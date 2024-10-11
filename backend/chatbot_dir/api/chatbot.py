@@ -1,7 +1,7 @@
 import json
 import os
+from datetime import datetime
 from pathlib import Path
-from pprint import pprint
 
 import cohere
 from dotenv import load_dotenv
@@ -242,6 +242,38 @@ def feedback_store(feedback_data):
         f.write("\n")
 
 
+# capture interaction fucntion
+
+
+def capture_interaction(
+    prompt, response, question_correct, correct_rating, correct_answer, metadata
+):
+    interaction = {
+        "Date_time": datetime.now().isoformat(),
+        "Question": prompt,
+        "Answer": response,
+        "Question_correct": question_correct,
+        "Correct_rating": correct_rating,
+        "Correct_Answer": correct_answer,
+        "Metadata": metadata,
+    }
+
+    file_path = os.path.join(os.path.dirname(__file__), "../data/interactions.json")
+
+    if not os.path.exists(file_path):
+        with open(file_path, "w") as f:
+            json.dump([], f)
+
+    with open(file_path, "r+") as f:
+        interactions = json.load(f)
+        interactions.append(interaction)
+        f.seek(0)
+        json.dump(interactions, f, indent=4)
+        f.truncate()
+
+    return {"message": "Interaction captured successfully"}
+
+
 # Submit Feedback Function for API Post
 def submit_feedback(request):
     if request.method == "POST":
@@ -268,4 +300,3 @@ def submit_feedback(request):
             return JsonResponse({"error": str(e)}, status=500)
     else:
         return JsonResponse({"error": "Invalid HTTP method"}, status=405)
-
