@@ -9,11 +9,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .chatbot import capture_interaction, generate_answer, submit_feedback
-from .serializers import (
-    ChatRatingSerializer,
-    CorrectAnswerSerializer,
-    CorrectBoolSerializer,
-)
+from .serializers import (ChatRatingSerializer, CorrectAnswerSerializer,
+                          CorrectBoolSerializer)
 
 
 class ChatbotView(APIView):
@@ -22,7 +19,6 @@ class ChatbotView(APIView):
         if serializer.is_valid():
             prompt = serializer.validated_data["prompt"]
             generation, binary_score = generate_answer(prompt)
-            capture_interaction(prompt, generation)
             response_data = {"generation": generation, "binary_score": binary_score}
             return Response(response_data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
