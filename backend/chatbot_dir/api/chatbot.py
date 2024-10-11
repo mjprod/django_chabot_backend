@@ -16,7 +16,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_groq import ChatGroq
 from pydantic import BaseModel, Field
 
-# Initialize global variables
+#
 docs_to_use = []
 prompt = ""
 
