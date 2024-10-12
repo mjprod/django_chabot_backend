@@ -191,11 +191,13 @@ rag_chain = (
 )
 
 
-# Function to Generate Answer
-def generate_answer(user_prompt):
-    global prompt, generation, response, docs_to_use
+# API functions
 
+
+def generate_answer(user_prompt):
+    global prompt, generation, docs_to_use
     prompt = user_prompt
+    docs_to_use = []
 
     # Retrieve documents
     docs_retrieve = retriever.invoke(prompt)
@@ -211,40 +213,36 @@ def generate_answer(user_prompt):
         {"context": format_docs(docs_to_use), "prompt": prompt}
     )
 
-    # Check for hallucinations
-    response = hallucination_grader.invoke(
-        {"documents": format_docs(docs_to_use), "generation": generation}
-    )
-
-    return generation, response.binary_score
-    print("Generation result:", generation)
-    print("Filtered documents:", len(docs_to_use))
+    return generation
 
 
-# Feedback Handling Functions
-def get_user_feedback(prompt, response, correct, rating, comments=""):
-    return {
-        "prompt": prompt,
-        "response": response,
-        "correct": int(correct),
-        "rating": int(rating),
-        "comments": comments,
-    }
+def submit_feedback(request):
+    if request.method == "POST":
+        try:
+            data = (
+                json.loads(request.body)
+                if isinstance(request.body, bytes)
+                else request.data
+            )
+            correct_answer = data.get("correct_answer")
+
+            if not correct_answer:
+                return JsonResponse(
+                    {"error": "Missing required field: correct_answer."}, status=400
+                )
+
+            # Here you might want to save this to your JSON or process it further
+            # For now, we'll just return a success message
+            return JsonResponse({"message": "Incorrect answer received"}, status=200)
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON format."}, status=400)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+    else:
+        return JsonResponse({"error": "Invalid HTTP method"}, status=405)
 
 
-def feedback_store(feedback_data):
-    os.makedirs("../data", exist_ok=True)
-    feedback_file = os.path.join(
-        os.path.dirname(__file__), "../data/database_update.json"
-    )
-    with open(feedback_file, "a") as f:
-        json.dump(feedback_data, f)
-        f.write("\n")
-
-
-# capture interaction fucntion
-
-
+# The capture_interaction function looks good as is, but let's ensure it matches the CaptureSummarySerializer
 def capture_interaction(
     prompt, response, question_correct, correct_rating, correct_answer, metadata
 ):
@@ -259,7 +257,6 @@ def capture_interaction(
     }
 
     file_path = os.path.join(os.path.dirname(__file__), "../data/interactions.json")
-
     if not os.path.exists(file_path):
         with open(file_path, "w") as f:
             json.dump([], f)
@@ -274,29 +271,4 @@ def capture_interaction(
     return {"message": "Interaction captured successfully"}
 
 
-# Submit Feedback Function for API Post
-def submit_feedback(request):
-    if request.method == "POST":
-        try:
-            data = json.loads(request.body)
-            prompt = data.get("prompt")
-            response_txt = data.get("response")
-            correct = data.get("correct")
-            rating = data.get("rating")
-            comments = data.get("comments", "")
-
-            if not all([prompt, response_txt, correct, rating]):
-                return JsonResponse({"error": "Missing required fields."}, status=400)
-
-            feedback = get_user_feedback(
-                prompt, response_txt, correct, rating, comments
-            )
-            feedback_store(feedback)
-
-            return JsonResponse({"message": "Feedback stored successfully"}, status=200)
-        except json.JSONDecodeError:
-            return JsonResponse({"error": "Invalid JSON format."}, status=400)
-        except Exception as e:
-            return JsonResponse({"error": str(e)}, status=500)
-    else:
-        return JsonResponse({"error": "Invalid HTTP method"}, status=405)
+# Remove or comment out any unused functions

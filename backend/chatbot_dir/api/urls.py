@@ -3,24 +3,29 @@
 from django.urls import path
 
 from .views import (
-    CaptureInteractionView,
-    ChatbotView,
+    AIResponseView,
+    CaptureSummaryView,
     ChatRatingView,
-    CorrectAnswerView,
     CorrectBoolView,
-    SubmitFeedbackView,
+    IncorrectAnswerResponseView,
+    UserInputView,
+    ViewSummaryView,
 )
 
 urlpatterns = [
-    path("chat/", ChatbotView.as_view(), name="chatbot"),
-    path("correct-answer/", CorrectAnswerView.as_view(), name="correct_answer"),
-    path("correct-bool/", CorrectBoolView.as_view(), name="correct_bool"),
-    path("chat-rating/", ChatRatingView.as_view(), name="chat_rating"),
-    path("submit-feedback/", SubmitFeedbackView.as_view(), name="submit_feedback"),
+    path("user_input/", UserInputView.as_view(), name="user_input"),
+    path("ai_response/", AIResponseView.as_view(), name="ai_response"),
+    path("correct_bool/", CorrectBoolView.as_view(), name="correct_bool"),
+    path("chat_rating/", ChatRatingView.as_view(), name="chat_rating"),
     path(
-        "capture_interaction/",
-        CaptureInteractionView.as_view(),
-        name="capture_interaction",
+        "incorrect_answer_response/",
+        IncorrectAnswerResponseView.as_view(),
+        name="incorrect_answer_response",
     ),
+    path(
+        "capture_summary/",
+        CaptureSummaryView.as_view(),
+        name="capture_summary",
+    ),
+    path("view_summary/", ViewSummaryView.as_view(), name="view_summary"),
 ]
-
