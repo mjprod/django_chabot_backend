@@ -14,7 +14,7 @@ class CorrectBoolSerializer(serializers.Serializer):
 
 
 class ChatRatingSerializer(serializers.Serializer):
-    rating = serializers.IntegerField(min_value=1, max_value=5)
+    rating = serializers.IntegerField(min_value=1, max_value=6)
 
 
 class IncorrectAnswerResponseSerializer(serializers.Serializer):
@@ -37,5 +37,4 @@ class ViewSummarySerializer(serializers.Serializer):
     Question_correct = serializers.BooleanField()
     Correct_rating = serializers.IntegerField(min_value=1, max_value=5)
     Correct_Answer = serializers.CharField()
-    Metadata = serializers.DictField()
-
+    Metadata = serializers.DictField(required=False)
