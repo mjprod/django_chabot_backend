@@ -4,6 +4,7 @@ from datetime import datetime
 from pathlib import Path
 
 import cohere
+from django.conf import settings
 from dotenv import load_dotenv
 from langchain.schema import Document as LangchainDocument
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -242,33 +243,33 @@ def submit_feedback(request):
         return JsonResponse({"error": "Invalid HTTP method"}, status=405)
 
 
-# The capture_interaction function looks good as is, but let's ensure it matches the CaptureSummarySerializer
-def capture_interaction(
-    prompt, response, question_correct, correct_rating, correct_answer, metadata
-):
-    interaction = {
-        "Date_time": datetime.now().isoformat(),
-        "Question": prompt,
-        "Answer": response,
-        "Question_correct": question_correct,
-        "Correct_rating": correct_rating,
-        "Correct_Answer": correct_answer,
-        "Metadata": metadata,
-    }
-
+def save_interaction(interaction_type, data):
     file_path = os.path.join(os.path.dirname(__file__), "../data/interactions.json")
+
+    # Create the file if it doesn't exist
     if not os.path.exists(file_path):
         with open(file_path, "w") as f:
             json.dump([], f)
 
-    with open(file_path, "r+") as f:
+    # Read existing interactions
+    with open(file_path, "r") as f:
         interactions = json.load(f)
-        interactions.append(interaction)
-        f.seek(0)
-        json.dump(interactions, f, indent=4)
-        f.truncate()
 
-    return {"message": "Interaction captured successfully"}
+    # Create new interaction
+    new_interaction = {
+        "Date_time": datetime.now().isoformat(),
+        "Type": interaction_type,
+        "Data": data,
+    }
+
+    # Append new interaction
+    interactions.append(new_interaction)
+
+    # Write updated interactions back to file
+    with open(file_path, "w") as f:
+        json.dump(interactions, f, indent=4)
+
+    return {"message": f"{interaction_type} interaction saved successfully"}
 
 
 # Remove or comment out any unused functions

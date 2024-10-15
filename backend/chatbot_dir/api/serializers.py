@@ -6,7 +6,7 @@ class UserInputSerializer(serializers.Serializer):
 
 
 class AIResponseSerializer(serializers.Serializer):
-    generation = serializers.CharField()
+    answer = serializers.CharField()
 
 
 class CorrectBoolSerializer(serializers.Serializer):

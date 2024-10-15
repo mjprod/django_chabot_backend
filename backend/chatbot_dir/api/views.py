@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .chatbot import capture_interaction, generate_answer, submit_feedback
+from .chatbot import generate_answer, save_interaction
 from .serializers import (
     AIResponseSerializer,
     CaptureSummarySerializer,
@@ -25,10 +25,7 @@ class UserInputView(APIView):
             prompt = serializer.validated_data["prompt"]
             generation = generate_answer(prompt)
             response_data = {"generation": generation}
-            self.save_to_json(
-                "chat_qna.json",
-                {"type": "user_input", "prompt": prompt, "generation": generation},
-            )
+            save_interaction("user_input", {"prompt": prompt, "generation": generation})
             return Response(response_data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -38,9 +35,7 @@ class AIResponseView(APIView):
         serializer = AIResponseSerializer(data=request.data)
         if serializer.is_valid():
             answer = serializer.validated_data["answer"]
-            self.save_to_json(
-                "chat_qna.json", {"type": "ai_response", "answer": answer}
-            )
+            save_interaction("ai_response", {"answer": answer})
             return Response({"answer": answer}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -50,9 +45,7 @@ class CorrectBoolView(APIView):
         serializer = CorrectBoolSerializer(data=request.data)
         if serializer.is_valid():
             is_correct = serializer.validated_data["is_correct"]
-            self.save_to_json(
-                "chat_qna.json", {"type": "correct_bool", "is_correct": is_correct}
-            )
+            save_interaction("correct_bool", {"is_correct": is_correct})
             return Response({"is_correct": is_correct}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -88,37 +81,10 @@ class CaptureSummaryView(APIView):
     def post(self, request):
         serializer = CaptureSummarySerializer(data=request.data)
         if serializer.is_valid():
-            user_input = serializer.validated_data["user_input"]
-            ai_response = serializer.validated_data["ai_response"]
-            correct_bool = serializer.validated_data["correct_bool"]
-            chat_rating = serializer.validated_data["chat_rating"]
-            incorrect_answer_response = serializer.validated_data.get(
-                "incorrect_answer_response", ""
-            )
-            metadata = serializer.validated_data.get("metadata", {})
-
-            result = capture_interaction(
-                prompt=user_input,
-                response=ai_response,
-                question_correct=correct_bool,
-                correct_rating=chat_rating,
-                correct_answer=incorrect_answer_response,
-                metadata=metadata,
-            )
+            data = serializer.validated_data
+            result = save_interaction("complete_interaction", data)
             return Response(result, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def get(self, request):
-        file_path = os.path.join(settings.BASE_DIR, "data", "chat_qna.json")
-        if not os.path.exists(file_path):
-            return Response(
-                {"error": "No data available"}, status=status.HTTP_404_NOT_FOUND
-            )
-
-        with open(file_path, "r") as f:
-            chat_qna_data = [json.loads(line) for line in f]
-
-        return Response(chat_qna_data, status=status.HTTP_200_OK)
 
 
 class ViewSummaryView(APIView):
