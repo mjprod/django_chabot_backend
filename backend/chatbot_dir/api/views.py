@@ -55,9 +55,7 @@ class ChatRatingView(APIView):
         serializer = ChatRatingSerializer(data=request.data)
         if serializer.is_valid():
             rating = serializer.validated_data["rating"]
-            self.save_to_json(
-                "chat_qna.json", {"type": "chat_rating", "rating": rating}
-            )
+            save_interaction("chat_rating", {"chat_rating": chat_rating})
             return Response({"rating": rating}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
