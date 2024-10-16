@@ -64,7 +64,7 @@ class IncorrectAnswerResponseView(APIView):
     def post(self, request):
         serializer = IncorrectAnswerResponseSerializer(data=request.data)
         if serializer.is_valid():
-            correct_answer = serializer.validated_data["correct_answer"]
+            incorrect_answer = serializer.validated_data["incorrect_answer"]
             save_interaction(
                 "incorrect_answer_response", {"incorrect_answer": incorrect_answer}
             )
