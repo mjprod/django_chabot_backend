@@ -65,9 +65,8 @@ class IncorrectAnswerResponseView(APIView):
         serializer = IncorrectAnswerResponseSerializer(data=request.data)
         if serializer.is_valid():
             correct_answer = serializer.validated_data["correct_answer"]
-            self.save_to_json(
-                "chat_qna.json",
-                {"type": "incorrect_answer", "correct_answer": correct_answer},
+            save_interaction(
+                "incorrect_answer_response", {"incorrect_answer": incorrect_answer}
             )
             return Response(
                 {"message": "Correct answer received"}, status=status.HTTP_200_OK
