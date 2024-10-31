@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["3.107.8.190", "localhost", "127.0.0.1"]
 
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 2,
+}
+
 
 # Application definition
 

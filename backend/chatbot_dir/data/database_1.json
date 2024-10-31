@@ -1,0 +1,159 @@
+[
+  {
+    "Question": "How do I reset my password?",
+    "Answer": "Go to settings, select 'Account', then 'Reset Password'.",
+    "Question_correct": null,
+    "Correct_Answer": null,
+    "Metadata": {
+      "Category": "Account",
+      "Frequency": "High",
+      "Difficulty": "Easy",
+      "Date Created": "2023-10-01",
+      "Summary": "Steps to reset the account password."
+    }
+  },
+  {
+    "Question": "How can I find my registered email address?",
+    "Answer": "Check under 'Profile' in the app settings.",
+    "Question_correct": null,
+    "Correct_Answer": null,
+    "Metadata": {
+      "Category": "Account",
+      "Frequency": "Medium",
+      "Difficulty": "Easy",
+      "Date Created": "2023-10-01",
+      "Summary": "Instructions to locate the registered email address."
+    }
+  },
+  {
+    "Question": "What should I do if I forgot my username?",
+    "Answer": "Use the 'Forgot Username' feature on the login page.",
+    "Question_correct": null,
+    "Correct_Answer": null,
+    "Metadata": {
+      "Category": "Account",
+      "Frequency": "Medium",
+      "Difficulty": "Medium",
+      "Date Created": "2023-10-01",
+      "Summary": "Guidance on recovering a forgotten username."
+    }
+  },
+  {
+    "Question": "How do I update my personal information?",
+    "Answer": "Navigate to 'Profile' and edit your details.",
+    "Question_correct": null,
+    "Correct_Answer": null,
+    "Metadata": {
+      "Category": "Profile",
+      "Frequency": "High",
+      "Difficulty": "Easy",
+      "Date Created": "2023-10-01",
+      "Summary": "'Profile' section allows updating personal info."
+    }
+  },
+  {
+    "Question": "Can I change my notification settings?",
+    "Answer": "'Settings' > 'Notifications' to customize alerts.",
+    "Question_correct": null,
+    "Correct_Answer": null,
+    "Metadata": {
+      "Category": "Settings",
+      "Frequency": "Medium",
+      "Difficulty": "Easy",
+      "Date Created": "2023-10-01",
+      "Summary": "Customizing notification preferences."
+    }
+  },
+  {
+    "Question": "How do I change my in-game avatar/photo?",
+    "Answer": "Go to 'Profile', select 'Profile Picture', and choose a new one.",
+    "Question_correct": null,
+    "Correct_Answer": null,
+    "Metadata": {
+      "Category": "Customization",
+      "Frequency": "Medium",
+      "Difficulty": "Easy",
+      "Date Created": "2023-10-01",
+      "Summary": "Steps to change the in-game avatar."
+    }
+  },
+  {
+    "Question": "What should I do if the game crashes?",
+    "Answer": "Restart the app and check for updates, also use the Feedback section to report any crashes or bugs",
+    "Question_correct": null,
+    "Correct_Answer": null,
+    "Metadata": {
+      "Category": "Technical",
+      "Frequency": "High",
+      "Difficulty": "Medium",
+      "Date Created": "2023-10-01",
+      "Summary": "Troubleshooting steps for game crashes."
+    }
+  },
+  {
+    "Question": "How can I report a bug?",
+    "Answer": "Use the 'Feedback' section in the settings menu.",
+    "Question_correct": null,
+    "Correct_Answer": null,
+    "Metadata": {
+      "Category": "Support",
+      "Frequency": "Low",
+      "Difficulty": "Medium",
+      "Date Created": "2023-10-01",
+      "Summary": "'Feedback' section allows bug reporting."
+    }
+  },
+  {
+    "Question": "Can I play offline?",
+    "Answer": "'Offline Mode' is  Not available at this current time",
+    "Question_correct": null,
+    "Correct_Answer": null,
+    "Metadata": {
+      "Category": "Features",
+      "Frequency": "Medium",
+      "Difficulty": "Easy",
+      "Date Created": "2023-10-01",
+      "Summary": "Enabling offline mode in the game."
+    }
+  },
+  {
+    "Question": "What is the minimum age to gamble online?",
+    "Answer": "The minimum age varies by jurisdiction, but it's typically 18 or 21.",
+    "Question_correct": null,
+    "Correct_Answer": null,
+    "Metadata": {
+      "Category": "Legal",
+      "Frequency": "High",
+      "Difficulty": "Easy",
+      "Date Created": "2023-10-01",
+      "Summary": "Information about legal age requirements for online gambling."
+    }
+  },
+  {
+    "Question": "How do I deposit funds to my casino account?",
+    "Answer": "Most sites offer credit cards, bank transfers, and e-wallets.",
+    "Question_correct": null,
+    "Correct_Answer": null,
+    "Metadata": {
+      "Category": "Banking",
+      "Frequency": "High",
+      "Difficulty": "Medium",
+      "Date Created": "2023-10-01",
+      "Summary": "Details on depositing funds to online casino accounts."
+    }
+  },
+  {
+    "Question": "How can I ensure an online casino is fair?",
+    "Answer": "Check for licensing and third-party audits for fairness verification.",
+    "Question_correct": null,
+    "Correct_Answer": null,
+    "Metadata": {
+      "Category": "Security",
+      "Frequency": "Medium",
+      "Difficulty": "Medium",
+      "Date Created": "2023-10-01",
+      "Summary": "Verifying the fairness of online casinos."
+    }
+  }
+]
+
