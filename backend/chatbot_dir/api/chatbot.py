@@ -33,14 +33,18 @@ with open(file_path, "r") as f:
 embedding_model = CohereEmbeddings(model="embed-english-v3.0")
 
 # Prepare Documents
-documents = [
-    {
-        "question": item["Question"],
-        "answer": item["Answer"],
-        "metadata": item["Metadata"],
-    }
-    for item in data
-]
+documents = []
+for item in data:
+    try:
+        document = {
+            "question": item["Question"],
+            "answer": item["Answer"],
+            "metadata": item.get("Metadata", {}),  # Use .get() with a default value
+        }
+        documents.append(document)
+    except KeyError as e:
+        print(f"KeyError: {e} - Skipping this item")
+        continue  # Skip to the next item if there's a KeyError
 
 
 # Custom Document Class to Avoid Conflicts

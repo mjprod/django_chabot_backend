@@ -1,0 +1,50 @@
+[
+    {
+        "Date_time": "2024-10-31T04:17:53.953263",
+        "Type": "user_input",
+        "Data": {
+            "prompt": "How do I participate in live casino tournaments?",
+            "generation": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time."
+        }
+    },
+    {
+        "Date_time": "2024-10-31T04:19:36.147274",
+        "Type": "ai_response",
+        "Data": {
+            "answer": "AI stands for Artificial Intelligence."
+        }
+    },
+    {
+        "Date_time": "2024-10-31T04:20:03.171529",
+        "Type": "correct_bool",
+        "Data": {
+            "is_correct": true
+        }
+    },
+    {
+        "Date_time": "2024-10-31T04:20:25.397787",
+        "Type": "chat_rating",
+        "Data": {
+            "rating": 5
+        }
+    },
+    {
+        "Date_time": "2024-10-31T04:21:11.127826",
+        "Type": "incorrect_answer_response",
+        "Data": {
+            "incorrect_answer": "The capital of France is not Berlin."
+        }
+    },
+    {
+        "Date_time": "2024-10-31T04:21:42.932913",
+        "Type": "complete_interaction",
+        "Data": {
+            "user_input": "What is AI?",
+            "ai_response": "AI stands for Artificial Intelligence.",
+            "correct_bool": true,
+            "chat_rating": 5,
+            "incorrect_answer_response": "The capital of France is not Berlin.",
+            "metadata": {}
+        }
+    }
+]
