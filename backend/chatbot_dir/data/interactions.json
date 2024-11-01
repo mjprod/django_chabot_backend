@@ -46,5 +46,53 @@
             "incorrect_answer_response": "The capital of France is not Berlin.",
             "metadata": {}
         }
+    },
+    {
+        "Date_time": "2024-10-31T23:00:38.762937",
+        "Type": "user_input",
+        "Data": {
+            "prompt": "How do I participate in live casino tournaments?",
+            "generation": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time."
+        }
+    },
+    {
+        "Date_time": "2024-10-31T23:04:04.950798",
+        "Type": "user_input",
+        "Data": {
+            "prompt": "why is my payment slower than usual tonight?",
+            "generation": "Many players won in the game tonight, which may have caused a slight delay in payment processing. We are working to speed up the processing, and the transfer is expected to be completed within 5 to 30 minutes."
+        }
+    },
+    {
+        "Date_time": "2024-10-31T23:05:09.246477",
+        "Type": "user_input",
+        "Data": {
+            "prompt": "why the fuck is my payment slow tonight?",
+            "generation": "Tonight, because many players won in the game, the speed of payment processing may be slightly delayed. We are trying our best to speed up the processing, and the transfer is expected to be completed within 5 to 30 minutes."
+        }
+    },
+    {
+        "Date_time": "2024-10-31T23:16:33.002087",
+        "Type": "user_input",
+        "Data": {
+            "prompt": "what is your policy on RNG and game payouts?",
+            "generation": "We are committed to ensuring all our games are fair and random. Our Random Number Generator (RNG) is regularly tested and certified by independent third-party agencies like eCOGRA and iTech Labs. These tests ensure that game outcomes are truly random and not manipulated."
+        }
+    },
+    {
+        "Date_time": "2024-10-31T23:42:52.369680",
+        "Type": "user_input",
+        "Data": {
+            "prompt": "how come the number i bet didn't win and i didn't get my money?",
+            "generation": "I don't have enough information to answer your question. However, I can suggest a possible reason why the number you bet on didn't win and you didn't get your money. It's possible that the outcome of the game was not in favor of the number you bet on. If you're still unsure, I recommend checking your betting history to see the outcome of the game and the reason why your bet was not successful."
+        }
+    },
+    {
+        "Date_time": "2024-11-01T00:19:50.498820",
+        "Type": "user_input",
+        "Data": {
+            "prompt": "waht crypto currencies do you use?",
+            "generation": "We currently accept Bitcoin, Ethereum, and Litecoin for deposits. For withdrawals, we accept cryptocurrencies such as Bitcoin and Ethereum, and in some cases, Litecoin is not mentioned as a withdrawal option but it is mentioned as a deposit option."
+        }
     }
 ]
