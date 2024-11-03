@@ -25,7 +25,7 @@ class CaptureSummarySerializer(serializers.Serializer):
     user_input = serializers.CharField()
     ai_response = serializers.CharField()
     correct_bool = serializers.BooleanField()
-    chat_rating = serializers.IntegerField(min_value=0, max_value=5)
+    chat_rating = serializers.IntegerField(min_value=0, max_value=6)
     incorrect_answer_response = serializers.CharField(required=False, allow_blank=True)
     metadata = serializers.DictField(required=False)
 

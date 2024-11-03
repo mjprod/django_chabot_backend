@@ -94,5 +94,21 @@
             "prompt": "waht crypto currencies do you use?",
             "generation": "We currently accept Bitcoin, Ethereum, and Litecoin for deposits. For withdrawals, we accept cryptocurrencies such as Bitcoin and Ethereum, and in some cases, Litecoin is not mentioned as a withdrawal option but it is mentioned as a deposit option."
         }
+    },
+    {
+        "Date_time": "2024-11-03T04:30:32.888632",
+        "Type": "user_input",
+        "Data": {
+            "prompt": "How do I participate in live casino tournaments?",
+            "generation": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time."
+        }
+    },
+    {
+        "Date_time": "2024-11-03T04:31:19.829634",
+        "Type": "user_input",
+        "Data": {
+            "prompt": "how long does a withdrawel take?",
+            "generation": "Withdrawal processing times vary depending on the method chosen. Generally, it takes 5 to 30 minutes, but under special circumstances, there may be delays."
+        }
     }
 ]
