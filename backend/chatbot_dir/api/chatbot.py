@@ -12,7 +12,11 @@ from langchain_cohere import CohereEmbeddings
 from langchain_community.document_loaders import JSONLoader
 from langchain_community.vectorstores import Chroma
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import ChatPromptTemplate, PromptTemplate
+from langchain_core.prompts import (
+    ChatPromptTemplate,
+    HumanMessagePromptTemplate,
+    SystemMessagePromptTemplate,
+)
 from langchain_core.runnables import RunnablePassthrough
 from langchain_groq import ChatGroq
 from pydantic import BaseModel, Field
@@ -199,26 +203,56 @@ rag_chain = (
 # API functions
 
 
-def generate_answer(user_prompt):
-    global prompt, generation, docs_to_use
-    prompt = user_prompt
-    docs_to_use = []
+def generate_answer(user_prompt, temperature, system_prompt):
+    try:
+        global prompt, generation, docs_to_use
+        prompt = user_prompt
+        docs_to_use = []
 
-    # Retrieve documents
-    docs_retrieve = retriever.invoke(prompt)
+        # Retrieve documents
+        docs_retrieve = retriever.invoke(prompt)
 
-    # Filter relevant documents
-    for doc in docs_retrieve:
-        res = retrieval_grader.invoke({"prompt": prompt, "document": doc.page_content})
-        if res.binary_score.lower() == "yes":
-            docs_to_use.append(doc)
+        # Filter relevant documents
+        for doc in docs_retrieve:
+            res = retrieval_grader.invoke(
+                {"prompt": prompt, "document": doc.page_content}
+            )
+            if res.binary_score.lower() == "yes":
+                docs_to_use.append(doc)
 
-    # Generate response
-    generation = rag_chain.invoke(
-        {"context": format_docs(docs_to_use), "prompt": prompt}
-    )
+        # system prompt for the AI model/LLM
+        rag_prompt_template = ChatPromptTemplate.from_messages(
+            [
+                SystemMessagePromptTemplate.from_template(system_prompt),
+                HumanMessagePromptTemplate.from_template(
+                    "Context: {context}\nQuestion: {prompt}"
+                ),
+            ]
+        )
 
-    return generation
+        # generate the response with new new temperature
+        rag_llm = ChatGroq(model="llama-3.1-8b-instant", temperature=temperature)
+
+        rag_chain = (
+            {"context": format_docs(docs_to_use), "prompt": prompt}
+            | rag_prompt_template
+            | rag_llm
+            | StrOutputParser()
+        )
+
+        # Generate response
+        generation = rag_chain.invoke()
+        return generation
+
+    except ValueError as ve:
+        # Log the error and return a meaningful message
+        print(f"ValueError in generate_answer: {ve}")
+        return "An error occurred while processing your request."
+
+    except Exception as e:
+        # Log unexpected errors
+        print(f"Unexpected error in generate_answer: {e}")
+        return "An unexpected error occurred. Please try again later."
 
 
 def submit_feedback(request):

@@ -3,6 +3,7 @@
 from django.urls import path
 
 from .views import (
+    AgentTestView,
     AIResponseView,
     CaptureSummaryView,
     ChatRatingView,
@@ -28,4 +29,5 @@ urlpatterns = [
         name="capture_summary",
     ),
     path("view_summary/", ViewSummaryView.as_view(), name="view_summary"),
+    path("agent_test/", AgentTestView.as_view(), name="agent_test"),
 ]

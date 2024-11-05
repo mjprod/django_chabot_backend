@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 
 from .chatbot import generate_answer, save_interaction
 from .serializers import (
+    AgentTestSerializer,
     AIResponseSerializer,
     CaptureSummarySerializer,
     ChatRatingSerializer,
@@ -27,6 +28,42 @@ class UserInputView(APIView):
             response_data = {"generation": generation}
             save_interaction("user_input", {"prompt": prompt, "generation": generation})
             return Response(response_data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# agent test view for creating agents to take the user prompt and generate a user
+
+
+class AgentTestView(APIView):
+    def post(self, request):
+        serializer = AgentTestSerializer(data=request.data)
+        if serializer.is_valid():
+            agentid = serializer.validated_data["agentid"]
+            prompt = serializer.validated_data["prompt"]
+            name = serializer.validated_data["name"]
+            temperature = serializer.validated_data["temperature"]
+            system_prompt = serializer.validated_data["system_prompt"]
+
+            # Generate the AI response with custom parameters
+            generation = generate_answer(prompt, temperature, system_prompt)
+
+            response_data = {"generation": generation, "name": name}
+
+            # Save the interaction details
+            save_interaction(
+                "agent_test",
+                {
+                    "agentid": agentid,
+                    "prompt": prompt,
+                    "name": name,
+                    "temperature": temperature,
+                    "system_prompt": system_prompt,
+                    "generation": generation,
+                },
+            )
+
+            return Response(response_data, status=status.HTTP_200_OK)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

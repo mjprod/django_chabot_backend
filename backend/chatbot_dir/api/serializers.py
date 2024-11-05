@@ -38,3 +38,11 @@ class ViewSummarySerializer(serializers.Serializer):
     Correct_rating = serializers.IntegerField(min_value=1, max_value=5)
     Correct_Answer = serializers.CharField()
     Metadata = serializers.DictField(required=False)
+
+
+class AgentTestSerializer(serializers.Serializer):
+    agentid = serializers.CharField()
+    prompt = serializers.CharField()
+    name = serializers.CharField()
+    temperature = serializers.IntegerField(min_value=0, max_value=10)
+    system_prompt = serializers.CharField()

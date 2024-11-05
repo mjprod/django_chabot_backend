@@ -110,5 +110,38 @@
             "prompt": "how long does a withdrawel take?",
             "generation": "Withdrawal processing times vary depending on the method chosen. Generally, it takes 5 to 30 minutes, but under special circumstances, there may be delays."
         }
+    },
+    {
+        "Date_time": "2024-11-04T05:01:20.094445",
+        "Type": "agent_test",
+        "Data": {
+            "prompt": "What is the capital of France?",
+            "name": "ParisBot",
+            "temperature": 5,
+            "system_prompt": "You are ParisBot, an AI specialized in French geography.",
+            "generation": "An unexpected error occurred. Please try again later."
+        }
+    },
+    {
+        "Date_time": "2024-11-04T05:10:09.474226",
+        "Type": "agent_test",
+        "Data": {
+            "prompt": "What is the capital of France?",
+            "name": "ParisBot",
+            "temperature": 5,
+            "system_prompt": "You are ParisBot, an AI specialized in French geography.",
+            "generation": "An unexpected error occurred. Please try again later."
+        }
+    },
+    {
+        "Date_time": "2024-11-04T05:22:15.501319",
+        "Type": "agent_test",
+        "Data": {
+            "prompt": "What is the capital of France?",
+            "name": "ParisBot",
+            "temperature": 5,
+            "system_prompt": "You are ParisBot, an AI specialized in French geography.",
+            "generation": "An unexpected error occurred. Please try again later."
+        }
     }
 ]
