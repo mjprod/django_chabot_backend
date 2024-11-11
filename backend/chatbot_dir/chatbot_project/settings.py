@@ -25,13 +25,12 @@ SECRET_KEY = "django-insecure-z$!=*9prhkq7xd2^2!!g39v$spw1f=yaxbc4qhle9yp1n!-b%-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["mjproapps.com", "www.mjproapps.com", "3.107.91.18", "156.67.222.95", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["mjproapps.com", "www.mjproapps.com", "3.107.8.190", "156.67.222.95", "localhost", "127.0.0.1"]
 
 SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
-SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -82,6 +81,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "chatbot_project.wsgi.application"
+
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "https://mjproapps.com",
@@ -133,16 +133,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# Allow all origins (for development)
-CORS_ALLOW_ALL_ORIGINS = False
 
 # For specific origins
 # CORS_ALLOWED_ORIGINS = [
