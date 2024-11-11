@@ -23,14 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-z$!=*9prhkq7xd2^2!!g39v$spw1f=yaxbc4qhle9yp1n!-b%-"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["mjproapps.com", "www.mjproapps.com", "3.107.91.18", "156.67.222.95", "localhost", "127.0.0.1"]
 
 SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = False
+SECURE_HSTS_PRELOAD = True
 SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
@@ -142,7 +142,7 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Allow all origins (for development)
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 
 # For specific origins
 # CORS_ALLOWED_ORIGINS = [
