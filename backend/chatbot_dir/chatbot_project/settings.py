@@ -25,15 +25,17 @@ SECRET_KEY = "django-insecure-z$!=*9prhkq7xd2^2!!g39v$spw1f=yaxbc4qhle9yp1n!-b%-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["3.107.91.18", "156.67.222.95", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["mjproapps.com", "www.mjproapps.com", "3.107.91.18", "156.67.222.95", "localhost", "127.0.0.1"]
 
-SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = False
 SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_HSTS_PRELOAD = True
 
 
 # Application definition
@@ -80,7 +82,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "chatbot_project.wsgi.application"
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    "https://mjproapps.com",
+    "https://www.mjproapps.com",
+]
 
 
 # Database
