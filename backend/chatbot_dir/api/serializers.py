@@ -1,5 +1,7 @@
 from rest_framework import serializers
 
+from .models import AIAgent
+
 
 class UserInputSerializer(serializers.Serializer):
     prompt = serializers.CharField()
@@ -40,9 +42,10 @@ class ViewSummarySerializer(serializers.Serializer):
     Metadata = serializers.DictField(required=False)
 
 
-class AgentTestSerializer(serializers.Serializer):
-    agentid = serializers.CharField()
-    prompt = serializers.CharField()
-    name = serializers.CharField()
-    temperature = serializers.IntegerField(min_value=0, max_value=10)
-    system_prompt = serializers.CharField()
+# this is the create agent serializer, it dictates what formatting the request needs to be
+
+
+class AIAgentSerializer(serializers.Serializer):
+    class Meta:
+        model = AIAgent
+        fields = ["agent_id", "name", "temperature", "system_prompt", "image"]
