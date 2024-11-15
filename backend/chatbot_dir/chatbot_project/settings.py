@@ -29,6 +29,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     "mjproapps.com",
+    "api.mjproapps.com",
     "www.mjproapps.com",
     "3.107.8.190",
     "54.206.216.180",
