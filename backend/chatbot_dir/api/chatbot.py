@@ -264,7 +264,7 @@ def generate_answer(user_prompt):
         "generation": generation,
         "translations": [
             {"language": "en", "text": generation},
-            {"language": "ms", "text": malay_translation.get("text", "")},
+            {"language": "ms-MY", "text": malay_translation.get("text", "")},
         ],
         "usage": {
             "prompt_tokens": malay_translation.get("prompt_tokens", 0),
