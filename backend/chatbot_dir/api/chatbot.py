@@ -262,12 +262,13 @@ def generate_answer(user_prompt):
 
     return {
         "generation": generation,
-        "translations": {
-            "malay": malay_translation.get("text", ""),
-            "usage": {
-                "prompt_tokens": malay_translation.get("prompt_tokens", 0),
-                "total_tokens": malay_translation.get("total_tokens", 0),
-            },
+        "translations": [
+            {"language": "en", "text": generation},
+            {"language": "ms", "text": malay_translation.get("text", "")},
+        ],
+        "usage": {
+            "prompt_tokens": malay_translation.get("prompt_tokens", 0),
+            "total_tokens": malay_translation.get("total_tokens", 0),
         },
     }
 

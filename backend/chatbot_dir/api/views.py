@@ -32,8 +32,8 @@ class UserInputView(APIView):
             response_data = {
                 "user_id": user_id,
                 "generation": generation["generation"],
-                "translations": generation["translations"]["malay"],
-                "usage": generation["translations"]["usage"],
+                "translations": generation["translations"],
+                "usage": generation["usage"],
             }
 
             save_interaction(
@@ -141,12 +141,7 @@ class ViewSummaryView(APIView):
                             "Date_time": interaction.get("Date_time"),
                             "Question": data.get("prompt", ""),
                             "generation": data.get("generation", ""),
-                            "translations": {
-                                "malay": data.get("translations", {}).get("malay", ""),
-                                "usage": data.get("translations", {}).get(
-                                    "usage", {"prompt_tokens": 0, "total_tokens": 0}
-                                ),
-                            },
+                            "translations": data.get("translations", []),
                             "Question_correct": False,
                             "Correct_rating": 0,
                             "Correct_Answer": "",

@@ -429,5 +429,43 @@
                 }
             }
         }
+    },
+    {
+        "Date_time": "2024-11-15T03:49:51.239966",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "How do I participate in live casino tournaments?",
+            "generation": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time."
+                },
+                {
+                    "language": "malay",
+                    "text": "Untuk menyertai kejohanan kasino langsung, semak bahagian 'Tournaments' di lobi kasino langsung kami. Pilih kejohanan yang akan datang, semak peraturan dan jumlah pembelian, kemudian klik 'Daftar'. Pastikan anda mempunyai dana yang mencukupi dalam akaun anda untuk pembelian. Kejohanan biasanya mempunyai masa permulaan tertentu, jadi pastikan anda mendaftar tepat pada masanya."
+                }
+            ]
+        }
+    },
+    {
+        "Date_time": "2024-11-15T03:52:52.276258",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "How do I participate in live casino tournaments?",
+            "generation": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time."
+                },
+                {
+                    "language": "ms",
+                    "text": "Untuk menyertai kejohanan kasino langsung, semak bahagian 'Tournaments' di lobi kasino langsung kami. Pilih kejohanan yang akan datang, semak peraturan dan jumlah pembelian, kemudian klik 'Daftar'. Pastikan anda mempunyai dana yang mencukupi dalam akaun anda untuk pembelian. Kejohanan biasanya mempunyai masa permulaan tertentu, jadi pastikan anda mendaftar tepat pada masanya."
+                }
+            ]
+        }
     }
 ]
