@@ -110,5 +110,324 @@
             "prompt": "how long does a withdrawel take?",
             "generation": "Withdrawal processing times vary depending on the method chosen. Generally, it takes 5 to 30 minutes, but under special circumstances, there may be delays."
         }
+    },
+    {
+        "Date_time": "2024-11-15T00:56:02.703063",
+        "Type": "user_input",
+        "user_id": 0,
+        "Data": {
+            "user_id": 0,
+            "prompt": "How do I participate in live casino tournaments?",
+            "generation": {
+                "english": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time.",
+                "malay": {
+                    "result": "Untuk menyertai kejohanan kasino langsung, semak bahagian 'Tournaments' di lobi kasino langsung kami. Pilih kejohanan yang akan datang, semak peraturan dan jumlah pembelian, kemudian klik 'Daftar'. Pastikan anda mempunyai dana yang mencukupi dalam akaun anda untuk pembelian. Kejohanan biasanya mempunyai masa permulaan tertentu, jadi pastikan anda mendaftar tepat pada masanya.",
+                    "usage": {
+                        "prompt_tokens": 90,
+                        "total_tokens": 90
+                    }
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-15T00:57:48.771492",
+        "Type": "ai_response",
+        "user_id": 0,
+        "Data": {
+            "answer": "This is a test AI response"
+        }
+    },
+    {
+        "Date_time": "2024-11-15T00:59:43.669564",
+        "Type": "complete_interaction",
+        "user_id": 0,
+        "Data": {
+            "user_input": "Test question",
+            "ai_response": {
+                "english": "Test response in English",
+                "malay": "Test response in Malay"
+            },
+            "correct_bool": true,
+            "chat_rating": 5,
+            "incorrect_answer_response": "",
+            "metadata": {}
+        }
+    },
+    {
+        "Date_time": "2024-11-15T01:20:45.230468",
+        "Type": "user_input",
+        "user_id": 0,
+        "Data": {
+            "user_id": 0,
+            "prompt": "What is machine learning?",
+            "generation": {
+                "english": "Machine learning is a subset of artificial intelligence (AI) that involves the use of algorithms and statistical models to enable machines to learn from data, make decisions, and improve their performance on a specific task without being explicitly programmed. It involves training models on large datasets, allowing them to identify patterns and relationships, and then using those patterns to make predictions or take actions.",
+                "malay": {
+                    "result": "Pembelajaran mesin ialah subset kecerdasan buatan (AI) yang melibatkan penggunaan algoritma dan model statistik untuk membolehkan mesin belajar daripada data, membuat keputusan, dan meningkatkan prestasi mereka pada tugasan tertentu tanpa diprogramkan secara eksplisit. Ia melibatkan latihan model pada set data besar, membenarkan mereka mengenal pasti corak dan hubungan, dan kemudian menggunakan corak tersebut untuk membuat ramalan atau mengambil tindakan.",
+                    "usage": {
+                        "prompt_tokens": 95,
+                        "total_tokens": 95
+                    }
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-15T01:31:23.994827",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "What is machine learning?",
+            "generation": {
+                "english": "Machine learning is a subset of artificial intelligence (AI) that involves the use of algorithms and statistical models to enable machines to learn from data, make decisions, and improve their performance on a specific task without being explicitly programmed. It involves training models on large datasets, allowing them to identify patterns and relationships, and then using those patterns to make predictions or take actions.",
+                "malay": {
+                    "result": "Pembelajaran mesin ialah subset kecerdasan buatan (AI) yang melibatkan penggunaan algoritma dan model statistik untuk membolehkan mesin belajar daripada data, membuat keputusan, dan meningkatkan prestasi mereka pada tugasan tertentu tanpa diprogramkan secara eksplisit. Ia melibatkan latihan model pada set data besar, membenarkan mereka mengenal pasti corak dan hubungan, dan kemudian menggunakan corak tersebut untuk membuat ramalan atau mengambil tindakan.",
+                    "usage": {
+                        "prompt_tokens": 95,
+                        "total_tokens": 95
+                    }
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-15T01:31:34.201663",
+        "Type": "ai_response",
+        "Data": {
+            "answer": "This is a test AI response"
+        }
+    },
+    {
+        "Date_time": "2024-11-15T01:31:39.566897",
+        "Type": "correct_bool",
+        "Data": {
+            "is_correct": true
+        }
+    },
+    {
+        "Date_time": "2024-11-15T01:31:45.261507",
+        "Type": "chat_rating",
+        "Data": {
+            "rating": 5
+        }
+    },
+    {
+        "Date_time": "2024-11-15T01:31:50.238228",
+        "Type": "incorrect_answer_response",
+        "Data": {
+            "incorrect_answer": "This is the correct answer"
+        }
+    },
+    {
+        "Date_time": "2024-11-15T01:31:57.244228",
+        "Type": "complete_interaction",
+        "Data": {
+            "user_input": "Test question",
+            "ai_response": {
+                "english": "Test response in English",
+                "malay": "Test response in Malay"
+            },
+            "correct_bool": true,
+            "chat_rating": 5,
+            "incorrect_answer_response": "",
+            "metadata": {}
+        }
+    },
+    {
+        "Date_time": "2024-11-15T01:35:44.535471",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "What is machine learning?",
+            "generation": {
+                "english": "Machine learning is a subset of artificial intelligence (AI) that involves the use of algorithms and statistical models to enable machines to learn from data, make decisions, and improve their performance on a specific task without being explicitly programmed. It involves training models on large datasets, allowing them to identify patterns and relationships, and then using those patterns to make predictions or take actions.",
+                "malay": {
+                    "result": "Pembelajaran mesin ialah subset kecerdasan buatan (AI) yang melibatkan penggunaan algoritma dan model statistik untuk membolehkan mesin belajar daripada data, membuat keputusan, dan meningkatkan prestasi mereka pada tugasan tertentu tanpa diprogramkan secara eksplisit. Ia melibatkan latihan model pada set data besar, membenarkan mereka mengenal pasti corak dan hubungan, dan kemudian menggunakan corak tersebut untuk membuat ramalan atau mengambil tindakan.",
+                    "usage": {
+                        "prompt_tokens": 95,
+                        "total_tokens": 95
+                    }
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-15T01:45:29.522562",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "How do I participate in live casino tournaments?",
+            "generation": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time.",
+            "translations": {
+                "malay": "",
+                "usage": {
+                    "prompt_tokens": 0,
+                    "total_tokens": 0
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-15T01:50:38.000494",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "How do I participate in live casino tournaments?",
+            "generation": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time.",
+            "translations": {
+                "malay": "",
+                "usage": {
+                    "prompt_tokens": 0,
+                    "total_tokens": 0
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-15T01:59:40.104675",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "How do I participate in live casino tournaments?",
+            "generation": {
+                "generation": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time.",
+                "translations": {
+                    "malay": "",
+                    "usage": {
+                        "prompt_tokens": 0,
+                        "total_tokens": 0
+                    }
+                }
+            },
+            "translations": {
+                "malay": "",
+                "usage": {
+                    "prompt_tokens": 0,
+                    "total_tokens": 0
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-15T02:05:29.810382",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "How do I participate in live casino tournaments?",
+            "generation": {
+                "generation": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time.",
+                "translations": {
+                    "malay": "",
+                    "usage": {
+                        "prompt_tokens": 0,
+                        "total_tokens": 0
+                    }
+                }
+            },
+            "translations": {
+                "malay": "",
+                "usage": {
+                    "prompt_tokens": 0,
+                    "total_tokens": 0
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-15T02:07:43.741081",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "How do I participate in live casino tournaments?",
+            "generation": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time.",
+            "translations": {
+                "malay": "",
+                "usage": {
+                    "prompt_tokens": 0,
+                    "total_tokens": 0
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-15T02:08:37.302878",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "How do I participate in live casino tournaments?",
+            "generation": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time.",
+            "translations": {
+                "malay": "",
+                "usage": {
+                    "prompt_tokens": 0,
+                    "total_tokens": 0
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-15T02:19:50.595217",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "How do I participate in live casino tournaments?",
+            "generation": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time.",
+            "translations": {
+                "malay": "Untuk menyertai kejohanan kasino langsung, semak bahagian 'Tournaments' di lobi kasino langsung kami. Pilih kejohanan yang akan datang, semak peraturan dan jumlah pembelian, kemudian klik 'Daftar'. Pastikan anda mempunyai dana yang mencukupi dalam akaun anda untuk pembelian. Kejohanan biasanya mempunyai masa permulaan tertentu, jadi pastikan anda mendaftar tepat pada masanya.",
+                "usage": {
+                    "prompt_tokens": 0,
+                    "total_tokens": 0
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-15T02:20:12.785545",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "How do I participate in live casino tournaments?",
+            "generation": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time.",
+            "translations": {
+                "malay": "Untuk menyertai kejohanan kasino langsung, semak bahagian 'Tournaments' di lobi kasino langsung kami. Pilih kejohanan yang akan datang, semak peraturan dan jumlah pembelian, kemudian klik 'Daftar'. Pastikan anda mempunyai dana yang mencukupi dalam akaun anda untuk pembelian. Kejohanan biasanya mempunyai masa permulaan tertentu, jadi pastikan anda mendaftar tepat pada masanya.",
+                "usage": {
+                    "prompt_tokens": 0,
+                    "total_tokens": 0
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-15T02:21:50.792371",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "How do I participate in live casino tournaments?",
+            "generation": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time.",
+            "translations": {
+                "malay": "Untuk menyertai kejohanan kasino langsung, semak bahagian 'Tournaments' di lobi kasino langsung kami. Pilih kejohanan yang akan datang, semak peraturan dan jumlah pembelian, kemudian klik 'Daftar'. Pastikan anda mempunyai dana yang mencukupi dalam akaun anda untuk pembelian. Kejohanan biasanya mempunyai masa permulaan tertentu, jadi pastikan anda mendaftar tepat pada masanya.",
+                "usage": {
+                    "prompt_tokens": 0,
+                    "total_tokens": 0
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-15T02:24:13.492130",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "How do I participate in live casino tournaments?",
+            "generation": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time.",
+            "translations": {
+                "malay": "Untuk menyertai kejohanan kasino langsung, semak bahagian 'Tournaments' di lobi kasino langsung kami. Pilih kejohanan yang akan datang, semak peraturan dan jumlah pembelian, kemudian klik 'Daftar'. Pastikan anda mempunyai dana yang mencukupi dalam akaun anda untuk pembelian. Kejohanan biasanya mempunyai masa permulaan tertentu, jadi pastikan anda mendaftar tepat pada masanya.",
+                "usage": {
+                    "prompt_tokens": 0,
+                    "total_tokens": 0
+                }
+            }
+        }
     }
 ]
