@@ -1,13 +1,14 @@
 import json
 import os
+from datetime import datetime
 
 from django.conf import settings
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .chatbot import generate_answer, save_interaction
+from .chatbot import generate_answer, save_interaction, translate_en_to_ms
 from .serializers import (
     AIResponseSerializer,
     CaptureSummarySerializer,
@@ -15,6 +16,7 @@ from .serializers import (
     CorrectBoolSerializer,
     IncorrectAnswerResponseSerializer,
     UserInputSerializer,
+    ViewSummarySerializer,
 )
 
 
@@ -23,9 +25,27 @@ class UserInputView(APIView):
         serializer = UserInputSerializer(data=request.data)
         if serializer.is_valid():
             prompt = serializer.validated_data["prompt"]
+            user_id = serializer.validated_data["user_id"]
+
             generation = generate_answer(prompt)
-            response_data = {"generation": generation}
-            save_interaction("user_input", {"prompt": prompt, "generation": generation})
+
+            response_data = {
+                "user_id": user_id,
+                "generation": generation["generation"],
+                "translations": generation["translations"],
+                "usage": generation["usage"],
+            }
+
+            save_interaction(
+                "user_input",
+                {
+                    "user_id": user_id,
+                    "prompt": prompt,
+                    "generation": generation["generation"],
+                    "translations": generation["translations"],
+                },
+            )
+
             return Response(response_data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -84,18 +104,59 @@ class CaptureSummaryView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# changed the ViewSummary API to work for the new malay/english
 class ViewSummaryView(APIView):
     def get(self, request):
-        file_path = os.path.join(settings.BASE_DIR, "data", "interactions.json")
-        if not os.path.exists(file_path):
-            return Response(
-                {"error": "No data available"}, status=status.HTTP_404_NOT_FOUND
+        try:
+            file_path = os.path.join(
+                os.path.dirname(__file__), "../data/interactions.json"
             )
 
-        with open(file_path, "r") as f:
-            interaction_data = json.load(f)
+            if not os.path.exists(file_path):
+                return Response(
+                    {"error": "No data available"}, status=status.HTTP_404_NOT_FOUND
+                )
 
-        return Response(interaction_data, status=status.HTTP_200_OK)
+            try:
+                with open(file_path, "r") as f:
+                    interactions = json.load(f)
+                    if not isinstance(interactions, list):
+                        return Response(
+                            {"error": "Invalid data format"},
+                            status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                        )
+            except json.JSONDecodeError:
+                return Response(
+                    {"error": "Invalid JSON data"},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                )
+
+            summaries = []
+            for interaction in interactions:
+                try:
+                    if interaction.get("Type") == "user_input":
+                        data = interaction.get("Data", {})
+                        summary = {
+                            "user_id": data.get("user_id", 0),
+                            "Date_time": interaction.get("Date_time"),
+                            "Question": data.get("prompt", ""),
+                            "generation": data.get("generation", ""),
+                            "translations": data.get("translations", []),
+                            "Question_correct": False,
+                            "Correct_rating": 0,
+                            "Correct_Answer": "",
+                            "Metadata": {},
+                        }
+                        summaries.append(summary)
+                except AttributeError:
+                    continue  # Skip malformed entries
+
+            return Response(summaries, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response(
+                {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
 
 def save_to_json(self, filename, data):
