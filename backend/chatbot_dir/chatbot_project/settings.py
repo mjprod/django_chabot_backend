@@ -31,7 +31,8 @@ ALLOWED_HOSTS = [
     "mjproapps.com",
     "www.mjproapps.com",
     "3.107.8.190",
-    "156.67.222.95",
+    "54.206.216.180",
+    "13.238.144.45".
     "localhost",
     "127.0.0.1",
 ]
