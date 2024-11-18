@@ -467,5 +467,43 @@
                 }
             ]
         }
+    },
+    {
+        "Date_time": "2024-11-18T05:07:20.399703",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "Berapa lama biasanya deposit diproses?",
+            "generation": "Saya tidak tahu berapa lama biasanya deposit diproses, karena informasi tersebut tidak disebutkan dalam konteks yang diberikan. Namun, menurut konteks, mereka akan memeriksa informasi deposit dan menyelesaikan masalah secepat mungkin setelah Anda memberikan informasi deposit atau menerima deposit receipt.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "Saya tidak tahu berapa lama biasanya deposit diproses, karena informasi tersebut tidak disebutkan dalam konteks yang diberikan. Namun, menurut konteks, mereka akan memeriksa informasi deposit dan menyelesaikan masalah secepat mungkin setelah Anda memberikan informasi deposit atau menerima deposit receipt."
+                },
+                {
+                    "language": "ms-MY",
+                    "text": "Saya tidak tahu berapa lama deposit biasanya diproses, kerana maklumat itu tidak dinyatakan dalam konteks yang diberikan. Walau bagaimanapun, mengikut konteks, mereka akan menyemak maklumat deposit dan menyelesaikan masalah secepat mungkin selepas anda memberikan maklumat deposit atau menerima deposit receipt."
+                }
+            ]
+        }
+    },
+    {
+        "Date_time": "2024-11-18T05:09:09.125803",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "Berapa lama biasanya deposit diproses?",
+            "generation": "Biasanya, waktu proses deposit adalah 5 hingga 30 menit.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "Biasanya, waktu proses deposit adalah 5 hingga 30 menit."
+                },
+                {
+                    "language": "ms-MY",
+                    "text": "Biasanya, masa proses deposit adalah 5 hingga 30 minit."
+                }
+            ]
+        }
     }
 ]
