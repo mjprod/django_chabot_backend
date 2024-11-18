@@ -469,39 +469,101 @@
         }
     },
     {
-        "Date_time": "2024-11-18T05:07:20.399703",
+        "Date_time": "2024-11-18T04:35:06.587307",
         "Type": "user_input",
         "Data": {
             "user_id": 0,
             "prompt": "Berapa lama biasanya deposit diproses?",
-            "generation": "Saya tidak tahu berapa lama biasanya deposit diproses, karena informasi tersebut tidak disebutkan dalam konteks yang diberikan. Namun, menurut konteks, mereka akan memeriksa informasi deposit dan menyelesaikan masalah secepat mungkin setelah Anda memberikan informasi deposit atau menerima deposit receipt.",
+            "cleaned_prompt": "How long does it usually take for a deposit to be processed?",
+            "generation": "Deposits are typically processed within 5 to 10 minutes.",
             "translations": [
                 {
                     "language": "en",
-                    "text": "Saya tidak tahu berapa lama biasanya deposit diproses, karena informasi tersebut tidak disebutkan dalam konteks yang diberikan. Namun, menurut konteks, mereka akan memeriksa informasi deposit dan menyelesaikan masalah secepat mungkin setelah Anda memberikan informasi deposit atau menerima deposit receipt."
+                    "text": "Deposits are typically processed within 5 to 10 minutes."
                 },
                 {
-                    "language": "ms-MY",
-                    "text": "Saya tidak tahu berapa lama deposit biasanya diproses, kerana maklumat itu tidak dinyatakan dalam konteks yang diberikan. Walau bagaimanapun, mengikut konteks, mereka akan menyemak maklumat deposit dan menyelesaikan masalah secepat mungkin selepas anda memberikan maklumat deposit atau menerima deposit receipt."
+                    "language": "ms",
+                    "text": "Deposit biasanya diproses dalam masa 5 hingga 10 minit."
                 }
             ]
         }
     },
     {
-        "Date_time": "2024-11-18T05:09:09.125803",
+        "Date_time": "2024-11-18T04:39:06.579433",
         "Type": "user_input",
         "Data": {
             "user_id": 0,
             "prompt": "Berapa lama biasanya deposit diproses?",
-            "generation": "Biasanya, waktu proses deposit adalah 5 hingga 30 menit.",
+            "cleaned_prompt": "How long does it usually take for a deposit to be processed?",
+            "generation": "Deposits are typically processed within 5 to 10 minutes.",
             "translations": [
                 {
                     "language": "en",
-                    "text": "Biasanya, waktu proses deposit adalah 5 hingga 30 menit."
+                    "text": "Deposits are typically processed within 5 to 10 minutes."
                 },
                 {
-                    "language": "ms-MY",
-                    "text": "Biasanya, masa proses deposit adalah 5 hingga 30 minit."
+                    "language": "ms",
+                    "text": "Deposit biasanya diproses dalam masa 5 hingga 10 minit."
+                }
+            ]
+        }
+    },
+    {
+        "Date_time": "2024-11-18T04:52:37.636796",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "Berapa lama biasanya deposit diproses?",
+            "cleaned_prompt": "How long does it usually take for the deposit to be processed?",
+            "generation": "The deposit processing time is typically between 5 to 30 minutes. However, one of the answers also mentions that deposits are processed within 5 to 10 minutes.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "The deposit processing time is typically between 5 to 30 minutes. However, one of the answers also mentions that deposits are processed within 5 to 10 minutes."
+                },
+                {
+                    "language": "ms",
+                    "text": "Masa pemprosesan deposit biasanya antara 5 hingga 30 minit. Walau bagaimanapun, salah satu jawapan juga menyebut bahawa deposit diproses dalam masa 5 hingga 10 minit."
+                }
+            ]
+        }
+    },
+    {
+        "Date_time": "2024-11-18T05:11:31.995375",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "Berapa lama biasanya deposit diproses?",
+            "cleaned_prompt": "How long does it usually take for a deposit to be processed?",
+            "generation": "Deposits are typically processed within 5 to 10 minutes.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "Deposits are typically processed within 5 to 10 minutes."
+                },
+                {
+                    "language": "ms",
+                    "text": "Deposit biasanya diproses dalam masa 5 hingga 10 minit."
+                }
+            ]
+        }
+    },
+    {
+        "Date_time": "2024-11-18T05:12:34.082455",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "\u4e3a\u4ec0\u4e48\u6211\u5b58\u6b3e\u540e\u8d26\u6237\u663e\u793a\u79ef\u5206\u4e3a0?",
+            "cleaned_prompt": "The translated text is: \"Why does my account show a balance of zero points after I made a deposit?\"",
+            "generation": "I don't have any additional context beyond what's provided. However, based on the given context, I can still try to answer your question. \n\nIf your account is displayed as 0 after deposit, it is recommended that you first check whether your deposit has been successfully processed in the transaction record. If you confirm that the deposit is processed, try to restart your application to update the account balance. If you have any other problems or need further help, please contact our customer service team at any time.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "I don't have any additional context beyond what's provided. However, based on the given context, I can still try to answer your question. \n\nIf your account is displayed as 0 after deposit, it is recommended that you first check whether your deposit has been successfully processed in the transaction record. If you confirm that the deposit is processed, try to restart your application to update the account balance. If you have any other problems or need further help, please contact our customer service team at any time."
+                },
+                {
+                    "language": "ms",
+                    "text": "Saya tidak mempunyai sebarang konteks tambahan selain daripada yang diberikan. Walau bagaimanapun, berdasarkan konteks yang diberikan, saya masih boleh cuba menjawab soalan anda.\n\nJika akaun anda dipaparkan sebagai 0 selepas deposit, adalah disyorkan untuk memeriksa terlebih dahulu sama ada deposit telah berjaya diproses dalam rekod transaksi. Jika anda mengesahkan bahawa deposit telah diproses, cubalah memulakan semula permohonan anda untuk mengemas kini baki akaun. Jika anda menghadapi masalah lain atau memerlukan bantuan lanjut, sila hubungi pasukan perkhidmatan pelanggan kami pada bila-bila masa."
                 }
             ]
         }
