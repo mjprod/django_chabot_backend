@@ -31,6 +31,8 @@ ALLOWED_HOSTS = [
     "mjproapps.com",
     "api.mjproapps.com",
     "www.mjproapps.com",
+    "staging.mjproapps.com",
+    "api-staging.mjproapps.com",
     "3.107.8.190",
     "54.206.216.180",
     "13.238.144.45",
