@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-z$!=*9prhkq7xd2^2!!g39v$spw1f=yaxbc4qhle9yp1n!-b%-"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-
+"""
 DEBUG = False
 
 
@@ -38,6 +38,12 @@ ALLOWED_HOSTS = [
 
 
 SECURE_SSL_REDIRECT = True
+"""
+DEBUG = True
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+SECURE_SSL_REDIRECT = False
+
+
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True

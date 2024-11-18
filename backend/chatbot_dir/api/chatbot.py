@@ -16,6 +16,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate, PromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_groq import ChatGroq
+from openai import OpenAI
 from pydantic import BaseModel, Field
 
 #
@@ -103,6 +104,28 @@ retriever = vectorstore.as_retriever(
 
 doc_retrieve = retriever.invoke(prompt)
 print("Documents retrieved:", len(doc_retrieve))
+
+
+# this is the OPENAI translate function
+def translate_and_clean(text):
+    # load env for api key
+    load_dotenv()
+
+    api_key = os.getenv("OPENAI_API_KEY")
+
+    client = OpenAI(api_key=api_key)
+    # generate response
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a translator and text cleaner. Translate the given text from Bahasa Malay to English, removing any slang and ensuring the output is in proper English.",
+            },
+            {"role": "user", "content": f"Translate and clean this text, {text}"},
+        ],
+    )
+    return response.choices[0].message.content.strip()
 
 
 # Define GradeDocuments Model
@@ -240,7 +263,12 @@ def translate_en_to_ms(input_text, to_lang="ms", model="small"):
 
 def generate_answer(user_prompt):
     global prompt, docs_to_use
-    prompt = user_prompt
+
+    # added in translate and clean prompt
+    cleaned_prompt = translate_and_clean(user_prompt)
+
+    # updated prompt to take the output of the cleaned_prompt call
+    prompt = cleaned_prompt
     docs_to_use = []
 
     # Retrieve documents

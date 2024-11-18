@@ -8,7 +8,12 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .chatbot import generate_answer, save_interaction, translate_en_to_ms
+from .chatbot import (
+    generate_answer,
+    save_interaction,
+    translate_and_clean,
+    translate_en_to_ms,
+)
 from .serializers import (
     AIResponseSerializer,
     CaptureSummarySerializer,
@@ -27,10 +32,15 @@ class UserInputView(APIView):
             prompt = serializer.validated_data["prompt"]
             user_id = serializer.validated_data["user_id"]
 
-            generation = generate_answer(prompt)
+            # added the translation here
+            cleaned_prompt = translate_and_clean(prompt)
+
+            generation = generate_answer(cleaned_prompt)
 
             response_data = {
                 "user_id": user_id,
+                "prompt": prompt,
+                "cleaned_prompt": cleaned_prompt,
                 "generation": generation["generation"],
                 "translations": generation["translations"],
                 "usage": generation["usage"],
@@ -41,6 +51,7 @@ class UserInputView(APIView):
                 {
                     "user_id": user_id,
                     "prompt": prompt,
+                    "cleaned_prompt": cleaned_prompt,
                     "generation": generation["generation"],
                     "translations": generation["translations"],
                 },
@@ -140,6 +151,7 @@ class ViewSummaryView(APIView):
                             "user_id": data.get("user_id", 0),
                             "Date_time": interaction.get("Date_time"),
                             "Question": data.get("prompt", ""),
+                            "Cleaned_Question": data.get("cleaned_prompt", ""),
                             "generation": data.get("generation", ""),
                             "translations": data.get("translations", []),
                             "Question_correct": False,

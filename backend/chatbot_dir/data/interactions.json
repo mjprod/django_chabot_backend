@@ -467,5 +467,65 @@
                 }
             ]
         }
+    },
+    {
+        "Date_time": "2024-11-18T04:35:06.587307",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "Berapa lama biasanya deposit diproses?",
+            "cleaned_prompt": "How long does it usually take for a deposit to be processed?",
+            "generation": "Deposits are typically processed within 5 to 10 minutes.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "Deposits are typically processed within 5 to 10 minutes."
+                },
+                {
+                    "language": "ms",
+                    "text": "Deposit biasanya diproses dalam masa 5 hingga 10 minit."
+                }
+            ]
+        }
+    },
+    {
+        "Date_time": "2024-11-18T04:39:06.579433",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "Berapa lama biasanya deposit diproses?",
+            "cleaned_prompt": "How long does it usually take for a deposit to be processed?",
+            "generation": "Deposits are typically processed within 5 to 10 minutes.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "Deposits are typically processed within 5 to 10 minutes."
+                },
+                {
+                    "language": "ms",
+                    "text": "Deposit biasanya diproses dalam masa 5 hingga 10 minit."
+                }
+            ]
+        }
+    },
+    {
+        "Date_time": "2024-11-18T04:52:37.636796",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "Berapa lama biasanya deposit diproses?",
+            "cleaned_prompt": "How long does it usually take for the deposit to be processed?",
+            "generation": "The deposit processing time is typically between 5 to 30 minutes. However, one of the answers also mentions that deposits are processed within 5 to 10 minutes.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "The deposit processing time is typically between 5 to 30 minutes. However, one of the answers also mentions that deposits are processed within 5 to 10 minutes."
+                },
+                {
+                    "language": "ms",
+                    "text": "Masa pemprosesan deposit biasanya antara 5 hingga 30 minit. Walau bagaimanapun, salah satu jawapan juga menyebut bahawa deposit diproses dalam masa 5 hingga 10 minit."
+                }
+            ]
+        }
     }
 ]
