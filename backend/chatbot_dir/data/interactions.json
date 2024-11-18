@@ -527,5 +527,45 @@
                 }
             ]
         }
+    },
+    {
+        "Date_time": "2024-11-18T05:11:31.995375",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "Berapa lama biasanya deposit diproses?",
+            "cleaned_prompt": "How long does it usually take for a deposit to be processed?",
+            "generation": "Deposits are typically processed within 5 to 10 minutes.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "Deposits are typically processed within 5 to 10 minutes."
+                },
+                {
+                    "language": "ms",
+                    "text": "Deposit biasanya diproses dalam masa 5 hingga 10 minit."
+                }
+            ]
+        }
+    },
+    {
+        "Date_time": "2024-11-18T05:12:34.082455",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "\u4e3a\u4ec0\u4e48\u6211\u5b58\u6b3e\u540e\u8d26\u6237\u663e\u793a\u79ef\u5206\u4e3a0?",
+            "cleaned_prompt": "The translated text is: \"Why does my account show a balance of zero points after I made a deposit?\"",
+            "generation": "I don't have any additional context beyond what's provided. However, based on the given context, I can still try to answer your question. \n\nIf your account is displayed as 0 after deposit, it is recommended that you first check whether your deposit has been successfully processed in the transaction record. If you confirm that the deposit is processed, try to restart your application to update the account balance. If you have any other problems or need further help, please contact our customer service team at any time.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "I don't have any additional context beyond what's provided. However, based on the given context, I can still try to answer your question. \n\nIf your account is displayed as 0 after deposit, it is recommended that you first check whether your deposit has been successfully processed in the transaction record. If you confirm that the deposit is processed, try to restart your application to update the account balance. If you have any other problems or need further help, please contact our customer service team at any time."
+                },
+                {
+                    "language": "ms",
+                    "text": "Saya tidak mempunyai sebarang konteks tambahan selain daripada yang diberikan. Walau bagaimanapun, berdasarkan konteks yang diberikan, saya masih boleh cuba menjawab soalan anda.\n\nJika akaun anda dipaparkan sebagai 0 selepas deposit, adalah disyorkan untuk memeriksa terlebih dahulu sama ada deposit telah berjaya diproses dalam rekod transaksi. Jika anda mengesahkan bahawa deposit telah diproses, cubalah memulakan semula permohonan anda untuk mengemas kini baki akaun. Jika anda menghadapi masalah lain atau memerlukan bantuan lanjut, sila hubungi pasukan perkhidmatan pelanggan kami pada bila-bila masa."
+                }
+            ]
+        }
     }
 ]
