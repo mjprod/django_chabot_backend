@@ -12,7 +12,6 @@ server {
     listen 443 ssl;
     server_name api-staging.mjproapps.com;
 
-    # SSL Configuration
     ssl_certificate /etc/letsencrypt/live/api-staging.mjproapps.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/api-staging.mjproapps.com/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
@@ -22,7 +21,6 @@ server {
     access_log /var/log/nginx/api-staging.mjproapps.com.access.log;
     error_log /var/log/nginx/api-staging.mjproapps.com.error.log;
 
-    # Main location block with CORS and proxy settings
     location / {
         # CORS headers
         add_header 'Access-Control-Allow-Origin' 'https://staging.mjproapps.com' always;
@@ -30,6 +28,22 @@ server {
         add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization' always;
         add_header 'Access-Control-Allow-Credentials' 'true' always;
         add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;
+
+
+        # Proxy settings
+        proxy_pass http://127.0.0.1:8000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+        proxy_buffering off;
+        proxy_redirect off;
+        proxy_read_timeout 300;
+        proxy_connect_timeout 300;
 
         # Handle preflight requests
         if ($request_method = 'OPTIONS') {
@@ -41,25 +55,6 @@ server {
             add_header 'Content-Length' 0;
             return 204;
         }
-
-        # Proxy settings
-        proxy_pass http://127.0.0.1:8000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-
-    # Static files location (if needed)
-    location /static/ {
-        alias /path/to/your/static/files/;
-        add_header 'Access-Control-Allow-Origin' 'https://staging.mjproapps.com' always;
-    }
-
-    # Media files location (if needed)
-    location /media/ {
-        alias /path/to/your/media/files/;
-        add_header 'Access-Control-Allow-Origin' 'https://staging.mjproapps.com' always;
     }
 }
     """
