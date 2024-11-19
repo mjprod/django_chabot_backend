@@ -55,19 +55,19 @@ server {
 }
 
 server {
-    listen 443 ssl;
-    server_name staging.mjproapps.com;
+    #listen 443 ssl;
+    #server_name staging.mjproapps.com;
 
     #ssl_certificate /etc/letsencrypt/live/staging.mjproapps.com/fullchain.pem;
     #ssl_certificate_key /etc/letsencrypt/live/staging.mjproapps.com/privkey.pem;
 
     # SSL parameters
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_prefer_server_ciphers on;
-    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
+    #ssl_protocols TLSv1.2 TLSv1.3;
+    #ssl_prefer_server_ciphers on;
+    #ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
 
     # HSTS (optional, but recommended for security)
-    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    #add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
 
     # Logs
     access_log /var/log/nginx/staging.mjproapps.com.access.log;
