@@ -58,8 +58,8 @@ server {
     listen 443 ssl;
     server_name staging.mjproapps.com;
 
-    ssl_certificate /etc/letsencrypt/live/staging.mjproapps.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/staging.mjproapps.com/privkey.pem;
+    #ssl_certificate /etc/letsencrypt/live/staging.mjproapps.com/fullchain.pem;
+    #ssl_certificate_key /etc/letsencrypt/live/staging.mjproapps.com/privkey.pem;
 
     # SSL parameters
     ssl_protocols TLSv1.2 TLSv1.3;
