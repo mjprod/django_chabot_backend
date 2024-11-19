@@ -1,17 +1,5 @@
 Chatbot Backend
 
-
-This Django-based backend serves as the core for a multilingual chatbot system with Retrieval-Augmented Generation (RAG) capabilities. It's designed to process user inputs, generate responses, and handle various interactions while supporting both English and Bahasa Malay languages.
-Purpose
-
-
-The main purposes of this backend are:
-To provide a robust API for handling user queries and generating appropriate responses.
-To implement a RAG system for more accurate and context-aware answers.
-To support multilingual interactions, specifically English and Bahasa Malay.
-To capture and store user interactions for future analysis and improvement.
-
-
 Key Components
 
 1. Chatbot Engine (chatbot.py)
@@ -41,22 +29,21 @@ POST /api/incorrect_answer_response/: Submit correct answers for incorrect respo
 POST /api/capture_summary/: Save complete interaction summaries.
 GET /api/view_summary/: Retrieve summaries of past interactions.
 
-
-Data Flow
-
-User sends a query through the UserInputView.
-The backend processes the query using the RAG system in chatbot.py.
-A response is generated and translated if necessary.
-The interaction is saved for future reference.
-Additional endpoints allow for feedback, ratings, and corrections to be submitted and stored.
-
-
 Setup and Configuration
 
 Ensure all required environment variables are set, including API keys for OpenAI and Mesolitica.
 Install all dependencies listed in requirements.txt.
 Run migrations to set up the database.
 Use python manage.py runserver to start the development server.
+SSL config:
+go to a file called create_nginx_config.py under chatbot_project/SSL
+
+Run this file with "sudo python3 create_nginx_config.py"
+
+once this is run, test with "sudo nginx -t"
+
+if successful then run "sudo systemctl reload nginx"
+
 
 
 Important Notes
