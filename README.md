@@ -38,7 +38,7 @@ Use python manage.py runserver to start the development server.
 SSL config:
 go to a file called create_nginx_config.py under chatbot_project/SSL
 
-Run this file with "sudo python3 create_nginx_config.py"
+Run this file with "sudo python3 create_nginx_config_1.py"
 
 once this is run, test with "sudo nginx -t"
 
