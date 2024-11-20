@@ -587,5 +587,53 @@
                 }
             ]
         }
+    },
+    {
+        "Date_time": "2024-11-20T05:40:49.235573",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "How do I participate in live casino tournaments?",
+            "cleaned_prompt": "How do I participate in live casino tournaments?",
+            "generation": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "To participate in live casino tournaments, check the 'Tournaments' section in our live casino lobby. Select an upcoming tournament, review the rules and buy-in amount, then click 'Register'. Ensure you have sufficient funds in your account for the buy-in. Tournaments often have specific start times, so be sure to join on time."
+                },
+                {
+                    "language": "ms-MY",
+                    "text": "Untuk menyertai kejohanan kasino langsung, semak bahagian 'Tournaments' di lobi kasino langsung kami. Pilih kejohanan yang akan datang, semak peraturan dan jumlah pembelian, kemudian klik 'Daftar'. Pastikan anda mempunyai dana yang mencukupi dalam akaun anda untuk pembelian. Kejohanan biasanya mempunyai masa permulaan tertentu, jadi pastikan anda mendaftar tepat pada masanya."
+                },
+                {
+                    "language": "cn",
+                    "text": "\u4e3a\u4e86\u53c2\u52a0\u73b0\u573a\u8d4c\u573a\u6bd4\u8d5b\uff0c\u8bf7\u68c0\u67e5\u6211\u4eec\u7684\u73b0\u573a\u8d4c\u573a\u5927\u5385\u4e2d\u7684\u201cTournaments\u201d\u90e8\u5206\u3002\u9009\u62e9\u5373\u5c06\u4e3e\u884c\u7684\u6bd4\u8d5b\uff0c\u5ba1\u67e5\u89c4\u5219\u548c\u8d2d\u5165\u91d1\u989d\uff0c\u7136\u540e\u70b9\u51fb\u201c\u6ce8\u518c\u201d\u3002\u786e\u4fdd\u60a8\u6709\u8db3\u591f\u7684\u8d44\u91d1\u5728\u60a8\u7684\u5e10\u6237\u4e2d\u8d2d\u4e70\u5165\u8d26\u3002\u6bd4\u8d5b\u901a\u5e38\u4f1a\u6709\u7279\u5b9a\u7684\u5f00\u673a\u65f6\u95f4\uff0c\u56e0\u6b64\u5fc5\u987b\u51c6\u65f6\u52a0\u5165\u3002"
+                }
+            ]
+        }
+    },
+    {
+        "Date_time": "2024-11-20T05:42:53.890020",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "what is the RTP on slot machines?",
+            "cleaned_prompt": "The original text is already in English. However, if you are asking for an explanation regarding the term \"RTP\" in relation to slot machines, here it is:\n\nRTP stands for \"Return to Player,\" which is a percentage that indicates how much of the total money wagered on a slot machine is paid back to players over time. For example, if a slot machine has an RTP of 95%, it means that, on average, players can expect to get back $95 for every $100 they wager over a long period.",
+            "generation": "Based on the provided context, I can answer your question about RTP. \n\nThe RTP (Return to Player) percentage for slot games varies, but most range between 95% to 98%. You can find the specific RTP for each game in its information section.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "Based on the provided context, I can answer your question about RTP. \n\nThe RTP (Return to Player) percentage for slot games varies, but most range between 95% to 98%. You can find the specific RTP for each game in its information section."
+                },
+                {
+                    "language": "ms-MY",
+                    "text": "Berdasarkan konteks yang diberikan, saya boleh menjawab soalan anda tentang RTP. \n\nPeratusan RTP (Return to Player) untuk permainan slot berbeza-beza, tetapi kebanyakannya antara 95% hingga 98%. Anda boleh mencari RTP tertentu untuk setiap permainan dalam bahagian maklumatnya."
+                },
+                {
+                    "language": "cn",
+                    "text": "\u6839\u636e\u63d0\u4f9b\u7684\u80cc\u666f\uff0c\u6211\u53ef\u4ee5\u56de\u7b54\u60a8\u5173\u4e8eRTP\u7684\u95ee\u9898\u3002\t\n\u683c\u5f0f\u6e38\u620f\u4e2d\u7684RTP\uff08\u8fd4\u56de\u73a9\u5bb6\uff09\u6bd4\u4f8b\u4e0d\u540c\uff0c\u4f46\u5927\u591a\u6570\u6e38\u620f\u8303\u56f4\u4e3a 95% \u81f3 98%\u3002\u60a8\u53ef\u4ee5\u5728\u5176\u4fe1\u606f\u90e8\u5206\u627e\u5230\u6bcf\u4e2a\u6e38\u620f\u4e2d\u5177\u4f53\u7684 RTP\u3002"
+                }
+            ]
+        }
     }
 ]

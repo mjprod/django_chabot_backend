@@ -223,6 +223,42 @@ rag_chain = (
 # API functions
 
 
+def translate_en_to_cn(input_text, to_lang="mandarin", model="small"):
+    url = "https://api.mesolitica.com/translation"
+
+    payload = {
+        "input": input_text,
+        "to_lang": to_lang,
+        "model": model,
+        "top_k": 1,
+        "top_p": 1,
+        "repetition_penalty": 1.1,
+        "temperature": 0,
+    }
+
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {os.getenv('MESOLITICA_API_KEY')}",
+    }
+
+    try:
+        print(f"Sending translation request for: {input_text}")
+        response = requests.post(url, json=payload, headers=headers)
+        print(f"Response status: {response.status_code}")
+        print(f"Response content: {response.text}")
+
+        if response.status_code == 200:
+            translation_data = response.json()
+            return {
+                "text": translation_data.get("result", ""),
+                "usage": translation_data.get("usage", {}),
+            }
+    except Exception as e:
+        print(f"Translation error: {str(e)}")
+
+    return {"text": "", "prompt_tokens": 0, "total_tokens": 0}
+
+
 def translate_en_to_ms(input_text, to_lang="ms", model="small"):
     # this is the url we send the payload to for translation
     url = "https://api.mesolitica.com/translation"
@@ -288,15 +324,21 @@ def generate_answer(user_prompt):
     # Get Malay translation
     malay_translation = translate_en_to_ms(generation)
 
+    # translate to Mandarin
+    chinese_translation = translate_en_to_cn(generation)
+
     return {
         "generation": generation,
         "translations": [
             {"language": "en", "text": generation},
             {"language": "ms-MY", "text": malay_translation.get("text", "")},
+            {"language": "cn", "text": chinese_translation.get("text", "")},
         ],
         "usage": {
             "prompt_tokens": malay_translation.get("prompt_tokens", 0),
             "total_tokens": malay_translation.get("total_tokens", 0),
+            "prompt_tokens": chinese_translation.get("prompt_tokens", 0),
+            "total_tokens": chinese_translation.get("total_tokens", 0),
         },
     }
 
