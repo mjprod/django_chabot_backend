@@ -9,35 +9,40 @@ def load_parameters():
         # Initialize SSM client
         ssm_client = boto3.client("ssm", region_name="ap-southeast-2")
 
-        # Define your parameter path prefix
-        parameter_path = "/staging_env_details"  # Example: /chatbot/prod/
+        # Get parameter by path
+        parameter_path = "/staging_env_details"
 
-        # Get all parameters under the path
-        paginator = ssm_client.get_paginator("get_parameters_by_path")
-        parameters = []
+        try:
+            response = ssm_client.get_parameter(
+                Name=parameter_path, WithDecryption=False
+            )
 
-        for page in paginator.paginate(
-            Path=parameter_path, Recursive=True, WithDecryption=True
-        ):
-            parameters.extend(page["Parameters"])
+            # Parse the parameter value which contains multiple lines
+            parameter_value = response["Parameter"]["Value"]
 
-        # Create .env content
-        env_content = []
-        for param in parameters:
-            # Extract parameter name (last part of the path)
-            param_name = param["Name"].split("/")[-1]
-            param_value = param["Value"]
-            env_content.append(f"{param_name}={param_value}")
+            # Split the value into individual lines
+            env_vars = parameter_value.split("\n")
 
-        # Write to .env file
-        env_path = Path(__file__).parent / ".env"
-        with open(env_path, "w") as env_file:
-            env_file.write("\n".join(env_content))
+            # Create .env content
+            env_content = []
+            for line in env_vars:
+                if line.strip() and "=" in line:
+                    env_content.append(line.strip())
 
-        print("Successfully loaded parameters into .env file")
+            # Write to .env file
+            env_path = Path(__file__).parent / ".env"
+            with open(env_path, "w") as env_file:
+                env_file.write("\n".join(env_content))
+
+            print(f"Successfully loaded parameters into {env_path}")
+
+        except ssm_client.exceptions.ParameterNotFound:
+            print(f"Parameter {parameter_path} not found")
+            raise
 
     except Exception as e:
         print(f"Error loading parameters: {e}")
+        raise
 
 
 if __name__ == "__main__":
