@@ -120,7 +120,7 @@ def translate_and_clean(text):
         messages=[
             {
                 "role": "system",
-                "content":"""You are a query optimization expert. Your task is to:
+                "content": """You are a query optimization expert. Your task is to:
 
 1. If the input is not in English:
    - Translate it to clear, formal English
