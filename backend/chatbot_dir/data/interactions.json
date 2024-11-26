@@ -635,5 +635,29 @@
                 }
             ]
         }
+    },
+    {
+        "Date_time": "2024-11-26T04:26:51.174799",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "How do I participate in live casino tournaments?",
+            "cleaned_prompt": "How do I participate in live casino tournaments?",
+            "generation": "To participate in live casino tournaments, follow these steps:\n\n1. Log in to your gaming account and navigate to the live casino section.\n2. Look for the 'Tournaments' or 'Live Casino Tournaments' tab, which is usually located at the top or bottom of the live casino page.\n3. Browse through the available tournaments and select the one you'd like to participate in.\n4. Read the tournament rules and requirements, including the buy-in amount, game type, and any specific rules or restrictions.\n5. Click the 'Join' or 'Buy-in' button to participate in the tournament.\n6. Make your buy-in payment, which will be deducted from your gaming account balance.\n7. Play the designated game during the tournament period, and your performance will be tracked and ranked against other participants.\n8. The tournament will typically end after a set period, and the winner(s) will be announced and awarded a prize.\n\nPlease note that some tournaments may have specific requirements, such as a minimum deposit or a specific game variant. Be sure to review the tournament rules before participating.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "To participate in live casino tournaments, follow these steps:\n\n1. Log in to your gaming account and navigate to the live casino section.\n2. Look for the 'Tournaments' or 'Live Casino Tournaments' tab, which is usually located at the top or bottom of the live casino page.\n3. Browse through the available tournaments and select the one you'd like to participate in.\n4. Read the tournament rules and requirements, including the buy-in amount, game type, and any specific rules or restrictions.\n5. Click the 'Join' or 'Buy-in' button to participate in the tournament.\n6. Make your buy-in payment, which will be deducted from your gaming account balance.\n7. Play the designated game during the tournament period, and your performance will be tracked and ranked against other participants.\n8. The tournament will typically end after a set period, and the winner(s) will be announced and awarded a prize.\n\nPlease note that some tournaments may have specific requirements, such as a minimum deposit or a specific game variant. Be sure to review the tournament rules before participating."
+                },
+                {
+                    "language": "ms-MY",
+                    "text": "Untuk menyertai kejohanan kasino secara langsung, ikuti langkah berikut:\n\n1. Log masuk ke akaun permainan anda dan navigasi ke bahagian kasino secara langsung.\n2. Cari tab 'Tournaments' atau 'Live Casino Tournaments', yang biasanya terletak di bahagian atas atau bawah halaman kasino secara langsung.\n3. Semak kejohanan yang tersedia dan pilih yang ingin anda sertai.\n4. Baca peraturan dan keperluan kejohanan, termasuk jumlah pembelian, jenis permainan dan sebarang peraturan atau sekatan tertentu.\n5. Klik butang 'Sertai' atau 'Beli-beli' untuk mengambil bahagian dalam kejohanan.\n6. Buat pembayaran beli-dalam anda, yang akan ditolak daripada baki akaun permainan anda.\n7. Main permainan yang ditetapkan semasa tempoh kejohanan, dan prestasi anda akan dikesan dan diletakkan pada kedudukan peserta lain.\n8. Kejohanan biasanya berakhir selepas tempoh yang ditetapkan, dan pemenang akan diumumkan dan dianugerahkan hadiah.\n\nSila ambil perhatian bahawa beberapa kejohanan mungkin mempunyai syarat khusus, seperti deposit minimum atau varian permainan tertentu. Pastikan anda menyemak semula peraturan kejohanan sebelum mengambil bahagian."
+                },
+                {
+                    "language": "cn",
+                    "text": "\u53c2\u52a0\u73b0\u573a\u8d4c\u573a\u6bd4\u8d5b\uff0c\u8bf7\u9075\u5faa\u4ee5\u4e0b\u6b65\u9aa4\uff1a\n\n1.\u767b\u5f55\u60a8\u7684\u6e38\u620f\u8d26\u6237\u5e76\u5bfc\u822a\u5230\u73b0\u573a\u8d4c\u573a\u90e8\u5206\u3002\n2.\u641c\u7d22\u201cTournaments\u201d\u6216\u201cLive Casino Tournaments\u201d\u6807\u9898\uff0c\u901a\u5e38\u4f4d\u4e8e\u73b0\u573a\u8d4c\u573a\u9875\u9762\u4e0a\u6216\u4e0b\u7aef\u3002\n3.\u6d4f\u89c8\u53ef\u7528\u7684\u6bd4\u8d5b\u5e76\u9009\u62e9\u60a8\u60f3\u8981\u53c2\u4e0e\u7684\u9009\u9879\u3002\n4.\u9605\u8bfb\u6bd4\u8d5b\u89c4\u5219\u548c\u8981\u6c42\uff0c\u5305\u62ec\u4e70\u5165\u91d1\u989d\u3001\u6e38\u620f\u7c7b\u578b\u4ee5\u53ca\u4efb\u4f55\u5177\u4f53\u89c4\u5b9a\u6216\u9650\u5236\u3002\n5.\u70b9\u51fb\u201cJoin\u201d\u6216\u201cBuy-in\u201d\u6309\u94ae\u53c2\u8d5b\u53c2\u8d5b\u3002\n6.\u4ece\u4f60\u7684\u6e38\u620f\u8d26\u6237\u4f59\u989d\u4e2d\u652f\u4ed8\u4e70\u5165\u4ed8\u6b3e\u3002\n7.\u5728\u6bd4\u8d5b\u671f\u95f4\u64ad\u653e\u6307\u5b9a\u7684\u6e38\u620f\uff0c\u5e76\u4e14\u4f60\u7684\u8868\u73b0\u5c06\u88ab\u8ddf\u8e2a\u5e76\u6392\u540d\u5176\u4ed6\u53c2\u8d5b\u8005\u3002\n8.\u6bd4\u8d5b\u901a\u5e38\u4f1a\u5728\u8bbe\u7f6e\u7684\u65f6\u95f4\u7ed3\u675f\u540e\u7ed3\u675f\uff0c\u83b7\u80dc\u8005\u5c06\u5728\u516c\u5e03\u5e76\u6388\u4e88\u5956\u54c1\u3002\n\n\u8bf7\u6ce8\u610f\uff0c\u4e00\u4e9b\u9526\u6807\u53ef\u80fd\u5177\u6709\u7279\u6b8a\u8981\u6c42\uff0c\u4f8b\u5982\u6700\u4f4e\u5b58\u50a8\u6216\u67d0\u79cd\u6e38\u620f\u7c7b\u578b\u7684\u3002\u786e\u4fdd\u63d0\u524d\u5ba1\u67e5\u6bd4\u8d5b\u89c4\u5219\u3002"
+                }
+            ]
+        }
     }
 ]

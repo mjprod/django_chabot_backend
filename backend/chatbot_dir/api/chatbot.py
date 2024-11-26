@@ -2,6 +2,7 @@ import json
 import os
 from datetime import datetime
 from pathlib import Path
+from typing import List
 
 import cohere
 import requests
@@ -26,41 +27,63 @@ prompt = ""
 # Load environment variables
 load_dotenv()
 
-# Load JSON data
-file_path = os.path.join(os.path.dirname(__file__), "../data/database.json")
-with open(file_path, "r") as f:
-    data = json.load(f)
 
-# Initialize Embedding Model
-embedding_model = CohereEmbeddings(model="embed-english-v3.0")
+# added function for loading and processing the json file
+def load_and_process_json_file() -> List[dict]:
+    base_dir = os.path.join(os.path.dirname(__file__), "../data")
+    database_files = [
+        "database_part_1.json",
+        "database_part_2.json",
+        "database_part_3.json",
+    ]
 
-# Prepare Documents
-documents = []
-for item in data:
-    try:
-        document = {
-            "question": item["Question"],
-            "answer": item["Answer"],
-            "metadata": item.get("Metadata", {}),  # Use .get() with a default value
-        }
-        documents.append(document)
-    except KeyError as e:
-        print(f"KeyError: {e} - Skipping this item")
-        continue  # Skip to the next item if there's a KeyError
+    # create the docutments list
+    all_documents = []
+
+    for file_name in database_files:
+        file_path = os.path.join(base_dir, file_name)
+        try:
+            with open(file_path, "r") as f:
+                data = json.load(f)
+                for item in data:
+                    if isinstance(item, dict):
+                        document = {
+                            "question": item["question"],
+                            "answer": item["answer"],
+                            "metadata": item.get("metadata", {}),
+                        }
+                        all_documents.append(document)
+        except FileNotFoundError:
+            print(f"Warning: {file_name} - not found")
+        except json.JSONDecodeError:
+            print(f"Error: Invalid JSON in {file_name}")
+            continue
+    return all_documents
 
 
-# Custom Document Class to Avoid Conflicts
 class CustomDocument:
     def __init__(self, page_content, metadata):
         self.page_content = page_content
         self.metadata = metadata
 
 
+embedding_model = CohereEmbeddings(model="embed-multilingual-v3.0")
+
+vectorstores = []
+
+documents = load_and_process_json_file()
+
 # Create Document Objects
+# Modify the document creation to flatten metadata
 doc_objects = [
     CustomDocument(
         page_content=f"Question: {doc['question']}\nAnswer: {doc['answer']}",
-        metadata=doc["metadata"],
+        metadata={
+            "category": ",".join(doc["metadata"].get("category", [])),
+            "subCategory": doc["metadata"].get("subCategory", ""),
+            "difficulty": doc["metadata"].get("difficulty", 0),
+            "confidence": doc["metadata"].get("confidence", 0.0),
+        },
     )
     for doc in documents
 ]
@@ -68,7 +91,7 @@ doc_objects = [
 
 # Text Splitter Class
 class CustomTextSplitter:
-    def __init__(self, chunk_size=500, chunk_overlap=100):
+    def __init__(self, chunk_size=300, chunk_overlap=50):
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
 
@@ -86,24 +109,40 @@ class CustomTextSplitter:
 
 
 # Initialize Text Splitter and Split Data
-text_splitter = CustomTextSplitter(chunk_size=500, chunk_overlap=100)
+text_splitter = CustomTextSplitter(chunk_size=300, chunk_overlap=50)
 split_data = text_splitter.split_documents(doc_objects)
 
-# Create Vector Store
-vectorstore = Chroma.from_documents(
-    documents=split_data,
-    collection_name="RAG",
-    embedding=embedding_model,
-)
+try:
+    store = Chroma.from_documents(
+        documents=split_data,
+        collection_name="RAG",
+        embedding=embedding_model,
+        persist_directory=f"./chroma_db",
+    )
 
-# Create Retriever
-retriever = vectorstore.as_retriever(
-    search_type="similarity",
-    search_kwargs={"k": 3},  # Number of retrievals
-)
+    vectorstores.append(store)
+except Exception as e:
+    print(f"Error: {e}")
 
-doc_retrieve = retriever.invoke(prompt)
-print("Documents retrieved:", len(doc_retrieve))
+
+# Changed the retriever to retrieve across all 4 vector stores
+class MultiRetriever:
+    def __init__(self, query):
+        self.vectorstores = vectorstores
+
+    def get_relevant_documents(self, query):
+        all_results = []
+        for store in vectorstores:
+            retriever = store.as_retriever(
+                search_type="mmr",
+                search_kwargs={"k": 3, "fetch_k": 5, "lambda_mult": 0.7},
+            )
+            results = retriever.get_relevant_documents(query)
+            all_results.extend(results)
+        return all_results[:3]
+
+
+retriever = MultiRetriever(vectorstores)
 
 
 # this is the OPENAI translate function
@@ -120,7 +159,38 @@ def translate_and_clean(text):
         messages=[
             {
                 "role": "system",
-                "content": "You are a translator and text cleaner. Translate the given text from Bahasa Malay to English, removing any slang and ensuring the output is in proper English.",
+                "content": """
+                You are a query optimization expert. Your task is to:
+
+1. If the input is not in English:
+   - Translate it to clear, formal English
+   - Maintain proper nouns, numbers, and technical terms
+   - Output: "Translated from [language] to English: [translated query]"
+
+2. If the input is in English:
+   - Remove filler words and informal language
+   - Standardize terminology
+   - Maintain the original question's intent
+   - Output: "[optimized query]"
+
+Do not:
+- Add explanations or additional context
+- Expand abbreviations unless unclear
+- Change the meaning of the query
+- Add steps or instructions
+
+Example 1:
+Input: "berapa minimum deposit ah?"
+Output: "Translated from Malay to English: What is the minimum deposit amount?"
+
+Example 2:
+Input: "how do I participate in live casino tournaments?"
+Output: "How do I participate in live casino tournaments?"
+
+Example 3:
+Input: "yo wassup how do i get my money back from da slots?"
+Output: "How do I withdraw money from slot games?"
+                """,
             },
             {"role": "user", "content": f"Translate and clean this text, {text}"},
         ],
@@ -193,8 +263,23 @@ rag_prompt_template = ChatPromptTemplate.from_messages(
     [
         (
             "system",
-            "You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know.",
+            """You are a knowledgeable gaming platform assistant. Provide direct, confident answers without referencing any context or databases. Never use phrases like "based on the provided context" or "it appears that."
+
+Key guidelines:
+- Give clear, direct responses
+- Use a friendly, professional tone
+- Provide specific details and timeframes
+- Include relevant follow-up information
+- Maintain accuracy while being conversational
+- Never mention sources or context
+- Avoid hedging language or uncertainty
+
+Example format:
+User: "How long does it take for deposits to process?"
+Assistant: "Deposits typically process within 5-30 minutes. If you haven't received your funds after 30 minutes, please contact our customer service team and we'll help resolve this right away."
+""",
         ),
+        ("assistant", "I'll provide clear, direct answers to help you."),
         ("human", "Context: {context}\nQuestion: {prompt}"),
     ]
 )
@@ -308,7 +393,7 @@ def generate_answer(user_prompt):
     docs_to_use = []
 
     # Retrieve documents
-    docs_retrieve = retriever.invoke(prompt)
+    docs_retrieve = retriever.get_relevant_documents(prompt)
 
     # Filter relevant documents
     for doc in docs_retrieve:
@@ -337,8 +422,6 @@ def generate_answer(user_prompt):
         "usage": {
             "prompt_tokens": malay_translation.get("prompt_tokens", 0),
             "total_tokens": malay_translation.get("total_tokens", 0),
-            "prompt_tokens": chinese_translation.get("prompt_tokens", 0),
-            "total_tokens": chinese_translation.get("total_tokens", 0),
         },
     }
 

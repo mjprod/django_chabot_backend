@@ -1,0 +1,1815 @@
+  {
+    "id": "0026",
+    "question": {
+      "text": "What payment methods do you accept for deposits?",
+      "variations": [
+        "Deposit payment options",
+        "Available deposit methods",
+        "How to make deposits"
+      ],
+      "intent": "deposit_methods",
+      "languages": {
+        "en": "What payment methods do you accept for deposits?",
+        "ms": "Apakah kaedah pembayaran yang anda terima untuk deposit?",
+        "cn": "您接受哪些存款支付方式？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "We accept ATM transfer, Online transfer, and Electronic wallet (E-Wallet).",
+        "ms": "Kami menerima pemindahan ATM, pemindahan Online, dan dompet Elektronik (E-Wallet).",
+        "cn": "我们接受ATM转账、网上转账和电子钱包（E-Wallet）。"
+      },
+      "detailed": {
+        "en": "We currently accept the following payment methods for deposit: ATM transfer, Online transfer, and Electronic wallet (E-Wallet). Each method is secure and processes within 5-30 minutes. Choose the method that's most convenient for you in the deposit section.",
+        "ms": "Kami kini menerima kaedah pembayaran berikut untuk deposit: Pemindahan ATM, pemindahan Online, dan dompet Elektronik (E-Wallet). Setiap kaedah adalah selamat dan diproses dalam masa 5-30 minit. Pilih kaedah yang paling mudah untuk anda di bahagian deposit.",
+        "cn": "我们目前接受以下存款支付方式：ATM转账、网上转账和电子钱包（E-Wallet）。每种方式都是安全的，处理时间在5-30分钟内。在存款部分选择最适合您的方式。"
+      },
+      "conditions": [
+        "Valid payment method",
+        "Account verification",
+        "Minimum deposit amount"
+      ]
+    },
+    "metadata": {
+      "category": ["financial", "deposits", "payments"],
+      "subCategory": "payment_methods",
+      "difficulty": 2,
+      "confidence": 0.98,
+      "dateCreated": "2024-10-22T12:48:19Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "payment_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "deposit_process",
+        "payment_verification",
+        "transaction_limits"
+      ],
+      "prerequisites": ["active_account"],
+      "followUpQuestions": {
+        "en": [
+          "What are the minimum deposit amounts?",
+          "How long do deposits take to process?"
+        ],
+        "ms": [
+          "Apakah jumlah deposit minimum?",
+          "Berapa lama masa yang diperlukan untuk memproses deposit?"
+        ],
+        "cn": [
+          "最低存款金额是多少？",
+          "存款处理需要多长时间？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  }
+][
+  {
+    "id": "0027",
+    "question": {
+      "text": "What should I do if I enter the wrong password?",
+      "variations": [
+        "Incorrect password help",
+        "Wrong password login",
+        "Password error assistance"
+      ],
+      "intent": "password_error",
+      "languages": {
+        "en": "What should I do if I enter the wrong password?",
+        "ms": "Apa yang perlu saya lakukan jika saya memasukkan kata laluan yang salah?",
+        "cn": "如果我输入错误的密码该怎么办？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Try to recall your password or use the 'Forgot Password' option to reset it.",
+        "ms": "Cuba ingat kata laluan anda atau gunakan pilihan 'Lupa Kata Laluan' untuk menetapkan semula.",
+        "cn": "尝试回忆您的密码或使用"忘记密码"选项重置密码。"
+      },
+      "detailed": {
+        "en": "If you enter the wrong password, first try to recall your password. If you really can't remember the password, you can click the 'Forgot Password' option and reset it according to the prompts.",
+        "ms": "Jika anda memasukkan kata laluan yang salah, cuba ingat kata laluan anda terlebih dahulu. Jika anda benar-benar tidak dapat mengingati kata laluan, anda boleh klik pilihan 'Lupa Kata Laluan' dan menetapkan semula mengikut arahan.",
+        "cn": "如果您输入错误的密码，首先请尝试回忆您的密码。如果您真的无法记住密码，可以点击"忘记密码"选项，按照提示重置密码。"
+      },
+      "conditions": [
+        "Active account",
+        "Access to registered email",
+        "Valid verification method"
+      ]
+    },
+    "metadata": {
+      "category": ["account_management", "security", "login"],
+      "subCategory": "password_recovery",
+      "difficulty": 2,
+      "confidence": 0.97,
+      "dateCreated": "2024-10-22T12:52:20Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "account_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "password_reset",
+        "account_security",
+        "login_issues"
+      ],
+      "prerequisites": ["registered_account"],
+      "followUpQuestions": {
+        "en": [
+          "How do I reset my password?",
+          "What if I can't access my registered email?"
+        ],
+        "ms": [
+          "Bagaimana saya menetapkan semula kata laluan saya?",
+          "Bagaimana jika saya tidak dapat mengakses e-mel berdaftar saya?"
+        ],
+        "cn": [
+          "如何重置密码？",
+          "如果我无法访问注册邮箱怎么办？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  },
+  {
+    "id": "0028",
+    "question": {
+      "text": "Do you provide tax bills for profit and loss?",
+      "variations": [
+        "Tax documentation request",
+        "Profit loss tax bills",
+        "Gaming tax statements"
+      ],
+      "intent": "tax_documentation",
+      "languages": {
+        "en": "Do you provide tax bills for profit and loss?",
+        "ms": "Adakah anda menyediakan bil cukai untuk keuntungan dan kerugian?",
+        "cn": "您是否提供盈亏的税单？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "We do not provide tax bills. Transactions can be explained as borrowings, repayments, or item purchases.",
+        "ms": "Kami tidak menyediakan bil cukai. Transaksi boleh dijelaskan sebagai pinjaman, pembayaran balik, atau pembelian barang.",
+        "cn": "我们不提供税单。交易可以解释为借贷、还款或物品买卖。"
+      },
+      "detailed": {
+        "en": "Usually, we do not provide tax bills for profit and loss. However, don't worry. If banks or other institutions ask, you can explain transactions as borrowings, repayments, or buying and selling items.",
+        "ms": "Biasanya, kami tidak menyediakan bil cukai untuk keuntungan dan kerugian. Walau bagaimanapun, jangan risau. Jika bank atau institusi lain bertanya, anda boleh menjelaskan transaksi sebagai pinjaman, pembayaran balik, atau membeli dan menjual barang.",
+        "cn": "通常，我们不提供盈亏的税单。但是不用担心。如果银行或其他机构询问，您可以将交易解释为借贷、还款或物品买卖。"
+      },
+      "conditions": [
+        "Account activity",
+        "Transaction history",
+        "Legal requirements"
+      ]
+    },
+    "metadata": {
+      "category": ["financial", "documentation", "legal"],
+      "subCategory": "tax_documentation",
+      "difficulty": 2,
+      "confidence": 0.95,
+      "dateCreated": "2024-10-22T12:55:36Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "financial_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "financial_records",
+        "transaction_history",
+        "legal_requirements"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [
+          "How can I track my transactions?",
+          "What records are available for download?"
+        ],
+        "ms": [
+          "Bagaimana saya boleh menjejaki transaksi saya?",
+          "Apakah rekod yang tersedia untuk dimuat turun?"
+        ],
+        "cn": [
+          "如何追踪我的交易？",
+          "有哪些记录可供下载？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  },
+  {
+    "id": "0029",
+    "question": {
+      "text": "How long does it take for a 500 deposit to be credited?",
+      "variations": [
+        "500 deposit processing time",
+        "Deposit credit duration",
+        "Wait time for 500 deposit"
+      ],
+      "intent": "deposit_timing",
+      "languages": {
+        "en": "How long does it take for a 500 deposit to be credited?",
+        "ms": "Berapa lama masa yang diperlukan untuk deposit 500 dikreditkan?",
+        "cn": "500存款需要多长时间才能到账？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Deposits typically process within 5 to 30 minutes.",
+        "ms": "Deposit biasanya diproses dalam masa 5 hingga 30 minit.",
+        "cn": "存款通常在5到30分钟内处理完成。"
+      },
+      "detailed": {
+        "en": "Thank you for asking! The deposit processing time is usually 5 to 30 minutes. If your 500 deposit has not been credited after 30 minutes, please contact our online customer service immediately. We will check and address the issue as soon as possible.",
+        "ms": "Terima kasih kerana bertanya! Masa pemprosesan deposit biasanya adalah 5 hingga 30 minit. Jika deposit 500 anda belum dikreditkan selepas 30 minit, sila hubungi perkhidmatan pelanggan dalam talian kami dengan segera. Kami akan memeriksa dan menangani isu tersebut secepat mungkin.",
+        "cn": "感谢您的询问！存款处理时间通常为5到30分钟。如果您的500存款在30分钟后仍未到账，请立即联系我们的在线客服。我们将尽快检查并解决问题。"
+      },
+      "conditions": [
+        "Valid deposit method",
+        "Correct account details",
+        "System operational"
+      ]
+    },
+    "metadata": {
+      "category": ["financial", "deposits", "transactions"],
+      "subCategory": "deposit_timing",
+      "difficulty": 2,
+      "confidence": 0.98,
+      "dateCreated": "2024-10-22T13:00:36Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "financial_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "deposit_process",
+        "payment_methods",
+        "transaction_times"
+      ],
+      "prerequisites": ["active_account"],
+      "followUpQuestions": {
+        "en": [
+          "What if my deposit takes longer?",
+          "How can I track my deposit?"
+        ],
+        "ms": [
+          "Bagaimana jika deposit saya mengambil masa lebih lama?",
+          "Bagaimana saya boleh menjejaki deposit saya?"
+        ],
+        "cn": [
+          "如果存款时间更长怎么办？",
+          "我如何追踪我的存款？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  }
+][
+  {
+    "id": "0030",
+    "question": {
+      "text": "Is there a two-factor authentication option for login?",
+      "variations": [
+        "Enable two-factor authentication",
+        "2FA security option",
+        "Login security features"
+      ],
+      "intent": "security_authentication",
+      "languages": {
+        "en": "Is there a two-factor authentication option for login?",
+        "ms": "Adakah terdapat pilihan pengesahan dua faktor untuk log masuk?",
+        "cn": "登录时是否有双重认证选项？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Yes, we provide dual authentication using password and TAC verification code.",
+        "ms": "Ya, kami menyediakan pengesahan berganda menggunakan kata laluan dan kod pengesahan TAC.",
+        "cn": "是的，我们提供使用密码和TAC验证码的双重认证。"
+      },
+      "detailed": {
+        "en": "Our app now provides dual authentication to ensure your account security. When logging in, you will be required to enter the password and the TAC verification code. These two layers of protection will greatly enhance your account security.",
+        "ms": "Aplikasi kami kini menyediakan pengesahan berganda untuk memastikan keselamatan akaun anda. Semasa log masuk, anda perlu memasukkan kata laluan dan kod pengesahan TAC. Dua lapisan perlindungan ini akan meningkatkan keselamatan akaun anda.",
+        "cn": "我们的应用程序现在提供双重认证以确保您的账户安全。登录时，您需要输入密码和TAC验证码。这两层保护将大大提高您的账户安全性。"
+      },
+      "conditions": [
+        "Active account",
+        "Valid phone number",
+        "TAC system operational"
+      ]
+    },
+    "metadata": {
+      "category": ["account_security", "authentication", "login"],
+      "subCategory": "security_features",
+      "difficulty": 2,
+      "confidence": 0.98,
+      "dateCreated": "2024-10-22T13:02:25Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "security_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "account_security",
+        "login_process",
+        "security_settings"
+      ],
+      "prerequisites": ["active_account"],
+      "followUpQuestions": {
+        "en": [
+          "How do I enable 2FA?",
+          "What if I don't receive the TAC code?"
+        ],
+        "ms": [
+          "Bagaimana saya mengaktifkan 2FA?",
+          "Bagaimana jika saya tidak menerima kod TAC?"
+        ],
+        "cn": [
+          "如何启用双重认证？",
+          "如果我没有收到TAC码怎么办？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  },
+  {
+    "id": "0031",
+    "question": {
+      "text": "Can I use my e-wallet account to make transactions?",
+      "variations": [
+        "E-wallet payment option",
+        "Electronic wallet transactions",
+        "Using e-wallet for payments"
+      ],
+      "intent": "ewallet_transactions",
+      "languages": {
+        "en": "Can I use my e-wallet account to make transactions?",
+        "ms": "Bolehkah saya menggunakan akaun e-wallet untuk membuat transaksi?",
+        "cn": "我可以使用电子钱包账户进行交易吗？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Yes, you can use your electronic wallet for transactions.",
+        "ms": "Ya, anda boleh menggunakan dompet elektronik untuk transaksi.",
+        "cn": "是的，您可以使用电子钱包进行交易。"
+      },
+      "detailed": {
+        "en": "Yes, you can use your electronic wallet to trade. We support a variety of payment methods, including electronic wallets, to provide you with convenient and fast services.",
+        "ms": "Ya, anda boleh menggunakan dompet elektronik untuk berdagang. Kami menyokong pelbagai kaedah pembayaran, termasuk dompet elektronik, untuk memberi anda perkhidmatan yang mudah dan pantas.",
+        "cn": "是的，您可以使用电子钱包进行交易。我们支持多种支付方式，包括电子钱包，为您提供便捷快速的服务。"
+      },
+      "conditions": [
+        "Valid e-wallet account",
+        "Supported e-wallet provider",
+        "Account verification complete"
+      ]
+    },
+    "metadata": {
+      "category": ["financial", "payments", "transactions"],
+      "subCategory": "payment_methods",
+      "difficulty": 2,
+      "confidence": 0.97,
+      "dateCreated": "2024-10-22T13:03:48Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "payment_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "payment_methods",
+        "transaction_process",
+        "e-wallet_support"
+      ],
+      "prerequisites": ["active_account"],
+      "followUpQuestions": {
+        "en": [
+          "Which e-wallets do you support?",
+          "Are there any fees for e-wallet transactions?"
+        ],
+        "ms": [
+          "E-wallet mana yang anda sokong?",
+          "Adakah terdapat yuran untuk transaksi e-wallet?"
+        ],
+        "cn": [
+          "您支持哪些电子钱包？",
+          "电子钱包交易是否收取费用？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  },
+  {
+    "id": "0032",
+    "question": {
+      "text": "Why hasn't my deposit been processed yet?",
+      "variations": [
+        "Deposit processing delay",
+        "Unprocessed deposit",
+        "Deposit not showing"
+      ],
+      "intent": "deposit_delay",
+      "languages": {
+        "en": "Why hasn't my deposit been processed yet?",
+        "ms": "Mengapa deposit saya belum diproses lagi?",
+        "cn": "为什么我的存款还未处理？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Deposits take 5-30 minutes to process. Check deposit receipt or contact customer service if delayed.",
+        "ms": "Deposit mengambil masa 5-30 minit untuk diproses. Periksa resit deposit atau hubungi khidmat pelanggan jika tertangguh.",
+        "cn": "存款需要5-30分钟处理。如有延迟，请检查存款收据或联系客服。"
+      },
+      "detailed": {
+        "en": "I'm sorry for the inconvenience. Your deposit may not be processed in time due to the following reasons: 1. There might be an issue with the deposit receipt, or it cannot be verified. 2. The deposit method may be incorrect and not in accordance with the platform requirements. Usually, the deposit processing time is 5 to 30 minutes. It's recommended that you check the deposit information or provide the deposit receipt to our online customer service. We will check it and solve the problem as soon as possible.",
+        "ms": "Maaf atas kesulitan ini. Deposit anda mungkin tidak diproses tepat pada masanya kerana sebab-sebab berikut: 1. Mungkin terdapat masalah dengan resit deposit, atau ia tidak dapat disahkan. 2. Kaedah deposit mungkin tidak betul dan tidak mengikut keperluan platform. Biasanya, masa pemprosesan deposit adalah 5 hingga 30 minit. Anda disyorkan untuk memeriksa maklumat deposit atau memberikan resit deposit kepada khidmat pelanggan dalam talian kami. Kami akan memeriksanya dan menyelesaikan masalah secepat mungkin.",
+        "cn": "抱歉给您带来不便。您的存款可能由于以下原因未能及时处理：1. 存款收据可能有问题，或无法验证。2. 存款方式可能不正确，不符合平台要求。通常，存款处理时间为5到30分钟。建议您检查存款信息或向我们的在线客服提供存款收据。我们会尽快检查并解决问题。"
+      },
+      "conditions": [
+        "Valid deposit attempt",
+        "Correct deposit method",
+        "Valid receipt"
+      ]
+    },
+    "metadata": {
+      "category": ["financial", "deposits", "customer_support"],
+      "subCategory": "deposit_issues",
+      "difficulty": 2,
+      "confidence": 0.96,
+      "dateCreated": "2024-10-22T12:50:45Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "support_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "deposit_process",
+        "payment_verification",
+        "customer_support"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [
+          "How can I check my deposit status?",
+          "What information should I provide to customer service?"
+        ],
+        "ms": [
+          "Bagaimana saya boleh memeriksa status deposit saya?",
+          "Maklumat apa yang perlu saya berikan kepada khidmat pelanggan?"
+        ],
+        "cn": [
+          "如何查看我的存款状态？",
+          "我需要向客服提供什么信息？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  }
+]
+  [
+  {
+    "id": "0033",
+    "question": {
+      "text": "What should I do if I get disconnected during a game?",
+      "variations": [
+        "Game disconnection issue",
+        "Lost connection while playing",
+        "Game connection problems"
+      ],
+      "intent": "game_disconnection_help",
+      "languages": {
+        "en": "What should I do if I get disconnected during a game?",
+        "ms": "Apa yang perlu saya lakukan jika terputus sambungan semasa permainan?",
+        "cn": "如果在游戏过程中断开连接该怎么办？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Reconnect to network, log in again, and your game progress will be restored.",
+        "ms": "Sambung semula ke rangkaian, log masuk semula, dan kemajuan permainan anda akan dipulihkan.",
+        "cn": "重新连接网络，重新登录，您的游戏进度将会恢复。"
+      },
+      "detailed": {
+        "en": "If you get disconnected during a game, follow these steps: 1. Try to reconnect to the network to ensure your network connection is stable. 2. Log in to the game again. In most cases, the system will automatically restore your game progress. 3. If the problem persists, contact online customer service. We will check and ensure your gaming experience will not be affected.",
+        "ms": "Jika anda terputus sambungan semasa permainan, ikuti langkah-langkah ini: 1. Cuba sambung semula ke rangkaian untuk memastikan sambungan rangkaian anda stabil. 2. Log masuk semula ke permainan. Dalam kebanyakan kes, sistem akan memulihkan kemajuan permainan anda secara automatik. 3. Jika masalah berterusan, hubungi khidmat pelanggan dalam talian. Kami akan memeriksa dan memastikan pengalaman permainan anda tidak terjejas.",
+        "cn": "如果您在游戏过程中断开连接，请按照以下步骤操作：1. 尝试重新连接网络以确保网络连接稳定。2. 重新登录游戏。在大多数情况下，系统会自动恢复您的游戏进度。3. 如果问题仍然存在，请联系在线客服。我们将检查并确保您的游戏体验不会受到影响。"
+      },
+      "conditions": [
+        "Internet connection",
+        "Valid account login",
+        "Recent game session"
+      ]
+    },
+    "metadata": {
+      "category": ["technical_support", "gaming", "connectivity"],
+      "subCategory": "game_issues",
+      "difficulty": 2,
+      "confidence": 0.97,
+      "dateCreated": "2024-10-24T15:41:00Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "technical_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "network_issues",
+        "game_recovery",
+        "technical_support"
+      ],
+      "prerequisites": ["active_account"],
+      "followUpQuestions": {
+        "en": [
+          "Will I lose my game progress?",
+          "How do I check my network connection?"
+        ],
+        "ms": [
+          "Adakah saya akan kehilangan kemajuan permainan saya?",
+          "Bagaimana saya memeriksa sambungan rangkaian saya?"
+        ],
+        "cn": [
+          "我会失去游戏进度吗？",
+          "如何检查网络连接？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  },
+  {
+    "id": "0034",
+    "question": {
+      "text": "Is there any issue with the deposit system right now?",
+      "variations": [
+        "Deposit system status",
+        "Current deposit issues",
+        "Deposit system problems"
+      ],
+      "intent": "deposit_system_status",
+      "languages": {
+        "en": "Is there any issue with the deposit system right now?",
+        "ms": "Adakah terdapat masalah dengan sistem deposit sekarang?",
+        "cn": "存款系统目前有任何问题吗？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Our deposit system is currently running normally with 5-30 minute processing time.",
+        "ms": "Sistem deposit kami kini beroperasi seperti biasa dengan masa pemprosesan 5-30 minit.",
+        "cn": "我们的存款系统目前运行正常，处理时间为5-30分钟。"
+      },
+      "detailed": {
+        "en": "Our deposit system is currently running normally. Usually, the deposit processing time is 5 to 30 minutes. If you encounter a delay, it may be because the processing time of the network system is slightly extended. If your deposit has not yet arrived after 30 minutes, please contact our online customer service, we will check it and solve it as soon as possible.",
+        "ms": "Sistem deposit kami kini beroperasi seperti biasa. Biasanya, masa pemprosesan deposit adalah 5 hingga 30 minit. Jika anda mengalami kelewatan, ia mungkin kerana masa pemprosesan sistem rangkaian sedikit dilanjutkan. Jika deposit anda belum tiba selepas 30 minit, sila hubungi khidmat pelanggan dalam talian kami, kami akan memeriksanya dan menyelesaikannya secepat mungkin.",
+        "cn": "我们的存款系统目前运行正常。通常，存款处理时间为5到30分钟。如果您遇到延迟，可能是因为网络系统的处理时间略有延长。如果您的存款在30分钟后仍未到账，请联系我们的在线客服，我们会尽快检查并解决。"
+      },
+      "conditions": [
+        "System operational",
+        "Network stability",
+        "Normal processing times"
+      ]
+    },
+    "metadata": {
+      "category": ["financial", "system_status", "deposits"],
+      "subCategory": "system_status",
+      "difficulty": 2,
+      "confidence": 0.98,
+      "dateCreated": "2024-10-24T15:42:00Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "system_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "deposit_process",
+        "system_maintenance",
+        "customer_support"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [
+          "When will my deposit arrive?",
+          "Should I try depositing again?"
+        ],
+        "ms": [
+          "Bilakah deposit saya akan tiba?",
+          "Haruskah saya cuba deposit sekali lagi?"
+        ],
+        "cn": [
+          "我的存款什么时候到账？",
+          "我应该再次尝试存款吗？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  },
+  {
+    "id": "0035",
+    "question": {
+      "text": "What are the stop recovery times for different lotteries today?",
+      "variations": [
+        "Lottery stop times today",
+        "Recovery times for lotteries",
+        "Today's lottery schedules"
+      ],
+      "intent": "lottery_schedules",
+      "languages": {
+        "en": "What are the stop recovery times for different lotteries today?",
+        "ms": "Apakah masa pemulihan berhenti untuk loteri berbeza hari ini?",
+        "cn": "今天不同彩票的停止恢复时间是什么？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "MKT: 07:00 PM, Singapore: 06:00 PM, CBD: 06:35 PM, GDLOTTO: 07:00 PM, 9LOTTO: 07:25 PM",
+        "ms": "MKT: 07:00 PM, Singapura: 06:00 PM, CBD: 06:35 PM, GDLOTTO: 07:00 PM, 9LOTTO: 07:25 PM",
+        "cn": "MKT: 19:00, 新加坡: 18:00, CBD: 18:35, GDLOTTO: 19:00, 9LOTTO: 19:25"
+      },
+      "detailed": {
+        "en": "The stop recovery times for different lotteries today are as follows: MKT: 07:00 PM, Singapore: 06:00 PM, CBD: 06:35 PM, GDLOTTO: 07:00 PM, 9LOTTO: 07:25 PM. Please place your bets in advance according to the type of lottery you want to buy.",
+        "ms": "Masa pemulihan berhenti untuk loteri berbeza hari ini adalah seperti berikut: MKT: 07:00 PM, Singapura: 06:00 PM, CBD: 06:35 PM, GDLOTTO: 07:00 PM, 9LOTTO: 07:25 PM. Sila letakkan pertaruhan anda lebih awal mengikut jenis loteri yang anda ingin beli.",
+        "cn": "今天不同彩票的停止恢复时间如下：MKT: 19:00, 新加坡: 18:00, CBD: 18:35, GDLOTTO: 19:00, 9LOTTO: 19:25。请根据您想购买的彩票类型提前下注。"
+      },
+      "conditions": [
+        "Times subject to change",
+        "Different timezone adjustments",
+        "System availability"
+      ]
+    },
+    "metadata": {
+      "category": ["gaming", "lottery", "schedules"],
+      "subCategory": "lottery_timing",
+      "difficulty": 2,
+      "confidence": 0.96,
+      "dateCreated": "2024-10-24T15:43:00Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "lottery_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "lottery_rules",
+        "betting_deadlines",
+        "game_schedules"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [
+          "How do I place a bet?",
+          "What happens if I miss the deadline?"
+        ],
+        "ms": [
+          "Bagaimana saya membuat pertaruhan?",
+          "Apa yang berlaku jika saya terlepas tarikh akhir?"
+        ],
+        "cn": [
+          "如何下注？",
+          "如果错过截止时间会怎样？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  }
+]
+  [
+  {
+    "id": "0036",
+    "question": {
+      "text": "How quickly is my account balance updated after a game?",
+      "variations": [
+        "Game balance update time",
+        "Account balance refresh speed",
+        "Balance update after playing"
+      ],
+      "intent": "balance_update_timing",
+      "languages": {
+        "en": "How quickly is my account balance updated after a game?",
+        "ms": "Berapa cepat baki akaun saya dikemas kini selepas permainan?",
+        "cn": "游戏结束后我的账户余额多快更新？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Account balance updates immediately after game completion.",
+        "ms": "Baki akaun dikemas kini serta-merta selepas permainan tamat.",
+        "cn": "游戏结束后账户余额立即更新。"
+      },
+      "detailed": {
+        "en": "Under normal circumstances, your account balance will be updated immediately after the game is over. If you find any delay or problem, please contact our customer service team at any time, and we will check and deal with it as soon as possible.",
+        "ms": "Dalam keadaan biasa, baki akaun anda akan dikemas kini serta-merta selepas permainan tamat. Jika anda mendapati sebarang kelewatan atau masalah, sila hubungi pasukan khidmat pelanggan kami pada bila-bila masa, dan kami akan memeriksa dan menanganinya secepat mungkin.",
+        "cn": "在正常情况下，您的账户余额将在游戏结束后立即更新。如果您发现任何延迟或问题，请随时联系我们的客服团队，我们将尽快检查和处理。"
+      },
+      "conditions": [
+        "Normal system operations",
+        "Game completion",
+        "Valid game session"
+      ]
+    },
+    "metadata": {
+      "category": ["gaming", "technical_support", "account_balance"],
+      "subCategory": "balance_updates",
+      "difficulty": 2,
+      "confidence": 0.98,
+      "dateCreated": "2024-10-22T12:15:52Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "technical_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "account_balance",
+        "game_completion",
+        "technical_support"
+      ],
+      "prerequisites": ["active_account"],
+      "followUpQuestions": {
+        "en": [
+          "What if my balance doesn't update?",
+          "How do I report balance issues?"
+        ],
+        "ms": [
+          "Bagaimana jika baki saya tidak dikemas kini?",
+          "Bagaimana saya melaporkan isu baki?"
+        ],
+        "cn": [
+          "如果余额没有更新怎么办？",
+          "如何报告余额问题？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  },
+  {
+    "id": "0037",
+    "question": {
+      "text": "Why does my account show 0 credits after I made a deposit?",
+      "variations": [
+        "Zero balance after deposit",
+        "Missing credits after deposit",
+        "Deposit not showing in balance"
+      ],
+      "intent": "missing_deposit_credits",
+      "languages": {
+        "en": "Why does my account show 0 credits after I made a deposit?",
+        "ms": "Mengapa akaun saya menunjukkan 0 kredit selepas saya membuat deposit?",
+        "cn": "为什么我存款后账户显示0余额？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Check transaction record and restart app to refresh balance.",
+        "ms": "Periksa rekod transaksi dan mulakan semula aplikasi untuk menyegarkan baki.",
+        "cn": "检查交易记录并重启应用程序以刷新余额。"
+      },
+      "detailed": {
+        "en": "If your account is displayed as 0 after deposit, it is recommended that you first check whether your deposit has been successfully processed in the transaction record. If you confirm that the deposit is processed, try to restart your application to update the account balance. If you have any other problems or need further help, please contact our customer service team at any time.",
+        "ms": "Jika akaun anda dipaparkan sebagai 0 selepas deposit, anda disyorkan untuk memeriksa sama ada deposit anda telah berjaya diproses dalam rekod transaksi. Jika anda mengesahkan deposit telah diproses, cuba mulakan semula aplikasi anda untuk mengemas kini baki akaun. Jika anda mempunyai masalah lain atau memerlukan bantuan lanjut, sila hubungi pasukan khidmat pelanggan kami pada bila-bila masa.",
+        "cn": "如果您的账户在存款后显示为0，建议您首先检查交易记录中是否已成功处理您的存款。如果您确认存款已处理，请尝试重启应用程序以更新账户余额。如果您有任何其他问题或需要进一步帮助，请随时联系我们的客服团队。"
+      },
+      "conditions": [
+        "Valid deposit made",
+        "Transaction record available",
+        "App functionality"
+      ]
+    },
+    "metadata": {
+      "category": ["financial", "technical_support", "account_balance"],
+      "subCategory": "balance_issues",
+      "difficulty": 2,
+      "confidence": 0.97,
+      "dateCreated": "2024-10-22T12:20:37Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "support_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "deposit_process",
+        "balance_updates",
+        "technical_support"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [
+          "How do I check my transaction record?",
+          "What if restarting doesn't help?"
+        ],
+        "ms": [
+          "Bagaimana saya memeriksa rekod transaksi saya?",
+          "Bagaimana jika memulakan semula tidak membantu?"
+        ],
+        "cn": [
+          "如何查看我的交易记录？",
+          "如果重启没有帮助怎么办？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  },
+  {
+    "id": "0038",
+    "question": {
+      "text": "Why can't I access the bank part on my mobile device?",
+      "variations": [
+        "Mobile banking access issues",
+        "Can't open bank section",
+        "Bank features not working on mobile"
+      ],
+      "intent": "mobile_banking_access",
+      "languages": {
+        "en": "Why can't I access the bank part on my mobile device?",
+        "ms": "Mengapa saya tidak boleh mengakses bahagian bank pada peranti mudah alih saya?",
+        "cn": "为什么我无法在移动设备上访问银行部分？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Account functions may be limited due to platform regulations.",
+        "ms": "Fungsi akaun mungkin terhad kerana peraturan platform.",
+        "cn": "账户功能可能因平台规定而受限。"
+      },
+      "detailed": {
+        "en": "It may not be possible to access the bank part on your mobile phone device, which may be because some operations violate the relevant regulations of the platform, resulting in limited account functions. If you think these operations do not violate any regulations, you can provide relevant evidence, and we will further verify and solve the problem for you.",
+        "ms": "Mungkin tidak dapat mengakses bahagian bank pada peranti telefon mudah alih anda, yang mungkin kerana beberapa operasi melanggar peraturan platform yang berkaitan, menyebabkan fungsi akaun terhad. Jika anda fikir operasi ini tidak melanggar sebarang peraturan, anda boleh memberikan bukti yang berkaitan, dan kami akan mengesahkan dan menyelesaikan masalah untuk anda.",
+        "cn": "您可能无法在手机设备上访问银行部分，这可能是因为某些操作违反了平台的相关规定，导致账户功能受限。如果您认为这些操作没有违反任何规定，您可以提供相关证据，我们将进一步核实并为您解决问题。"
+      },
+      "conditions": [
+        "Platform compliance",
+        "Account status",
+        "Mobile device compatibility"
+      ]
+    },
+    "metadata": {
+      "category": ["technical_support", "mobile_access", "banking"],
+      "subCategory": "access_issues",
+      "difficulty": 2,
+      "confidence": 0.96,
+      "dateCreated": "2024-10-22T12:39:41Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "technical_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "mobile_banking",
+        "account_restrictions",
+        "platform_regulations"
+      ],
+      "prerequisites": ["active_account"],
+      "followUpQuestions": {
+        "en": [
+          "How can I verify my account status?",
+          "What regulations might I have violated?"
+        ],
+        "ms": [
+          "Bagaimana saya boleh mengesahkan status akaun saya?",
+          "Apakah peraturan yang mungkin saya langgar?"
+        ],
+        "cn": [
+          "如何验证我的账户状态？",
+          "我可能违反了哪些规定？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  }
+]
+  [
+  {
+    "id": "0039",
+    "question": {
+      "text": "How can I change my phone number?",
+      "variations": [
+        "Update phone number",
+        "Change contact number",
+        "Modify phone details"
+      ],
+      "intent": "phone_number_update",
+      "languages": {
+        "en": "How can I change my phone number?",
+        "ms": "Bagaimana saya boleh menukar nombor telefon saya?",
+        "cn": "如何更改我的电话号码？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Click portrait icon, select update phone number, enter new number and verify with TAC code.",
+        "ms": "Klik ikon potret, pilih kemaskini nombor telefon, masukkan nombor baru dan sahkan dengan kod TAC.",
+        "cn": "点击头像图标，选择更新电话号码，输入新号码并用TAC码验证。"
+      },
+      "detailed": {
+        "en": "You only need a few simple steps: 1. Click the portrait icon in the lower right corner. 2. Select update phone number. 3. Enter the new mobile phone number, and then click to send TAC. 4. Enter the received verification code, and then click Submit to complete the process!",
+        "ms": "Anda hanya perlu beberapa langkah mudah: 1. Klik ikon potret di sudut kanan bawah. 2. Pilih kemaskini nombor telefon. 3. Masukkan nombor telefon baru, dan kemudian klik untuk menghantar TAC. 4. Masukkan kod pengesahan yang diterima, dan kemudian klik Hantar untuk melengkapkan proses!",
+        "cn": "您只需要几个简单的步骤：1. 点击右下角的头像图标。2. 选择更新电话号码。3. 输入新的手机号码，然后点击发送TAC。4. 输入收到的验证码，然后点击提交完成流程！"
+      },
+      "conditions": [
+        "Active account",
+        "Valid new phone number",
+        "TAC verification"
+      ]
+    },
+    "metadata": {
+      "category": ["account_management", "profile_settings", "security"],
+      "subCategory": "contact_update",
+      "difficulty": 2,
+      "confidence": 0.98,
+      "dateCreated": "2024-10-22T12:46:51Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "account_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "profile_management",
+        "security_settings",
+        "account_verification"
+      ],
+      "prerequisites": ["active_account"],
+      "followUpQuestions": {
+        "en": [
+          "What if I don't receive the TAC code?",
+          "Can I change my phone number multiple times?"
+        ],
+        "ms": [
+          "Bagaimana jika saya tidak menerima kod TAC?",
+          "Bolehkah saya menukar nombor telefon beberapa kali?"
+        ],
+        "cn": [
+          "如果我没有收到TAC码怎么办？",
+          "我可以多次更改电话号码吗？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  },
+  {
+    "id": "0040",
+    "question": {
+      "text": "Can you speed up my withdrawal process?",
+      "variations": [
+        "Faster withdrawal request",
+        "Quick withdrawal process",
+        "Expedite withdrawal"
+      ],
+      "intent": "withdrawal_speed",
+      "languages": {
+        "en": "Can you speed up my withdrawal process?",
+        "ms": "Bolehkah anda mempercepatkan proses pengeluaran saya?",
+        "cn": "您能加快我的提款流程吗？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Withdrawals take 5-30 minutes for security. Cannot be expedited.",
+        "ms": "Pengeluaran mengambil masa 5-30 minit untuk keselamatan. Tidak boleh dipercepatkan.",
+        "cn": "提款需要5-30分钟以确保安全。无法加快。"
+      },
+      "detailed": {
+        "en": "We understand that you want to withdraw money faster! However, in order to ensure the security of each transaction, our system and customer service team takes a little time to review, usually 5 to 30 minutes. Although we want to accelerate the process, this is to ensure your capital safety.",
+        "ms": "Kami faham anda ingin mengeluarkan wang dengan lebih cepat! Walau bagaimanapun, untuk memastikan keselamatan setiap transaksi, sistem dan pasukan khidmat pelanggan kami mengambil sedikit masa untuk menyemak, biasanya 5 hingga 30 minit. Walaupun kami ingin mempercepatkan proses, ini adalah untuk memastikan keselamatan modal anda.",
+        "cn": "我们理解您想更快提取资金！但是，为了确保每笔交易的安全，我们的系统和客服团队需要一点时间审核，通常是5到30分钟。虽然我们想加快处理速度，但这是为了确保您的资金安全。"
+      },
+      "conditions": [
+        "Valid withdrawal request",
+        "Account verification",
+        "Security checks"
+      ]
+    },
+    "metadata": {
+      "category": ["financial", "withdrawals", "security"],
+      "subCategory": "withdrawal_process",
+      "difficulty": 2,
+      "confidence": 0.97,
+      "dateCreated": "2024-10-22T12:43:18Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "financial_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "withdrawal_process",
+        "security_measures",
+        "transaction_times"
+      ],
+      "prerequisites": ["active_withdrawal_request"],
+      "followUpQuestions": {
+        "en": [
+          "Why does it take so long to process?",
+          "What security checks are performed?"
+        ],
+        "ms": [
+          "Mengapa ia mengambil masa yang lama untuk diproses?",
+          "Apakah pemeriksaan keselamatan yang dilakukan?"
+        ],
+        "cn": [
+          "为什么处理需要这么长时间？",
+          "执行哪些安全检查？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  },
+  {
+    "id": "0041",
+    "question": {
+      "text": "What is the box you are talking about?",
+      "variations": [
+        "Which box do you mean",
+        "Box reference clarification",
+        "Explain the box mentioned"
+      ],
+      "intent": "clarification_request",
+      "languages": {
+        "en": "What is the box you are talking about?",
+        "ms": "Apakah kotak yang anda maksudkan?",
+        "cn": "您说的框是什么？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "The box refers to our customer service interface.",
+        "ms": "Kotak tersebut merujuk kepada antara muka khidmat pelanggan kami.",
+        "cn": "该框指的是我们的客服界面。"
+      },
+      "detailed": {
+        "en": "You can tell me what you have encountered here. The box I am talking about is customer service.",
+        "ms": "Anda boleh beritahu saya apa yang anda hadapi di sini. Kotak yang saya maksudkan ialah khidmat pelanggan.",
+        "cn": "您可以告诉我您在这里遇到了什么。我说的框是指客服。"
+      },
+      "conditions": [
+        "Context needed",
+        "Customer service available",
+        "User inquiry"
+      ]
+    },
+    "metadata": {
+      "category": ["customer_support", "interface", "clarification"],
+      "subCategory": "interface_explanation",
+      "difficulty": 1,
+      "confidence": 0.95,
+      "dateCreated": "2024-10-22T12:36:40Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "support_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "customer_service",
+        "user_interface",
+        "support_features"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [
+          "How do I contact customer service?",
+          "Where is the customer service box located?"
+        ],
+        "ms": [
+          "Bagaimana saya boleh menghubungi khidmat pelanggan?",
+          "Di manakah kotak khidmat pelanggan terletak?"
+        ],
+        "cn": [
+          "如何联系客服？",
+          "客服框在哪里？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  }
+]
+  [
+  {
+    "id": "0042",
+    "question": {
+      "text": "What is the minimum deposit amount?",
+      "variations": [
+        "Lowest deposit allowed",
+        "Minimum amount to deposit",
+        "Smallest deposit possible"
+      ],
+      "intent": "minimum_deposit_inquiry",
+      "languages": {
+        "en": "What is the minimum deposit amount?",
+        "ms": "Berapakah jumlah deposit minimum?",
+        "cn": "最低存款金额是多少？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Please contact customer service for current minimum deposit amounts.",
+        "ms": "Sila hubungi khidmat pelanggan untuk jumlah deposit minimum semasa.",
+        "cn": "请联系客服了解当前最低存款金额。"
+      },
+      "detailed": {
+        "en": "For the most accurate and up-to-date minimum deposit amount, please contact our customer service team. Minimum amounts may vary depending on the payment method chosen and any ongoing promotions.",
+        "ms": "Untuk jumlah deposit minimum yang tepat dan terkini, sila hubungi pasukan khidmat pelanggan kami. Jumlah minimum mungkin berbeza bergantung pada kaedah pembayaran yang dipilih dan promosi yang sedang berjalan.",
+        "cn": "要了解最准确和最新的最低存款金额，请联系我们的客服团队。最低金额可能因选择的支付方式和正在进行的促销活动而异。"
+      },
+      "conditions": [
+        "Valid payment method",
+        "Account verification",
+        "Promotion eligibility"
+      ]
+    },
+    "metadata": {
+      "category": ["financial", "deposits", "requirements"],
+      "subCategory": "deposit_limits",
+      "difficulty": 2,
+      "confidence": 0.96,
+      "dateCreated": "2024-10-24T15:44:00Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "financial_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "deposit_methods",
+        "payment_options",
+        "account_limits"
+      ],
+      "prerequisites": ["active_account"],
+      "followUpQuestions": {
+        "en": [
+          "What payment methods are available?",
+          "Are there any deposit fees?"
+        ],
+        "ms": [
+          "Apakah kaedah pembayaran yang tersedia?",
+          "Adakah terdapat yuran deposit?"
+        ],
+        "cn": [
+          "有哪些支付方式可用？",
+          "是否有存款手续费？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  },
+  {
+    "id": "0043",
+    "question": {
+      "text": "How do I know if my withdrawal has been approved?",
+      "variations": [
+        "Check withdrawal status",
+        "Withdrawal approval confirmation",
+        "Track withdrawal request"
+      ],
+      "intent": "withdrawal_status_check",
+      "languages": {
+        "en": "How do I know if my withdrawal has been approved?",
+        "ms": "Bagaimana saya tahu jika pengeluaran saya telah diluluskan?",
+        "cn": "如何知道我的提款是否已获批准？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Check your transaction history or contact customer service for withdrawal status.",
+        "ms": "Periksa sejarah transaksi anda atau hubungi khidmat pelanggan untuk status pengeluaran.",
+        "cn": "查看您的交易记录或联系客服了解提款状态。"
+      },
+      "detailed": {
+        "en": "You can check your withdrawal status in two ways: 1. Check your transaction history in the app for the most recent status. 2. Contact our customer service team for immediate confirmation. Typically, withdrawals are processed within 5-30 minutes unless there are additional verification requirements.",
+        "ms": "Anda boleh memeriksa status pengeluaran anda dengan dua cara: 1. Periksa sejarah transaksi anda dalam aplikasi untuk status terkini. 2. Hubungi pasukan khidmat pelanggan kami untuk pengesahan segera. Biasanya, pengeluaran diproses dalam masa 5-30 minit melainkan terdapat keperluan pengesahan tambahan.",
+        "cn": "您可以通过两种方式查看提款状态：1. 在应用程序中查看交易记录以了解最新状态。2. 联系我们的客服团队立即确认。通常，提款在5-30分钟内处理完成，除非需要额外验证。"
+      },
+      "conditions": [
+        "Valid withdrawal request",
+        "Account verification",
+        "System operational"
+      ]
+    },
+    "metadata": {
+      "category": ["financial", "withdrawals", "customer_support"],
+      "subCategory": "withdrawal_status",
+      "difficulty": 2,
+      "confidence": 0.97,
+      "dateCreated": "2024-10-24T15:45:00Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "financial_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "withdrawal_process",
+        "transaction_history",
+        "customer_support"
+      ],
+      "prerequisites": ["active_withdrawal_request"],
+      "followUpQuestions": {
+        "en": [
+          "Why is my withdrawal taking longer?",
+          "How do I cancel a withdrawal request?"
+        ],
+        "ms": [
+          "Mengapa pengeluaran saya mengambil masa yang lebih lama?",
+          "Bagaimana saya membatalkan permintaan pengeluaran?"
+        ],
+        "cn": [
+          "为什么我的提款需要更长时间？",
+          "如何取消提款请求？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  },
+  {
+    "id": "0044",
+    "question": {
+      "text": "Why is my game lagging?",
+      "variations": [
+        "Game performance issues",
+        "Slow game response",
+        "Game running slowly"
+      ],
+      "intent": "game_performance_issues",
+      "languages": {
+        "en": "Why is my game lagging?",
+        "ms": "Mengapa permainan saya mengalami lag?",
+        "cn": "为什么我的游戏出现卡顿？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Check your internet connection and restart the app to resolve lag issues.",
+        "ms": "Periksa sambungan internet anda dan mulakan semula aplikasi untuk menyelesaikan isu lag.",
+        "cn": "检查您的网络连接并重启应用程序以解决卡顿问题。"
+      },
+      "detailed": {
+        "en": "Game lag can be caused by several factors: 1. Unstable internet connection - try switching to a stronger network. 2. App cache - try clearing your cache or restarting the app. 3. Device performance - close other running apps. If the problem persists, contact our customer service for assistance.",
+        "ms": "Lag permainan boleh disebabkan oleh beberapa faktor: 1. Sambungan internet tidak stabil - cuba tukar ke rangkaian yang lebih kuat. 2. Cache aplikasi - cuba kosongkan cache atau mulakan semula aplikasi. 3. Prestasi peranti - tutup aplikasi lain yang berjalan. Jika masalah berterusan, hubungi khidmat pelanggan kami untuk bantuan.",
+        "cn": "游戏卡顿可能由几个因素造成：1. 网络连接不稳定 - 尝试切换到更强的网络。2. 应用程序缓存 - 尝试清除缓存或重启应用程序。3. 设备性能 - 关闭其他运行的应用程序。如果问题持续存在，请联系我们的客服寻求帮助。"
+      },
+      "conditions": [
+        "Internet connectivity",
+        "Device performance",
+        "App functionality"
+      ]
+    },
+    "metadata": {
+      "category": ["technical_support", "gaming", "performance"],
+      "subCategory": "game_issues",
+      "difficulty": 2,
+      "confidence": 0.95,
+      "dateCreated": "2024-10-24T15:46:00Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "technical_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "technical_issues",
+        "game_performance",
+        "troubleshooting"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [
+          "How do I clear the app cache?",
+          "What are the minimum device requirements?"
+        ],
+        "ms": [
+          "Bagaimana saya mengosongkan cache aplikasi?",
+          "Apakah keperluan minimum peranti?"
+        ],
+        "cn": [
+          "如何清除应用程序缓存？",
+          "最低设备要求是什么？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  }
+]
+[
+  {
+    "id": "0045",
+    "question": {
+      "text": "What is the minimum deposit amount?",
+      "variations": [
+        "Lowest deposit allowed",
+        "Minimum amount to deposit",
+        "Smallest deposit possible"
+      ],
+      "intent": "minimum_deposit_inquiry",
+      "languages": {
+        "en": "What is the minimum deposit amount?",
+        "ms": "Berapakah jumlah deposit minimum?",
+        "cn": "最低存款金额是多少？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Please contact customer service for current minimum deposit amounts.",
+        "ms": "Sila hubungi khidmat pelanggan untuk jumlah deposit minimum semasa.",
+        "cn": "请联系客服了解当前最低存款金额。"
+      },
+      "detailed": {
+        "en": "For the most accurate and up-to-date minimum deposit amount, please contact our customer service team. Minimum amounts may vary depending on the payment method chosen and any ongoing promotions.",
+        "ms": "Untuk jumlah deposit minimum yang tepat dan terkini, sila hubungi pasukan khidmat pelanggan kami. Jumlah minimum mungkin berbeza bergantung pada kaedah pembayaran yang dipilih dan promosi yang sedang berjalan.",
+        "cn": "要了解最准确和最新的最低存款金额，请联系我们的客服团队。最低金额可能因选择的支付方式和正在进行的促销活动而异。"
+      },
+      "conditions": [
+        "Valid payment method",
+        "Account verification",
+        "Promotion eligibility"
+      ]
+    },
+    "metadata": {
+      "category": ["financial", "deposits", "requirements"],
+      "subCategory": "deposit_limits",
+      "difficulty": 2,
+      "confidence": 0.96,
+      "dateCreated": "2024-10-24T15:44:00Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "financial_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "deposit_methods",
+        "payment_options",
+        "account_limits"
+      ],
+      "prerequisites": ["active_account"],
+      "followUpQuestions": {
+        "en": [
+          "What payment methods are available?",
+          "Are there any deposit fees?"
+        ],
+        "ms": [
+          "Apakah kaedah pembayaran yang tersedia?",
+          "Adakah terdapat yuran deposit?"
+        ],
+        "cn": [
+          "有哪些支付方式可用？",
+          "是否有存款手续费？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  },
+  {
+    "id": "0046",
+    "question": {
+      "text": "How do I verify my account to increase withdrawal limits?",
+      "variations": [
+        "Increase withdrawal limits",
+        "Account verification process",
+        "Higher withdrawal limits"
+      ],
+      "intent": "account_verification",
+      "languages": {
+        "en": "How do I verify my account to increase withdrawal limits?",
+        "ms": "Bagaimana saya boleh mengesahkan akaun saya untuk meningkatkan had pengeluaran?",
+        "cn": "如何验证我的账户以提高提款限额？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Complete KYC process by providing ID, proof of address, and selfie in account verification section.",
+        "ms": "Lengkapkan proses KYC dengan memberikan ID, bukti alamat, dan swafoto di bahagian pengesahan akaun.",
+        "cn": "在账户验证部分提供身份证明、地址证明和自拍照来完成KYC流程。"
+      },
+      "detailed": {
+        "en": "To verify your account and increase withdrawal limits, you'll need to complete our KYC (Know Your Customer) process. Go to your account settings and look for the 'Verification' section. You'll need to provide a copy of your ID, proof of address, and possibly a selfie. Once verified, your withdrawal limits will be increased.",
+        "ms": "Untuk mengesahkan akaun anda dan meningkatkan had pengeluaran, anda perlu melengkapkan proses KYC (Kenali Pelanggan Anda). Pergi ke tetapan akaun dan cari bahagian 'Pengesahan'. Anda perlu memberikan salinan ID, bukti alamat, dan mungkin swafoto. Setelah disahkan, had pengeluaran anda akan ditingkatkan.",
+        "cn": "要验证您的账户并提高提款限额，您需要完成我们的KYC（了解您的客户）流程。前往账户设置并查找"验证"部分。您需要提供身份证复印件、地址证明和可能需要的自拍照。验证完成后，您的提款限额将会提高。"
+      },
+      "conditions": [
+        "Valid identification",
+        "Proof of address",
+        "Clear selfie photo"
+      ]
+    },
+    "metadata": {
+      "category": ["account_management", "verification", "withdrawals"],
+      "subCategory": "account_verification",
+      "difficulty": 2,
+      "confidence": 0.97,
+      "dateCreated": "2024-10-24T15:34:00Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "verification_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "kyc_process",
+        "withdrawal_limits",
+        "account_security"
+      ],
+      "prerequisites": ["active_account"],
+      "followUpQuestions": {
+        "en": [
+          "How long does verification take?",
+          "What documents are accepted for verification?"
+        ],
+        "ms": [
+          "Berapa lama masa pengesahan diperlukan?",
+          "Apakah dokumen yang diterima untuk pengesahan?"
+        ],
+        "cn": [
+          "验证需要多长时间？",
+          "验证接受哪些文件？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  },
+  {
+    "id": "0047",
+    "question": {
+      "text": "What games offer the highest RTP (Return to Player) percentage?",
+      "variations": [
+        "Best RTP games",
+        "Highest return games",
+        "Games with best odds"
+      ],
+      "intent": "game_rtp_inquiry",
+      "languages": {
+        "en": "What games offer the highest RTP (Return to Player) percentage?",
+        "ms": "Permainan apa yang menawarkan peratusan RTP (Pulangan kepada Pemain) tertinggi?",
+        "cn": "哪些游戏提供最高的RTP（返还玩家）百分比？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Blackjack offers 99.5% RTP, while slots like Mega Joker (99%) and Jackpot 6000 (98.9%) offer high returns.",
+        "ms": "Blackjack menawarkan RTP 99.5%, manakala slot seperti Mega Joker (99%) dan Jackpot 6000 (98.9%) menawarkan pulangan tinggi.",
+        "cn": "21点提供99.5%的RTP，而像Mega Joker（99%）和Jackpot 6000（98.9%）等老虎机提供高回报。"
+      },
+      "detailed": {
+        "en": "Generally, our slot games with the highest RTP are Mega Joker (99%), Jackpot 6000 (98.9%), and Blood Suckers (98%). For table games, Blackjack typically offers the highest RTP at around 99.5% with perfect strategy. Always check the game info for specific RTP percentages.",
+        "ms": "Secara umum, permainan slot kami dengan RTP tertinggi adalah Mega Joker (99%), Jackpot 6000 (98.9%), dan Blood Suckers (98%). Untuk permainan meja, Blackjack biasanya menawarkan RTP tertinggi sekitar 99.5% dengan strategi sempurna. Sentiasa periksa maklumat permainan untuk peratusan RTP tertentu.",
+        "cn": "通常，我们RTP最高的老虎机游戏是Mega Joker（99%）、Jackpot 6000（98.9%）和Blood Suckers（98%）。对于桌面游戏，21点在采用完美策略的情况下通常提供最高约99.5%的RTP。请随时查看游戏信息以了解具体的RTP百分比。"
+      },
+      "conditions": [
+        "Perfect strategy used",
+        "Game rules followed",
+        "RTP percentages may vary"
+      ]
+    },
+    "metadata": {
+      "category": ["gaming", "game_info", "statistics"],
+      "subCategory": "game_statistics",
+      "difficulty": 2,
+      "confidence": 0.98,
+      "dateCreated": "2024-10-24T15:35:00Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "game_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "game_strategies",
+        "odds_calculation",
+        "game_rules"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [
+          "How do I calculate RTP?",
+          "What strategies improve my odds?"
+        ],
+        "ms": [
+          "Bagaimana saya mengira RTP?",
+          "Apakah strategi yang meningkatkan peluang saya?"
+        ],
+        "cn": [
+          "如何计算RTP？",
+          "什么策略可以提高我的胜算？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  }
+]
+  [
+  {
+    "id": "0048",
+    "question": {
+      "text": "What should I do if I get disconnected during a game?",
+      "variations": [
+        "Game disconnection issue",
+        "Lost connection while playing",
+        "Game connection problems"
+      ],
+      "intent": "game_disconnection_help",
+      "languages": {
+        "en": "What should I do if I get disconnected during a game?",
+        "ms": "Apa yang perlu saya lakukan jika terputus sambungan semasa permainan?",
+        "cn": "如果在游戏过程中断开连接该怎么办？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Reconnect to network, log in again, and your game progress will be restored.",
+        "ms": "Sambung semula ke rangkaian, log masuk semula, dan kemajuan permainan anda akan dipulihkan.",
+        "cn": "重新连接网络，重新登录，您的游戏进度将会恢复。"
+      },
+      "detailed": {
+        "en": "If you get disconnected during a game, follow these steps: 1. Try to reconnect to the network to ensure your network connection is stable. 2. Log in to the game again. In most cases, the system will automatically restore your game progress. 3. If the problem persists, contact online customer service. We will check and ensure your gaming experience will not be affected.",
+        "ms": "Jika anda terputus sambungan semasa permainan, ikuti langkah-langkah ini: 1. Cuba sambung semula ke rangkaian untuk memastikan sambungan rangkaian anda stabil. 2. Log masuk semula ke permainan. Dalam kebanyakan kes, sistem akan memulihkan kemajuan permainan anda secara automatik. 3. Jika masalah berterusan, hubungi khidmat pelanggan dalam talian. Kami akan memeriksa dan memastikan pengalaman permainan anda tidak terjejas.",
+        "cn": "如果您在游戏过程中断开连接，请按照以下步骤操作：1. 尝试重新连接网络以确保网络连接稳定。2. 重新登录游戏。在大多数情况下，系统会自动恢复您的游戏进度。3. 如果问题仍然存在，请联系在线客服。我们将检查并确保您的游戏体验不会受到影响。"
+      },
+      "conditions": [
+        "Internet connection",
+        "Valid account login",
+        "Recent game session"
+      ]
+    },
+    "metadata": {
+      "category": ["technical_support", "gaming", "connectivity"],
+      "subCategory": "game_issues",
+      "difficulty": 2,
+      "confidence": 0.97,
+      "dateCreated": "2024-10-24T15:41:00Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "technical_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "network_issues",
+        "game_recovery",
+        "technical_support"
+      ],
+      "prerequisites": ["active_account"],
+      "followUpQuestions": {
+        "en": [
+          "Will I lose my game progress?",
+          "How do I check my network connection?"
+        ],
+        "ms": [
+          "Adakah saya akan kehilangan kemajuan permainan saya?",
+          "Bagaimana saya memeriksa sambungan rangkaian saya?"
+        ],
+        "cn": [
+          "我会失去游戏进度吗？",
+          "如何检查网络连接？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  },
+  {
+    "id": "0049",
+    "question": {
+      "text": "Is there any issue with the deposit system right now?",
+      "variations": [
+        "Deposit system status",
+        "Current deposit issues",
+        "Deposit system problems"
+      ],
+      "intent": "deposit_system_status",
+      "languages": {
+        "en": "Is there any issue with the deposit system right now?",
+        "ms": "Adakah terdapat masalah dengan sistem deposit sekarang?",
+        "cn": "存款系统目前有任何问题吗？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "Our deposit system is currently running normally with 5-30 minute processing time.",
+        "ms": "Sistem deposit kami kini beroperasi seperti biasa dengan masa pemprosesan 5-30 minit.",
+        "cn": "我们的存款系统目前运行正常，处理时间为5-30分钟。"
+      },
+      "detailed": {
+        "en": "Our deposit system is currently running normally. Usually, the deposit processing time is 5 to 30 minutes. If you encounter a delay, it may be because the processing time of the network system is slightly extended. If your deposit has not yet arrived after 30 minutes, please contact our online customer service, we will check it and solve it as soon as possible.",
+        "ms": "Sistem deposit kami kini beroperasi seperti biasa. Biasanya, masa pemprosesan deposit adalah 5 hingga 30 minit. Jika anda mengalami kelewatan, ia mungkin kerana masa pemprosesan sistem rangkaian sedikit dilanjutkan. Jika deposit anda belum tiba selepas 30 minit, sila hubungi khidmat pelanggan dalam talian kami, kami akan memeriksanya dan menyelesaikannya secepat mungkin.",
+        "cn": "我们的存款系统目前运行正常。通常，存款处理时间为5到30分钟。如果您遇到延迟，可能是因为网络系统的处理时间略有延长。如果您的存款在30分钟后仍未到账，请联系我们的在线客服，我们会尽快检查并解决。"
+      },
+      "conditions": [
+        "System operational",
+        "Network stability",
+        "Normal processing times"
+      ]
+    },
+    "metadata": {
+      "category": ["financial", "system_status", "deposits"],
+      "subCategory": "system_status",
+      "difficulty": 2,
+      "confidence": 0.98,
+      "dateCreated": "2024-10-24T15:42:00Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "system_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "deposit_process",
+        "system_maintenance",
+        "customer_support"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [
+          "When will my deposit arrive?",
+          "Should I try depositing again?"
+        ],
+        "ms": [
+          "Bilakah deposit saya akan tiba?",
+          "Haruskah saya cuba deposit sekali lagi?"
+        ],
+        "cn": [
+          "我的存款什么时候到账？",
+          "我应该再次尝试存款吗？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  },
+  {
+    "id": "0050",
+    "question": {
+      "text": "What are the stop recovery times for different lotteries today?",
+      "variations": [
+        "Lottery stop times today",
+        "Recovery times for lotteries",
+        "Today's lottery schedules"
+      ],
+      "intent": "lottery_schedules",
+      "languages": {
+        "en": "What are the stop recovery times for different lotteries today?",
+        "ms": "Apakah masa pemulihan berhenti untuk loteri berbeza hari ini?",
+        "cn": "今天不同彩票的停止恢复时间是什么？"
+      }
+    },
+    "answer": {
+      "short": {
+        "en": "MKT: 07:00 PM, Singapore: 06:00 PM, CBD: 06:35 PM, GDLOTTO: 07:00 PM, 9LOTTO: 07:25 PM",
+        "ms": "MKT: 07:00 PM, Singapura: 06:00 PM, CBD: 06:35 PM, GDLOTTO: 07:00 PM, 9LOTTO: 07:25 PM",
+        "cn": "MKT: 19:00, 新加坡: 18:00, CBD: 18:35, GDLOTTO: 19:00, 9LOTTO: 19:25"
+      },
+      "detailed": {
+        "en": "The stop recovery times for different lotteries today are as follows: MKT: 07:00 PM, Singapore: 06:00 PM, CBD: 06:35 PM, GDLOTTO: 07:00 PM, 9LOTTO: 07:25 PM. Please place your bets in advance according to the type of lottery you want to buy.",
+        "ms": "Masa pemulihan berhenti untuk loteri berbeza hari ini adalah seperti berikut: MKT: 07:00 PM, Singapura: 06:00 PM, CBD: 06:35 PM, GDLOTTO: 07:00 PM, 9LOTTO: 07:25 PM. Sila letakkan pertaruhan anda lebih awal mengikut jenis loteri yang anda ingin beli.",
+        "cn": "今天不同彩票的停止恢复时间如下：MKT: 19:00, 新加坡: 18:00, CBD: 18:35, GDLOTTO: 19:00, 9LOTTO: 19:25。请根据您想购买的彩票类型提前下注。"
+      },
+      "conditions": [
+        "Times subject to change",
+        "Different timezone adjustments",
+        "System availability"
+      ]
+    },
+    "metadata": {
+      "category": ["gaming", "lottery", "schedules"],
+      "subCategory": "lottery_timing",
+      "difficulty": 2,
+      "confidence": 0.96,
+      "dateCreated": "2024-10-24T15:43:00Z",
+      "lastUpdated": "2024-11-25T09:00:00Z",
+      "version": "1.0",
+      "source": "lottery_documentation",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "lottery_rules",
+        "betting_deadlines",
+        "game_schedules"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [
+          "How do I place a bet?",
+          "What happens if I miss the deadline?"
+        ],
+        "ms": [
+          "Bagaimana saya membuat pertaruhan?",
+          "Apa yang berlaku jika saya terlepas tarikh akhir?"
+        ],
+        "cn": [
+          "如何下注？",
+          "如果错过截止时间会怎样？"
+        ]
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    }
+  }
+
