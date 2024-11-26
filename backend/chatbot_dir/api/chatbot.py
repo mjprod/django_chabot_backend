@@ -192,7 +192,7 @@ Input: "yo wassup how do i get my money back from da slots?"
 Output: "How do I withdraw money from slot games?"
                 """,
             },
-            {"role": "user", "content": f"Translate and clean this text, {text}"},
+            {"role": "user", "content": f"Process this text, {text}"},
         ],
     )
     return response.choices[0].message.content.strip()
