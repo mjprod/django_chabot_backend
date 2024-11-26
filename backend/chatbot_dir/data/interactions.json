@@ -659,5 +659,101 @@
                 }
             ]
         }
+    },
+    {
+        "Date_time": "2024-11-26T05:53:53.688584",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "is there any issue with the deposit system right now?",
+            "cleaned_prompt": "\"Is there an issue with the deposit system right now?\"",
+            "generation": "Our deposit system is functioning normally. Typically, the processing time for deposits is between 5 to 30 minutes. If you experience any issues or delays, please contact our customer service team and we'll help resolve this right away.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "Our deposit system is functioning normally. Typically, the processing time for deposits is between 5 to 30 minutes. If you experience any issues or delays, please contact our customer service team and we'll help resolve this right away."
+                },
+                {
+                    "language": "ms-MY",
+                    "text": "Sistem deposit kami berfungsi seperti biasa. Biasanya, masa pemprosesan untuk deposit adalah antara 5 hingga 30 minit. Jika anda mengalami sebarang masalah atau kelewatan, sila hubungi pasukan perkhidmatan pelanggan kami dan kami akan membantu menyelesaikannya dengan segera."
+                },
+                {
+                    "language": "cn",
+                    "text": "\u6211\u4eec\u7684\u5b58\u6b3e\u7cfb\u7edf\u6b63\u5e38\u8fd0\u884c\u3002\u901a\u5e38\uff0c\u5b58\u6b3e\u7684\u5904\u7406\u65f6\u95f4\u662f5\u81f330\u5206\u949f\u4e4b\u95f4\u3002\u5982\u679c\u60a8\u9047\u5230\u4efb\u4f55\u95ee\u9898\u6216\u5ef6\u8bef\uff0c\u8bf7\u8054\u7cfb\u6211\u4eec\u7684\u5ba2\u670d\u56e2\u961f\uff0c\u6211\u4eec\u5c06\u5c3d\u5feb\u89e3\u51b3\u8fd9\u4e2a\u95ee\u9898\u3002"
+                }
+            ]
+        }
+    },
+    {
+        "Date_time": "2024-11-26T05:55:32.108803",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "what are the stop recovery times for different lotteries today?",
+            "cleaned_prompt": "How long are the stop recovery times for different lotteries today?",
+            "generation": "The stop recovery times for different lotteries today are as follows: \n\n- MKT: 7:00 PM\n- Singapore: 6:00 PM\n- CBD: 6:35 PM\n- GDLOTTO: 7:00 PM\n- 9Lotto: 7:25 PM\n\nPlease place your bets in advance according to these times to avoid missing the opportunity.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "The stop recovery times for different lotteries today are as follows: \n\n- MKT: 7:00 PM\n- Singapore: 6:00 PM\n- CBD: 6:35 PM\n- GDLOTTO: 7:00 PM\n- 9Lotto: 7:25 PM\n\nPlease place your bets in advance according to these times to avoid missing the opportunity."
+                },
+                {
+                    "language": "ms-MY",
+                    "text": "Masa pemulihan berhenti untuk burung walit yang berbeza hari ini adalah seperti berikut:\n\n- MKT: 7:00 PM\n- Singapura: 6:00 PM\n- CBD: 6:35 PTG\n- GDLOTTO: 7:00 PG\n- 9Lotto: 7:25 PG\n\nSila letakkan pertaruhan anda lebih awal mengikut masa ini untuk mengelakkan kehilangan peluang."
+                },
+                {
+                    "language": "cn",
+                    "text": "\u4eca\u5929\u7684\u4e0d\u540c\u732b\u5934\u76d4\u7684\u6062\u590d\u65f6\u95f4\u5982\u4e0b\uff1a\n\n- MKT\uff1a7:00 PM\n-\u65b0\u52a0\u5761\uff1a6:00 PM\n- CBD\uff1a6:35 PM\n- GDLOTTO\uff1a7:00 PM\n- 9Lotto\uff1a7:25 PM\n\n\u8bf7\u6309\u7167\u8fd9\u4e9b\u65f6\u6bb5\u63d0\u524d\u6295\u6807\uff0c\u4ee5\u907f\u514d\u7f3a\u5931\u673a\u4f1a\u3002"
+                }
+            ]
+        }
+    },
+    {
+        "Date_time": "2024-11-26T05:56:44.452514",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "tell me about the lotteries today?",
+            "cleaned_prompt": "\"Tell me about today's lotteries.\"",
+            "generation": "The latest purchase times for different lotteries today are as follows:\n\n- MKT: 7:00 PM\n- Singapore: 6:00 PM\n- CBD: 6:35 PM\n- GDLOTTO: 7:00 PM\n- 9LOTTO: 7:25 PM\n\nPlease note that these times are subject to change, and it's always best to check with the lottery provider for the most up-to-date information.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "The latest purchase times for different lotteries today are as follows:\n\n- MKT: 7:00 PM\n- Singapore: 6:00 PM\n- CBD: 6:35 PM\n- GDLOTTO: 7:00 PM\n- 9LOTTO: 7:25 PM\n\nPlease note that these times are subject to change, and it's always best to check with the lottery provider for the most up-to-date information."
+                },
+                {
+                    "language": "ms-MY",
+                    "text": "Masa pembelian terkini untuk burung walit yang berbeza hari ini adalah seperti berikut:\n\n- MKT: 7:00 PM\n- Singapura: 6:00 PM\n- CBD: 6:35 PTG\n- GDLOTTO: 7:00 PG\n- 9LOTTO: 7:25 PG\n\nSila ambil perhatian bahawa masa ini tertakluk kepada perubahan, dan sentiasa ada masa untuk menyemak dengan pembekal loteri untuk maklumat paling terkini."
+                },
+                {
+                    "language": "cn",
+                    "text": "\u4eca\u5929\u7684\u5404\u79cd\u732b\u54aa\u8ba2\u8d2d\u65f6\u95f4\u5982\u4e0b\uff1a\n\n- MKT\uff1a7:00 PM\n-\u65b0\u52a0\u5761\uff1a6:00 PM\n- CBD\uff1a6:35 PM\n- GDLOTTO\uff1a7:00 PM\n- 9LOTTO\uff1a7:25 PM\n\n\u8bf7\u6ce8\u610f\uff0c\u8fd9\u4e9b\u65f6\u95f4\u662f\u968f\u65f6\u53d1\u751f\u53d8\u5316\u7684\uff0c\u6700\u597d\u4e0e\u5f69\u7968\u4f9b\u5e94\u5546\u67e5\u770b\u6700\u6700\u65b0\u7684\u4fe1\u606f\u3002"
+                }
+            ]
+        }
+    },
+    {
+        "Date_time": "2024-11-26T05:58:58.332219",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "\u4eca\u5929\u4e0d\u540c\u5f69\u7968\u7684\u8d2d\u4e70\u622a\u6b62\u65f6\u95f4\u662f\u4ec0\u4e48\u65f6\u5019\uff1f",
+            "cleaned_prompt": "Translated from Chinese to English: What are the purchase cutoff times for different lotteries today?",
+            "generation": "The latest purchase time for different lotteries today is as follows:\n\n- MKT: 7:00 PM\n- Singapore: 6:00 PM\n- CBD: 6:35 PM\n- GDLOTTO: 7:00 PM\n- 9LOTTO: 7:25 PM\n\nPlease note that these times are subject to change, and it's always best to check with the lottery provider for the most up-to-date information.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "The latest purchase time for different lotteries today is as follows:\n\n- MKT: 7:00 PM\n- Singapore: 6:00 PM\n- CBD: 6:35 PM\n- GDLOTTO: 7:00 PM\n- 9LOTTO: 7:25 PM\n\nPlease note that these times are subject to change, and it's always best to check with the lottery provider for the most up-to-date information."
+                },
+                {
+                    "language": "ms-MY",
+                    "text": "Masa pembelian terkini untuk burung walit yang berbeza hari ini adalah seperti berikut:\n\n- MKT: 7:00 PM\n- Singapura: 6:00 PM\n- CBD: 6:35 PTG\n- GDLOTTO: 7:00 PG\n- 9LOTTO: 7:25 PG\n\nSila ambil perhatian bahawa masa-masa ini tertakluk kepada perubahan, dan sentiasa ada masa untuk menyemak dengan pembekal loteri untuk maklumat paling terkini."
+                },
+                {
+                    "language": "cn",
+                    "text": "\u4eca\u5929\u7684\u5404\u79cd\u732b\u5934\u76d4\u7684\u6700\u65b0\u8d2d\u4e70\u65f6\u95f4\u5982\u4e0b\uff1a\n\n- MKT\uff1a7:00 PM\n-\u65b0\u52a0\u5761\uff1a6:00 PM\n- CBD\uff1a6:35 PM\n- GDLOTTO\uff1a7:00 PM\n- 9LOTTO\uff1a7:25 PM\n\n\u8bf7\u6ce8\u610f\uff0c\u8fd9\u4e9b\u65f6\u95f4\u662f\u968f\u65f6\u53d1\u751f\u53d8\u5316\uff0c\u6700\u597d\u4e0e\u5f69\u7968\u63d0\u4f9b\u5546\u68c0\u67e5\u6700\u6700\u65b0\u7684\u4fe1\u606f\u3002"
+                }
+            ]
+        }
     }
 ]
