@@ -266,20 +266,35 @@ rag_prompt_template = ChatPromptTemplate.from_messages(
             """You are a knowledgeable gaming platform assistant. Provide direct, confident answers without referencing any context or databases. Never use phrases like "based on the provided context" or "it appears that."
 
 Key guidelines:
-- Give clear, direct responses
+-always start with a formal friendly polite tone, example: Dear Player, Dear Boss
+- whenever you use the words "You" use a more formal word
+-add please infront of the first process you are explaining to the customer. for example "Please click the settings icon".
+- Give clear but friendly, semi-informal response
 - Use a friendly, professional tone
+- dont recommend users to control their emotions and dont mention losses and casino edge. Instead wish them better luck next time,
+- If a user askes about the 4D drawtime, do not mention times outside of the specific platform times found in the database files.
+- whenever you would say "Morning" replace it with words like "Daytime".
+- when the user asks a drawtime related question, Mention the times that you have access to but refer them to our platform for more infomration.
+- instead of saying "some event" use "some specific event"
+- When giving a list of procedures to the user, at the end of the conversation add in "if this hasnt resolved your issue, please contact the Professional Customer Service immediately"
+- instead of words like "Support Team", use the words "Professional Customer Service"
 - Provide specific details and timeframes
 - Include relevant follow-up information
-- Maintain accuracy while being conversational
+- Maintain accuracy while being easy to talk to and conversational
 - Never mention sources or context
 - Avoid hedging language or uncertainty
+- avoid using phrases that direct the user to customer service/support as you are the customer support agent yourself.
+-do not use phrases like contact us directly as they have already contacted us. only provide answers and follow if they ask for follow up.
+- avoid using words like "Our Platform", instead use phrases like "on the app, on the platform"
+- Always use “您” 
+
 
 Example format:
 User: "How long does it take for deposits to process?"
-Assistant: "Deposits typically process within 5-30 minutes. If you haven't received your funds after 30 minutes, please contact our customer service team and we'll help resolve this right away."
+Assistant: "Dear Boss, Deposits typically process within 5-30 minutes. If you haven't received your funds after 30 minutes"
 """,
         ),
-        ("assistant", "I'll provide clear, direct answers to help you."),
+        ("assistant", "I'll provide clear, friendly direct answers to help you."),
         ("human", "Context: {context}\nQuestion: {prompt}"),
     ]
 )
@@ -306,42 +321,40 @@ rag_chain = (
 
 
 # API functions
-
-
-def translate_en_to_cn(input_text, to_lang="mandarin", model="small"):
-    url = "https://api.mesolitica.com/translation"
-
-    payload = {
-        "input": input_text,
-        "to_lang": to_lang,
-        "model": model,
-        "top_k": 1,
-        "top_p": 1,
-        "repetition_penalty": 1.1,
-        "temperature": 0,
-    }
-
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {os.getenv('MESOLITICA_API_KEY')}",
-    }
+def translate_en_to_cn(input_text):
+    # Load environment variables
+    load_dotenv()
+    api_key = os.getenv("OPENAI_API_KEY")
+    client = OpenAI(api_key=api_key)
 
     try:
-        print(f"Sending translation request for: {input_text}")
-        response = requests.post(url, json=payload, headers=headers)
-        print(f"Response status: {response.status_code}")
-        print(f"Response content: {response.text}")
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a professional translator. Translate the following English text to Simplified Chinese (Mandarin). Maintain the original meaning and tone while ensuring the translation is natural and fluent.",
+                },
+                {
+                    "role": "user",
+                    "content": f"Translate this text to Chinese: {input_text}",
+                },
+            ],
+            temperature=0.1,
+        )
 
-        if response.status_code == 200:
-            translation_data = response.json()
-            return {
-                "text": translation_data.get("result", ""),
-                "usage": translation_data.get("usage", {}),
-            }
+        translation = response.choices[0].message.content.strip()
+
+        return {
+            "text": translation,
+            "usage": {
+                "prompt_tokens": response.usage.prompt_tokens,
+                "total_tokens": response.usage.total_tokens,
+            },
+        }
     except Exception as e:
         print(f"Translation error: {str(e)}")
-
-    return {"text": "", "prompt_tokens": 0, "total_tokens": 0}
+        return {"text": "", "prompt_tokens": 0, "total_tokens": 0}
 
 
 def translate_en_to_ms(input_text, to_lang="ms", model="small"):
@@ -455,14 +468,24 @@ def submit_feedback(request):
 def save_interaction(interaction_type, data):
     file_path = os.path.join(os.path.dirname(__file__), "../data/interactions.json")
 
-    # Create the file if it doesn't exist
+    # Initialize empty interactions list
+    interactions = []
+
+    # Create the file with empty array if it doesn't exist
     if not os.path.exists(file_path):
         with open(file_path, "w") as f:
             json.dump([], f)
-
-    # Read existing interactions
-    with open(file_path, "r") as f:
-        interactions = json.load(f)
+    else:
+        # Try to read existing interactions
+        try:
+            with open(file_path, "r") as f:
+                content = f.read()
+                if content:  # Only try to load if file is not empty
+                    interactions = json.loads(content)
+                # If file is empty, keep empty list
+        except json.JSONDecodeError:
+            # If file is corrupted, start fresh
+            interactions = []
 
     # Create new interaction
     new_interaction = {
