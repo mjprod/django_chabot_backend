@@ -454,8 +454,6 @@ def submit_feedback(request):
                     {"error": "Missing required field: correct_answer."}, status=400
                 )
 
-            # Here you might want to save this to your JSON or process it further
-            # For now, we'll just return a success message
             return JsonResponse({"message": "Incorrect answer received"}, status=200)
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON format."}, status=400)

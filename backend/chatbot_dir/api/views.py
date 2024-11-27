@@ -43,7 +43,13 @@ class UserInputView(APIView):
                 "cleaned_prompt": cleaned_prompt,
                 "generation": generation["generation"],
                 "translations": generation["translations"],
-                "usage": generation["usage"],
+                "usage": {
+                    "prompt_tokens": generation["usage"].get("prompt_tokens", 0),
+                    "completion_tokens": generation["usage"].get(
+                        "completion_tokens", 0
+                    ),
+                    "total_tokens": generation["usage"].get("total_tokens", 0),
+                },
             }
 
             save_interaction(
