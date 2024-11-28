@@ -206,7 +206,7 @@ class GradeDocuments(BaseModel):
 
 
 # Initialize LLM for Grading
-llm_grader = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
+llm_grader = ChatGroq(model="llama-3.1-70b-versatile", temperature=0)
 structured_llm_grader = llm_grader.with_structured_output(GradeDocuments)
 
 # System Message for Grader
@@ -236,7 +236,7 @@ class GradeHallucinations(BaseModel):
 
 
 # Initialize LLM for Hallucination Grading
-llm_hallucination = ChatGroq(model="mixtral-8x7b-32768", temperature=0)
+llm_hallucination = ChatGroq(model="llama-3.1-70b-versatile", temperature=0)
 structured_hallucination_grader = llm_hallucination.with_structured_output(
     GradeHallucinations
 )
@@ -314,7 +314,7 @@ Assistant: "Dear Boss, Please allow 5-30 minutes for deposit processing. If fund
 )
 
 # Initialize LLM for RAG Chain
-rag_llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
+rag_llm = ChatGroq(model="llama-3.1-70b-versatile", temperature=0)
 
 
 # Define Formatting Function

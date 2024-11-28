@@ -2083,5 +2083,253 @@
                 "metadata": {}
             }
         }
+    },
+    {
+        "Date_time": "2024-11-28T05:17:25.534087",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "What is the RTP?",
+            "cleaned_prompt": "What is the RTP?",
+            "generation": "Dear Player, I'm happy to help you. However, I don't have enough information to provide the RTP (Return to Player) as the context is empty. Please provide more context or details about the game you are referring to, and I'll do my best to assist you. If this hasn't resolved your issue, please contact Our Professional Customer Service team who can assist you further.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "Dear Player, I'm happy to help you. However, I don't have enough information to provide the RTP (Return to Player) as the context is empty. Please provide more context or details about the game you are referring to, and I'll do my best to assist you. If this hasn't resolved your issue, please contact Our Professional Customer Service team who can assist you further."
+                },
+                {
+                    "language": "ms-MY",
+                    "text": "Dear Player, saya gembira dapat membantu anda. Walau bagaimanapun, saya tidak mempunyai maklumat yang mencukupi untuk memberikan RTP (Return to Player) kerana konteksnya kosong. Sila berikan lebih banyak konteks atau butiran tentang permainan yang anda maksudkan, dan saya akan berusaha sebaik mungkin untuk membantu anda. Jika ini belum menyelesaikan masalah anda, sila hubungi pasukan Perkhidmatan Pelanggan Profesional Kami yang boleh membantu anda dengan lebih lanjut."
+                },
+                {
+                    "language": "cn",
+                    "text": "\u4eb2\u7231\u7684\u73a9\u5bb6\uff0c\u6211\u5f88\u9ad8\u5174\u80fd\u4e3a\u60a8\u63d0\u4f9b\u5e2e\u52a9\u3002\u7136\u800c\uff0c\u7531\u4e8e\u4e0a\u4e0b\u6587\u4fe1\u606f\u4e0d\u8db3\uff0c\u6211\u65e0\u6cd5\u63d0\u4f9bRTP\uff08\u73a9\u5bb6\u56de\u62a5\u7387\uff09\u3002\u8bf7\u60a8\u63d0\u4f9b\u66f4\u591a\u5173\u4e8e\u60a8\u6240\u63d0\u53ca\u6e38\u620f\u7684\u4e0a\u4e0b\u6587\u6216\u7ec6\u8282\uff0c\u6211\u4f1a\u5c3d\u529b\u534f\u52a9\u60a8\u3002\u5982\u679c\u8fd9\u4ecd\u672a\u89e3\u51b3\u60a8\u7684\u95ee\u9898\uff0c\u8bf7\u8054\u7cfb\u6211\u4eec\u7684\u4e13\u4e1a\u5ba2\u670d\u56e2\u961f\uff0c\u4ed6\u4eec\u5c06\u4e3a\u60a8\u63d0\u4f9b\u8fdb\u4e00\u6b65\u7684\u5e2e\u52a9\u3002"
+                }
+            ]
+        }
+    },
+    {
+        "Date_time": "2024-11-28T05:17:46.824664",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "What is the time for my money withdrawal?",
+            "cleaned_prompt": "What is the time for my money withdrawal?",
+            "generation": "Dear Player, Please allow 5 to 30 minutes for your withdrawal to be processed. This time is necessary for our system and customer service team to review and ensure the security of each transaction. If this hasn't resolved your issue, please contact Our Professional Customer Service team who can assist you further.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "Dear Player, Please allow 5 to 30 minutes for your withdrawal to be processed. This time is necessary for our system and customer service team to review and ensure the security of each transaction. If this hasn't resolved your issue, please contact Our Professional Customer Service team who can assist you further."
+                },
+                {
+                    "language": "ms-MY",
+                    "text": "Pemain yang dihormati, Sila izinkan anda membuat 5 hingga 30 minit untuk pengeluaran anda diproses. Masa ini diperlukan bagi sistem dan pasukan perkhidmatan pelanggan kami untuk menyemak dan memastikan keselamatan setiap transaksi. Jika masalah anda belum diselesaikan, sila hubungi pasukan Perkhidmatan Pelanggan Profesional Kami yang dapat membantu anda dengan lebih lanjut."
+                },
+                {
+                    "language": "cn",
+                    "text": "\u4eb2\u7231\u7684\u73a9\u5bb6\uff0c\u8bf7\u60a8\u8010\u5fc3\u7b49\u5f855\u523030\u5206\u949f\uff0c\u4ee5\u4fbf\u5904\u7406\u60a8\u7684\u63d0\u73b0\u8bf7\u6c42\u3002\u8fd9\u4e2a\u65f6\u95f4\u662f\u6211\u4eec\u7cfb\u7edf\u548c\u5ba2\u670d\u56e2\u961f\u5ba1\u6838\u5e76\u786e\u4fdd\u6bcf\u7b14\u4ea4\u6613\u5b89\u5168\u6240\u5fc5\u9700\u7684\u3002\u5982\u679c\u60a8\u7684\u95ee\u9898\u4ecd\u672a\u89e3\u51b3\uff0c\u8bf7\u8054\u7cfb\u4e13\u4e1a\u5ba2\u670d\u56e2\u961f\uff0c\u4ed6\u4eec\u5c06\u4e3a\u60a8\u63d0\u4f9b\u8fdb\u4e00\u6b65\u7684\u5e2e\u52a9\u3002"
+                }
+            ]
+        }
+    },
+    {
+        "Date_time": "2024-11-28T05:41:05.046813",
+        "Type": "complete_interaction",
+        "Data": {
+            "user_input": "What is AI?",
+            "ai_response": "AI stands for Artificial Intelligence.",
+            "correct_bool": true,
+            "chat_rating": 5,
+            "metadata": {}
+        }
+    },
+    {
+        "Date_time": "2024-11-28T05:41:40.484664",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T05:41:40.483616",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 0,
+                "prompt": "original question",
+                "cleaned_prompt": "processed question",
+                "generation": "answer text",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "english text"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "malay text"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "chinese text"
+                    }
+                ],
+                "correct_bool": true,
+                "correct_answer": "Correct Answer goes here",
+                "chat_rating": 3,
+                "metadata": {}
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T05:41:40.490517",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T05:41:40.489538",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 0,
+                "prompt": "original question",
+                "cleaned_prompt": "processed question",
+                "generation": "answer text",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "english text"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "malay text"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "chinese text"
+                    }
+                ],
+                "correct_bool": true,
+                "correct_answer": "Correct Answer goes here",
+                "chat_rating": 3
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T05:41:53.358469",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T05:41:53.354919",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 0,
+                "prompt": "original question",
+                "cleaned_prompt": "processed question",
+                "generation": "answer text",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "english text"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "malay text"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "chinese text"
+                    }
+                ],
+                "correct_bool": true,
+                "correct_answer": "gqfioghaukghae",
+                "chat_rating": 3,
+                "metadata": {}
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T05:41:53.364897",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T05:41:53.363903",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 0,
+                "prompt": "original question",
+                "cleaned_prompt": "processed question",
+                "generation": "answer text",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "english text"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "malay text"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "chinese text"
+                    }
+                ],
+                "correct_bool": true,
+                "correct_answer": "gqfioghaukghae",
+                "chat_rating": 3
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T06:04:20.529384",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T06:04:20.527304",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 0,
+                "prompt": "original question",
+                "cleaned_prompt": "processed question",
+                "generation": "answer text",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "english text"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "malay text"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "chinese text"
+                    }
+                ],
+                "correct_bool": true,
+                "correct_answer": "gqfioghaukghae",
+                "chat_rating": 3,
+                "metadata": {}
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T06:04:20.537041",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T06:04:20.535818",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 0,
+                "prompt": "original question",
+                "cleaned_prompt": "processed question",
+                "generation": "answer text",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "english text"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "malay text"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "chinese text"
+                    }
+                ],
+                "correct_bool": true,
+                "correct_answer": "gqfioghaukghae",
+                "chat_rating": 3
+            }
+        }
     }
 ]

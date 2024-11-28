@@ -21,5 +21,74 @@
         "correct_bool": true,
         "correct_answer": "Correct Answer goes here",
         "chat_rating": 3
+    },
+    {
+        "user_id": 0,
+        "prompt": "original question",
+        "cleaned_prompt": "processed question",
+        "generation": "answer text",
+        "translations": [
+            {
+                "language": "en",
+                "text": "english text"
+            },
+            {
+                "language": "ms-MY",
+                "text": "malay text"
+            },
+            {
+                "language": "cn",
+                "text": "chinese text"
+            }
+        ],
+        "correct_bool": true,
+        "correct_answer": "Correct Answer goes here",
+        "chat_rating": 3
+    },
+    {
+        "user_id": 0,
+        "prompt": "original question",
+        "cleaned_prompt": "processed question",
+        "generation": "answer text",
+        "translations": [
+            {
+                "language": "en",
+                "text": "english text"
+            },
+            {
+                "language": "ms-MY",
+                "text": "malay text"
+            },
+            {
+                "language": "cn",
+                "text": "chinese text"
+            }
+        ],
+        "correct_bool": true,
+        "correct_answer": "gqfioghaukghae",
+        "chat_rating": 3
+    },
+    {
+        "user_id": 0,
+        "prompt": "original question",
+        "cleaned_prompt": "processed question",
+        "generation": "answer text",
+        "translations": [
+            {
+                "language": "en",
+                "text": "english text"
+            },
+            {
+                "language": "ms-MY",
+                "text": "malay text"
+            },
+            {
+                "language": "cn",
+                "text": "chinese text"
+            }
+        ],
+        "correct_bool": true,
+        "correct_answer": "gqfioghaukghae",
+        "chat_rating": 3
     }
 ]

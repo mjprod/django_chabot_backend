@@ -103,9 +103,9 @@ class IncorrectAnswerResponseView(APIView):
     def post(self, request):
         serializer = IncorrectAnswerResponseSerializer(data=request.data)
         if serializer.is_valid():
-            incorrect_answer = serializer.validated_data["incorrect_answer"]
+            correct_answer = serializer.validated_data["incorrect_answer"]
             save_interaction(
-                "incorrect_answer_response", {"incorrect_answer": incorrect_answer}
+                "incorrect_answer_response", {"correct_answer": correct_answer}
             )
             return Response(
                 {"message": "Correct answer received"}, status=status.HTTP_200_OK
@@ -167,6 +167,13 @@ class CaptureSummaryMultilangView(APIView):
                     "chat_rating": serializer.validated_data.get("chat_rating"),
                 }
                 save_interaction_outcome(outcome_data)
+
+                interaction_data = {
+                    "Date_time": datetime.now().isoformat(),
+                    "Type": "complete_interaction",
+                    "Data": outcome_data,
+                }
+                result = save_interaction("complete_interaction", interaction_data)
 
                 return Response(
                     {
