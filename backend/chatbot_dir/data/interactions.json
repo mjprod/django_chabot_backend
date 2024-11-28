@@ -1693,5 +1693,395 @@
                 "metadata": {}
             }
         }
+    },
+    {
+        "Date_time": "2024-11-28T02:25:38.777641",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T02:25:38.775883",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 0,
+                "prompt": "original question",
+                "cleaned_prompt": "processed question",
+                "generation": "answer text",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "english text"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "malay text"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "chinese text"
+                    }
+                ],
+                "metadata": {}
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T02:25:49.563562",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T02:25:49.561612",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 0,
+                "prompt": "original question",
+                "cleaned_prompt": "processed question",
+                "generation": "answer text",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "english text"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "malay text"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "chinese text"
+                    }
+                ],
+                "metadata": {}
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T02:25:50.484587",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T02:25:50.480714",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 0,
+                "prompt": "original question",
+                "cleaned_prompt": "processed question",
+                "generation": "answer text",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "english text"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "malay text"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "chinese text"
+                    }
+                ],
+                "metadata": {}
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T02:26:26.899576",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T02:26:26.896416",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 0,
+                "prompt": "original question",
+                "cleaned_prompt": "processed question",
+                "generation": "answer text",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "english text"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "malay text"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "chinese text"
+                    }
+                ],
+                "metadata": {}
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T04:09:10.482235",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T04:09:10.479364",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 123,
+                "prompt": "How do I deposit money?",
+                "cleaned_prompt": "What is the deposit procedure?",
+                "generation": "Dear Boss, Please follow these steps to make a deposit...",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "Dear Boss, Please follow these steps to make a deposit..."
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "Tuan Boss, Sila ikuti langkah-langkah ini untuk membuat deposit..."
+                    },
+                    {
+                        "language": "cn",
+                        "text": "\u4eb2\u7231\u7684\u8001\u677f\uff0c\u8bf7\u6309\u7167\u4ee5\u4e0b\u6b65\u9aa4\u8fdb\u884c\u5b58\u6b3e..."
+                    }
+                ],
+                "correct_bool": true,
+                "correct_answer": "",
+                "chat_rating": 5,
+                "metadata": {
+                    "platform": "web",
+                    "session_id": "abc123"
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T04:10:11.405141",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T04:10:11.403260",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 123,
+                "prompt": "How do I deposit money?",
+                "cleaned_prompt": "What is the deposit procedure?",
+                "generation": "Dear Boss, Please follow these steps to make a deposit...",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "Dear Boss, Please follow these steps to make a deposit..."
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "Tuan Boss, Sila ikuti langkah-langkah ini untuk membuat deposit..."
+                    },
+                    {
+                        "language": "cn",
+                        "text": "\u4eb2\u7231\u7684\u8001\u677f\uff0c\u8bf7\u6309\u7167\u4ee5\u4e0b\u6b65\u9aa4\u8fdb\u884c\u5b58\u6b3e..."
+                    }
+                ],
+                "correct_bool": true,
+                "correct_answer": "",
+                "chat_rating": 5,
+                "metadata": {
+                    "platform": "web",
+                    "session_id": "abc123"
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T04:10:47.320242",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T04:10:47.315461",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 123,
+                "prompt": "How do I deposit money?",
+                "cleaned_prompt": "What is the deposit procedure?",
+                "generation": "Dear Boss, Please follow these steps to make a deposit...",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "Dear Boss, Please follow these steps to make a deposit..."
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "Tuan Boss, Sila ikuti langkah-langkah ini untuk membuat deposit..."
+                    },
+                    {
+                        "language": "cn",
+                        "text": "\u4eb2\u7231\u7684\u8001\u677f\uff0c\u8bf7\u6309\u7167\u4ee5\u4e0b\u6b65\u9aa4\u8fdb\u884c\u5b58\u6b3e..."
+                    }
+                ],
+                "correct_bool": true,
+                "correct_answer": "",
+                "chat_rating": 5,
+                "metadata": {
+                    "platform": "web",
+                    "session_id": "abc123"
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T04:11:04.528621",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T04:11:04.525443",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 123,
+                "prompt": "How do I deposit money?",
+                "cleaned_prompt": "What is the deposit procedure?",
+                "generation": "Dear Boss, Please follow these steps to make a deposit...",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "Dear Boss, Please follow these steps to make a deposit..."
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "Tuan Boss, Sila ikuti langkah-langkah ini untuk membuat deposit..."
+                    },
+                    {
+                        "language": "cn",
+                        "text": "\u4eb2\u7231\u7684\u8001\u677f\uff0c\u8bf7\u6309\u7167\u4ee5\u4e0b\u6b65\u9aa4\u8fdb\u884c\u5b58\u6b3e..."
+                    }
+                ],
+                "correct_bool": true,
+                "correct_answer": "",
+                "chat_rating": 5,
+                "metadata": {
+                    "platform": "web",
+                    "session_id": "abc123"
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T04:13:35.643394",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T04:13:35.640450",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 123,
+                "prompt": "How do I deposit money?",
+                "cleaned_prompt": "What is the deposit procedure?",
+                "generation": "Dear Boss, Please follow these steps to make a deposit...",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "Dear Boss, Please follow these steps to make a deposit..."
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "Tuan Boss, Sila ikuti langkah-langkah ini untuk membuat deposit..."
+                    },
+                    {
+                        "language": "cn",
+                        "text": "\u4eb2\u7231\u7684\u8001\u677f\uff0c\u8bf7\u6309\u7167\u4ee5\u4e0b\u6b65\u9aa4\u8fdb\u884c\u5b58\u6b3e..."
+                    }
+                ],
+                "correct_bool": true,
+                "correct_answer": "",
+                "chat_rating": 5,
+                "metadata": {
+                    "platform": "web",
+                    "session_id": "abc123"
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T04:14:18.748580",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T04:14:18.747133",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 123,
+                "prompt": "How do I deposit money?",
+                "cleaned_prompt": "What is the deposit procedure?",
+                "generation": "Dear Boss, Please follow these steps to make a deposit...",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "Dear Boss, Please follow these steps to make a deposit..."
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "Tuan Boss, Sila ikuti langkah-langkah ini untuk membuat deposit..."
+                    },
+                    {
+                        "language": "cn",
+                        "text": "\u4eb2\u7231\u7684\u8001\u677f\uff0c\u8bf7\u6309\u7167\u4ee5\u4e0b\u6b65\u9aa4\u8fdb\u884c\u5b58\u6b3e..."
+                    }
+                ],
+                "correct_bool": true,
+                "correct_answer": "",
+                "chat_rating": 5,
+                "metadata": {
+                    "platform": "web",
+                    "session_id": "abc123"
+                }
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T04:15:32.238897",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T04:15:32.237248",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 0,
+                "prompt": "original question",
+                "cleaned_prompt": "processed question",
+                "generation": "answer text",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "english text"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "malay text"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "chinese text"
+                    }
+                ],
+                "correct_bool": true,
+                "correct_answer": "Correct Answer goes here",
+                "chat_rating": 3,
+                "metadata": {}
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T04:20:36.860475",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T04:20:36.858288",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 0,
+                "prompt": "original question",
+                "cleaned_prompt": "processed question",
+                "generation": "answer text",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "english text"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "malay text"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "chinese text"
+                    }
+                ],
+                "correct_bool": true,
+                "correct_answer": "Correct Answer goes here",
+                "chat_rating": 3,
+                "metadata": {}
+            }
+        }
     }
 ]

@@ -530,4 +530,48 @@ def save_interaction(interaction_type, data):
     return {"message": f"{interaction_type} interaction saved successfully"}
 
 
+# added new function to save the interaction outcomes to a seperate json file here
+def save_interaction_outcome(data):
+    file_path = os.path.join(
+        os.path.dirname(__file__), "../data/interaction_outcome.json"
+    )
+    outcomes = []
+
+    # Create directory if it doesn't exist
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+    # Create or read existing file
+    if not os.path.exists(file_path):
+        with open(file_path, "w") as f:
+            json.dump([], f)
+    else:
+        try:
+            with open(file_path, "r") as f:
+                content = f.read()
+                if content:
+                    outcomes = json.loads(content)
+        except json.JSONDecodeError:
+            outcomes = []
+
+    formatted_data = {
+        "user_id": data.get("user_id", 0),
+        "prompt": data.get("prompt"),
+        "cleaned_prompt": data.get("cleaned_prompt"),
+        "generation": data.get("generation"),
+        "translations": data.get("translations", []),
+        "correct_bool": data.get("correct_bool"),
+        "correct_answer": data.get("correct_answer", ""),
+        "chat_rating": data.get("chat_rating"),
+    }
+
+    # Append new outcome
+    outcomes.append(formatted_data)
+
+    # Write updated outcomes back to file
+    with open(file_path, "w") as f:
+        json.dump(outcomes, f, indent=4, ensure_ascii=False)
+
+    return {"message": "Interaction outcome saved successfully"}
+
+
 # Remove or comment out any unused functions

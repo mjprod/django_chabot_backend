@@ -28,7 +28,7 @@ class CaptureSummarySerializer(serializers.Serializer):
     ai_response = serializers.CharField()
     correct_bool = serializers.BooleanField()
     chat_rating = serializers.IntegerField(min_value=0, max_value=6)
-    incorrect_answer_response = serializers.CharField(required=False, allow_blank=True)
+    correct_answer = serializers.CharField(required=False, allow_blank=True)
     metadata = serializers.DictField(required=False)
 
 
@@ -40,6 +40,9 @@ class CaptureSummaryMultilangSerializer(serializers.Serializer):
     translations = serializers.ListField(
         child=serializers.DictField(), required=False, default=[]
     )
+    correct_bool = serializers.BooleanField()
+    correct_answer = serializers.CharField(required=False, allow_blank=True)
+    chat_rating = serializers.IntegerField(min_value=0, max_value=6)
     metadata = serializers.DictField(required=False, default=dict)
 
 

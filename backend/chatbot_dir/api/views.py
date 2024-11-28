@@ -11,6 +11,7 @@ from rest_framework.views import APIView
 from .chatbot import (
     generate_answer,
     save_interaction,
+    save_interaction_outcome,
     translate_and_clean,
     translate_en_to_ms,
 )
@@ -126,20 +127,59 @@ class CaptureSummaryMultilangView(APIView):
     def post(self, request):
         serializer = CaptureSummaryMultilangSerializer(data=request.data)
         if serializer.is_valid():
-            data = {
-                "Date_time": datetime.now().isoformat(),
-                "Type": "complete_interaction",
-                "Data": {
-                    "user_id": serializer.validated_data.get("user_id"),
+            try:
+                interaction_data = {
+                    "Date_time": datetime.now().isoformat(),
+                    "Type": "complete_interaction",
+                    "Data": {
+                        "user_id": serializer.validated_data.get("user_id"),
+                        "prompt": serializer.validated_data.get("prompt"),
+                        "cleaned_prompt": serializer.validated_data.get(
+                            "cleaned_prompt"
+                        ),
+                        "generation": serializer.validated_data.get("generation"),
+                        "translations": serializer.validated_data.get(
+                            "translations", []
+                        ),
+                        "correct_bool": serializer.validated_data.get("correct_bool"),
+                        "correct_answer": serializer.validated_data.get(
+                            "correct_answer"
+                        ),
+                        "chat_rating": serializer.validated_data.get("chat_rating"),
+                        "metadata": serializer.validated_data.get("metadata", {}),
+                    },
+                }
+
+                # Save to interactions.json
+                result = save_interaction("complete_interaction", interaction_data)
+
+                # Save to interaction_outcome.json with correct format
+                outcome_data = {
+                    "user_id": serializer.validated_data.get("user_id", 0),
                     "prompt": serializer.validated_data.get("prompt"),
                     "cleaned_prompt": serializer.validated_data.get("cleaned_prompt"),
                     "generation": serializer.validated_data.get("generation"),
                     "translations": serializer.validated_data.get("translations", []),
-                    "metadata": serializer.validated_data.get("metadata", {}),
-                },
-            }
-            result = save_interaction("complete_interaction", data)
-            return Response(result, status=status.HTTP_200_OK)
+                    "correct_bool": serializer.validated_data.get("correct_bool"),
+                    "correct_answer": serializer.validated_data.get(
+                        "correct_answer", ""
+                    ),
+                    "chat_rating": serializer.validated_data.get("chat_rating"),
+                }
+                save_interaction_outcome(outcome_data)
+
+                return Response(
+                    {
+                        "status": "success",
+                        "message": "Interaction saved successfully",
+                        "data": result,
+                    },
+                    status=status.HTTP_200_OK,
+                )
+            except Exception as e:
+                return Response(
+                    {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
