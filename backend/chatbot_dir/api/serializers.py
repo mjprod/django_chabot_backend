@@ -25,11 +25,22 @@ class IncorrectAnswerResponseSerializer(serializers.Serializer):
 
 class CaptureSummarySerializer(serializers.Serializer):
     user_input = serializers.CharField()
-    ai_response = serializers.DictField()
+    ai_response = serializers.CharField()
     correct_bool = serializers.BooleanField()
     chat_rating = serializers.IntegerField(min_value=0, max_value=6)
     incorrect_answer_response = serializers.CharField(required=False, allow_blank=True)
     metadata = serializers.DictField(required=False)
+
+
+class CaptureSummaryMultilangSerializer(serializers.Serializer):
+    user_id = serializers.IntegerField(required=False)
+    prompt = serializers.CharField(required=True)
+    cleaned_prompt = serializers.CharField(required=True)
+    generation = serializers.CharField(required=True)
+    translations = serializers.ListField(
+        child=serializers.DictField(), required=False, default=[]
+    )
+    metadata = serializers.DictField(required=False, default=dict)
 
 
 # added the english and malay fields to the view summary call

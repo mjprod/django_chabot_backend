@@ -16,6 +16,7 @@ from .chatbot import (
 )
 from .serializers import (
     AIResponseSerializer,
+    CaptureSummaryMultilangSerializer,
     CaptureSummarySerializer,
     ChatRatingSerializer,
     CorrectBoolSerializer,
@@ -116,6 +117,27 @@ class CaptureSummaryView(APIView):
         serializer = CaptureSummarySerializer(data=request.data)
         if serializer.is_valid():
             data = serializer.validated_data
+            result = save_interaction("complete_interaction", data)
+            return Response(result, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CaptureSummaryMultilangView(APIView):
+    def post(self, request):
+        serializer = CaptureSummaryMultilangSerializer(data=request.data)
+        if serializer.is_valid():
+            data = {
+                "Date_time": datetime.now().isoformat(),
+                "Type": "complete_interaction",
+                "Data": {
+                    "user_id": serializer.validated_data.get("user_id"),
+                    "prompt": serializer.validated_data.get("prompt"),
+                    "cleaned_prompt": serializer.validated_data.get("cleaned_prompt"),
+                    "generation": serializer.validated_data.get("generation"),
+                    "translations": serializer.validated_data.get("translations", []),
+                    "metadata": serializer.validated_data.get("metadata", {}),
+                },
+            }
             result = save_interaction("complete_interaction", data)
             return Response(result, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

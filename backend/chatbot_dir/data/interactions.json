@@ -1582,5 +1582,116 @@
                 }
             ]
         }
+    },
+    {
+        "Date_time": "2024-11-28T01:05:45.412060",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T01:05:45.409703",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 0,
+                "prompt": "original question",
+                "cleaned_prompt": "processed question",
+                "generation": "answer text",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "english text"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "malay text"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "chinese text"
+                    }
+                ],
+                "metadata": {}
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T01:23:45.089457",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T01:23:45.085930",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 0,
+                "prompt": "original question",
+                "cleaned_prompt": "processed question",
+                "generation": "answer text",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "english text"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "malay text"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "chinese text"
+                    }
+                ],
+                "metadata": {}
+            }
+        }
+    },
+    {
+        "Date_time": "2024-11-28T01:26:42.324595",
+        "Type": "complete_interaction",
+        "Data": {
+            "user_input": "What is AI?",
+            "ai_response": "AI stands for Artificial Intelligence.",
+            "correct_bool": true,
+            "chat_rating": 5,
+            "incorrect_answer_response": "The capital of France is not Berlin.",
+            "metadata": {}
+        }
+    },
+    {
+        "Date_time": "2024-11-28T01:29:20.374122",
+        "Type": "complete_interaction",
+        "Data": {
+            "user_input": "What is AI?",
+            "ai_response": "AI stands for Artificial Intelligence.",
+            "correct_bool": true,
+            "chat_rating": 5,
+            "incorrect_answer_response": "The capital of France is not Berlin.",
+            "metadata": {}
+        }
+    },
+    {
+        "Date_time": "2024-11-28T01:30:40.250712",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-28T01:30:40.247768",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 0,
+                "prompt": "original question",
+                "cleaned_prompt": "processed question",
+                "generation": "answer text",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "english text"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "malay text"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "chinese text"
+                    }
+                ],
+                "metadata": {}
+            }
+        }
     }
 ]

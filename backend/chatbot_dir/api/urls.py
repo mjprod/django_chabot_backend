@@ -4,6 +4,7 @@ from django.urls import path
 
 from .views import (
     AIResponseView,
+    CaptureSummaryMultilangView,
     CaptureSummaryView,
     ChatRatingView,
     CorrectBoolView,
@@ -26,6 +27,11 @@ urlpatterns = [
         "capture_summary/",
         CaptureSummaryView.as_view(),
         name="capture_summary",
+    ),
+    path(
+        "capture_summary_multilang/",
+        CaptureSummaryMultilangView.as_view(),
+        name="capture_summary_multilang",
     ),
     path("view_summary/", ViewSummaryView.as_view(), name="view_summary"),
 ]
