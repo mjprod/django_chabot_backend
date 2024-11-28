@@ -142,6 +142,7 @@ class ViewSummaryView(APIView):
                             {"error": "Invalid data format"},
                             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
                         )
+
             except json.JSONDecodeError:
                 return Response(
                     {"error": "Invalid JSON data"},
@@ -176,10 +177,9 @@ class ViewSummaryView(APIView):
                 {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
-
-def save_to_json(self, filename, data):
-    file_path = os.path.join(settings.BASE_DIR, "data", filename)
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
-    with open(file_path, "a") as f:
-        json.dump(data, f)
-        f.write("\n")
+    def save_to_json(self, filename, data):
+        file_path = os.path.join(settings.BASE_DIR, "data", filename)
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        with open(file_path, "a") as f:
+            json.dump(data, f)
+            f.write("\n")
