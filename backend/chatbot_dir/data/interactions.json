@@ -2331,5 +2331,60 @@
                 "chat_rating": 3
             }
         }
+    },
+    {
+        "Date_time": "2024-11-29T01:27:55.689662",
+        "Type": "user_input",
+        "Data": {
+            "user_id": 0,
+            "prompt": "How do I participate in live casino tournaments?",
+            "cleaned_prompt": "How do I participate in live casino tournaments?",
+            "generation": "Dear Player, \n\nPlease check the tournaments section on the app for details on how to participate in live casino tournaments. Typically, you will need to register for the tournament and meet any entry requirements specified. \n\nIf this hasn't resolved your issue, please contact Our Professional Customer Service team who can assist you further.",
+            "translations": [
+                {
+                    "language": "en",
+                    "text": "Dear Player, \n\nPlease check the tournaments section on the app for details on how to participate in live casino tournaments. Typically, you will need to register for the tournament and meet any entry requirements specified. \n\nIf this hasn't resolved your issue, please contact Our Professional Customer Service team who can assist you further."
+                },
+                {
+                    "language": "ms-MY",
+                    "text": "Pemain yang dihormati,\n\nSila semak bahagian kejohanan di aplikasi untuk maklumat tentang cara menyertai kejohanan kasino langsung. Biasanya, anda perlu mendaftar untuk kejohanan dan memenuhi sebarang syarat penyertaan yang dinyatakan.\n\nJika ini belum menyelesaikan masalah anda, sila hubungi pasukan Perkhidmatan Pelanggan Profesional Kami yang boleh membantu anda dengan lebih lanjut."
+                },
+                {
+                    "language": "cn",
+                    "text": "\u4eb2\u7231\u7684\u73a9\u5bb6\uff0c\n\n\u8bf7\u60a8\u5728\u5e94\u7528\u7a0b\u5e8f\u7684\u6bd4\u8d5b\u4e13\u533a\u67e5\u770b\u6709\u5173\u5982\u4f55\u53c2\u52a0\u73b0\u573a\u8d4c\u573a\u6bd4\u8d5b\u7684\u8be6\u7ec6\u4fe1\u606f\u3002\u901a\u5e38\uff0c\u60a8\u9700\u8981\u6ce8\u518c\u6bd4\u8d5b\u5e76\u6ee1\u8db3\u4efb\u4f55\u6307\u5b9a\u7684\u5165\u573a\u8981\u6c42\u3002\n\n\u5982\u679c\u8fd9\u4ecd\u672a\u89e3\u51b3\u60a8\u7684\u95ee\u9898\uff0c\u8bf7\u8054\u7cfb\u6211\u4eec\u7684\u4e13\u4e1a\u5ba2\u670d\u56e2\u961f\uff0c\u4ed6\u4eec\u5c06\u4e3a\u60a8\u63d0\u4f9b\u8fdb\u4e00\u6b65\u7684\u5e2e\u52a9\u3002"
+                }
+            ]
+        }
+    },
+    {
+        "Date_time": "2024-11-29T01:29:11.690745",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-11-29T01:29:11.688594",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 0,
+                "prompt": "original question",
+                "cleaned_prompt": "processed question",
+                "generation": "answer text",
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "english text"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "malay text"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "chinese text"
+                    }
+                ],
+                "correct_bool": false,
+                "correct_answer": null,
+                "chat_rating": 5
+            }
+        }
     }
 ]

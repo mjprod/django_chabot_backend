@@ -17,6 +17,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate, PromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_groq import ChatGroq
+from langchain_openai import ChatOpenAI
 from openai import OpenAI
 from pydantic import BaseModel, Field
 
@@ -206,7 +207,7 @@ class GradeDocuments(BaseModel):
 
 
 # Initialize LLM for Grading
-llm_grader = ChatGroq(model="llama-3.1-70b-versatile", temperature=0)
+llm_grader = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 structured_llm_grader = llm_grader.with_structured_output(GradeDocuments)
 
 # System Message for Grader
@@ -236,7 +237,7 @@ class GradeHallucinations(BaseModel):
 
 
 # Initialize LLM for Hallucination Grading
-llm_hallucination = ChatGroq(model="llama-3.1-70b-versatile", temperature=0)
+llm_hallucination = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 structured_hallucination_grader = llm_hallucination.with_structured_output(
     GradeHallucinations
 )
@@ -314,7 +315,7 @@ Assistant: "Dear Boss, Please allow 5-30 minutes for deposit processing. If fund
 )
 
 # Initialize LLM for RAG Chain
-rag_llm = ChatGroq(model="llama-3.1-70b-versatile", temperature=0)
+rag_llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
 
 # Define Formatting Function

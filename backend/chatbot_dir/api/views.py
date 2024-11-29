@@ -128,31 +128,6 @@ class CaptureSummaryMultilangView(APIView):
         serializer = CaptureSummaryMultilangSerializer(data=request.data)
         if serializer.is_valid():
             try:
-                interaction_data = {
-                    "Date_time": datetime.now().isoformat(),
-                    "Type": "complete_interaction",
-                    "Data": {
-                        "user_id": serializer.validated_data.get("user_id"),
-                        "prompt": serializer.validated_data.get("prompt"),
-                        "cleaned_prompt": serializer.validated_data.get(
-                            "cleaned_prompt"
-                        ),
-                        "generation": serializer.validated_data.get("generation"),
-                        "translations": serializer.validated_data.get(
-                            "translations", []
-                        ),
-                        "correct_bool": serializer.validated_data.get("correct_bool"),
-                        "correct_answer": serializer.validated_data.get(
-                            "correct_answer"
-                        ),
-                        "chat_rating": serializer.validated_data.get("chat_rating"),
-                        "metadata": serializer.validated_data.get("metadata", {}),
-                    },
-                }
-
-                # Save to interactions.json
-                result = save_interaction("complete_interaction", interaction_data)
-
                 # Save to interaction_outcome.json with correct format
                 outcome_data = {
                     "user_id": serializer.validated_data.get("user_id", 0),
@@ -161,13 +136,12 @@ class CaptureSummaryMultilangView(APIView):
                     "generation": serializer.validated_data.get("generation"),
                     "translations": serializer.validated_data.get("translations", []),
                     "correct_bool": serializer.validated_data.get("correct_bool"),
-                    "correct_answer": serializer.validated_data.get(
-                        "correct_answer", ""
-                    ),
+                    "correct_answer": serializer.validated_data.get("correct_answer"),
                     "chat_rating": serializer.validated_data.get("chat_rating"),
                 }
                 save_interaction_outcome(outcome_data)
 
+                # Save to interactions.json
                 interaction_data = {
                     "Date_time": datetime.now().isoformat(),
                     "Type": "complete_interaction",
