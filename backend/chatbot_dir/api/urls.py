@@ -67,12 +67,12 @@ urlpatterns = [
     ),
     # new API for conversation
     path(
-        "prompt_conversation",
+        "prompt_conversation/",
         PromptConversationView.as_view(),
         name="prompt_conversation",
     ),
     path(
-        "complete_conversations",
+        "complete_conversations/",
         CompleteConversationsView.as_view(),
         name="complete_conversations",
     ),
