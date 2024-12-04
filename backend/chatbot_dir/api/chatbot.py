@@ -531,12 +531,14 @@ def generate_answer(
 ):
     # Handle legacy user_input calls (where only user_prompt is provided)
     if session_id is None:
-        # Generate response without conversation tracking
+        # Clean and translate prompt
         cleaned_prompt = translate_and_clean(user_prompt)
+
+        # Get relevant documents
         docs_retrieve = retriever.get_relevant_documents(cleaned_prompt)
+        docs_to_use = []
 
         # Filter documents
-        docs_to_use = []
         for doc in docs_retrieve:
             relevance_score = retrieval_grader.invoke(
                 {"prompt": cleaned_prompt, "document": doc.page_content}
@@ -552,15 +554,18 @@ def generate_answer(
             }
         )
 
-        # Calculate confidence
-        confidence_result = confidence_grader.invoke(
-            {"documents": format_docs(docs_to_use), "generation": generation}
-        )
+        # Generate translations
+        malay_translation = translate_en_to_ms(generation)
+        chinese_translation = translate_en_to_cn(generation)
 
-        # Return legacy format for user_input
+        # Return legacy format with translations
         return {
             "generation": generation,
-            "translations": [],
+            "translations": [
+                {"language": "en", "text": generation},
+                {"language": "ms-MY", "text": malay_translation.get("text", "")},
+                {"language": "cn", "text": chinese_translation.get("text", "")},
+            ],
             "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
         }
 
