@@ -526,11 +526,45 @@ def translate_en_to_ms(input_text, to_lang="ms", model="small"):
 
 
 # updated generate_answer function to include new classes for chat history
-def generate_answer(user_prompt, session_id, admin_id, agent_id, user_id):
+def generate_answer(
+    user_prompt, session_id=None, admin_id=None, agent_id=None, user_id=None
+):
+    # Handle legacy user_input calls (where only user_prompt is provided)
+    if session_id is None:
+        # Generate response without conversation tracking
+        cleaned_prompt = translate_and_clean(user_prompt)
+        docs_retrieve = retriever.get_relevant_documents(cleaned_prompt)
 
-    global prompt, docs_to_use
+        # Filter documents
+        docs_to_use = []
+        for doc in docs_retrieve:
+            relevance_score = retrieval_grader.invoke(
+                {"prompt": cleaned_prompt, "document": doc.page_content}
+            )
+            if relevance_score.confidence_score >= 0.7:
+                docs_to_use.append(doc)
 
-    # grab the exsisting conversation or create a new one
+        # Generate response
+        generation = rag_chain.invoke(
+            {
+                "context": format_docs(docs_to_use),
+                "prompt": cleaned_prompt,
+            }
+        )
+
+        # Calculate confidence
+        confidence_result = confidence_grader.invoke(
+            {"documents": format_docs(docs_to_use), "generation": generation}
+        )
+
+        # Return legacy format for user_input
+        return {
+            "generation": generation,
+            "translations": [],
+            "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
+        }
+
+    # Handle new conversation-based calls
     conversation = ConversationMetaData(
         session_id=session_id,
         admin_id=admin_id,
@@ -538,29 +572,21 @@ def generate_answer(user_prompt, session_id, admin_id, agent_id, user_id):
         user_id=user_id,
     )
 
-    # added in translate and clean prompt
     cleaned_prompt = translate_and_clean(user_prompt)
-    # use add message
     conversation.add_message("user", user_prompt)
 
-    # updated prompt to take the output of the cleaned_prompt call
     docs_to_use = []
-
-    # Retrieve documents
     docs_retrieve = retriever.get_relevant_documents(cleaned_prompt)
 
-    # Filter documents based on confidence score
     for doc in docs_retrieve:
         relevance_score = retrieval_grader.invoke(
             {"prompt": cleaned_prompt, "document": doc.page_content}
         )
-        if relevance_score.confidence_score >= 0.7:  # Threshold for document relevance
+        if relevance_score.confidence_score >= 0.7:
             docs_to_use.append(doc)
 
-    # pull history for context
     history = conversation.get_conversation_history()
 
-    # Generate response
     generation = rag_chain.invoke(
         {
             "context": format_docs(docs_to_use),
@@ -574,7 +600,6 @@ def generate_answer(user_prompt, session_id, admin_id, agent_id, user_id):
     )
 
     conversation.add_message("assistant", generation)
-
     save_conversation(conversation)
 
     return {
