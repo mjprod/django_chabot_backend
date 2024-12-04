@@ -2386,5 +2386,72 @@
                 "chat_rating": 5
             }
         }
+    },
+    {
+        "Date_time": "2024-12-02T23:59:55.761610",
+        "Type": "ai_response",
+        "Data": {
+            "answer": "Here is how to deposit..."
+        }
+    },
+    {
+        "Date_time": "2024-12-03T00:01:05.513227",
+        "Type": "correct_bool",
+        "Data": {
+            "is_correct": true
+        }
+    },
+    {
+        "Date_time": "2024-12-03T00:01:36.438783",
+        "Type": "chat_rating",
+        "Data": {
+            "rating": 5
+        }
+    },
+    {
+        "Date_time": "2024-12-03T00:02:31.215680",
+        "Type": "incorrect_answer_response",
+        "Data": {
+            "correct_answer": "The correct process is..."
+        }
+    },
+    {
+        "Date_time": "2024-12-03T00:03:21.966746",
+        "Type": "complete_interaction",
+        "Data": {
+            "user_input": "How do I deposit?",
+            "ai_response": "Here is the process...",
+            "correct_bool": true,
+            "chat_rating": 5,
+            "correct_answer": "",
+            "metadata": {}
+        }
+    },
+    {
+        "Date_time": "2024-12-03T00:04:21.071787",
+        "Type": "complete_interaction",
+        "Data": {
+            "Date_time": "2024-12-03T00:04:21.069336",
+            "Type": "complete_interaction",
+            "Data": {
+                "user_id": 2,
+                "prompt": "How do I deposit?",
+                "cleaned_prompt": "How do I make a deposit?",
+                "generation": "Here is how to deposit...",
+                "translations": [
+                    {
+                        "language": "ms-MY",
+                        "text": "Ini cara untuk deposit..."
+                    },
+                    {
+                        "language": "cn",
+                        "text": "\u8fd9\u662f\u5982\u4f55\u5b58\u6b3e..."
+                    }
+                ],
+                "correct_bool": true,
+                "correct_answer": "",
+                "chat_rating": 5
+            }
+        }
     }
 ]

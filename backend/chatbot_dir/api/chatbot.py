@@ -1,11 +1,12 @@
+import cProfile
 import json
 import os
 from datetime import datetime
 from pathlib import Path
 from typing import List
 
-import cohere
 import requests
+from bson import ObjectId
 from django.conf import settings
 from dotenv import load_dotenv
 from langchain.schema import Document as LangchainDocument
@@ -16,12 +17,14 @@ from langchain_community.vectorstores import Chroma
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate, PromptTemplate
 from langchain_core.runnables import RunnablePassthrough
-from langchain_groq import ChatGroq
 from langchain_openai import ChatOpenAI
 from openai import OpenAI
 from pydantic import BaseModel, Field
 
-#
+# mongodb imports
+from pymongo import MongoClient
+
+# create out gloabl variables
 docs_to_use = []
 prompt = ""
 
@@ -146,6 +149,73 @@ class MultiRetriever:
 retriever = MultiRetriever(vectorstores)
 
 
+# created message class to keep track of messages that build a Conversation
+class Message:
+    def __init__(self, role, content, timestamp=None):
+        self.role = role
+        self.content = content
+        self.timestamp = timestamp or datetime.now().isoformat()
+
+
+# added Conversation class here that created our session specific information
+class ConversationMetaData:
+    def __init__(self, session_id, user_id, agent_id, admin_id, timestamp=None):
+        self.session_id = session_id
+        self.admin_id = admin_id
+        self.user_id = user_id
+        self.agent_id = agent_id
+        self.timestamp = timestamp or datetime.now().isoformat()
+        self.messages = []
+        self.translations = []
+        self._id = ObjectId()
+
+    def add_message(self, role, content):
+        message = Message(role, content)
+        self.messages.append(message)
+
+        # added in translation layer here
+        if role == "assistant":
+            malay_translation = translate_en_to_ms(content)
+            chinese_translation = translate_en_to_cn(content)
+
+            self.translations.append(
+                {
+                    "message_id": len(self.messages) - 1,
+                    "translations": [
+                        {"language": "en", "text": content},
+                        {
+                            "language": "ms-MY",
+                            "text": malay_translation.get("text", ""),
+                        },
+                        {"language": "cn", "text": chinese_translation.get("text", "")},
+                    ],
+                }
+            )
+            return message
+
+    def get_conversation_history(self):
+        return [
+            {"role": msg.role, "content": msg.content, "timestamp": msg.timestamp}
+            for msg in self.messages
+        ]
+
+    # save the output to a dict for using in API
+    def to_dict(self):
+        return {
+            "_id": self._id,
+            "session_id": self.session_id,
+            "admin_id": self.admin_id,
+            "user_id": self.user_id,
+            "agent_id": self.agent_id,
+            "timestamp": self.timestamp,
+            "messages": [
+                {"role": msg.role, "content": msg.content, "timestamp": msg.timestamp}
+                for msg in self.messages
+            ],
+            "translations": self.translations,
+        }
+
+
 # this is the OPENAI translate function
 def translate_and_clean(text):
     # load env for api key
@@ -201,8 +271,10 @@ Output: "How do I withdraw money from slot games?"
 
 # Define GradeDocuments Model
 class GradeDocuments(BaseModel):
-    binary_score: str = Field(
-        description="Documents are relevant to the question, 'yes' or 'no'"
+    confidence_score: float = Field(
+        description="Confidence score between 0.0 and 1.0 indicating document relevance",
+        ge=0.0,
+        le=1.0,
     )
 
 
@@ -211,53 +283,77 @@ llm_grader = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 structured_llm_grader = llm_grader.with_structured_output(GradeDocuments)
 
 # System Message for Grader
-system_message = """
-You are a grader assessing the relevance of a retrieved document to a user question.
-If the document contains keyword(s) or semantic meaning related to the user question,
-grade it as relevant.
-Give a binary score 'yes' or 'no' to indicate whether the
-document is relevant to the question.
+document_system_message = """
+You are a document relevance assessor. Analyze the retrieved document's relevance to the user's question.
+Provide a confidence score between 0.0 and 1.0 where:
+- 1.0: Document contains exact matches or directly relevant information
+- 0.7-0.9: Document contains highly relevant but not exact information
+- 0.4-0.6: Document contains partially relevant or related information
+- 0.1-0.3: Document contains minimal relevant information
+- 0.0: Document is completely irrelevant
+
+Consider:
+- Keyword matches
+- Semantic relevance
+- Context alignment
+- Information completeness
 """
 
 # Create Grading Prompt
-grade_prompt = ChatPromptTemplate.from_messages(
+document_grade_prompt = ChatPromptTemplate.from_messages(
     [
-        ("system", system_message),
+        ("system", document_system_message),
         ("human", "Retrieved document: \n\n {document} \n\n User question: {prompt}"),
     ]
 )
 
 # Runnable Chain for Document Grader
-retrieval_grader = grade_prompt | structured_llm_grader
+retrieval_grader = document_grade_prompt | structured_llm_grader
 
 
 # Define GradeHallucinations Model
-class GradeHallucinations(BaseModel):
-    binary_score: str = Field(description="Answer is grounded in facts, 'yes' or 'no'")
+class GradeConfidenceLevel(BaseModel):
+    confidence_score: float = Field(
+        description="Confidence score between 0.0 and 1.0 indicating how well the answer is grounded in source facts",
+        ge=0.0,
+        le=1.0,
+    )
 
 
 # Initialize LLM for Hallucination Grading
-llm_hallucination = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-structured_hallucination_grader = llm_hallucination.with_structured_output(
-    GradeHallucinations
+llm_confidence = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+structured_confidence_grader = llm_confidence.with_structured_output(
+    GradeConfidenceLevel
 )
 
-# System Message for Hallucination Grader
-hallucination_system_message = """
-You are a grader assessing whether an LLM generation is grounded in / supported by a set of retrieved facts.
-Give a binary score 'yes' or 'no'. 'Yes' means that the answer is grounded in / supported by the set of facts.
-"""
+# System Message for confidence Grader
+confidence_system_message = """
+You are a grader assessing how well an AI response is grounded in the provided source facts.
+Provide a confidence score between 0.0 and 1.0 where:
+- 1.0: Answer is completely supported by source facts with exact matches
+- 0.8-0.9: Answer is strongly supported with most information retrieved
+- 0.6-0.7: Answer is moderately supported with reasonable inferences
+- 0.4-0.5: Answer is partially supported but do not contain enough data to give a true response
+- 0.0-0.39: Answer is out of scope and not to be answered
 
-# Create Hallucination Grading Prompt
-hallucination_prompt = ChatPromptTemplate.from_messages(
+Consider:
+- Exact matches with source facts
+- Logical inferences from provided information
+- Unsupported statements
+- Factual accuracy and completeness
+- Whether the question is within the gaming/gambling platform scope
+"""
+# Create Confidence Grading Prompt
+confidence_prompt = ChatPromptTemplate.from_messages(
     [
-        ("system", hallucination_system_message),
-        ("human", "Set of facts: \n\n {documents} \n\n LLM generation: {generation}"),
+        ("system", confidence_system_message),
+        ("human", "Source facts: \n\n {documents} \n\n AI response: {generation}"),
     ]
 )
 
-# Runnable Chain for Hallucination Grader
-hallucination_grader = hallucination_prompt | structured_hallucination_grader
+# Runnable Chain for Confidence Grader
+confidence_grader = confidence_prompt | structured_confidence_grader
+
 
 # Define Prompt Template for RAG Chain
 rag_prompt_template = ChatPromptTemplate.from_messages(
@@ -336,6 +432,11 @@ rag_chain = (
 
 
 # API functions
+def get_mongodb_client():
+    client = MongoClient(settings.MONGODB_URI)
+    return client[settings.MONGODB_DATABASE]
+
+
 def translate_en_to_cn(input_text):
     # Load environment variables
     load_dotenv()
@@ -424,48 +525,118 @@ def translate_en_to_ms(input_text, to_lang="ms", model="small"):
     return {"text": "", "prompt_tokens": 0, "total_tokens": 0}
 
 
-def generate_answer(user_prompt):
+# updated generate_answer function to include new classes for chat history
+def generate_answer(user_prompt, session_id, admin_id, agent_id, user_id):
+
     global prompt, docs_to_use
+
+    # grab the exsisting conversation or create a new one
+    conversation = ConversationMetaData(
+        session_id=session_id,
+        admin_id=admin_id,
+        agent_id=agent_id,
+        user_id=user_id,
+    )
 
     # added in translate and clean prompt
     cleaned_prompt = translate_and_clean(user_prompt)
+    # use add message
+    conversation.add_message("user", user_prompt)
 
     # updated prompt to take the output of the cleaned_prompt call
-    prompt = cleaned_prompt
     docs_to_use = []
 
     # Retrieve documents
-    docs_retrieve = retriever.get_relevant_documents(prompt)
+    docs_retrieve = retriever.get_relevant_documents(cleaned_prompt)
 
-    # Filter relevant documents
+    # Filter documents based on confidence score
     for doc in docs_retrieve:
-        res = retrieval_grader.invoke({"prompt": prompt, "document": doc.page_content})
-        if res.binary_score.lower() == "yes":
+        relevance_score = retrieval_grader.invoke(
+            {"prompt": cleaned_prompt, "document": doc.page_content}
+        )
+        if relevance_score.confidence_score >= 0.7:  # Threshold for document relevance
             docs_to_use.append(doc)
+
+    # pull history for context
+    history = conversation.get_conversation_history()
 
     # Generate response
     generation = rag_chain.invoke(
-        {"context": format_docs(docs_to_use), "prompt": prompt}
+        {
+            "context": format_docs(docs_to_use),
+            "prompt": cleaned_prompt,
+            "history": history,
+        }
     )
 
-    # Get Malay translation
-    malay_translation = translate_en_to_ms(generation)
+    confidence_result = confidence_grader.invoke(
+        {"documents": format_docs(docs_to_use), "generation": generation}
+    )
 
-    # translate to Mandarin
-    chinese_translation = translate_en_to_cn(generation)
+    conversation.add_message("assistant", generation)
+
+    save_conversation(conversation)
 
     return {
         "generation": generation,
-        "translations": [
-            {"language": "en", "text": generation},
-            {"language": "ms-MY", "text": malay_translation.get("text", "")},
-            {"language": "cn", "text": chinese_translation.get("text", "")},
-        ],
-        "usage": {
-            "prompt_tokens": malay_translation.get("prompt_tokens", 0),
-            "total_tokens": malay_translation.get("total_tokens", 0),
-        },
+        "conversation": conversation.to_dict(),
+        "confidence_score": confidence_result.confidence_score,
+        "translations": (
+            conversation.translations[-1]["translations"]
+            if conversation.translations
+            else []
+        ),
     }
+
+
+def save_conversation(conversation):
+    db = get_mongodb_client()
+    conversations = db.conversations
+    conversation_dict = conversation.to_dict()
+
+    # Remove _id from the dictionary if it exists
+    if "_id" in conversation_dict:
+        del conversation_dict["_id"]
+
+    conversations.update_one(
+        {"session_id": conversation.session_id},
+        {"$set": conversation_dict},
+        upsert=True,
+    )
+
+
+def save_interaction(interaction_type, data):
+    db = get_mongodb_client()
+    interactions = db.interactions
+
+    new_interaction = {
+        "timestamp": datetime.now().isoformat(),
+        "type": interaction_type,
+        "data": data,
+    }
+
+    interactions.insert_one(new_interaction)
+    return {"message": f"{interaction_type} interaction saved successfully"}
+
+
+def save_interaction_outcome(data):
+    db = get_mongodb_client()
+    outcomes = db.interaction_outcomes
+
+    formatted_data = {
+        "user_id": data.get("user_id", 0),
+        "prompt": data.get("prompt"),
+        "cleaned_prompt": data.get("cleaned_prompt"),
+        "generation": data.get("generation"),
+        "translations": data.get("translations", []),
+        "correct_bool": data.get("correct_bool"),
+        "correct_answer": data.get("correct_answer", ""),
+        "chat_rating": data.get("chat_rating"),
+        "timestamp": datetime.now().isoformat(),
+    }
+
+    outcomes.insert_one(formatted_data)
+    return {"message": "Interaction outcome saved successfully"}
 
 
 def submit_feedback(request):
@@ -492,87 +663,29 @@ def submit_feedback(request):
         return JsonResponse({"error": "Invalid HTTP method"}, status=405)
 
 
-def save_interaction(interaction_type, data):
-    file_path = os.path.join(os.path.dirname(__file__), "../data/interactions.json")
+def load_and_process_json_file() -> List[dict]:
+    db = get_mongodb_client()
+    documents = db.training_documents.find({})
 
-    # Initialize empty interactions list
-    interactions = []
+    all_documents = []
+    for doc in documents:
+        if isinstance(doc, dict):
+            document = {
+                "question": doc["question"],
+                "answer": doc["answer"],
+                "metadata": doc.get("metadata", {}),
+            }
+            all_documents.append(document)
 
-    # Create the file with empty array if it doesn't exist
-    if not os.path.exists(file_path):
-        with open(file_path, "w") as f:
-            json.dump([], f)
-    else:
-        # Try to read existing interactions
-        try:
-            with open(file_path, "r") as f:
-                content = f.read()
-                if content:  # Only try to load if file is not empty
-                    interactions = json.loads(content)
-                # If file is empty, keep empty list
-        except json.JSONDecodeError:
-            # If file is corrupted, start fresh
-            interactions = []
-
-    # Create new interaction
-    new_interaction = {
-        "Date_time": datetime.now().isoformat(),
-        "Type": interaction_type,
-        "Data": data,
-    }
-
-    # Append new interaction
-    interactions.append(new_interaction)
-
-    # Write updated interactions back to file
-    with open(file_path, "w") as f:
-        json.dump(interactions, f, indent=4)
-
-    return {"message": f"{interaction_type} interaction saved successfully"}
+    return all_documents
 
 
-# added new function to save the interaction outcomes to a seperate json file here
-def save_interaction_outcome(data):
-    file_path = os.path.join(
-        os.path.dirname(__file__), "../data/interaction_outcome.json"
-    )
-    outcomes = []
-
-    # Create directory if it doesn't exist
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
-
-    # Create or read existing file
-    if not os.path.exists(file_path):
-        with open(file_path, "w") as f:
-            json.dump([], f)
-    else:
-        try:
-            with open(file_path, "r") as f:
-                content = f.read()
-                if content:
-                    outcomes = json.loads(content)
-        except json.JSONDecodeError:
-            outcomes = []
-
-    formatted_data = {
-        "user_id": data.get("user_id", 0),
-        "prompt": data.get("prompt"),
-        "cleaned_prompt": data.get("cleaned_prompt"),
-        "generation": data.get("generation"),
-        "translations": data.get("translations", []),
-        "correct_bool": data.get("correct_bool"),
-        "correct_answer": data.get("correct_answer", ""),
-        "chat_rating": data.get("chat_rating"),
-    }
-
-    # Append new outcome
-    outcomes.append(formatted_data)
-
-    # Write updated outcomes back to file
-    with open(file_path, "w") as f:
-        json.dump(outcomes, f, indent=4, ensure_ascii=False)
-
-    return {"message": "Interaction outcome saved successfully"}
+def handle_mongodb_operation(operation):
+    try:
+        return operation()
+    except Exception as e:
+        print(f"MongoDB operation failed: {str(e)}")
+        return None
 
 
 # Remove or comment out any unused functions

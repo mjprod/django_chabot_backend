@@ -2,17 +2,26 @@ import json
 import os
 from datetime import datetime
 
+from bson import ObjectId
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
+from pymongo import MongoClient
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .chatbot import (
+    ConversationMetaData,
+    GradeConfidenceLevel,
+    GradeDocuments,
+    confidence_grader,
+    format_docs,
     generate_answer,
+    retrieval_grader,
     save_interaction,
     save_interaction_outcome,
     translate_and_clean,
+    translate_en_to_cn,
     translate_en_to_ms,
 )
 from .serializers import (
@@ -20,11 +29,28 @@ from .serializers import (
     CaptureSummaryMultilangSerializer,
     CaptureSummarySerializer,
     ChatRatingSerializer,
+    CompleteConversationsSerializer,
+    ConversationMetadataSerializer,
     CorrectBoolSerializer,
     IncorrectAnswerResponseSerializer,
+    MessageDataSerializer,
+    MessageSerializer,
+    NewAIResponseSerializer,
+    NewCaptureSummaryMultilangSerializer,
+    NewCaptureSummarySerializer,
+    NewUserInputSerializer,
+    NewViewSummarySerializer,
+    PromptConversationSerializer,
     UserInputSerializer,
     ViewSummarySerializer,
 )
+
+
+# added mongodb base view class
+class MongoDBMixin:
+    def get_db(self):
+        client = MongoClient(settings.MONGODB_URI)
+        return client[settings.MONGODB_DATABASE]
 
 
 class UserInputView(APIView):
@@ -77,6 +103,99 @@ class AIResponseView(APIView):
             save_interaction("ai_response", {"answer": answer})
             return Response({"answer": answer}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class NewAIResponseView(MongoDBMixin, APIView):
+    def __init__(self):
+        self.client = MongoClient(settings.MONGODB_URI)
+        self.db = self.client[settings.MONGODB_DATABASE]
+        self.ai_responses = self.db.ai_responses
+        # Create indexes for efficient querying
+        self.ai_responses.create_index([("timestamp", -1)])
+        self.ai_responses.create_index([("session_id", 1)])
+
+    def post(self, request):
+        try:
+            serializer = AIResponseSerializer(data=request.data)
+            if not serializer.is_valid():
+                return Response(
+                    {"error": "Invalid input data", "details": serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            answer = serializer.validated_data["answer"]
+
+            # Create MongoDB document
+            ai_response_doc = {
+                "_id": ObjectId(),
+                "answer": answer,
+                "timestamp": datetime.now().isoformat(),
+                "metadata": {
+                    "ip_address": request.META.get("REMOTE_ADDR"),
+                    "user_agent": request.META.get("HTTP_USER_AGENT"),
+                    "session_id": str(ObjectId()),
+                    "platform": request.META.get("HTTP_SEC_CH_UA_PLATFORM", "unknown"),
+                },
+            }
+
+            # Save to MongoDB
+            self.ai_responses.insert_one(ai_response_doc)
+
+            # Prepare response
+            response_data = {
+                "answer": answer,
+                "session_id": str(ai_response_doc["_id"]),
+            }
+
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response(
+                {"error": f"Request processing failed: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+    def get(self, request):
+        try:
+            # Pagination parameters
+            page = int(request.query_params.get("page", 1))
+            limit = int(request.query_params.get("limit", 10))
+            session_id = request.query_params.get("session_id")
+
+            # Query filter
+            query_filter = {}
+            if session_id:
+                query_filter["metadata.session_id"] = session_id
+
+            # Get total count and paginated results
+            total_count = self.ai_responses.count_documents(query_filter)
+            cursor = (
+                self.ai_responses.find(query_filter)
+                .sort("timestamp", -1)
+                .skip((page - 1) * limit)
+                .limit(limit)
+            )
+
+            # Process results
+            results = []
+            for doc in cursor:
+                doc["_id"] = str(doc["_id"])
+                results.append(doc)
+
+            response_data = {
+                "total": total_count,
+                "page": page,
+                "limit": limit,
+                "results": results,
+            }
+
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response(
+                {"error": f"Failed to retrieve AI responses: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
 
 
 class CorrectBoolView(APIView):
@@ -226,3 +345,290 @@ class ViewSummaryView(APIView):
         with open(file_path, "a") as f:
             json.dump(data, f)
             f.write("\n")
+
+
+# New API views functions here for history and conversation
+
+
+class NewUserInputView(APIView):
+    def __init__(self):
+        self.client = MongoClient(settings.MONGODB_URI)
+        self.db = self.client[settings.MONGODB_DATABASE]
+        self.user_inputs = self.db.user_inputs
+        # first go at the pagination
+        self.user_inputs.create_index([("timestamp", -1)])
+        self.user_inputs.create_index([("user_id", 1)])
+
+    def post(self, request):
+        try:
+            # check the data for validity and return error if no good
+            serializer = NewUserInputSerializer(data=request.data)
+            if not serializer.is_valid():
+                return Response(
+                    {"error": "Invalid input data", "details": serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # fetch our data validated as prompt and user_id
+            prompt = serializer.validated_data["prompt"]
+            user_id = serializer.validated_data["user_id"]
+
+            # Generate the rest of the answer via the response call
+            response = generate_answer(
+                user_prompt=prompt,
+                session_id=str(ObjectId()),
+                admin_id=request.data.get("admin_id", ""),
+                agent_id=request.data.get("agent_id", ""),
+                user_id=user_id,
+            )
+
+            # Create the mongodb interaction/object for storage
+            user_input_doc = {
+                "_id": ObjectId(),
+                "user_id": user_id,
+                "prompt": prompt,
+                "cleaned_prompt": response.get("cleaned_prompt", prompt),
+                "generation": response.get("generation", ""),
+                "translations": response.get("translations", []),
+                "timestamp": datetime.now().isoformat(),
+                "metadata": {
+                    "ip_address": request.META.get("REMOTE_ADDR"),
+                    "user_agent": request.META.get("HTTP_USER_AGENT"),
+                    "session_id": response.get("conversation", {}).get("session_id"),
+                    "platform": request.META.get("HTTP_SEC_CH_UA_PLATFORM", "unknown"),
+                },
+            }
+
+            # Save to MongoDB
+            self.user_inputs.insert_one(user_input_doc)
+
+            # from the inserted document we take the relevant fields prep for the client
+            response_data = {
+                "user_id": user_id,
+                "prompt": prompt,
+                "generation": response.get("generation", ""),
+                "translations": response.get("translations", []),
+                "session_id": str(user_input_doc["_id"]),
+            }
+
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response(
+                {"error": f"Request processing failed: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+    def get(self, request):
+        try:
+            # Pagination parameters
+            page = int(request.query_params.get("page", 1))
+            limit = int(request.query_params.get("limit", 10))
+            user_id = request.query_params.get("user_id")
+
+            # Query filter
+            query_filter = {}
+            if user_id:
+                query_filter["user_id"] = user_id
+
+            # Get total count and paginated results
+            total_count = self.user_inputs.count_documents(query_filter)
+            cursor = (
+                self.user_inputs.find(query_filter)
+                .sort("timestamp", -1)
+                .skip((page - 1) * limit)
+                .limit(limit)
+            )
+
+            # Process results
+            results = []
+            for doc in cursor:
+                doc["_id"] = str(doc["_id"])
+                results.append(doc)
+
+            response_data = {
+                "total": total_count,
+                "page": page,
+                "limit": limit,
+                "results": results,
+            }
+
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response(
+                {"error": f"Failed to retrieve user inputs: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+
+class ConversationHistoryView(MongoDBMixin, APIView):
+    def get(self, request, session_id):
+        db = self.get_db()
+        conversations = db.conversations
+
+        conversation = conversations.find_one({"session_id": session_id})
+        if not conversation:
+            return Response(
+                {"error": "Conversation not found"}, status=status.HTTP_404_NOT_FOUND
+            )
+
+        conversation["_id"] = str(conversation["_id"])
+        return Response(conversation, status=status.HTTP_200_OK)
+
+    def post(self, request, session_id):
+        serializer = ConversationMetadataSerializer(data=request.data)
+        if serializer.is_valid():
+            conversation = ConversationMetaData(
+                session_id=session_id,
+                user_id=serializer.validated_data["user_id"],
+                agent_id=serializer.validated_data["agent_id"],
+                admin_id=serializer.validated_data["admin_id"],
+            )
+            save_conversation(conversation)
+            return Response(conversation.to_dict(), status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ConversationMessagesView(APIView):
+    def get(self, request, session_id):
+        file_path = os.path.join(
+            os.path.dirname(__file__), "../data/conversations.json"
+        )
+        if not os.path.exists(file_path):
+            return Response([], status=status.HTTP_200_OK)
+
+        with open(file_path, "r") as f:
+            conversations = json.load(f)
+
+        conversation = next(
+            (conv for conv in conversations if conv["session_id"] == session_id), None
+        )
+
+        if conversation:
+            return Response(conversation["messages"], status=status.HTTP_200_OK)
+        return Response([], status=status.HTTP_200_OK)
+
+
+class UserConversationsView(MongoDBMixin, APIView):
+    def get(self, request, user_id):
+        db = self.get_db()
+        conversations = db.conversations
+
+        user_conversations = []
+        for conv in conversations.find({"user_id": user_id}):
+            conv["_id"] = str(conv["_id"])
+            user_conversations.append(conv)
+
+        return Response(user_conversations, status=status.HTTP_200_OK)
+
+
+class AgentConversationsView(APIView):
+    def get(self, request, agent_id):
+        file_path = os.path.join(
+            os.path.dirname(__file__), "../data/conversations.json"
+        )
+        if not os.path.exists(file_path):
+            return Response([], status=status.HTTP_200_OK)
+
+        with open(file_path, "r") as f:
+            conversations = json.load(f)
+
+        agent_conversations = [
+            conv for conv in conversations if conv["agent_id"] == agent_id
+        ]
+
+        return Response(agent_conversations, status=status.HTTP_200_OK)
+
+
+# new api for start conversation
+class PromptConversationView(MongoDBMixin, APIView):
+    def post(self, request):
+        try:
+            serializer = PromptConversationSerializer(data=request.data)
+            if not serializer.is_valid():
+                return Response(
+                    {"error": "Invalid input data", "details": serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            # takee the calidated data into variables
+            prompt = serializer.validated_data["prompt"]
+            conversation_id = serializer.validated_data["conversation_id"]
+            user_id = serializer.validated_data["user_id"]
+
+            # ai generated response goes here:
+            response = generate_answer(
+                user_prompt=prompt,
+                session_id=conversation_id,
+                admin_id="",  # added this for use later
+                agent_id="",  # added this for user later aswell
+                user_id=user_id,
+            )
+
+            # added the translations
+            translations = []
+            if response.get("translations"):
+                translations = response["translations"]
+
+            # Create new document instead of updating
+            db = self.get_db()
+            conversation_data = {
+                "conversation_id": conversation_id,
+                "prompt": prompt,
+                "generation": response["generation"],
+                "user_id": user_id,
+                "translations": translations,
+                "timestamp": datetime.now().isoformat(),
+            }
+
+            # Insert as new document instead of updating
+            db.conversations.insert_one(conversation_data)
+
+            # after addeding in the confidence we prep the response
+            response_data = {
+                "conversation_id": conversation_id,
+                "generation": response["generation"],
+                "confidence": response["confidence_score"],
+                "translations": response.get("translations", []),
+            }
+
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response(
+                {"error": f"Request processing failed: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+
+class CompleteConversationsView(MongoDBMixin, APIView):
+    def post(self, request):
+        try:
+            serializer = CompleteConversationsSerializer(data=request.data)
+            if not serializer.is_valid():
+                return Response(
+                    {"error": "Invalid input data", "details": serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            conversation_data = {
+                "conversation_id": serializer.validated_data["conversation_id"],
+                "user_id": serializer.validated_data["user_id"],
+                "messages": serializer.validated_data["messages"],
+                "translations": serializer.validated_data.get("translations", []),
+                "timestamp": datetime.now().isoformat(),
+            }
+
+            db = self.get_db()
+            db.complete_conversations.insert_one(conversation_data)
+
+            return Response(
+                {"message": "Conversation saved successfully"},
+                status=status.HTTP_201_CREATED,
+            )
+
+        except Exception as e:
+            return Response(
+                {"error": f"Request processing failed: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
