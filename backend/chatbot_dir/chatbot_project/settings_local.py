@@ -130,8 +130,36 @@ DATABASES = {
     },
 }
 
+# added logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": "prompt_conversation.log",
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "api": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+        },
+    },
+}
 
-# Password validation
+
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [

@@ -1,6 +1,8 @@
+import asyncio
 import cProfile
 import json
 import os
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from pathlib import Path
 from typing import List
@@ -141,9 +143,12 @@ class MultiRetriever:
                 search_type="mmr",
                 search_kwargs={"k": 5, "fetch_k": 8, "lambda_mult": 0.8},
             )
-            results = retriever.get_relevant_documents(query)
+            results = retriever.invoke(query)
             all_results.extend(results)
         return all_results[:3]
+
+    def invoke(self, query):
+        return self.get_relevant_documents(query)
 
 
 retriever = MultiRetriever(vectorstores)
@@ -437,6 +442,25 @@ def get_mongodb_client():
     return client[settings.MONGODB_DATABASE]
 
 
+# added in async for translations
+async def generate_translations(generation):
+    with ThreadPoolExecutor() as executor:
+        # Run translations in parallel
+        malay_future = executor.submit(translate_en_to_ms, generation)
+        chinese_future = executor.submit(translate_en_to_cn, generation)
+
+        # Gather results
+        translations = await asyncio.gather(
+            asyncio.wrap_future(malay_future), asyncio.wrap_future(chinese_future)
+        )
+
+        return [
+            {"language": "en", "text": generation},
+            {"language": "ms-MY", "text": translations[0].get("text", "")},
+            {"language": "cn", "text": translations[1].get("text", "")},
+        ]
+
+
 def translate_en_to_cn(input_text):
     # Load environment variables
     load_dotenv()
@@ -525,20 +549,105 @@ def translate_en_to_ms(input_text, to_lang="ms", model="small"):
     return {"text": "", "prompt_tokens": 0, "total_tokens": 0}
 
 
-# updated generate_answer function to include new classes for chat history
+def generate_user_input(user_prompt):
+    # Clean and translate prompt
+    cleaned_prompt = translate_and_clean(user_prompt)
+
+    # Get relevant documents
+    docs_retrieve = retriever.get_relevant_documents(cleaned_prompt)
+    docs_to_use = []
+
+    # Filter documents
+    for doc in docs_retrieve:
+        relevance_score = retrieval_grader.invoke(
+            {"prompt": cleaned_prompt, "document": doc.page_content}
+        )
+        if relevance_score.confidence_score >= 0.7:
+            docs_to_use.append(doc)
+
+    # Generate response
+    generation = rag_chain.invoke(
+        {
+            "context": format_docs(docs_to_use),
+            "prompt": cleaned_prompt,
+        }
+    )
+
+    # Generate translations asynchronously
+    translations = asyncio.run(generate_translations(generation))
+
+    return {
+        "generation": generation,
+        "translations": translations,
+        "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
+    }
+
+
+def generate_prompt_conversation(
+    user_prompt, conversation_id, admin_id, agent_id, user_id
+):
+    # Initialize conversation
+    conversation = ConversationMetaData(
+        session_id=conversation_id,  # This maps conversation_id to session_id
+        admin_id=admin_id,
+        agent_id=agent_id,
+        user_id=user_id,
+    )
+
+    # Process prompt and add message
+    cleaned_prompt = translate_and_clean(user_prompt)
+    conversation.add_message("user", user_prompt)
+
+    # Get and filter relevant documents
+    docs_retrieve = retriever.invoke(cleaned_prompt)
+    docs_to_use = []
+
+    for doc in docs_retrieve:
+        relevance_score = retrieval_grader.invoke(
+            {"prompt": cleaned_prompt, "document": doc.page_content}
+        )
+        if relevance_score.confidence_score >= 0.7:
+            docs_to_use.append(doc)
+
+    # Generate response with context and history
+    generation = rag_chain.invoke(
+        {
+            "context": format_docs(docs_to_use),
+            "prompt": cleaned_prompt,
+            "history": conversation.get_conversation_history(),
+        }
+    )
+
+    # Calculate confidence
+    confidence_result = confidence_grader.invoke(
+        {"documents": format_docs(docs_to_use), "generation": generation}
+    )
+
+    # Generate translations asynchronously
+    translations = asyncio.run(generate_translations(generation))
+
+    # Save conversation
+    conversation.add_message("assistant", generation)
+    save_conversation(conversation)
+
+    return {
+        "generation": generation,
+        "conversation": conversation.to_dict(),
+        "confidence_score": confidence_result.confidence_score,
+        "translations": translations,
+    }
+
+
+"""# updated generate_answer function to include new classes for chat history
 def generate_answer(
     user_prompt, session_id=None, admin_id=None, agent_id=None, user_id=None
 ):
-    # Handle legacy user_input calls (where only user_prompt is provided)
+    # Handle legacy user_input calls
     if session_id is None:
-        # Clean and translate prompt
         cleaned_prompt = translate_and_clean(user_prompt)
-
-        # Get relevant documents
-        docs_retrieve = retriever.get_relevant_documents(cleaned_prompt)
+        docs_retrieve = retriever.invoke(cleaned_prompt)
         docs_to_use = []
 
-        # Filter documents
         for doc in docs_retrieve:
             relevance_score = retrieval_grader.invoke(
                 {"prompt": cleaned_prompt, "document": doc.page_content}
@@ -546,7 +655,6 @@ def generate_answer(
             if relevance_score.confidence_score >= 0.7:
                 docs_to_use.append(doc)
 
-        # Generate response
         generation = rag_chain.invoke(
             {
                 "context": format_docs(docs_to_use),
@@ -554,27 +662,18 @@ def generate_answer(
             }
         )
 
-        # Generate translations
-        malay_translation = translate_en_to_ms(generation)
-        chinese_translation = translate_en_to_cn(generation)
+        # Generate translations asynchronously
+        translations = asyncio.run(generate_translations(generation))
 
-        # Return legacy format with translations
         return {
             "generation": generation,
-            "translations": [
-                {"language": "en", "text": generation},
-                {"language": "ms-MY", "text": malay_translation.get("text", "")},
-                {"language": "cn", "text": chinese_translation.get("text", "")},
-            ],
+            "translations": translations,
             "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
         }
 
-    # Handle new conversation-based calls
+    # Handle conversation-based calls
     conversation = ConversationMetaData(
-        session_id=session_id,
-        admin_id=admin_id,
-        agent_id=agent_id,
-        user_id=user_id,
+        session_id=session_id, admin_id=admin_id, agent_id=agent_id, user_id=user_id
     )
 
     cleaned_prompt = translate_and_clean(user_prompt)
@@ -590,13 +689,11 @@ def generate_answer(
         if relevance_score.confidence_score >= 0.7:
             docs_to_use.append(doc)
 
-    history = conversation.get_conversation_history()
-
     generation = rag_chain.invoke(
         {
             "context": format_docs(docs_to_use),
             "prompt": cleaned_prompt,
-            "history": history,
+            "history": conversation.get_conversation_history(),
         }
     )
 
@@ -604,6 +701,8 @@ def generate_answer(
         {"documents": format_docs(docs_to_use), "generation": generation}
     )
 
+    # Generate translations asynchronously
+    translations = asyncio.run(generate_translations(generation))
     conversation.add_message("assistant", generation)
     save_conversation(conversation)
 
@@ -611,12 +710,9 @@ def generate_answer(
         "generation": generation,
         "conversation": conversation.to_dict(),
         "confidence_score": confidence_result.confidence_score,
-        "translations": (
-            conversation.translations[-1]["translations"]
-            if conversation.translations
-            else []
-        ),
+        "translations": translations,
     }
+    """
 
 
 def save_conversation(conversation):

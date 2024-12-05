@@ -1,5 +1,9 @@
 import json
+
+# added logging
+import logging
 import os
+import time
 from datetime import datetime
 
 from bson import ObjectId
@@ -16,7 +20,8 @@ from .chatbot import (
     GradeDocuments,
     confidence_grader,
     format_docs,
-    generate_answer,
+    generate_prompt_conversation,
+    generate_user_input,
     retrieval_grader,
     save_interaction,
     save_interaction_outcome,
@@ -53,18 +58,36 @@ class MongoDBMixin:
         return client[settings.MONGODB_DATABASE]
 
 
+logger = logging.getLogger(__name__)
+
+
 class UserInputView(APIView):
     def post(self, request):
-        serializer = UserInputSerializer(data=request.data)
-        if serializer.is_valid():
+        start_time = time.time()
+        logger.info("Starting user_input request")
+
+        try:
+            # Validate input data
+            logger.info("Validating request data")
+            serializer = UserInputSerializer(data=request.data)
+            if not serializer.is_valid():
+                logger.error(f"Validation failed: {serializer.errors}")
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            # Extract data
             prompt = serializer.validated_data["prompt"]
             user_id = serializer.validated_data["user_id"]
 
-            # added the translation here
+            # Generate response
+            generation_start = time.time()
+            logger.info("Starting AI response generation")
             cleaned_prompt = translate_and_clean(prompt)
+            generation = generate_user_input(cleaned_prompt)
+            logger.info(
+                f"AI Generation completed in {time.time() - generation_start:.2f}s"
+            )
 
-            generation = generate_answer(cleaned_prompt)
-
+            # Prepare response data
             response_data = {
                 "user_id": user_id,
                 "prompt": prompt,
@@ -80,6 +103,8 @@ class UserInputView(APIView):
                 },
             }
 
+            # Save interaction
+            logger.info("Saving interaction to database")
             save_interaction(
                 "user_input",
                 {
@@ -91,8 +116,17 @@ class UserInputView(APIView):
                 },
             )
 
+            total_time = time.time() - start_time
+            logger.info(f"Total request processing time: {total_time:.2f}s")
+
             return Response(response_data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        except Exception as e:
+            logger.error(f"Error processing request: {str(e)}")
+            return Response(
+                {"error": f"Request processing failed: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
 
 
 class AIResponseView(APIView):
@@ -545,46 +579,55 @@ class AgentConversationsView(APIView):
 class PromptConversationView(MongoDBMixin, APIView):
     def post(self, request):
         try:
+            # Log start of request processing
+            logger.info("Starting prompt_conversation request")
+            start_time = time.time()
+
+            # Validate input data
             serializer = PromptConversationSerializer(data=request.data)
             if not serializer.is_valid():
                 return Response(
                     {"error": "Invalid input data", "details": serializer.errors},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
-            # takee the calidated data into variables
+
+            # Extract validated data
             prompt = serializer.validated_data["prompt"]
             conversation_id = serializer.validated_data["conversation_id"]
             user_id = serializer.validated_data["user_id"]
 
-            # ai generated response goes here:
-            response = generate_answer(
+            # Generate AI response with timing
+            generation_start = time.time()
+            logger.info("Starting AI response generation")
+            response = generate_prompt_conversation(
                 user_prompt=prompt,
-                session_id=conversation_id,
-                admin_id="",  # added this for use later
-                agent_id="",  # added this for user later aswell
+                conversation_id=conversation_id,
+                admin_id="",
+                agent_id="",
                 user_id=user_id,
             )
+            logger.info(
+                f"AI Generation completed in {time.time() - generation_start:.2f}s"
+            )
 
-            # added the translations
-            translations = []
-            if response.get("translations"):
-                translations = response["translations"]
-
-            # Create new document instead of updating
+            # MongoDB operations with timing
+            db_start = time.time()
+            logger.info("Starting MongoDB Write Operations")
             db = self.get_db()
             conversation_data = {
                 "conversation_id": conversation_id,
                 "prompt": prompt,
                 "generation": response["generation"],
                 "user_id": user_id,
-                "translations": translations,
+                "translations": response.get("translations", []),
                 "timestamp": datetime.now().isoformat(),
             }
 
-            # Insert as new document instead of updating
+            # Insert as new document
             db.conversations.insert_one(conversation_data)
+            logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
 
-            # after addeding in the confidence we prep the response
+            # Prepare response data
             response_data = {
                 "conversation_id": conversation_id,
                 "generation": response["generation"],
@@ -592,9 +635,13 @@ class PromptConversationView(MongoDBMixin, APIView):
                 "translations": response.get("translations", []),
             }
 
+            logger.info(
+                f"Total request processing time: {time.time() - start_time:.2f}s"
+            )
             return Response(response_data, status=status.HTTP_200_OK)
 
         except Exception as e:
+            logger.error(f"Error processing request: {str(e)}")
             return Response(
                 {"error": f"Request processing failed: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
