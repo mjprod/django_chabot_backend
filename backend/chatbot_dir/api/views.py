@@ -74,9 +74,9 @@ class UserInputView(APIView):
                 logger.error(f"Validation failed: {serializer.errors}")
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-            # Extract data
+            # Extract data with default "anonymous" for user_id
             prompt = serializer.validated_data["prompt"]
-            user_id = serializer.validated_data["user_id"]
+            user_id = serializer.validated_data.get("user_id", "None")
 
             # Generate response
             generation_start = time.time()
@@ -103,8 +103,7 @@ class UserInputView(APIView):
                 },
             }
 
-            # Save interaction
-            logger.info("Saving interaction to database")
+            # Always save interaction
             save_interaction(
                 "user_input",
                 {

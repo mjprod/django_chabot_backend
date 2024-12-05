@@ -75,7 +75,7 @@ class ConversationMetadataSerializer(serializers.Serializer):
 # Currently used serializers are below: to be removed once history is working on server
 class UserInputSerializer(serializers.Serializer):
     prompt = serializers.CharField()
-    user_id = serializers.CharField(required=False)
+    user_id = serializers.CharField(required=False, allow_null=True, allow_blank=True)
 
 
 class CaptureSummarySerializer(serializers.Serializer):
