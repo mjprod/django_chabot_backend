@@ -1,7 +1,8 @@
 import asyncio
-import cProfile
 import json
+import logging
 import os
+import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from pathlib import Path
@@ -14,10 +15,10 @@ from dotenv import load_dotenv
 from langchain.schema import Document as LangchainDocument
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_cohere import CohereEmbeddings
-from langchain_community.document_loaders import JSONLoader
 from langchain_community.vectorstores import Chroma
+from langchain_community.vectorstores.utils import filter_complex_metadata
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import ChatPromptTemplate, PromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_openai import ChatOpenAI
 from openai import OpenAI
@@ -26,7 +27,9 @@ from pydantic import BaseModel, Field
 # mongodb imports
 from pymongo import MongoClient
 
-# create out gloabl variables
+# create our gloabl variables
+logger = logging.getLogger(__name__)
+logger.info("Initializing vector database...")
 docs_to_use = []
 prompt = ""
 
@@ -43,28 +46,76 @@ def load_and_process_json_file() -> List[dict]:
         "database_part_3.json",
     ]
 
-    # create the docutments list
     all_documents = []
 
     for file_name in database_files:
         file_path = os.path.join(base_dir, file_name)
         try:
-            with open(file_path, "r") as f:
+            with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 for item in data:
                     if isinstance(item, dict):
-                        document = {
-                            "question": item["question"],
-                            "answer": item["answer"],
-                            "metadata": item.get("metadata", {}),
+                        # Extract detailed answer in English
+                        detailed_answer = (
+                            item.get("answer", {}).get("detailed", {}).get("en", "")
+                        )
+
+                        # Process metadata with proper error handling
+                        metadata = item.get("metadata", {})
+                        processed_metadata = {
+                            "category": ",".join(metadata.get("category", [])),
+                            "subCategory": metadata.get("subCategory", ""),
+                            "difficulty": metadata.get("difficulty", 0),
+                            "confidence": metadata.get("confidence", 0.0),
+                            "dateCreated": metadata.get("dateCreated", ""),
+                            "lastUpdated": metadata.get("lastUpdated", ""),
+                            "version": metadata.get("version", "1.0"),
+                            "status": metadata.get("status", "active"),
                         }
-                        all_documents.append(document)
+
+                        # Create structured document
+                        document = {
+                            "question": {
+                                "text": item.get("question", {}).get("text", ""),
+                                "variations": item.get("question", {}).get(
+                                    "variations", []
+                                ),
+                                "intent": item.get("question", {}).get("intent", ""),
+                                "languages": item.get("question", {}).get(
+                                    "languages", {}
+                                ),
+                            },
+                            "answer": {
+                                "short": item.get("answer", {}).get("short", {}),
+                                "detailed": item.get("answer", {}).get("detailed", {}),
+                                "conditions": item.get("answer", {}).get(
+                                    "conditions", []
+                                ),
+                            },
+                            "metadata": processed_metadata,
+                            "context": item.get("context", {}),
+                        }
+
+                        # Validate document key/values
+                        if document["question"]["text"] and detailed_answer:
+                            all_documents.append(document)
+
         except FileNotFoundError:
-            print(f"Warning: {file_name} - not found")
+            logger.error(f"Database file not found: {file_name}")
         except json.JSONDecodeError:
-            print(f"Error: Invalid JSON in {file_name}")
-            continue
+            logger.error(f"Invalid JSON format in file: {file_name}")
+        except Exception as e:
+            logger.error(f"Error processing file {file_name}: {str(e)}")
+
+    if not all_documents:
+        logger.warning("No documents were loaded from the database files")
+
     return all_documents
+
+
+embedding_model = CohereEmbeddings(model="embed-multilingual-v3.0")
+vectorstores = []
+documents = load_and_process_json_file()
 
 
 class CustomDocument:
@@ -73,22 +124,19 @@ class CustomDocument:
         self.metadata = metadata
 
 
-embedding_model = CohereEmbeddings(model="embed-multilingual-v3.0")
-
-vectorstores = []
-
-documents = load_and_process_json_file()
-
 # Create Document Objects
-# Modify the document creation to flatten metadata
 doc_objects = [
     CustomDocument(
-        page_content=f"Question: {doc['question']}\nAnswer: {doc['answer']}",
+        page_content=f"Question: {doc['question']['text']}\nAnswer: {doc['answer']['detailed']['en']}",
         metadata={
             "category": ",".join(doc["metadata"].get("category", [])),
             "subCategory": doc["metadata"].get("subCategory", ""),
             "difficulty": doc["metadata"].get("difficulty", 0),
             "confidence": doc["metadata"].get("confidence", 0.0),
+            "intent": doc["question"].get("intent", ""),
+            # Convert variations list to string
+            "variations": ", ".join(doc["question"].get("variations", [])),
+            "conditions": ", ".join(doc["answer"].get("conditions", [])),
         },
     )
     for doc in documents
@@ -96,42 +144,162 @@ doc_objects = [
 
 
 # Text Splitter Class
-class CustomTextSplitter:
-    def __init__(self, chunk_size=500, chunk_overlap=100):
+class CustomTextSplitter(RecursiveCharacterTextSplitter):
+    def __init__(self, chunk_size=1000, chunk_overlap=200, length_function=len):
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
+        self.length_function = length_function
 
     def split_documents(self, documents):
+        if not documents:
+            return []
+
         chunks = []
         for doc in documents:
-            text = doc.page_content
-            while len(text) > self.chunk_size:
-                chunk = text[: self.chunk_size]
-                chunks.append(CustomDocument(page_content=chunk, metadata=doc.metadata))
-                text = text[self.chunk_size - self.chunk_overlap :]
-            if text:
-                chunks.append(CustomDocument(page_content=text, metadata=doc.metadata))
+            try:
+                text = doc.page_content
+                metadata = doc.metadata
+
+                # Handle short documents
+                if self.length_function(text) <= self.chunk_size:
+                    chunks.append(CustomDocument(page_content=text, metadata=metadata))
+                    continue
+
+                # Split into sentences
+                sentences = [s.strip() + ". " for s in text.split(". ") if s.strip()]
+                current_chunk = []
+                current_length = 0
+
+                for sentence in sentences:
+                    sentence_length = self.length_function(sentence)
+
+                    # Handle sentences longer than chunk_size
+                    if sentence_length > self.chunk_size:
+                        if current_chunk:
+                            chunks.append(
+                                CustomDocument(
+                                    page_content="".join(current_chunk),
+                                    metadata=metadata,
+                                )
+                            )
+                            current_chunk = []
+                            current_length = 0
+
+                        # Split long sentence
+                        words = sentence.split()
+                        current_words = []
+                        current_word_length = 0
+
+                        for word in words:
+                            word_length = self.length_function(word + " ")
+                            if current_word_length + word_length > self.chunk_size:
+                                chunks.append(
+                                    CustomDocument(
+                                        page_content=" ".join(current_words),
+                                        metadata=metadata,
+                                    )
+                                )
+                                current_words = [word]
+                                current_word_length = word_length
+                            else:
+                                current_words.append(word)
+                                current_word_length += word_length
+
+                        if current_words:
+                            current_chunk = [" ".join(current_words)]
+                            current_length = self.length_function(current_chunk[0])
+                        continue
+
+                    # Normal sentence processing
+                    if current_length + sentence_length > self.chunk_size:
+                        if current_chunk:
+                            chunks.append(
+                                CustomDocument(
+                                    page_content="".join(current_chunk),
+                                    metadata=metadata,
+                                )
+                            )
+
+                            # Handle overlap
+                            overlap_start = max(
+                                0, len(current_chunk) - self.chunk_overlap
+                            )
+                            current_chunk = current_chunk[overlap_start:]
+                            current_length = sum(
+                                self.length_function(s) for s in current_chunk
+                            )
+
+                    current_chunk.append(sentence)
+                    current_length += sentence_length
+
+                # Add remaining text
+                if current_chunk:
+                    chunks.append(
+                        CustomDocument(
+                            page_content="".join(current_chunk), metadata=metadata
+                        )
+                    )
+
+            except Exception as e:
+                logger.error(f"Error splitting document: {str(e)}")
+                continue
+
         return chunks
 
 
-# Initialize Text Splitter and Split Data
-text_splitter = CustomTextSplitter(chunk_size=500, chunk_overlap=100)
-split_data = text_splitter.split_documents(doc_objects)
+# Process documents in batches
+def create_vector_store(documents, batch_size=500):
+    try:
+        logger.info("Starting document splitting process")
+        split_start = time.time()
 
+        # Initialize Text Splitter inside the function
+        text_splitter = CustomTextSplitter(
+            chunk_size=1000, chunk_overlap=200, length_function=len
+        )
+
+        # Split documents
+        split_data = text_splitter.split_documents(documents)
+        logger.info(f"Document splitting completed in {time.time() - split_start:.2f}s")
+
+        logger.info("Initializing Chroma vector store")
+        store_start = time.time()
+
+        # Create store
+        store = Chroma.from_documents(
+            documents=split_data,
+            collection_name="RAG",
+            embedding=embedding_model,
+            persist_directory="./chroma_db",
+            collection_metadata={
+                "hnsw:space": "cosine",
+                "hnsw:construction_ef": 100,
+                "hnsw:search_ef": 50,
+            },
+        )
+
+        logger.info(
+            f"Vector store creation completed in {time.time() - store_start:.2f}s"
+        )
+        vectorstores.append(store)
+        return store
+
+    except Exception as e:
+        logger.error(f"Vector store creation failed: {str(e)}")
+        raise
+
+
+# Process docs
+filtered_docs = filter_complex_metadata(doc_objects)
 try:
-    store = Chroma.from_documents(
-        documents=split_data,
-        collection_name="RAG",
-        embedding=embedding_model,
-        persist_directory=f"./chroma_db",
-    )
-
-    vectorstores.append(store)
+    logger.info("Starting vector store creation with filtered documents")
+    store = create_vector_store(filtered_docs)
+    logger.info("Vector store creation completed successfully")
 except Exception as e:
-    print(f"Error: {e}")
+    logger.error(f"Failed to create vector store: {str(e)}")
 
 
-# Changed the retriever to retrieve across all 4 vector stores
+# retriever to retrieve across all 4 vector stores
 class MultiRetriever:
     def __init__(self, query):
         self.vectorstores = vectorstores
@@ -154,7 +322,7 @@ class MultiRetriever:
 retriever = MultiRetriever(vectorstores)
 
 
-# created message class to keep track of messages that build a Conversation
+# created message class to keep track of messages that build up a Conversation
 class Message:
     def __init__(self, role, content, timestamp=None):
         self.role = role
@@ -178,7 +346,7 @@ class ConversationMetaData:
         message = Message(role, content)
         self.messages.append(message)
 
-        # added in translation layer here
+        # translation layer
         if role == "assistant":
             malay_translation = translate_en_to_ms(content)
             chinese_translation = translate_en_to_cn(content)
@@ -204,7 +372,7 @@ class ConversationMetaData:
             for msg in self.messages
         ]
 
-    # save the output to a dict for using in API
+    # save the output to a dict for using API
     def to_dict(self):
         return {
             "_id": self._id,
@@ -274,7 +442,7 @@ Output: "How do I withdraw money from slot games?"
     return response.choices[0].message.content.strip()
 
 
-# Define GradeDocuments Model
+# Define grading of docs
 class GradeDocuments(BaseModel):
     confidence_score: float = Field(
         description="Confidence score between 0.0 and 1.0 indicating document relevance",
@@ -365,50 +533,71 @@ rag_prompt_template = ChatPromptTemplate.from_messages(
     [
         (
             "system",
-            """You are a knowledgeable gaming/gambling platform assistant. Your primary task is to thoroughly analyse the provided context and deliver precise, accurate information.
-CONTEXT ANALYSIS RULES:  
-- First, carefully examine all provided context  
-- Match user questions with relevant context information  
-- Only use information present in the context  
-- If information is missing from context, acknowledge the limitationRESPONSE FORMAT:  
-- Begin with "Dear Player" or "Dear Boss"  
-- Use formal pronouns (您) for "you/your"  
-- Add "please" before first instruction  
-- Respond only in English  
-- For questions specifically about **procedures** or **steps to resolve an issue**, after providing guidance or instructions include if the problem is still not resolved or you encounter any difficulty follow the instruction, you can reach out through our professional support team, and we’ll ensure you get the help you need.
--   For fixed answers like rules or the location of the feature, instead of asking contact our Professional Customer Service team to further assist you, ask users let me know if you have other questions.
-- 
-- CONTENT GUIDELINES:  
-- Provide detailed, specific information from context  
-- Avoid saying please note when answering
-- Include exact numbers and timeframes when available  
-- Instead of saying "navigate to", say "please go to"
-- Use "on the app" or "on the platform" instead of "our platform"  
-- Avoid time-specific greetings (use "Day" instead of "Morning/Afternoon")  
-- For 4D questions, strictly use draw times from context  
-- For technical issues, provide step-by-step solutions  
-- For account-related queries, give precise proceduresTONE AND STYLE:  
-- Clear and friendly semi-informal tone  
-- Professional yet approachable language  
-- Direct and confident answers  
-- No hedging or uncertainty  
-- No emotional management advice  
+            """You are a knowledgeable gaming/gambling platform assistant. 
+            Your primary task is to analyze context and maintain natural conversation 
+            flow while delivering precise information.
+
+CONTEXT RULES:
+- Thoroughly examine all provided context before responding
+- Only use information present in the context
+- Match user questions with relevant context information
+- Acknowledge limitations when information is missing
+
+CONVERSATION FLOW:
+- First Message:
+  * Begin with "Dear Player"
+  * Introduce yourself briefly
+  * Use formal pronouns (您)
+- Follow-up Messages:
+  * Skip formal greetings
+  * Reference previous context naturally
+  * Maintain conversation continuity
+  * Build upon established context
+
+CONTENT DELIVERY:
+- Provide detailed, specific information
+- Include exact numbers and timeframes
+- Use "please go to" instead of "navigate to"
+- Use "on the app" or "on the platform"
+- For technical issues:
+  * Provide step-by-step solutions
+  * Only suggest support contact if steps fail
+- For fixed answers:
+  * Give direct information
+  * Offer to answer follow-up questions
+
+TONE AND STYLE:
+- Clear and friendly semi-informal
+- Professional yet approachable
+- Direct and confident answers
+- No hedging or uncertainty
+- No emotional management advice
 - For losses, simply wish better luck
 - Do not mention casino edge
-- PROHIBITED:  
-- Information not in context  
-- Mentioning sources/databases  
-- Phrases like "based on" or "it appears"  
-- do not use External knowledge or assumptions  (Only what is within the databases you have access to)
-- Suggesting customer service contact unless specifically asked
-- 
-Example:Questions: 
-What games offer the highest RTP (Return to Player) percentage?  
-Answers: The winning rate of slot games is actually determined by the game's random mechanisms. Sometimes, you may feel that the chances of winning are decreasing, which is actually a normal fluctuation phenomenon; after all, each spin is an independent random event.
 
-Questions: Is there any issue with the deposit system right now?  
-Answers: Our deposit system is currently running normally. Usually, the deposit processing time is 5 to 30 minutes. If you encounter a delay, it may be because the processing time of the network system is slightly extended. If your deposit has not yet arrived after 30 minutes, you can reach out through our professional support team, and we’ll ensure you get the help you need.
-""",
+PROHIBITED:
+- Information not in context
+- Mentioning sources/databases
+- Phrases like "based on" or "it appears"
+- External knowledge or assumptions
+- Generic endings asking for more questions
+- Time-specific greetings
+- Saying "please note"
+- Suggesting customer service unless necessary
+
+Example Flow:
+User: "What's the minimum deposit?"
+Assistant: "Dear Player, the minimum deposit amount is $10. 
+You can make deposits through various payment methods on the app."
+
+User: "Which payment method is fastest?"
+Assistant: "Bank transfers typically process within 5-15 minutes. 
+For instant deposits, please use e-wallets available on the platform."
+
+User: "How do I set up an e-wallet?"
+Assistant: "Please go to the wallet section and select 'Add Payment Method'.
+Follow the verification steps to link your e-wallet. 
+If you encounter any issues during setup, our support team is ready to assist you.""",
         ),
         ("assistant", "I'll provide clear, friendly direct answers to help you."),
         ("human", "Context: {context}\nQuestion: {prompt}"),
@@ -442,10 +631,10 @@ def get_mongodb_client():
     return client[settings.MONGODB_DATABASE]
 
 
-# added in async for translations
+# async for translations
 async def generate_translations(generation):
     with ThreadPoolExecutor() as executor:
-        # Run translations in parallel
+        # Run translations
         malay_future = executor.submit(translate_en_to_ms, generation)
         chinese_future = executor.submit(translate_en_to_cn, generation)
 
@@ -462,14 +651,13 @@ async def generate_translations(generation):
 
 
 def translate_en_to_cn(input_text):
-    # Load environment variables
     load_dotenv()
     api_key = os.getenv("OPENAI_API_KEY")
     client = OpenAI(api_key=api_key)
 
     try:
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             messages=[
                 {
                     "role": "system",
@@ -549,6 +737,7 @@ def translate_en_to_ms(input_text, to_lang="ms", model="small"):
     return {"text": "", "prompt_tokens": 0, "total_tokens": 0}
 
 
+# this is an old functuion that will be removed in prod
 def generate_user_input(user_prompt):
     # Clean and translate prompt
     cleaned_prompt = translate_and_clean(user_prompt)
@@ -586,66 +775,27 @@ def generate_user_input(user_prompt):
 def generate_prompt_conversation(
     user_prompt, conversation_id, admin_id, agent_id, user_id
 ):
-    # Initialize conversation
-    conversation = ConversationMetaData(
-        session_id=conversation_id,  # This maps conversation_id to session_id
-        admin_id=admin_id,
-        agent_id=agent_id,
-        user_id=user_id,
-    )
+    start_time = time.time()
+    logger.info("Starting prompt_conversation request")
 
-    # Process prompt and add message
-    cleaned_prompt = translate_and_clean(user_prompt)
-    conversation.add_message("user", user_prompt)
-
-    # Get and filter relevant documents
-    docs_retrieve = retriever.invoke(cleaned_prompt)
-    docs_to_use = []
-
-    for doc in docs_retrieve:
-        relevance_score = retrieval_grader.invoke(
-            {"prompt": cleaned_prompt, "document": doc.page_content}
+    try:
+        # Initialize conversation
+        conversation = ConversationMetaData(
+            session_id=conversation_id,
+            admin_id=admin_id,
+            agent_id=agent_id,
+            user_id=user_id,
         )
-        if relevance_score.confidence_score >= 0.7:
-            docs_to_use.append(doc)
 
-    # Generate response with context and history
-    generation = rag_chain.invoke(
-        {
-            "context": format_docs(docs_to_use),
-            "prompt": cleaned_prompt,
-            "history": conversation.get_conversation_history(),
-        }
-    )
-
-    # Calculate confidence
-    confidence_result = confidence_grader.invoke(
-        {"documents": format_docs(docs_to_use), "generation": generation}
-    )
-
-    # Generate translations asynchronously
-    translations = asyncio.run(generate_translations(generation))
-
-    # Save conversation
-    conversation.add_message("assistant", generation)
-    save_conversation(conversation)
-
-    return {
-        "generation": generation,
-        "conversation": conversation.to_dict(),
-        "confidence_score": confidence_result.confidence_score,
-        "translations": translations,
-    }
-
-
-"""# updated generate_answer function to include new classes for chat history
-def generate_answer(
-    user_prompt, session_id=None, admin_id=None, agent_id=None, user_id=None
-):
-    # Handle legacy user_input calls
-    if session_id is None:
+        # Process prompt and add message
+        logger.info("Processing user prompt")
         cleaned_prompt = translate_and_clean(user_prompt)
-        docs_retrieve = retriever.invoke(cleaned_prompt)
+        conversation.add_message("user", user_prompt)
+
+        # Get and filter relevant documents
+        logger.info("Retrieving relevant documents")
+        docs_start = time.time()
+        docs_retrieve = retriever.invoke(cleaned_prompt)[:3]  # Limit initial retrieval
         docs_to_use = []
 
         for doc in docs_retrieve:
@@ -654,65 +804,49 @@ def generate_answer(
             )
             if relevance_score.confidence_score >= 0.7:
                 docs_to_use.append(doc)
+        logger.info(f"Document retrieval completed in {time.time() - docs_start:.2f}s")
 
+        # Generate response with context and history
+        logger.info("Generating AI response")
+        generation_start = time.time()
         generation = rag_chain.invoke(
             {
                 "context": format_docs(docs_to_use),
                 "prompt": cleaned_prompt,
+                "history": conversation.get_conversation_history(),
             }
+        )
+        logger.info(f"AI Generation completed in {time.time() - generation_start:.2f}s")
+
+        # Calculate confidence
+        confidence_result = confidence_grader.invoke(
+            {"documents": format_docs(docs_to_use), "generation": generation}
         )
 
         # Generate translations asynchronously
+        translation_start = time.time()
         translations = asyncio.run(generate_translations(generation))
+        logger.info(f"Translations completed in {time.time() - translation_start:.2f}s")
+
+        # Save conversation
+        db_start = time.time()
+        conversation.add_message("assistant", generation)
+        save_conversation(conversation)
+        logger.info(f"Database operation completed in {time.time() - db_start:.2f}s")
+
+        total_time = time.time() - start_time
+        logger.info(f"Total request processing time: {total_time:.2f}s")
 
         return {
             "generation": generation,
+            "conversation": conversation.to_dict(),
+            "confidence_score": confidence_result.confidence_score,
             "translations": translations,
-            "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
         }
 
-    # Handle conversation-based calls
-    conversation = ConversationMetaData(
-        session_id=session_id, admin_id=admin_id, agent_id=agent_id, user_id=user_id
-    )
-
-    cleaned_prompt = translate_and_clean(user_prompt)
-    conversation.add_message("user", user_prompt)
-
-    docs_to_use = []
-    docs_retrieve = retriever.get_relevant_documents(cleaned_prompt)
-
-    for doc in docs_retrieve:
-        relevance_score = retrieval_grader.invoke(
-            {"prompt": cleaned_prompt, "document": doc.page_content}
-        )
-        if relevance_score.confidence_score >= 0.7:
-            docs_to_use.append(doc)
-
-    generation = rag_chain.invoke(
-        {
-            "context": format_docs(docs_to_use),
-            "prompt": cleaned_prompt,
-            "history": conversation.get_conversation_history(),
-        }
-    )
-
-    confidence_result = confidence_grader.invoke(
-        {"documents": format_docs(docs_to_use), "generation": generation}
-    )
-
-    # Generate translations asynchronously
-    translations = asyncio.run(generate_translations(generation))
-    conversation.add_message("assistant", generation)
-    save_conversation(conversation)
-
-    return {
-        "generation": generation,
-        "conversation": conversation.to_dict(),
-        "confidence_score": confidence_result.confidence_score,
-        "translations": translations,
-    }
-    """
+    except Exception as e:
+        logger.error(f"Error in prompt_conversation: {str(e)}")
+        raise
 
 
 def save_conversation(conversation):
@@ -745,73 +879,9 @@ def save_interaction(interaction_type, data):
     return {"message": f"{interaction_type} interaction saved successfully"}
 
 
-def save_interaction_outcome(data):
-    db = get_mongodb_client()
-    outcomes = db.interaction_outcomes
-
-    formatted_data = {
-        "user_id": data.get("user_id", 0),
-        "prompt": data.get("prompt"),
-        "cleaned_prompt": data.get("cleaned_prompt"),
-        "generation": data.get("generation"),
-        "translations": data.get("translations", []),
-        "correct_bool": data.get("correct_bool"),
-        "correct_answer": data.get("correct_answer", ""),
-        "chat_rating": data.get("chat_rating"),
-        "timestamp": datetime.now().isoformat(),
-    }
-
-    outcomes.insert_one(formatted_data)
-    return {"message": "Interaction outcome saved successfully"}
-
-
-def submit_feedback(request):
-    if request.method == "POST":
-        try:
-            data = (
-                json.loads(request.body)
-                if isinstance(request.body, bytes)
-                else request.data
-            )
-            correct_answer = data.get("correct_answer")
-
-            if not correct_answer:
-                return JsonResponse(
-                    {"error": "Missing required field: correct_answer."}, status=400
-                )
-
-            return JsonResponse({"message": "Incorrect answer received"}, status=200)
-        except json.JSONDecodeError:
-            return JsonResponse({"error": "Invalid JSON format."}, status=400)
-        except Exception as e:
-            return JsonResponse({"error": str(e)}, status=500)
-    else:
-        return JsonResponse({"error": "Invalid HTTP method"}, status=405)
-
-
-def load_and_process_json_file() -> List[dict]:
-    db = get_mongodb_client()
-    documents = db.training_documents.find({})
-
-    all_documents = []
-    for doc in documents:
-        if isinstance(doc, dict):
-            document = {
-                "question": doc["question"],
-                "answer": doc["answer"],
-                "metadata": doc.get("metadata", {}),
-            }
-            all_documents.append(document)
-
-    return all_documents
-
-
 def handle_mongodb_operation(operation):
     try:
         return operation()
     except Exception as e:
         print(f"MongoDB operation failed: {str(e)}")
         return None
-
-
-# Remove or comment out any unused functions

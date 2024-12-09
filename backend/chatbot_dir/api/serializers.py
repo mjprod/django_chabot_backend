@@ -3,14 +3,6 @@ from datetime import datetime
 from rest_framework import serializers
 
 
-class NewUserInputSerializer(serializers.Serializer):
-    prompt = serializers.CharField()
-    user_id = serializers.CharField()
-    session_id = serializers.CharField()
-    agent_id = serializers.CharField()
-    admin_id = serializers.CharField()
-
-
 class TranslationSerializer(serializers.Serializer):
     language = serializers.CharField()
     text = serializers.CharField()
@@ -23,45 +15,6 @@ class MessageSerializer(serializers.Serializer):
     timestamp = serializers.DateTimeField(default=datetime.now)
 
 
-class NewCaptureSummarySerializer(serializers.Serializer):
-    user_input = serializers.CharField()
-    ai_response = serializers.CharField()
-    correct_bool = serializers.BooleanField()
-    chat_rating = serializers.IntegerField(min_value=0, max_value=6)
-    correct_answer = serializers.CharField(required=False, allow_blank=True)
-    metadata = serializers.DictField(required=False)
-
-
-class NewCaptureSummaryMultilangSerializer(serializers.Serializer):
-    session_id = serializers.CharField(required=True)
-    user_id = serializers.CharField(required=True)
-    agent_id = serializers.CharField(required=True)
-    admin_id = serializers.CharField(required=True)
-    prompt = serializers.CharField(required=True)
-    cleaned_prompt = serializers.CharField(required=True)
-    generation = serializers.CharField(required=True)
-    translations = TranslationSerializer(many=True, required=False, default=[])
-    correct_bool = serializers.BooleanField(required=False)
-    correct_answer = serializers.CharField(required=False, allow_blank=True)
-    chat_rating = serializers.IntegerField(min_value=0, max_value=6, required=False)
-    timestamp = serializers.DateTimeField(default=datetime.now)
-
-
-class NewViewSummarySerializer(serializers.Serializer):
-    session_id = serializers.CharField()
-    user_id = serializers.CharField()
-    agent_id = serializers.CharField()
-    admin_id = serializers.CharField()
-    timestamp = serializers.DateTimeField()
-    Question = serializers.CharField()
-    Answer_English = serializers.CharField()
-    Answer_Malay = serializers.CharField()
-    Answer_Chinese = serializers.CharField()
-    Question_correct = serializers.BooleanField()
-    Correct_rating = serializers.IntegerField(min_value=1, max_value=5)
-    Correct_Answer = serializers.CharField()
-
-
 class ConversationMetadataSerializer(serializers.Serializer):
     session_id = serializers.CharField()
     user_id = serializers.CharField()
@@ -72,68 +25,11 @@ class ConversationMetadataSerializer(serializers.Serializer):
     translations = TranslationSerializer(many=True)
 
 
-# Currently used serializers are below: to be removed once history is working on server
 class UserInputSerializer(serializers.Serializer):
     prompt = serializers.CharField()
     user_id = serializers.CharField(required=False, allow_null=True, allow_blank=True)
 
 
-class CaptureSummarySerializer(serializers.Serializer):
-    user_input = serializers.CharField()
-    ai_response = serializers.CharField()
-    correct_bool = serializers.BooleanField()
-    chat_rating = serializers.IntegerField(min_value=0, max_value=6)
-    correct_answer = serializers.CharField(required=False, allow_blank=True)
-    metadata = serializers.DictField(required=False)
-
-
-class CaptureSummaryMultilangSerializer(serializers.Serializer):
-    user_id = serializers.IntegerField(required=False)
-    prompt = serializers.CharField(required=True)
-    cleaned_prompt = serializers.CharField(required=True)
-    generation = serializers.CharField(required=True)
-    translations = serializers.ListField(
-        child=serializers.DictField(), required=False, default=[]
-    )
-    correct_bool = serializers.BooleanField()
-    correct_answer = serializers.CharField(required=False, allow_blank=True)
-    chat_rating = serializers.IntegerField(min_value=0, max_value=6)
-    metadata = serializers.DictField(required=False, default=dict)
-
-
-class ViewSummarySerializer(serializers.Serializer):
-    Date_time = serializers.DateTimeField()
-    User_id = serializers.IntegerField(default=0)
-    Question = serializers.CharField()
-    Answer_English = serializers.CharField()
-    Answer_Malay = serializers.CharField()
-    Question_correct = serializers.BooleanField()
-    Correct_rating = serializers.IntegerField(min_value=1, max_value=5)
-    Correct_Answer = serializers.CharField()
-    Metadata = serializers.DictField(required=False)
-
-
-class AIResponseSerializer(serializers.Serializer):
-    answer = serializers.CharField()
-
-
-class NewAIResponseSerializer(serializers.Serializer):
-    answer = serializers.CharField()
-
-
-class CorrectBoolSerializer(serializers.Serializer):
-    is_correct = serializers.BooleanField()
-
-
-class ChatRatingSerializer(serializers.Serializer):
-    rating = serializers.IntegerField(min_value=1, max_value=6)
-
-
-class IncorrectAnswerResponseSerializer(serializers.Serializer):
-    incorrect_answer = serializers.CharField()
-
-
-# new AI for admin panels:
 class PromptConversationSerializer(serializers.Serializer):
     prompt = serializers.CharField(required=True)
     conversation_id = serializers.CharField(required=True)
@@ -141,13 +37,44 @@ class PromptConversationSerializer(serializers.Serializer):
 
 
 class MessageDataSerializer(serializers.Serializer):
-    role = serializers.CharField()
-    content = serializers.CharField()
+    text = serializers.JSONField(allow_null=True)  # For array or string
+    sender = serializers.CharField()
+    user = serializers.CharField()
     timestamp = serializers.DateTimeField()
+    agent_id = serializers.CharField(required=False)
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        # Map sender to role for test compatibility
+        data["role"] = data.pop("sender")
+        # Map text to content for test compatibility
+        data["content"] = data.pop("text")
+        return data
+
+    def to_internal_value(self, data):
+        # Handle incoming data in either format
+        if "role" in data and "content" in data:
+            # Convert from test format to storage format
+            return {
+                "text": data["content"],
+                "sender": data["role"],
+                "user": data.get("user", ""),
+                "timestamp": data["timestamp"],
+                "agent_id": data.get("agent_id", ""),
+            }
+        return super().to_internal_value(data)
 
 
 class CompleteConversationsSerializer(serializers.Serializer):
     conversation_id = serializers.CharField(required=True)
-    user_id = serializers.CharField(required=True)
     messages = MessageDataSerializer(many=True, required=True)
-    translations = TranslationSerializer(many=True, required=False)
+
+
+class CaptureFeedbackSerializer(serializers.Serializer):
+    conversation_id = serializers.CharField(required=True)
+    user_input = serializers.CharField(required=True)
+    ai_response = serializers.CharField(required=True)
+    correct_bool = serializers.BooleanField(required=True)
+    chat_rating = serializers.IntegerField(min_value=0, max_value=6)
+    correct_answer = serializers.CharField(required=False, allow_blank=True)
+    metadata = serializers.DictField(required=False, default=dict)
