@@ -255,6 +255,7 @@ class CompleteConversationsView(MongoDBMixin, APIView):
         logger.info(f"Request Data: {request.data}")
         logger.info(f"Request Content-Type: {request.content_type}")
         logger.info(f"Request Headers: {request.headers}")
+        logger.info(f"Request Body: {request.body}")
 
         try:
             # Validate input data
