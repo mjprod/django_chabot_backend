@@ -252,13 +252,13 @@ class CompleteConversationsView(MongoDBMixin, APIView):
         start_time = time.time()
         logger.info("Starting complete_conversations POST request")
 
-        logger.info(f"Request Data: {request.data}")
-        logger.info(f"Request Content-Type: {request.content_type}")
-        logger.info(f"Request Headers: {request.headers}")
-        logger.info(f"Request Body: {request.body}")
-
         try:
-            # Validate input data
+            # Log the request data first, before any processing
+            logger.info(f"Request Data: {request.data}")
+            logger.info(f"Request Content-Type: {request.content_type}")
+            logger.info(f"Request Headers: {request.headers}")
+
+            # Then proceed with validation
             logger.info("Validating request data")
             serializer = CompleteConversationsSerializer(data=request.data)
             if not serializer.is_valid():
