@@ -252,6 +252,10 @@ class CompleteConversationsView(MongoDBMixin, APIView):
         start_time = time.time()
         logger.info("Starting complete_conversations POST request")
 
+        logger.info(f"Request Data: {request.data}")
+        logger.info(f"Request Content-Type: {request.content_type}")
+        logger.info(f"Request Headers: {request.headers}")
+
         try:
             # Validate input data
             logger.info("Validating request data")
