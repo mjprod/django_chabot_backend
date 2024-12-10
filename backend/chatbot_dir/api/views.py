@@ -302,51 +302,75 @@ class CompleteConversationsView(MongoDBMixin, APIView):
 
 
 class CaptureFeedbackView(MongoDBMixin, APIView):
+
     def post(self, request):
         start_time = time.time()
         logger.info("Starting feedback POST request")
-
         try:
-            # Validate input data
+            # Transform incoming data to match serializer format
+            transformed_data = {
+                "conversation_id": str(ObjectId()),  # Generate new ID if not provided
+                "user_input": request.data.get("prompt", ""),
+                "ai_response": request.data.get("generation", ""),
+                "correct_bool": request.data.get("correct_bool", False),
+                "chat_rating": request.data.get("chat_rating", 0),
+                "correct_answer": request.data.get("correct_answer", ""),
+                "metadata": {
+                    **request.data.get("metadata", {}),
+                    "user_id": request.data.get("user_id"),
+                    "translations": request.data.get("translations", []),
+                    "confidence": 0.97,  # Add fixed confidence score
+                },
+            }
+
+            # Validate transformed data
             logger.info("Validating request data")
-            serializer = CaptureFeedbackSerializer(data=request.data)
+            serializer = CaptureFeedbackSerializer(data=transformed_data)
             if not serializer.is_valid():
                 logger.error(f"Validation failed: {serializer.errors}")
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    {"error": "Invalid input data", "details": serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
 
+            # Process translations
             logger.info("Processing feedback translations")
             translated_data = {
                 "conversation_id": serializer.validated_data["conversation_id"],
-                "user_input": translate_and_clean(
-                    serializer.validated_data["user_input"]
-                ),
+                "user_input": translate_and_clean(transformed_data["user_input"]),
                 "ai_response": serializer.validated_data["ai_response"],
                 "correct_bool": serializer.validated_data["correct_bool"],
                 "chat_rating": serializer.validated_data["chat_rating"],
                 "correct_answer": translate_and_clean(
-                    serializer.validated_data.get("correct_answer", "")
+                    transformed_data.get("correct_answer", "")
                 ),
-                "metadata": serializer.validated_data.get("metadata", {}),
+                "metadata": {
+                    **serializer.validated_data.get("metadata", {}),
+                    "confidence": 0.97,
+                },
                 "timestamp": datetime.now().isoformat(),
                 "search_score": 0.0,
             }
 
-            # Create text index for search
-            db = self.get_db()
-            logger.info("Creating text index for feedback search")
-            db.feedback_data.create_index([("user_input", "text")])
-
             # MongoDB operations
-            db_start = time.time()
-            logger.info("Starting MongoDB Write Operations")
-            feedback_data = {
-                **serializer.validated_data,
-                "timestamp": datetime.now().isoformat(),
-                "search_score": 0.0,  # this starts the intial search
-            }
+            try:
+                db = self.get_db()
+                logger.info("Creating text index for feedback search")
+                db.feedback_data.create_index([("user_input", "text")])
 
-            db.feedback_data.insert_one(feedback_data)
-            logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
+                db_start = time.time()
+                logger.info("Starting MongoDB Write Operations")
+                db.feedback_data.insert_one(translated_data)
+                logger.info(
+                    f"MongoDB operation completed in {time.time() - db_start:.2f}s"
+                )
+
+            except Exception as db_error:
+                logger.error(f"MongoDB operation failed: {str(db_error)}")
+                return Response(
+                    {"error": f"Database operation failed: {str(db_error)}"},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                )
 
             total_time = time.time() - start_time
             logger.info(f"Total request processing time: {total_time:.2f}s")

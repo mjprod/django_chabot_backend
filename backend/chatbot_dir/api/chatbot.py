@@ -341,6 +341,7 @@ class ConversationMetaData:
         self.messages = []
         self.translations = []
         self._id = ObjectId()
+        self.is_first_message = True
 
     def add_message(self, role, content):
         message = Message(role, content)

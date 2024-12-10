@@ -71,10 +71,10 @@ class CompleteConversationsSerializer(serializers.Serializer):
 
 
 class CaptureFeedbackSerializer(serializers.Serializer):
-    conversation_id = serializers.CharField(required=True)
-    user_input = serializers.CharField(required=True)
-    ai_response = serializers.CharField(required=True)
-    correct_bool = serializers.BooleanField(required=True)
-    chat_rating = serializers.IntegerField(min_value=0, max_value=6)
+    conversation_id = serializers.CharField()
+    user_input = serializers.CharField()
+    ai_response = serializers.CharField()
+    correct_bool = serializers.BooleanField()
+    chat_rating = serializers.IntegerField()
     correct_answer = serializers.CharField(required=False, allow_blank=True)
-    metadata = serializers.DictField(required=False, default=dict)
+    metadata = serializers.DictField(required=False)
