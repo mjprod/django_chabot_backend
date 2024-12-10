@@ -1,12 +1,13 @@
 import json
 from googletrans import Translator
 
-def translate_json(input_file, output_file, src_lang='zh-cn', dest_lang='en'):
+
+def translate_json(input_file, output_file, src_lang="zh-cn", dest_lang="en"):
     # Initialize the translator
     translator = Translator()
 
     # Load the JSON data from the input file
-    with open(input_file, 'r', encoding='utf-8') as f:
+    with open(input_file, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     # Function to recursively translate strings in JSON
@@ -25,8 +26,11 @@ def translate_json(input_file, output_file, src_lang='zh-cn', dest_lang='en'):
     translated_data = translate_string(data)
 
     # Write the translated data to the output file
-    with open(output_file, 'w', encoding='utf-8') as f:
+    with open(output_file, "w", encoding="utf-8") as f:
         json.dump(translated_data, f, ensure_ascii=False, indent=4)
 
+
 # Example usage
-translate_json('json_translate.json', 'translated_json.json', src_lang='zh-cn', dest_lang='en')
+translate_json(
+    "json_translate.json", "translated_json.json", src_lang="zh-cn", dest_lang="en"
+)
