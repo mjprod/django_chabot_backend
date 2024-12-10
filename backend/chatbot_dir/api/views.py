@@ -170,6 +170,7 @@ class PromptConversationView(MongoDBMixin, APIView):
             # Prepare response data
             response_data = {
                 "conversation_id": conversation_id,
+                "user_input": prompt,
                 "generation": response["generation"],
                 "confidence": response["confidence_score"],
                 "translations": response.get("translations", []),
@@ -312,13 +313,18 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
                 logger.error(f"Validation failed: {serializer.errors}")
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+            # Create text index for search
+            db = self.get_db()
+            logger.info("Creating text index for feedback search")
+            db.feedback_data.create_index([("user_input", "text")])
+
             # MongoDB operations
             db_start = time.time()
             logger.info("Starting MongoDB Write Operations")
-            db = self.get_db()
             feedback_data = {
                 **serializer.validated_data,
                 "timestamp": datetime.now().isoformat(),
+                "search_score": 0.0,  # this starts the intial search
             }
 
             db.feedback_data.insert_one(feedback_data)

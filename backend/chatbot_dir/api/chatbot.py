@@ -545,7 +545,7 @@ CONTEXT RULES:
 
 CONVERSATION FLOW:
 - First Message:
-  * Begin with "Dear Player"
+  * Begin with "Dear Player" (Only use Dear Player for the first interaction and follow up or other questions do not use)
   * Introduce yourself briefly
   * Use formal pronouns (您)
 - Follow-up Messages:
@@ -629,6 +629,112 @@ rag_chain = (
 def get_mongodb_client():
     client = MongoClient(settings.MONGODB_URI)
     return client[settings.MONGODB_DATABASE]
+
+
+def update_local_confidence(generation, confidence_diff):
+    try:
+        logger.info(
+            "Starting update of local confidence scores across all database files"
+        )
+        base_dir = os.path.join(os.path.dirname(__file__), "../data")
+        database_files = [
+            "database_part_1.json",
+            "database_part_2.json",
+            "database_part_3.json",
+        ]
+
+        updated = False
+        for database_file in database_files:
+            file_path = os.path.join(base_dir, database_file)
+            try:
+                with open(file_path, "r+") as f:
+                    data = json.load(f)
+                    for item in data:
+                        # Correctly access nested dictionary structure
+                        if (
+                            isinstance(item, dict)
+                            and "answer" in item
+                            and "detailed" in item["answer"]
+                            and "en" in item["answer"]["detailed"]
+                            and item["answer"]["detailed"]["en"] == generation
+                        ):
+                            current_confidence = item["metadata"]["confidence"]
+                            item["metadata"]["confidence"] = min(
+                                1.0, current_confidence + (confidence_diff * 0.1)
+                            )
+                            updated = True
+                            logger.info(
+                                f"Updated confidence in {database_file} from {current_confidence} to {item['metadata']['confidence']}"
+                            )
+
+                            # Write back to file
+                            f.seek(0)
+                            json.dump(data, f, indent=4)
+                            f.truncate()
+                            logger.info(f"Successfully updated {database_file}")
+                            break
+
+            except FileNotFoundError:
+                logger.error(f"Database file not found: {database_file}")
+            except json.JSONDecodeError:
+                logger.error(f"Invalid JSON format in file: {database_file}")
+            except Exception as e:
+                logger.error(f"Error processing file {database_file}: {str(e)}")
+
+        if not updated:
+            logger.warning("No matching answer found in any database files")
+
+    except Exception as e:
+        logger.error(f"Error updating local confidence: {str(e)}")
+
+
+def update_database_confidence(comparison_result, docs_to_use):
+    try:
+        logger.info("Starting database confidence update")
+        base_dir = os.path.join(os.path.dirname(__file__), "../data")
+        database_files = [
+            "database_part_1.json",
+            "database_part_2.json",
+            "database_part_3.json",
+        ]
+
+        for database_file in database_files:
+            file_path = os.path.join(base_dir, database_file)
+            try:
+                with open(file_path, "r+") as f:
+                    data = json.load(f)
+                    for i, item in enumerate(data):
+                        # Check if the answer matches using proper dictionary access
+                        if (
+                            isinstance(item, dict)
+                            and "answer" in item
+                            and "detailed" in item["answer"]
+                            and "en" in item["answer"]["detailed"]
+                            and item["answer"]["detailed"]["en"]
+                            == comparison_result["best_feedback"]["correct_answer"]
+                        ):
+
+                            current_confidence = item["metadata"]["confidence"]
+                            data[i]["metadata"]["confidence"] = min(
+                                1.0, current_confidence + 0.1
+                            )
+
+                            logger.info(
+                                f"Updated confidence in {database_file} from {current_confidence} to {data[i]['metadata']['confidence']}"
+                            )
+
+                            # Write back to file
+                            f.seek(0)
+                            json.dump(data, f, indent=4)
+                            f.truncate()
+                            logger.info(f"Successfully updated {database_file}")
+                            break
+
+            except Exception as e:
+                logger.error(f"Error processing file {database_file}: {str(e)}")
+
+    except Exception as e:
+        logger.error(f"Error updating database confidence: {str(e)}")
 
 
 # async for translations
@@ -806,7 +912,7 @@ def generate_prompt_conversation(
                 docs_to_use.append(doc)
         logger.info(f"Document retrieval completed in {time.time() - docs_start:.2f}s")
 
-        # Generate response with context and history
+        # Generate  inital response
         logger.info("Generating AI response")
         generation_start = time.time()
         generation = rag_chain.invoke(
@@ -817,6 +923,27 @@ def generate_prompt_conversation(
             }
         )
         logger.info(f"AI Generation completed in {time.time() - generation_start:.2f}s")
+
+        # INSERT SELF-LEARNING HERE - After generation but before translations
+        logger.info("Starting self-learning comparison")
+        db = get_mongodb_client()
+        relevant_feedbacks = get_relevant_feedback_data(cleaned_prompt, db)
+
+        if relevant_feedbacks:
+            logger.info(f"Found {len(relevant_feedbacks)} relevant feedback answers")
+            comparison_result = compare_answers(
+                generation, relevant_feedbacks, docs_to_use
+            )
+
+            if comparison_result and comparison_result["better_answer"] == "feedback":
+                logger.info("Using feedback answer with higher confidence")
+                generation = comparison_result["best_feedback"]["correct_answer"]
+                update_database_confidence(comparison_result, docs_to_use)
+            else:
+                logger.info("Generated answer maintained, updating confidence")
+                update_local_confidence(
+                    generation, comparison_result["confidence_diff"]
+                )
 
         # Calculate confidence
         confidence_result = confidence_grader.invoke(
@@ -884,4 +1011,75 @@ def handle_mongodb_operation(operation):
         return operation()
     except Exception as e:
         print(f"MongoDB operation failed: {str(e)}")
+        return None
+
+
+def get_relevant_feedback_data(cleaned_prompt, db):
+    logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
+    try:
+        db.feedback_data.create_index([("user_input", "text")])
+        logger.info("create text index for feedback search")
+
+        similar_answers = (
+            db.feedback_data.find(
+                {
+                    "$text": {"$search": cleaned_prompt},
+                    "correct_answer": {"$exists": True, "$ne": ""},
+                }
+            )
+            .sort([("score", {"$meta": "textScore"}), ("timestamp", -1)])
+            .limit(3)
+        )
+
+        feedback_list = list(similar_answers)
+        logger.info(f"found {len(feedback_list)} potential feedback matches")
+        return feedback_list
+    except Exception as e:
+        logger.error(f"Error retrieving feedback answers: {str(e)}")
+        return []
+
+
+def compare_answers(generation, feedback_answers, docs_to_use):
+    logger.info("Starting answer comparison process")
+    try:
+        # Score generated answer
+        generated_score = confidence_grader.invoke(
+            {"documents": format_docs(docs_to_use), "generation": generation}
+        ).confidence_score
+        logger.info(f"Generated answer confidence score: {generated_score}")
+
+        # Find best feedback answer
+        best_match = None
+        highest_score = 0
+
+        for feedback in feedback_answers:
+            feedback_score = confidence_grader.invoke(
+                {
+                    "documents": format_docs(docs_to_use),
+                    "generation": feedback["correct_answer"],
+                }
+            ).confidence_score
+            logger.info(
+                f"Feedback answer score: {feedback_score} for ID: {feedback['conversation_id']}"
+            )
+
+            if feedback_score > highest_score:
+                highest_score = feedback_score
+                best_match = feedback
+
+        comparison_result = {
+            "better_answer": (
+                "generated" if generated_score > highest_score else "feedback"
+            ),
+            "confidence_diff": abs(generated_score - highest_score),
+            "generated_score": generated_score,
+            "feedback_score": highest_score,
+            "best_feedback": best_match,
+        }
+        logger.info(
+            f"Comparison result: {comparison_result['better_answer']} answer is better"
+        )
+        return comparison_result
+    except Exception as e:
+        logger.error(f"Error comparing answers: {str(e)}")
         return None
