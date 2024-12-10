@@ -843,6 +843,31 @@ def translate_en_to_ms(input_text, to_lang="ms", model="small"):
     return {"text": "", "prompt_tokens": 0, "total_tokens": 0}
 
 
+def process_feedback_translation(feedback_data):
+    try:
+        logger.info("Processing feedback translation")
+
+        # Translate user input if not in English
+        user_input = translate_and_clean(feedback_data["user_input"])
+        logger.info("User input translation completed")
+
+        # Translate correct answer if provided and not in English
+        if feedback_data.get("correct_answer"):
+            correct_answer = translate_and_clean(feedback_data["correct_answer"])
+            logger.info("Correct answer translation completed")
+        else:
+            correct_answer = ""
+
+        return {
+            **feedback_data,
+            "user_input": user_input,
+            "correct_answer": correct_answer,
+        }
+    except Exception as e:
+        logger.error(f"Error processing feedback translation: {str(e)}")
+        return feedback_data
+
+
 # this is an old functuion that will be removed in prod
 def generate_user_input(user_prompt):
     # Clean and translate prompt

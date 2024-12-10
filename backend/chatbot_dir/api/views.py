@@ -16,6 +16,7 @@ from rest_framework.views import APIView
 from .chatbot import (
     generate_prompt_conversation,
     generate_user_input,
+    process_feedback_translation,
     save_interaction,
     translate_and_clean,
 )
@@ -312,6 +313,23 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
             if not serializer.is_valid():
                 logger.error(f"Validation failed: {serializer.errors}")
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            logger.info("Processing feedback translations")
+            translated_data = {
+                "conversation_id": serializer.validated_data["conversation_id"],
+                "user_input": translate_and_clean(
+                    serializer.validated_data["user_input"]
+                ),
+                "ai_response": serializer.validated_data["ai_response"],
+                "correct_bool": serializer.validated_data["correct_bool"],
+                "chat_rating": serializer.validated_data["chat_rating"],
+                "correct_answer": translate_and_clean(
+                    serializer.validated_data.get("correct_answer", "")
+                ),
+                "metadata": serializer.validated_data.get("metadata", {}),
+                "timestamp": datetime.now().isoformat(),
+                "search_score": 0.0,
+            }
 
             # Create text index for search
             db = self.get_db()
