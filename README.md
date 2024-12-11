@@ -1,5 +1,6 @@
 <p align="center">
    ![iconJokerPlus512](https://github.com/user-attachments/assets/469be24b-3bc3-47de-ae4a-29f83390a4cf)
+	![iconJokerPlus512](https://github.com/user-attachments/assets/c4507fa2-4252-4fad-87bd-049e2be5f918)
 </p>
 <p align="center"><h1 align="center">DJANGO_CHABOT_BACKEND.GIT</h1></p>
 <p align="center">
