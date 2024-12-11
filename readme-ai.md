@@ -1,5 +1,22 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-markdown-open.svg" align="center" width="30%">
+    <img src="<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Outer Circle -->
+  <circle cx="32" cy="32" r="30" fill="#4CAF50" stroke="#388E3C" stroke-width="4"/>
+  
+  <!-- Chatbot Head -->
+  <rect x="16" y="20" width="32" height="28" rx="16" ry="16" fill="#fff" />
+  
+  <!-- Eyes -->
+  <circle cx="24" cy="30" r="3" fill="#000" />
+  <circle cx="40" cy="30" r="3" fill="#000" />
+
+  <!-- Mouth -->
+  <path d="M24 40 Q32 46 40 40" stroke="#000" stroke-width="2" fill="none"/>
+
+  <!-- Antenna -->
+  <line x1="32" y1="14" x2="32" y2="20" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="32" cy="12" r="4" fill="#fff" />
+</svg> align="center" width="30%">
 </p>
 <p align="center"><h1 align="center">DJANGO_CHABOT_BACKEND.GIT</h1></p>
 <p align="center">
@@ -18,7 +35,7 @@
 </p>
 <br>
 
-##  Table of Contents
+## Table of Contents
 
 - [ Overview](#-overview)
 - [ Features](#-features)
@@ -36,29 +53,29 @@
 
 ---
 
-##  Overview
+## Overview
 
 **djangochatbotbackend.git** is a powerful open-source project that streamlines AI chatbot interactions. It simplifies managing user inputs, responses, and feedback, enhancing chatbot accuracy and user experience. Ideal for developers seeking efficient API routing and seamless data handling, it elevates chatbot systems with structured functionality and robust data management.
 
 ---
 
-##  Features
+## Features
 
-|      | Feature         | Summary       |
-| :--- | :---:           | :---          |
-| ⚙️  | **Architecture**  | <ul><li>Utilizes Django framework for backend development.</li><li>Follows a modular structure with separate components for API, models, views, and settings.</li><li>Employs Django management commands for administrative tasks.</li></ul> |
-| 🔩 | **Code Quality**  | <ul><li>Consistent code style and adherence to PEP 8 guidelines.</li><li>Includes comprehensive unit tests for various components.</li><li>Uses Django best practices for ORM usage and view handling.</li></ul> |
-| 📄 | **Documentation** | <ul><li>Well-documented codebase with inline comments and docstrings.</li><li>Includes a `requirements.txt` file for managing project dependencies.</li><li>Provides usage and installation commands for easy setup and execution.</li></ul> |
-| 🔌 | **Integrations**  | <ul><li>Integrates with external tools or libraries for translation, document retrieval, and text processing.</li><li>Supports API endpoints for seamless integration with frontend or external systems.</li><li>Implements serializers for data transformation and validation.</li></ul> |
-| 🧩 | **Modularity**    | <ul><li>Encourages separation of concerns with distinct modules for different functionalities.</li><li>Promotes reusability of code through modular design.</li><li>Facilitates easy maintenance and scalability of the project.</li></ul> |
-| 🧪 | **Testing**       | <ul><li>Includes unit tests for critical functionalities like feedback submission and translation.</li><li>Ensures test coverage for key components to maintain reliability.</li><li>Validates data integrity and proper functionality of features.</li></ul> |
-| ⚡️  | **Performance**   | <ul><li>Optimizes response time by leveraging efficient algorithms for document retrieval and text processing.</li><li>Utilizes caching mechanisms for frequently accessed data.</li><li>Ensures scalability to handle increased user load.</li></ul> |
-| 🛡️ | **Security**      | <ul><li>Implements Django security features like CSRF protection and secure session handling.</li><li>Follows best practices for data validation and sanitization to prevent vulnerabilities.</li><li>Enforces secure communication protocols for API endpoints.</li></ul> |
-| 📦 | **Dependencies**  | <ul><li>Manages project dependencies using `pip` and `requirements.txt` files.</li><li>Specifies required packages and versions for easy setup and reproducibility.</li><li>Ensures compatibility and stability by tracking dependencies.</li></ul> |
+|     |      Feature      | Summary                                                                                                                                                                                                                                                                                   |
+| :-- | :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ⚙️  | **Architecture**  | <ul><li>Utilizes Django framework for backend development.</li><li>Follows a modular structure with separate components for API, models, views, and settings.</li><li>Employs Django management commands for administrative tasks.</li></ul>                                              |
+| 🔩  | **Code Quality**  | <ul><li>Consistent code style and adherence to PEP 8 guidelines.</li><li>Includes comprehensive unit tests for various components.</li><li>Uses Django best practices for ORM usage and view handling.</li></ul>                                                                          |
+| 📄  | **Documentation** | <ul><li>Well-documented codebase with inline comments and docstrings.</li><li>Includes a `requirements.txt` file for managing project dependencies.</li><li>Provides usage and installation commands for easy setup and execution.</li></ul>                                              |
+| 🔌  | **Integrations**  | <ul><li>Integrates with external tools or libraries for translation, document retrieval, and text processing.</li><li>Supports API endpoints for seamless integration with frontend or external systems.</li><li>Implements serializers for data transformation and validation.</li></ul> |
+| 🧩  |  **Modularity**   | <ul><li>Encourages separation of concerns with distinct modules for different functionalities.</li><li>Promotes reusability of code through modular design.</li><li>Facilitates easy maintenance and scalability of the project.</li></ul>                                                |
+| 🧪  |    **Testing**    | <ul><li>Includes unit tests for critical functionalities like feedback submission and translation.</li><li>Ensures test coverage for key components to maintain reliability.</li><li>Validates data integrity and proper functionality of features.</li></ul>                             |
+| ⚡️ |  **Performance**  | <ul><li>Optimizes response time by leveraging efficient algorithms for document retrieval and text processing.</li><li>Utilizes caching mechanisms for frequently accessed data.</li><li>Ensures scalability to handle increased user load.</li></ul>                                     |
+| 🛡️  |   **Security**    | <ul><li>Implements Django security features like CSRF protection and secure session handling.</li><li>Follows best practices for data validation and sanitization to prevent vulnerabilities.</li><li>Enforces secure communication protocols for API endpoints.</li></ul>                |
+| 📦  | **Dependencies**  | <ul><li>Manages project dependencies using `pip` and `requirements.txt` files.</li><li>Specifies required packages and versions for easy setup and reproducibility.</li><li>Ensures compatibility and stability by tracking dependencies.</li></ul>                                       |
 
 ---
 
-##  Project Structure
+## Project Structure
 
 ```sh
 └── django_chabot_backend.git/
@@ -67,8 +84,8 @@
         └── chatbot_dir
 ```
 
+### Project Index
 
-###  Project Index
 <details open>
 	<summary><b><code>DJANGO_CHABOT_BACKEND.GIT/</code></b></summary>
 	<details> <!-- __root__ Submodule -->
@@ -171,34 +188,35 @@
 </details>
 
 ---
-##  Getting Started
 
-###  Prerequisites
+## Getting Started
+
+### Prerequisites
 
 Before getting started with django_chabot_backend.git, ensure your runtime environment meets the following requirements:
 
 - **Programming Language:** Python
 - **Package Manager:** Pip
 
-
-###  Installation
+### Installation
 
 Install django_chabot_backend.git using one of the following methods:
 
 **Build from source:**
 
 1. Clone the django_chabot_backend.git repository:
+
 ```sh
 ❯ git clone https://github.com/mjprod/django_chabot_backend.git
 ```
 
 2. Navigate to the project directory:
+
 ```sh
 ❯ cd django_chabot_backend.git
 ```
 
 3. Install the project dependencies:
-
 
 **Using `pip`** &nbsp; [<img align="center" src="https://img.shields.io/badge/Pip-3776AB.svg?style={badge_style}&logo=pypi&logoColor=white" />](https://pypi.org/project/pip/)
 
@@ -206,10 +224,8 @@ Install django_chabot_backend.git using one of the following methods:
 ❯ pip install -r backend/chatbot_dir/requirements.txt, backend/chatbot_dir/chatbot_project/requirements.txt
 ```
 
+### Usage
 
-
-
-###  Usage
 Run django_chabot_backend.git using the following command:
 **Using `pip`** &nbsp; [<img align="center" src="https://img.shields.io/badge/Pip-3776AB.svg?style={badge_style}&logo=pypi&logoColor=white" />](https://pypi.org/project/pip/)
 
@@ -217,8 +233,8 @@ Run django_chabot_backend.git using the following command:
 ❯ python {entrypoint}
 ```
 
+### Testing
 
-###  Testing
 Run the test suite using the following command:
 **Using `pip`** &nbsp; [<img align="center" src="https://img.shields.io/badge/Pip-3776AB.svg?style={badge_style}&logo=pypi&logoColor=white" />](https://pypi.org/project/pip/)
 
@@ -226,17 +242,17 @@ Run the test suite using the following command:
 ❯ pytest
 ```
 
-
 ---
-##  Project Roadmap
 
-- [X] **`Task 1`**: <strike>Implement feature one.</strike>
+## Project Roadmap
+
+- [x] **`Task 1`**: <strike>Implement feature one.</strike>
 - [ ] **`Task 2`**: Implement feature two.
 - [ ] **`Task 3`**: Implement feature three.
 
 ---
 
-##  Contributing
+## Contributing
 
 - **💬 [Join the Discussions](https://github.com/mjprod/django_chabot_backend.git/discussions)**: Share your insights, provide feedback, or ask questions.
 - **🐛 [Report Issues](https://github.com/mjprod/django_chabot_backend.git/issues)**: Submit bugs found or log feature requests for the `django_chabot_backend.git` project.
@@ -279,13 +295,13 @@ Run the test suite using the following command:
 
 ---
 
-##  License
+## License
 
 This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
 
 ---
 
-##  Acknowledgments
+## Acknowledgments
 
 - List any resources, contributors, inspiration, etc. here.
 
