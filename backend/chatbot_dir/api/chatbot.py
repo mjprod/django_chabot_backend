@@ -573,7 +573,7 @@ structured_llm_grader = llm_grader.with_structured_output(GradeDocuments)
 
 # System Message for Grader
 document_system_message = """
-You are a document relevance assessor. 
+You are a document relevance assessor.
 Analyze the retrieved document's relevance to the user's question.
 Provide a confidence score between 0.0 and 1.0 where:
 - 1.0: Document contains exact matches or directly relevant information
@@ -604,7 +604,7 @@ retrieval_grader = document_grade_prompt | structured_llm_grader
 # Define GradeHallucinations Model
 class GradeConfidenceLevel(BaseModel):
     confidence_score: float = Field(
-        description="""Confidence score between 0.0 and 1.0 
+        description="""Confidence score between 0.0 and 1.0
         indicating how well the answer is grounded in source facts""",
         ge=0.0,
         le=1.0,
