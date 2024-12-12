@@ -21,5 +21,9 @@ urlpatterns = [
         CompleteConversationsView.as_view(),
         name="complete_conversations",
     ),
-    path("capture_feedback/", CaptureFeedbackView.as_view(), name="capture_feedback"),
+    path(
+        "capture_feedback/",
+        CaptureFeedbackView.as_view(),
+        name="capture_feedback",
+    ),
 ]

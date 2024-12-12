@@ -16,4 +16,4 @@ class ApiConfig(AppConfig):
             create_feedback_indexes()
             logger.info("MongoDB indexes created successfully on startup")
         except Exception as e:
-            logger.error(f"Failed to create MongoDB indexes on startup: {str(e)}")
+            logger.error(f"Failed to create indexes on startup: {str(e)}")

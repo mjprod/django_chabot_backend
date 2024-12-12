@@ -29,26 +29,27 @@ def rebuild_vector_store(documents):
         if not cohere_api_key:
             raise ValueError("COHERE_API_KEY environment variable is not set")
 
-        embedding_model = CohereEmbeddings(
-            model="embed-multilingual-v3.0", cohere_api_key=cohere_api_key
-        )
+        embedding_model = CohereEmbeddings(model="embed-multilingual-v3.0")
 
         # Convert to LangchainDocument objects
-        doc_objects = [
-            LangchainDocument(
-                page_content=f"Question: {doc['question']['text']}\nAnswer: {doc['answer']['detailed']['en']}",
-                metadata={
-                    "category": ",".join(doc["metadata"].get("category", [])),
-                    "subCategory": doc["metadata"].get("subCategory", ""),
-                    "difficulty": doc["metadata"].get("difficulty", 0),
-                    "confidence": doc["metadata"].get("confidence", 0.0),
-                    "intent": doc["question"].get("intent", ""),
-                    "variations": ", ".join(doc["question"].get("variations", [])),
-                    "conditions": ", ".join(doc["answer"].get("conditions", [])),
-                },
+        doc_objects = []
+        for doc in documents:
+            page_content = (
+                f"Question: {doc['question']['text']}\n"
+                f"Answer: {doc['answer']['detailed']['en']}"
             )
-            for doc in documents
-        ]
+            metadata = {
+                "category": ",".join(doc["metadata"].get("category", [])),
+                "subCategory": doc["metadata"].get("subCategory", ""),
+                "difficulty": doc["metadata"].get("difficulty", 0),
+                "confidence": doc["metadata"].get("confidence", 0.0),
+                "intent": doc["question"].get("intent", ""),
+                "variations": ", ".join(doc["question"].get("variations", [])),
+                "conditions": ", ".join(doc["answer"].get("conditions", [])),
+            }
+            doc_objects.append(
+                LangchainDocument(page_content=page_content, metadata=metadata)
+            )
 
         # Create store
         store = Chroma.from_documents(

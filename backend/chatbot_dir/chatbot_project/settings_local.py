@@ -116,7 +116,10 @@ MONGODB_CLUSTER = os.getenv("MONGODB_CLUSTER")
 MONGODB_DATABASE = os.getenv("MONGODB_DATABASE", "ChatbotDB")
 
 # Construct MongoDB URI
-MONGODB_URI = f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@{MONGODB_CLUSTER}/{MONGODB_DATABASE}?retryWrites=true&w=majority"
+MONGODB_URI = (
+    f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}"
+    f"@{MONGODB_CLUSTER}/{MONGODB_DATABASE}?retryWrites=true&w=majority"
+)
 
 
 DATABASES = {

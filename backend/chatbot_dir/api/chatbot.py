@@ -5,14 +5,12 @@ import os
 import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
-from pathlib import Path
 from typing import List
 
 import requests
 from bson import ObjectId
 from django.conf import settings
 from dotenv import load_dotenv
-from langchain.schema import Document as LangchainDocument
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_cohere import CohereEmbeddings
 from langchain_community.vectorstores import Chroma
@@ -127,14 +125,16 @@ class CustomDocument:
 # Create Document Objects
 doc_objects = [
     CustomDocument(
-        page_content=f"Question: {doc['question']['text']}\nAnswer: {doc['answer']['detailed']['en']}",
+        page_content=(
+            f"Question: {doc['question']['text']}\n"
+            f"Answer: {doc['answer']['detailed']['en']}"
+        ),
         metadata={
             "category": ",".join(doc["metadata"].get("category", [])),
             "subCategory": doc["metadata"].get("subCategory", ""),
             "difficulty": doc["metadata"].get("difficulty", 0),
             "confidence": doc["metadata"].get("confidence", 0.0),
             "intent": doc["question"].get("intent", ""),
-            # Convert variations list to string
             "variations": ", ".join(doc["question"].get("variations", [])),
             "conditions": ", ".join(doc["answer"].get("conditions", [])),
         },
@@ -324,7 +324,8 @@ retriever = MultiRetriever(vectorstores)
 
 def get_rag_prompt_template(is_first_message):
     if is_first_message:
-        system_content = """You are a friendly gaming platform assistant focused on natural conversation.
+        system_content = """You are a friendly gaming platform assistant
+        focused on natural conversation.
 
 CONVERSATION STYLE:
 - Respond warmly and naturally
@@ -378,7 +379,8 @@ PROHIBITED:
 - Saying "please note"
 - Suggesting customer service unless necessary"""
     else:
-        system_content = """You are a friendly gaming platform assistant focused on natural conversation.
+        system_content = """You are a friendly gaming platform assistant
+        focused on natural conversation.
 
 CONVERSATION STYLE:
 - Maintain warm, natural dialogue
@@ -517,13 +519,13 @@ def translate_and_clean(text):
                     1. If the input is not in English:
                     - Translate it to clear, formal English
                     - Maintain proper nouns, numbers, and technical terms
-                    - Output ONLY the translated text without any prefixes or explanations
+                    - Output ONLY the translated text without any prefixes or
+                    explanations
                     2. If the input is in English:
                     - Remove filler words and informal language
                     - Standardize terminology
                     - Maintain the original question's intent
                     - Output ONLY the cleaned text
-                    
                     Do not:
                     - Add explanations or additional context
                     - Include phrases like "Translated from X to English:"
@@ -571,7 +573,8 @@ structured_llm_grader = llm_grader.with_structured_output(GradeDocuments)
 
 # System Message for Grader
 document_system_message = """
-You are a document relevance assessor. Analyze the retrieved document's relevance to the user's question.
+You are a document relevance assessor.
+Analyze the retrieved document's relevance to the user's question.
 Provide a confidence score between 0.0 and 1.0 where:
 - 1.0: Document contains exact matches or directly relevant information
 - 0.7-0.9: Document contains highly relevant but not exact information
@@ -601,7 +604,8 @@ retrieval_grader = document_grade_prompt | structured_llm_grader
 # Define GradeHallucinations Model
 class GradeConfidenceLevel(BaseModel):
     confidence_score: float = Field(
-        description="Confidence score between 0.0 and 1.0 indicating how well the answer is grounded in source facts",
+        description="""Confidence score between 0.0 and 1.0
+        indicating how well the answer is grounded in source facts""",
         ge=0.0,
         le=1.0,
     )
@@ -647,8 +651,8 @@ rag_prompt_template = ChatPromptTemplate.from_messages(
     [
         (
             "system",
-            """You are a knowledgeable gaming/gambling platform assistant. 
-            Your primary task is to analyze context and maintain natural conversation 
+            """You are a knowledgeable gaming/gambling platform assistant.
+            Your primary task is to analyze context and maintain natural conversation
             flow while delivering precise information.
 
 CONTEXT RULES:
@@ -659,7 +663,8 @@ CONTEXT RULES:
 
 CONVERSATION FLOW:
 - First Message:
-  * Begin with "Dear Player" (Only use Dear Player for the first interaction and follow up or other questions do not use)
+  * Begin with "Dear Player" (Only use Dear Player for
+  the first interaction and follow up or other questions do not use)
   * Introduce yourself briefly
   * Use formal pronouns (您)
 - Follow-up Messages:
@@ -701,16 +706,16 @@ PROHIBITED:
 
 Example Flow:
 User: "What's the minimum deposit?"
-Assistant: "Dear Player, the minimum deposit amount is $10. 
+Assistant: "Dear Player, the minimum deposit amount is $10.
 You can make deposits through various payment methods on the app."
 
 User: "Which payment method is fastest?"
-Assistant: "Bank transfers typically process within 5-15 minutes. 
+Assistant: "Bank transfers typically process within 5-15 minutes.
 For instant deposits, please use e-wallets available on the platform."
 
 User: "How do I set up an e-wallet?"
 Assistant: "Please go to the wallet section and select 'Add Payment Method'.
-Follow the verification steps to link your e-wallet. 
+Follow the verification steps to link your e-wallet.
 If you encounter any issues during setup, our support team is ready to assist you.""",
         ),
         ("assistant", "I'll provide clear, friendly direct answers to help you."),
@@ -778,7 +783,8 @@ def update_local_confidence(generation, confidence_diff):
                             )
                             updated = True
                             logger.info(
-                                f"Updated confidence in {database_file} from {current_confidence} to {item['metadata']['confidence']}"
+                                f"Updated confidence in {database_file} "
+                                f"from {current_confidence} to {item['metadata']['confidence']}"
                             )
 
                             # Write back to file
@@ -834,7 +840,8 @@ def update_database_confidence(comparison_result, docs_to_use):
                             )
 
                             logger.info(
-                                f"Updated confidence in {database_file} from {current_confidence} to {data[i]['metadata']['confidence']}"
+                                f"Updated confidence in {database_file} "
+                                f"from {current_confidence} to {data[i]['metadata']['confidence']}"
                             )
 
                             # Write back to file
@@ -881,7 +888,8 @@ def translate_en_to_cn(input_text):
             messages=[
                 {
                     "role": "system",
-                    "content": """You are a professional Chinese translator specializing in gaming platform communications. Follow these guidelines:
+                    "content": """You are a professional Chinese translator specializing
+                    in gaming platform communications. Follow these guidelines:
     - Use Simplified Chinese (简体中文)
     - Maintain a semi-formal tone (温和 亲近)
     - Use standard business honorifics (您) for addressing users
@@ -982,7 +990,7 @@ def process_feedback_translation(feedback_data):
         return feedback_data
 
 
-# this is an old functuion that will be removed in prod
+# ahsfahssf this is an old functuion that will be removed in prod
 def generate_user_input(user_prompt):
     # Clean and translate prompt
     cleaned_prompt = translate_and_clean(user_prompt)
@@ -1214,8 +1222,8 @@ def compare_answers(generation, feedback_answers, docs_to_use):
         highest_score = 0
 
         for feedback in feedback_answers:
-            # For the demo I have added in a fixed feedback_score so that the feedback always wins to show the client
-            feedback_score = 0.95  # this will be removed when we move to the next stage
+            # For demo added in fixed feedback always wins to show the client
+            feedback_score = 0.95  # remove when move to the next stage
             logger.info(
                 f"Feedback answer score: {feedback_score} for ID: {feedback['conversation_id']}"
             )
@@ -1226,8 +1234,8 @@ def compare_answers(generation, feedback_answers, docs_to_use):
 
         # Always return feedback as better for demos
         comparison_result = {
-            "better_answer": "feedback",  # this always chooses feedback as the better answer
-            "confidence_diff": 0.1,  # this is for making a small confidence change each time to simulate learning
+            "better_answer": "feedback",  # always choose feedback as better answer
+            "confidence_diff": 0.1,  # mall confidence change to simulate learning
             "generated_score": generated_score,
             "feedback_score": highest_score,
             "best_feedback": best_match,

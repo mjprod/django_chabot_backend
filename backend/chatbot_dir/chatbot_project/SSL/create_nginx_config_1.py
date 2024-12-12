@@ -1,5 +1,6 @@
 import os
 
+
 def create_nginx_config():
     config = """
 server {
@@ -25,7 +26,8 @@ server {
         # CORS headers
         add_header 'Access-Control-Allow-Origin' 'https://staging.mjproapps.com' always;
         add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, PUT, DELETE' always;
-        add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization' always;
+        add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,
+        If-Modified-Since,Cache-Control,Content-Type,Range,Authorization' always;
         add_header 'Access-Control-Allow-Credentials' 'true' always;
         add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;
 
@@ -49,7 +51,8 @@ server {
         if ($request_method = 'OPTIONS') {
             add_header 'Access-Control-Allow-Origin' 'https://staging.mjproapps.com' always;
             add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, PUT, DELETE' always;
-            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization' always;
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,
+            If-Modified-Since,Cache-Control,Content-Type,Range,Authorization' always;
             add_header 'Access-Control-Max-Age' 1728000;
             add_header 'Content-Type' 'text/plain charset=UTF-8';
             add_header 'Content-Length' 0;
@@ -81,6 +84,7 @@ server {
         print("Error: Permission denied. Try running the script with sudo.")
     except Exception as e:
         print(f"An error occurred: {e}")
+
 
 if __name__ == "__main__":
     create_nginx_config()
