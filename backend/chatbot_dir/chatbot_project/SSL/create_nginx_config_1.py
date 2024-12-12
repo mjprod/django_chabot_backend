@@ -88,4 +88,3 @@ server {
 
 if __name__ == "__main__":
     create_nginx_config()
-

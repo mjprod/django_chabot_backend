@@ -25,7 +25,7 @@ server {
     DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
 
     # HSTS (optional, but recommended for security)
-    add_header Strict-Transport-Security 
+    add_header Strict-Transport-Security
     "max-age=31536000; includeSubDomains" always;
 
     # Logs
@@ -33,7 +33,7 @@ server {
     error_log /var/log/nginx/api-staging.mjproapps.com.error.log;
 
     location / {
-        proxy_pass http://127.0.0.1:8000;  
+        proxy_pass http://127.0.0.1:8000;
         # Assuming your Django app runs on port 8000
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -134,4 +134,3 @@ server {
 
 if __name__ == "__main__":
     create_nginx_config()
-
