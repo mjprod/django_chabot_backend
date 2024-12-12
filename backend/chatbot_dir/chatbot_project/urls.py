@@ -21,7 +21,7 @@ from rest_framework.schemas import get_schema_view
 from rest_framework.documentation import include_docs_urls
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
-    path('api/schema/', get_schema_view(title="API Schema"), name='api_schema'),
+    path("admin/", admin.site.urls),
+    path("api/", include("api.urls")),
+    path("api/schema/", get_schema_view(title="API Schema"), name="api_schema"),
 ]

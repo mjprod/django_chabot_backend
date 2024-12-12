@@ -35,7 +35,6 @@ docs_to_use = []
 prompt = ""
 
 
-
 # load env
 load_dotenv()
 
@@ -123,14 +122,16 @@ def generate_answer(user_prompt):
     docs_retrieve = retriever.invoke(prompt)
 
     # Filter relevant documents
-    
+
     for doc in docs_retrieve:
         res = retrieval_grader.invoke({"prompt": prompt, "document": doc.page_content})
         if res.binary_score == "yes":
             docs_to_use.append(doc)
 
     # Generate response
-    generation = rag_chain.invoke({"documents": format_docs(docs_to_use), "prompt": prompt})
+    generation = rag_chain.invoke(
+        {"documents": format_docs(docs_to_use), "prompt": prompt}
+    )
 
     # Check for hallucinations
     response = hallucination_grader.invoke(
@@ -138,6 +139,7 @@ def generate_answer(user_prompt):
     )
 
     return generation, response.binary_score
+
 
 # create class for relevance LLM
 class GradeDocuments(BaseModel):
@@ -171,7 +173,7 @@ grade_prompt = ChatPromptTemplate.from_messages(
 # runnable chain for document grader
 retrieval_grader = grade_prompt | structured_llm_grader
 
-#test print for debug
+# test print for debug
 # print("Filtered docuemnts:", len(docs_to_use))
 
 
