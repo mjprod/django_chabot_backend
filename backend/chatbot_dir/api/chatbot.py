@@ -982,7 +982,7 @@ def process_feedback_translation(feedback_data):
         return feedback_data
 
 
-# this is an old functuion that will be removed in prod
+# ahsfahssf this is an old functuion that will be removed in prod
 def generate_user_input(user_prompt):
     # Clean and translate prompt
     cleaned_prompt = translate_and_clean(user_prompt)
