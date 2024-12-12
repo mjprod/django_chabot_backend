@@ -523,7 +523,6 @@ def translate_and_clean(text):
                     - Standardize terminology
                     - Maintain the original question's intent
                     - Output ONLY the cleaned text
-                    
                     Do not:
                     - Add explanations or additional context
                     - Include phrases like "Translated from X to English:"
