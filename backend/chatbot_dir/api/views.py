@@ -1,8 +1,5 @@
-import json
-
 # added logging
 import logging
-import os
 import time
 from datetime import datetime
 
@@ -16,8 +13,6 @@ from rest_framework.views import APIView
 from .chatbot import (
     generate_prompt_conversation,
     generate_user_input,
-    process_feedback_translation,
-    save_interaction,
     translate_and_clean,
 )
 from .serializers import (

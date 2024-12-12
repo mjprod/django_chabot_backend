@@ -11,7 +11,6 @@ import requests
 from bson import ObjectId
 from django.conf import settings
 from dotenv import load_dotenv
-from langchain.schema import Document as LangchainDocument
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_cohere import CohereEmbeddings
 from langchain_community.vectorstores import Chroma
@@ -377,7 +376,8 @@ PROHIBITED:
 - Saying "please note"
 - Suggesting customer service unless necessary"""
     else:
-        system_content = """You are a friendly gaming platform assistant focused on natural conversation.
+        system_content = """You are a friendly gaming platform assistant 
+        focused on natural conversation.
 
 CONVERSATION STYLE:
 - Maintain warm, natural dialogue
@@ -516,7 +516,8 @@ def translate_and_clean(text):
                     1. If the input is not in English:
                     - Translate it to clear, formal English
                     - Maintain proper nouns, numbers, and technical terms
-                    - Output ONLY the translated text without any prefixes or explanations
+                    - Output ONLY the translated text without any prefixes or 
+                    explanations
                     2. If the input is in English:
                     - Remove filler words and informal language
                     - Standardize terminology
@@ -658,7 +659,8 @@ CONTEXT RULES:
 
 CONVERSATION FLOW:
 - First Message:
-  * Begin with "Dear Player" (Only use Dear Player for the first interaction and follow up or other questions do not use)
+  * Begin with "Dear Player" (Only use Dear Player for 
+  the first interaction and follow up or other questions do not use)
   * Introduce yourself briefly
   * Use formal pronouns (您)
 - Follow-up Messages:
@@ -777,7 +779,7 @@ def update_local_confidence(generation, confidence_diff):
                             )
                             updated = True
                             logger.info(
-                                f"Updated confidence in {database_file} from {current_confidence} to {item['metadata']['confidence']}"
+                                f"Updated confidence in {database_file} from {current_confidence} to {data[i]['metadata']['confidence']}"
                             )
 
                             # Write back to file
@@ -880,7 +882,8 @@ def translate_en_to_cn(input_text):
             messages=[
                 {
                     "role": "system",
-                    "content": """You are a professional Chinese translator specializing in gaming platform communications. Follow these guidelines:
+                    "content": """You are a professional Chinese translator specializing 
+                    in gaming platform communications. Follow these guidelines:
     - Use Simplified Chinese (简体中文)
     - Maintain a semi-formal tone (温和 亲近)
     - Use standard business honorifics (您) for addressing users
@@ -1213,8 +1216,8 @@ def compare_answers(generation, feedback_answers, docs_to_use):
         highest_score = 0
 
         for feedback in feedback_answers:
-            # For the demo I have added in a fixed feedback_score so that the feedback always wins to show the client
-            feedback_score = 0.95  # this will be removed when we move to the next stage
+            # For demo added in fixed feedback always wins to show the client
+            feedback_score = 0.95  # remove when move to the next stage
             logger.info(
                 f"Feedback answer score: {feedback_score} for ID: {feedback['conversation_id']}"
             )
@@ -1225,8 +1228,8 @@ def compare_answers(generation, feedback_answers, docs_to_use):
 
         # Always return feedback as better for demos
         comparison_result = {
-            "better_answer": "feedback",  # this always chooses feedback as the better answer
-            "confidence_diff": 0.1,  # this is for making a small confidence change each time to simulate learning
+            "better_answer": "feedback",  # always choose feedback as better answer
+            "confidence_diff": 0.1,  # mall confidence change to simulate learning
             "generated_score": generated_score,
             "feedback_score": highest_score,
             "best_feedback": best_match,
