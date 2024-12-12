@@ -125,14 +125,16 @@ class CustomDocument:
 # Create Document Objects
 doc_objects = [
     CustomDocument(
-        page_content=f"Question: {doc['question']['text']}\nAnswer: {doc['answer']['detailed']['en']}",
+        page_content=(
+            f"Question: {doc['question']['text']}\n"
+            f"Answer: {doc['answer']['detailed']['en']}"
+        ),
         metadata={
             "category": ",".join(doc["metadata"].get("category", [])),
             "subCategory": doc["metadata"].get("subCategory", ""),
             "difficulty": doc["metadata"].get("difficulty", 0),
             "confidence": doc["metadata"].get("confidence", 0.0),
             "intent": doc["question"].get("intent", ""),
-            # Convert variations list to string
             "variations": ", ".join(doc["question"].get("variations", [])),
             "conditions": ", ".join(doc["answer"].get("conditions", [])),
         },
@@ -322,7 +324,8 @@ retriever = MultiRetriever(vectorstores)
 
 def get_rag_prompt_template(is_first_message):
     if is_first_message:
-        system_content = """You are a friendly gaming platform assistant focused on natural conversation.
+        system_content = """You are a friendly gaming platform assistant
+        focused on natural conversation.
 
 CONVERSATION STYLE:
 - Respond warmly and naturally
@@ -570,7 +573,8 @@ structured_llm_grader = llm_grader.with_structured_output(GradeDocuments)
 
 # System Message for Grader
 document_system_message = """
-You are a document relevance assessor. Analyze the retrieved document's relevance to the user's question.
+You are a document relevance assessor. 
+Analyze the retrieved document's relevance to the user's question.
 Provide a confidence score between 0.0 and 1.0 where:
 - 1.0: Document contains exact matches or directly relevant information
 - 0.7-0.9: Document contains highly relevant but not exact information
@@ -600,7 +604,8 @@ retrieval_grader = document_grade_prompt | structured_llm_grader
 # Define GradeHallucinations Model
 class GradeConfidenceLevel(BaseModel):
     confidence_score: float = Field(
-        description="Confidence score between 0.0 and 1.0 indicating how well the answer is grounded in source facts",
+        description="""Confidence score between 0.0 and 1.0 
+        indicating how well the answer is grounded in source facts""",
         ge=0.0,
         le=1.0,
     )
@@ -835,7 +840,8 @@ def update_database_confidence(comparison_result, docs_to_use):
                             )
 
                             logger.info(
-                                f"Updated confidence in {database_file} from {current_confidence} to {data[i]['metadata']['confidence']}"
+                                f"Updated confidence in {database_file} "
+                                f"from {current_confidence} to {data[i]['metadata']['confidence']}"
                             )
 
                             # Write back to file
