@@ -779,7 +779,8 @@ def update_local_confidence(generation, confidence_diff):
                             )
                             updated = True
                             logger.info(
-                                f"Updated confidence in {database_file} from {current_confidence} to {data[i]['metadata']['confidence']}"
+                                f"Updated confidence in {database_file} "
+                                f"from {current_confidence} to {item['metadata']['confidence']}"
                             )
 
                             # Write back to file
