@@ -919,7 +919,7 @@ def translate_en_to_cn(input_text):
         return {"text": "", "prompt_tokens": 0, "total_tokens": 0}
 
 
-def translate_en_to_ms(input_text, to_lang="ms", model="small"):
+def translate_en_to_ms(input_text, to_lang="ms", model="base"):
     # this is the url we send the payload to for translation
     url = "https://api.mesolitica.com/translation"
 
