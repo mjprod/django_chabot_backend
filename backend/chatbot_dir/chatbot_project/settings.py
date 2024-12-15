@@ -10,10 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv()
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,13 +28,11 @@ SECRET_KEY = "django-insecure-z$!=*9prhkq7xd2^2!!g39v$spw1f=yaxbc4qhle9yp1n!-b%-
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = [
-    "mjproapps.com",
-    "api.mjproapps.com",
-    "www.mjproapps.com",
+    "api-staging.mjproapps.com",
     "3.107.8.190",
     "54.206.216.180",
     "13.238.144.45",
@@ -43,8 +45,8 @@ SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_HSTS_PRELOAD = True
 
@@ -59,7 +61,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "api",
+    "api.apps.ApiConfig",
     "corsheaders",
 ]
 
@@ -96,19 +98,62 @@ WSGI_APPLICATION = "chatbot_project.wsgi.application"
 
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
-    "https://mjproapps.com",
-    "https://www.mjproapps.com",
+    "https://api-staging.mjproapps.com",
 ]
+# MongoDB settings
+MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
+MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
+MONGODB_CLUSTER = os.getenv("MONGODB_CLUSTER")
+MONGODB_DATABASE = os.getenv("MONGODB_DATABASE", "ChatbotDB")
 
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+# Construct MongoDB URI
+MONGODB_URI = (
+    f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}"
+    f"@{MONGODB_CLUSTER}/{MONGODB_DATABASE}?retryWrites=true&w=majority"
+)
+
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
-    }
+    },
+    "mongodb": {
+        "ENGINE": "djongo",
+        "NAME": MONGODB_DATABASE,
+        "CLIENT": {
+            "host": MONGODB_URI,
+        },
+    },
+}
+# added logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": "prompt_conversation.log",
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "api": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+        },
+    },
 }
 
 
