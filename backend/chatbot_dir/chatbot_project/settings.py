@@ -67,6 +67,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -74,7 +75,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "chatbot_project.urls"
@@ -102,6 +102,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://api-staging.mjproapps.com",
     "https://staging.mjproapps.com",
     "https://mjproapps.com",
+    "https://www.mjproapps.com",
 ]
 # MongoDB settings
 MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
