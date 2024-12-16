@@ -52,15 +52,25 @@ class MessageDataSerializer(serializers.Serializer):
         return data
 
     def to_internal_value(self, data):
-        if isinstance(data.get("text"), (list, str)):
+        try:
+            text_data = data.get("text")
+            # Clean up [object Object] artifacts if it's an array
+            if isinstance(text_data, list):
+                text_data = [
+                    str(item).replace("[object Object]", "").strip()
+                    for item in text_data
+                    if item
+                ]
+
             return {
-                "text": data["text"],
+                "text": text_data,
                 "sender": data["sender"],
                 "user": data.get("user", ""),
                 "timestamp": data["timestamp"],
                 "agent_id": data.get("agent_id", ""),
             }
-        return super().to_internal_value(data)
+        except Exception as e:
+            raise serializers.ValidationError(f"Data validation failed: {str(e)}")
 
 
 class CompleteConversationsSerializer(serializers.Serializer):
