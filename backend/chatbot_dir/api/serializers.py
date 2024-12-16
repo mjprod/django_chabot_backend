@@ -37,7 +37,7 @@ class PromptConversationSerializer(serializers.Serializer):
 
 
 class MessageDataSerializer(serializers.Serializer):
-    text = serializers.JSONField(allow_null=True)  # For array or string
+    text = serializers.JSONField(required=True)  # For array or string
     sender = serializers.CharField()
     user = serializers.CharField()
     timestamp = serializers.DateTimeField()
@@ -52,12 +52,10 @@ class MessageDataSerializer(serializers.Serializer):
         return data
 
     def to_internal_value(self, data):
-        # Handle incoming data in either format
-        if "role" in data and "content" in data:
-            # Convert from test format to storage format
+        if isinstance(data.get("text"), (list, str)):
             return {
-                "text": data["content"],
-                "sender": data["role"],
+                "text": data["text"],
+                "sender": data["sender"],
                 "user": data.get("user", ""),
                 "timestamp": data["timestamp"],
                 "agent_id": data.get("agent_id", ""),
