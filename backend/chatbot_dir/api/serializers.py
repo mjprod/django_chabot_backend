@@ -37,33 +37,30 @@ class PromptConversationSerializer(serializers.Serializer):
 
 
 class MessageDataSerializer(serializers.Serializer):
-    text = serializers.JSONField(required=True)  # For array or string
+    text = serializers.JSONField(required=True)
     sender = serializers.CharField()
     user = serializers.CharField()
     timestamp = serializers.DateTimeField()
     agent_id = serializers.CharField(required=False)
 
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        # Map sender to role for test compatibility
-        data["role"] = data.pop("sender")
-        # Map text to content for test compatibility
-        data["content"] = data.pop("text")
-        return data
-
     def to_internal_value(self, data):
         try:
             text_data = data.get("text")
-            # Clean up [object Object] artifacts if it's an array
+            # Handle both string and array types
             if isinstance(text_data, list):
-                text_data = [
-                    str(item).replace("[object Object]", "").strip()
-                    for item in text_data
-                    if item
-                ]
+                # Clean up [object Object] artifacts from arrays
+                cleaned_text = []
+                for item in text_data:
+                    if isinstance(item, str):
+                        # Remove [object Object] artifacts
+                        cleaned_item = item.replace("[object Object]", "").strip()
+                        if cleaned_item:  # Only add non-empty strings
+                            cleaned_text.append(cleaned_item)
+            else:
+                cleaned_text = text_data
 
             return {
-                "text": text_data,
+                "text": cleaned_text,
                 "sender": data["sender"],
                 "user": data.get("user", ""),
                 "timestamp": data["timestamp"],
@@ -71,6 +68,15 @@ class MessageDataSerializer(serializers.Serializer):
             }
         except Exception as e:
             raise serializers.ValidationError(f"Data validation failed: {str(e)}")
+
+    def to_representation(self, instance):
+        return {
+            "text": instance["text"],
+            "sender": instance["sender"],
+            "user": instance["user"],
+            "timestamp": instance["timestamp"],
+            "agent_id": instance.get("agent_id", ""),
+        }
 
 
 class CompleteConversationsSerializer(serializers.Serializer):

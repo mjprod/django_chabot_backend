@@ -248,9 +248,8 @@ class CompleteConversationsView(MongoDBMixin, APIView):
     def post(self, request):
         start_time = time.time()
         logger.info("Starting complete_conversations POST request")
-
         try:
-            # Log the request data first, before any processing
+            # Log the request data
             logger.info(f"Request Data: {request.data}")
             logger.info(f"Request Content-Type: {request.content_type}")
             logger.info(f"Request Headers: {request.headers}")
@@ -261,20 +260,34 @@ class CompleteConversationsView(MongoDBMixin, APIView):
                 "messages": [],
             }
 
+            # Process each message and clean up [object Object] artifacts
             for message in request.data["messages"]:
                 cleaned_message = {
-                    "text": message["text"],
                     "sender": message["sender"],
                     "user": message["user"],
                     "timestamp": message["timestamp"],
                 }
+
+                # Handle text field that can be either string or array
+                if isinstance(message["text"], list):
+                    cleaned_message["text"] = [
+                        item.replace("[object Object]", "").strip()
+                        for item in message["text"]
+                        if item and isinstance(item, str)
+                    ]
+                else:
+                    cleaned_message["text"] = message["text"]
+
+                # Add optional agent_id if present
                 if "agent_id" in message:
                     cleaned_message["agent_id"] = message["agent_id"]
+
                 cleaned_data["messages"].append(cleaned_message)
 
             # Validate cleaned data
             logger.info("Validating request data")
             serializer = CompleteConversationsSerializer(data=cleaned_data)
+
             if not serializer.is_valid():
                 logger.error(f"Validation failed: {serializer.errors}")
                 return Response(
@@ -282,18 +295,15 @@ class CompleteConversationsView(MongoDBMixin, APIView):
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
+            # Save to MongoDB
             conversation_data = {
                 "conversation_id": serializer.validated_data["conversation_id"],
                 "messages": serializer.validated_data["messages"],
                 "timestamp": datetime.now().isoformat(),
             }
 
-            # Save to MongoDB
             db = self.get_db()
             db.complete_conversations.insert_one(conversation_data)
-
-            total_time = time.time() - start_time
-            logger.info(f"Total request processing time: {total_time:.2f}s")
 
             return Response(
                 {"message": "Conversation saved successfully"},
