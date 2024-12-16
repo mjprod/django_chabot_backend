@@ -255,19 +255,32 @@ class CompleteConversationsView(MongoDBMixin, APIView):
             logger.info(f"Request Content-Type: {request.content_type}")
             logger.info(f"Request Headers: {request.headers}")
 
-            # Then proceed with validation
+            # Clean up the messages data before validation
+            cleaned_data = {
+                "conversation_id": request.data["conversation_id"],
+                "messages": [],
+            }
+
+            for message in request.data["messages"]:
+                cleaned_message = {
+                    "text": message["text"],
+                    "sender": message["sender"],
+                    "user": message["user"],
+                    "timestamp": message["timestamp"],
+                }
+                if "agent_id" in message:
+                    cleaned_message["agent_id"] = message["agent_id"]
+                cleaned_data["messages"].append(cleaned_message)
+
+            # Validate cleaned data
             logger.info("Validating request data")
-            serializer = CompleteConversationsSerializer(data=request.data)
+            serializer = CompleteConversationsSerializer(data=cleaned_data)
             if not serializer.is_valid():
                 logger.error(f"Validation failed: {serializer.errors}")
                 return Response(
                     {"error": "Invalid input data", "details": serializer.errors},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
-
-            # Prepare MongoDB document
-            db_start = time.time()
-            logger.info("Starting MongoDB Write Operations")
 
             conversation_data = {
                 "conversation_id": serializer.validated_data["conversation_id"],
@@ -278,7 +291,6 @@ class CompleteConversationsView(MongoDBMixin, APIView):
             # Save to MongoDB
             db = self.get_db()
             db.complete_conversations.insert_one(conversation_data)
-            logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
 
             total_time = time.time() - start_time
             logger.info(f"Total request processing time: {total_time:.2f}s")
