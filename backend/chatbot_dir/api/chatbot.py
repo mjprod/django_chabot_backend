@@ -1,8 +1,11 @@
 import asyncio
+import gc
 import json
 import logging
 import os
+import resource
 import time
+import tracemalloc
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from typing import List
@@ -24,6 +27,24 @@ from pydantic import BaseModel, Field
 
 # mongodb imports
 from pymongo import MongoClient
+
+
+def monitor_memory():
+    """Start memory monitoring and return initial snapshot"""
+    tracemalloc.start()
+    snapshot1 = tracemalloc.take_snapshot()
+    return snapshot1
+
+
+def compare_memory(snapshot1):
+    """Compare memory usage against initial snapshot"""
+    snapshot2 = tracemalloc.take_snapshot()
+    top_stats = snapshot2.compare_to(snapshot1, "lineno")
+    print("[ Top 10 memory differences ]")
+    for stat in top_stats[:10]:
+        print(stat)
+    gc.collect()  # Force garbage collection after comparison
+
 
 # create our gloabl variables
 logger = logging.getLogger(__name__)
@@ -249,6 +270,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
 
 # Process documents in batches
 def create_vector_store(documents, batch_size=500):
+    memory_snapshot = monitor_memory()
     try:
         logger.info("Starting document splitting process")
         split_start = time.time()
@@ -282,11 +304,14 @@ def create_vector_store(documents, batch_size=500):
             f"Vector store creation completed in {time.time() - store_start:.2f}s"
         )
         vectorstores.append(store)
+        compare_memory(memory_snapshot)
         return store
 
     except Exception as e:
         logger.error(f"Vector store creation failed: {str(e)}")
         raise
+    finally:
+        del split_data
 
 
 # Process docs
@@ -305,15 +330,21 @@ class MultiRetriever:
         self.vectorstores = vectorstores
 
     def get_relevant_documents(self, query):
+
+        memory_snapshot = monitor_memory()
         all_results = []
-        for store in vectorstores:
-            retriever = store.as_retriever(
-                search_type="mmr",
-                search_kwargs={"k": 5, "fetch_k": 8, "lambda_mult": 0.8},
-            )
-            results = retriever.invoke(query)
-            all_results.extend(results)
-        return all_results[:3]
+        try:
+            for store in vectorstores:
+                retriever = store.as_retriever(
+                    search_type="mmr",
+                    search_kwargs={"k": 5, "fetch_k": 8, "lambda_mult": 0.8},
+                )
+                results = retriever.invoke(query)
+                all_results.extend(results)
+                compare_memory(memory_snapshot)
+            return all_results[:3]
+        finally:
+            gc.collect()
 
     def invoke(self, query):
         return self.get_relevant_documents(query)
@@ -505,6 +536,7 @@ class ConversationMetaData:
 
 # this is the OPENAI translate function
 def translate_and_clean(text):
+    memory_snapshot = monitor_memory()
     api_key = os.getenv("OPENAI_API_KEY")
     client = OpenAI(api_key=api_key)
 
@@ -556,6 +588,9 @@ def translate_and_clean(text):
     except Exception as e:
         logger.error(f"Translation error: {str(e)}")
         return text
+    finally:
+        compare_memory(memory_snapshot)
+        gc.collect()
 
 
 # Define grading of docs
@@ -1028,6 +1063,7 @@ def generate_user_input(user_prompt):
 def generate_prompt_conversation(
     user_prompt, conversation_id, admin_id, agent_id, user_id
 ):
+    memory_snapshot = monitor_memory()
     start_time = time.time()
     logger.info("Starting prompt_conversation request")
 
@@ -1140,24 +1176,47 @@ def generate_prompt_conversation(
     except Exception as e:
         logger.error(f"Error in prompt_conversation: {str(e)}")
         raise
+    finally:
+        compare_memory(memory_snapshot)
+        gc.collect()
 
 
 def save_conversation(conversation):
-    db = get_mongodb_client()
-    conversations = db.conversations
-    conversation_dict = conversation.to_dict()
+    memory_snapshot = monitor_memory()
+    try:
+        db = get_mongodb_client()
+        conversations = db.conversations
+        conversation_dict = conversation.to_dict()
 
-    # Remove _id from the dictionary if it exists
-    if "_id" in conversation_dict:
-        del conversation_dict["_id"]
+        # Remove _id to prevent duplicate key errors
+        if "_id" in conversation_dict:
+            del conversation_dict["_id"]
 
-    conversation_dict["is_first_message"] = False
+        # Update conversation state
+        conversation_dict["is_first_message"] = False
 
-    conversations.update_one(
-        {"session_id": conversation.session_id},
-        {"$set": conversation_dict},
-        upsert=True,
-    )
+        # MongoDB operation with error handling
+        result = conversations.update_one(
+            {"session_id": conversation.session_id},
+            {"$set": conversation_dict},
+            upsert=True,
+        )
+
+        # Verify operation success
+        if result.modified_count > 0 or result.upserted_id:
+            logger.info(f"Successfully saved conversation {conversation.session_id}")
+        else:
+            logger.warning(f"No changes made to conversation {conversation.session_id}")
+
+        return result
+    except Exception as e:
+        logger.error(f"Failed to save conversation: {str(e)}")
+        raise
+    finally:
+        # Clean up and memory management
+        compare_memory(memory_snapshot)
+        gc.collect()
+        del conversation_dict  # Explicit cleanup of large dictionary
 
 
 def save_interaction(interaction_type, data):

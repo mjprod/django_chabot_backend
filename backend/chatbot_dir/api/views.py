@@ -1,6 +1,8 @@
 # added logging
+import gc
 import logging
 import time
+import tracemalloc
 from datetime import datetime
 
 from bson import ObjectId
@@ -11,8 +13,10 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .chatbot import (
+    compare_memory,
     generate_prompt_conversation,
     generate_user_input,
+    monitor_memory,
     translate_and_clean,
 )
 from .serializers import (
@@ -26,8 +30,17 @@ from .serializers import (
 # added mongodb base view class
 class MongoDBMixin:
     def get_db(self):
-        client = MongoClient(settings.MONGODB_URI)
-        return client[settings.MONGODB_DATABASE]
+        memory_snapshot = monitor_memory()
+        try:
+            client = MongoClient(settings.MONGODB_URI)
+            return client[settings.MONGODB_DATABASE]
+        finally:
+            compare_memory(memory_snapshot)
+            gc.collect()
+
+    def cleanup_db_connection(self, db):
+        if db is not None:
+            db.client.close()
 
 
 logger = logging.getLogger(__name__)
@@ -35,6 +48,8 @@ logger = logging.getLogger(__name__)
 
 class UserInputView(MongoDBMixin, APIView):
     def post(self, request):
+        memory_snapshot = monitor_memory()
+        db = None
         start_time = time.time()
         logger.info("Starting user_input request")
 
@@ -96,6 +111,12 @@ class UserInputView(MongoDBMixin, APIView):
                 {"error": f"Request processing failed: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
+        finally:
+            if db is not None:
+                self.cleanup_db_connection(db)
+            compare_memory(memory_snapshot)
+            gc.collect()
+            del generation
 
 
 class UserConversationsView(MongoDBMixin, APIView):
@@ -114,6 +135,8 @@ class UserConversationsView(MongoDBMixin, APIView):
 # new api for start conversation
 class PromptConversationView(MongoDBMixin, APIView):
     def post(self, request):
+        memory_snapshot = monitor_memory()
+        db = None
         try:
             # Log start of request processing
             logger.info("Starting prompt_conversation request")
@@ -183,6 +206,12 @@ class PromptConversationView(MongoDBMixin, APIView):
                 {"error": f"Request processing failed: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
+        finally:
+            if db is not None:
+                self.cleanup_db_connection(db)
+            compare_memory(memory_snapshot)
+            gc.collect()
+            del response
 
 
 class CompleteConversationsView(MongoDBMixin, APIView):
