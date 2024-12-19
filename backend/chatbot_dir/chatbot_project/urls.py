@@ -17,10 +17,15 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+from django.views.decorators.cache import cache_page
 from rest_framework.schemas import get_schema_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("api.urls")),
-    path("api/schema/", get_schema_view(title="API Schema"), name="api_schema"),
+    path(
+        "api/schema/",
+        cache_page(60 * 60)(get_schema_view(title="API Schema")),
+        name="api_schema",
+    ),
 ]

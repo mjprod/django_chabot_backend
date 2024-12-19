@@ -1,6 +1,7 @@
 # chatbot_project/api/urls.py
 
 from django.urls import path
+from django.views.decorators.cache import cache_page
 
 from .views import (
     CaptureFeedbackView,
@@ -18,12 +19,8 @@ urlpatterns = [
     ),
     path(
         "complete_conversations/",
-        CompleteConversationsView.as_view(),
+        cache_page(60 * 5)(CompleteConversationsView.as_view()),  # Cache for 5 minutes
         name="complete_conversations",
     ),
-    path(
-        "capture_feedback/",
-        CaptureFeedbackView.as_view(),
-        name="capture_feedback",
-    ),
+    path("capture_feedback/", CaptureFeedbackView.as_view(), name="capture_feedback"),
 ]
