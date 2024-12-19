@@ -33,11 +33,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "api-staging.mjproapps.com",
-<<<<<<< HEAD
     "api.mjproapps.com",
-=======
-    "api-mjproapps.com",
->>>>>>> staging
     "3.107.8.190",
     "54.206.216.180",
     "13.238.144.45",
