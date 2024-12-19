@@ -67,20 +67,12 @@ class PromptConversationSerializer(serializers.Serializer):
 
 
 class MessageDataSerializer(serializers.Serializer):
-<<<<<<< HEAD
-    text = serializers.JSONField(required=True)
-    sender = serializers.CharField()
-    user = serializers.CharField()
-=======
     text = serializers.JSONField(allow_null=True)  # For array or string
     sender = serializers.CharField(max_length=100)
     user = serializers.CharField(max_length=100)
->>>>>>> staging
     timestamp = serializers.DateTimeField()
     agent_id = serializers.CharField(max_length=100, required=False)
 
-<<<<<<< HEAD
-=======
     def to_representation(self, instance):
         try:
             data = super().to_representation(instance)
@@ -92,7 +84,6 @@ class MessageDataSerializer(serializers.Serializer):
         finally:
             gc.collect()
 
->>>>>>> staging
     def to_internal_value(self, data):
         try:
             text_data = data.get("text")
@@ -118,15 +109,6 @@ class MessageDataSerializer(serializers.Serializer):
             }
         except Exception as e:
             raise serializers.ValidationError(f"Data validation failed: {str(e)}")
-
-    def to_representation(self, instance):
-        return {
-            "text": instance["text"],
-            "sender": instance["sender"],
-            "user": instance["user"],
-            "timestamp": instance["timestamp"],
-            "agent_id": instance.get("agent_id", ""),
-        }
 
 
 class CompleteConversationsSerializer(serializers.Serializer):
