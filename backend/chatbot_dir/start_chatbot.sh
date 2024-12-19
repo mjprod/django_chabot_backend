@@ -28,4 +28,8 @@ db.interactions.create_index([('timestamp', -1)])
 export $(grep -v '^#' .env | xargs)
 
 # Run Django development server
-python3 manage.py runserver 0.0.0.0:8000
+gunicorn --workers=3 \
+         --bind 0.0.0.0:8000 \
+         --access-logfile - \
+         --error-logfile - \
+         chatbot_project.wsgi:application
