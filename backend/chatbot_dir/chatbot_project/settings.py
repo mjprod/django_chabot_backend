@@ -110,10 +110,7 @@ WSGI_APPLICATION = "chatbot_project.wsgi.application"
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "https://api-staging.mjproapps.com",
-<<<<<<< HEAD
     "https://staging.mjproapps.com",
-=======
->>>>>>> staging
     "https://mjproapps.com",
     "https://www.mjproapps.com",
 ]
