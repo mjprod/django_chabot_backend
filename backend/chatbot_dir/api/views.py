@@ -19,6 +19,7 @@ from .chatbot import (
     monitor_memory,
     translate_and_clean,
 )
+from .json_db import JsonDB
 from .serializers import (
     CaptureFeedbackSerializer,
     CompleteConversationsSerializer,
@@ -27,26 +28,34 @@ from .serializers import (
 )
 
 
-# added mongodb base view class
-class MongoDBMixin:
+class JsonDBMixin:
     def get_db(self):
-        memory_snapshot = monitor_memory()
-        try:
-            client = MongoClient(settings.MONGODB_URI)
-            return client[settings.MONGODB_DATABASE]
-        finally:
-            compare_memory(memory_snapshot)
-            gc.collect()
+        return JsonDB(settings.JSON_DATABASE_PATH)
 
     def cleanup_db_connection(self, db):
-        if db is not None:
-            db.client.close()
+        pass  # No cleanup needed for JSON database
+
+
+# added mongodb base view class
+# class MongoDBMixin:
+# def get_db(self):
+# memory_snapshot = monitor_memory()
+# try:
+# client = MongoClient(settings.MONGODB_URI)
+# return client[settings.MONGODB_DATABASE]
+# finally:
+# compare_memory(memory_snapshot)
+# gc.collect()
+
+# def cleanup_db_connection(self, db):
+# if db is not None:
+# db.client.close()
 
 
 logger = logging.getLogger(__name__)
 
 
-class UserInputView(MongoDBMixin, APIView):
+class UserInputView(JsonDBMixin, APIView):
     def post(self, request):
         memory_snapshot = monitor_memory()
         db = None
@@ -97,7 +106,7 @@ class UserInputView(MongoDBMixin, APIView):
 
             user_input_doc = {**response_data, "timestamp": datetime.now().isoformat()}
 
-            db.user_inputs.insert_one(user_input_doc)
+            db.insert_one("user_inputs", user_input_doc)
             logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
 
             total_time = time.time() - start_time
@@ -119,7 +128,16 @@ class UserInputView(MongoDBMixin, APIView):
             del generation
 
 
-class UserConversationsView(MongoDBMixin, APIView):
+class UserConversationsView(JsonDBMixin, APIView):
+    def get(self, request, user_id):
+        db = self.get_db()
+        # Replace direct collection access
+        user_conversations = db.find("conversations", {"user_id": user_id})
+        return Response(user_conversations, status=status.HTTP_200_OK)
+
+
+"""
+class UserConversationsView(JsonDBMixin, APIView):
     def get(self, request, user_id):
         db = self.get_db()
         conversations = db.conversations
@@ -130,10 +148,11 @@ class UserConversationsView(MongoDBMixin, APIView):
             user_conversations.append(conv)
 
         return Response(user_conversations, status=status.HTTP_200_OK)
+"""
 
 
 # new api for start conversation
-class PromptConversationView(MongoDBMixin, APIView):
+class PromptConversationView(JsonDBMixin, APIView):
     def post(self, request):
         memory_snapshot = monitor_memory()
         db = None
@@ -183,7 +202,8 @@ class PromptConversationView(MongoDBMixin, APIView):
             }
 
             # Insert as new document
-            db.conversations.insert_one(conversation_data)
+            # db.conversations.insert_one(conversation_data)
+            db.insert_one("conversations", conversation_data)
             logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
 
             # Prepare response data
@@ -211,10 +231,9 @@ class PromptConversationView(MongoDBMixin, APIView):
                 self.cleanup_db_connection(db)
             compare_memory(memory_snapshot)
             gc.collect()
-            del response
 
 
-class CompleteConversationsView(MongoDBMixin, APIView):
+class CompleteConversationsView(JsonDBMixin, APIView):
     def get(self, request):
         start_time = time.time()
         logger.info("Starting complete_conversations GET request")
@@ -228,7 +247,7 @@ class CompleteConversationsView(MongoDBMixin, APIView):
             db_start = time.time()
             logger.info("Starting MongoDB Read Operations")
             db = self.get_db()
-
+            """
             # Query filter
             query_filter = {}
 
@@ -245,7 +264,18 @@ class CompleteConversationsView(MongoDBMixin, APIView):
             results = []
             for doc in cursor:
                 doc["_id"] = str(doc["_id"])
-                results.append(doc)
+                results.append(doc) """
+
+            # Use find method instead of direct collection access
+            all_conversations = db.find("complete_conversations", {})
+            total_count = len(all_conversations)
+
+            # Handle pagination manually since we're using JSON storage
+            start_idx = (page - 1) * limit
+            end_idx = start_idx + limit
+            results = sorted(
+                all_conversations, key=lambda x: x.get("timestamp", ""), reverse=True
+            )[start_idx:end_idx]
 
             logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
 
@@ -277,14 +307,8 @@ class CompleteConversationsView(MongoDBMixin, APIView):
     def post(self, request):
         start_time = time.time()
         logger.info("Starting complete_conversations POST request")
-
         try:
-            # Log the request data first, before any processing
-            logger.info(f"Request Data: {request.data}")
-            logger.info(f"Request Content-Type: {request.content_type}")
-            logger.info(f"Request Headers: {request.headers}")
-
-            # Then proceed with validation
+            # Validate request data
             logger.info("Validating request data")
             serializer = CompleteConversationsSerializer(data=request.data)
             if not serializer.is_valid():
@@ -294,24 +318,45 @@ class CompleteConversationsView(MongoDBMixin, APIView):
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
-            # Prepare MongoDB document
-            db_start = time.time()
-            logger.info("Starting MongoDB Write Operations")
+            # Clean up the messages data
+            cleaned_messages = []
+            for message in serializer.validated_data["messages"]:
+                cleaned_message = {
+                    "text": (
+                        message["text"]
+                        if isinstance(message["text"], str)
+                        else [
+                            text
+                            for text in message["text"]
+                            if not str(text).endswith("[object Object]")
+                        ]
+                    ),
+                    "sender": message["sender"],
+                    "user": message["user"],
+                    "timestamp": (
+                        message["timestamp"].isoformat()
+                        if isinstance(message["timestamp"], datetime)
+                        else message["timestamp"]
+                    ),
+                }
+                if "agent_id" in message:
+                    cleaned_message["agent_id"] = message["agent_id"]
+                cleaned_messages.append(cleaned_message)
 
+            # Prepare conversation data with serializable datetime
             conversation_data = {
                 "conversation_id": serializer.validated_data["conversation_id"],
-                "messages": serializer.validated_data["messages"],
+                "messages": cleaned_messages,
                 "timestamp": datetime.now().isoformat(),
             }
 
-            # Save to MongoDB
+            # Save to JSON database
             db = self.get_db()
-            db.complete_conversations.insert_one(conversation_data)
-            logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
+            db.insert_one("complete_conversations", conversation_data)
 
-            total_time = time.time() - start_time
-            logger.info(f"Total request processing time: {total_time:.2f}s")
-
+            logger.info(
+                f"Total request processing time: {time.time() - start_time:.2f}s"
+            )
             return Response(
                 {"message": "Conversation saved successfully"},
                 status=status.HTTP_201_CREATED,
@@ -325,7 +370,8 @@ class CompleteConversationsView(MongoDBMixin, APIView):
             )
 
 
-class CaptureFeedbackView(MongoDBMixin, APIView):
+"""
+class CaptureFeedbackView(JsonDBMixin, APIView):
 
     def post(self, request):
         start_time = time.time()
@@ -462,8 +508,135 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
                 {"error": f"Failed to retrieve feedback: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
+"""
 
 
+class CaptureFeedbackView(JsonDBMixin, APIView):
+    def post(self, request):
+        start_time = time.time()
+        logger.info("Starting feedback POST request")
+        try:
+            # Transform incoming data
+            transformed_data = {
+                "conversation_id": str(
+                    request.data.get("conversation_id")
+                ),  # Use existing conversation_id
+                "user_input": request.data.get("prompt", ""),
+                "ai_response": request.data.get("generation", ""),
+                "correct_bool": request.data.get("correct_bool", False),
+                "chat_rating": request.data.get("chat_rating", 0),
+                "correct_answer": request.data.get("correct_answer", ""),
+                "metadata": {
+                    "user_id": request.data.get("user_id"),
+                    "translations": request.data.get("translations", []),
+                    "confidence": 0.97,
+                },
+            }
+
+            # Validate transformed data
+            logger.info("Validating request data")
+            serializer = CaptureFeedbackSerializer(data=transformed_data)
+            if not serializer.is_valid():
+                logger.error(f"Validation failed: {serializer.errors}")
+                return Response(
+                    {"error": "Invalid input data", "details": serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Process translations and prepare data
+            logger.info("Processing feedback translations")
+            feedback_data = {
+                "conversation_id": serializer.validated_data["conversation_id"],
+                "user_input": translate_and_clean(transformed_data["user_input"]),
+                "ai_response": serializer.validated_data["ai_response"],
+                "correct_bool": serializer.validated_data["correct_bool"],
+                "chat_rating": serializer.validated_data["chat_rating"],
+                "correct_answer": translate_and_clean(
+                    transformed_data.get("correct_answer", "")
+                ),
+                "metadata": {
+                    **serializer.validated_data.get("metadata", {}),
+                    "confidence": 0.97,
+                },
+                "timestamp": datetime.now().isoformat(),
+                "search_score": 0.0,
+            }
+
+            # Save to JSON database
+            db = self.get_db()
+            db.insert_one("feedback_data", feedback_data)
+
+            logger.info(
+                f"Total request processing time: {time.time() - start_time:.2f}s"
+            )
+            return Response(
+                {"message": "Feedback saved successfully"},
+                status=status.HTTP_201_CREATED,
+            )
+
+        except Exception as e:
+            logger.error(f"Error processing request: {str(e)}")
+            return Response(
+                {"error": f"Failed to save feedback: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+    def get(self, request):
+        start_time = time.time()
+        logger.info("Starting feedback GET request")
+        try:
+            # Get pagination parameters
+            page = int(request.query_params.get("page", 1))
+            limit = int(request.query_params.get("limit", 10))
+
+            # Get data from JSON database
+            db = self.get_db()
+            all_feedback = db.find("feedback_data", {})
+            total_count = len(all_feedback)
+
+            # Manual pagination
+            start_idx = (page - 1) * limit
+            end_idx = start_idx + limit
+            results = sorted(
+                all_feedback, key=lambda x: x.get("timestamp", ""), reverse=True
+            )[start_idx:end_idx]
+
+            response_data = {
+                "total": total_count,
+                "page": page,
+                "limit": limit,
+                "results": results,
+            }
+
+            logger.info(
+                f"Total request processing time: {time.time() - start_time:.2f}s"
+            )
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except ValueError as e:
+            logger.error(f"Invalid pagination parameters: {str(e)}")
+            return Response(
+                {"error": "Invalid pagination parameters"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        except Exception as e:
+            logger.error(f"Error processing request: {str(e)}")
+            return Response(
+                {"error": f"Failed to retrieve feedback: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+
+def create_feedback_indexes():
+    try:
+        logger.info("Starting feedback index creation")
+        # No indexes needed for JSON storage
+        logger.info("Feedback indexes not required for JSON storage")
+    except Exception as e:
+        logger.error(f"Failed to create feedback indexes: {str(e)}")
+
+
+"""
 def create_feedback_indexes():
     try:
         logger.info("Starting feedback index creation")
@@ -476,3 +649,4 @@ def create_feedback_indexes():
         logger.info(f"Feedback indexes created successfully in {total_time:.2f}s")
     except Exception as e:
         logger.error(f"Failed to create feedback indexes: {str(e)}")
+"""

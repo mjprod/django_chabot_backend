@@ -28,6 +28,12 @@ from pydantic import BaseModel, Field
 # mongodb imports
 from pymongo import MongoClient
 
+from .json_db import JsonDB
+
+
+def get_db():
+    return JsonDB(settings.JSON_DATABASE_PATH)
+
 
 def monitor_memory():
     """Start memory monitoring and return initial snapshot"""
@@ -484,7 +490,8 @@ class ConversationMetaData:
         self.timestamp = timestamp or datetime.now().isoformat()
         self.messages = []
         self.translations = []
-        self._id = ObjectId()
+        # self._id = ObjectId()
+        self._id = str(int(time.time() * 1000))
         self.is_first_message = True
 
     def add_message(self, role, content):
@@ -778,11 +785,12 @@ rag_chain = (
     | StrOutputParser()
 )
 
-
+"""
 # API functions
 def get_mongodb_client():
     client = MongoClient(settings.MONGODB_URI)
     return client[settings.MONGODB_DATABASE]
+"""
 
 
 def update_local_confidence(generation, confidence_diff):
@@ -843,6 +851,28 @@ def update_local_confidence(generation, confidence_diff):
         logger.error(f"Error updating local confidence: {str(e)}")
 
 
+def update_database_confidence(comparison_result: dict, docs_to_use: list):
+    db = JsonDB(settings.JSON_DATABASE_PATH)
+    if not comparison_result or "best_feedback" not in comparison_result:
+        return
+
+    correct_answer = comparison_result["best_feedback"].get("correct_answer")
+    if not correct_answer:
+        return
+
+    feedback_data = db.find("feedback_data", {})
+    for feedback in feedback_data:
+        if feedback.get("correct_answer") == correct_answer:
+            current_confidence = feedback.get("confidence", 0.0)
+            db.update_one(
+                "feedback_data",
+                {"correct_answer": correct_answer},
+                {"$set": {"confidence": min(1.0, current_confidence + 0.1)}},
+            )
+            break
+
+
+"""
 def update_database_confidence(comparison_result, docs_to_use):
     try:
         logger.info("Starting database confidence update")
@@ -891,6 +921,7 @@ def update_database_confidence(comparison_result, docs_to_use):
 
     except Exception as e:
         logger.error(f"Error updating database confidence: {str(e)}")
+"""
 
 
 # async for translations
@@ -1066,6 +1097,117 @@ def generate_prompt_conversation(
     memory_snapshot = monitor_memory()
     start_time = time.time()
     logger.info("Starting prompt_conversation request")
+    try:
+        # Initialize JSON database
+        db = JsonDB(settings.JSON_DATABASE_PATH)
+
+        # Check for existing conversation
+        existing_conversation = db.find_one(
+            "conversations", {"session_id": conversation_id}
+        )
+        is_first_message = not existing_conversation
+
+        # Initialize conversation
+        conversation = ConversationMetaData(
+            session_id=conversation_id,
+            admin_id=admin_id,
+            agent_id=agent_id,
+            user_id=user_id,
+        )
+        conversation.is_first_message = is_first_message
+
+        # Get RAG prompt template
+        rag_prompt = get_rag_prompt_template(is_first_message)
+
+        # Process prompt and add message
+        logger.info("Processing user prompt")
+        cleaned_prompt = translate_and_clean(user_prompt)
+        conversation.add_message("user", user_prompt)
+
+        # Get and filter relevant documents
+        logger.info("Retrieving relevant documents")
+        docs_start = time.time()
+        docs_retrieve = retriever.invoke(cleaned_prompt)[:3]
+        docs_to_use = []
+
+        for doc in docs_retrieve:
+            relevance_score = retrieval_grader.invoke(
+                {"prompt": cleaned_prompt, "document": doc.page_content}
+            )
+            if relevance_score.confidence_score >= 0.7:
+                docs_to_use.append(doc)
+
+        logger.info(f"Document retrieval completed in {time.time() - docs_start:.2f}s")
+
+        # Generate initial response
+        logger.info("Generating AI response")
+        dynamic_chain = (
+            {
+                "context": lambda x: format_docs(docs_to_use),
+                "prompt": RunnablePassthrough(),
+            }
+            | rag_prompt
+            | rag_llm
+            | StrOutputParser()
+        )
+
+        generation_start = time.time()
+        generation = dynamic_chain.invoke(cleaned_prompt)
+        logger.info(f"AI Generation completed in {time.time() - generation_start:.2f}s")
+
+        # Self-learning comparison
+        logger.info("Starting self-learning comparison")
+        relevant_feedbacks = get_relevant_feedback_data(cleaned_prompt, db)
+
+        if relevant_feedbacks:
+            logger.info(f"Found {len(relevant_feedbacks)} relevant feedback answers")
+            comparison_result = compare_answers(
+                generation, relevant_feedbacks, docs_to_use
+            )
+
+            if comparison_result and comparison_result["better_answer"] == "feedback":
+                logger.info("Using feedback answer with higher confidence")
+                generation = comparison_result["best_feedback"]["correct_answer"]
+                update_database_confidence(comparison_result, docs_to_use)
+            else:
+                logger.info("Generated answer maintained")
+
+        # Calculate confidence
+        confidence_result = confidence_grader.invoke(
+            {"documents": format_docs(docs_to_use), "generation": generation}
+        )
+
+        # Generate translations
+        translation_start = time.time()
+        translations = asyncio.run(generate_translations(generation))
+        logger.info(f"Translations completed in {time.time() - translation_start:.2f}s")
+
+        # Save conversation
+        conversation.add_message("assistant", generation)
+        save_conversation(conversation)
+
+        return {
+            "generation": generation,
+            "conversation": conversation.to_dict(),
+            "confidence_score": confidence_result.confidence_score,
+            "translations": translations,
+        }
+
+    except Exception as e:
+        logger.error(f"Error in prompt_conversation: {str(e)}")
+        raise
+    finally:
+        compare_memory(memory_snapshot)
+        gc.collect()
+
+
+"""
+def generate_prompt_conversation(
+    user_prompt, conversation_id, admin_id, agent_id, user_id
+):
+    memory_snapshot = monitor_memory()
+    start_time = time.time()
+    logger.info("Starting prompt_conversation request")
 
     try:
         # this is a check for the conversation to remove Dear player
@@ -1179,12 +1321,13 @@ def generate_prompt_conversation(
     finally:
         compare_memory(memory_snapshot)
         gc.collect()
+"""
 
-
-def save_conversation(conversation):
+"""
+def save_conversation(conversation: ConversationMetaData) -> dict:
     memory_snapshot = monitor_memory()
     try:
-        db = get_mongodb_client()
+        db = JsonDB(settings.JSON_DATABASE_PATH)
         conversations = db.conversations
         conversation_dict = conversation.to_dict()
 
@@ -1217,10 +1360,41 @@ def save_conversation(conversation):
         compare_memory(memory_snapshot)
         gc.collect()
         del conversation_dict  # Explicit cleanup of large dictionary
+"""
 
 
-def save_interaction(interaction_type, data):
-    db = get_mongodb_client()
+def save_conversation(conversation: ConversationMetaData) -> dict:
+    memory_snapshot = monitor_memory()
+    try:
+        db = JsonDB(settings.JSON_DATABASE_PATH)
+        conversation_dict = conversation.to_dict()
+        # Remove _id to prevent duplicate key errors
+        if "_id" in conversation_dict:
+            del conversation_dict["_id"]
+        # Update conversation state
+        conversation_dict["is_first_message"] = False
+
+        # Use update_one method directly from JsonDB
+        result = db.update_one(
+            "conversations",
+            {"session_id": conversation.session_id},
+            {"$set": conversation_dict},
+            upsert=True,
+        )
+
+        logger.info(f"Successfully saved conversation {conversation.session_id}")
+        return {"success": True, "session_id": conversation.session_id}
+    except Exception as e:
+        logger.error(f"Failed to save conversation: {str(e)}")
+        raise
+    finally:
+        compare_memory(memory_snapshot)
+        gc.collect()
+        del conversation_dict  # Explicit cleanup of large dictionary
+
+
+def save_interaction(interaction_type: str, data: dict) -> dict:
+    db = JsonDB(settings.JSON_DATABASE_PATH)
     interactions = db.interactions
 
     new_interaction = {
@@ -1233,15 +1407,35 @@ def save_interaction(interaction_type, data):
     return {"message": f"{interaction_type} interaction saved successfully"}
 
 
+"""
 def handle_mongodb_operation(operation):
     try:
         return operation()
     except Exception as e:
         print(f"MongoDB operation failed: {str(e)}")
         return None
+"""
 
 
-def get_relevant_feedback_data(cleaned_prompt, db):
+def get_relevant_feedback_data(prompt: str, db) -> list:
+    feedback_data = db.find("feedback_data", {})
+    relevant_feedback = []
+
+    for feedback in feedback_data:
+        if prompt.lower() in feedback.get("user_input", "").lower():
+            relevant_feedback.append(
+                {
+                    "question": feedback.get("question", ""),
+                    "correct_answer": feedback.get("correct_answer", ""),
+                    "confidence": feedback.get("confidence", 0.0),
+                }
+            )
+
+    return relevant_feedback[:10]
+
+
+"""
+def get_relevant_feedback_data(cleaned_prompt: str, db) -> list:
     logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
     try:
         db.feedback_data.create_index([("user_input", "text")])
@@ -1264,6 +1458,7 @@ def get_relevant_feedback_data(cleaned_prompt, db):
     except Exception as e:
         logger.error(f"Error retrieving feedback answers: {str(e)}")
         return []
+"""
 
 
 def compare_answers(generation, feedback_answers, docs_to_use):
