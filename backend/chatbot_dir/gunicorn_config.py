@@ -15,3 +15,6 @@ pythonpath = os.path.join(chdir, "backend/chatbot_dir")
 accesslog = "-"
 errorlog = "-"
 loglevel = "info"
+
+# Prevent memory leaks
+worker_tmp_dir = "/dev/shm"
