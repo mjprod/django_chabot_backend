@@ -6,7 +6,8 @@ import os
 import resource
 import time
 import tracemalloc
-from concurrent.futures import ThreadPoolExecutor
+import asyncio
+
 from datetime import datetime
 from typing import List
 
@@ -901,14 +902,18 @@ def update_local_confidence(generation, confidence_diff):
 
 # async for translations
 async def generate_translations(generation):
-    with ThreadPoolExecutor() as executor:
+   # with ThreadPoolExecutor() as executor:
         # Run translations
-        malay_future = executor.submit(translate_en_to_ms, generation)
-        chinese_future = executor.submit(translate_en_to_cn, generation)
+        #malay_future = executor.submit(translate_en_to_ms, generation)
+        #chinese_future = executor.submit(translate_en_to_cn, generation)
+
+        #malay_future = await asyncio.to_thread(translate_en_to_ms, generation)
+        #chinese_future = await asyncio.to_thread(translate_en_to_cn, generation)
 
         # Gather results
         translations = await asyncio.gather(
-            asyncio.wrap_future(malay_future), asyncio.wrap_future(chinese_future)
+            asyncio.to_thread(translate_en_to_ms, generation),
+            asyncio.to_thread(translate_en_to_cn, generation)
         )
 
         return [
@@ -1096,6 +1101,7 @@ def generate_prompt_conversation(
 
         # Process prompt and add message
         logger.info("Processing user prompt")
+        
         cleaned_prompt = translate_and_clean(user_prompt)
         conversation.add_message("user", user_prompt)
 

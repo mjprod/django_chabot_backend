@@ -4,6 +4,7 @@ import logging
 import time
 import tracemalloc
 from datetime import datetime
+from contextlib import contextmanager
 
 from bson import ObjectId
 from django.conf import settings
@@ -28,19 +29,33 @@ from .serializers import (
 
 
 # added mongodb base view class
-#class MongoDBMixin:
- #   def get_db(self):
-  #      memory_snapshot = monitor_memory()
-   #     try:
-    #        client = MongoClient(settings.MONGODB_URI)
-     ##  finally:
-       #     compare_memory(memory_snapshot)
-        #    gc.collect()
-        # added mongodb base view class
 class MongoDBMixin:
+    """
+    MongoDBMixin handles MongoDB connections using context managers
+    for better connection management and error handling.
+    """
+    @contextmanager
     def get_db(self):
-        client = MongoClient(settings.MONGODB_URI)
-        return client[settings.MONGODB_DATABASE]
+        """Context manager for MongoDB connection."""
+        try:
+            # Log start of database connection
+            logger.info("Connecting to MongoDB...")
+
+            # Create MongoDB client
+            client = MongoClient(settings.MONGODB_URI)
+            db = client[settings.MONGODB_DATABASE]
+
+            # Yield the database object for use
+            yield db
+
+        except Exception as e:
+            logger.error(f"Failed to connect to MongoDB: {str(e)}")
+            raise
+
+        finally:
+            # Ensure the connection is closed after use
+            client.close()
+            logger.info("MongoDB connection closed.")
 
 
 logger = logging.getLogger(__name__)
