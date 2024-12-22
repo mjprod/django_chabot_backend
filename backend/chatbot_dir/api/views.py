@@ -115,7 +115,7 @@ class UserInputView(APIView):
             #if db is not None:
                 #self.cleanup_db_connection(db)
             #compare_memory(memory_snapshot)
-            gc.collect()
+            #gc.collect()
             del generation
 
 
@@ -214,12 +214,12 @@ class PromptConversationView(APIView):
                 {"error": f"Request processing failed: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-        finally:
+        #finally:
             #if db is not None:
                 #self.cleanup_db_connection(db)
             #compare_memory(memory_snapshot)
-            gc.collect()
-            del response
+            #gc.collect()
+            #del response
 
 
 class CompleteConversationsView(APIView):
