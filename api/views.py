@@ -171,21 +171,21 @@ class PromptConversationView(APIView):
             )
 
             # MongoDB operations with timing
-            db_start = time.time()
-            logger.info("Starting MongoDB Write Operations")
-            db = self.get_db()
-            conversation_data = {
-                "conversation_id": conversation_id,
-                "prompt": prompt,
-                "generation": response["generation"],
-                "user_id": user_id,
-                "translations": response.get("translations", []),
-                "timestamp": datetime.now().isoformat(),
-            }
+           # db_start = time.time()
+            #logger.info("Starting MongoDB Write Operations")
+            #db = self.get_db()
+            #conversation_data = {
+             #   "conversation_id": conversation_id,
+              #  "prompt": prompt,
+               # "generation": response["generation"],
+                #"user_id": user_id,
+               # "translations": response.get("translations", []),
+               #"timestamp": datetime.now().isoformat(),
+           # }
 
             # Insert as new document
-            db.conversations.insert_one(conversation_data)
-            logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
+           # db.conversations.insert_one(conversation_data)
+           # logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
 
             # Prepare response data
             response_data = {
@@ -196,9 +196,9 @@ class PromptConversationView(APIView):
                 "translations": response.get("translations", []),
             }
 
-            logger.info(
-                f"Total request processing time: {time.time() - start_time:.2f}s"
-            )
+            #logger.info(
+             #   f"Total request processing time: {time.time() - start_time:.2f}s"
+            #)
             return Response(response_data, status=status.HTTP_200_OK)
 
         except Exception as e:

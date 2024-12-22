@@ -196,11 +196,11 @@ class PromptConversationView(APIView):
             #}
              # Prepare response data
             response_data = {
-                "conversation_id": 'conversation_id',
-                "user_input": 'prompt',
-                "generation": 'response["generation"]',
-                "confidence": 'response["confidence_score"]',
-                "translations": 'response.get("translations", [])',
+                "conversation_id": conversation_id,
+                "user_input": prompt,
+                "generation": response["generation"],
+                "confidence": response["confidence_score"],
+                "translations": response.get("translations", []),
             }
 
            # logger.info(
