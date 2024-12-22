@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .chatbot import (
-    compare_memory,
+    #compare_memory,
     generate_prompt_conversation,
     generate_user_input,
     monitor_memory,
@@ -30,17 +30,17 @@ from .serializers import (
 # added mongodb base view class
 #class MongoDBMixin:
    # def get_db(self):
-        #memory_snapshot = monitor_memory()
+       # memory_snapshot = monitor_memory()
        # try:
-            #client = MongoClient(settings.MONGODB_URI)
+         #   client = MongoClient(settings.MONGODB_URI)
             #return client[settings.MONGODB_DATABASE]
-       # finally:
+      #  finally:
             #compare_memory(memory_snapshot)
-          #  gc.collect()
+            #gc.collect()
 
-    #def cleanup_db_connection(self, db):
-     #   if db is not None:
-      #       db.client.close()
+   # def cleanup_db_connection(self, db):
+       # if db is not None:
+       #     db.client.close()
 
 
 logger = logging.getLogger(__name__)
@@ -49,8 +49,8 @@ logger = logging.getLogger(__name__)
 class UserInputView(APIView):
     def post(self, request):
         #memory_snapshot = monitor_memory()
-        db = None
-        start_time = time.time()
+        #db = None
+        #start_time = time.time()
         logger.info("Starting user_input request")
 
         try:
@@ -91,17 +91,17 @@ class UserInputView(APIView):
             }
 
             # Save to MongoDB
-            db_start = time.time()
+            # db_start = time.time()
             logger.info("Starting MongoDB Write Operations")
-            db = self.get_db()
+          #   db = self.get_db()
 
-            user_input_doc = {**response_data, "timestamp": datetime.now().isoformat()}
+          #   user_input_doc = {**response_data, "timestamp": datetime.now().isoformat()}
 
-            db.user_inputs.insert_one(user_input_doc)
-            logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
+         #    db.user_inputs.insert_one(user_input_doc)
+            # logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
 
-            total_time = time.time() - start_time
-            logger.info(f"Total request processing time: {total_time:.2f}s")
+          #   total_time = time.time() - start_time
+         #    logger.info(f"Total request processing time: {total_time:.2f}s")
 
             return Response(response_data, status=status.HTTP_200_OK)
 
@@ -121,21 +121,22 @@ class UserInputView(APIView):
 
 class UserConversationsView(APIView):
     def get(self, request, user_id):
-        db = self.get_db()
-        conversations = db.conversations
+        # db = self.get_db()
+       #  conversations = db.conversations
 
-        user_conversations = []
-        for conv in conversations.find({"user_id": user_id}):
-            conv["_id"] = str(conv["_id"])
-            user_conversations.append(conv)
-
-        return Response(user_conversations, status=status.HTTP_200_OK)
+       #  user_conversations = []
+        # for conv in conversations.find({"user_id": user_id}):
+        # #     conv["_id"] = str(conv["_id"])
+        #     user_conversations.append(conv)
+# 
+       #  return Response(user_conversations, status=status.HTTP_200_OK)
+        return Response("todo", status=status.HTTP_200_OK)
 
 
 # new api for start conversation
 class PromptConversationView(APIView):
     def post(self, request):
-        #memory_snapshot = monitor_memory()
+        memory_snapshot = monitor_memory()
         db = None
         try:
             # Log start of request processing

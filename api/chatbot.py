@@ -29,21 +29,21 @@ from pydantic import BaseModel, Field
 #from pymongo import MongoClient
 
 
-def monitor_memory():
-    """Start memory monitoring and return initial snapshot"""
-    tracemalloc.start()
-    snapshot1 = tracemalloc.take_snapshot()
-    return snapshot1
+# def monitor_memory():
+  #   """Start memory monitoring and return initial snapshot"""
+    # tracemalloc.start()
+    # snapshot1 = tracemalloc.take_snapshot()
+    # return snapshot1
 
 
-def compare_memory(snapshot1):
-    """Compare memory usage against initial snapshot"""
-    snapshot2 = tracemalloc.take_snapshot()
-    top_stats = snapshot2.compare_to(snapshot1, "lineno")
-    print("[ Top 10 memory differences ]")
-    for stat in top_stats[:10]:
-        print(stat)
-    gc.collect()  # Force garbage collection after comparison
+# def compare_memory(snapshot1):
+  #   """Compare memory usage against initial snapshot"""
+   #  snapshot2 = tracemalloc.take_snapshot()
+    # top_stats = snapshot2.compare_to(snapshot1, "lineno")
+    # print("[ Top 10 memory differences ]")
+    # for stat in top_stats[:10]:
+     #    print(stat)
+    # gc.collect()  # Force garbage collection after comparison
 
 
 # create our gloabl variables
@@ -270,7 +270,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
 
 # Process documents in batches
 def create_vector_store(documents, batch_size=500):
-    #memory_snapshot = monitor_memory()
+    # = monitor_memory()
     try:
         logger.info("Starting document splitting process")
         split_start = time.time()
@@ -536,7 +536,7 @@ class ConversationMetaData:
 
 # this is the OPENAI translate function
 def translate_and_clean(text):
-    #                                                                    memory_snapshot = monitor_memory()
+    #memory_snapshot = monitor_memory()
     api_key = os.getenv("OPENAI_API_KEY")
     client = OpenAI(api_key=api_key)
 
@@ -589,7 +589,7 @@ def translate_and_clean(text):
         logger.error(f"Translation error: {str(e)}")
         return text
     finally:
-       # compare_memory(memory_snapshot)
+        #compare_memory(memory_snapshot)
         gc.collect()
 
 
@@ -780,9 +780,9 @@ rag_chain = (
 
 
 # API functions
-def get_mongodb_client():
-    client = MongoClient(settings.MONGODB_URI)
-    return client[settings.MONGODB_DATABASE]
+#def get_mongodb_client():
+   # client = MongoClient(settings.MONGODB_URI)
+    #return client[settings.MONGODB_DATABASE]
 
 
 def update_local_confidence(generation, confidence_diff):
@@ -1069,10 +1069,10 @@ def generate_prompt_conversation(
 
     try:
         # this is a check for the conversation to remove Dear player
-        db = get_mongodb_client()
-        existing_conversation = db.conversations.find_one(
-            {"session_id": conversation_id}
-        )
+        # db = get_mongodb_client()
+        # existing_conversation = db.conversations.find_one(
+         #    {"session_id": conversation_id}
+        # )
         is_first_message = not existing_conversation
         # Initialize conversation
         conversation = ConversationMetaData(
@@ -1128,7 +1128,7 @@ def generate_prompt_conversation(
 
         # this is where the self learning comes in, Its rough but will be worked on over time
         logger.info("Starting self-learning comparison")
-        db = get_mongodb_client()
+        # db = get_mongodb_client()
         relevant_feedbacks = get_relevant_feedback_data(cleaned_prompt, db)
 
         if relevant_feedbacks:
@@ -1182,15 +1182,15 @@ def generate_prompt_conversation(
 
 
 def save_conversation(conversation):
-    #memory_snapshot = monitor_memory()
+    # memory_snapshot = monitor_memory()
     try:
-        db = get_mongodb_client()
-        conversations = db.conversations
-        conversation_dict = conversation.to_dict()
+      #   db = get_mongodb_client()
+        # conversations = db.conversations
+        # conversation_dict = conversation.to_dict()
 
         # Remove _id to prevent duplicate key errors
-        if "_id" in conversation_dict:
-            del conversation_dict["_id"]
+       #  if "_id" in conversation_dict:
+          #   del conversation_dict["_id"]
 
         # Update conversation state
         conversation_dict["is_first_message"] = False
@@ -1214,14 +1214,14 @@ def save_conversation(conversation):
         raise
     finally:
         # Clean up and memory management
-       #compare_memory(memory_snapshot)
+        #compare_memory(memory_snapshot)
         gc.collect()
         del conversation_dict  # Explicit cleanup of large dictionary
 
 
 def save_interaction(interaction_type, data):
-    db = get_mongodb_client()
-    interactions = db.interactions
+    #db = get_mongodb_client()
+    #interactions = db.interactions
 
     new_interaction = {
         "timestamp": datetime.now().isoformat(),
@@ -1229,7 +1229,7 @@ def save_interaction(interaction_type, data):
         "data": data,
     }
 
-    interactions.insert_one(new_interaction)
+   # interactions.insert_one(new_interaction)
     return {"message": f"{interaction_type} interaction saved successfully"}
 
 
