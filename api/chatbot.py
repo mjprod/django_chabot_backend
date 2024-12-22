@@ -1027,9 +1027,9 @@ def process_feedback_translation(feedback_data):
 
 
 # ahsfahssf this is an old functuion that will be removed in prod
-def generate_user_input(user_prompt):
+def generate_user_input(cleaned_prompt):
     # Clean and translate prompt
-    cleaned_prompt = translate_and_clean(user_prompt)
+    #cleaned_prompt = translate_and_clean(user_prompt)
 
     # Get relevant documents
     docs_retrieve = retriever.get_relevant_documents(cleaned_prompt)
