@@ -1070,10 +1070,11 @@ def generate_prompt_conversation(
     try:
         # this is a check for the conversation to remove Dear player
         #db = get_mongodb_client()
-        existing_conversation = db.conversations.find_one(
-            {"session_id": conversation_id}
-        )
-        is_first_message = not existing_conversation
+       # existing_conversation = db.conversations.find_one(
+          #  {"session_id": conversation_id}
+       # )
+       # is_first_message = not existing_conversation
+        is_first_message = True
         # Initialize conversation
         conversation = ConversationMetaData(
             session_id=conversation_id,
@@ -1246,29 +1247,29 @@ def handle_mongodb_operation(operation):
         return None
 
 
-def get_relevant_feedback_data(cleaned_prompt, db):
-    logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
-    try:
-        db.feedback_data.create_index([("user_input", "text")])
-        logger.info("create text index for feedback search")
+#def get_relevant_feedback_data(cleaned_prompt, db):
+ #   logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
+  #  try:
+   #     db.feedback_data.create_index([("user_input", "text")])
+    #    logger.info("create text index for feedback search")
 
-        similar_answers = (
-            db.feedback_data.find(
-                {
-                    "$text": {"$search": cleaned_prompt},
-                    "correct_answer": {"$exists": True, "$ne": ""},
-                }
-            )
-            .sort([("score", {"$meta": "textScore"}), ("timestamp", -1)])
-            .limit(3)
-        )
+     #   similar_answers = (
+      #      db.feedback_data.find(
+       #         {
+        #            "$text": {"$search": cleaned_prompt},
+         #           "correct_answer": {"$exists": True, "$ne": ""},
+          #      }
+           # )
+            #.sort([("score", {"$meta": "textScore"}), ("timestamp", -1)])
+            #.limit(3)
+       # )
 
-        feedback_list = list(similar_answers)
-        logger.info(f"found {len(feedback_list)} potential feedback matches")
-        return feedback_list
-    except Exception as e:
-        logger.error(f"Error retrieving feedback answers: {str(e)}")
-        return []
+        #feedback_list = list(similar_answers)
+        #logger.info(f"found {len(feedback_list)} potential feedback matches")
+        #return feedback_list
+    #except Exception as e:
+      #  logger.error(f"Error retrieving feedback answers: {str(e)}")
+     #   return []
 
 
 def compare_answers(generation, feedback_answers, docs_to_use):
