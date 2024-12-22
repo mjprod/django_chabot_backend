@@ -184,7 +184,7 @@ class PromptConversationView(APIView):
 
             # Insert as new document
            # db.conversations.insert_one(conversation_data)
-            logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
+           # logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
 
             # Prepare response data
            # response_data = {
@@ -194,12 +194,20 @@ class PromptConversationView(APIView):
             #    "confidence": response["confidence_score"],
              #   "translations": response.get("translations", []),
             #}
+             # Prepare response data
+            response_data = {
+                "conversation_id": 'conversation_id',
+                "user_input": 'prompt',
+                "generation": 'response["generation"]',
+                "confidence": 'response["confidence_score"]',
+                "translations": 'response.get("translations", [])',
+            }
 
            # logger.info(
             #    f"Total request processing time: {time.time() - start_time:.2f}s"
             #)
-            #return Response(response_data, status=status.HTTP_200_OK)
-            return Response("TODO", status=status.HTTP_200_OK)
+            return Response(response_data, status=status.HTTP_200_OK)
+            
         except Exception as e:
             logger.error(f"Error processing request: {str(e)}")
             return Response(
