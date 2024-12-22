@@ -780,9 +780,9 @@ rag_chain = (
 
 
 # API functions
-def get_mongodb_client():
-    client = MongoClient(settings.MONGODB_URI)
-    return client[settings.MONGODB_DATABASE]
+#def get_mongodb_client():
+    #client = MongoClient(settings.MONGODB_URI)
+    #return client[settings.MONGODB_DATABASE]
 
 
 def update_local_confidence(generation, confidence_diff):
@@ -1069,7 +1069,7 @@ def generate_prompt_conversation(
 
     try:
         # this is a check for the conversation to remove Dear player
-        db = get_mongodb_client()
+        #db = get_mongodb_client()
         existing_conversation = db.conversations.find_one(
             {"session_id": conversation_id}
         )
@@ -1128,49 +1128,53 @@ def generate_prompt_conversation(
 
         # this is where the self learning comes in, Its rough but will be worked on over time
         logger.info("Starting self-learning comparison")
-        db = get_mongodb_client()
-        relevant_feedbacks = get_relevant_feedback_data(cleaned_prompt, db)
+        #db = get_mongodb_client()
+        #relevant_feedbacks = get_relevant_feedback_data(cleaned_prompt, db)
 
-        if relevant_feedbacks:
-            logger.info(f"Found {len(relevant_feedbacks)} relevant feedback answers")
-            comparison_result = compare_answers(
-                generation, relevant_feedbacks, docs_to_use
-            )
+       # if relevant_feedbacks:
+          #  logger.info(f"Found {len(relevant_feedbacks)} relevant feedback answers")
+         #   comparison_result = compare_answers(
+         #       generation, relevant_feedbacks, docs_to_use
+         #   )
 
-            if comparison_result and comparison_result["better_answer"] == "feedback":
-                logger.info("Using feedback answer with higher confidence")
-                generation = comparison_result["best_feedback"]["correct_answer"]
-                update_database_confidence(comparison_result, docs_to_use)
-            else:
-                logger.info("Generated answer maintained, updating confidence")
-                update_local_confidence(
-                    generation, comparison_result["confidence_diff"]
-                )
+          #  if comparison_result and comparison_result["better_answer"] == "feedback":
+           #     logger.info("Using feedback answer with higher confidence")
+          #      generation = comparison_result["best_feedback"]["correct_answer"]
+          #      update_database_confidence(comparison_result, docs_to_use)
+           # else:
+           #     logger.info("Generated answer maintained, updating confidence")
+            #    update_local_confidence(
+           #         generation, comparison_result["confidence_diff"]
+            #    )
 
         # Calculate confidence
-        confidence_result = confidence_grader.invoke(
-            {"documents": format_docs(docs_to_use), "generation": generation}
-        )
+       # confidence_result = confidence_grader.invoke(
+         #   {"documents": format_docs(docs_to_use), "generation": generation}
+       # )
 
         # Generate translations asynchronously
-        translation_start = time.time()
-        translations = asyncio.run(generate_translations(generation))
-        logger.info(f"Translations completed in {time.time() - translation_start:.2f}s")
+        #translation_start = time.time()
+        #translations = asyncio.run(generate_translations(generation))
+        # logger.info(f"Translations completed in {time.time() - translation_start:.2f}s")
 
         # Save conversation
-        db_start = time.time()
-        conversation.add_message("assistant", generation)
-        save_conversation(conversation)
-        logger.info(f"Database operation completed in {time.time() - db_start:.2f}s")
-
-        total_time = time.time() - start_time
-        logger.info(f"Total request processing time: {total_time:.2f}s")
+       # db_start = time.time()
+       # conversation.add_message("assistant", generation)
+       # save_conversation(conversation)
+       # logger.info(f"Database operation completed in {time.time() - db_start:.2f}s")
+#
+        #total_time = time.time() - start_time
+        # logger.info(f"Total request processing time: {total_time:.2f}s")
 
         return {
-            "generation": generation,
-            "conversation": conversation.to_dict(),
-            "confidence_score": confidence_result.confidence_score,
-            "translations": translations,
+           # "generation": generation,
+           # "conversation": conversation.to_dict(),
+           # "confidence_score": confidence_result.confidence_score,
+           # "translations": translations,
+           "generation": 'generation',
+           "conversation": 'conversation.to_dict()',
+           "confidence_score": 'confidence_result.confidence_score',
+           "translations": 'translations',
         }
 
     except Exception as e:

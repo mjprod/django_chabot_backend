@@ -470,10 +470,10 @@ def create_feedback_indexes():
         logger.info("Starting feedback index creation")
         start_time = time.time()
 
-        db = MongoClient(settings.MONGODB_URI)[settings.MONGODB_DATABASE]
-        db.feedback_data.create_index([("timestamp", -1)])
+        #db = MongoClient(settings.MONGODB_URI)[settings.MONGODB_DATABASE]
+        #db.feedback_data.create_index([("timestamp", -1)])
 
-        total_time = time.time() - start_time
-        logger.info(f"Feedback indexes created successfully in {total_time:.2f}s")
+        #total_time = time.time() - start_time
+        #logger.info(f"Feedback indexes created successfully in {total_time:.2f}s")
     except Exception as e:
         logger.error(f"Failed to create feedback indexes: {str(e)}")
