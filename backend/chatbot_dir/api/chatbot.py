@@ -1188,29 +1188,29 @@ def generate_prompt_conversation(
 def save_conversation(conversation):
     #memory_snapshot = monitor_memory()
     try:
-        db = get_mongodb_client()
-        conversations = db.conversations
-        conversation_dict = conversation.to_dict()
+      #  db = get_mongodb_client()
+       # conversations = db.conversations
+       # conversation_dict = conversation.to_dict()
 
         # Remove _id to prevent duplicate key errors
-        if "_id" in conversation_dict:
-            del conversation_dict["_id"]
+      #  if "_id" in conversation_dict:
+        #    del conversation_dict["_id"]
 
         # Update conversation state
-        conversation_dict["is_first_message"] = False
+       # conversation_dict["is_first_message"] = False
 
         # MongoDB operation with error handling
-        result = conversations.update_one(
-            {"session_id": conversation.session_id},
-            {"$set": conversation_dict},
-            upsert=True,
-        )
+       # result = conversations.update_one(
+      ##      {"session_id": conversation.session_id},
+        #    {"$set": conversation_dict},
+       #     upsert=True,
+       # )
 
         # Verify operation success
-        if result.modified_count > 0 or result.upserted_id:
-            logger.info(f"Successfully saved conversation {conversation.session_id}")
-        else:
-            logger.warning(f"No changes made to conversation {conversation.session_id}")
+        #if result.modified_count > 0 or result.upserted_id:
+        #    logger.info(f"Successfully saved conversation {conversation.session_id}")
+       # else:
+         #   logger.warning(f"No changes made to conversation {conversation.session_id}")
 
         return result
     except Exception as e:
@@ -1224,8 +1224,8 @@ def save_conversation(conversation):
 
 
 def save_interaction(interaction_type, data):
-    db = get_mongodb_client()
-    interactions = db.interactions
+    #db = get_mongodb_client()
+    #interactions = db.interactions
 
     new_interaction = {
         "timestamp": datetime.now().isoformat(),
@@ -1233,8 +1233,9 @@ def save_interaction(interaction_type, data):
         "data": data,
     }
 
-    interactions.insert_one(new_interaction)
-    return {"message": f"{interaction_type} interaction saved successfully"}
+    #interactions.insert_one(new_interaction)
+    #return {"message": f"{interaction_type} interaction saved successfully"}
+    return {"message": f"TODO interaction saved successfully"}
 
 
 def handle_mongodb_operation(operation):
