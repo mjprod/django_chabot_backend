@@ -896,17 +896,16 @@ def update_database_confidence(comparison_result, docs_to_use):
 
 # async for translations
 async def generate_translations(generation):
-    # Run translations concurrently
     translations = await asyncio.gather(
         translate_en_to_ms(generation),
         translate_en_to_cn(generation)
     )
 
-    # Return formatted results
+    # Convert translations to string (if needed)
     return [
-        {"language": "en", "text": generation},
-        {"language": "ms-MY", "text": translations[0].get("text", "")},
-        {"language": "cn", "text": translations[1].get("text", "")},
+        {"language": "en", "text": str(generation)},
+        {"language": "ms-MY", "text": str(translations[0].get("text", ""))},
+        {"language": "cn", "text": str(translations[1].get("text", ""))},
     ]
 '''async def generate_translations(generation):
     with ThreadPoolExecutor() as executor:
