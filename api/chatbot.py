@@ -29,21 +29,21 @@ from pydantic import BaseModel, Field
 #from pymongo import MongoClient
 
 
-# def monitor_memory():
-  #   """Start memory monitoring and return initial snapshot"""
-    # tracemalloc.start()
-    # snapshot1 = tracemalloc.take_snapshot()
-    # return snapshot1
+def monitor_memory():
+    """Start memory monitoring and return initial snapshot"""
+    tracemalloc.start()
+    snapshot1 = tracemalloc.take_snapshot()
+    return snapshot1
 
 
-# def compare_memory(snapshot1):
-  #   """Compare memory usage against initial snapshot"""
-   #  snapshot2 = tracemalloc.take_snapshot()
-    # top_stats = snapshot2.compare_to(snapshot1, "lineno")
-    # print("[ Top 10 memory differences ]")
-    # for stat in top_stats[:10]:
-     #    print(stat)
-    # gc.collect()  # Force garbage collection after comparison
+def compare_memory(snapshot1):
+    """Compare memory usage against initial snapshot"""
+    snapshot2 = tracemalloc.take_snapshot()
+    top_stats = snapshot2.compare_to(snapshot1, "lineno")
+    print("[ Top 10 memory differences ]")
+    for stat in top_stats[:10]:
+        print(stat)
+    gc.collect()  # Force garbage collection after comparison
 
 
 # create our gloabl variables
@@ -270,7 +270,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
 
 # Process documents in batches
 def create_vector_store(documents, batch_size=500):
-    # = monitor_memory()
+    #memory_snapshot = monitor_memory()
     try:
         logger.info("Starting document splitting process")
         split_start = time.time()
@@ -536,7 +536,7 @@ class ConversationMetaData:
 
 # this is the OPENAI translate function
 def translate_and_clean(text):
-    #memory_snapshot = monitor_memory()
+    #                                                                    memory_snapshot = monitor_memory()
     api_key = os.getenv("OPENAI_API_KEY")
     client = OpenAI(api_key=api_key)
 
@@ -589,7 +589,7 @@ def translate_and_clean(text):
         logger.error(f"Translation error: {str(e)}")
         return text
     finally:
-        #compare_memory(memory_snapshot)
+       # compare_memory(memory_snapshot)
         gc.collect()
 
 
@@ -781,7 +781,7 @@ rag_chain = (
 
 # API functions
 #def get_mongodb_client():
-   # client = MongoClient(settings.MONGODB_URI)
+    #client = MongoClient(settings.MONGODB_URI)
     #return client[settings.MONGODB_DATABASE]
 
 
@@ -1069,11 +1069,12 @@ def generate_prompt_conversation(
 
     try:
         # this is a check for the conversation to remove Dear player
-        # db = get_mongodb_client()
-        # existing_conversation = db.conversations.find_one(
-         #    {"session_id": conversation_id}
-        # )
-        is_first_message = not existing_conversation
+        #db = get_mongodb_client()
+       # existing_conversation = db.conversations.find_one(
+          #  {"session_id": conversation_id}
+       # )
+       # is_first_message = not existing_conversation
+        is_first_message = True
         # Initialize conversation
         conversation = ConversationMetaData(
             session_id=conversation_id,
@@ -1128,24 +1129,24 @@ def generate_prompt_conversation(
 
         # this is where the self learning comes in, Its rough but will be worked on over time
         logger.info("Starting self-learning comparison")
-        # db = get_mongodb_client()
-       # relevant_feedbacks = get_relevant_feedback_data(cleaned_prompt, db)
+        #db = get_mongodb_client()
+        #relevant_feedbacks = get_relevant_feedback_data(cleaned_prompt, db)
 
-        #if relevant_feedbacks:
+       # if relevant_feedbacks:
           #  logger.info(f"Found {len(relevant_feedbacks)} relevant feedback answers")
-           # comparison_result = compare_answers(
-           #     generation, relevant_feedbacks, docs_to_use
-           # )
+         #   comparison_result = compare_answers(
+         #       generation, relevant_feedbacks, docs_to_use
+         #   )
 
-            #if comparison_result and comparison_result["better_answer"] == "feedback":
-             #   logger.info("Using feedback answer with higher confidence")
-              #  generation = comparison_result["best_feedback"]["correct_answer"]
-              #  update_database_confidence(comparison_result, docs_to_use)
+          #  if comparison_result and comparison_result["better_answer"] == "feedback":
+           #     logger.info("Using feedback answer with higher confidence")
+          #      generation = comparison_result["best_feedback"]["correct_answer"]
+          #      update_database_confidence(comparison_result, docs_to_use)
            # else:
-             #   logger.info("Generated answer maintained, updating confidence")
+           #     logger.info("Generated answer maintained, updating confidence")
             #    update_local_confidence(
-             #       generation, comparison_result["confidence_diff"]
-             #   )
+           #         generation, comparison_result["confidence_diff"]
+            #    )
 
         # Calculate confidence
         confidence_result = confidence_grader.invoke(
@@ -1158,55 +1159,59 @@ def generate_prompt_conversation(
         logger.info(f"Translations completed in {time.time() - translation_start:.2f}s")
 
         # Save conversation
-        #db_start = time.time()
-        conversation.add_message("assistant", generation)
-        save_conversation(conversation)
-        #logger.info(f"Database operation completed in {time.time() - db_start:.2f}s")
-
-       # total_time = time.time() - start_time
-       # logger.info(f"Total request processing time: {total_time:.2f}s")
+       # db_start = time.time()
+       # conversation.add_message("assistant", generation)
+       # save_conversation(conversation)
+       # logger.info(f"Database operation completed in {time.time() - db_start:.2f}s")
+#
+        #total_time = time.time() - start_time
+        # logger.info(f"Total request processing time: {total_time:.2f}s")
 
         return {
-            "generation": generation,
-            "conversation": conversation.to_dict(),
-            "confidence_score": confidence_result.confidence_score,
-            "translations": translations,
+           # "generation": generation,
+           # "conversation": conversation.to_dict(),
+           # "confidence_score": confidence_result.confidence_score,
+           # "translations": translations,
+           "generation": generation,
+           "conversation": conversation.to_dict(),
+           "confidence_score": confidence_result.confidence_score,
+           "translations": translations,
         }
 
     except Exception as e:
         logger.error(f"Error in prompt_conversation: {str(e)}")
         raise
-    #finally:
+    finally:
         #compare_memory(memory_snapshot)
-       # \gc.collect()
+        gc.collect()
 
 
 def save_conversation(conversation):
-    # memory_snapshot = monitor_memory()
+    #memory_snapshot = monitor_memory()
     try:
-      #   db = get_mongodb_client()
-        # conversations = db.conversations
-        # conversation_dict = conversation.to_dict()
+      #  db = get_mongodb_client()
+       # conversations = db.conversations
+       # conversation_dict = conversation.to_dict()
 
         # Remove _id to prevent duplicate key errors
-       #  if "_id" in conversation_dict:
-          #   del conversation_dict["_id"]
+      #  if "_id" in conversation_dict:
+        #    del conversation_dict["_id"]
 
         # Update conversation state
-        conversation_dict["is_first_message"] = False
+       # conversation_dict["is_first_message"] = False
 
         # MongoDB operation with error handling
-        result = conversations.update_one(
-            {"session_id": conversation.session_id},
-            {"$set": conversation_dict},
-            upsert=True,
-        )
+       # result = conversations.update_one(
+      ##      {"session_id": conversation.session_id},
+        #    {"$set": conversation_dict},
+       #     upsert=True,
+       # )
 
         # Verify operation success
-        if result.modified_count > 0 or result.upserted_id:
-            logger.info(f"Successfully saved conversation {conversation.session_id}")
-        else:
-            logger.warning(f"No changes made to conversation {conversation.session_id}")
+        #if result.modified_count > 0 or result.upserted_id:
+        #    logger.info(f"Successfully saved conversation {conversation.session_id}")
+       # else:
+         #   logger.warning(f"No changes made to conversation {conversation.session_id}")
 
         return result
     except Exception as e:
@@ -1214,7 +1219,7 @@ def save_conversation(conversation):
         raise
     finally:
         # Clean up and memory management
-        #compare_memory(memory_snapshot)
+       #compare_memory(memory_snapshot)
         gc.collect()
         del conversation_dict  # Explicit cleanup of large dictionary
 
@@ -1229,8 +1234,9 @@ def save_interaction(interaction_type, data):
         "data": data,
     }
 
-   # interactions.insert_one(new_interaction)
-    return {"message": f"{interaction_type} interaction saved successfully"}
+    #interactions.insert_one(new_interaction)
+    #return {"message": f"{interaction_type} interaction saved successfully"}
+    return {"message": f"TODO interaction saved successfully"}
 
 
 def handle_mongodb_operation(operation):
@@ -1242,18 +1248,18 @@ def handle_mongodb_operation(operation):
 
 
 #def get_relevant_feedback_data(cleaned_prompt, db):
-    #logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
-   # try:
-    #    db.feedback_data.create_index([("user_input", "text")])
-     #   logger.info("create text index for feedback search")
+ #   logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
+  #  try:
+   #     db.feedback_data.create_index([("user_input", "text")])
+    #    logger.info("create text index for feedback search")
 
-      #  similar_answers = (
-       #     db.feedback_data.find(
-        #        {
-         #           "$text": {"$search": cleaned_prompt},
-          #          "correct_answer": {"$exists": True, "$ne": ""},
-           #     }
-            #)
+     #   similar_answers = (
+      #      db.feedback_data.find(
+       #         {
+        #            "$text": {"$search": cleaned_prompt},
+         #           "correct_answer": {"$exists": True, "$ne": ""},
+          #      }
+           # )
             #.sort([("score", {"$meta": "textScore"}), ("timestamp", -1)])
             #.limit(3)
        # )
@@ -1262,8 +1268,8 @@ def handle_mongodb_operation(operation):
         #logger.info(f"found {len(feedback_list)} potential feedback matches")
         #return feedback_list
     #except Exception as e:
-        #logger.error(f"Error retrieving feedback answers: {str(e)}")
-        #return []'''
+      #  logger.error(f"Error retrieving feedback answers: {str(e)}")
+     #   return []
 
 
 def compare_answers(generation, feedback_answers, docs_to_use):
