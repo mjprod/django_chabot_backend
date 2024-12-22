@@ -2,7 +2,7 @@ chroma-hnswlib==0.7.6
 chromadb==0.5.12
 cohere==5.11.0
 Django==3.1.12
-django-cors-headers==4.4.0
+django-cors-headers==3.7.0
 djangorestframework==3.15.2
 docker==7.1.0
 groq==0.11.0
