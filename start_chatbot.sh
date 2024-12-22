@@ -4,12 +4,17 @@
 cd ~/chatbot
 
 # Activate the virtual environment
+#source venv/bin/activate
+
+python3.10 -m venv venv
 source venv/bin/activate
 
-cd ~/chatbot/django_chabot_backend/backend/chatbot_dir
+cd ~/chatbot/django_chabot_backend
+
+#cd ~/chatbot/django_chabot_backend/backend/chatbot_dir
 
 # Run the parameter_store_loader python file to update the .env with correct details
-python3 parameter_store_loader.py
+#python3 parameter_store_loader.py
 
 # Create MongoDB indexes before starting server
 #python3 -c "
