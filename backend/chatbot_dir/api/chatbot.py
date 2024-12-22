@@ -1149,14 +1149,14 @@ def generate_prompt_conversation(
             #    )
 
         # Calculate confidence
-       # confidence_result = confidence_grader.invoke(
-         #   {"documents": format_docs(docs_to_use), "generation": generation}
-       # )
+        confidence_result = confidence_grader.invoke(
+            {"documents": format_docs(docs_to_use), "generation": generation}
+        )
 
         # Generate translations asynchronously
-        #translation_start = time.time()
-        #translations = asyncio.run(generate_translations(generation))
-        # logger.info(f"Translations completed in {time.time() - translation_start:.2f}s")
+        translation_start = time.time()
+        translations = asyncio.run(generate_translations(generation))
+        logger.info(f"Translations completed in {time.time() - translation_start:.2f}s")
 
         # Save conversation
        # db_start = time.time()
@@ -1174,8 +1174,8 @@ def generate_prompt_conversation(
            # "translations": translations,
            "generation": generation,
            "conversation": conversation.to_dict(),
-           "confidence_score": 'confidence_result.confidence_score',
-           "translations": 'translations',
+           "confidence_score": confidence_result.confidence_score,
+           "translations": translations,
         }
 
     except Exception as e:
