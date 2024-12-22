@@ -1148,9 +1148,9 @@ def generate_prompt_conversation(
              #   )
 
         # Calculate confidence
-       # confidence_result = confidence_grader.invoke(
-          #  {"documents": format_docs(docs_to_use), "generation": generation}
-        #)
+        confidence_result = confidence_grader.invoke(
+            {"documents": format_docs(docs_to_use), "generation": generation}
+        )
 
         # Generate translations asynchronously
         translation_start = time.time()
