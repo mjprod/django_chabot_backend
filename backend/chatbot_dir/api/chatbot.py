@@ -1172,8 +1172,8 @@ def generate_prompt_conversation(
            # "conversation": conversation.to_dict(),
            # "confidence_score": confidence_result.confidence_score,
            # "translations": translations,
-           "generation": 'generation',
-           "conversation": 'conversation.to_dict()',
+           "generation": generation,
+           "conversation": conversation.to_dict(),
            "confidence_score": 'confidence_result.confidence_score',
            "translations": 'translations',
         }
