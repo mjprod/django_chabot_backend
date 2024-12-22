@@ -895,18 +895,39 @@ def update_database_confidence(comparison_result, docs_to_use):
 
 
 # async for translations
-async def generate_translations(generation):
-    translations = await asyncio.gather(
-        translate_en_to_ms(generation),
-        translate_en_to_cn(generation)
-    )
 
-    # Convert translations to string (if needed)
-    return [
-        {"language": "en", "text": str(generation)},
-        {"language": "ms-MY", "text": str(translations[0].get("text", ""))},
-        {"language": "cn", "text": str(translations[1].get("text", ""))},
-    ]
+async def generate_translations(generation):
+    try:
+        logger.info(f"Starting translations for: {generation}")
+
+        with ThreadPoolExecutor() as executor:
+            # Run translations
+            malay_future = executor.submit(translate_en_to_ms, generation)
+            chinese_future = executor.submit(translate_en_to_cn, generation)
+
+            logger.info("Submitted translation tasks...")
+
+            # Gather results
+            translations = await asyncio.gather(
+                asyncio.wrap_future(malay_future), 
+                asyncio.wrap_future(chinese_future)
+            )
+
+            logger.info(f"Translation results: {translations}")
+
+            # Return structured translations
+            output = [
+                {"language": "en", "text": generation},
+                {"language": "ms-MY", "text": translations[0].get("text", "")},
+                {"language": "cn", "text": translations[1].get("text", "")},
+            ]
+
+            logger.info(f"Final output: {output}")
+            return output
+
+    except Exception as e:
+        logger.error(f"Error in generate_translations: {str(e)}", exc_info=True)
+        raise
 '''async def generate_translations(generation):
     with ThreadPoolExecutor() as executor:
         # Run translations
