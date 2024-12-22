@@ -11,7 +11,7 @@ from datetime import datetime
 from typing import List
 
 import requests
-from bson import ObjectId
+#from bson import ObjectId
 from django.conf import settings
 from dotenv import load_dotenv
 from langchain.text_splitter import RecursiveCharacterTextSplitter
