@@ -49,7 +49,7 @@ logger = logging.getLogger(__name__)
 class UserInputView(APIView):
     def post(self, request):
         #memory_snapshot = monitor_memory()
-        db = None
+       # db = None
         start_time = time.time()
         logger.info("Starting user_input request")
 
@@ -112,8 +112,8 @@ class UserInputView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
         finally:
-            if db is not None:
-                self.cleanup_db_connection(db)
+            #if db is not None:
+                #self.cleanup_db_connection(db)
             #compare_memory(memory_snapshot)
             gc.collect()
             del generation
@@ -121,13 +121,13 @@ class UserInputView(APIView):
 
 class UserConversationsView(APIView):
     def get(self, request, user_id):
-        db = self.get_db()
-        conversations = db.conversations
+        #db = self.get_db()
+        #conversations = db.conversations
 
         user_conversations = []
-        for conv in conversations.find({"user_id": user_id}):
-            conv["_id"] = str(conv["_id"])
-            user_conversations.append(conv)
+       # for conv in conversations.find({"user_id": user_id}):
+        #    conv["_id"] = str(conv["_id"])
+        user_conversations.append({"user_id": user_id})
 
         return Response(user_conversations, status=status.HTTP_200_OK)
 
@@ -136,7 +136,7 @@ class UserConversationsView(APIView):
 class PromptConversationView(APIView):
     def post(self, request):
         #memory_snapshot = monitor_memory()
-        db = None
+        #db = None
         try:
             # Log start of request processing
             logger.info("Starting prompt_conversation request")
@@ -215,8 +215,8 @@ class PromptConversationView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
         finally:
-            if db is not None:
-                self.cleanup_db_connection(db)
+            #if db is not None:
+                #self.cleanup_db_connection(db)
             #compare_memory(memory_snapshot)
             gc.collect()
             del response
@@ -478,10 +478,10 @@ def create_feedback_indexes():
         logger.info("Starting feedback index creation")
         start_time = time.time()
 
-        db = MongoClient(settings.MONGODB_URI)[settings.MONGODB_DATABASE]
-        db.feedback_data.create_index([("timestamp", -1)])
+       # db = MongoClient(settings.MONGODB_URI)[settings.MONGODB_DATABASE]
+        #db.feedback_data.create_index([("timestamp", -1)])
 
-        total_time = time.time() - start_time
-        logger.info(f"Feedback indexes created successfully in {total_time:.2f}s")
+        #total_time = time.time() - start_time
+        #logger.info(f"Feedback indexes created successfully in {total_time:.2f}s")
     except Exception as e:
         logger.error(f"Failed to create feedback indexes: {str(e)}")
