@@ -147,16 +147,16 @@ DATABASES = {
             "timeout": 20,
         },
     },
-   # "mongodb": {
-    #    "ENGINE": "djongo",
-     #   "NAME": MONGODB_DATABASE,
-      #  "CLIENT": {
-       #     "host": MONGODB_URI,
-        #    "maxPoolSize": 50,
-         #   "minPoolSize": 10,
-          #  "maxIdleTimeMS": 45000,
-        #},
-    #},
+    "mongodb": {
+        "ENGINE": "djongo",
+        "NAME": MONGODB_DATABASE,
+        "CLIENT": {
+            "host": MONGODB_URI,
+            "maxPoolSize": 50,
+            "minPoolSize": 10,
+            "maxIdleTimeMS": 45000,
+        },
+    },
 }
 # File Upload Settings
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB

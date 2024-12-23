@@ -26,7 +26,7 @@ from openai import OpenAI
 from pydantic import BaseModel, Field
 
 # mongodb imports
-#from pymongo import MongoClient
+from pymongo import MongoClient
 
 
 def monitor_memory():
@@ -781,9 +781,12 @@ rag_chain = (
 
 
 # API functions
-#def get_mongodb_client():
-    #client = MongoClient(settings.MONGODB_URI)
-    #return client[settings.MONGODB_DATABASE]
+def get_mongodb_client():
+    client = MongoClient(settings.MONGODB_URI)
+    logger.info(
+            "MONGO DB URI: " + settings.MONGODB_URI
+        )
+    return client[settings.MONGODB_DATABASE]
 
 
 def update_local_confidence(generation, confidence_diff):
