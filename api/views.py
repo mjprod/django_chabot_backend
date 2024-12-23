@@ -5,7 +5,7 @@ import time
 import tracemalloc
 from datetime import datetime
 
-#from bson import ObjectId
+from bson import ObjectId
 from django.conf import settings
 from pymongo import MongoClient
 from rest_framework import status
@@ -191,7 +191,7 @@ class UserConversationsView(MongoDBMixin, APIView):
 # new api for start conversation
 class PromptConversationView(MongoDBMixin, APIView):
     def post(self, request):
-        db = None  # Initialize database connection
+        db = None
         try:
             # Log start of request processing
             logger.info("Starting prompt_conversation request")
@@ -225,7 +225,7 @@ class PromptConversationView(MongoDBMixin, APIView):
             )
 
             # Prepare MongoDB document
-            db = self.get_db()  # Connect to MongoDB
+            db = self.get_db()
             conversation_data = {
                 "conversation_id": conversation_id,
                 "prompt": prompt,
@@ -267,8 +267,9 @@ class PromptConversationView(MongoDBMixin, APIView):
             # Uncomment memory cleanup if needed
             # gc.collect()
 
-class CompleteConversationsView(APIView):
+class CompleteConversationsView(MongoDBMixin, APIView):
     def get(self, request):
+        db = None 
         start_time = time.time()
         logger.info("Starting complete_conversations GET request")
 
@@ -277,41 +278,41 @@ class CompleteConversationsView(APIView):
             page = int(request.query_params.get("page", 1))
             limit = int(request.query_params.get("limit", 10))
 
-            # Get MongoDB connection
-            #db_start = time.time()
-           # logger.info("Starting MongoDB Read Operations")
-            #db = self.get_db()
+            # Connect to MongoDB
+            db = self.get_db()
+            logger.info("Connected to MongoDB")
 
             # Query filter
             query_filter = {}
 
             # Get total count and paginated results
-            #total_count = db.complete_conversations.count_documents(query_filter)
-           # cursor = (
-            #    db.complete_conversations.find(query_filter)
-            #    .sort("timestamp", -1)
-            #    .skip((page - 1) * limit)
-            #    .limit(limit)
-            #)
+            total_count = db.complete_conversations.count_documents(query_filter)
+            cursor = (
+                db.complete_conversations.find(query_filter)
+                .sort("timestamp", -1)
+                .skip((page - 1) * limit)
+                .limit(limit)
+            )
 
             # Process results
             results = []
             for doc in cursor:
-                doc["_id"] = str(doc["_id"])
+                doc["_id"] = str(doc["_id"])  # Convert ObjectId to string
                 results.append(doc)
 
-            #logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
+            logger.info(f"Retrieved {len(results)} conversations from MongoDB")
 
+            # Prepare response
             response_data = {
-               # "total": total_count,
-               "total": 999,
+                "total": total_count,
                 "page": page,
                 "limit": limit,
                 "results": results,
             }
 
-            #total_time = time.time() - start_time
-            #logger.info(f"Total request processing time: {total_time:.2f}s")
+            logger.info(
+                f"Total request processing time: {time.time() - start_time:.2f}s"
+            )
 
             return Response(response_data, status=status.HTTP_200_OK)
 
@@ -321,6 +322,7 @@ class CompleteConversationsView(APIView):
                 {"error": "Invalid pagination parameters"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
+
         except Exception as e:
             logger.error(f"Error processing request: {str(e)}")
             return Response(
@@ -328,17 +330,23 @@ class CompleteConversationsView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
+        finally:
+            # Cleanup database connection
+            if db is not None:
+                self.cleanup_db_connection(db)
+
     def post(self, request):
+        db = None 
         start_time = time.time()
         logger.info("Starting complete_conversations POST request")
 
         try:
-            # Log the request data first, before any processing
+            # Log incoming request details
             logger.info(f"Request Data: {request.data}")
             logger.info(f"Request Content-Type: {request.content_type}")
             logger.info(f"Request Headers: {request.headers}")
 
-            # Then proceed with validation
+            # Validate request data
             logger.info("Validating request data")
             serializer = CompleteConversationsSerializer(data=request.data)
             if not serializer.is_valid():
@@ -348,47 +356,51 @@ class CompleteConversationsView(APIView):
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
-            # Prepare MongoDB document
-            #db_start = time.time()
+            # Prepare document for MongoDB
             logger.info("Starting MongoDB Write Operations")
-
             conversation_data = {
                 "conversation_id": serializer.validated_data["conversation_id"],
                 "messages": serializer.validated_data["messages"],
-                "timestamp": datetime.now().isoformat(),
+                "timestamp": datetime.utcnow().isoformat(),  # Use UTC for consistency
             }
 
-            # Save to MongoDB
-            #db = self.get_db()
-            #db.complete_conversations.insert_one(conversation_data)
-            #logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
+            db = self.get_db()
+            result = db.complete_conversations.insert_one(conversation_data)
+            inserted_id = str(result.inserted_id)
 
-            #total_time = time.time() - start_time
-            #logger.info(f"Total request processing time: {total_time:.2f}s")
+            # Prepare and return response
+            response_data = {
+                "message": "Conversation saved successfully",
+                "conversation_id": inserted_id,
+            }
 
-            return Response(
-                {"message": "Conversation saved successfully"},
-                status=status.HTTP_201_CREATED,
+            logger.info(
+                f"MongoDB operation completed in {time.time() - start_time:.2f}s"
             )
+            return Response(response_data, status=status.HTTP_201_CREATED)
 
         except Exception as e:
-            logger.error(f"Error processing request: {str(e)}")
+            logger.error(f"Error processing request: {str(e)}", exc_info=True)
             return Response(
                 {"error": f"Request processing failed: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
+        finally:
+            if db is not None:
+                self.cleanup_db_connection(db)
+            gc.collect()
 
 
-class CaptureFeedbackView(APIView):
-
+class CaptureFeedbackView(MongoDBMixin, APIView):
     def post(self, request):
+        db = None  # Initialize database connection
         start_time = time.time()
         logger.info("Starting feedback POST request")
+
         try:
             # Transform incoming data to match serializer format
             transformed_data = {
-               # "conversation_id": str(ObjectId()),  # Generate new ID if not provided
-                "conversation_id": str("1"),
+                "conversation_id": str(ObjectId()),  # Generate dynamic ID
                 "user_input": request.data.get("prompt", ""),
                 "ai_response": request.data.get("generation", ""),
                 "correct_bool": request.data.get("correct_bool", False),
@@ -412,7 +424,7 @@ class CaptureFeedbackView(APIView):
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
-            # Process translations
+            # Prepare MongoDB document
             logger.info("Processing feedback translations")
             translated_data = {
                 "conversation_id": serializer.validated_data["conversation_id"],
@@ -427,45 +439,37 @@ class CaptureFeedbackView(APIView):
                     **serializer.validated_data.get("metadata", {}),
                     "confidence": 0.97,
                 },
-                "timestamp": datetime.now().isoformat(),
+                "timestamp": datetime.utcnow().isoformat(),
                 "search_score": 0.0,
             }
 
             # MongoDB operations
-            #try:
-                #db = self.get_db()
-                #logger.info("Creating text index for feedback search")
-                #db.feedback_data.create_index([("user_input", "text")])
+            db = self.get_db()
+            db.feedback_data.create_index([("user_input", "text")])  # Create index
 
-                #db_start = time.time()
-                #logger.info("Starting MongoDB Write Operations")
-                #db.feedback_data.insert_one(translated_data)
-                #logger.info(
-                   # f"MongoDB operation completed in {time.time() - db_start:.2f}s"
-               # )
+            logger.info("Starting MongoDB Write Operations")
+            db.feedback_data.insert_one(translated_data)
+            logger.info(f"MongoDB operation completed in {time.time() - start_time:.2f}s")
 
-           # except Exception as db_error:
-             #   logger.error(f"MongoDB operation failed: {str(db_error)}")
-              #  return Response(
-              #      {"error": f"Database operation failed: {str(db_error)}"},
-               #     status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-              #  )
-
-           # total_time = time.time() - start_time
-            #logger.info(f"Total request processing time: {total_time:.2f}s")
             return Response(
                 {"message": "Feedback saved successfully"},
                 status=status.HTTP_201_CREATED,
             )
 
         except Exception as e:
-            logger.error(f"Error processing request: {str(e)}")
+            logger.error(f"Error processing request: {str(e)}", exc_info=True)
             return Response(
                 {"error": f"Failed to save feedback: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
+        finally:
+            if db is not None:
+                self.cleanup_db_connection(db)
+            gc.collect()
+
     def get(self, request):
+        db = None
         start_time = time.time()
         logger.info("Starting feedback GET request")
 
@@ -475,59 +479,45 @@ class CaptureFeedbackView(APIView):
             limit = int(request.query_params.get("limit", 10))
 
             # MongoDB operations
-            #db_start = time.time()
-           # logger.info("Starting MongoDB Read Operations")
-            #db = self.get_db()
-            #total_count = db.feedback_data.count_documents({})
+            db = self.get_db()
+            total_count = db.feedback_data.count_documents({})
 
-            #cursor = (
-           #     db.feedback_data.find({})
-           #     .sort("timestamp", -1)
-          #      .skip((page - 1) * limit)
-           #     .limit(limit)
-       #     )
+            cursor = (
+                db.feedback_data.find({})
+                .sort("timestamp", -1)
+                .skip((page - 1) * limit)
+                .limit(limit)
+            )
 
-          #  results = []
-         #   for doc in cursor:
-          #      doc["_id"] = str(doc["_id"])
-          #      results.append(doc)
+            results = []
+            for doc in cursor:
+                doc["_id"] = str(doc["_id"])
+                results.append(doc)
 
-          #  logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
+            response_data = {
+                "total": total_count,
+                "page": page,
+                "limit": limit,
+                "results": results,
+            }
 
-          #  response_data = {
-          #      "total": total_count,
-          #      "page": page,
-         #       "limit": limit,
-         #       "results": results,
-         #   }
+            logger.info(f"Total request processing time: {time.time() - start_time:.2f}s")
+            return Response(response_data, status=status.HTTP_200_OK)
 
-          #  total_time = time.time() - start_time
-          #  logger.info(f"Total request processing time: {total_time:.2f}s")
-          #  return Response(response_data, status=status.HTTP_200_OK)
-            return Response("TODO", status=status.HTTP_200_OK)
         except ValueError as e:
-            logger.error(f"Invalid pagination parameters: {str(e)}")
+            logger.error(f"Invalid pagination parameters: {str(e)}", exc_info=True)
             return Response(
                 {"error": "Invalid pagination parameters"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
         except Exception as e:
-            logger.error(f"Error processing request: {str(e)}")
+            logger.error(f"Error processing request: {str(e)}", exc_info=True)
             return Response(
                 {"error": f"Failed to retrieve feedback: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
-
-def create_feedback_indexes():
-    try:
-        logger.info("Starting feedback index creation")
-        start_time = time.time()
-
-       # db = MongoClient(settings.MONGODB_URI)[settings.MONGODB_DATABASE]
-        #db.feedback_data.create_index([("timestamp", -1)])
-
-        #total_time = time.time() - start_time
-        #logger.info(f"Feedback indexes created successfully in {total_time:.2f}s")
-    except Exception as e:
-        logger.error(f"Failed to create feedback indexes: {str(e)}")
+        finally:
+            if db is not None:
+                self.cleanup_db_connection(db)
+                gc.collect()
