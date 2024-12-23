@@ -9,8 +9,8 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         try:
             # Conectar ao MongoDB
-            client = MongoClient(settings.DATABASES['default']['CLIENT']['host'])
-            db = client[settings.DATABASES['default']['NAME']]
+            client = MongoClient(settings.MONGODB_URI)
+            db = client[settings.MONGODB_DATABASE]
 
             # Criar índices
             db.user_inputs.create_index([('user_id', 1)])
