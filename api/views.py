@@ -26,7 +26,6 @@ from .serializers import (
     UserInputSerializer,
 )
 
-
 # added mongodb base view class
 from pymongo import MongoClient
 from django.conf import settings
@@ -157,18 +156,36 @@ class UserInputView(MongoDBMixin, APIView):
             total_time = time.time() - start_time
             logger.info(f"Total request processing time: {total_time:.2f}s")
 
-
-class UserConversationsView(APIView):
+class UserConversationsView(MongoDBMixin, APIView):
     def get(self, request, user_id):
-        #db = self.get_db()
-        #conversations = db.conversations
+        db = None
+        try:
+            # Connect to the database
+            db = self.get_db()
+            conversations = db.conversations
 
-        user_conversations = []
-       # for conv in conversations.find({"user_id": user_id}):
-        #    conv["_id"] = str(conv["_id"])
-        user_conversations.append({"user_id": user_id})
+            # Fetch user conversations
+            user_conversations = []
+            for conv in conversations.find({"user_id": user_id}):
+                # Convert ObjectId to string for JSON serialization
+                conv["_id"] = str(conv["_id"])
+                user_conversations.append(conv)  # Append each conversation
 
-        return Response(user_conversations, status=status.HTTP_200_OK)
+            # Return response with data or empty list
+            return Response(user_conversations, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            # Handle errors gracefully
+            logger.error(f"Error fetching conversations: {str(e)}", exc_info=True)
+            return Response(
+                {"error": "Failed to fetch user conversations."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+        finally:
+            # Clean up database connection
+            if db is not None:
+                self.cleanup_db_connection(db)
 
 
 # new api for start conversation
