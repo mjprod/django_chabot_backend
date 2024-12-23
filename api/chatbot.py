@@ -11,7 +11,7 @@ from datetime import datetime
 from typing import List
 
 import requests
-#from bson import ObjectId
+from bson import ObjectId
 from django.conf import settings
 from dotenv import load_dotenv
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -484,8 +484,7 @@ class ConversationMetaData:
         self.timestamp = timestamp or datetime.now().isoformat()
         self.messages = []
         self.translations = []
-        #self._id = ObjectId()
-        self._id = "1"
+        self._id = ObjectId()
         self.is_first_message = True
 
     def add_message(self, role, content):

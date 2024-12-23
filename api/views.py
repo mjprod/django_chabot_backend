@@ -400,7 +400,7 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
         try:
             # Transform incoming data to match serializer format
             transformed_data = {
-                "conversation_id": str(ObjectId()),  # Generate dynamic ID
+                "conversation_id": str(ObjectId()),
                 "user_input": request.data.get("prompt", ""),
                 "ai_response": request.data.get("generation", ""),
                 "correct_bool": request.data.get("correct_bool", False),
