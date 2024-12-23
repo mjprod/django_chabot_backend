@@ -189,10 +189,9 @@ class UserConversationsView(MongoDBMixin, APIView):
 
 
 # new api for start conversation
-class PromptConversationView(APIView):
+class PromptConversationView(MongoDBMixin, APIView):
     def post(self, request):
-        #memory_snapshot = monitor_memory()
-        #db = None
+        db = None  # Initialize database connection
         try:
             # Log start of request processing
             logger.info("Starting prompt_conversation request")
@@ -219,38 +218,28 @@ class PromptConversationView(APIView):
                 conversation_id=conversation_id,
                 admin_id="",
                 agent_id="",
-                user_id="",
+                user_id=user_id, 
             )
             logger.info(
                 f"AI Generation completed in {time.time() - generation_start:.2f}s"
             )
 
-            # MongoDB operations with timing
-           # db_start = time.time()
-           # logger.info("Starting MongoDB Write Operations")
-           # db = self.get_db()
-           # conversation_data = {
-            #    "conversation_id": conversation_id,
-           #     "prompt": prompt,
-           #     "generation": response["generation"],
-           #     "user_id": user_id,
-           #      "translations": response.get("translations", []),
-           #     "timestamp": datetime.now().isoformat(),
-            #}
+            # Prepare MongoDB document
+            db = self.get_db()  # Connect to MongoDB
+            conversation_data = {
+                "conversation_id": conversation_id,
+                "prompt": prompt,
+                "generation": response["generation"],
+                "user_id": user_id,
+                "translations": response.get("translations", []),
+                "timestamp": datetime.now().isoformat(),
+            }
 
-            # Insert as new document
-           # db.conversations.insert_one(conversation_data)
-           # logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
+            # Insert into MongoDB
+            db.conversations.insert_one(conversation_data)
+            logger.info("MongoDB operation successful.")
 
-            # Prepare response data
-           # response_data = {
-            #    "conversation_id": conversation_id,
-            #    "user_input": prompt,
-            #    "generation": response["generation"],
-            #    "confidence": response["confidence_score"],
-             #   "translations": response.get("translations", []),
-            #}
-             # Prepare response data
+            # Prepare and send response
             response_data = {
                 "conversation_id": conversation_id,
                 "user_input": prompt,
@@ -259,24 +248,24 @@ class PromptConversationView(APIView):
                 "translations": response.get("translations", []),
             }
 
-           # logger.info(
-            #    f"Total request processing time: {time.time() - start_time:.2f}s"
-            #)
+            logger.info(
+                f"Total request processing time: {time.time() - start_time:.2f}s"
+            )
             return Response(response_data, status=status.HTTP_200_OK)
-            
+
         except Exception as e:
             logger.error(f"Error processing request: {str(e)}")
             return Response(
                 {"error": f"Request processing failed: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-        #finally:
-            #if db is not None:
-                #self.cleanup_db_connection(db)
-            #compare_memory(memory_snapshot)
-            #gc.collect()
-            #del response
 
+        finally:
+            # Cleanup database connection
+            if db is not None:
+                self.cleanup_db_connection(db)
+            # Uncomment memory cleanup if needed
+            # gc.collect()
 
 class CompleteConversationsView(APIView):
     def get(self, request):
