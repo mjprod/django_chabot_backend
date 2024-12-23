@@ -7,7 +7,7 @@ from datetime import datetime
 
 #from bson import ObjectId
 from django.conf import settings
-#from pymongo import MongoClient
+from pymongo import MongoClient
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -28,6 +28,44 @@ from .serializers import (
 
 
 # added mongodb base view class
+from pymongo import MongoClient
+from django.conf import settings
+import logging
+
+# Initialize logger
+logger = logging.getLogger(__name__)
+
+class MongoDBMixin:
+    """
+    Mixin to handle MongoDB database connections.
+    """
+    def get_db(self):
+        """
+        Establish and return a connection to the MongoDB database.
+        """
+        try:
+            # Connect to the MongoDB database using Django settings
+            client = MongoClient(settings.MONGODB_URI)
+            db = client[settings.MONGODB_DATABASE]
+            logger.info("MongoDB connection established successfully.")
+            return db
+        except Exception as e:
+            # Log any connection error
+            logger.error(f"Error connecting to MongoDB: {str(e)}")
+            raise
+
+    def cleanup_db_connection(self, db):
+        """
+        Close the MongoDB database connection to release resources.
+        """
+        try:
+            if db:
+                db.client.close()
+                logger.info("MongoDB connection closed.")
+        except Exception as e:
+            # Log any error during closing connection
+            logger.error(f"Error closing MongoDB connection: {str(e)}")
+
 #class MongoDBMixin:
    # def get_db(self):
         #memory_snapshot = monitor_memory()
@@ -43,14 +81,10 @@ from .serializers import (
       #       db.client.close()
 
 
-logger = logging.getLogger(__name__)
-
-
-class UserInputView(APIView):
+class UserInputView(MongoDBMixin, APIView):
     def post(self, request):
-        #memory_snapshot = monitor_memory()
-       # db = None
-        start_time = time.time()
+        db = None
+        start_time = time.time()  # Track total processing time
         logger.info("Starting user_input request")
 
         try:
@@ -61,11 +95,12 @@ class UserInputView(APIView):
                 logger.error(f"Validation failed: {serializer.errors}")
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-            # Extract data with default "None" for user_id
+            # Extract input data
             prompt = serializer.validated_data["prompt"]
             user_id = serializer.validated_data.get("user_id", "None")
+            logger.info(f"Received request from user_id: {user_id}, prompt: {prompt}")
 
-            # Generate response
+            # Generate AI response
             generation_start = time.time()
             logger.info("Starting AI response generation")
             cleaned_prompt = translate_and_clean(prompt)
@@ -74,7 +109,7 @@ class UserInputView(APIView):
                 f"AI Generation completed in {time.time() - generation_start:.2f}s"
             )
 
-            # Prepare MongoDB document and response data
+            # Prepare response data
             response_data = {
                 "user_id": user_id,
                 "prompt": prompt,
@@ -91,32 +126,36 @@ class UserInputView(APIView):
             }
 
             # Save to MongoDB
-            #db_start = time.time()
-           # logger.info("Starting MongoDB Write Operations")
-           # db = self.get_db()
+            db_start = time.time()
+            logger.info("Starting MongoDB Write Operations in UserInputView")
+            db = self.get_db()
 
-           # user_input_doc = {**response_data, "timestamp": datetime.now().isoformat()}
+            user_input_doc = {**response_data, "timestamp": datetime.now().isoformat()}
+            db.user_inputs.insert_one(user_input_doc)
+            logger.info(
+                f"MongoDB operation completed in {time.time() - db_start:.2f}s"
+            )
 
-           # db.user_inputs.insert_one(user_input_doc)
-        #    logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
-
-           # total_time = time.time() - start_time
-           # logger.info(f"Total request processing time: {total_time:.2f}s")
-
+            # Return the response
             return Response(response_data, status=status.HTTP_200_OK)
 
         except Exception as e:
-            logger.error(f"Error processing request: {str(e)}")
+            logger.error(
+                f"Error processing request: {str(e)}", exc_info=True  # Log stack trace
+            )
             return Response(
                 {"error": f"Request processing failed: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
         finally:
-            #if db is not None:
-                #self.cleanup_db_connection(db)
-            #compare_memory(memory_snapshot)
-            #gc.collect()
-            del generation
+            # Cleanup database connection
+            if db is not None:
+                self.cleanup_db_connection(db)
+            gc.collect()  # Explicit garbage collection for safety
+
+            # Log total processing time
+            total_time = time.time() - start_time
+            logger.info(f"Total request processing time: {total_time:.2f}s")
 
 
 class UserConversationsView(APIView):
