@@ -306,7 +306,6 @@ def create_vector_store(documents, batch_size=500):
         vectorstores.append(store)
         #compare_memory(memory_snapshot)
         return store
-
     except Exception as e:
         logger.error(f"Vector store creation failed: {str(e)}")
         raise
@@ -330,7 +329,6 @@ class MultiRetriever:
         self.vectorstores = vectorstores
 
     def get_relevant_documents(self, query):
-
         #memory_snapshot = monitor_memory()
         all_results = []
         try:
@@ -349,9 +347,7 @@ class MultiRetriever:
     def invoke(self, query):
         return self.get_relevant_documents(query)
 
-
 retriever = MultiRetriever(vectorstores)
-
 
 def get_rag_prompt_template(is_first_message):
     if is_first_message:
@@ -761,11 +757,9 @@ If you encounter any issues during setup, our support team is ready to assist yo
 # Initialize LLM for RAG Chain
 rag_llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
-
 # Define Formatting Function
 def format_docs(docs):
     return "\n".join(doc.page_content for doc in docs)
-
 
 # Create RAG Chain
 rag_chain = (
@@ -777,7 +771,6 @@ rag_chain = (
     | rag_llm
     | StrOutputParser()
 )
-
 
 # API functions
 def get_mongodb_client():
@@ -1105,12 +1098,12 @@ def generate_prompt_conversation(
 
     try:
         # this is a check for the conversation to remove Dear player
-        #db = get_mongodb_client()
-       # existing_conversation = db.conversations.find_one(
-          #  {"session_id": conversation_id}
-       # )
-       # is_first_message = not existing_conversation
-        is_first_message = True
+        db = get_mongodb_client()
+        existing_conversation = db.conversations.find_one(
+            {"session_id": conversation_id}
+        )
+        is_first_message = not existing_conversation
+       
         # Initialize conversation
         conversation = ConversationMetaData(
             session_id=conversation_id,
@@ -1204,10 +1197,6 @@ def generate_prompt_conversation(
         # logger.info(f"Total request processing time: {total_time:.2f}s")
 
         return {
-           # "generation": generation,
-           # "conversation": conversation.to_dict(),
-           # "confidence_score": confidence_result.confidence_score,
-           # "translations": translations,
            "generation": generation,
            "conversation": conversation.to_dict(),
            "confidence_score": confidence_result.confidence_score,
