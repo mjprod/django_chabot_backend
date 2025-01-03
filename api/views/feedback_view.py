@@ -3,77 +3,119 @@ from datetime import datetime
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from pymongo.errors import PyMongoError
 from ..mixins.mongodb_mixin import MongoDBMixin
 from ..serializers import CaptureFeedbackSerializer
 
+# Initialize logger
 logger = logging.getLogger(__name__)
 
 class CaptureFeedbackView(MongoDBMixin, APIView):
     """
-    View para capturar e salvar feedbacks.
+    APIView to capture and save user feedback in MongoDB.
+    Supports both POST and GET requests.
     """
 
     def post(self, request):
-        db = None
+        """
+        Handles POST requests to save feedback in MongoDB.
+        """
+        db = None  # Initialize database connection variable
         try:
-            logger.info("Recebendo feedback.")
+            logger.info("Receiving feedback data.")
 
-            # Validar dados recebidos
+            # Validate incoming data
             serializer = CaptureFeedbackSerializer(data=request.data)
             if not serializer.is_valid():
-                logger.error(f"Erro de validação: {serializer.errors}")
+                logger.error(f"Validation error: {serializer.errors}")
                 return Response(
-                    {"error": "Dados inválidos.", "details": serializer.errors},
+                    {"error": "Invalid data.", "details": serializer.errors},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
-            # Preparar documento para o MongoDB
+            # Prepare data for saving
             feedback_data = {
                 **serializer.validated_data,
                 "timestamp": datetime.utcnow().isoformat(),
             }
 
+            # Connect to MongoDB
             db = self.get_db()
             db.feedback_data.insert_one(feedback_data)
-            logger.info("Feedback salvo no MongoDB.")
+            logger.info("Feedback successfully saved to MongoDB.")
 
             return Response(
-                {"message": "Feedback salvo com sucesso."},
+                {"message": "Feedback saved successfully."},
                 status=status.HTTP_201_CREATED,
             )
 
-        except Exception as e:
-            logger.error(f"Erro ao salvar feedback: {str(e)}", exc_info=True)
+        except PyMongoError as db_error:
+            logger.error(f"Database error while saving feedback: {str(db_error)}", exc_info=True)
             return Response(
-                {"error": "Erro ao salvar feedback."},
+                {"error": "Failed to save feedback due to database error."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-
+        except Exception as e:
+            logger.error(f"Unexpected error while saving feedback: {str(e)}", exc_info=True)
+            return Response(
+                {"error": "An unexpected error occurred."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
         finally:
             if db:
                 self.close_db()
+                logger.info("Database connection closed.")
 
     def get(self, request):
-        db = None
+        """
+        Handles GET requests to retrieve feedback data.
+        Supports pagination for better performance.
+        """
+        db = None  # Initialize database connection variable
         try:
+            logger.info("Fetching feedback data.")
+
+            # Connect to MongoDB
             db = self.get_db()
 
-            # Buscar feedbacks no banco
-            feedbacks = db.feedback_data.find().sort("timestamp", -1)
+            # Pagination parameters
+            page = int(request.GET.get("page", 1))
+            limit = int(request.GET.get("limit", 10))
+            skip = (page - 1) * limit
+
+            # Fetch feedbacks from MongoDB
+            feedbacks = db.feedback_data.find().sort("timestamp", -1).skip(skip).limit(limit)
+            total_count = db.feedback_data.count_documents({})
+
+            # Process results
             results = []
             for feedback in feedbacks:
-                feedback["_id"] = str(feedback["_id"])  # Converter ObjectId
+                feedback["_id"] = str(feedback["_id"])  # Convert ObjectId to string
                 results.append(feedback)
 
-            return Response(results, status=status.HTTP_200_OK)
+            response_data = {
+                "total": total_count,
+                "page": page,
+                "limit": limit,
+                "results": results,
+            }
 
-        except Exception as e:
-            logger.error(f"Erro ao buscar feedbacks: {str(e)}", exc_info=True)
+            logger.info(f"Fetched {len(results)} feedback records.")
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except PyMongoError as db_error:
+            logger.error(f"Database error while fetching feedback: {str(db_error)}", exc_info=True)
             return Response(
-                {"error": "Erro ao buscar feedbacks."},
+                {"error": "Failed to fetch feedback data due to database error."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-
+        except Exception as e:
+            logger.error(f"Unexpected error while fetching feedback: {str(e)}", exc_info=True)
+            return Response(
+                {"error": "An unexpected error occurred."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
         finally:
             if db:
                 self.close_db()
+                logger.info("Database connection closed.")

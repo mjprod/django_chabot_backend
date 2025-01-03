@@ -32,24 +32,23 @@ DEBUG = True
 
 
 ALLOWED_HOSTS = [
-    "mjproapps.com",
+    "api.staging.mjproapps.com",
     "api.mjproapps.com",
-    "www.mjproapps.com",
     "3.107.8.190",
     "54.206.216.180",
     "13.238.144.45",
     "localhost",
     "127.0.0.1",
-    "192.168.1.134"
+    "192.168.1.134",
 ]
 
-
-SECURE_SSL_REDIRECT = False
+#Prod / Staging
+SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_HSTS_PRELOAD = True
 
@@ -64,8 +63,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "corsheaders",
     "api.apps.ApiConfig",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -106,24 +105,22 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = "chatbot_project.wsgi.application"
 
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
+    "https://api-staging.mjproapps.com",
     "https://mjproapps.com",
     "https://www.mjproapps.com",
 ]
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-# aded mongodb intergration
 # MongoDB settings
 MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
 MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
 MONGODB_CLUSTER = os.getenv("MONGODB_CLUSTER")
 MONGODB_DATABASE = os.getenv("MONGODB_DATABASE", "ChatbotDB")
+
 
 # Construct MongoDB URI
 MONGODB_URI = (
@@ -142,7 +139,6 @@ CACHES = {
         },
     }
 }
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -152,19 +148,17 @@ DATABASES = {
             "timeout": 20,
         },
     },
-   # "mongodb": {
-    #    "ENGINE": "djongo",
-     #   "NAME": MONGODB_DATABASE,
-      #  "CLIENT": {
-       #     "host": MONGODB_URI,
-        #    "maxPoolSize": 50,
-         #   "minPoolSize": 10,
-          #  "maxIdleTimeMS": 45000,
-        #},
-    #},
+    "mongodb": {
+        "ENGINE": "djongo",
+        "NAME": MONGODB_DATABASE,
+        "CLIENT": {
+            "host": MONGODB_URI,
+            "maxPoolSize": 50,
+            "minPoolSize": 10,
+            "maxIdleTimeMS": 45000,
+        },
+    },
 }
-
-
 # File Upload Settings
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB
 DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB
@@ -231,6 +225,7 @@ LOGGING = {
 }
 
 
+# Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -272,6 +267,7 @@ STATICFILES_DIRS = [
 # Media Files
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MAX_UPLOAD_SIZE = 5242880  # 5MB
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

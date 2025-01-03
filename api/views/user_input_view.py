@@ -70,7 +70,6 @@ class UserInputView(MongoDBMixin, APIView):
             logger.info(
                 f"MongoDB operation completed in {time.time() - db_start:.2f}s"
             )
-
             # Return the response
             return Response(response_data, status=status.HTTP_200_OK)
 
