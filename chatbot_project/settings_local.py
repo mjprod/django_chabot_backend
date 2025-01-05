@@ -110,6 +110,7 @@ WSGI_APPLICATION = "chatbot_project.wsgi.application"
 
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
+   "http://localhost:3000", 
     "https://mjproapps.com",
     "https://www.mjproapps.com",
 ]

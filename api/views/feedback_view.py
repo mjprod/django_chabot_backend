@@ -1,4 +1,6 @@
 import logging
+import time
+
 from datetime import datetime
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -10,88 +12,123 @@ from ..serializers import CaptureFeedbackSerializer
 # Initialize logger
 logger = logging.getLogger(__name__)
 
+from ..chatbot import (
+    translate_and_clean,
+)
+
 class CaptureFeedbackView(MongoDBMixin, APIView):
-    """
-    APIView to capture and save user feedback in MongoDB.
-    Supports both POST and GET requests.
-    """
 
     def post(self, request):
-        """
-        Handles POST requests to save feedback in MongoDB.
-        """
-        db = None  # Initialize database connection variable
+        start_time = time.time()
+        logger.info("Starting feedback POST request")
         try:
-            logger.info("Receiving feedback data.")
+            # Transform incoming data to match serializer format
+            transformed_data = {
+                "conversation_id": request.data.get("conversation_id", ""),  # Generate new ID if not provided
+                "user_input": request.data.get("prompt", ""),
+                "ai_response": request.data.get("generation", ""),
+                "correct_bool": request.data.get("correct_bool", False),
+                "chat_rating": request.data.get("chat_rating", 0),
+                "correct_answer": request.data.get("correct_answer", ""),
+                "metadata": {
+                    **request.data.get("metadata", {}),
+                    "user_id": request.data.get("user_id"),
+                    "translations": request.data.get("translations", []),
+                    "confidence": 0.97,  # Add fixed confidence score
+                },
+            }
 
-            # Validate incoming data
-            serializer = CaptureFeedbackSerializer(data=request.data)
+            # Validate transformed data
+            logger.info("Validating request data")
+            serializer = CaptureFeedbackSerializer(data=transformed_data)
             if not serializer.is_valid():
-                logger.error(f"Validation error: {serializer.errors}")
+                logger.error(f"Validation failed: {serializer.errors}")
                 return Response(
-                    {"error": "Invalid data.", "details": serializer.errors},
+                    {"error": "Invalid input data", "details": serializer.errors},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
-            # Prepare data for saving
-            feedback_data = {
-                **serializer.validated_data,
-                "timestamp": datetime.utcnow().isoformat(),
+            # Process translations
+            logger.info("Processing feedback translations")
+            translated_data = {
+                "conversation_id": serializer.validated_data["conversation_id"],
+                "user_input": translate_and_clean(transformed_data["user_input"]),
+                "ai_response": serializer.validated_data["ai_response"],
+                "correct_bool": serializer.validated_data["correct_bool"],
+                "chat_rating": serializer.validated_data["chat_rating"],
+                "correct_answer": translate_and_clean(
+                    transformed_data.get("correct_answer", "")
+                ),
+                "metadata": {
+                    **serializer.validated_data.get("metadata", {}),
+                    "confidence": 0.97,
+                },
+                "timestamp": datetime.now().isoformat(),
+                "search_score": 0.0,
             }
 
-            # Connect to MongoDB
-            db = self.get_db()
-            db.feedback_data.insert_one(feedback_data)
-            logger.info("Feedback successfully saved to MongoDB.")
+            # MongoDB operations
+            try:
+                db = self.get_db()
+                logger.info("Creating text index for feedback search")
+                db.feedback_data.create_index([("user_input", "text")])
 
+                db_start = time.time()
+                logger.info("Starting MongoDB Write Operations")
+                db.feedback_data.insert_one(translated_data)
+                logger.info(
+                    f"MongoDB operation completed in {time.time() - db_start:.2f}s"
+                )
+
+            except Exception as db_error:
+                logger.error(f"MongoDB operation failed: {str(db_error)}")
+                return Response(
+                    {"error": f"Database operation failed: {str(db_error)}"},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                )
+
+            total_time = time.time() - start_time
+            logger.info(f"Total request processing time: {total_time:.2f}s")
             return Response(
-                {"message": "Feedback saved successfully."},
+                {"message": "Feedback saved successfully"},
                 status=status.HTTP_201_CREATED,
             )
 
-        except PyMongoError as db_error:
-            logger.error(f"Database error while saving feedback: {str(db_error)}", exc_info=True)
-            return Response(
-                {"error": "Failed to save feedback due to database error."},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            )
         except Exception as e:
-            logger.error(f"Unexpected error while saving feedback: {str(e)}", exc_info=True)
+            logger.error(f"Error processing request: {str(e)}")
             return Response(
-                {"error": "An unexpected error occurred."},
+                {"error": f"Failed to save feedback: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-        finally:
-            if db:
-                self.close_db()
-                logger.info("Database connection closed.")
 
     def get(self, request):
-        """
-        Handles GET requests to retrieve feedback data.
-        Supports pagination for better performance.
-        """
-        db = None  # Initialize database connection variable
+        start_time = time.time()
+        logger.info("Starting feedback GET request")
+
         try:
-            logger.info("Fetching feedback data.")
+            # Get pagination parameters
+            page = int(request.query_params.get("page", 1))
+            limit = int(request.query_params.get("limit", 10))
 
-            # Connect to MongoDB
+            # MongoDB operations
+            db_start = time.time()
+            logger.info("Starting MongoDB Read Operations")
             db = self.get_db()
-
-            # Pagination parameters
-            page = int(request.GET.get("page", 1))
-            limit = int(request.GET.get("limit", 10))
-            skip = (page - 1) * limit
-
-            # Fetch feedbacks from MongoDB
-            feedbacks = db.feedback_data.find().sort("timestamp", -1).skip(skip).limit(limit)
             total_count = db.feedback_data.count_documents({})
 
-            # Process results
+            cursor = (
+                db.feedback_data.find({})
+                .sort("timestamp", -1)
+                .skip((page - 1) * limit)
+                .limit(limit)
+            )
+
             results = []
-            for feedback in feedbacks:
-                feedback["_id"] = str(feedback["_id"])  # Convert ObjectId to string
-                results.append(feedback)
+            for doc in cursor:
+                doc["_id"] = str(doc["_id"])
+                results.append(doc)
+
+            logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
 
             response_data = {
                 "total": total_count,
@@ -100,22 +137,19 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
                 "results": results,
             }
 
-            logger.info(f"Fetched {len(results)} feedback records.")
+            total_time = time.time() - start_time
+            logger.info(f"Total request processing time: {total_time:.2f}s")
             return Response(response_data, status=status.HTTP_200_OK)
 
-        except PyMongoError as db_error:
-            logger.error(f"Database error while fetching feedback: {str(db_error)}", exc_info=True)
+        except ValueError as e:
+            logger.error(f"Invalid pagination parameters: {str(e)}")
             return Response(
-                {"error": "Failed to fetch feedback data due to database error."},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                {"error": "Invalid pagination parameters"},
+                status=status.HTTP_400_BAD_REQUEST,
             )
         except Exception as e:
-            logger.error(f"Unexpected error while fetching feedback: {str(e)}", exc_info=True)
+            logger.error(f"Error processing request: {str(e)}")
             return Response(
-                {"error": "An unexpected error occurred."},
+                {"error": f"Failed to retrieve feedback: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-        finally:
-            if db:
-                self.close_db()
-                logger.info("Database connection closed.")

@@ -6,6 +6,8 @@ import os
 import resource
 import time
 import tracemalloc
+import re
+
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from typing import List
@@ -340,6 +342,8 @@ class MultiRetriever:
                 results = retriever.invoke(query)
                 all_results.extend(results)
                 #compare_memory(memory_snapshot)
+                logger.info(f"Processing completed with {len(all_results)} total results.")
+
             return all_results[:3]
         finally:
             gc.collect()
@@ -534,6 +538,10 @@ class ConversationMetaData:
 def translate_and_clean(text):
     #                                                                    memory_snapshot = monitor_memory()
     api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        logger.error("Missing OPENAI_API_KEY environment variable.")
+        return text
+
     client = OpenAI(api_key=api_key)
 
     try:
@@ -568,7 +576,7 @@ def translate_and_clean(text):
         translated_text = response.choices[0].message.content.strip()
 
         # Remove any remaining translation prefixes if they exist
-        prefixes_to_remove = [
+        '''prefixes_to_remove = [
             "Translated from Chinese to English:",
             "Translated from Malay to English:",
             "Translated from Malaysian to English:",
@@ -577,12 +585,14 @@ def translate_and_clean(text):
 
         for prefix in prefixes_to_remove:
             if translated_text.startswith(prefix):
-                translated_text = translated_text.replace(prefix, "").strip()
+                translated_text = translated_text.replace(prefix, "").strip()'''
+        
+        translated_text = re.sub(r"^(Translated.*?:)", "", translated_text).strip()
 
         return translated_text
 
     except Exception as e:
-        logger.error(f"Translation error: {str(e)}")
+        logger.error(f"Translation error: {str(e)}", exc_info=True)
         return text
     finally:
        # compare_memory(memory_snapshot)
@@ -1061,6 +1071,8 @@ def generate_user_input(cleaned_prompt):
 
     # Get relevant documents
     docs_retrieve = retriever.get_relevant_documents(cleaned_prompt)
+    logger.error(f"Retrieved {len(docs_retrieve)} documents")
+
     docs_to_use = []
 
     # Filter documents
