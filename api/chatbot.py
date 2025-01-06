@@ -790,7 +790,6 @@ def get_mongodb_client():
         )
     return client[settings.MONGODB_DATABASE]
 
-
 def update_local_confidence(generation, confidence_diff):
     try:
         logger.info(
@@ -841,10 +840,8 @@ def update_local_confidence(generation, confidence_diff):
                 logger.error(f"Invalid JSON format in file: {database_file}")
             except Exception as e:
                 logger.error(f"Error processing file {database_file}: {str(e)}")
-
         if not updated:
             logger.warning("No matching answer found in any database files")
-
     except Exception as e:
         logger.error(f"Error updating local confidence: {str(e)}")
 
@@ -898,9 +895,7 @@ def update_database_confidence(comparison_result, docs_to_use):
     except Exception as e:
         logger.error(f"Error updating database confidence: {str(e)}")
 
-
 # async for translations
-
 async def generate_translations(generation):
     try:
         logger.info(f"Starting translations for: {generation}")
@@ -929,27 +924,9 @@ async def generate_translations(generation):
 
             logger.info(f"Final output: {output}")
             return output
-
     except Exception as e:
         logger.error(f"Error in generate_translations: {str(e)}", exc_info=True)
         raise
-'''async def generate_translations(generation):
-    with ThreadPoolExecutor() as executor:
-        # Run translations
-        malay_future = executor.submit(translate_en_to_ms, generation)
-        chinese_future = executor.submit(translate_en_to_cn, generation)
-
-        # Gather results
-        translations = await asyncio.gather(
-            asyncio.wrap_future(malay_future), asyncio.wrap_future(chinese_future)
-        )
-
-        return [
-            {"language": "en", "text": generation},
-            {"language": "ms-MY", "text": translations[0].get("text", "")},
-            {"language": "cn", "text": translations[1].get("text", "")},
-        ]
-'''
 
 def translate_en_to_cn(input_text):
     load_dotenv()
@@ -1308,7 +1285,6 @@ def handle_mongodb_operation(operation):
       #  logger.error(f"Error retrieving feedback answers: {str(e)}")
      #   return []
 
-
 def compare_answers(generation, feedback_answers, docs_to_use):
     logger.info("Starting answer comparison process")
     try:
@@ -1347,7 +1323,6 @@ def compare_answers(generation, feedback_answers, docs_to_use):
             f"Comparison result: {comparison_result['better_answer']} answer is better"
         )
         return comparison_result
-
     except Exception as e:
         logger.error(f"Error comparing answers: {str(e)}")
         return None

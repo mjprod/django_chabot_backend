@@ -17,14 +17,13 @@ from ..chatbot import (
 )
 
 class CaptureFeedbackView(MongoDBMixin, APIView):
-
     def post(self, request):
         start_time = time.time()
         logger.info("Starting feedback POST request")
         try:
             # Transform incoming data to match serializer format
             transformed_data = {
-                "conversation_id": request.data.get("conversation_id", ""),  # Generate new ID if not provided
+                "conversation_id": request.data.get("conversation_id", ""),
                 "user_input": request.data.get("prompt", ""),
                 "ai_response": request.data.get("generation", ""),
                 "correct_bool": request.data.get("correct_bool", False),
@@ -93,7 +92,6 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
                 {"message": "Feedback saved successfully"},
                 status=status.HTTP_201_CREATED,
             )
-
         except Exception as e:
             logger.error(f"Error processing request: {str(e)}")
             return Response(
@@ -140,7 +138,6 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
             total_time = time.time() - start_time
             logger.info(f"Total request processing time: {total_time:.2f}s")
             return Response(response_data, status=status.HTTP_200_OK)
-
         except ValueError as e:
             logger.error(f"Invalid pagination parameters: {str(e)}")
             return Response(

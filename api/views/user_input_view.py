@@ -16,7 +16,6 @@ from ..chatbot import (
 )
 
 class UserInputView(MongoDBMixin, APIView):
-
     def post(self, request):
         db = None
         start_time = time.time()
@@ -72,7 +71,6 @@ class UserInputView(MongoDBMixin, APIView):
             )
             # Return the response
             return Response(response_data, status=status.HTTP_200_OK)
-
         except Exception as e:
             logger.error(
                 f"Error processing request: {str(e)}", exc_info=True  # Log stack trace

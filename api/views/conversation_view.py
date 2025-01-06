@@ -83,14 +83,12 @@ class PromptConversationView(MongoDBMixin, APIView):
                 f"Total request processing time: {time.time() - start_time:.2f}s"
             )
             return Response(response_data, status=status.HTTP_200_OK)
-
         except Exception as e:
             logger.error(f"Error processing request: {str(e)}")
             return Response(
                 {"error": f"Request processing failed: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-
         finally:
             # Cleanup database connection
             if db is not None:
@@ -146,21 +144,18 @@ class CompleteConversationsView(MongoDBMixin, APIView):
             )
 
             return Response(response_data, status=status.HTTP_200_OK)
-
         except ValueError as e:
             logger.error(f"Invalid pagination parameters: {str(e)}")
             return Response(
                 {"error": "Invalid pagination parameters"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-
         except Exception as e:
             logger.error(f"Error processing request: {str(e)}")
             return Response(
                 {"error": f"Failed to retrieve conversations: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-
         finally:
             # Cleanup database connection
             if db is not None:
@@ -209,7 +204,6 @@ class CompleteConversationsView(MongoDBMixin, APIView):
                 f"MongoDB operation completed in {time.time() - start_time:.2f}s"
             )
             return Response(response_data, status=status.HTTP_201_CREATED)
-
         except Exception as e:
             logger.error(f"Error processing request: {str(e)}", exc_info=True)
             return Response(
