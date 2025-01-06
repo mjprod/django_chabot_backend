@@ -121,17 +121,17 @@ CORS_ALLOWED_ORIGINS = [
 
 # aded mongodb intergration
 # MongoDB settings
-# MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
-# MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
-# MONGODB_CLUSTER = os.getenv("MONGODB_CLUSTER")
-# MONGODB_DATABASE = os.getenv("MONGODB_DATABASE", "ChatbotDB")
+MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
+MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
+MONGODB_CLUSTER = os.getenv("MONGODB_CLUSTER")
+MONGODB_DATABASE = os.getenv("MONGODB_DATABASE", "ChatbotDB")
 
 # Construct MongoDB URI
-# MONGODB_URI = (
-# f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}"
-# f"@{MONGODB_CLUSTER}/{MONGODB_DATABASE}?retryWrites=true&w=majority"
-# )
-JSON_DATABASE_PATH = os.path.join(BASE_DIR, "temp_database.json")
+MONGODB_URI = (
+    f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}"
+    f"@{MONGODB_CLUSTER}/{MONGODB_DATABASE}?retryWrites=true&w=majority"
+)
+
 # Cache Configuration
 CACHES = {
     "default": {

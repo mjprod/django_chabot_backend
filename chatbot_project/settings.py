@@ -116,7 +116,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://www.mjproapps.com",
 ]
 
-"""
 # MongoDB settings
 MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
 MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
@@ -129,8 +128,6 @@ MONGODB_URI = (
     f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}"
     f"@{MONGODB_CLUSTER}/{MONGODB_DATABASE}?retryWrites=true&w=majority"
 )
-"""
-JSON_DATABASE_PATH = os.path.join(BASE_DIR, "temp_database.json")
 
 # Cache Configuration
 CACHES = {
@@ -152,16 +149,16 @@ DATABASES = {
             "timeout": 20,
         },
     },
-    # "mongodb": {
-    # "ENGINE": "djongo",
-    # "NAME": MONGODB_DATABASE,
-    # "CLIENT": {
-    # "host": MONGODB_URI,
-    # "maxPoolSize": 50,
-    # "minPoolSize": 10,
-    # "maxIdleTimeMS": 45000,
-    # },
-    # },
+    "mongodb": {
+        "ENGINE": "djongo",
+        "NAME": MONGODB_DATABASE,
+        "CLIENT": {
+            "host": MONGODB_URI,
+            "maxPoolSize": 50,
+            "minPoolSize": 10,
+            "maxIdleTimeMS": 45000,
+        },
+    },
 }
 # File Upload Settings
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB
@@ -268,7 +265,6 @@ STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesSto
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-
 # Media Files
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MAX_UPLOAD_SIZE = 5242880  # 5MB
