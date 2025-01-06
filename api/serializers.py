@@ -123,4 +123,3 @@ class CaptureFeedbackSerializer(serializers.Serializer):
         if len(str(value)) > 2000:
             raise serializers.ValidationError("Metadata field is too large")
         return value
-    
