@@ -17,9 +17,9 @@ try:
     # Create a MongoDB client with SSL/TLS enabled
     client = MongoClient(
         uri,
-        tls=True,                         # Enable TLS
-        tlsCAFile=certifi.where(),        # Use trusted CA certificates
-        serverSelectionTimeoutMS=5000     # Timeout after 5 seconds
+        tls=True,  # Enable TLS
+        tlsCAFile=certifi.where(),  # Use trusted CA certificates
+        serverSelectionTimeoutMS=5000,  # Timeout after 5 seconds
     )
 
     # Test connection with a ping

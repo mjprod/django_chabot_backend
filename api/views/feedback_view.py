@@ -1,3 +1,6 @@
+from ..chatbot import (
+    translate_and_clean,
+)
 import logging
 import time
 
@@ -12,9 +15,6 @@ from ..serializers import CaptureFeedbackSerializer
 # Initialize logger
 logger = logging.getLogger(__name__)
 
-from ..chatbot import (
-    translate_and_clean,
-)
 
 class CaptureFeedbackView(MongoDBMixin, APIView):
     def post(self, request):

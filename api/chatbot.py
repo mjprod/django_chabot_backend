@@ -342,7 +342,9 @@ class MultiRetriever:
                 results = retriever.invoke(query)
                 all_results.extend(results)
                 # compare_memory(memory_snapshot)
-                logger.info(f"Processing completed with {len(all_results)} total results.")
+                logger.info(
+                    f"Processing completed with {len(all_results)} total results."
+                )
 
             return all_results[:3]
         finally:
@@ -578,7 +580,7 @@ def translate_and_clean(text):
         translated_text = response.choices[0].message.content.strip()
 
         # Remove any remaining translation prefixes if they exist
-        '''prefixes_to_remove = [
+        """prefixes_to_remove = [
             "Translated from Chinese to English:",
             "Translated from Malay to English:",
             "Translated from Malaysian to English:",
@@ -587,7 +589,7 @@ def translate_and_clean(text):
 
         for prefix in prefixes_to_remove:
             if translated_text.startswith(prefix):
-                translated_text = translated_text.replace(prefix, "").strip()'''
+                translated_text = translated_text.replace(prefix, "").strip()"""
 
         translated_text = re.sub(r"^(Translated.*?:)", "", translated_text).strip()
 
@@ -597,7 +599,7 @@ def translate_and_clean(text):
         logger.error(f"Translation error: {str(e)}", exc_info=True)
         return text
     finally:
-       # compare_memory(memory_snapshot)
+        # compare_memory(memory_snapshot)
         gc.collect()
 
 
@@ -792,9 +794,7 @@ rag_chain = (
 
 def get_mongodb_client():
     client = MongoClient(settings.MONGODB_URI)
-    logger.info(
-        "MONGO DB URI: " + settings.MONGODB_URI
-    )
+    logger.info("MONGO DB URI: " + settings.MONGODB_URI)
     return client[settings.MONGODB_DATABASE]
 
 
@@ -903,6 +903,7 @@ def update_database_confidence(comparison_result, docs_to_use):
     except Exception as e:
         logger.error(f"Error updating database confidence: {str(e)}")
 
+
 # async for translations
 
 
@@ -919,8 +920,7 @@ async def generate_translations(generation):
 
             # Gather results
             translations = await asyncio.gather(
-                asyncio.wrap_future(malay_future),
-                asyncio.wrap_future(chinese_future)
+                asyncio.wrap_future(malay_future), asyncio.wrap_future(chinese_future)
             )
 
             logger.info(f"Translation results: {translations}")
@@ -1161,7 +1161,7 @@ def generate_prompt_conversation(
         # db = get_mongodb_client()
         # relevant_feedbacks = get_relevant_feedback_data(cleaned_prompt, db)
 
-       # if relevant_feedbacks:
+        # if relevant_feedbacks:
         #  logger.info(f"Found {len(relevant_feedbacks)} relevant feedback answers")
         #   comparison_result = compare_answers(
         #       generation, relevant_feedbacks, docs_to_use
@@ -1188,11 +1188,11 @@ def generate_prompt_conversation(
         logger.info(f"Translations completed in {time.time() - translation_start:.2f}s")
 
         # Save conversation
-       # db_start = time.time()
-       # conversation.add_message("assistant", generation)
-       # save_conversation(conversation)
-       # logger.info(f"Database operation completed in {time.time() - db_start:.2f}s")
-#
+        # db_start = time.time()
+        # conversation.add_message("assistant", generation)
+        # save_conversation(conversation)
+        # logger.info(f"Database operation completed in {time.time() - db_start:.2f}s")
+        #
         # total_time = time.time() - start_time
         # logger.info(f"Total request processing time: {total_time:.2f}s")
 
@@ -1214,28 +1214,28 @@ def generate_prompt_conversation(
 def save_conversation(conversation):
     # memory_snapshot = monitor_memory()
     try:
-      # db = get_mongodb_client()
-       # conversations = db.conversations
-       # conversation_dict = conversation.to_dict()
+        # db = get_mongodb_client()
+        # conversations = db.conversations
+        # conversation_dict = conversation.to_dict()
 
         # Remove _id to prevent duplicate key errors
-      #  if "_id" in conversation_dict:
+        #  if "_id" in conversation_dict:
         #    del conversation_dict["_id"]
 
         # Update conversation state
-       # conversation_dict["is_first_message"] = False
+        # conversation_dict["is_first_message"] = False
 
         # MongoDB operation with error handling
-       # result = conversations.update_one(
-      # {"session_id": conversation.session_id},
+        # result = conversations.update_one(
+        # {"session_id": conversation.session_id},
         #    {"$set": conversation_dict},
-       #     upsert=True,
-       # )
+        #     upsert=True,
+        # )
 
         # Verify operation success
         # if result.modified_count > 0 or result.upserted_id:
         #    logger.info(f"Successfully saved conversation {conversation.session_id}")
-       # else:
+        # else:
         #   logger.warning(f"No changes made to conversation {conversation.session_id}")
 
         return result
@@ -1244,7 +1244,7 @@ def save_conversation(conversation):
         raise
     finally:
         # Clean up and memory management
-       # compare_memory(memory_snapshot)
+        # compare_memory(memory_snapshot)
         gc.collect()
         del conversation_dict  # Explicit cleanup of large dictionary
 
@@ -1272,7 +1272,7 @@ def handle_mongodb_operation(operation):
         return None
 
 
-'''
+"""
  def get_relevant_feedback_data(cleaned_prompt, db):
     logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
     try:
@@ -1295,7 +1295,7 @@ def handle_mongodb_operation(operation):
     except Exception as e:
         logger.error(f"Error retrieving feedback answers: {str(e)}")
        return []
-'''
+"""
 
 
 def compare_answers(generation, feedback_answers, docs_to_use):

@@ -1,4 +1,10 @@
-
+from ..chatbot import (
+    generate_prompt_conversation,
+)
+from ..serializers import (
+    CompleteConversationsSerializer,
+    PromptConversationSerializer,
+)
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -10,16 +16,10 @@ import time
 
 logger = logging.getLogger(__name__)
 
-from ..serializers import (
-    CompleteConversationsSerializer,
-    PromptConversationSerializer,
-)
-
-from ..chatbot import (
-    generate_prompt_conversation,
-)
 
 # new api for start conversation
+
+
 class PromptConversationView(MongoDBMixin, APIView):
     def post(self, request):
         db = None
@@ -49,7 +49,7 @@ class PromptConversationView(MongoDBMixin, APIView):
                 conversation_id=conversation_id,
                 admin_id="",
                 agent_id="",
-                user_id=user_id, 
+                user_id=user_id,
             )
             logger.info(
                 f"AI Generation completed in {time.time() - generation_start:.2f}s"
@@ -92,13 +92,14 @@ class PromptConversationView(MongoDBMixin, APIView):
         finally:
             # Cleanup database connection
             if db is not None:
-               self.close_db()
+                self.close_db()
             # Uncomment memory cleanup if needed
             # gc.collect()
 
+
 class CompleteConversationsView(MongoDBMixin, APIView):
     def get(self, request):
-        db = None 
+        db = None
         start_time = time.time()
         logger.info("Starting complete_conversations GET request")
 
@@ -162,7 +163,7 @@ class CompleteConversationsView(MongoDBMixin, APIView):
                 self.close_db()
 
     def post(self, request):
-        db = None 
+        db = None
         start_time = time.time()
         logger.info("Starting complete_conversations POST request")
 
@@ -213,4 +214,4 @@ class CompleteConversationsView(MongoDBMixin, APIView):
         finally:
             if db is not None:
                 self.close_db()
-            #gc.collect()
+            # gc.collect()

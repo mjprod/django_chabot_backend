@@ -40,7 +40,7 @@ ALLOWED_HOSTS = [
     "13.238.144.45",
     "localhost",
     "127.0.0.1",
-    "192.168.1.134"
+    "192.168.1.134",
 ]
 
 
@@ -110,7 +110,7 @@ WSGI_APPLICATION = "chatbot_project.wsgi.application"
 
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
-   "http://localhost:3000", 
+    "http://localhost:3000",
     "https://mjproapps.com",
     "https://www.mjproapps.com",
 ]
@@ -153,16 +153,16 @@ DATABASES = {
             "timeout": 20,
         },
     },
-   # "mongodb": {
+    # "mongodb": {
     #    "ENGINE": "djongo",
-     #   "NAME": MONGODB_DATABASE,
-      #  "CLIENT": {
-       #     "host": MONGODB_URI,
-        #    "maxPoolSize": 50,
-         #   "minPoolSize": 10,
-          #  "maxIdleTimeMS": 45000,
-        #},
-    #},
+    #   "NAME": MONGODB_DATABASE,
+    #  "CLIENT": {
+    #     "host": MONGODB_URI,
+    #    "maxPoolSize": 50,
+    #   "minPoolSize": 10,
+    #  "maxIdleTimeMS": 45000,
+    # },
+    # },
 }
 
 

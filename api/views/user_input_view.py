@@ -1,3 +1,7 @@
+from ..chatbot import (
+    generate_user_input,
+    translate_and_clean,
+)
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -10,10 +14,6 @@ from ..mixins.mongodb_mixin import MongoDBMixin
 
 logger = logging.getLogger(__name__)
 
-from ..chatbot import (
-    generate_user_input,
-    translate_and_clean,
-)
 
 class UserInputView(MongoDBMixin, APIView):
     def post(self, request):
@@ -66,9 +66,7 @@ class UserInputView(MongoDBMixin, APIView):
 
             user_input_doc = {**response_data, "timestamp": datetime.now().isoformat()}
             db.user_inputs.insert_one(user_input_doc)
-            logger.info(
-                f"MongoDB operation completed in {time.time() - db_start:.2f}s"
-            )
+            logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
             # Return the response
             return Response(response_data, status=status.HTTP_200_OK)
         except Exception as e:
@@ -82,8 +80,8 @@ class UserInputView(MongoDBMixin, APIView):
         finally:
             # Cleanup database connection
             if db is not None:
-               self.close_db()
-            #gc.collect()  # Explicit garbage collection for safety
+                self.close_db()
+            # gc.collect()  # Explicit garbage collection for safety
 
             # Log total processing time
             total_time = time.time() - start_time
