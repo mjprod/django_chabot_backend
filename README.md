@@ -288,5 +288,3 @@ This project is protected under the [SELECT-A-LICENSE](https://choosealicense.co
 ##  Acknowledgments
 
 - List any resources, contributors, inspiration, etc. here.
-
----
