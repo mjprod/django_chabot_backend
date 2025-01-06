@@ -1201,9 +1201,9 @@ def generate_prompt_conversation(
 
 
 def save_conversation(conversation):
-    #memory_snapshot = monitor_memory()
+    # memory_snapshot = monitor_memory()
     try:
-      #  db = get_mongodb_client()
+      # db = get_mongodb_client()
        # conversations = db.conversations
        # conversation_dict = conversation.to_dict()
 
@@ -1222,7 +1222,7 @@ def save_conversation(conversation):
        # )
 
         # Verify operation success
-        #if result.modified_count > 0 or result.upserted_id:
+        # if result.modified_count > 0 or result.upserted_id:
         #    logger.info(f"Successfully saved conversation {conversation.session_id}")
        # else:
          #   logger.warning(f"No changes made to conversation {conversation.session_id}")
@@ -1233,14 +1233,14 @@ def save_conversation(conversation):
         raise
     finally:
         # Clean up and memory management
-       #compare_memory(memory_snapshot)
+       # compare_memory(memory_snapshot)
         gc.collect()
         del conversation_dict  # Explicit cleanup of large dictionary
 
 
 def save_interaction(interaction_type, data):
-    #db = get_mongodb_client()
-    #interactions = db.interactions
+    # db = get_mongodb_client()
+    # interactions = db.interactions
 
     new_interaction = {
         "timestamp": datetime.now().isoformat(),
@@ -1248,8 +1248,8 @@ def save_interaction(interaction_type, data):
         "data": data,
     }
 
-    #interactions.insert_one(new_interaction)
-    #return {"message": f"{interaction_type} interaction saved successfully"}
+    # interactions.insert_one(new_interaction)
+    # return {"message": f"{interaction_type} interaction saved successfully"}
     return {"message": f"TODO interaction saved successfully"}
 
 
@@ -1260,30 +1260,30 @@ def handle_mongodb_operation(operation):
         print(f"MongoDB operation failed: {str(e)}")
         return None
 
+'''
+ def get_relevant_feedback_data(cleaned_prompt, db):
+    logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
+    try:
+        db.feedback_data.create_index([("user_input", "text")])
+        logger.info("create text index for feedback search")
 
-#def get_relevant_feedback_data(cleaned_prompt, db):
- #   logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
-  #  try:
-   #     db.feedback_data.create_index([("user_input", "text")])
-    #    logger.info("create text index for feedback search")
-
-     #   similar_answers = (
-      #      db.feedback_data.find(
-       #         {
-        #            "$text": {"$search": cleaned_prompt},
-         #           "correct_answer": {"$exists": True, "$ne": ""},
-          #      }
-           # )
-            #.sort([("score", {"$meta": "textScore"}), ("timestamp", -1)])
-            #.limit(3)
-       # )
-
-        #feedback_list = list(similar_answers)
-        #logger.info(f"found {len(feedback_list)} potential feedback matches")
-        #return feedback_list
-    #except Exception as e:
-      #  logger.error(f"Error retrieving feedback answers: {str(e)}")
-     #   return []
+        similar_answers = (
+          db.feedback_data.find(
+                {
+                    "$text": {"$search": cleaned_prompt},
+                    "correct_answer": {"$exists": True, "$ne": ""},
+                }
+            )
+            .sort([("score", {"$meta": "textScore"}), ("timestamp", -1)])
+            .limit(3)
+        )
+        feedback_list = list(similar_answers)
+        logger.info(f"found {len(feedback_list)} potential feedback matches")
+        return feedback_list
+    except Exception as e:
+        logger.error(f"Error retrieving feedback answers: {str(e)}")
+       return []
+'''
 
 def compare_answers(generation, feedback_answers, docs_to_use):
     logger.info("Starting answer comparison process")
