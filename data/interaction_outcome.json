@@ -1,0 +1,136 @@
+[
+    {
+        "user_id": 0,
+        "prompt": "original question",
+        "cleaned_prompt": "processed question",
+        "generation": "answer text",
+        "translations": [
+            {
+                "language": "en",
+                "text": "english text"
+            },
+            {
+                "language": "ms-MY",
+                "text": "malay text"
+            },
+            {
+                "language": "cn",
+                "text": "chinese text"
+            }
+        ],
+        "correct_bool": true,
+        "correct_answer": "Correct Answer goes here",
+        "chat_rating": 3
+    },
+    {
+        "user_id": 0,
+        "prompt": "original question",
+        "cleaned_prompt": "processed question",
+        "generation": "answer text",
+        "translations": [
+            {
+                "language": "en",
+                "text": "english text"
+            },
+            {
+                "language": "ms-MY",
+                "text": "malay text"
+            },
+            {
+                "language": "cn",
+                "text": "chinese text"
+            }
+        ],
+        "correct_bool": true,
+        "correct_answer": "Correct Answer goes here",
+        "chat_rating": 3
+    },
+    {
+        "user_id": 0,
+        "prompt": "original question",
+        "cleaned_prompt": "processed question",
+        "generation": "answer text",
+        "translations": [
+            {
+                "language": "en",
+                "text": "english text"
+            },
+            {
+                "language": "ms-MY",
+                "text": "malay text"
+            },
+            {
+                "language": "cn",
+                "text": "chinese text"
+            }
+        ],
+        "correct_bool": true,
+        "correct_answer": "gqfioghaukghae",
+        "chat_rating": 3
+    },
+    {
+        "user_id": 0,
+        "prompt": "original question",
+        "cleaned_prompt": "processed question",
+        "generation": "answer text",
+        "translations": [
+            {
+                "language": "en",
+                "text": "english text"
+            },
+            {
+                "language": "ms-MY",
+                "text": "malay text"
+            },
+            {
+                "language": "cn",
+                "text": "chinese text"
+            }
+        ],
+        "correct_bool": true,
+        "correct_answer": "gqfioghaukghae",
+        "chat_rating": 3
+    },
+    {
+        "user_id": 0,
+        "prompt": "original question",
+        "cleaned_prompt": "processed question",
+        "generation": "answer text",
+        "translations": [
+            {
+                "language": "en",
+                "text": "english text"
+            },
+            {
+                "language": "ms-MY",
+                "text": "malay text"
+            },
+            {
+                "language": "cn",
+                "text": "chinese text"
+            }
+        ],
+        "correct_bool": false,
+        "correct_answer": null,
+        "chat_rating": 5
+    },
+    {
+        "user_id": 2,
+        "prompt": "How do I deposit?",
+        "cleaned_prompt": "How do I make a deposit?",
+        "generation": "Here is how to deposit...",
+        "translations": [
+            {
+                "language": "ms-MY",
+                "text": "Ini cara untuk deposit..."
+            },
+            {
+                "language": "cn",
+                "text": "这是如何存款..."
+            }
+        ],
+        "correct_bool": true,
+        "correct_answer": "",
+        "chat_rating": 5
+    }
+]
