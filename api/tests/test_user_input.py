@@ -3,6 +3,7 @@ from rest_framework import status
 from django.urls import reverse
 from unittest.mock import patch
 
+
 class UserInputViewTests(APITestCase):
     """
     Tests for the UserInputView.

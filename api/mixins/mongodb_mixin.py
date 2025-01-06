@@ -4,10 +4,12 @@ from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
+
 class MongoDBMixin:
     """
     Mixin to handle MongoDB database connections.
     """
+
     def get_db(self):
         """
         Establish and return a connection to the MongoDB database.
@@ -21,6 +23,7 @@ class MongoDBMixin:
         except Exception as e:
             logger.error(f"MongoDB connection error: {str(e)}", exc_info=True)
             raise
+
     def close_db(self):
         """
         Close the MongoDB database connection to release resources.

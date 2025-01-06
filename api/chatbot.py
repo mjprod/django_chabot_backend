@@ -272,7 +272,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
 
 # Process documents in batches
 def create_vector_store(documents, batch_size=500):
-    #memory_snapshot = monitor_memory()
+    # memory_snapshot = monitor_memory()
     try:
         logger.info("Starting document splitting process")
         split_start = time.time()
@@ -306,7 +306,7 @@ def create_vector_store(documents, batch_size=500):
             f"Vector store creation completed in {time.time() - store_start:.2f}s"
         )
         vectorstores.append(store)
-        #compare_memory(memory_snapshot)
+        # compare_memory(memory_snapshot)
         return store
     except Exception as e:
         logger.error(f"Vector store creation failed: {str(e)}")
@@ -331,7 +331,7 @@ class MultiRetriever:
         self.vectorstores = vectorstores
 
     def get_relevant_documents(self, query):
-        #memory_snapshot = monitor_memory()
+        # memory_snapshot = monitor_memory()
         all_results = []
         try:
             for store in vectorstores:
@@ -341,7 +341,7 @@ class MultiRetriever:
                 )
                 results = retriever.invoke(query)
                 all_results.extend(results)
-                #compare_memory(memory_snapshot)
+                # compare_memory(memory_snapshot)
                 logger.info(f"Processing completed with {len(all_results)} total results.")
 
             return all_results[:3]
@@ -351,7 +351,9 @@ class MultiRetriever:
     def invoke(self, query):
         return self.get_relevant_documents(query)
 
+
 retriever = MultiRetriever(vectorstores)
+
 
 def get_rag_prompt_template(is_first_message):
     if is_first_message:
@@ -586,7 +588,7 @@ def translate_and_clean(text):
         for prefix in prefixes_to_remove:
             if translated_text.startswith(prefix):
                 translated_text = translated_text.replace(prefix, "").strip()'''
-        
+
         translated_text = re.sub(r"^(Translated.*?:)", "", translated_text).strip()
 
         return translated_text
@@ -768,8 +770,11 @@ If you encounter any issues during setup, our support team is ready to assist yo
 rag_llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
 # Define Formatting Function
+
+
 def format_docs(docs):
     return "\n".join(doc.page_content for doc in docs)
+
 
 # Create RAG Chain
 rag_chain = (
@@ -783,12 +788,15 @@ rag_chain = (
 )
 
 # API functions
+
+
 def get_mongodb_client():
     client = MongoClient(settings.MONGODB_URI)
     logger.info(
-            "MONGO DB URI: " + settings.MONGODB_URI
-        )
+        "MONGO DB URI: " + settings.MONGODB_URI
+    )
     return client[settings.MONGODB_DATABASE]
+
 
 def update_local_confidence(generation, confidence_diff):
     try:
@@ -896,6 +904,8 @@ def update_database_confidence(comparison_result, docs_to_use):
         logger.error(f"Error updating database confidence: {str(e)}")
 
 # async for translations
+
+
 async def generate_translations(generation):
     try:
         logger.info(f"Starting translations for: {generation}")
@@ -909,7 +919,7 @@ async def generate_translations(generation):
 
             # Gather results
             translations = await asyncio.gather(
-                asyncio.wrap_future(malay_future), 
+                asyncio.wrap_future(malay_future),
                 asyncio.wrap_future(chinese_future)
             )
 
@@ -927,6 +937,7 @@ async def generate_translations(generation):
     except Exception as e:
         logger.error(f"Error in generate_translations: {str(e)}", exc_info=True)
         raise
+
 
 def translate_en_to_cn(input_text):
     load_dotenv()
@@ -1044,7 +1055,7 @@ def process_feedback_translation(feedback_data):
 # ahsfahssf this is an old functuion that will be removed in prod
 def generate_user_input(cleaned_prompt):
     # Clean and translate prompt
-    #cleaned_prompt = translate_and_clean(user_prompt)
+    # cleaned_prompt = translate_and_clean(user_prompt)
 
     # Get relevant documents
     docs_retrieve = retriever.get_relevant_documents(cleaned_prompt)
@@ -1081,7 +1092,7 @@ def generate_user_input(cleaned_prompt):
 def generate_prompt_conversation(
     user_prompt, conversation_id, admin_id, agent_id, user_id
 ):
-    #memory_snapshot = monitor_memory()
+    # memory_snapshot = monitor_memory()
     start_time = time.time()
     logger.info("Starting prompt_conversation request")
 
@@ -1092,7 +1103,7 @@ def generate_prompt_conversation(
             {"session_id": conversation_id}
         )
         is_first_message = not existing_conversation
-       
+
         # Initialize conversation
         conversation = ConversationMetaData(
             session_id=conversation_id,
@@ -1147,24 +1158,24 @@ def generate_prompt_conversation(
 
         # this is where the self learning comes in, Its rough but will be worked on over time
         logger.info("Starting self-learning comparison")
-        #db = get_mongodb_client()
-        #relevant_feedbacks = get_relevant_feedback_data(cleaned_prompt, db)
+        # db = get_mongodb_client()
+        # relevant_feedbacks = get_relevant_feedback_data(cleaned_prompt, db)
 
        # if relevant_feedbacks:
-          #  logger.info(f"Found {len(relevant_feedbacks)} relevant feedback answers")
-         #   comparison_result = compare_answers(
-         #       generation, relevant_feedbacks, docs_to_use
-         #   )
+        #  logger.info(f"Found {len(relevant_feedbacks)} relevant feedback answers")
+        #   comparison_result = compare_answers(
+        #       generation, relevant_feedbacks, docs_to_use
+        #   )
 
-          #  if comparison_result and comparison_result["better_answer"] == "feedback":
-           #     logger.info("Using feedback answer with higher confidence")
-          #      generation = comparison_result["best_feedback"]["correct_answer"]
-          #      update_database_confidence(comparison_result, docs_to_use)
-           # else:
-           #     logger.info("Generated answer maintained, updating confidence")
-            #    update_local_confidence(
-           #         generation, comparison_result["confidence_diff"]
-            #    )
+        #  if comparison_result and comparison_result["better_answer"] == "feedback":
+        #     logger.info("Using feedback answer with higher confidence")
+        #      generation = comparison_result["best_feedback"]["correct_answer"]
+        #      update_database_confidence(comparison_result, docs_to_use)
+        # else:
+        #     logger.info("Generated answer maintained, updating confidence")
+        #    update_local_confidence(
+        #         generation, comparison_result["confidence_diff"]
+        #    )
 
         # Calculate confidence
         confidence_result = confidence_grader.invoke(
@@ -1182,21 +1193,21 @@ def generate_prompt_conversation(
        # save_conversation(conversation)
        # logger.info(f"Database operation completed in {time.time() - db_start:.2f}s")
 #
-        #total_time = time.time() - start_time
+        # total_time = time.time() - start_time
         # logger.info(f"Total request processing time: {total_time:.2f}s")
 
         return {
-           "generation": generation,
-           "conversation": conversation.to_dict(),
-           "confidence_score": confidence_result.confidence_score,
-           "translations": translations,
+            "generation": generation,
+            "conversation": conversation.to_dict(),
+            "confidence_score": confidence_result.confidence_score,
+            "translations": translations,
         }
 
     except Exception as e:
         logger.error(f"Error in prompt_conversation: {str(e)}")
         raise
     finally:
-        #compare_memory(memory_snapshot)
+        # compare_memory(memory_snapshot)
         gc.collect()
 
 
@@ -1216,7 +1227,7 @@ def save_conversation(conversation):
 
         # MongoDB operation with error handling
        # result = conversations.update_one(
-      ##      {"session_id": conversation.session_id},
+      # {"session_id": conversation.session_id},
         #    {"$set": conversation_dict},
        #     upsert=True,
        # )
@@ -1225,7 +1236,7 @@ def save_conversation(conversation):
         # if result.modified_count > 0 or result.upserted_id:
         #    logger.info(f"Successfully saved conversation {conversation.session_id}")
        # else:
-         #   logger.warning(f"No changes made to conversation {conversation.session_id}")
+        #   logger.warning(f"No changes made to conversation {conversation.session_id}")
 
         return result
     except Exception as e:
@@ -1260,6 +1271,7 @@ def handle_mongodb_operation(operation):
         print(f"MongoDB operation failed: {str(e)}")
         return None
 
+
 '''
  def get_relevant_feedback_data(cleaned_prompt, db):
     logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
@@ -1284,6 +1296,7 @@ def handle_mongodb_operation(operation):
         logger.error(f"Error retrieving feedback answers: {str(e)}")
        return []
 '''
+
 
 def compare_answers(generation, feedback_answers, docs_to_use):
     logger.info("Starting answer comparison process")
