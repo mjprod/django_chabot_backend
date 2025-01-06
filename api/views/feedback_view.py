@@ -1,6 +1,3 @@
-from ..chatbot import (
-    translate_and_clean,
-)
 import logging
 import time
 
@@ -8,10 +5,12 @@ from datetime import datetime
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from pymongo.errors import PyMongoError
 from ..mixins.mongodb_mixin import MongoDBMixin
 from ..serializers import CaptureFeedbackSerializer
 
+from ..chatbot import (
+    translate_and_clean,
+)
 # Initialize logger
 logger = logging.getLogger(__name__)
 
