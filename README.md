@@ -2,7 +2,6 @@
 Chatbot Backend
 
 Key Components
-
 1. Chatbot Engine (chatbot.py)
 Implements the core logic for document retrieval and answer generation.
 Uses Cohere embeddings and Chroma vector store for efficient document retrieval.

@@ -153,18 +153,6 @@ DATABASES = {
             "timeout": 20,
         },
     },
-<<<<<<< HEAD:backend/chatbot_dir/chatbot_project/settings_local.py
-    # "mongodb": {
-    # "ENGINE": "djongo",
-    # "NAME": MONGODB_DATABASE,
-    # "CLIENT": {
-    # "host": MONGODB_URI,
-    # "maxPoolSize": 50,
-    # "minPoolSize": 10,
-    # "maxIdleTimeMS": 45000,
-    # },
-    # },
-=======
    # "mongodb": {
     #    "ENGINE": "djongo",
      #   "NAME": MONGODB_DATABASE,
@@ -175,7 +163,6 @@ DATABASES = {
           #  "maxIdleTimeMS": 45000,
         #},
     #},
->>>>>>> origin/feature/bug_install:chatbot_project/settings_local.py
 }
 
 
