@@ -3,7 +3,6 @@ from datetime import datetime
 
 from rest_framework import serializers
 
-
 class BaseSerializer(serializers.Serializer):
     def to_representation(self, instance):
         try:
@@ -85,30 +84,17 @@ class MessageDataSerializer(serializers.Serializer):
             gc.collect()
 
     def to_internal_value(self, data):
-        try:
-            text_data = data.get("text")
-            # Handle both string and array types
-            if isinstance(text_data, list):
-                # Clean up [object Object] artifacts from arrays
-                cleaned_text = []
-                for item in text_data:
-                    if isinstance(item, str):
-                        # Remove [object Object] artifacts
-                        cleaned_item = item.replace("[object Object]", "").strip()
-                        if cleaned_item:  # Only add non-empty strings
-                            cleaned_text.append(cleaned_item)
-            else:
-                cleaned_text = text_data
-
+        # Handle incoming data in either format
+        if "role" in data and "content" in data:
+            # Convert from test format to storage format
             return {
-                "text": cleaned_text,
-                "sender": data["sender"],
+                "text": data["content"],
+                "sender": data["role"],
                 "user": data.get("user", ""),
                 "timestamp": data["timestamp"],
                 "agent_id": data.get("agent_id", ""),
             }
-        except Exception as e:
-            raise serializers.ValidationError(f"Data validation failed: {str(e)}")
+        return super().to_internal_value(data)
 
 
 class CompleteConversationsSerializer(serializers.Serializer):
