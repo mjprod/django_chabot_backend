@@ -3,6 +3,7 @@ from datetime import datetime
 
 from rest_framework import serializers
 
+
 class BaseSerializer(serializers.Serializer):
     def to_representation(self, instance):
         try:
@@ -122,3 +123,4 @@ class CaptureFeedbackSerializer(serializers.Serializer):
         if len(str(value)) > 2000:
             raise serializers.ValidationError("Metadata field is too large")
         return value
+    
