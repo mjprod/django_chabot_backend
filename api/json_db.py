@@ -42,7 +42,7 @@ class JsonDB:
         try:
             with open(self.file_path, "r") as f:
                 return json.load(f)
-        except json.JSONDecodeError as e:
+        except json.JSONDecodeError:
             # Reset file to initial state if corrupted
             initial_data = {
                 "conversations": [],

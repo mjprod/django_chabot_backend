@@ -3,7 +3,6 @@ import gc
 import json
 import logging
 import os
-import resource
 import time
 import tracemalloc
 import re
@@ -11,6 +10,7 @@ import re
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from typing import List
+from unittest import result
 
 import requests
 from bson import ObjectId
@@ -540,7 +540,7 @@ class ConversationMetaData:
 
 # this is the OPENAI translate function
 def translate_and_clean(text):
-    #                                                                    memory_snapshot = monitor_memory()
+    # memory_snapshot = monitor_memory()
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         logger.error("Missing OPENAI_API_KEY environment variable.")
@@ -1093,7 +1093,7 @@ def generate_prompt_conversation(
     user_prompt, conversation_id, admin_id, agent_id, user_id
 ):
     # memory_snapshot = monitor_memory()
-    start_time = time.time()
+    # start_time = time.time()
     logger.info("Starting prompt_conversation request")
 
     try:
@@ -1246,18 +1246,18 @@ def save_conversation(conversation):
         # Clean up and memory management
         # compare_memory(memory_snapshot)
         gc.collect()
-        del conversation_dict  # Explicit cleanup of large dictionary
+        # del conversation_dict  # Explicit cleanup of large dictionary
 
 
 def save_interaction(interaction_type, data):
     # db = get_mongodb_client()
     # interactions = db.interactions
 
-    new_interaction = {
-        "timestamp": datetime.now().isoformat(),
-        "type": interaction_type,
-        "data": data,
-    }
+    # new_interaction = {
+    # "timestamp": datetime.now().isoformat(),
+    # "type": interaction_type,
+    # "data": data,
+    # }
 
     # interactions.insert_one(new_interaction)
     # return {"message": f"{interaction_type} interaction saved successfully"}

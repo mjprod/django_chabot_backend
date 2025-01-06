@@ -11,6 +11,7 @@ from ..serializers import CaptureFeedbackSerializer
 from ..chatbot import (
     translate_and_clean,
 )
+
 # Initialize logger
 logger = logging.getLogger(__name__)
 

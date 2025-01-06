@@ -12,8 +12,10 @@ try:
     password = quote_plus("w33k4@H-p6.A*4$")
 
     # MongoDB URI
-    uri = f"mongodb+srv://{username}:{password}@chatbotdb.ooyoj.mongodb.net/ChatbotDB?retryWrites=true&w=majority"
-
+    uri = (
+        f"mongodb+srv://{username}:{password}@chatbotdb.ooyoj.mongodb.net/"
+        f"ChatbotDB?retryWrites=true&w=majority"
+    )
     # Create a MongoDB client with SSL/TLS enabled
     client = MongoClient(
         uri,
