@@ -1261,7 +1261,7 @@ def save_interaction(interaction_type, data):
 
     # interactions.insert_one(new_interaction)
     # return {"message": f"{interaction_type} interaction saved successfully"}
-    return {"message": f"TODO interaction saved successfully"}
+    return {"message": "TODO interaction saved successfully"}
 
 
 def handle_mongodb_operation(operation):
