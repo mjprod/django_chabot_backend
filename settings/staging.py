@@ -6,6 +6,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://api-staging.mjproapps.com",
     "https://staging.mjproapps.com",
 ]
+CORS_ALLOW_CREDENTIALS = True
 
 # Security
 SECURE_SSL_REDIRECT = True
