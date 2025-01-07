@@ -1,6 +1,5 @@
 import os
-
-from .base import BASE_DIR
+from .base import *  # noqa: F403
 
 DEBUG = False
 ALLOWED_HOSTS = ["api.mjproapps.com", "www.mjproapps.com"]

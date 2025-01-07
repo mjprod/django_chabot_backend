@@ -1,4 +1,4 @@
-from .base import BASE_DIR,SECRET_KEY,ROOT_URLCONF,INSTALLED_APPS,MIDDLEWARE
+from .base import *  # noqa: F403
 
 DEBUG = True
 ALLOWED_HOSTS = ["api-staging.mjproapps.com", "https://staging.mjproapps.com"]
