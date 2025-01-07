@@ -8,12 +8,12 @@ https://docs.djangoproject.com/en/5.1/howto/deployment/wsgi/
 """
 
 # import gc
-# import os
+import os
 
 from django.core.wsgi import get_wsgi_application
 
 # Set environment variable before application loads
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "chatbot_project.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.base")
 
 
 # Initialize WSGI application with memory management
