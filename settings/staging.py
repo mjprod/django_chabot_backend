@@ -22,6 +22,9 @@ MONGODB_PASSWORD = "JS19931989JR$"
 MONGODB_CLUSTER = "staging-cluster.ooyoj.mongodb.net"
 MONGODB_DATABASE = "chatbotdb"
 
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = "django-insecure-z$!=*9prhkq7xd2^2!!g39v$spw1f=yaxbc4qhle9yp1n!-b%-"
+
 # Construct MongoDB URI
 MONGODB_URI = (
     f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}"
