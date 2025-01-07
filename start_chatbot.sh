@@ -21,4 +21,7 @@ cd ~/chatbot/django_chabot_backend
 export $(grep -v '^#' .env | xargs)
 
 # Run Django development server
-python3 manage.py runserver 0.0.0.0:8000
+# python3 manage.py runserver 0.0.0.0:8000
+# python3 manage.py runserver 0.0.0.0:8000 --settings=settings.local
+# python3 manage.py runserver 0.0.0.0:8000 --settings=settings.staging
+# python3 manage.py runserver 0.0.0.0:8000 --settings=settings.production
