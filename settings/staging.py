@@ -1,8 +1,7 @@
 from .base import *
 
 DEBUG = True
-ALLOWED_HOSTS = ["api-staging.mjproapps.com", "https://staging.mjproapps.com"
-]
+ALLOWED_HOSTS = ["api-staging.mjproapps.com", "https://staging.mjproapps.com"]
 CORS_ALLOWED_ORIGINS = [
     "https://api-staging.mjproapps.com",
     "https://staging.mjproapps.com",

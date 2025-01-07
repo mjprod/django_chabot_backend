@@ -7,8 +7,8 @@ For more information on this file, see
 https://docs.djangoproject.com/en/5.1/howto/deployment/wsgi/
 """
 
-import gc
-import os
+# import gc
+# import os
 
 from django.core.wsgi import get_wsgi_application
 
@@ -27,7 +27,7 @@ application = get_managed_application()
 
 
 # Add request cleanup middleware
-'''
+"""
 class MemoryCleanupMiddleware:
     def __init__(self, application):
         self.application = application
@@ -38,6 +38,6 @@ class MemoryCleanupMiddleware:
         finally:
             gc.collect()  # Clean up after each request
 
-'''
+"""
 # Wrap application with memory cleanup
 # application = MemoryCleanupMiddleware(application)
