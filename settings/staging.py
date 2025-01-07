@@ -1,6 +1,6 @@
 from .base import *  # noqa: F403
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ["api-staging.mjproapps.com", "https://staging.mjproapps.com","54.206.216.180"]
 CORS_ALLOWED_ORIGINS = [
    "http://localhost:3000", 
