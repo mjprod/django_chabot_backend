@@ -498,7 +498,7 @@ class ConversationMetaData:
         # translation layer
         if role == "assistant":
             malay_translation = translate_en_to_ms(content)
-            chinese_translation = translate_en_to_cn(content)
+            chinese_translation = (content)
 
             self.translations.append(
                 {
@@ -540,6 +540,7 @@ class ConversationMetaData:
 
 # this is the OPENAI translate function
 def translate_and_clean(text):
+    logger.error("translate_and_clean")
     # memory_snapshot = monitor_memory()
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
@@ -794,7 +795,6 @@ rag_chain = (
 
 def get_mongodb_client():
     client = MongoClient(settings.MONGODB_URI)
-    logger.info("MONGO DB URI: " + settings.MONGODB_URI)
     return client[settings.MONGODB_DATABASE]
 
 
@@ -940,6 +940,8 @@ async def generate_translations(generation):
 
 
 def translate_en_to_cn(input_text):
+    logger.error("translate_en_to_cn")
+
     load_dotenv()
     api_key = os.getenv("OPENAI_API_KEY")
     client = OpenAI(api_key=api_key)
