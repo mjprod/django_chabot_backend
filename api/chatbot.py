@@ -337,7 +337,8 @@ class MultiRetriever:
             for store in vectorstores:
                 retriever = store.as_retriever(
                     search_type="mmr",
-                    search_kwargs={"k": 5, "fetch_k": 8, "lambda_mult": 0.8},
+                    search_kwargs={"k": 3, "fetch_k": 8, "lambda_mult": 0.8},
+                    # search_kwargs={"k": 5, "fetch_k": 8, "lambda_mult": 0.8},
                 )
                 results = retriever.invoke(query)
                 all_results.extend(results)
@@ -551,7 +552,8 @@ def translate_and_clean(text):
 
     try:
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            # model="gpt-4o-mini",
+            model="gpt-3.5-turbo",
             messages=[
                 {
                     "role": "system",
@@ -576,6 +578,8 @@ def translate_and_clean(text):
                 },
                 {"role": "user", "content": f"Process this text: {text}"},
             ],
+            max_tokens=150,
+            timeout=10,
         )
 
         translated_text = response.choices[0].message.content.strip()
@@ -790,12 +794,14 @@ rag_chain = (
     | StrOutputParser()
 )
 
+mongo_client = None
+
 # API functions
-
-
 def get_mongodb_client():
-    client = MongoClient(settings.MONGODB_URI)
-    return client[settings.MONGODB_DATABASE]
+    global mongo_client
+    if mongo_client is None:
+        mongo_client = MongoClient(settings.MONGODB_URI)
+    return mongo_client[settings.MONGODB_DATABASE]
 
 
 def update_local_confidence(generation, confidence_diff):
@@ -940,13 +946,12 @@ async def generate_translations(generation):
 
 
 def translate_en_to_cn(input_text):
-    logger.error("translate_en_to_cn")
-
-    load_dotenv()
-    api_key = os.getenv("OPENAI_API_KEY")
-    client = OpenAI(api_key=api_key)
+    logger.info("Translating text to Chinese...")
 
     try:
+        api_key = os.getenv("OPENAI_API_KEY")
+        client = OpenAI(api_key=api_key)
+
         response = client.chat.completions.create(
             model="gpt-4o",
             messages=[
@@ -975,6 +980,7 @@ def translate_en_to_cn(input_text):
                 },
             ],
             temperature=0,
+            timeout=20,
         )
 
         translation = response.choices[0].message.content.strip()
