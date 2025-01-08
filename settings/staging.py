@@ -22,19 +22,15 @@ CORS_ALLOW_METHODS = [
     "PUT",
     "DELETE",
 ]
-'''
 
-
-CORS_ALLOW_HEADERS = [
-    "DNT",
-    "User-Agent",
-    "X-Requested-With",
-    "If-Modified-Since",
-    "Cache-Control",
-    "Content-Type",
-    "Range",
-    "Authorization",
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "OPTIONS",
+    "PUT",
+    "DELETE",
 ]
+'''
 
 # Security
 SECURE_SSL_REDIRECT = True
