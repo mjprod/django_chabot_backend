@@ -1,5 +1,6 @@
 from .base import *  # noqa: F403
 
+
 DEBUG = True
 ALLOWED_HOSTS = [
     "localhost",
@@ -13,24 +14,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://api-staging.mjproapps.com",
     "https://staging.mjproapps.com",
 ]
-# CORS_ALLOW_CREDENTIALS = True
-'''
-CORS_ALLOW_METHODS = [
-    "GET",
-    "POST",
-    "OPTIONS",
-    "PUT",
-    "DELETE",
-]
-
-CORS_ALLOW_METHODS = [
-    "GET",
-    "POST",
-    "OPTIONS",
-    "PUT",
-    "DELETE",
-]
-'''
 
 # Security
 SECURE_SSL_REDIRECT = True
