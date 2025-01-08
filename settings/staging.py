@@ -14,7 +14,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://staging.mjproapps.com",
 ]
 # CORS_ALLOW_CREDENTIALS = True
-
+'''
 CORS_ALLOW_METHODS = [
     "GET",
     "POST",
@@ -22,6 +22,8 @@ CORS_ALLOW_METHODS = [
     "PUT",
     "DELETE",
 ]
+'''
+
 
 CORS_ALLOW_HEADERS = [
     "DNT",
