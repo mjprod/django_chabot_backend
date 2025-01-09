@@ -926,26 +926,32 @@ def generate_prompt_conversation(
 
         # this is where the self learning comes in, Its rough but will be worked on over time
         logger.info("Starting self-learning comparison")
-        # db = get_mongodb_client()
-        # relevant_feedbacks = get_relevant_feedback_data(cleaned_prompt, db)
+        db = get_mongodb_client()
+        relevant_feedbacks = get_relevant_feedback_data(cleaned_prompt, db)
 
-        
+        comparison_result = {
+            "better_answer": None,
+            "confidence_diff": 0.0,
+            "generated_score": 0.0,
+            "feedback_score": 0.0,
+            "best_feedback": None,
+        }
 
-        # if relevant_feedbacks:
-        #  logger.info(f"Found {len(relevant_feedbacks)} relevant feedback answers")
-        #   comparison_result = compare_answers(
-        #       generation, relevant_feedbacks, docs_to_use
-        #   )
+        if relevant_feedbacks:
+            logger.info(f"Found {len(relevant_feedbacks)} relevant feedback answers")
+            comparison_result = compare_answers(
+               generation, relevant_feedbacks, docs_to_use
+           )
 
-        #  if comparison_result and comparison_result["better_answer"] == "feedback":
-        #     logger.info("Using feedback answer with higher confidence")
-        #      generation = comparison_result["best_feedback"]["correct_answer"]
-        #      update_database_confidence(comparison_result, docs_to_use)
-        # else:
-        #     logger.info("Generated answer maintained, updating confidence")
-        #    update_local_confidence(
-        #         generation, comparison_result["confidence_diff"]
-        #    )
+        if comparison_result and comparison_result["better_answer"] == "feedback":
+            logger.info("Using feedback answer with higher confidence")
+            generation = comparison_result["best_feedback"]["correct_answer"]
+            update_database_confidence(comparison_result, docs_to_use)
+        else:
+            logger.info("Generated answer maintained, updating confidence")
+            update_local_confidence(
+                 generation, comparison_result["confidence_diff"]
+            )
 
         # Calculate confidence
         confidence_result = confidence_grader.invoke(
@@ -1041,6 +1047,37 @@ def handle_mongodb_operation(operation):
         print(f"MongoDB operation failed: {str(e)}")
         return None
 
+def ensure_feedback_index(db):
+    if "feedback_index" not in db.feedback_data.index_information():
+        db.feedback_data.create_index([("user_input", "text")], name="feedback_index")
+        logger.info("Created text index for feedback search")
+
+def get_relevant_feedback_data(cleaned_prompt, db):
+    logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
+    try:
+        ensure_feedback_index(db)
+
+        similar_answers = (
+            db.feedback_data.find(
+                {
+                    "$text": {"$search": cleaned_prompt},
+                    "correct_answer": {"$exists": True, "$ne": ""},
+                }
+            )
+            .sort([("score", {"$meta": "textScore"}), ("timestamp", -1)])
+            .limit(3)
+        )
+
+        feedback_list = list(similar_answers)
+        if not feedback_list:
+            logger.warning(f"No feedback matches found for prompt: {cleaned_prompt}")
+            return []
+
+        logger.info(f"Found {len(feedback_list)} potential feedback matches")
+        return feedback_list
+    except Exception as e:
+        logger.error(f"Error retrieving feedback answers: {str(e)}")
+        return []
 
 """
  def get_relevant_feedback_data(cleaned_prompt, db):
