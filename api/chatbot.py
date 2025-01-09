@@ -31,8 +31,29 @@ from pydantic import BaseModel, Field
 from pymongo import MongoClient
 
 # constants
-from ai_config.ai_constants import OPENAI_MODEL, OPENAI_MODEL_EN_TO_CN, OPENAI_TIMEOUT, MAX_TOKENS, COHERE_MODEL, MAX_TEMPERATURE, EMBEDDING_CHUNK_SIZE, EMBEDDING_OVERLAP, MMR_SEARCH_K, MMR_FETCH_K, MMR_LAMBDA_MULT, URL_TRANSLATE_EN_TO_MS
-from ai_config.ai_prompts import FIRST_MESSAGE_PROMPT, FOLLOW_UP_PROMPT, TRANSLATION_AND_CLEAN_PROMPT, DOCUMENT_RELEVANCE_PROMPT, CONFIDENCE_GRADER_PROMPT, TRANSLATION_EN_TO_CN_PROMPT, RAG_PROMPT_TEMPLATE
+from ai_config.ai_constants import (
+    OPENAI_MODEL,
+    OPENAI_MODEL_EN_TO_CN,
+    OPENAI_TIMEOUT,
+    MAX_TOKENS,
+    COHERE_MODEL,
+    MAX_TEMPERATURE,
+    EMBEDDING_CHUNK_SIZE,
+    EMBEDDING_OVERLAP,
+    MMR_SEARCH_K,
+    MMR_FETCH_K,
+    MMR_LAMBDA_MULT,
+    URL_TRANSLATE_EN_TO_MS,
+)
+from ai_config.ai_prompts import (
+    FIRST_MESSAGE_PROMPT,
+    FOLLOW_UP_PROMPT,
+    TRANSLATION_AND_CLEAN_PROMPT,
+    DOCUMENT_RELEVANCE_PROMPT,
+    CONFIDENCE_GRADER_PROMPT,
+    TRANSLATION_EN_TO_CN_PROMPT,
+    RAG_PROMPT_TEMPLATE,
+)
 
 
 def monitor_memory():
@@ -172,7 +193,12 @@ doc_objects = [
 
 # Text Splitter Class
 class CustomTextSplitter(RecursiveCharacterTextSplitter):
-    def __init__(self, chunk_size=EMBEDDING_CHUNK_SIZE, chunk_overlap=EMBEDDING_OVERLAP, length_function=len):
+    def __init__(
+        self,
+        chunk_size=EMBEDDING_CHUNK_SIZE,
+        chunk_overlap=EMBEDDING_OVERLAP,
+        length_function=len,
+    ):
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
         self.length_function = length_function
@@ -339,7 +365,11 @@ class MultiRetriever:
             for store in vectorstores:
                 retriever = store.as_retriever(
                     search_type="mmr",
-                    search_kwargs={"k": MMR_SEARCH_K, "fetch_k": MMR_FETCH_K, "lambda_mult": MMR_LAMBDA_MULT},
+                    search_kwargs={
+                        "k": MMR_SEARCH_K,
+                        "fetch_k": MMR_FETCH_K,
+                        "lambda_mult": MMR_LAMBDA_MULT,
+                    },
                 )
                 results = retriever.invoke(query)
                 all_results.extend(results)
@@ -360,7 +390,7 @@ retriever = MultiRetriever(vectorstores)
 
 
 def get_rag_prompt_template(is_first_message):
-   
+
     system_content = FIRST_MESSAGE_PROMPT if is_first_message else FOLLOW_UP_PROMPT
 
     return ChatPromptTemplate.from_messages(
@@ -399,7 +429,7 @@ class ConversationMetaData:
         # translation layer
         if role == "assistant":
             malay_translation = translate_en_to_ms(content)
-            chinese_translation = (content)
+            chinese_translation = content
 
             self.translations.append(
                 {
@@ -570,6 +600,7 @@ rag_chain = (
 )
 
 mongo_client = None
+
 
 # API functions
 def get_mongodb_client():
@@ -926,6 +957,8 @@ def generate_prompt_conversation(
 
         # this is where the self learning comes in, Its rough but will be worked on over time
         logger.info("Starting self-learning comparison")
+
+        """
         db = get_mongodb_client()
         relevant_feedbacks = get_relevant_feedback_data(cleaned_prompt, db)
 
@@ -952,6 +985,7 @@ def generate_prompt_conversation(
             update_local_confidence(
                  generation, comparison_result["confidence_diff"]
             )
+        """
 
         # Calculate confidence
         confidence_result = confidence_grader.invoke(
@@ -1047,10 +1081,12 @@ def handle_mongodb_operation(operation):
         print(f"MongoDB operation failed: {str(e)}")
         return None
 
+
 def ensure_feedback_index(db):
     if "feedback_index" not in db.feedback_data.index_information():
         db.feedback_data.create_index([("user_input", "text")], name="feedback_index")
         logger.info("Created text index for feedback search")
+
 
 def get_relevant_feedback_data(cleaned_prompt, db):
     logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
@@ -1078,6 +1114,7 @@ def get_relevant_feedback_data(cleaned_prompt, db):
     except Exception as e:
         logger.error(f"Error retrieving feedback answers: {str(e)}")
         return []
+
 
 """
  def get_relevant_feedback_data(cleaned_prompt, db):
