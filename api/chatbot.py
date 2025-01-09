@@ -30,6 +30,10 @@ from pydantic import BaseModel, Field
 # mongodb imports
 from pymongo import MongoClient
 
+# constants
+from ai_config.ai_constants import OPENAI_MODEL, OPENAI_MODEL_EN_TO_CN, OPENAI_TIMEOUT, MAX_TOKENS, COHERE_MODEL, MAX_TEMPERATURE, EMBEDDING_CHUNK_SIZE, EMBEDDING_OVERLAP, MMR_SEARCH_K, MMR_FETCH_K, MMR_LAMBDA_MULT, URL_TRANSLATE_EN_TO_MS
+from ai_config.ai_prompts import FIRST_MESSAGE_PROMPT, FOLLOW_UP_PROMPT, TRANSLATION_AND_CLEAN_PROMPT, DOCUMENT_RELEVANCE_PROMPT, CONFIDENCE_GRADER_PROMPT, TRANSLATION_EN_TO_CN_PROMPT, RAG_PROMPT_TEMPLATE
+
 
 def monitor_memory():
     """Start memory monitoring and return initial snapshot"""
@@ -134,7 +138,7 @@ def load_and_process_json_file() -> List[dict]:
     return all_documents
 
 
-embedding_model = CohereEmbeddings(model="embed-multilingual-v3.0")
+embedding_model = CohereEmbeddings(model=COHERE_MODEL)
 vectorstores = []
 documents = load_and_process_json_file()
 
@@ -168,7 +172,7 @@ doc_objects = [
 
 # Text Splitter Class
 class CustomTextSplitter(RecursiveCharacterTextSplitter):
-    def __init__(self, chunk_size=1000, chunk_overlap=200, length_function=len):
+    def __init__(self, chunk_size=EMBEDDING_CHUNK_SIZE, chunk_overlap=EMBEDDING_OVERLAP, length_function=len):
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
         self.length_function = length_function
@@ -278,9 +282,7 @@ def create_vector_store(documents, batch_size=500):
         split_start = time.time()
 
         # Initialize Text Splitter inside the function
-        text_splitter = CustomTextSplitter(
-            chunk_size=1000, chunk_overlap=200, length_function=len
-        )
+        text_splitter = CustomTextSplitter()
 
         # Split documents
         split_data = text_splitter.split_documents(documents)
@@ -337,8 +339,7 @@ class MultiRetriever:
             for store in vectorstores:
                 retriever = store.as_retriever(
                     search_type="mmr",
-                    search_kwargs={"k": 3, "fetch_k": 8, "lambda_mult": 0.8},
-                    # search_kwargs={"k": 5, "fetch_k": 8, "lambda_mult": 0.8},
+                    search_kwargs={"k": MMR_SEARCH_K, "fetch_k": MMR_FETCH_K, "lambda_mult": MMR_LAMBDA_MULT},
                 )
                 results = retriever.invoke(query)
                 all_results.extend(results)
@@ -359,109 +360,8 @@ retriever = MultiRetriever(vectorstores)
 
 
 def get_rag_prompt_template(is_first_message):
-    if is_first_message:
-        system_content = """You are a friendly gaming platform assistant
-        focused on natural conversation.
-
-CONVERSATION STYLE:
-- Respond warmly and naturally
-- Match the user's tone and energy
-- Use conversational acknowledgments ("I see", "Got it", "I understand")
-- For thank you messages, respond with "You're welcome" or similar phrases
-- Show enthusiasm when appropriate
-
-CORE RULES:
-- Use context information accurately
-- Maintain professional but friendly tone
-- Keep responses concise but complete
-- Build rapport through conversation
-
-RESPONSE PATTERNS:
-- For greetings: Respond warmly with "Dear Player"
-- For thank you: Reply with variations of "You're welcome"
-- For goodbyes: Close warmly but professionally
-- For confusion: Gently ask for clarification
-
-CONTENT DELIVERY:
-- Start with acknowledgment
-- Provide clear information
-- End with subtle encouragement
-- Use natural transitions
-- Include exact numbers and timeframes
-
-PROHIBITED:
-- Overly formal language
-- Generic responses
-- Ignoring conversational cues
-- Breaking character
-- Using external knowledge
-
-TONE AND STYLE:
-- Clear and friendly semi-informal
-- Professional yet approachable
-- Direct and confident answers
-- No hedging or uncertainty
-- No emotional management advice
-- For losses, simply wish better luck
-- Do not mention casino edge
-
-PROHIBITED:
-- Information not in context
-- Mentioning sources/databases
-- Phrases like "based on" or "it appears"
-- External knowledge or assumptions
-- Generic endings asking for more questions
-- Time-specific greetings
-- Saying "please note"
-- Suggesting customer service unless necessary"""
-    else:
-        system_content = """You are a friendly gaming platform assistant
-        focused on natural conversation.
-
-CONVERSATION STYLE:
-- Maintain warm, natural dialogue
-- Build on previous context
-- Use conversational acknowledgments
-- Match user's communication style
-- Show personality while staying professional
-
-CORE RULES:
-- Skip formal greetings in follow-ups
-- Reference previous context naturally
-- Keep information accurate
-- Stay friendly but focused
-
-RESPONSE PATTERNS:
-- For thank you: Use variations like "You're welcome!", "Happy to help!", "Anytime!"
-- For questions: Acknowledge before answering
-- For confusion: Gently clarify
-- For feedback: Show appreciation
-
-CONTENT DELIVERY:
-- Natural conversation flow
-- Clear information sharing
-- Subtle encouragement
-- Warm closings
-- Exact details when needed
-
-TONE AND STYLE:
-- Clear and friendly semi-informal
-- Professional yet approachable
-- Direct and confident answers
-- No hedging or uncertainty
-- No emotional management advice
-- For losses, simply wish better luck
-- Do not mention casino edge
-
-PROHIBITED:
-- Information not in context
-- Mentioning sources/databases
-- Phrases like "based on" or "it appears"
-- External knowledge or assumptions
-- Generic endings asking for more questions
-- Time-specific greetings
-- Saying "please note"
-- Suggesting customer service unless necessary"""
+   
+    system_content = FIRST_MESSAGE_PROMPT if is_first_message else FOLLOW_UP_PROMPT
 
     return ChatPromptTemplate.from_messages(
         [
@@ -552,49 +452,19 @@ def translate_and_clean(text):
 
     try:
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            # model="gpt-3.5-turbo",
+            model=OPENAI_MODEL,
             messages=[
                 {
                     "role": "system",
-                    "content": """
-                    You are a query optimization expert. Your task is to:
-                    1. If the input is not in English:
-                    - Translate it to clear, formal English
-                    - Maintain proper nouns, numbers, and technical terms
-                    - Output ONLY the translated text without any prefixes or
-                    explanations
-                    2. If the input is in English:
-                    - Remove filler words and informal language
-                    - Standardize terminology
-                    - Maintain the original question's intent
-                    - Output ONLY the cleaned text
-                    Do not:
-                    - Add explanations or additional context
-                    - Include phrases like "Translated from X to English:"
-                    - Add any prefixes or suffixes
-                    - Change the meaning of the query
-                    """,
+                    "content": TRANSLATION_AND_CLEAN_PROMPT,
                 },
                 {"role": "user", "content": f"Process this text: {text}"},
             ],
-            max_tokens=150,
-            timeout=10,
+            max_tokens=MAX_TOKENS,
+            timeout=OPENAI_TIMEOUT,
         )
 
         translated_text = response.choices[0].message.content.strip()
-
-        # Remove any remaining translation prefixes if they exist
-        """prefixes_to_remove = [
-            "Translated from Chinese to English:",
-            "Translated from Malay to English:",
-            "Translated from Malaysian to English:",
-            "Translation:",
-        ]
-
-        for prefix in prefixes_to_remove:
-            if translated_text.startswith(prefix):
-                translated_text = translated_text.replace(prefix, "").strip()"""
 
         translated_text = re.sub(r"^(Translated.*?:)", "", translated_text).strip()
 
@@ -618,26 +488,11 @@ class GradeDocuments(BaseModel):
 
 
 # Initialize LLM for Grading
-llm_grader = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+llm_grader = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
 structured_llm_grader = llm_grader.with_structured_output(GradeDocuments)
 
 # System Message for Grader
-document_system_message = """
-You are a document relevance assessor.
-Analyze the retrieved document's relevance to the user's question.
-Provide a confidence score between 0.0 and 1.0 where:
-- 1.0: Document contains exact matches or directly relevant information
-- 0.7-0.9: Document contains highly relevant but not exact information
-- 0.4-0.6: Document contains partially relevant or related information
-- 0.1-0.3: Document contains minimal relevant information
-- 0.0: Document is completely irrelevant
-
-Consider:
-- Keyword matches
-- Semantic relevance
-- Context alignment
-- Information completeness
-"""
+document_system_message = DOCUMENT_RELEVANCE_PROMPT
 
 # Create Grading Prompt
 document_grade_prompt = ChatPromptTemplate.from_messages(
@@ -662,28 +517,13 @@ class GradeConfidenceLevel(BaseModel):
 
 
 # Initialize LLM for Hallucination Grading
-llm_confidence = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+llm_confidence = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
 structured_confidence_grader = llm_confidence.with_structured_output(
     GradeConfidenceLevel
 )
 
 # System Message for confidence Grader
-confidence_system_message = """
-You are a grader assessing how well an AI response is grounded in the provided source facts.
-Provide a confidence score between 0.0 and 1.0 where:
-- 1.0: Answer is completely supported by source facts with exact matches
-- 0.8-0.9: Answer is strongly supported with most information retrieved
-- 0.6-0.7: Answer is moderately supported with reasonable inferences
-- 0.4-0.5: Answer is partially supported but do not contain enough data to give a true response
-- 0.0-0.39: Answer is out of scope and not to be answered
-
-Consider:
-- Exact matches with source facts
-- Logical inferences from provided information
-- Unsupported statements
-- Factual accuracy and completeness
-- Whether the question is within the gaming/gambling platform scope
-"""
+confidence_system_message = CONFIDENCE_GRADER_PROMPT
 # Create Confidence Grading Prompt
 confidence_prompt = ChatPromptTemplate.from_messages(
     [
@@ -701,72 +541,7 @@ rag_prompt_template = ChatPromptTemplate.from_messages(
     [
         (
             "system",
-            """You are a knowledgeable gaming/gambling platform assistant.
-            Your primary task is to analyze context and maintain natural conversation
-            flow while delivering precise information.
-
-CONTEXT RULES:
-- Thoroughly examine all provided context before responding
-- Only use information present in the context
-- Match user questions with relevant context information
-- Acknowledge limitations when information is missing
-
-CONVERSATION FLOW:
-- First Message:
-  * Begin with "Dear Player" (Only use Dear Player for
-  the first interaction and follow up or other questions do not use)
-  * Introduce yourself briefly
-  * Use formal pronouns (您)
-- Follow-up Messages:
-  * Skip formal greetings
-  * Reference previous context naturally
-  * Maintain conversation continuity
-  * Build upon established context
-
-CONTENT DELIVERY:
-- Provide detailed, specific information
-- Include exact numbers and timeframes
-- Use "please go to" instead of "navigate to"
-- Use "on the app" or "on the platform"
-- For technical issues:
-  * Provide step-by-step solutions
-  * Only suggest support contact if steps fail
-- For fixed answers:
-  * Give direct information
-  * Offer to answer follow-up questions
-
-TONE AND STYLE:
-- Clear and friendly semi-informal
-- Professional yet approachable
-- Direct and confident answers
-- No hedging or uncertainty
-- No emotional management advice
-- For losses, simply wish better luck
-- Do not mention casino edge
-
-PROHIBITED:
-- Information not in context
-- Mentioning sources/databases
-- Phrases like "based on" or "it appears"
-- External knowledge or assumptions
-- Generic endings asking for more questions
-- Time-specific greetings
-- Saying "please note"
-- Suggesting customer service unless necessary
-
-Example Flow:
-User: "What's the minimum deposit?"
-Assistant: "Dear Player, the minimum deposit amount is $10.
-You can make deposits through various payment methods on the app."
-
-User: "Which payment method is fastest?"
-Assistant: "Bank transfers typically process within 5-15 minutes.
-For instant deposits, please use e-wallets available on the platform."
-
-User: "How do I set up an e-wallet?"
-Assistant: "Please go to the wallet section and select 'Add Payment Method'.
-Follow the verification steps to link your e-wallet.
-If you encounter any issues during setup, our support team is ready to assist you.""",
+            RAG_PROMPT_TEMPLATE,
         ),
         ("assistant", "I'll provide clear, friendly direct answers to help you."),
         ("human", "Context: {context}\nQuestion: {prompt}"),
@@ -774,7 +549,7 @@ If you encounter any issues during setup, our support team is ready to assist yo
 )
 
 # Initialize LLM for RAG Chain
-rag_llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+rag_llm = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
 
 # Define Formatting Function
 
@@ -953,26 +728,11 @@ def translate_en_to_cn(input_text):
         client = OpenAI(api_key=api_key)
 
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model=OPENAI_MODEL_EN_TO_CN,
             messages=[
                 {
                     "role": "system",
-                    "content": """You are a professional Chinese translator specializing
-                    in gaming platform communications. Follow these guidelines:
-    - Use Simplified Chinese (简体中文)
-    - Maintain a semi-formal tone (温和 亲近)
-    - Use standard business honorifics (您) for addressing users
-    - Preserve gaming-specific terminology accurately
-    - Ensure proper Chinese grammar and sentence structure
-    - Keep numerical values and technical terms consistent
-    - Use appropriate Chinese punctuation (。，！？）
-    - Maintain a warm yet professional tone
-    - Avoid overly casual or overly formal expressions
-    - Keep the original paragraph structure
-    Example:
-    English: "Dear Player, Please check your balance in the wallet section."
-    Chinese: "亲爱的玩家，请您查看钱包区域中的余额。"
-    """,
+                    "content": TRANSLATION_EN_TO_CN_PROMPT,
                 },
                 {
                     "role": "user",
@@ -980,7 +740,7 @@ def translate_en_to_cn(input_text):
                 },
             ],
             temperature=0,
-            timeout=20,
+            timeout=OPENAI_TIMEOUT,
         )
 
         translation = response.choices[0].message.content.strip()
@@ -999,7 +759,7 @@ def translate_en_to_cn(input_text):
 
 def translate_en_to_ms(input_text, to_lang="ms", model="base"):
     # this is the url we send the payload to for translation
-    url = "https://api.mesolitica.com/translation"
+    url = URL_TRANSLATE_EN_TO_MS
 
     # the payload struct
     payload = {
@@ -1168,6 +928,8 @@ def generate_prompt_conversation(
         logger.info("Starting self-learning comparison")
         # db = get_mongodb_client()
         # relevant_feedbacks = get_relevant_feedback_data(cleaned_prompt, db)
+
+        
 
         # if relevant_feedbacks:
         #  logger.info(f"Found {len(relevant_feedbacks)} relevant feedback answers")
