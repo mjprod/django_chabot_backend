@@ -582,8 +582,6 @@ rag_prompt_template = ChatPromptTemplate.from_messages(
 rag_llm = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
 
 # Define Formatting Function
-
-
 def format_docs(docs):
     return "\n".join(doc.page_content for doc in docs)
 
