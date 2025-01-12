@@ -943,7 +943,7 @@ def generate_prompt_conversation(
             | StrOutputParser()
         )
 
-        generation_start = time.time()
+        # generation_start = time.time()
         generation = dynamic_chain.invoke(
             {
                 "context": format_docs(docs_to_use),
@@ -951,10 +951,10 @@ def generate_prompt_conversation(
                 "history": conversation.get_conversation_history(),
             }
         )
-        logger.info(f"AI Generation completed in {time.time() - generation_start:.2f}s")
+        # logger.info(f"AI Generation completed in {time.time() - generation_start:.2f}s")
 
         # this is where the self learning comes in, Its rough but will be worked on over time
-        logger.info("Starting self-learning comparison")
+        # logger.info("Starting self-learning comparison")
 
         """
         db = get_mongodb_client()
