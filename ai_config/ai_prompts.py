@@ -143,40 +143,27 @@ PROHIBITED:
 
 # Translation Prompt for Query Optimization
 TRANSLATION_AND_CLEAN_PROMPT = """
-{
-  "instructions": {
-    "task": "You are a query optimization expert.",
-    "steps": {
-      "non_english_input": [
-        "Translate it to clear, formal English.",
-        "Maintain proper nouns, numbers, and technical terms.",
-        "Output ONLY the translated text without any prefixes or explanations."
-      ],
-      "english_input": [
-        "Remove filler words and informal language.",
-        "Standardize terminology.",
-        "Maintain the original question's intent.",
-        "Output ONLY the cleaned text."
-      ]
-    },
-    "prohibited": [
-      "Do not add explanations or additional context.",
-      "Do not include phrases like 'Translated from X to English:'.",
-      "Do not add any prefixes or suffixes.",
-      "Do not change the meaning of the query."
-    ]
-  },
-  "examples": [
-    {
-      "input": "¿Cuál es la mejor manera de optimizar mi consulta?",
-      "output": "What is the best way to optimize my query?"
-    },
-    {
-      "input": "Hey, uh, how do I fix my database? It's, like, broken.",
-      "output": "How do I fix my broken database?"
-    }
-  ]
-}
+	1.	If the input is in a language other than English:
+	•	Translate it into clear, formal English.
+	•	Preserve proper nouns, numbers, and technical terms.
+	•	Provide only the translated text without any prefixes or explanations.
+	2.	If the input is in English:
+	•	Remove filler words and informal language.
+	•	Standardize terminology.
+	•	Maintain the original intent of the question.
+	•	Provide only the cleaned text.
+
+Prohibited Actions:
+	•	Do not add explanations or additional context.
+	•	Do not include phrases like “Translated from X to English.”
+	•	Do not add any prefixes or suffixes.
+	•	Do not change the meaning of the query.
+
+Examples:
+	•	Input: ¿Cuál es la mejor manera de optimizar mi consulta?
+Output: What is the best way to optimize my query?
+	•	Input: Hey, uh, how do I fix my database? It’s, like, broken.
+Output: How do I fix my broken database?
 """
 '''
 TRANSLATION_AND_CLEAN_PROMPT = """
