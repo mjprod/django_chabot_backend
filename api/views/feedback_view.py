@@ -23,7 +23,6 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
         """Process and translate our correct answer into the languages needed"""
         if not correct_answer:
             return []
-        
         logger.info(f"Processing translations for: {correct_answer}")
         translations = [
             {
@@ -31,7 +30,6 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
                 "text": correct_answer
             }
         ]
-        
         try:
             # Try Malay translation
             logger.info("Attempting Malay translation...")
@@ -40,14 +38,12 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
             if translated_ms and isinstance(translated_ms, dict):
                 translations.append({
                     "language": "ms",
-                    "text": translated_ms.get('text', '')  #Extract just the text, the token count isnt relevant for now
+                    "text": translated_ms.get('text', '')  # Extract just the text,
                 })
             else:
-                logger.error("Malay translation returned empty or invalid format")
-                
+                logger.error("Malay translation returned empty or invalid format") 
         except Exception as e:
             logger.error(f"Error in Malay translation: {str(e)}")
-            
         try:
             # Try Chinese translation
             logger.info("Attempting Chinese translation...")
@@ -56,14 +52,12 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
             if translated_cn and isinstance(translated_cn, dict):
                 translations.append({
                     "language": "cn",
-                    "text": translated_cn.get('text', '')  #Extract just the text, we don't need anything else
+                    "text": translated_cn.get('text', '')  # Extract just the text
                 })
             else:
-                logger.error("Chinese translation returned empty or invalid format")
-                
+                logger.error("Chinese translation returned empty or invalid format")     
         except Exception as e:
             logger.error(f"Error in Chinese translation: {str(e)}")
-        
         logger.info(f"Final translations array: {translations}")
         return translations
 
@@ -78,7 +72,9 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
                 "ai_response": request.data.get("generation", ""),
                 "correct_bool": request.data.get("correct_bool", False),
                 "chat_rating": request.data.get("chat_rating", 0),
-                "correct_answer": self._process_correct_answer_translations(request.data.get("correct_answer", "")),
+                "correct_answer": self._process_correct_answer_translations(
+                    request.data.get("correct_answer", "")
+                ),
                 "metadata": {
                     **request.data.get("metadata", {}),
                     "user_id": request.data.get("user_id"),
@@ -106,7 +102,6 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
                 "correct_bool": serializer.validated_data["correct_bool"],
                 "chat_rating": serializer.validated_data["chat_rating"],
                 "correct_answer": serializer.validated_data["correct_answer"],
-    
                 "metadata": {
                     **serializer.validated_data.get("metadata", {}),
                     "confidence": 0.97,
@@ -119,26 +114,22 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
             db = self.get_db()
             logger.info("Creating text index for feedback search")
             db.feedback_data.create_index([("user_input", "text")])
-
             db_start = time.time()
             logger.info("Starting MongoDB Write Operations")
             db.feedback_data.insert_one(translated_data)
             logger.info(f"MongoDB operation completed in {time.time() - db_start:.2f}s")
-
             total_time = time.time() - start_time
             logger.info(f"Total request processing time: {total_time:.2f}s")
             return Response(
                 {"message": "Feedback saved successfully"},
                 status=status.HTTP_201_CREATED,
             )
-
         except Exception as e:
             logger.error(f"Error processing request: {str(e)}")
             return Response(
                 {"error": f"Failed to save feedback: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-
 
     def get(self, request):
         start_time = time.time()

@@ -65,6 +65,7 @@ class PromptConversationSerializer(serializers.Serializer):
     conversation_id = serializers.CharField(max_length=100, required=True)
     user_id = serializers.CharField(max_length=100, required=True)
 
+
 class PromptConversationHistorySerializer(serializers.Serializer):
     prompt = serializers.CharField(max_length=1000, required=True)
     conversation_id = serializers.CharField(max_length=100, required=True)
@@ -112,10 +113,12 @@ class CompleteConversationsSerializer(serializers.Serializer):
             raise serializers.ValidationError("Too many messages in this conversation")
         return value
 
+
 class MultiLanguageAnswerField(serializers.Serializer):
     en = serializers.CharField(max_length=2000, required=False, allow_blank=True)
     ms = serializers.CharField(max_length=2000, required=False, allow_blank=True)
     cn = serializers.CharField(max_length=2000, required=False, allow_blank=True)
+
 
 class CaptureFeedbackSerializer(serializers.Serializer):
     conversation_id = serializers.CharField(max_length=100)
