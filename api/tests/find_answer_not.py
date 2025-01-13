@@ -93,10 +93,12 @@ queries = [
     "tell me about Glauco in mythology.",
     "can you explain the myth of Glauco?",
     "can you explain the myth of Galuco?",
-    "How can I get my money refund?",
-    "How can I get my money back?",
-    "How can I get a money?",
-    "How can I optimize your query!"
+     "who is Glauco?",
+    "what do you know about Glauco?",
+    "is Glauco a person or a deity?",
+    "tell me about Glauco in mythology.",
+    "can you explain the myth of Glauco?",
+    "can you explain the myth of Galuco?",
 ]
 
 # Iterate over queries and search for answers for each one

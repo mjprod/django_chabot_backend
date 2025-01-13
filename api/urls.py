@@ -3,6 +3,7 @@ from django.views.decorators.cache import cache_page
 
 # Import views from conversation_view, feedback_view, and user_input_view
 from .views.conversation_view import CompleteConversationsView, PromptConversationView
+from .views.conversation_with_db_view import PromptConversationWithDBView
 from .views.feedback_view import (
     CaptureFeedbackView,
 )
@@ -19,6 +20,13 @@ urlpatterns = [
         "prompt_conversation/",
         PromptConversationView.as_view(),
         name="prompt_conversation",
+    ),
+    # Route to start a conversation with mongo db
+    path(
+        "prompt_conversation_with_db/",
+        PromptConversationWithDBView.
+        as_view(),
+        name="prompt_conversation_with_db",
     ),
     # Route for complete conversations (cached for 5 minutes)
     path(

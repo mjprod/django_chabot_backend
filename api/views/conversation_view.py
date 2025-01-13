@@ -18,8 +18,6 @@ logger = logging.getLogger(__name__)
 
 
 # new api for start conversation
-
-
 class PromptConversationView(MongoDBMixin, APIView):
     def post(self, request):
         db = None
