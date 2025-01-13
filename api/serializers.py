@@ -13,14 +13,13 @@ class BaseSerializer(serializers.Serializer):
 
 
 class TranslationSerializer(serializers.Serializer):
-    language = serializers.CharField(max_length=10, required=True)
+    language = serializers.CharField(max_length=20, required=True)
     text = serializers.CharField(max_length=2000, required=True, allow_blank=True)
 
     def validate_text(self, value):
-        if len(value.encode("utf-8")) > 500:
+        if len(value.encode("utf-8")) > 1000:
             raise serializers.ValidationError("Text too large")
         return value
-
 
 # added new serializers for the chat conversation and history
 class MessageSerializer(serializers.Serializer):

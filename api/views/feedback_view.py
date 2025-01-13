@@ -23,6 +23,13 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
         """Process and translate our correct answer into the languages needed"""
         if not correct_answer:
             return []
+        
+        # Add max length validation
+        MAX_TEXT_LENGTH = 1000  # Adjust this value based on your requirements
+        if len(correct_answer) > MAX_TEXT_LENGTH:
+            logger.warning(f"Correct answer exceeds max length of {MAX_TEXT_LENGTH}")
+            correct_answer = correct_answer[:MAX_TEXT_LENGTH]
+            
         logger.info(f"Processing translations for: {correct_answer}")
         translations = [
             {
@@ -30,6 +37,17 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
                 "text": correct_answer
             }
         ]
+        
+        def validate_translation(translated_text):
+            """Helper to validate and truncate translation if needed"""
+            if isinstance(translated_text, dict):
+                text = translated_text.get('text', '')
+                if len(text) > MAX_TEXT_LENGTH:
+                    logger.warning(f"Translation exceeds max length of {MAX_TEXT_LENGTH}")
+                    return text[:MAX_TEXT_LENGTH]
+                return text
+            return ''
+
         try:
             # Try Malay translation
             logger.info("Attempting Malay translation...")
@@ -37,13 +55,14 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
             logger.info(f"Malay translation result: {translated_ms}")
             if translated_ms and isinstance(translated_ms, dict):
                 translations.append({
-                    "language": "ms",
-                    "text": translated_ms.get('text', '')  # Extract just the text,
+                    "language": "ms-MY",
+                    "text": validate_translation(translated_ms)
                 })
             else:
                 logger.error("Malay translation returned empty or invalid format") 
         except Exception as e:
             logger.error(f"Error in Malay translation: {str(e)}")
+
         try:
             # Try Chinese translation
             logger.info("Attempting Chinese translation...")
@@ -52,12 +71,13 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
             if translated_cn and isinstance(translated_cn, dict):
                 translations.append({
                     "language": "cn",
-                    "text": translated_cn.get('text', '')  # Extract just the text
+                    "text": validate_translation(translated_cn)
                 })
             else:
                 logger.error("Chinese translation returned empty or invalid format")     
         except Exception as e:
             logger.error(f"Error in Chinese translation: {str(e)}")
+
         logger.info(f"Final translations array: {translations}")
         return translations
 
