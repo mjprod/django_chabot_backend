@@ -13,8 +13,8 @@ class BaseSerializer(serializers.Serializer):
 
 
 class TranslationSerializer(serializers.Serializer):
-    language = serializers.CharField(max_length=10)
-    text = serializers.CharField(max_length=550)
+    language = serializers.CharField(max_length=10, required=True)
+    text = serializers.CharField(max_length=2000, required=True, allow_blank=True)
 
     def validate_text(self, value):
         if len(value.encode("utf-8")) > 500:
@@ -112,6 +112,10 @@ class CompleteConversationsSerializer(serializers.Serializer):
             raise serializers.ValidationError("Too many messages in this conversation")
         return value
 
+class MultiLanguageAnswerField(serializers.Serializer):
+    en = serializers.CharField(max_length=2000, required=False, allow_blank=True)
+    ms = serializers.CharField(max_length=2000, required=False, allow_blank=True)
+    cn = serializers.CharField(max_length=2000, required=False, allow_blank=True)
 
 class CaptureFeedbackSerializer(serializers.Serializer):
     conversation_id = serializers.CharField(max_length=100)
@@ -119,12 +123,16 @@ class CaptureFeedbackSerializer(serializers.Serializer):
     ai_response = serializers.CharField(max_length=2000)
     correct_bool = serializers.BooleanField()
     chat_rating = serializers.IntegerField(min_value=0, max_value=6)
-    correct_answer = serializers.CharField(
-        max_length=2000, required=False, allow_blank=True
-    )
+    correct_answer = TranslationSerializer(many=True, required=False, allow_empty=True)
     metadata = serializers.DictField(required=False)
 
-    def validate_metadata(self, value):
-        if len(str(value)) > 2000:
-            raise serializers.ValidationError("Metadata field is too large")
+    def validate_correct_answer(self, value):
+        if not value:
+            return []
+        # Ensure all required fields are present
+        for item in value:
+            if not isinstance(item, dict):
+                raise serializers.ValidationError("Each translation must be a dictionary")
+            if 'language' not in item or 'text' not in item:
+                raise serializers.ValidationError("Each translation must have 'language' and 'text' fields")
         return value
