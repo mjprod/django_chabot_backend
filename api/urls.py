@@ -2,7 +2,11 @@ from django.urls import path
 from django.views.decorators.cache import cache_page
 
 # Import views from conversation_view, feedback_view, and user_input_view
-from .views.conversation_view import CompleteConversationsView, PromptConversationView
+from .views.conversation_view import (
+    CompleteConversationsView,
+    PromptConversationView,
+    PromptConversationHistoryView,
+)
 from .views.feedback_view import (
     CaptureFeedbackView,
 )
@@ -19,6 +23,11 @@ urlpatterns = [
         "prompt_conversation/",
         PromptConversationView.as_view(),
         name="prompt_conversation",
+    ),
+    path(
+        "prompt_conversation_history/",
+        PromptConversationHistoryView.as_view(),
+        name="prompt_conversation_history",
     ),
     # Route for complete conversations (cached for 5 minutes)
     path(
