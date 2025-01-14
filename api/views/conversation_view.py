@@ -98,11 +98,15 @@ class PromptConversationView(MongoDBMixin, APIView):
             # Uncomment memory cleanup if needed
             # gc.collect()
 
+
 """
-this is the new View for the prompt_conversation_history, it will be used to get the history of a conversation
-with the context and conversation_id, it will be able to get the history of the conversation along with the new question
+this is the new View for the prompt_conversation_history, 
+it will be used to get the history of a conversation
+with the context and conversation_id, it will be able to 
+get the history of the conversation along with the new question
 and if the user where to ask "What was the first message i sent, it will be able to find it and return that to the user
 """
+
 
 class PromptConversationHistoryView(MongoDBMixin, APIView):
     def post(self, request):
@@ -183,7 +187,7 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
                     status=status.HTTP_404_NOT_FOUND,
                 )
 
-            # for our response data we have the updated_at, this is for the timing of the message for Openai
+            # for our response data we have the updated_at
             response_data = {
                 "conversation_id": conversation_id,
                 "messages": conversation.get("messages", []),
@@ -203,6 +207,7 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
         finally:
             if db is not None:
                 self.close_db()
+
 
 class CompleteConversationsView(MongoDBMixin, APIView):
     def get(self, request):
