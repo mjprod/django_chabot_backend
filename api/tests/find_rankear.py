@@ -13,7 +13,10 @@ MONGODB_DATABASE = "chatbotdb"
 # Conectar ao MongoDB
 try:
     client = MongoClient(
-        f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@{MONGODB_CLUSTER}/{MONGODB_DATABASE}?retryWrites=true&w=majority&tlsAllowInvalidCertificates=true"
+        f"mongodb+srv://{MONGODB_USERNAME}:"
+        f"{MONGODB_PASSWORD}@{MONGODB_CLUSTER}/"
+        f"{MONGODB_DATABASE}?retryWrites=true&w=majority"
+        "&tlsAllowInvalidCertificates=true"
     )
     db = client[MONGODB_DATABASE]
     print("Connected to MongoDB successfully.")
@@ -42,7 +45,7 @@ def rank_topics(data, num_clusters=3):
     kmeans.fit(tfidf_matrix)
 
     clusters = kmeans.labels_
-    terms = vectorizer.get_feature_names_out()
+    #terms = vectorizer.get_feature_names_out()
 
     # Identificar os principais termos por cluster
     clustered_data = {}
