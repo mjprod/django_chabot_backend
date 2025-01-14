@@ -144,7 +144,8 @@ PROHIBITED:
 # Translation Prompt for Query Optimization
 TRANSLATION_AND_CLEAN_PROMPT = """
 	1.	If the input is in a language other than English:
-	•	Translate it into clear, formal English.
+	•	Translate it into clear and simple, formal English.
+  - It will be translated into Simplified Chinese and Maly Bahasa.
 	•	Preserve proper nouns, numbers, and technical terms.
 	•	Provide only the translated text without any prefixes or explanations.
 	2.	If the input is in English:

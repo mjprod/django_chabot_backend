@@ -1,5 +1,6 @@
 import logging
 import time
+import asyncio
 
 from datetime import datetime
 from rest_framework.views import APIView
@@ -10,12 +11,13 @@ from ..serializers import CaptureFeedbackSerializer
 
 from ..chatbot import (
     translate_and_clean,
+    generate_translations,
 )
 
 # Initialize logger
 logger = logging.getLogger(__name__)
 
-
+# TODO: Implement confidence score for feedback
 class CaptureFeedbackView(MongoDBMixin, APIView):
     def post(self, request):
         start_time = time.time()
@@ -33,7 +35,7 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
                     **request.data.get("metadata", {}),
                     "user_id": request.data.get("user_id"),
                     "translations": request.data.get("translations", []),
-                    "confidence": 0.97,  # Add fixed confidence score
+                    "confidence": 0.0,  # Add fixed confidence score
                 },
             }
 
@@ -47,6 +49,8 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
+            translations = asyncio.run(generate_translations(transformed_data.get("correct_answer", "")))
+
             # Process translations
             logger.info("Processing feedback translations")
             translated_data = {
@@ -58,10 +62,7 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
                 "correct_answer": translate_and_clean(
                     transformed_data.get("correct_answer", "")
                 ),
-                "metadata": {
-                    **serializer.validated_data.get("metadata", {}),
-                    "confidence": 0.97,
-                },
+                "metadata": translations,
                 "timestamp": datetime.now().isoformat(),
                 "search_score": 0.0,
             }

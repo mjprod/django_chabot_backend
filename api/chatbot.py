@@ -715,8 +715,6 @@ def update_database_confidence(comparison_result, docs_to_use):
 
 
 # async for translations
-
-
 async def generate_translations(generation):
     try:
         logger.info(f"Starting translations for: {generation}")
