@@ -100,11 +100,12 @@ class PromptConversationView(MongoDBMixin, APIView):
 
 
 """
-this is the new View for the prompt_conversation_history, 
+this is the new View for the prompt_conversation_history,
 it will be used to get the history of a conversation
-with the context and conversation_id, it will be able to 
+with the context and conversation_id, it will be able to
 get the history of the conversation along with the new question
-and if the user where to ask "What was the first message i sent, it will be able to find it and return that to the user
+and if the user where to ask "What was the first message i sent,
+it will be able to find it and return that to the user
 """
 
 
