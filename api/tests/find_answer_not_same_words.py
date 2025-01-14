@@ -11,7 +11,9 @@ MONGODB_DATABASE = "chatbotdb"
 # Connect to MongoDB
 try:
     client = MongoClient(
-        f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@{MONGODB_CLUSTER}/{MONGODB_DATABASE}?retryWrites=true&w=majority&tlsAllowInvalidCertificates=true"
+        f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@"
+        f"{MONGODB_CLUSTER}/{MONGODB_DATABASE}?"
+        f"retryWrites=true&w=majority&tlsAllowInvalidCertificates=true"
     )
     db = client[MONGODB_DATABASE]
     print("Connected to MongoDB successfully.")
@@ -19,12 +21,16 @@ except Exception as e:
     print(f"Error connecting to MongoDB: {e}")
     exit()
 
+
 # Ensure text index
 def ensure_text_index(collection, field):
     try:
         indexes = collection.index_information()
         # Check if a text index already exists for the specified field
-        if not any(index["key"][0][0] == field and index["key"][0][1] == "text" for index in indexes.values()):
+        if not any(
+            index["key"][0][0] == field and index["key"][0][1] == "text"
+            for index in indexes.values()
+        ):
             collection.create_index([(field, "text")], name=f"{field}_text_index")
             print(f"Text index created on field '{field}'")
         else:
@@ -32,11 +38,13 @@ def ensure_text_index(collection, field):
     except Exception as e:
         print(f"Error creating/verifying text index: {e}")
 
+
 # Check similarity
 def is_similar(text1, text2, threshold=0.8):
     # Determine if two strings are similar based on the threshold
     ratio = SequenceMatcher(None, text1, text2).ratio()
     return ratio >= threshold
+
 
 # Simple Rephrasing Function
 def rephrase_text(text):
@@ -50,6 +58,7 @@ def rephrase_text(text):
     ]
     return random.choice(rephrases)
 
+
 # Search and respond with rephrased answers
 def search_and_rephrase_answers(query, collection_name="feedback_data"):
     collection = db[collection_name]
@@ -60,8 +69,14 @@ def search_and_rephrase_answers(query, collection_name="feedback_data"):
         # Perform a text search on the 'correct_answer' field
         results = collection.find(
             {"$text": {"$search": query}},
-            {"score": {"$meta": "textScore"}, "correct_answer": 1, "metadata.translations": 1}
-        ).sort("score", {"$meta": "textScore"})  # Sort by text score
+            {
+                "score": {"$meta": "textScore"},
+                "correct_answer": 1,
+                "metadata.translations": 1,
+            },
+        ).sort(
+            "score", {"$meta": "textScore"}
+        )  # Sort by text score
 
         results_list = list(results)
         if results_list:
@@ -79,7 +94,11 @@ def search_and_rephrase_answers(query, collection_name="feedback_data"):
                 translations = {}
                 if isinstance(raw_translations, list):
                     for item in raw_translations:
-                        if isinstance(item, dict) and "language" in item and "text" in item:
+                        if (
+                            isinstance(item, dict)
+                            and "language" in item
+                            and "text" in item
+                        ):
                             translations[item["language"]] = item["text"]
                 elif isinstance(raw_translations, dict):
                     translations = raw_translations
@@ -96,18 +115,24 @@ def search_and_rephrase_answers(query, collection_name="feedback_data"):
                         break
 
                 if not is_duplicate:
-                    seen_answers.append({
-                        "correct_answer": answer,
-                        "translations": translations,
-                        "score": score
-                    })
+                    seen_answers.append(
+                        {
+                            "correct_answer": answer,
+                            "translations": translations,
+                            "score": score,
+                        }
+                    )
 
             # Sort by confidence score
-            merged_results = sorted(seen_answers, key=lambda x: x["score"], reverse=True)
+            merged_results = sorted(
+                seen_answers, key=lambda x: x["score"], reverse=True
+            )
 
             for result in merged_results:
                 rephrased_answer = rephrase_text(result["correct_answer"])
-                print(f"- Correct Answer: {rephrased_answer} (Confidence: {result['score']:.2f})")
+                print(
+                    f"- Correct Answer: {rephrased_answer} (Confidence: {result['score']:.2f})"
+                )
                 print(f"  Translations: {result['translations']}")
             return merged_results
         else:
@@ -116,6 +141,7 @@ def search_and_rephrase_answers(query, collection_name="feedback_data"):
     except Exception as e:
         print(f"Error searching for correct answers: {e}")
         return None
+
 
 # Dynamic Query
 query = "What do you know about Glauco"

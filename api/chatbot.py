@@ -581,6 +581,7 @@ rag_prompt_template = ChatPromptTemplate.from_messages(
 # Initialize LLM for RAG Chain
 rag_llm = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
 
+
 # Define Formatting Function
 def format_docs(docs):
     return "\n".join(doc.page_content for doc in docs)
@@ -1014,6 +1015,100 @@ def generate_prompt_conversation(
         raise
     finally:
         # compare_memory(memory_snapshot)
+        gc.collect()
+
+
+def prompt_conversation_history(
+    user_prompt, conversation_id, admin_id, agent_id, user_id
+):
+    logger.info("Starting prompt_conversation_history request")
+
+    try:
+        # get our connection with MongoDB
+        db = get_mongodb_client()
+
+        # make sure we have an existing conversation, if not, we will create a new one
+        existing_conversation = db.conversations.find_one(
+            {"session_id": conversation_id}
+        )
+
+        if existing_conversation:
+            # Load existing conversation and get the messages list
+            messages = existing_conversation.get("messages", [])
+        else:
+            # Create new conversation with system prompt
+            messages = [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
+
+        # Add our new message with the role of user and the content of the user prompt
+        messages.append(
+            {
+                "role": "user",
+                "content": user_prompt,
+                "timestamp": datetime.now().isoformat(),
+            }
+        )
+
+        # this is the same as before, no changes here
+        docs_retrieve = retriever.invoke(user_prompt)[:3]
+        docs_to_use = []
+
+        # Filter documents same as before with confidence score
+        for doc in docs_retrieve:
+            relevance_score = retrieval_grader.invoke(
+                {"prompt": user_prompt, "document": doc.page_content}
+            )
+            if relevance_score.confidence_score >= 0.7:
+                docs_to_use.append(doc)
+
+        # Prepare the OpenAI call with the history we have made
+        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        response = client.chat.completions.create(
+            model=OPENAI_MODEL,
+            messages=messages,
+            temperature=MAX_TEMPERATURE,
+            max_tokens=MAX_TOKENS,
+            timeout=OPENAI_TIMEOUT,
+        )
+
+        # Extract and append AI response
+        ai_response = response.choices[0].message.content
+        messages.append(
+            {
+                "role": "assistant",
+                "content": ai_response,
+                "timestamp": datetime.now().isoformat(),
+            }
+        )
+
+        # hit our translations function
+        translations = asyncio.run(generate_translations(ai_response))
+
+        # Prepare our conversation as before but without is_first_message
+        conversation = {
+            "session_id": conversation_id,
+            "admin_id": admin_id,
+            "agent_id": agent_id,
+            "user_id": user_id,
+            "messages": messages,
+            "translations": translations,
+            "updated_at": datetime.now().isoformat(),
+        }
+
+        # Upsert conversation to MongoDB
+        db.conversations.update_one(
+            {"session_id": conversation_id}, {"$set": conversation}, upsert=True
+        )
+
+        return {
+            "generation": ai_response,
+            "conversation_id": conversation_id,
+            "translations": translations,
+        }
+
+    except Exception as e:
+        logger.error(f"Error in prompt_conversation_history: {str(e)}")
+        raise
+    finally:
         gc.collect()
 
 

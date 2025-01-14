@@ -155,15 +155,15 @@ TRANSLATION_AND_CLEAN_PROMPT = """
 	•	Provide only the cleaned text.
 
 Prohibited Actions:
-	•	Do not add explanations or additional context.
-	•	Do not include phrases like “Translated from X to English.”
-	•	Do not add any prefixes or suffixes.
-	•	Do not change the meaning of the query.
+Do not add explanations or additional context.
+Do not include phrases like “Translated from X to English.”
+Do not add any prefixes or suffixes.
+Do not change the meaning of the query.
 
 Examples:
-	•	Input: ¿Cuál es la mejor manera de optimizar mi consulta?
+Input: ¿Cuál es la mejor manera de optimizar mi consulta?
 Output: What is the best way to optimize my query?
-	•	Input: Hey, uh, how do I fix my database? It’s, like, broken.
+Input: Hey, uh, how do I fix my database? It is, like, broken.
 Output: How do I fix my broken database?
 """
 '''
