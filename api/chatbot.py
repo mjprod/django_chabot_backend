@@ -1020,7 +1020,9 @@ def generate_prompt_conversation(
         gc.collect()
 
 
-def prompt_conversation_history(user_prompt, conversation_id, admin_id, agent_id, user_id):
+def prompt_conversation_history(
+    user_prompt, conversation_id, admin_id, agent_id, user_id
+):
     logger.info("Starting prompt_conversation_history request")
 
     try:
@@ -1037,16 +1039,16 @@ def prompt_conversation_history(user_prompt, conversation_id, admin_id, agent_id
             messages = existing_conversation.get("messages", [])
         else:
             # Create new conversation with system prompt
-            messages = [
-                {"role": "system", "content": FIRST_MESSAGE_PROMPT}
-            ]
+            messages = [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
 
         # Add our new message with the role of user and the content of the user prompt
-        messages.append({
-            "role": "user",
-            "content": user_prompt,
-            "timestamp": datetime.now().isoformat()
-        })
+        messages.append(
+            {
+                "role": "user",
+                "content": user_prompt,
+                "timestamp": datetime.now().isoformat(),
+            }
+        )
 
         # this is the same as before, no changes here
         docs_retrieve = retriever.invoke(user_prompt)[:3]
@@ -1067,16 +1069,18 @@ def prompt_conversation_history(user_prompt, conversation_id, admin_id, agent_id
             messages=messages,
             temperature=MAX_TEMPERATURE,
             max_tokens=MAX_TOKENS,
-            timeout=OPENAI_TIMEOUT
+            timeout=OPENAI_TIMEOUT,
         )
 
         # Extract and append AI response
         ai_response = response.choices[0].message.content
-        messages.append({
-            "role": "assistant",
-            "content": ai_response,
-            "timestamp": datetime.now().isoformat()
-        })
+        messages.append(
+            {
+                "role": "assistant",
+                "content": ai_response,
+                "timestamp": datetime.now().isoformat(),
+            }
+        )
 
         # hit our translations function
         translations = asyncio.run(generate_translations(ai_response))
@@ -1089,20 +1093,18 @@ def prompt_conversation_history(user_prompt, conversation_id, admin_id, agent_id
             "user_id": user_id,
             "messages": messages,
             "translations": translations,
-            "updated_at": datetime.now().isoformat()
+            "updated_at": datetime.now().isoformat(),
         }
 
         # Upsert conversation to MongoDB
         db.conversations.update_one(
-            {"session_id": conversation_id},
-            {"$set": conversation},
-            upsert=True
+            {"session_id": conversation_id}, {"$set": conversation}, upsert=True
         )
 
         return {
             "generation": ai_response,
             "conversation_id": conversation_id,
-            "translations": translations
+            "translations": translations,
         }
 
     except Exception as e:

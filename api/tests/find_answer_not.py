@@ -14,7 +14,9 @@ translator = Translator()
 # Connect to MongoDB
 try:
     client = MongoClient(
-        f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@{MONGODB_CLUSTER}/{MONGODB_DATABASE}?retryWrites=true&w=majority&tlsAllowInvalidCertificates=true"
+        f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@"
+        f"{MONGODB_CLUSTER}/{MONGODB_DATABASE}?"
+        f"retryWrites=true&w=majority&tlsAllowInvalidCertificates=true"
     )
     db = client[MONGODB_DATABASE]
     print("Connected to MongoDB successfully.")
@@ -22,11 +24,15 @@ except Exception as e:
     print(f"Error connecting to MongoDB: {e}")
     exit()
 
+
 # Ensure that a text index exists for the specified field
 def ensure_text_index(collection, field):
     try:
         indexes = collection.index_information()
-        if not any(index["key"][0][0] == field and index["key"][0][1] == "text" for index in indexes.values()):
+        if not any(
+            index["key"][0][0] == field and index["key"][0][1] == "text"
+            for index in indexes.values()
+        ):
             collection.create_index([(field, "text")], name=f"{field}_text_index")
             print(f"Text index created on field '{field}'")
         else:
@@ -34,35 +40,45 @@ def ensure_text_index(collection, field):
     except Exception as e:
         print(f"Error creating/verifying text index: {e}")
 
+
 # Translate text dynamically using Google Translate
 def translate_correct_answer(correct_answer):
     translations = {}
     try:
         # Translate to Malay
-        translations["ms-MY"] = translator.translate(correct_answer, src="en", dest="ms").text
+        translations["ms-MY"] = translator.translate(
+            correct_answer, src="en", dest="ms"
+        ).text
 
         # Translate to Chinese
-        translations["cn"] = translator.translate(correct_answer, src="en", dest="zh-cn").text
+        translations["cn"] = translator.translate(
+            correct_answer, src="en", dest="zh-cn"
+        ).text
 
     except Exception as e:
         print(f"Error translating text: {e}")
     return translations
 
+
 # Search and translate the top correct answer
 def search_top_answer_and_translate(query, collection_name="feedback_data"):
     collection = db[collection_name]
-    print(Fore.CYAN +f"Searching for: '{query}' in collection '{collection_name}'"+ Style.RESET_ALL)
+    print(
+        Fore.CYAN
+        + f"Searching for: '{query}' in collection '{collection_name}'"
+        + Style.RESET_ALL
+    )
     try:
         # Use the existing text index (on user_input)
         results = collection.find(
-            {
-                "$text": {"$search": query}  # Search in the existing text index
-            },
+            {"$text": {"$search": query}},  # Search in the existing text index
             {
                 "score": {"$meta": "textScore"},  # Include relevance score
-                "correct_answer": 1  # Ensure the `correct_answer` field is included
-            }
-        ).sort("score", {"$meta": "textScore"})  # Sort by relevance
+                "correct_answer": 1,  # Ensure the `correct_answer` field is included
+            },
+        ).sort(
+            "score", {"$meta": "textScore"}
+        )  # Sort by relevance
 
         results_list = list(results)
         if results_list:
@@ -70,8 +86,11 @@ def search_top_answer_and_translate(query, collection_name="feedback_data"):
             correct_answer = top_result["correct_answer"]
             confidence = top_result["score"]
 
-            print(f"Top Result:")
-            print(Fore.GREEN + f"- Correct Answer (EN): {correct_answer} (Confidence: {confidence:.2f})"+ Style.RESET_ALL)
+            print("Top Result:")
+            print(
+                Fore.GREEN + f"- Correct Answer (EN): {correct_answer} "
+                f"(Confidence: {confidence:.2f})" + Style.RESET_ALL
+            )
 
             # Translate the `correct_answer` field to other languages
             translations = translate_correct_answer(correct_answer)
@@ -79,11 +98,14 @@ def search_top_answer_and_translate(query, collection_name="feedback_data"):
             # Display translations
             print("Translations:")
             for lang, translation in translations.items():
-                print(Fore.MAGENTA + f"  {lang.upper()}: {translation}"+ Style.RESET_ALL)
+                print(
+                    Fore.MAGENTA + f"  {lang.upper()}: {translation}" + Style.RESET_ALL
+                )
         else:
             print(Fore.RED + "No related correct answers found." + Style.RESET_ALL)
     except Exception as e:
         print(f"Error fetching highest confidence answer: {e}")
+
 
 # Define test queries
 queries = [
@@ -96,7 +118,7 @@ queries = [
     "How can I get my money refund?",
     "How can I get my money back?",
     "How can I get a money?",
-    "How can I optimize your query!"
+    "How can I optimize your query!",
 ]
 
 # Iterate over queries and search for answers for each one

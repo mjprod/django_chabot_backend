@@ -21,11 +21,15 @@ except Exception as e:
     print(f"Error connecting to MongoDB: {e}")
     exit()
 
+
 # Função para buscar dados do banco
 def fetch_correct_answers(collection_name="feedback_data"):
     collection = db[collection_name]
     results = collection.find({}, {"correct_answer": 1, "_id": 0})
-    return [result["correct_answer"] for result in results if "correct_answer" in result]
+    return [
+        result["correct_answer"] for result in results if "correct_answer" in result
+    ]
+
 
 # Função para agrupar respostas
 def rank_topics(data, num_clusters=3):
@@ -48,6 +52,7 @@ def rank_topics(data, num_clusters=3):
         clustered_data[f"Cluster {i+1}"] = Counter(cluster_terms).most_common()
 
     return clustered_data
+
 
 # Buscar dados do MongoDB
 data = fetch_correct_answers()
