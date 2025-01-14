@@ -1,9 +1,11 @@
 from ..chatbot import (
     generate_prompt_conversation,
+    prompt_conversation_history,
 )
 from ..serializers import (
     CompleteConversationsSerializer,
     PromptConversationSerializer,
+    PromptConversationHistorySerializer,
 )
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -95,6 +97,117 @@ class PromptConversationView(MongoDBMixin, APIView):
                 self.close_db()
             # Uncomment memory cleanup if needed
             # gc.collect()
+
+
+"""
+this is the new View for the prompt_conversation_history,
+it will be used to get the history of a conversation
+with the context and conversation_id, it will be able to
+get the history of the conversation along with the new question
+and if the user where to ask "What was the first message i sent,
+it will be able to find it and return that to the user
+"""
+
+
+class PromptConversationHistoryView(MongoDBMixin, APIView):
+    def post(self, request):
+        db = None
+        try:
+            # Log start of request processing
+            logger.info("Starting prompt_conversation_history request")
+            start_time = time.time()
+
+            # Validate input data
+            serializer = PromptConversationHistorySerializer(data=request.data)
+            if not serializer.is_valid():
+                return Response(
+                    {"error": "Invalid input data", "details": serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Extract validated data
+            prompt = serializer.validated_data["prompt"]
+            conversation_id = serializer.validated_data["conversation_id"]
+            user_id = serializer.validated_data["user_id"]
+
+            # Generate AI response with timing
+            generation_start = time.time()
+            logger.info("Starting AI answer generation")
+            response = prompt_conversation_history(
+                user_prompt=prompt,
+                conversation_id=conversation_id,
+                admin_id="",
+                agent_id="",
+                user_id=user_id,
+            )
+            logger.info(
+                f"AI Generation completed in {time.time() - generation_start:.2f}s"
+            )
+
+            # this is the response data that is sent to user
+            response_data = {
+                "conversation_id": conversation_id,
+                "user_input": prompt,
+                "generation": response["generation"],
+                "translations": response.get("translations", []),
+            }
+
+            logger.info(
+                f"Total request processing time: {time.time() - start_time:.2f}s"
+            )
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            logger.error(f"Error processing request: {str(e)}")
+            return Response(
+                {"error": f"Request processing failed: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+        finally:
+            if db is not None:
+                self.close_db()
+
+    def get(self, request):
+        db = None
+        try:
+            # Get conversation_id from query params
+            conversation_id = request.query_params.get("conversation_id")
+            if not conversation_id:
+                return Response(
+                    {"error": "conversation_id is required"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Connect to MongoDB and get conversation history
+            db = self.get_db()
+            conversation = db.conversations.find_one({"session_id": conversation_id})
+
+            if not conversation:
+                return Response(
+                    {"error": "Conversation not found"},
+                    status=status.HTTP_404_NOT_FOUND,
+                )
+
+            # for our response data we have the updated_at
+            response_data = {
+                "conversation_id": conversation_id,
+                "messages": conversation.get("messages", []),
+                "translations": conversation.get("translations", []),
+                "user_id": conversation.get("user_id"),
+                "updated_at": conversation.get("updated_at"),
+            }
+
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            logger.error(f"Error retrieving conversation history: {str(e)}")
+            return Response(
+                {"error": f"Failed to retrieve conversation history: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+        finally:
+            if db is not None:
+                self.close_db()
 
 
 class CompleteConversationsView(MongoDBMixin, APIView):
