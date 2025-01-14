@@ -1018,23 +1018,6 @@ def generate_prompt_conversation(
         # compare_memory(memory_snapshot)
         gc.collect()
 
-'''this is the new function i will be using, it is a smarter version of prompt_conversation, the goal of this is to be able to take a 
-prompt from a user, and create a conversation ID that will be saved to mongoDB  with the correct format for the history of the conversation, when a second question is asked with 
-the same conversation ID, it will be appended to the conversation saved on mongodb, and then when we send the user's prompt to the OpenAI API it will be with prompt and the history 
-we have built, for now i will create a prompt_conversation_smart function to build this logic,
-
-The logic for the response is conversation_id = [
-interactions = [
-  messages=[ 
-{"role": "system", "content": "You are a helpful assistant."},
-{"role": "user", "content": "message 1 content."},
-{"role": "assistant", "content": "message 2 content"},
-{"role": "user", "content": "message 3 content"},
-{"role": "assistant", "content": "message 4 content."},
-{"role": "user", "content": "message 5 content."}
- ],
-)
-'''
 
 def prompt_conversation_history(user_prompt, conversation_id, admin_id, agent_id, user_id):
     logger.info("Starting prompt_conversation_history request")
