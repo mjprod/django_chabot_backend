@@ -581,6 +581,7 @@ rag_prompt_template = ChatPromptTemplate.from_messages(
 # Initialize LLM for RAG Chain
 rag_llm = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
 
+
 # Define Formatting Function
 def format_docs(docs):
     return "\n".join(doc.page_content for doc in docs)
@@ -1025,7 +1026,7 @@ def prompt_conversation_history(user_prompt, conversation_id, admin_id, agent_id
     try:
         # get our connection with MongoDB
         db = get_mongodb_client()
-        
+
         # make sure we have an existing conversation, if not, we will create a new one
         existing_conversation = db.conversations.find_one(
             {"session_id": conversation_id}
@@ -1039,7 +1040,7 @@ def prompt_conversation_history(user_prompt, conversation_id, admin_id, agent_id
             messages = [
                 {"role": "system", "content": FIRST_MESSAGE_PROMPT}
             ]
-            
+
         # Add our new message with the role of user and the content of the user prompt
         messages.append({
             "role": "user",
@@ -1050,7 +1051,7 @@ def prompt_conversation_history(user_prompt, conversation_id, admin_id, agent_id
         # this is the same as before, no changes here
         docs_retrieve = retriever.invoke(user_prompt)[:3]
         docs_to_use = []
-        
+
         # Filter documents same as before with confidence score
         for doc in docs_retrieve:
             relevance_score = retrieval_grader.invoke(
