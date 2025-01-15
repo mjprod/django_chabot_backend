@@ -1,11 +1,15 @@
 from ..chatbot import (
     generate_prompt_conversation,
     prompt_conversation_history,
+    translate_and_clean,
 )
 from ..serializers import (
     CompleteConversationsSerializer,
     PromptConversationSerializer,
     PromptConversationHistorySerializer,
+)
+from ai_config.ai_prompts import (
+    FIRST_MESSAGE_PROMPT,
 )
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -122,7 +126,7 @@ def parse_to_json(data):
     return parsed_data
 
 # Search and translate the top correct answer
-def search_top_answer_and_translate(self,query, collection_name="feedback_data"):
+def search_top_answer_and_translate(self,query,conversation_id, collection_name="feedback_data"):
     db = self.get_db()
     collection = db[collection_name]
     print(f"Searching for: '{query}' in collection '{collection_name}'")
@@ -138,31 +142,90 @@ def search_top_answer_and_translate(self,query, collection_name="feedback_data")
                 "correct_answer": 1 ,
                 "conversation_id": 1,
                 "user_input": 1,
-                "metadata": 1, # Ensure the `correct_answer` field is included
+                "metadata": 1,
+                "timestamp": 1,
             }
         ).sort("score", {"$meta": "textScore"})  # Sort by relevance
 
         results_list = list(results)
         if results_list:
-            top_result = results_list[0]  # Select the result with the highest scor
-           
-             # Safely retrieve keys with .get() to avoid KeyErrors
-            correct_answer = top_result.get("correct_answer")
-            confidence = top_result.get("score", 0)
-            conversation_id = top_result.get("conversation_id", "unknown-conversation")
-            user_input = top_result.get("user_input", query)
-            metadata = top_result.get("metadata", {})
 
-            # Return the top answer and confidence score
-            return {
-                "correct_answer": correct_answer,
-                "conversation_id": conversation_id,
-                "user_input": user_input,
-                "generation": correct_answer,
-                "confidence": confidence,
-                "translations": metadata.get("translations", []),
-            }
+            # Sort results by timestamp
+            sorted_results = sorted(results_list, key=lambda x: x.get('timestamp', 0), reverse=True)
+
+            # Filter results with score > 0.7
+            filtered_results = [doc for doc in sorted_results if doc.get("score", 0) > 0.7]
+            # Check if filtered_results is empty
+            
+            if filtered_results:
+                top_result = filtered_results[0]
+           
+                # Safely retrieve keys with .get() to avoid KeyErrors
+                correct_answer = top_result.get("correct_answer")
+                confidence = top_result.get("score", 0)
+                conversation_id = conversation_id
+                user_input = top_result.get("user_input", query)
+                metadata = top_result.get("metadata", {})
         
+                if isinstance(metadata, list):
+                    translations = metadata  # Use the list directly if it's already structured
+                else:
+                    translations = [] 
+
+                # make sure we have an existing conversation, if not, we will create a new one
+                existing_conversation = db.conversations.find_one(
+                    {"session_id": conversation_id}
+                )
+
+                if existing_conversation:
+                    # Load existing conversation and get the messages list
+                    messages = existing_conversation.get("messages", [])
+                else:
+                    # Create new conversation with system prompt
+                    messages = [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
+
+                # Add our new message with the role of user and the content of the user prompt
+                messages.append(
+                    {
+                        "role": "user",
+                        "content": query,
+                        "timestamp": datetime.now().isoformat(),
+                    }
+                )
+                
+                # Prepare our conversation as before but without is_first_message
+                conversation = {
+                    "session_id": conversation_id,
+                    "admin_id": "admin_id",
+                    "agent_id": "agent_id",
+                    "user_id": "user_id",
+                    "messages": messages,
+                    "translations": translations,
+                    "updated_at": datetime.now().isoformat(),
+                }
+
+                # Upsert conversation to MongoDB
+                db.conversations.update_one(
+                    {"session_id": conversation_id}, {"$set": conversation}, upsert=True
+                )    
+        
+                # Return the top answer and confidence score
+                return {
+                    "correct_answer": correct_answer,
+                    "conversation_id": conversation_id,
+                    "user_input": user_input,
+                    "generation": correct_answer,
+                    "confidence": confidence,
+                    "translations": translations,
+                }
+            else:
+                # Handle case when no results match the criteria
+                print("No results found with a score > 0.7.")
+                return {
+                    "correct_answer": None,
+                    "confidence": 0,
+                    "message": "No related correct answers found."
+            }
         else:
             print("No related correct answers found.")
             return {
@@ -170,8 +233,13 @@ def search_top_answer_and_translate(self,query, collection_name="feedback_data")
                 "confidence": 0,
                 "message": "No related correct answers found."
             }
+            
     except Exception as e:
         print(f"Error fetching highest confidence answer: {e}")
+    finally:
+        # Cleanup database connection
+        if db is not None:
+            self.close_db()
 
 """
 this is the new View for the prompt_conversation_history,
@@ -185,6 +253,7 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
     def post(self, request):
         db = None
         try:
+            # db = self.get_db()
             # Log start of request processing
             logger.info("Starting prompt_conversation_history request")
             start_time = time.time()
@@ -203,7 +272,7 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
             user_id = serializer.validated_data["user_id"]
 
              # Search for the answer on mongo db
-            response = search_top_answer_and_translate(self,prompt)
+            response = search_top_answer_and_translate(self,prompt,conversation_id)
             if response["correct_answer"]:
                 time.sleep(6)
                 return Response(response, status=status.HTTP_200_OK)
@@ -212,7 +281,7 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
             generation_start = time.time()
             logger.info("Starting AI answer generation")
             response = prompt_conversation_history(
-                user_prompt=prompt,
+                user_prompt=translate_and_clean(prompt),
                 conversation_id=conversation_id,
                 admin_id="",
                 agent_id="",
@@ -241,9 +310,9 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
                 {"error": f"Request processing failed: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-        finally:
-            if db is not None:
-                self.close_db()
+        # finally:
+            # if db is not None:
+                #self.close_db()
 
     def get(self, request):
         db = None

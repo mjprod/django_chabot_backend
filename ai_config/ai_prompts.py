@@ -145,12 +145,13 @@ PROHIBITED:
 TRANSLATION_AND_CLEAN_PROMPT = """
 	1.	If the input is in a language other than English:
 	•	Translate it into clear and simple, formal English.
-  • It will be translated into Simplified Chinese and Malay Bahasa.
+  • Use always English as the target language.
+  • Make the English easy cause it will be translated.
 	•	Preserve proper nouns, numbers, and technical terms.
 	•	Provide only the translated text without any prefixes or explanations.
 	2.	If the input is in English:
 	•	Remove filler words and informal language.
-  • Make the English easy cause it will be translated into Simplified Chinese and Malay Bahasa.
+  • Make the English easy cause it will be translated.
 	•	Standardize terminology.
 	•	Maintain the original intent of the question.
 	•	Provide only the cleaned text.
