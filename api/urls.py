@@ -7,7 +7,7 @@ from .views.conversation_with_db_view import PromptConversationWithDBView
 from .views.conversation_view import (
     CompleteConversationsView,
     PromptConversationView,
-    # PromptConversationHistoryView,
+    PromptConversationHistoryView,
 )
 from .views.feedback_view import (
     CaptureFeedbackView,
