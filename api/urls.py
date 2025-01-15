@@ -11,7 +11,7 @@ from .views.conversation_view import (
 )
 from .views.feedback_view import (
     CaptureFeedbackView,
-    CaptureFeedbackMultiView,
+    # CaptureFeedbackMultiView,
 )
 from .views.user_input_view import (
     UserInputView,
