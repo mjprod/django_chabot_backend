@@ -120,7 +120,7 @@ class CaptureFeedbackSerializer(serializers.Serializer):
     ai_response = serializers.CharField(max_length=2000)
     correct_bool = serializers.BooleanField()
     chat_rating = serializers.IntegerField(min_value=0, max_value=6)
-    language = serializers.CharField(max_length=10)
+    # language = serializers.CharField(max_length=10)
     correct_answer = serializers.CharField(
         max_length=2000, required=False, allow_blank=True
     )
