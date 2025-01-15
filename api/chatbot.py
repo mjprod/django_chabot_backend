@@ -581,7 +581,6 @@ rag_prompt_template = ChatPromptTemplate.from_messages(
 # Initialize LLM for RAG Chain
 rag_llm = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
 
-
 # Define Formatting Function
 def format_docs(docs):
     return "\n".join(doc.page_content for doc in docs)
@@ -716,8 +715,6 @@ def update_database_confidence(comparison_result, docs_to_use):
 
 
 # async for translations
-
-
 async def generate_translations(generation):
     try:
         logger.info(f"Starting translations for: {generation}")
@@ -1018,7 +1015,6 @@ def generate_prompt_conversation(
     finally:
         # compare_memory(memory_snapshot)
         gc.collect()
-
 
 def prompt_conversation_history(
     user_prompt, conversation_id, admin_id, agent_id, user_id

@@ -2,13 +2,16 @@ from django.urls import path
 from django.views.decorators.cache import cache_page
 
 # Import views from conversation_view, feedback_view, and user_input_view
+from .views.conversation_view import CompleteConversationsView, PromptConversationView
+from .views.conversation_with_db_view import PromptConversationWithDBView
 from .views.conversation_view import (
     CompleteConversationsView,
     PromptConversationView,
-    PromptConversationHistoryView,
+    # PromptConversationHistoryView,
 )
 from .views.feedback_view import (
     CaptureFeedbackView,
+    CaptureFeedbackMultiView,
 )
 from .views.user_input_view import (
     UserInputView,
@@ -24,6 +27,13 @@ urlpatterns = [
         PromptConversationView.as_view(),
         name="prompt_conversation",
     ),
+    # Route to start a conversation with mongo db
+    path(
+        "prompt_conversation_with_db/",
+        PromptConversationWithDBView.
+        as_view(),
+        name="prompt_conversation_with_db",
+    ),
     path(
         "prompt_conversation_history/",
         PromptConversationHistoryView.as_view(),
@@ -37,4 +47,6 @@ urlpatterns = [
     ),
     # Route for capturing feedback
     path("capture_feedback/", CaptureFeedbackView.as_view(), name="capture_feedback"),
+     # Route for capturing feedback
+    # path("capture_feedback_multi/", CaptureFeedbackMultiView.as_view(), name="capture_feedback_multi"),
 ]

@@ -143,15 +143,18 @@ PROHIBITED:
 
 # Translation Prompt for Query Optimization
 TRANSLATION_AND_CLEAN_PROMPT = """
-1. If the input is in a language other than English:
-Translate it into clear, formal English.
-Preserve proper nouns, numbers, and technical terms.
-Provide only the translated text without any prefixes or explanations.
-2. If the input is in English:
-Remove filler words and informal language.
-Standardize terminology.
-Maintain the original intent of the question.
-Provide only the cleaned text.
+	1.	If the input is in a language other than English:
+	•	Translate it into clear and simple, formal English.
+  • Use always English as the target language.
+  • Make the English easy cause it will be translated.
+	•	Preserve proper nouns, numbers, and technical terms.
+	•	Provide only the translated text without any prefixes or explanations.
+	2.	If the input is in English:
+	•	Remove filler words and informal language.
+  • Make the English easy cause it will be translated.
+	•	Standardize terminology.
+	•	Maintain the original intent of the question.
+	•	Provide only the cleaned text.
 
 Prohibited Actions:
 Do not add explanations or additional context.

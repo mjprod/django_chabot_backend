@@ -74,13 +74,22 @@ def search_top_answer_and_translate(query, collection_name="feedback_data"):
             {"$text": {"$search": query}},  # Search in the existing text index
             {
                 "score": {"$meta": "textScore"},  # Include relevance score
-                "correct_answer": 1,  # Ensure the `correct_answer` field is included
+                "correct_answer": 1,
+                "timestamp":1,  # Ensure the `correct_answer` field is included
             },
         ).sort(
             "score", {"$meta": "textScore"}
         )  # Sort by relevance
 
         results_list = list(results)
+
+        sorted_results = sorted(results_list, key=lambda x: (x['timestamp']), reverse=True)
+
+        best_result = sorted_results[0]
+
+        print(Fore.RED + str(best_result) + Style.RESET_ALL)
+
+        '''
         if results_list:
             top_result = results_list[0]  # Select the result with the highest score
             correct_answer = top_result["correct_answer"]
@@ -103,6 +112,7 @@ def search_top_answer_and_translate(query, collection_name="feedback_data"):
                 )
         else:
             print(Fore.RED + "No related correct answers found." + Style.RESET_ALL)
+            '''
     except Exception as e:
         print(f"Error fetching highest confidence answer: {e}")
 
@@ -110,15 +120,9 @@ def search_top_answer_and_translate(query, collection_name="feedback_data"):
 # Define test queries
 queries = [
     "who is Glauco?",
-    "what do you know about Glauco?",
-    "is Glauco a person or a deity?",
-    "tell me about Glauco in mythology.",
-    "can you explain the myth of Glauco?",
-    "can you explain the myth of Galuco?",
-    "How can I get my money refund?",
-    "How can I get my money back?",
-    "How can I get a money?",
-    "How can I optimize your query!",
+    "bagaimana kabar glauco?",
+    "格劳科怎么样？",   
+    "who is KAKO?",
 ]
 
 # Iterate over queries and search for answers for each one
