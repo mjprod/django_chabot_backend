@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from ..mixins.mongodb_mixin import MongoDBMixin
 from ..serializers import CaptureFeedbackSerializer
-from concurrent.futures import ThreadPoolExecutor
+# from concurrent.futures import ThreadPoolExecutor
 
 from ..chatbot import (
     translate_and_clean,
@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 # TODO: Implement confidence score for feedback
 class CaptureFeedbackView(MongoDBMixin, APIView):
-    async def post(self, request):
+    def post(self, request):
         start_time = time.time()
         logger.info("Starting feedback POST request")
         try:
@@ -171,7 +171,7 @@ class CaptureFeedbackMultiView(MongoDBMixin, APIView):
                 "ai_response": request.data.get("generation", ""),
                 "correct_bool": request.data.get("correct_bool", False),
                 "chat_rating": request.data.get("chat_rating", 0),
-                "correct_answer": request.data.get("correct_answer", ""),
+                "corre ct_answer": request.data.get("correct_answer", ""),
                 "language": request.data.get("language", ""),
                 "metadata": {
                     **request.data.get("metadata", {}),
