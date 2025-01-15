@@ -89,6 +89,9 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
                     {"error": f"Database operation failed: {str(db_error)}"},
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 )
+            finally:
+                if db is not None:
+                    self.close_db()
 
             total_time = time.time() - start_time
             logger.info(f"Total request processing time: {total_time:.2f}s")
