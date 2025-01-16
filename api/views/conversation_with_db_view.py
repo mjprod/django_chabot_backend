@@ -1,4 +1,3 @@
-
 from ..chatbot import (
     generate_prompt_conversation,
 )
@@ -23,6 +22,7 @@ logger = logging.getLogger(__name__)
 
 
 mongo_client = None
+
 
 # API functions
 def get_mongodb_client():
@@ -49,12 +49,13 @@ def parse_to_json(data):
         "translations": [
             {
                 "language": translation.get("language", ""),
-                "text": translation.get("text", "")
+                "text": translation.get("text", ""),
             }
             for translation in translations
-        ]
+        ],
     }
     return parsed_data
+
 
 # Search and translate the top correct answer
 def search_top_answer_and_translate(query, collection_name="feedback_data"):
@@ -65,23 +66,25 @@ def search_top_answer_and_translate(query, collection_name="feedback_data"):
         # Use the existing text index (on user_input)
         results = collection.find(
             {
-                "$text": {"$search": query} ,  # Search in the existing text index
+                "$text": {"$search": query},  # Search in the existing text index
                 #  # Search in the existing text index
             },
             {
                 "score": {"$meta": "textScore"},  # Include relevance score
-                "correct_answer": 1 ,
+                "correct_answer": 1,
                 "conversation_id": 1,
                 "user_input": 1,
-                "metadata": 1, # Ensure the `correct_answer` field is included
-            }
-        ).sort("score", {"$meta": "textScore"})  # Sort by relevance
+                "metadata": 1,  # Ensure the `correct_answer` field is included
+            },
+        ).sort(
+            "score", {"$meta": "textScore"}
+        )  # Sort by relevance
 
         results_list = list(results)
         if results_list:
             top_result = results_list[0]  # Select the result with the highest scor
-           
-             # Safely retrieve keys with .get() to avoid KeyErrors
+
+            # Safely retrieve keys with .get() to avoid KeyErrors
             correct_answer = top_result.get("correct_answer")
             confidence = top_result.get("score", 0)
             conversation_id = top_result.get("conversation_id", "unknown-conversation")
@@ -97,16 +100,17 @@ def search_top_answer_and_translate(query, collection_name="feedback_data"):
                 "confidence": confidence,
                 "translations": metadata.get("translations", []),
             }
-        
+
         else:
             print("No related correct answers found.")
             return {
                 "correct_answer": None,
                 "confidence": 0,
-                "message": "No related correct answers found."
+                "message": "No related correct answers found.",
             }
     except Exception as e:
         print(f"Error fetching highest confidence answer: {e}")
+
 
 # new api for start conversation
 class PromptConversationWithDBView(MongoDBMixin, APIView):
@@ -130,13 +134,11 @@ class PromptConversationWithDBView(MongoDBMixin, APIView):
             conversation_id = serializer.validated_data["conversation_id"]
             user_id = serializer.validated_data["user_id"]
 
-
             # Search for the answer on mongo db
             response = search_top_answer_and_translate(prompt)
             if response["correct_answer"]:
                 time.sleep(6)
                 return Response(response, status=status.HTTP_200_OK)
-
 
             # Generate AI response with timing
             generation_start = time.time()
