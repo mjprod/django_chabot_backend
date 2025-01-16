@@ -45,7 +45,7 @@ def rank_topics(data, num_clusters=3):
     kmeans.fit(tfidf_matrix)
 
     clusters = kmeans.labels_
-    #terms = vectorizer.get_feature_names_out()
+    # terms = vectorizer.get_feature_names_out()
 
     # Identificar os principais termos por cluster
     clustered_data = {}

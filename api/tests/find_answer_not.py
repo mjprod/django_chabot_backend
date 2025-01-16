@@ -75,7 +75,7 @@ def search_top_answer_and_translate(query, collection_name="feedback_data"):
             {
                 "score": {"$meta": "textScore"},  # Include relevance score
                 "correct_answer": 1,
-                "timestamp":1,  # Ensure the `correct_answer` field is included
+                "timestamp": 1,  # Ensure the `correct_answer` field is included
             },
         ).sort(
             "score", {"$meta": "textScore"}
@@ -83,13 +83,15 @@ def search_top_answer_and_translate(query, collection_name="feedback_data"):
 
         results_list = list(results)
 
-        sorted_results = sorted(results_list, key=lambda x: (x['timestamp']), reverse=True)
+        sorted_results = sorted(
+            results_list, key=lambda x: (x["timestamp"]), reverse=True
+        )
 
         best_result = sorted_results[0]
 
         print(Fore.RED + str(best_result) + Style.RESET_ALL)
 
-        '''
+        """
         if results_list:
             top_result = results_list[0]  # Select the result with the highest score
             correct_answer = top_result["correct_answer"]
@@ -112,7 +114,7 @@ def search_top_answer_and_translate(query, collection_name="feedback_data"):
                 )
         else:
             print(Fore.RED + "No related correct answers found." + Style.RESET_ALL)
-            '''
+            """
     except Exception as e:
         print(f"Error fetching highest confidence answer: {e}")
 
@@ -121,7 +123,7 @@ def search_top_answer_and_translate(query, collection_name="feedback_data"):
 queries = [
     "who is Glauco?",
     "bagaimana kabar glauco?",
-    "格劳科怎么样？",   
+    "格劳科怎么样？",
     "who is KAKO?",
 ]
 
