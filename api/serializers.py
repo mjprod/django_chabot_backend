@@ -122,12 +122,11 @@ class CaptureFeedbackSerializer(serializers.Serializer):
     correct_bool = serializers.BooleanField()
     chat_rating = serializers.IntegerField(min_value=0, max_value=6)
     language = serializers.CharField(max_length=10, required=False, allow_blank=True)
+    correct_question = serializers.CharField(
+        max_length=1000, required=False, allow_blank=True
+    )
     correct_answer = serializers.CharField(
         max_length=2000, required=False, allow_blank=True
     )
     metadata = serializers.DictField(required=False)
-
-    def validate_metadata(self, value):
-        if len(str(value)) > 2000:
-            raise serializers.ValidationError("Metadata field is too large")
-        return value
+    
