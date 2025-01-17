@@ -70,6 +70,7 @@ class PromptConversationHistorySerializer(serializers.Serializer):
     prompt = serializers.CharField(max_length=1000, required=True)
     conversation_id = serializers.CharField(max_length=100, required=True)
     user_id = serializers.CharField(max_length=100, required=True)
+    use_mongo = serializers.BooleanField(default=True, required=False)
 
 
 class MessageDataSerializer(serializers.Serializer):
