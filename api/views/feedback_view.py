@@ -170,7 +170,7 @@ class CaptureFeedbackMultiView(MongoDBMixin, APIView):
             # Transform incoming data to match serializer format
             transformed_data = {
                 "conversation_id": request.data.get("conversation_id", ""),
-                "user_input": request.data.get("prompt", ""),
+                "user_input": request.data.get("correct_question", ""),
                 "ai_response": request.data.get("generation", ""),
                 "correct_bool": request.data.get("correct_bool", False),
                 "chat_rating": request.data.get("chat_rating", 0),
