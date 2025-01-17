@@ -191,7 +191,7 @@ def search_top_answer_and_translate(
 
             # Filter results with score > 0.7
             filtered_results = [
-                doc for doc in sorted_results if doc.get("score", 0) > 0.7
+                doc for doc in sorted_results if doc.get("score", 0) > 0.5
             ]
             # Check if filtered_results is empty
 
@@ -296,6 +296,7 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
     def post(self, request):
         db = None
         try:
+
             # db = self.get_db()
             # Log start of request processing
             logger.info("Starting prompt_conversation_history request")
@@ -313,14 +314,21 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
             prompt = serializer.validated_data["prompt"]
             conversation_id = serializer.validated_data["conversation_id"]
             user_id = serializer.validated_data["user_id"]
-
-            # Search for the answer on mongo db
-            response = search_top_answer_and_translate(self, prompt, conversation_id)
-            if response["correct_answer"]:
-                time.sleep(6)
-                return Response(response, status=status.HTTP_200_OK)
+            use_mongo = serializer.validated_data["use_mongo"]
+        
+            
+            if use_mongo:
+                print("Using Mongo DB")
+                # Search for the answer on mongo db
+                response = search_top_answer_and_translate(self, prompt, conversation_id)
+                if response["correct_answer"]:
+                    print("Correct answer found in Mongo DB")
+                    time.sleep(6)
+                    return Response(response, status=status.HTTP_200_OK)
+                
 
             # Generate AI response with timing
+
             generation_start = time.time()
             logger.info("Starting AI answer generation")
             response = prompt_conversation_history(
