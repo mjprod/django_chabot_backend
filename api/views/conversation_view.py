@@ -191,7 +191,7 @@ def search_top_answer_and_translate(
 
             # Filter results with score > 0.7
             filtered_results = [
-                doc for doc in sorted_results if doc.get("score", 0) > 0.7
+                doc for doc in sorted_results if doc.get("score", 0) > 0.5
             ]
             # Check if filtered_results is empty
 
