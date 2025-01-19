@@ -440,7 +440,8 @@ class ConversationMetaData:
                             "language": "ms_MY",
                             "text": malay_translation.get("text", ""),
                         },
-                        {"language": "cn", "text": chinese_translation.get("text", "")},
+                        {"language": "zh_CN", "text": chinese_translation.get("text", "")},
+                        {"language": "zh_TW", "text": chinese_translation.get("text", "")},
                     ],
                 }
             )
@@ -737,8 +738,9 @@ async def generate_translations(generation):
             # Return structured translations
             output = [
                 {"language": "en", "text": generation},
-                {"language": "ms_MY", "text": translations[0].get("text", "")},
-                {"language": "cn", "text": translations[1].get("text", "")},
+                {"language": "ms-MY", "text": translations[0].get("text", "")},
+                {"language": "zh_CN", "text": translations[1].get("text", "")},
+                {"language": "zh_TW", "text": translations[1].get("text", "")},
             ]
 
             logger.info(f"Final output: {output}")
