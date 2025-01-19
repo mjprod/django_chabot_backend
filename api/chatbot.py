@@ -408,6 +408,7 @@ class Message:
         self.content = content
         self.timestamp = timestamp or datetime.now().isoformat()
 
+
 # TODO: add new language translations here
 # added Conversation class here that created our session specific information
 class ConversationMetaData:

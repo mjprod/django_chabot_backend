@@ -129,4 +129,3 @@ class CaptureFeedbackSerializer(serializers.Serializer):
         max_length=2000, required=False, allow_blank=True
     )
     metadata = serializers.DictField(required=False)
-    

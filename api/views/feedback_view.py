@@ -15,9 +15,7 @@ from ..chatbot import (
     generate_translations,
 )
 
-from ai_config.ai_constants import (
-    LANGUAGE_DEFAULT
-)
+from ai_config.ai_constants import LANGUAGE_DEFAULT
 
 # Initialize logger
 logger = logging.getLogger(__name__)

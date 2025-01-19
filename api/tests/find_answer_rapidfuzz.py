@@ -6,7 +6,7 @@ from rapidfuzz import fuzz
 # MongoDB Configuration
 MONGODB_USERNAME = "dev"
 MONGODB_PASSWORD = "Yrr0szjwTuE1BU7Y"
-MONGODB_CLUSTER = "chatbotdb-dev.0bcs2.mongodb.net" 
+MONGODB_CLUSTER = "chatbotdb-dev.0bcs2.mongodb.net"
 MONGODB_DATABASE = "chatbotdb"
 
 # Connect to MongoDB
@@ -59,8 +59,9 @@ def fuzzy_match(query, collection_name="feedback_data", threshold=60):
 
     return matches
 
+    # Define test queries
 
-        # Define test queries
+
 queries = [
     "你们这边接受什么存款方式？",
     "有什么存款支付选项我可以选？",
@@ -75,6 +76,8 @@ for query in queries:
     if results:
         print(f"\nTop Matches for Query: '{query}':")
         for result in results[:3]:  # Print top 3 matches
-            print(f"Similarity: {result['similarity']}% | Question: {result['user_input']} | Answer: {result['correct_answer']}")
+            print(
+                f"Similarity: {result['similarity']}% | Question: {result['user_input']} | Answer: {result['correct_answer']}"
+            )
     else:
         print(f"No relevant matches found for query: '{query}'.")

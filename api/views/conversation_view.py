@@ -306,7 +306,7 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
             logger.info("Starting prompt_conversation_history request")
             start_time = time.time()
 
-             # Get the header value as a string
+            # Get the header value as a string
             use_mongo_str = request.headers.get("Use-Mongo", "false")
 
             # Language
@@ -327,16 +327,17 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
             prompt = serializer.validated_data["prompt"]
             conversation_id = serializer.validated_data["conversation_id"]
             user_id = serializer.validated_data["user_id"]
-        
+
             if use_mongo:
                 print("Using Mongo DB")
                 # Search for the answer on mongo db
-                response = search_top_answer_and_translate(self, prompt, conversation_id)
+                response = search_top_answer_and_translate(
+                    self, prompt, conversation_id
+                )
                 if response["correct_answer"]:
                     print("Correct answer found in Mongo DB")
                     time.sleep(6)
                     return Response(response, status=status.HTTP_200_OK)
-                
 
             # Generate AI response with timing
 
