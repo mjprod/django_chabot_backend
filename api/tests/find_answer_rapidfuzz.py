@@ -1,5 +1,4 @@
 from pymongo import MongoClient
-from colorama import Fore, Style
 from rapidfuzz import fuzz
 
 
