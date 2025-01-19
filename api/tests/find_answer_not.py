@@ -46,7 +46,7 @@ def translate_correct_answer(correct_answer):
     translations = {}
     try:
         # Translate to Malay
-        translations["ms-MY"] = translator.translate(
+        translations["ms_MY"] = translator.translate(
             correct_answer, src="en", dest="ms"
         ).text
 

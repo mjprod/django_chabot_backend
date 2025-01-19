@@ -2,7 +2,6 @@ from django.urls import path
 from django.views.decorators.cache import cache_page
 
 # Import views from conversation_view, feedback_view, and user_input_view
-from .views.conversation_view import CompleteConversationsView, PromptConversationView
 from .views.conversation_with_db_view import PromptConversationWithDBView
 from .views.conversation_view import (
     CompleteConversationsView,
