@@ -1,3 +1,12 @@
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+import logging
+from datetime import datetime
+from ..mixins.mongodb_mixin import MongoDBMixin
+import time
+
 from ..chatbot import (
     generate_prompt_conversation,
     prompt_conversation_history,
@@ -11,14 +20,9 @@ from ..serializers import (
 from ai_config.ai_prompts import (
     FIRST_MESSAGE_PROMPT,
 )
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-
-import logging
-from datetime import datetime
-from ..mixins.mongodb_mixin import MongoDBMixin
-import time
+from ai_config.ai_constants import (
+    LANGUAGE_DEFAULT,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -140,7 +144,7 @@ def search_top_answer_and_translate(
     indexes = collection.index_information()
 
     # Check if there's an existing text index
-    for index_name, index_data in indexes.items():
+    for index_data in indexes.items():
         if index_data.get("key") == [("user_input", "text")]:
             index_exists = True
             break
@@ -302,6 +306,15 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
             logger.info("Starting prompt_conversation_history request")
             start_time = time.time()
 
+             # Get the header value as a string
+            use_mongo_str = request.headers.get("Use-Mongo", "false")
+
+            # Language
+            language = request.GET.get("language", LANGUAGE_DEFAULT)
+            print("Using Mongo DB" + language)
+            # Convert string to boolean
+            use_mongo = use_mongo_str.lower() in ("true", "1", "yes")
+
             # Validate input data
             serializer = PromptConversationHistorySerializer(data=request.data)
             if not serializer.is_valid():
@@ -314,9 +327,7 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
             prompt = serializer.validated_data["prompt"]
             conversation_id = serializer.validated_data["conversation_id"]
             user_id = serializer.validated_data["user_id"]
-            use_mongo = serializer.validated_data["use_mongo"]
         
-            
             if use_mongo:
                 print("Using Mongo DB")
                 # Search for the answer on mongo db

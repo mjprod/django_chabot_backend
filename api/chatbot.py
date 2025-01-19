@@ -408,7 +408,7 @@ class Message:
         self.content = content
         self.timestamp = timestamp or datetime.now().isoformat()
 
-
+# TODO: add new language translations here
 # added Conversation class here that created our session specific information
 class ConversationMetaData:
     def __init__(self, session_id, user_id, agent_id, admin_id, timestamp=None):
@@ -437,7 +437,7 @@ class ConversationMetaData:
                     "translations": [
                         {"language": "en", "text": content},
                         {
-                            "language": "ms-MY",
+                            "language": "ms_MY",
                             "text": malay_translation.get("text", ""),
                         },
                         {"language": "cn", "text": chinese_translation.get("text", "")},
@@ -737,7 +737,7 @@ async def generate_translations(generation):
             # Return structured translations
             output = [
                 {"language": "en", "text": generation},
-                {"language": "ms-MY", "text": translations[0].get("text", "")},
+                {"language": "ms_MY", "text": translations[0].get("text", "")},
                 {"language": "cn", "text": translations[1].get("text", "")},
             ]
 

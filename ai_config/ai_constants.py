@@ -37,3 +37,6 @@ MMR_LAMBDA_MULT = 0.8
 
 # URL we send the payload to for translation
 URL_TRANSLATE_EN_TO_MS = "https://api.mesolitica.com/translation"
+
+# Language Default
+LANGUAGE_DEFAULT = "en"

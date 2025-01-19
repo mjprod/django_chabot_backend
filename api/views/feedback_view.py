@@ -12,9 +12,11 @@ from concurrent.futures import ThreadPoolExecutor
 
 from ..chatbot import (
     translate_and_clean,
-    # translate_en_to_cn,
-    # translate_en_to_ms,
     generate_translations,
+)
+
+from ai_config.ai_constants import (
+    LANGUAGE_DEFAULT
 )
 
 # Initialize logger
@@ -166,11 +168,18 @@ class CaptureFeedbackMultiView(MongoDBMixin, APIView):
     def post(self, request):
         start_time = time.time()
         logger.info("Starting feedback POST request")
+
+        # Language
+        language = request.GET.get("language", LANGUAGE_DEFAULT)
+
+        # Debug: print the boolean value
+        print(f"Use MongoDB: {language}")
+
         try:
             # Transform incoming data to match serializer format
             transformed_data = {
                 "conversation_id": request.data.get("conversation_id", ""),
-                "user_input": request.data.get("correct_question", ""),
+                "user_input": request.data.get("prompt", ""),
                 "ai_response": request.data.get("generation", ""),
                 "correct_bool": request.data.get("correct_bool", False),
                 "chat_rating": request.data.get("chat_rating", 0),
@@ -219,7 +228,19 @@ class CaptureFeedbackMultiView(MongoDBMixin, APIView):
 
                 db_start = time.time()
                 logger.info("Starting MongoDB Write Operations")
-                db.feedback_data.insert_one(translated_data)
+
+                language_collections = {
+                    "en": "feedback_data_en",
+                    "ms_MY": "feedback_data_ms_MY",
+                    "zh_CN": "feedback_data_zh_CN",
+                    "zh_TW": "feedback_data_zh_TW",
+                }
+
+                collection_name = language_collections.get(language)
+                if not collection_name:
+                    raise ValueError(f"Unsupported language: {language}")
+
+                db[collection_name].insert_one(translated_data)
                 logger.info(
                     f"MongoDB operation completed in {time.time() - db_start:.2f}s"
                 )
