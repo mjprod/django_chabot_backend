@@ -441,8 +441,14 @@ class ConversationMetaData:
                             "language": "ms_MY",
                             "text": malay_translation.get("text", ""),
                         },
-                        {"language": "zh_CN", "text": chinese_translation.get("text", "")},
-                        {"language": "zh_TW", "text": chinese_translation.get("text", "")},
+                        {
+                            "language": "zh_CN",
+                            "text": chinese_translation.get("text", ""),
+                        },
+                        {
+                            "language": "zh_TW",
+                            "text": chinese_translation.get("text", ""),
+                        },
                     ],
                 }
             )
