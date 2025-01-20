@@ -11,11 +11,13 @@ from ..chatbot import (
     generate_prompt_conversation,
     prompt_conversation_history,
     translate_and_clean,
+    prompt_conversation_admin,
 )
 from ..serializers import (
     CompleteConversationsSerializer,
     PromptConversationSerializer,
     PromptConversationHistorySerializer,
+    PromptConversationAdminSerializer,
 )
 from ai_config.ai_prompts import (
     FIRST_MESSAGE_PROMPT,
@@ -359,6 +361,7 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
                 "conversation_id": conversation_id,
                 "user_input": prompt,
                 "generation": response["generation"],
+                "language": language,
                 "translations": response.get("translations", []),
             }
 
@@ -538,3 +541,57 @@ class CompleteConversationsView(MongoDBMixin, APIView):
             if db is not None:
                 self.close_db()
             # gc.collect()
+
+
+"""
+this is the new api for the prompt_conversation_admin,
+it will be used for AI chat with the admin panel
+"""
+
+
+class PromptConversationAdminView(MongoDBMixin, APIView):
+    def post(self, request):
+        start_time = time.time()
+        logger.info("Starting prompt_conversation_admin request")
+
+        try:
+            # Get language from query params or request data
+            language_code = request.GET.get("language", LANGUAGE_DEFAULT)
+            logger.info(f"Processing request for language: {language_code}")
+
+            # Validate input data
+            input_serializer = PromptConversationAdminSerializer(data=request.data)
+            if not input_serializer.is_valid():
+                logger.error(f"Validation failed: {input_serializer.errors}")
+                return Response(
+                    {"error": "Invalid input data", "details": input_serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Extract validated data
+            validated_data = input_serializer.validated_data
+
+            # Generate AI response
+            generation_start = time.time()
+            logger.info("Starting AI response generation")
+
+            response = prompt_conversation_admin(
+                user_prompt=validated_data["user_prompt"],
+                conversation_id=validated_data["conversation_id"],
+                admin_id=validated_data.get("admin_id", ""),
+                agent_id=validated_data.get("agent_id", ""),
+                user_id=validated_data["user_id"],
+                language_code=language_code,
+            )
+
+            # No need for separate response serializer
+            return Response(response, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            logger.error(
+                f"Error in prompt_conversation_admin view: {str(e)}", exc_info=True
+            )
+            return Response(
+                {"error": f"Request processing failed: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )

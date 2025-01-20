@@ -7,6 +7,7 @@ from .views.conversation_view import (
     CompleteConversationsView,
     PromptConversationView,
     PromptConversationHistoryView,
+    PromptConversationAdminView,
 )
 from .views.feedback_view import (
     CaptureFeedbackView,
@@ -50,5 +51,11 @@ urlpatterns = [
         "capture_feedback_multi/",
         CaptureFeedbackMultiView.as_view(),
         name="capture_feedback_multi",
+    ),
+    # Route for prompt_conversation_admin
+    path(
+        "prompt_conversation_admin/",
+        PromptConversationAdminView.as_view(),
+        name="prompt_conversation_admin",
     ),
 ]
