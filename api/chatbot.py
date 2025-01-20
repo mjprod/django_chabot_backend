@@ -412,11 +412,11 @@ class Message:
 # TODO: add new language translations here
 # added Conversation class here that created our session specific information
 class ConversationMetaData:
-    def __init__(self, session_id, user_id, agent_id, admin_id, timestamp=None):
+    def __init__(self, session_id, user_id, bot_id, admin_id, timestamp=None):
         self.session_id = session_id
         self.admin_id = admin_id
         self.user_id = user_id
-        self.agent_id = agent_id
+        self.bot_id = bot_id
         self.timestamp = timestamp or datetime.now().isoformat()
         self.messages = []
         self.translations = []
@@ -467,7 +467,7 @@ class ConversationMetaData:
             "session_id": self.session_id,
             "admin_id": self.admin_id,
             "user_id": self.user_id,
-            "agent_id": self.agent_id,
+            "bot_id": self.bot_id,
             "timestamp": self.timestamp,
             "messages": [
                 {"role": msg.role, "content": msg.content, "timestamp": msg.timestamp}
@@ -895,7 +895,7 @@ def generate_user_input(cleaned_prompt):
 
 
 def generate_prompt_conversation(
-    user_prompt, conversation_id, admin_id, agent_id, user_id
+    user_prompt, conversation_id, admin_id, bot_id, user_id
 ):
     # memory_snapshot = monitor_memory()
     # start_time = time.time()
@@ -913,7 +913,7 @@ def generate_prompt_conversation(
         conversation = ConversationMetaData(
             session_id=conversation_id,
             admin_id=admin_id,
-            agent_id=agent_id,
+            bot_id=bot_id,
             user_id=user_id,
         )
         conversation.is_first_message = is_first_message
@@ -1028,7 +1028,7 @@ def generate_prompt_conversation(
 
 
 def prompt_conversation_history(
-    user_prompt, conversation_id, admin_id, agent_id, user_id
+    user_prompt, conversation_id, admin_id, bot_id, user_id
 ):
     logger.info("Starting prompt_conversation_history request")
 
@@ -1096,7 +1096,7 @@ def prompt_conversation_history(
         conversation = {
             "session_id": conversation_id,
             "admin_id": admin_id,
-            "agent_id": agent_id,
+            "bot_id": bot_id,
             "user_id": user_id,
             "messages": messages,
             "translations": translations,

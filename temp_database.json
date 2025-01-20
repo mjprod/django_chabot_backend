@@ -4,7 +4,7 @@
       "session_id": "test_1",
       "admin_id": "",
       "user_id": "",
-      "agent_id": "",
+      "bot_id": "",
       "timestamp": "2024-12-19T23:45:22.164410",
       "messages": [
         {
@@ -190,7 +190,7 @@
           "sender": "bot",
           "user": "leo",
           "timestamp": "2024-12-06T01:28:38.761761+00:00",
-          "agent_id": "88"
+          "bot_id": "88"
         },
         {
           "text": "How are you today?\n",
@@ -203,7 +203,7 @@
           "sender": "bot",
           "user": "John Pereira",
           "timestamp": "2024-12-06T01:29:09.392392+00:00",
-          "agent_id": "88"
+          "bot_id": "88"
         }
       ],
       "timestamp": "2024-12-19T23:37:02.648866",
@@ -217,7 +217,7 @@
           "sender": "bot",
           "user": "leo",
           "timestamp": "2024-12-06T01:28:38.761761+00:00",
-          "agent_id": "88"
+          "bot_id": "88"
         },
         {
           "text": "How are you today?\n",
@@ -230,7 +230,7 @@
           "sender": "bot",
           "user": "John Pereira",
           "timestamp": "2024-12-06T01:29:09.392392+00:00",
-          "agent_id": "88"
+          "bot_id": "88"
         }
       ],
       "timestamp": "2024-12-19T23:45:40.702522",
