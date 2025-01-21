@@ -11,11 +11,13 @@ from ..chatbot import (
     generate_prompt_conversation,
     prompt_conversation_history,
     translate_and_clean,
+    prompt_conversation_admin,
 )
 from ..serializers import (
     CompleteConversationsSerializer,
     PromptConversationSerializer,
     PromptConversationHistorySerializer,
+    PromptConversationAdminSerializer,
 )
 from ai_config.ai_prompts import (
     FIRST_MESSAGE_PROMPT,
@@ -131,9 +133,7 @@ def parse_to_json(data):
 
 
 # Search and translate the top correct answer
-def search_top_answer_and_translate(
-    self, query, conversation_id, collection_name
-):
+def search_top_answer_and_translate(self, query, conversation_id, collection_name):
 
     db = self.get_db()
     collection = db[collection_name]
@@ -299,7 +299,6 @@ it will be able to find it and return that to the user
 
 class PromptConversationHistoryView(MongoDBMixin, APIView):
     def post(self, request):
-        db = None
         try:
 
             # db = self.get_db()
@@ -307,16 +306,17 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
             logger.info("Starting prompt_conversation_history request")
             start_time = time.time()
 
-             # Get the header value as a string
-            use_mongo_str = request.GET.get("use_mongo","0") # Default to "0" if not provided
+            # Get the header value as a string
+            use_mongo_str = request.GET.get(
+                "use_mongo", "0"
+            )  # Default to "0" if not provided
             use_mongo = use_mongo_str in ("1", "true", "yes")
-            print("Mongo: " + str(use_mongo))            
-            
+            print("Mongo: " + str(use_mongo))
+
             # Language
             language = request.GET.get("language", LANGUAGE_DEFAULT)
             print("Language " + language)
-            
-           
+
             # Validate input data
             serializer = PromptConversationHistorySerializer(data=request.data)
             if not serializer.is_valid():
@@ -329,22 +329,26 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
             prompt = serializer.validated_data["prompt"]
             conversation_id = serializer.validated_data["conversation_id"]
             user_id = serializer.validated_data["user_id"]
-        
+
             if use_mongo:
                 print("Using Mongo DB")
                 # Search for the answer on mongo db
-                response = search_top_answer_and_translate(self, prompt, conversation_id , collection_name="feedback_data_"+ language)
+                response = search_top_answer_and_translate(
+                    self,
+                    prompt,
+                    conversation_id,
+                    collection_name="feedback_data_" + language,
+                )
                 if response["correct_answer"]:
                     print("Correct answer found in Mongo DB")
                     time.sleep(6)
                     return Response(response, status=status.HTTP_200_OK)
-                
 
             # Generate AI response with timing
-
             generation_start = time.time()
             logger.info("Starting AI answer generation")
             response = prompt_conversation_history(
+                self,
                 user_prompt=translate_and_clean(prompt),
                 conversation_id=conversation_id,
                 admin_id="",
@@ -360,6 +364,7 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
                 "conversation_id": conversation_id,
                 "user_input": prompt,
                 "generation": response["generation"],
+                "language": language,
                 "translations": response.get("translations", []),
             }
 
@@ -539,3 +544,60 @@ class CompleteConversationsView(MongoDBMixin, APIView):
             if db is not None:
                 self.close_db()
             # gc.collect()
+
+
+"""
+this is the new api for the prompt_conversation_admin,
+it will be used for AI chat with the admin panel
+"""
+
+
+class PromptConversationAdminView(MongoDBMixin, APIView):
+    def post(self, request):
+        logger.info("Starting prompt_conversation_admin request")
+
+        try:
+            # Get language from query params or request data
+            language_code = request.GET.get("language", LANGUAGE_DEFAULT)
+            logger.info(f"Processing request for language: {language_code}")
+
+            # Validate input data
+            input_serializer = PromptConversationAdminSerializer(data=request.data)
+            if not input_serializer.is_valid():
+                logger.error(f"Validation failed: {input_serializer.errors}")
+                return Response(
+                    {"error": "Invalid input data", "details": input_serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Extract validated data
+            validated_data = input_serializer.validated_data
+
+            # Generate AI response
+            generation_start = time.time()
+            logger.info("Starting AI response generation")
+
+            response = prompt_conversation_admin(
+                self,
+                user_input=validated_data["user_input"],
+                conversation_id=validated_data["conversation_id"],
+                admin_id=validated_data.get("admin_id", ""),
+                bot_id=validated_data.get("bot_id", ""),
+                user_id=validated_data["user_id"],
+                language_code=language_code,
+            )
+
+            generation_time = time.time() - generation_start
+            if generation_time < 3:
+                time.sleep(6 - generation_time)
+
+            return Response(response, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            logger.error(
+                f"Error in prompt_conversation_admin view: {str(e)}", exc_info=True
+            )
+            return Response(
+                {"error": f"Request processing failed: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
