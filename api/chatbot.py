@@ -1262,15 +1262,11 @@ def prompt_conversation_admin(
             # the vector store is the context
             messages_history = messages.copy()
             if docs_retrieve:
-                messages_history.append(
-                    {
-                        "role": "system",
-                        "content": (
-                            "Relevant context: "
-                            f"{' '.join([doc.page_content for doc in docs_retrieve])}"
-                        ),
-                    }
-                )
+                context_text = ' '.join([doc.page_content for doc in docs_retrieve])
+                messages_history.append({
+                    "role": "system",
+                    "content": f"Relevant context: {context_text}"
+                })
 
             response = client.chat.completions.create(
                 model=OPENAI_MODEL,
