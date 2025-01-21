@@ -1203,6 +1203,7 @@ def prompt_conversation_admin(
     logger.info(
         f"Starting prompt_conversation_admin request - Language: {language_code}"
     )
+    db = None
 
     try:
         # Database connection with timeout
@@ -1327,7 +1328,8 @@ def prompt_conversation_admin(
         logger.error(f"Error in prompt_conversation_admin: {str(e)}", exc_info=True)
         raise
     finally:
-        gc.collect()
+        if db is not None:
+            self.close_db()
 
 
 def save_conversation(conversation):
