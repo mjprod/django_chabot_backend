@@ -1265,7 +1265,13 @@ def prompt_conversation_admin(
                 messages_history.append(
                     {
                         "role": "system",
-                        "content": f"Relevant context: {' '.join([doc.page_content for doc in docs_retrieve])}",
+                        "content": (
+                            f"Relevant context: "
+                            f"{' '.join([
+                                doc.page_content 
+                                for doc in docs_retrieve
+                            ])}"
+                        ),
                     }
                 )
 
