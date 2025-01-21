@@ -1266,11 +1266,8 @@ def prompt_conversation_admin(
                     {
                         "role": "system",
                         "content": (
-                            f"Relevant context: "
-                            f"{' '.join([
-                                doc.page_content 
-                                for doc in docs_retrieve
-                            ])}"
+                            "Relevant context: "
+                            f"{' '.join([doc.page_content for doc in docs_retrieve])}"
                         ),
                     }
                 )
