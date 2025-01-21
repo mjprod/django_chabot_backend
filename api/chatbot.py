@@ -9,7 +9,7 @@ import re
 
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
-from typing import List, Optional
+from typing import List
 from unittest import result
 
 import requests
@@ -1060,8 +1060,9 @@ def generate_prompt_conversation(
 
 
 def prompt_conversation_history(
-    user_prompt, conversation_id, admin_id, bot_id, user_id
-):
+        self, user_prompt, conversation_id, admin_id, bot_id, user_id
+        ):
+
     logger.info("Starting prompt_conversation_history request")
 
     try:
@@ -1154,7 +1155,7 @@ def prompt_conversation_history(
 
 
 """
-this is the new vector store function that will be used to get the vector store for the language 
+this is the new vector store function that will be used to get the vector store for the language
 the user has selected
 """
 

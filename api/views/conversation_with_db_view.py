@@ -2,8 +2,7 @@ from ..chatbot import (
     generate_prompt_conversation,
 )
 from ..serializers import (
-    CompleteConversationsSerializer,
-    PromptConversationSerializer,
+    PromptConversationSerializer
 )
 from rest_framework.views import APIView
 from rest_framework.response import Response

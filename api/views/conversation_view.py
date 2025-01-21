@@ -299,7 +299,6 @@ it will be able to find it and return that to the user
 
 class PromptConversationHistoryView(MongoDBMixin, APIView):
     def post(self, request):
-        db = None
         try:
 
             # db = self.get_db()
@@ -346,7 +345,6 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
                     return Response(response, status=status.HTTP_200_OK)
 
             # Generate AI response with timing
-
             generation_start = time.time()
             logger.info("Starting AI answer generation")
             response = prompt_conversation_history(
@@ -556,7 +554,6 @@ it will be used for AI chat with the admin panel
 
 class PromptConversationAdminView(MongoDBMixin, APIView):
     def post(self, request):
-        start_time = time.time()
         logger.info("Starting prompt_conversation_admin request")
 
         try:

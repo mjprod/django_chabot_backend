@@ -6,8 +6,7 @@ import json
 import logging
 import os
 import shutil
-from pathlib import Path
-from typing import Dict, List
+from typing import List
 
 from dotenv import load_dotenv
 from langchain.schema import Document as LangchainDocument
