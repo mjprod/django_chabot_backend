@@ -54,6 +54,7 @@ from ai_config.ai_prompts import (
     TRANSLATION_EN_TO_CN_PROMPT,
     RAG_PROMPT_TEMPLATE,
     ADMIN_CONVERSATION_PROMPT,
+    IS_LAST_MESSAGE_PROMPT,
 )
 
 
@@ -1208,7 +1209,7 @@ def prompt_conversation_admin(
     admin_id,
     bot_id,
     user_id,
-    language_code="en",
+    language_code=LANGUAGE_DEFAULT,
     is_last_message=False,
 ):
     start_time = time.time()
@@ -1279,9 +1280,7 @@ def prompt_conversation_admin(
             # Debug print for last_message flag
             print(f"Is last message flag: {is_last_message}")
             if is_last_message:
-                system_prompt = """This is the last message in the conversation.
-                Please provide a conclusive response without asking any more questions
-                and thank the user for their message."""
+                system_prompt = ADMIN_CONVERSATION_PROMPT + IS_LAST_MESSAGE_PROMPT
             else:
                 system_prompt = ADMIN_CONVERSATION_PROMPT
 
