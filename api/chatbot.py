@@ -1202,7 +1202,7 @@ speed is the key here
 
 
 def prompt_conversation_admin(
-    self, user_input, conversation_id, admin_id, bot_id, user_id, language_code="en"
+    self, user_prompt, conversation_id, admin_id, bot_id, user_id, language_code="en"
 ):
 
     start_time = time.time()
@@ -1234,7 +1234,7 @@ def prompt_conversation_admin(
         messages.append(
             {
                 "role": "user",
-                "content": user_input,
+                "content": user_prompt,
                 "timestamp": datetime.now().isoformat(),
             }
         )
@@ -1244,7 +1244,7 @@ def prompt_conversation_admin(
         try:
             vector_store = get_vector_store(language_code)
             docs_retrieve = vector_store.similarity_search(
-                user_input, k=3  # Limit to top 3 results for performance
+                user_prompt, k=3  # Limit to top 3 results for performance
             )
             logger.debug(
                 f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
@@ -1259,7 +1259,7 @@ def prompt_conversation_admin(
         try:
             client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), timeout=OPENAI_TIMEOUT)
 
-            # the vector store is the context
+            # the history of messages is the context
             messages_history = messages.copy()
             if docs_retrieve:
                 context_text = " ".join([doc.page_content for doc in docs_retrieve])
@@ -1272,6 +1272,7 @@ def prompt_conversation_admin(
                 messages=messages_history,
                 temperature=MAX_TEMPERATURE,
                 max_tokens=MAX_TOKENS,
+                timeout=OPENAI_TIMEOUT,
             )
             ai_response = response.choices[0].message.content
             logger.debug(
@@ -1299,10 +1300,6 @@ def prompt_conversation_admin(
             "language": language_code,
             "messages": messages,
             "updated_at": datetime.now().isoformat(),
-            "metadata": {
-                "processing_time": time.time() - start_time,
-                "docs_retrieved": len(docs_retrieve),
-            },
         }
 
         # Upsert with retry logic

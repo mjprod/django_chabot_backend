@@ -132,46 +132,17 @@ class CaptureFeedbackSerializer(serializers.Serializer):
 
 
 class PromptConversationAdminSerializer(serializers.Serializer):
-
-    conversation_id = serializers.CharField(
-        max_length=100,
-        required=True,
-    )
-    user_id = serializers.CharField(
-        max_length=100,
-        required=True,
-    )
-
-    user_input = serializers.CharField(
-        max_length=2000,
-        required=False,
-    )
-    admin_id = serializers.CharField(
-        max_length=100,
-        required=False,
-        allow_blank=True,
-    )
-    bot_id = serializers.CharField(
-        max_length=100,
-        required=False,
-        allow_blank=True,
-    )
-
-    generation = serializers.CharField(
-        required=False,
-    )
+    prompt = serializers.CharField(required=True)
+    conversation_id = serializers.CharField(required=True)
+    user_id = serializers.CharField(required=True)
+    admin_id = serializers.CharField(required=False, default="")
+    bot_id = serializers.CharField(required=False, default="")
     language = serializers.CharField(
         max_length=10,
         required=False,
         default="en",
     )
-    processing_time = serializers.FloatField(
-        required=False,
-    )
-    metadata = serializers.DictField(
-        required=False,
-        default=dict,
-    )
+    
 
     def validate_language(self, value):
         """Validate the language code is supported"""
