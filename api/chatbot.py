@@ -1280,7 +1280,7 @@ def prompt_conversation_admin(
             print(f"Is last message flag: {is_last_message}")
             if is_last_message:
                 system_prompt = """This is the last message in the conversation.
-                Please provide a conclusive response without asking any more questions 
+                Please provide a conclusive response without asking any more questions
                 and thank the user for their message."""
             else:
                 system_prompt = ADMIN_CONVERSATION_PROMPT
