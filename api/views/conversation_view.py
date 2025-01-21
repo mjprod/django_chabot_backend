@@ -345,7 +345,8 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
 
             generation_start = time.time()
             logger.info("Starting AI answer generation")
-            response = prompt_conversation_history(self,
+            response = prompt_conversation_history(
+                self,
                 user_prompt=translate_and_clean(prompt),
                 conversation_id=conversation_id,
                 admin_id="",
@@ -589,7 +590,6 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
             if generation_time < 3:
                 time.sleep(6 - generation_time)
 
-            
             return Response(response, status=status.HTTP_200_OK)
 
         except Exception as e:

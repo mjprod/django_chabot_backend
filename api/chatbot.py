@@ -1059,8 +1059,8 @@ def generate_prompt_conversation(
         gc.collect()
 
 
-def prompt_conversation_history(self, 
-    user_prompt, conversation_id, admin_id, bot_id, user_id
+def prompt_conversation_history(
+    self, user_prompt, conversation_id, admin_id, bot_id, user_id
 ):
     logger.info("Starting prompt_conversation_history request")
 
@@ -1214,7 +1214,7 @@ def prompt_conversation_admin(
         # Conversation retrieval
         existing_conversation = db.conversations.find_one(
             {"session_id": conversation_id},
-            {"messages": 1, "_id": 0}, 
+            {"messages": 1, "_id": 0},
         )
 
         messages = (
