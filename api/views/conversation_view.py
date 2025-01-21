@@ -133,9 +133,7 @@ def parse_to_json(data):
 
 
 # Search and translate the top correct answer
-def search_top_answer_and_translate(
-    self, query, conversation_id, collection_name
-):
+def search_top_answer_and_translate(self, query, conversation_id, collection_name):
 
     db = self.get_db()
     collection = db[collection_name]
@@ -309,16 +307,17 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
             logger.info("Starting prompt_conversation_history request")
             start_time = time.time()
 
-             # Get the header value as a string
-            use_mongo_str = request.GET.get("use_mongo","0") # Default to "0" if not provided
+            # Get the header value as a string
+            use_mongo_str = request.GET.get(
+                "use_mongo", "0"
+            )  # Default to "0" if not provided
             use_mongo = use_mongo_str in ("1", "true", "yes")
-            print("Mongo: " + str(use_mongo))            
-            
+            print("Mongo: " + str(use_mongo))
+
             # Language
             language = request.GET.get("language", LANGUAGE_DEFAULT)
             print("Language " + language)
-            
-           
+
             # Validate input data
             serializer = PromptConversationHistorySerializer(data=request.data)
             if not serializer.is_valid():
@@ -331,16 +330,20 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
             prompt = serializer.validated_data["prompt"]
             conversation_id = serializer.validated_data["conversation_id"]
             user_id = serializer.validated_data["user_id"]
-        
+
             if use_mongo:
                 print("Using Mongo DB")
                 # Search for the answer on mongo db
-                response = search_top_answer_and_translate(self, prompt, conversation_id , collection_name="feedback_data_"+ language)
+                response = search_top_answer_and_translate(
+                    self,
+                    prompt,
+                    conversation_id,
+                    collection_name="feedback_data_" + language,
+                )
                 if response["correct_answer"]:
                     print("Correct answer found in Mongo DB")
                     time.sleep(6)
                     return Response(response, status=status.HTTP_200_OK)
-                
 
             # Generate AI response with timing
 
