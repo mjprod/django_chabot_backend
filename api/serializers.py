@@ -137,12 +137,12 @@ class PromptConversationAdminSerializer(serializers.Serializer):
     user_id = serializers.CharField(required=True)
     admin_id = serializers.CharField(required=False, default="")
     bot_id = serializers.CharField(required=False, default="")
+    is_last_message = serializers.BooleanField(required=False, default=False)
     language = serializers.CharField(
         max_length=10,
         required=False,
         default="en",
     )
-    
 
     def validate_language(self, value):
         """Validate the language code is supported"""

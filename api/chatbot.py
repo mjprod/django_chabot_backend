@@ -1202,14 +1202,23 @@ speed is the key here
 
 
 def prompt_conversation_admin(
-    self, user_prompt, conversation_id, admin_id, bot_id, user_id, language_code="en"
+    self,
+    user_prompt,
+    conversation_id,
+    admin_id,
+    bot_id,
+    user_id,
+    language_code="en",
+    is_last_message=False,
 ):
-
     start_time = time.time()
     logger.info(
         f"Starting prompt_conversation_admin request - Language: {language_code}"
     )
     db = None
+
+    # Define system prompt at the start
+    system_prompt = ADMIN_CONVERSATION_PROMPT
 
     try:
         # Database connection with timeout
@@ -1227,7 +1236,7 @@ def prompt_conversation_admin(
         messages = (
             existing_conversation.get("messages", [])
             if existing_conversation
-            else [{"role": "system", "content": ADMIN_CONVERSATION_PROMPT}]
+            else [{"role": "system", "content": system_prompt}]
         )
 
         # Add user message
@@ -1267,6 +1276,14 @@ def prompt_conversation_admin(
                     {"role": "system", "content": f"Relevant context: {context_text}"}
                 )
 
+            # Debug print for last_message flag
+            print(f"Is last message flag: {is_last_message}")
+            if is_last_message:
+                system_prompt = """This is the last message in the conversation.
+                Please provide a conclusive response without asking any more questions and thank the user for their message."""
+            else:
+                system_prompt = ADMIN_CONVERSATION_PROMPT
+
             response = client.chat.completions.create(
                 model=OPENAI_MODEL,
                 messages=messages_history,
@@ -1299,6 +1316,7 @@ def prompt_conversation_admin(
             "user_id": user_id,
             "language": language_code,
             "messages": messages,
+            "is_last_message": is_last_message,
             "updated_at": datetime.now().isoformat(),
         }
 
@@ -1323,6 +1341,7 @@ def prompt_conversation_admin(
             "generation": ai_response,
             "conversation_id": conversation_id,
             "language": language_code,
+            "is_last_message": is_last_message,
         }
 
     except Exception as e:

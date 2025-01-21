@@ -585,6 +585,7 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
                 bot_id=validated_data.get("bot_id", ""),
                 user_id=validated_data["user_id"],
                 language_code=language_code,
+                is_last_message=validated_data.get("is_last_message", False),
             )
 
             generation_time = time.time() - generation_start
