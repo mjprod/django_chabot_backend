@@ -76,7 +76,11 @@ for query in queries:
         print(f"\nTop Matches for Query: '{query}':")
         for result in results[:3]:  # Print top 3 matches
             print(
-                f"Similarity: {result['similarity']}% | Question: {result['user_input']} | Answer: {result['correct_answer']}"
+                (
+                    f"Similarity: {result['similarity']}% | "
+                    f"Question: {result['user_input']} | "
+                    f"Answer: {result['correct_answer']}"
+                )
             )
     else:
         print(f"No relevant matches found for query: '{query}'.")

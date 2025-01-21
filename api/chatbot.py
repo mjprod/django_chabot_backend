@@ -1183,16 +1183,21 @@ def get_vector_store(language_code: str = LANGUAGE_DEFAULT):
 
 
 """
-this new function called prompt_conversation_admin is going to be the leanest smartest chatbot function, the goal here is to:
-Take the user input from our frontend with a language code in the url (/prompt_conversation_admin/?language=zh_CN)
+this new function called prompt_conversation_admin
+the leanest smartest chatbot function, the goal here is to:
+Take the user input from our frontend with a language code in the url
+(/prompt_conversation_admin/?language=zh_CN)
 Use the language code to get the relevant vector store from the chroma_db folder
 if not language is sent we will make the default language en
 Use the correct vector store to get the relevant documents
 Use the documents to generate a response
-Return the response to the frontend with a language field in the response to associate the language with the response
-then same as prompt_conversation_history we will use the same function to save the conversation to the database
+Return the response to the frontend with a language field in
+the response to associate the language with the response
+then same as prompt_conversation_history we will use the same
+function to save the conversation to the database
 and use history in our response generation for context and conversation
-the focus here is that there is no need to translate or touch the user input, speed is the key here
+the focus here is that there is no need to translate or touch the user input,
+speed is the key here
 """
 
 
