@@ -1060,7 +1060,7 @@ def generate_prompt_conversation(
 
 
 def prompt_conversation_history(
-    self, user_prompt, conversation_id, admin_id, bot_id, user_id
+    user_prompt, conversation_id, admin_id, bot_id, user_id
 ):
     logger.info("Starting prompt_conversation_history request")
 

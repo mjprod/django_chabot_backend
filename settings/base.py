@@ -120,7 +120,7 @@ WSGI_APPLICATION = "chatbot_project.wsgi.application"
 
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = []
-CORS_ALLOW_HEADERS = list(default_headers) + []
+CORS_ALLOW_HEADERS = list(default_headers) + [""]
 
 # Cache Configuration
 CACHES = {

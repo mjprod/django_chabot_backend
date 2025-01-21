@@ -1,0 +1,174 @@
+[
+    {
+        "session_id": "test123",
+        "admin_id": "admin1",
+        "user_id": "user1",
+        "bot_id": "agent1",
+        "timestamp": "2024-12-02T23:48:34.013695",
+        "messages": [
+            {
+                "role": "user",
+                "content": "How do I deposit?",
+                "timestamp": "2024-12-02T23:48:35.128802"
+            },
+            {
+                "role": "assistant",
+                "content": "Dear Player, \n\nPlease follow these steps to make a deposit: \n\n1. Please go to the deposit section on the app.\n2. Select your preferred payment method.\n3. Enter the amount you wish to deposit.\n4. Confirm the transaction.\n\nAfter completing the deposit, it is recommended that you first check whether your deposit has been successfully processed in the transaction record. If you confirm that the deposit is processed, try to restart your application to update the account balance. \n\nIf you have any other problems or need further help, you can reach out through our professional support team, and we’ll ensure you get the help you need. \n\nLet me know if you have other questions.",
+                "timestamp": "2024-12-02T23:48:41.054730"
+            }
+        ],
+        "translations": []
+    },
+    {
+        "session_id": "test123",
+        "admin_id": "admin1",
+        "user_id": "user1",
+        "bot_id": "agent1",
+        "timestamp": "2024-12-02T23:55:30.862124",
+        "messages": [
+            {
+                "role": "user",
+                "content": "How do I deposit?",
+                "timestamp": "2024-12-02T23:55:32.169671"
+            },
+            {
+                "role": "assistant",
+                "content": "Dear Player, \n\nPlease check whether your deposit has been successfully processed in the transaction record. If you confirm that the deposit is processed, try to restart your application to update the account balance. \n\nIf you have any other questions, let me know!",
+                "timestamp": "2024-12-02T23:55:34.966742"
+            }
+        ],
+        "translations": [
+            {
+                "message_id": 1,
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "Dear Player, \n\nPlease check whether your deposit has been successfully processed in the transaction record. If you confirm that the deposit is processed, try to restart your application to update the account balance. \n\nIf you have any other questions, let me know!"
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "Pemain yang dihormati, \n\nSila semak sama ada deposit anda telah berjaya diproses dalam rekod transaksi. Jika anda mengesahkan bahawa deposit sedang diproses, cuba mulakan semula permohonan anda untuk mengemas kini baki akaun. \n\nJika anda mempunyai sebarang soalan lain, beritahu saya!"
+                    },
+                    {
+                        "language": "cn",
+                        "text": "亲爱的玩家，\n\n请您检查交易记录中您的存款是否已成功处理。如果您确认存款已处理，请尝试重启您的应用程序以更新账户余额。\n\n如果您有任何其他问题，请随时告诉我！"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "session_id": "{{session_id}}",
+        "admin_id": "{{admin_id}}",
+        "user_id": "{{user_id}}",
+        "bot_id": "{{bot_id}}",
+        "timestamp": "2024-12-03T00:05:10.846614",
+        "messages": [
+            {
+                "role": "user",
+                "content": "How do I deposit?",
+                "timestamp": "2024-12-03T00:05:11.435029"
+            },
+            {
+                "role": "assistant",
+                "content": "Dear Player, \n\nPlease follow these steps to make a deposit: \n\n1. Please go to the deposit section on the app.\n2. Select your preferred payment method.\n3. Enter the amount you wish to deposit.\n4. Follow the prompts to complete the transaction.\n\nAfter making your deposit, it is recommended that you first check whether your deposit has been successfully processed in the transaction record. If you confirm that the deposit is processed, try to restart your application to update the account balance. \n\nIf you have any other problems or need further help, you can reach out through our professional support team, and we’ll ensure you get the help you need. \n\nLet me know if you have other questions.",
+                "timestamp": "2024-12-03T00:05:17.057150"
+            }
+        ],
+        "translations": [
+            {
+                "message_id": 1,
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "Dear Player, \n\nPlease follow these steps to make a deposit: \n\n1. Please go to the deposit section on the app.\n2. Select your preferred payment method.\n3. Enter the amount you wish to deposit.\n4. Follow the prompts to complete the transaction.\n\nAfter making your deposit, it is recommended that you first check whether your deposit has been successfully processed in the transaction record. If you confirm that the deposit is processed, try to restart your application to update the account balance. \n\nIf you have any other problems or need further help, you can reach out through our professional support team, and we’ll ensure you get the help you need. \n\nLet me know if you have other questions."
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "Pemain yang dihormati,\n\nSila ikuti langkah-langkah ini untuk membuat deposit:\n\n1. Sila pergi ke bahagian deposit di aplikasi.\n2. Pilih kaedah pembayaran pilihan anda.\n3. Masukkan jumlah yang ingin anda deposit.\n4. Ikuti gesaan untuk menyelesaikan transaksi.\n\nSelepas membuat deposit anda, adalah disyorkan agar anda menyemak terlebih dahulu sama ada deposit anda telah berjaya diproses dalam rekod transaksi. Jika anda mengesahkan bahawa deposit sedang diproses, cuba mulakan semula permohonan anda untuk mengemas kini baki akaun.\n\nJika anda menghadapi sebarang masalah lain atau memerlukan bantuan lanjut, anda boleh menghubungi pasukan sokongan profesional kami, dan kami akan memastikan anda mendapat bantuan yang diperlukan.\n\nBeritahu saya jika anda mempunyai soalan lain."
+                    },
+                    {
+                        "language": "cn",
+                        "text": "亲爱的玩家，\n\n请您按照以下步骤进行充值：\n\n1. 请前往应用程序中的充值区域。\n2. 选择您偏好的支付方式。\n3. 输入您希望充值的金额。\n4. 按照提示完成交易。\n\n在完成充值后，建议您首先检查交易记录，以确认您的充值是否已成功处理。如果您确认充值已处理，请尝试重启应用程序以更新账户余额。\n\n如果您有其他问题或需要进一步的帮助，欢迎您通过我们的专业支持团队与我们联系，我们将确保您获得所需的帮助。\n\n如您有其他问题，请随时告知我。"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "session_id": "{{session_id}}",
+        "admin_id": "{{admin_id}}",
+        "user_id": "{{user_id}}",
+        "bot_id": "{{bot_id}}",
+        "timestamp": "2024-12-03T00:32:29.848905",
+        "messages": [
+            {
+                "role": "user",
+                "content": "How do I deposit?",
+                "timestamp": "2024-12-03T00:32:30.489946"
+            },
+            {
+                "role": "assistant",
+                "content": "Dear Player,  \n\nPlease follow these steps to make a deposit:  \n1. Please go to the deposit section on the app.  \n2. Select your preferred payment method.  \n3. Enter the amount you wish to deposit.  \n4. Follow the prompts to complete the transaction.  \n\nTypically, the deposit processing time is between 5 to 30 minutes. If your deposit has not arrived after 30 minutes, you can reach out through our professional support team, and we’ll ensure you get the help you need.  \n\nLet me know if you have other questions.",
+                "timestamp": "2024-12-03T00:32:37.157202"
+            }
+        ],
+        "translations": [
+            {
+                "message_id": 1,
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "Dear Player,  \n\nPlease follow these steps to make a deposit:  \n1. Please go to the deposit section on the app.  \n2. Select your preferred payment method.  \n3. Enter the amount you wish to deposit.  \n4. Follow the prompts to complete the transaction.  \n\nTypically, the deposit processing time is between 5 to 30 minutes. If your deposit has not arrived after 30 minutes, you can reach out through our professional support team, and we’ll ensure you get the help you need.  \n\nLet me know if you have other questions."
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "Pemain yang dihormati,\n\nSila ikuti langkah-langkah ini untuk membuat deposit:\n1. Sila pergi ke bahagian deposit di aplikasi.\n2. Pilih kaedah pembayaran pilihan anda.\n3. Masukkan jumlah yang ingin anda deposit.\n4. Ikuti gesaan untuk menyelesaikan transaksi.\n\nBiasanya, masa pemprosesan deposit adalah antara 5 hingga 30 minit. Jika deposit anda tidak sampai selepas 30 minit, anda boleh menghubungi pasukan sokongan profesional kami dan kami akan memastikan anda mendapat bantuan yang diperlukan.\n\nBeritahu saya jika anda mempunyai soalan lain."
+                    },
+                    {
+                        "language": "cn",
+                        "text": "亲爱的玩家，  \n\n请您按照以下步骤进行充值：  \n1. 请前往应用程序中的充值区域。  \n2. 选择您偏好的支付方式。  \n3. 输入您希望充值的金额。  \n4. 按照提示完成交易。  \n\n通常，充值处理时间为5到30分钟。如果您的充值在30分钟后仍未到账，您可以通过我们的专业支持团队与我们联系，我们将确保为您提供所需的帮助。  \n\n如您有其他问题，请随时告知我。"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "session_id": "0099",
+        "admin_id": "Jared",
+        "user_id": "0098",
+        "bot_id": "Leo",
+        "timestamp": "2024-12-03T00:34:23.763367",
+        "messages": [
+            {
+                "role": "user",
+                "content": "How do I deposit?",
+                "timestamp": "2024-12-03T00:34:24.488174"
+            },
+            {
+                "role": "assistant",
+                "content": "Dear Player,\n\nPlease follow these steps to make a deposit:\n\n1. Please check whether your deposit has been successfully processed in the transaction record.\n2. If you confirm that the deposit is processed, try to restart your application to update your account balance.\n\nIf you have any other problems or need further help, you can reach out through our professional support team, and we’ll ensure you get the help you need. \n\nLet me know if you have other questions.",
+                "timestamp": "2024-12-03T00:34:28.629045"
+            }
+        ],
+        "translations": [
+            {
+                "message_id": 1,
+                "translations": [
+                    {
+                        "language": "en",
+                        "text": "Dear Player,\n\nPlease follow these steps to make a deposit:\n\n1. Please check whether your deposit has been successfully processed in the transaction record.\n2. If you confirm that the deposit is processed, try to restart your application to update your account balance.\n\nIf you have any other problems or need further help, you can reach out through our professional support team, and we’ll ensure you get the help you need. \n\nLet me know if you have other questions."
+                    },
+                    {
+                        "language": "ms-MY",
+                        "text": "Pemain yang dihormati,\n\nSila ikuti langkah-langkah ini untuk membuat deposit:\n\n1. Sila semak sama ada deposit anda telah berjaya diproses dalam rekod transaksi.\n2. Jika anda mengesahkan bahawa deposit sedang diproses, cuba mulakan semula permohonan anda untuk mengemas kini baki akaun anda.\n\nJika anda mempunyai sebarang masalah lain atau memerlukan bantuan lanjut, anda boleh menghubungi pasukan sokongan profesional kami dan kami akan memastikan anda mendapat bantuan yang diperlukan.\n\nBeritahu saya jika anda mempunyai soalan lain."
+                    },
+                    {
+                        "language": "cn",
+                        "text": "亲爱的玩家，\n\n请您按照以下步骤进行充值：\n\n1. 请检查您的充值是否已在交易记录中成功处理。\n2. 如果您确认充值已处理，请尝试重启您的应用程序以更新账户余额。\n\n如果您有其他问题或需要进一步的帮助，欢迎您通过我们的专业支持团队与我们联系，我们将确保您获得所需的帮助。\n\n如您有其他问题，请随时告知我。"
+                    }
+                ]
+            }
+        ]
+    }
+]
