@@ -444,11 +444,11 @@ class Message:
 # TODO: add new language translations here
 # added Conversation class here that created our session specific information
 class ConversationMetaData:
-    def __init__(self, session_id, user_id, agent_id, admin_id, timestamp=None):
+    def __init__(self, session_id, user_id, bot_id, admin_id, timestamp=None):
         self.session_id = session_id
         self.admin_id = admin_id
         self.user_id = user_id
-        self.agent_id = agent_id
+        self.bot_id = bot_id
         self.timestamp = timestamp or datetime.now().isoformat()
         self.messages = []
         self.translations = []
@@ -499,7 +499,7 @@ class ConversationMetaData:
             "session_id": self.session_id,
             "admin_id": self.admin_id,
             "user_id": self.user_id,
-            "agent_id": self.agent_id,
+            "bot_id": self.bot_id,
             "timestamp": self.timestamp,
             "messages": [
                 {"role": msg.role, "content": msg.content, "timestamp": msg.timestamp}
@@ -927,7 +927,7 @@ def generate_user_input(cleaned_prompt):
 
 
 def generate_prompt_conversation(
-    user_prompt, conversation_id, admin_id, agent_id, user_id
+    user_prompt, conversation_id, admin_id, bot_id, user_id
 ):
     # memory_snapshot = monitor_memory()
     # start_time = time.time()
@@ -945,7 +945,7 @@ def generate_prompt_conversation(
         conversation = ConversationMetaData(
             session_id=conversation_id,
             admin_id=admin_id,
-            agent_id=agent_id,
+            bot_id=bot_id,
             user_id=user_id,
         )
         conversation.is_first_message = is_first_message
@@ -1059,14 +1059,14 @@ def generate_prompt_conversation(
         gc.collect()
 
 
-def prompt_conversation_history(
-    user_prompt, conversation_id, admin_id, agent_id, user_id
+def prompt_conversation_history(self, 
+    user_prompt, conversation_id, admin_id, bot_id, user_id
 ):
     logger.info("Starting prompt_conversation_history request")
 
     try:
         # get our connection with MongoDB
-        db = get_mongodb_client()
+        db = self.get_db()
 
         # make sure we have an existing conversation, if not, we will create a new one
         existing_conversation = db.conversations.find_one(
@@ -1128,7 +1128,7 @@ def prompt_conversation_history(
         conversation = {
             "session_id": conversation_id,
             "admin_id": admin_id,
-            "agent_id": agent_id,
+            "bot_id": bot_id,
             "user_id": user_id,
             "messages": messages,
             "translations": translations,
@@ -1196,7 +1196,7 @@ the focus here is that there is no need to translate or touch the user input, sp
 
 
 def prompt_conversation_admin(
-    user_prompt, conversation_id, admin_id, agent_id, user_id, language_code="en"
+    self, user_input, conversation_id, admin_id, bot_id, user_id, language_code="en"
 ):
 
     start_time = time.time()
@@ -1206,7 +1206,7 @@ def prompt_conversation_admin(
 
     try:
         # Database connection with timeout
-        db = get_mongodb_client()
+        db = self.get_db()
         logger.debug(
             f"MongoDB connection established in {time.time() - start_time:.2f}s"
         )
@@ -1214,7 +1214,7 @@ def prompt_conversation_admin(
         # Conversation retrieval
         existing_conversation = db.conversations.find_one(
             {"session_id": conversation_id},
-            {"messages": 1, "_id": 0},  # Projection for better performance
+            {"messages": 1, "_id": 0}, 
         )
 
         messages = (
@@ -1227,7 +1227,7 @@ def prompt_conversation_admin(
         messages.append(
             {
                 "role": "user",
-                "content": user_prompt,
+                "content": user_input,
                 "timestamp": datetime.now().isoformat(),
             }
         )
@@ -1237,7 +1237,7 @@ def prompt_conversation_admin(
         try:
             vector_store = get_vector_store(language_code)
             docs_retrieve = vector_store.similarity_search(
-                user_prompt, k=5  # Limit to top 5 results for performance
+                user_input, k=3  # Limit to top 3 results for performance
             )
             logger.debug(
                 f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
@@ -1245,6 +1245,7 @@ def prompt_conversation_admin(
         except Exception as ve:
             logger.error(f"Vector store error: {str(ve)}")
             docs_retrieve = []
+            print(docs_retrieve)
 
         # OpenAI response generation
         generation_start = time.time()
@@ -1252,9 +1253,9 @@ def prompt_conversation_admin(
             client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), timeout=OPENAI_TIMEOUT)
 
             # the vector store is the context
-            context_messages = messages.copy()
+            messages_history = messages.copy()
             if docs_retrieve:
-                context_messages.append(
+                messages_history.append(
                     {
                         "role": "system",
                         "content": f"Relevant context: {' '.join([doc.page_content for doc in docs_retrieve])}",
@@ -1263,7 +1264,7 @@ def prompt_conversation_admin(
 
             response = client.chat.completions.create(
                 model=OPENAI_MODEL,
-                messages=context_messages,
+                messages=messages_history,
                 temperature=MAX_TEMPERATURE,
                 max_tokens=MAX_TOKENS,
             )
@@ -1288,7 +1289,7 @@ def prompt_conversation_admin(
         conversation = {
             "session_id": conversation_id,
             "admin_id": admin_id,
-            "agent_id": agent_id,
+            "bot_id": bot_id,
             "user_id": user_id,
             "language": language_code,
             "messages": messages,

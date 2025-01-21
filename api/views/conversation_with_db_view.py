@@ -147,7 +147,7 @@ class PromptConversationWithDBView(MongoDBMixin, APIView):
                 user_prompt=prompt,
                 conversation_id=conversation_id,
                 admin_id="",
-                agent_id="",
+                bot_id="",
                 user_id=user_id,
             )
             logger.info(

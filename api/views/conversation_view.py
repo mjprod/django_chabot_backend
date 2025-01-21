@@ -58,7 +58,7 @@ class PromptConversationView(MongoDBMixin, APIView):
                 user_prompt=prompt,
                 conversation_id=conversation_id,
                 admin_id="",
-                agent_id="",
+                bot_id="",
                 user_id=user_id,
             )
             logger.info(
@@ -243,7 +243,7 @@ def search_top_answer_and_translate(
                 conversation = {
                     "session_id": conversation_id,
                     "admin_id": "admin_id",
-                    "agent_id": "agent_id",
+                    "bot_id": "bot_id",
                     "user_id": "user_id",
                     "messages": messages,
                     "translations": translations,
@@ -345,11 +345,11 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
 
             generation_start = time.time()
             logger.info("Starting AI answer generation")
-            response = prompt_conversation_history(
+            response = prompt_conversation_history(self,
                 user_prompt=translate_and_clean(prompt),
                 conversation_id=conversation_id,
                 admin_id="",
-                agent_id="",
+                bot_id="",
                 user_id=user_id,
             )
             logger.info(
@@ -576,15 +576,20 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
             logger.info("Starting AI response generation")
 
             response = prompt_conversation_admin(
-                user_prompt=validated_data["user_prompt"],
+                self,
+                user_input=validated_data["user_input"],
                 conversation_id=validated_data["conversation_id"],
                 admin_id=validated_data.get("admin_id", ""),
-                agent_id=validated_data.get("agent_id", ""),
+                bot_id=validated_data.get("bot_id", ""),
                 user_id=validated_data["user_id"],
                 language_code=language_code,
             )
 
-            # No need for separate response serializer
+            generation_time = time.time() - generation_start
+            if generation_time < 3:
+                time.sleep(6 - generation_time)
+
+            
             return Response(response, status=status.HTTP_200_OK)
 
         except Exception as e:

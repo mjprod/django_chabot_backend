@@ -37,7 +37,7 @@ class MessageSerializer(serializers.Serializer):
 class ConversationMetadataSerializer(BaseSerializer):
     session_id = serializers.CharField(max_length=100)
     user_id = serializers.CharField(max_length=100)
-    agent_id = serializers.CharField(max_length=100)
+    bot_id = serializers.CharField(max_length=100)
     admin_id = serializers.CharField(max_length=100)
     timestamp = serializers.DateTimeField(default=datetime.now)
     messages = MessageSerializer(many=True)
@@ -78,7 +78,7 @@ class MessageDataSerializer(serializers.Serializer):
     sender = serializers.CharField(max_length=100)
     user = serializers.CharField(max_length=100)
     timestamp = serializers.DateTimeField()
-    agent_id = serializers.CharField(max_length=100, required=False)
+    bot_id = serializers.CharField(max_length=100, required=False)
 
     def to_representation(self, instance):
         try:
@@ -100,7 +100,7 @@ class MessageDataSerializer(serializers.Serializer):
                 "sender": data["role"],
                 "user": data.get("user", ""),
                 "timestamp": data["timestamp"],
-                "agent_id": data.get("agent_id", ""),
+                "bot_id": data.get("bot_id", ""),
             }
         return super().to_internal_value(data)
 
@@ -142,7 +142,7 @@ class PromptConversationAdminSerializer(serializers.Serializer):
         required=True,
     )
 
-    user_prompt = serializers.CharField(
+    user_input = serializers.CharField(
         max_length=2000,
         required=False,
     )
@@ -151,7 +151,7 @@ class PromptConversationAdminSerializer(serializers.Serializer):
         required=False,
         allow_blank=True,
     )
-    agent_id = serializers.CharField(
+    bot_id = serializers.CharField(
         max_length=100,
         required=False,
         allow_blank=True,
