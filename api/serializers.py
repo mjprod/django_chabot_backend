@@ -118,13 +118,10 @@ class CompleteConversationsSerializer(serializers.Serializer):
 class CaptureFeedbackSerializer(serializers.Serializer):
     conversation_id = serializers.CharField(max_length=100)
     user_input = serializers.CharField(max_length=1000)
-    ai_response = serializers.CharField(max_length=2000)
+    ai_response = serializers.CharField(max_length=2000, required=False, allow_blank=True)
     correct_bool = serializers.BooleanField()
     chat_rating = serializers.IntegerField(min_value=0, max_value=6)
     language = serializers.CharField(max_length=10, required=False, allow_blank=True)
-    correct_question = serializers.CharField(
-        max_length=1000, required=False, allow_blank=True
-    )
     correct_answer = serializers.CharField(
         max_length=2000, required=False, allow_blank=True
     )
