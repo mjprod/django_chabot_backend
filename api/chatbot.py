@@ -788,6 +788,40 @@ async def generate_translations(generation):
         logger.error(f"Error in generate_translations: {str(e)}", exc_info=True)
         raise
 
+def is_finalizing_phrase(phrase):
+    logger.error("@@@@@@@@@@@@@@@@@")
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        logger.error("Missing OPENAI_API_KEY environment variable.")
+        return text
+
+    client = OpenAI(api_key=api_key)
+
+    """
+    Analyzes whether a given phrase is likely to be a conversation-ender.
+    """
+    messages = [
+        {"role": "system", "content": "You are an assistant that determines if a phrase ends a conversation."},
+        {"role": "user", "content": f"Does the following phrase indicate the end of a conversation?\n\nPhrase: \"{phrase}\"\n\nRespond with 'Yes' or 'No'."}
+    ]
+    
+    try:
+        response = client.chat.completions.create(
+            model=OPENAI_MODEL,
+            messages=messages,
+            temperature=0,
+            timeout=OPENAI_TIMEOUT,
+        )
+       
+        result = response.choices[0].message.content.strip()
+        if result.lower() == "yes":
+            return "true"
+        else:
+            return "false"
+
+    except Exception as e:
+        print(f"Error during OpenAI API call: {e}")
+        return False
 
 def translate_en_to_cn(input_text):
     logger.info("Translating text to Chinese...")
@@ -1202,8 +1236,7 @@ speed is the key here
 
 
 def prompt_conversation_admin(
-    self, user_prompt, conversation_id, admin_id, bot_id, user_id, language_code="en"
-):
+    self, user_prompt, conversation_id, admin_id, bot_id, user_id, language_code=LANGUAGE_DEFAULT):
 
     start_time = time.time()
     logger.info(
@@ -1268,7 +1301,7 @@ def prompt_conversation_admin(
                 )
 
             response = client.chat.completions.create(
-                model=OPENAI_MODEL,
+            model=OPENAI_MODEL,
                 messages=messages_history,
                 temperature=MAX_TEMPERATURE,
                 max_tokens=MAX_TOKENS,
@@ -1281,6 +1314,9 @@ def prompt_conversation_admin(
         except Exception as oe:
             logger.error(f"OpenAI error: {str(oe)}")
             raise
+
+        is_last_message = is_finalizing_phrase(ai_response)
+
 
         # Update conversation
         messages.append(
@@ -1323,6 +1359,7 @@ def prompt_conversation_admin(
             "generation": ai_response,
             "conversation_id": conversation_id,
             "language": language_code,
+            "is_last_message": is_last_message,
         }
 
     except Exception as e:
