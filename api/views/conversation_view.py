@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from asgiref.sync import async_to_sync
 
 import logging
 from datetime import datetime
@@ -12,6 +13,7 @@ from ..chatbot import (
     prompt_conversation_history,
     translate_and_clean,
     prompt_conversation_admin,
+    is_finalizing_phrase
 )
 from ..serializers import (
     CompleteConversationsSerializer,
@@ -588,8 +590,9 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
             )
 
             generation_time = time.time() - generation_start
-            if generation_time < 3:
-                time.sleep(6 - generation_time)
+            #if generation_time < 3:
+            time.sleep(6 )
+
 
             return Response(response, status=status.HTTP_200_OK)
 

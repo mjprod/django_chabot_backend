@@ -115,6 +115,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://staging.mjproapps.com",
     "https://mjproapps.com",
     "https://www.mjproapps.com",
+    "http://127.0.0.1:3000",  # React local
+    "http://localhost:3000", 
 ]
 
 # MongoDB settings
