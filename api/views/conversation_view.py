@@ -590,8 +590,8 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
             )
 
             generation_time = time.time() - generation_start
-            if generation_time < 3:
-                time.sleep(6 - generation_time)
+            #if generation_time < 3:
+            time.sleep(6 )
 
 
             return Response(response, status=status.HTTP_200_OK)
