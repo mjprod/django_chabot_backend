@@ -789,14 +789,12 @@ async def generate_translations(generation):
         raise
 
 def is_finalizing_phrase(phrase):
-    logger.error("@@@@@@@@@@@@@@@@@")
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         logger.error("Missing OPENAI_API_KEY environment variable.")
-        return text
+        return "false"
 
     client = OpenAI(api_key=api_key)
-
     """
     Analyzes whether a given phrase is likely to be a conversation-ender.
     """
@@ -883,8 +881,8 @@ def translate_en_to_ms(input_text, to_lang="ms", model="base"):
     try:
         print(f"Sending translation request for: {input_text}")  # Debug print
         response = requests.post(url, json=payload, headers=headers)
-        print(f"Response status: {response.status_code}")  # Debug print
-        print(f"Response content: {response.text}")  # Debug print
+        # print(f"Response status: {response.status_code}")  # Debug print
+        # print(f"Response content: {response.text}")  # Debug print
 
         if response.status_code == 200:
             translation_data = response.json()
@@ -1316,7 +1314,6 @@ def prompt_conversation_admin(
             raise
 
         is_last_message = is_finalizing_phrase(ai_response)
-
 
         # Update conversation
         messages.append(
