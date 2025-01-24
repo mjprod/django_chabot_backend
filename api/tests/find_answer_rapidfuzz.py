@@ -93,6 +93,8 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
     """
     collection = db[collection_name]
 
+    index_information = collection.index_information()
+    print(index_information)
     # Fetch all documents with 'user_input' and 'correct_answer'
     documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1}))
 
@@ -138,8 +140,11 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
     for match in matches:
         print(f"Similarity: {match['similarity']}% | Combined: {match['user_input']} {match['correct_answer']}")
 
-    return matches
+    return matches              
+    
+    
 
+   
 
 # Define test queries
 queries = [
@@ -162,9 +167,9 @@ for query in queries:
         for result in results[:3]:  # Print top 3 matches
             print(
                 (
-                    f"Similarity: {result['similarity']}% | "
-                    f"Question: {result['user_input']} | "
-                    f"Answer: {result['correct_answer']}"
+                    # f"Similarity: {result['similarity']}% | "
+                    # f"Question: {result['user_input']} | "
+                    f"{result['correct_answer']}"
                 )
             )
     else:
