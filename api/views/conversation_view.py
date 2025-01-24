@@ -604,3 +604,45 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
                 {"error": f"Request processing failed: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
+    
+    def get(self, request):
+        db = None
+        try:
+            # Get conversation_id from query params
+            conversation_id = request.query_params.get("conversation_id")
+            if not conversation_id:
+                return Response(
+                    {"error": "conversation_id is required"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Connect to MongoDB and get conversation history
+            db = self.get_db()
+            conversation = db.conversations.find_one({"session_id": conversation_id})
+
+            if not conversation:
+                return Response(
+                    {"error": "Conversation not found"},
+                    status=status.HTTP_404_NOT_FOUND,
+                )
+
+            # for our response data we have the updated_at
+            response_data = {
+                "conversation_id": conversation_id,
+                "messages": conversation.get("messages", []),
+                "translations": conversation.get("translations", []),
+                "user_id": conversation.get("user_id"),
+                "updated_at": conversation.get("updated_at"),
+            }
+
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            logger.error(f"Error retrieving conversation history: {str(e)}")
+            return Response(
+                {"error": f"Failed to retrieve conversation history: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+        finally:
+            if db is not None:
+                self.close_db()
