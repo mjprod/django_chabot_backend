@@ -53,7 +53,23 @@ from ai_config.ai_prompts import (
     CONFIDENCE_GRADER_PROMPT,
     TRANSLATION_EN_TO_CN_PROMPT,
     RAG_PROMPT_TEMPLATE,
+    ADMIN_CONVERSATION_PROMPT,
 )
+
+
+# this is split to allow the old database to be stored in a different directory
+CHROMA_BASE_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(__file__)), "data/chroma_db"
+)
+CHROMA_OLD_PATH = os.path.join(CHROMA_BASE_PATH, "old")
+
+# Keep the original VECTOR_STORE_PATHS for multi-language
+VECTOR_STORE_PATHS = {
+    "en": os.path.join(CHROMA_BASE_PATH, "en"),
+    "ms_MY": os.path.join(CHROMA_BASE_PATH, "ms_MY"),
+    "zh_CN": os.path.join(CHROMA_BASE_PATH, "zh_CN"),
+    "zh_TW": os.path.join(CHROMA_BASE_PATH, "zh_TW"),
+}
 
 
 def monitor_memory():
@@ -81,6 +97,15 @@ prompt = ""
 
 # Load environment variables
 load_dotenv()
+
+# Language constants
+LANGUAGE_DEFAULT = "en"
+SUPPORTED_LANGUAGES = {
+    "en": "english",
+    "ms_MY": "malay",
+    "zh_CN": "chinese_simplified",
+    "zh_TW": "chinese_traditional",
+}
 
 
 # added function for loading and processing the json file
@@ -302,8 +327,15 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
 
 # Process documents in batches
 def create_vector_store(documents, batch_size=500):
-    # memory_snapshot = monitor_memory()
     try:
+        if not documents:
+            logger.error("No documents provided for vector store creation")
+            return None
+
+        # Create the old directory if it doesn't exist
+        os.makedirs(CHROMA_OLD_PATH, exist_ok=True)
+        logger.info(f"Ensuring old vector store directory exists: {CHROMA_OLD_PATH}")
+
         logger.info("Starting document splitting process")
         split_start = time.time()
 
@@ -314,15 +346,15 @@ def create_vector_store(documents, batch_size=500):
         split_data = text_splitter.split_documents(documents)
         logger.info(f"Document splitting completed in {time.time() - split_start:.2f}s")
 
-        logger.info("Initializing Chroma vector store")
+        logger.info("Initializing Chroma vector store for legacy data")
         store_start = time.time()
 
-        # Create store
+        # Create store specifically for the old JSON files
         store = Chroma.from_documents(
             documents=split_data,
-            collection_name="RAG",
+            collection_name="legacy_RAG",  # Changed collection name to differentiate
             embedding=embedding_model,
-            persist_directory="./chroma_db",
+            persist_directory=CHROMA_OLD_PATH,  # Use the old path
             collection_metadata={
                 "hnsw:space": "cosine",
                 "hnsw:construction_ef": 100,
@@ -331,11 +363,11 @@ def create_vector_store(documents, batch_size=500):
         )
 
         logger.info(
-            f"Vector store creation completed in {time.time() - store_start:.2f}s"
+            f"Legacy vector store creation completed in {time.time() - store_start:.2f}s"
         )
         vectorstores.append(store)
-        # compare_memory(memory_snapshot)
         return store
+
     except Exception as e:
         logger.error(f"Vector store creation failed: {str(e)}")
         raise
@@ -409,13 +441,14 @@ class Message:
         self.timestamp = timestamp or datetime.now().isoformat()
 
 
+# TODO: add new language translations here
 # added Conversation class here that created our session specific information
 class ConversationMetaData:
-    def __init__(self, session_id, user_id, agent_id, admin_id, timestamp=None):
+    def __init__(self, session_id, user_id, bot_id, admin_id, timestamp=None):
         self.session_id = session_id
         self.admin_id = admin_id
         self.user_id = user_id
-        self.agent_id = agent_id
+        self.bot_id = bot_id
         self.timestamp = timestamp or datetime.now().isoformat()
         self.messages = []
         self.translations = []
@@ -437,10 +470,17 @@ class ConversationMetaData:
                     "translations": [
                         {"language": "en", "text": content},
                         {
-                            "language": "ms-MY",
+                            "language": "ms_MY",
                             "text": malay_translation.get("text", ""),
                         },
-                        {"language": "cn", "text": chinese_translation.get("text", "")},
+                        {
+                            "language": "zh_CN",
+                            "text": chinese_translation.get("text", ""),
+                        },
+                        {
+                            "language": "zh_TW",
+                            "text": chinese_translation.get("text", ""),
+                        },
                     ],
                 }
             )
@@ -459,7 +499,7 @@ class ConversationMetaData:
             "session_id": self.session_id,
             "admin_id": self.admin_id,
             "user_id": self.user_id,
-            "agent_id": self.agent_id,
+            "bot_id": self.bot_id,
             "timestamp": self.timestamp,
             "messages": [
                 {"role": msg.role, "content": msg.content, "timestamp": msg.timestamp}
@@ -580,6 +620,7 @@ rag_prompt_template = ChatPromptTemplate.from_messages(
 
 # Initialize LLM for RAG Chain
 rag_llm = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
+
 
 # Define Formatting Function
 def format_docs(docs):
@@ -715,8 +756,6 @@ def update_database_confidence(comparison_result, docs_to_use):
 
 
 # async for translations
-
-
 async def generate_translations(generation):
     try:
         logger.info(f"Starting translations for: {generation}")
@@ -739,7 +778,8 @@ async def generate_translations(generation):
             output = [
                 {"language": "en", "text": generation},
                 {"language": "ms-MY", "text": translations[0].get("text", "")},
-                {"language": "cn", "text": translations[1].get("text", "")},
+                {"language": "zh_CN", "text": translations[1].get("text", "")},
+                {"language": "zh_TW", "text": translations[1].get("text", "")},
             ]
 
             logger.info(f"Final output: {output}")
@@ -748,6 +788,38 @@ async def generate_translations(generation):
         logger.error(f"Error in generate_translations: {str(e)}", exc_info=True)
         raise
 
+def is_finalizing_phrase(phrase):
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        logger.error("Missing OPENAI_API_KEY environment variable.")
+        return "false"
+
+    client = OpenAI(api_key=api_key)
+    """
+    Analyzes whether a given phrase is likely to be a conversation-ender.
+    """
+    messages = [
+        {"role": "system", "content": "You are an assistant that determines if a phrase ends a conversation."},
+        {"role": "user", "content": f"Does the following phrase indicate the end of a conversation?\n\nPhrase: \"{phrase}\"\n\nRespond with 'Yes' or 'No'."}
+    ]
+    
+    try:
+        response = client.chat.completions.create(
+            model=OPENAI_MODEL,
+            messages=messages,
+            temperature=0,
+            timeout=OPENAI_TIMEOUT,
+        )
+       
+        result = response.choices[0].message.content.strip()
+        if result.lower() == "yes":
+            return "true"
+        else:
+            return "false"
+
+    except Exception as e:
+        print(f"Error during OpenAI API call: {e}")
+        return False
 
 def translate_en_to_cn(input_text):
     logger.info("Translating text to Chinese...")
@@ -809,8 +881,8 @@ def translate_en_to_ms(input_text, to_lang="ms", model="base"):
     try:
         print(f"Sending translation request for: {input_text}")  # Debug print
         response = requests.post(url, json=payload, headers=headers)
-        print(f"Response status: {response.status_code}")  # Debug print
-        print(f"Response content: {response.text}")  # Debug print
+        # print(f"Response status: {response.status_code}")  # Debug print
+        # print(f"Response content: {response.text}")  # Debug print
 
         if response.status_code == 200:
             translation_data = response.json()
@@ -887,7 +959,7 @@ def generate_user_input(cleaned_prompt):
 
 
 def generate_prompt_conversation(
-    user_prompt, conversation_id, admin_id, agent_id, user_id
+    user_prompt, conversation_id, admin_id, bot_id, user_id
 ):
     # memory_snapshot = monitor_memory()
     # start_time = time.time()
@@ -905,7 +977,7 @@ def generate_prompt_conversation(
         conversation = ConversationMetaData(
             session_id=conversation_id,
             admin_id=admin_id,
-            agent_id=agent_id,
+            bot_id=bot_id,
             user_id=user_id,
         )
         conversation.is_first_message = is_first_message
@@ -1017,6 +1089,282 @@ def generate_prompt_conversation(
     finally:
         # compare_memory(memory_snapshot)
         gc.collect()
+
+
+def prompt_conversation_history(
+    self, user_prompt, conversation_id, admin_id, bot_id, user_id
+):
+
+    logger.info("Starting prompt_conversation_history request")
+
+    try:
+        # get our connection with MongoDB
+        db = self.get_db()
+
+        # make sure we have an existing conversation, if not, we will create a new one
+        existing_conversation = db.conversations.find_one(
+            {"session_id": conversation_id}
+        )
+
+        if existing_conversation:
+            # Load existing conversation and get the messages list
+            messages = existing_conversation.get("messages", [])
+        else:
+            # Create new conversation with system prompt
+            messages = [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
+
+        # Add our new message with the role of user and the content of the user prompt
+        messages.append(
+            {
+                "role": "user",
+                "content": user_prompt,
+                "timestamp": datetime.now().isoformat(),
+            }
+        )
+
+        # this is the same as before, no changes here
+        docs_retrieve = retriever.invoke(user_prompt)[:3]
+        docs_to_use = []
+
+        # Filter documents same as before with confidence score
+        for doc in docs_retrieve:
+            relevance_score = retrieval_grader.invoke(
+                {"prompt": user_prompt, "document": doc.page_content}
+            )
+            if relevance_score.confidence_score >= 0.7:
+                docs_to_use.append(doc)
+
+        # Prepare the OpenAI call with the history we have made
+        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        response = client.chat.completions.create(
+            model=OPENAI_MODEL,
+            messages=messages,
+            temperature=MAX_TEMPERATURE,
+            max_tokens=MAX_TOKENS,
+            timeout=OPENAI_TIMEOUT,
+        )
+
+        # Extract and append AI response
+        ai_response = response.choices[0].message.content
+        messages.append(
+            {
+                "role": "assistant",
+                "content": ai_response,
+                "timestamp": datetime.now().isoformat(),
+            }
+        )
+
+        # hit our translations function
+        translations = asyncio.run(generate_translations(ai_response))
+
+        # Prepare our conversation as before but without is_first_message
+        conversation = {
+            "session_id": conversation_id,
+            "admin_id": admin_id,
+            "bot_id": bot_id,
+            "user_id": user_id,
+            "messages": messages,
+            "translations": translations,
+            "updated_at": datetime.now().isoformat(),
+        }
+
+        # Upsert conversation to MongoDB
+        db.conversations.update_one(
+            {"session_id": conversation_id}, {"$set": conversation}, upsert=True
+        )
+
+        return {
+            "generation": ai_response,
+            "conversation_id": conversation_id,
+            "translations": translations,
+        }
+
+    except Exception as e:
+        logger.error(f"Error in prompt_conversation_history: {str(e)}")
+        raise
+    finally:
+        gc.collect()
+
+
+"""
+this is the new vector store function that will be used to get the vector store for the language
+the user has selected
+"""
+
+
+def get_vector_store(language_code: str = LANGUAGE_DEFAULT):
+    try:
+        if language_code not in SUPPORTED_LANGUAGES:
+            logger.warning(
+                f"Unsupported language code: {language_code}, falling back to English"
+            )
+            language_code = LANGUAGE_DEFAULT
+
+        store_path = VECTOR_STORE_PATHS.get(language_code)
+
+        logger.info(f"Loading vector store for language: {language_code}")
+        return Chroma(
+            persist_directory=store_path,
+            embedding_function=embedding_model,
+            collection_name=f"docs_{language_code}",
+        )
+
+    except Exception as e:
+        logger.error(f"Error loading vector store: {str(e)}")
+        raise
+
+
+"""
+this new function called prompt_conversation_admin
+the leanest smartest chatbot function, the goal here is to:
+Take the user input from our frontend with a language code in the url
+(/prompt_conversation_admin/?language=zh_CN)
+Use the language code to get the relevant vector store from the chroma_db folder
+if not language is sent we will make the default language en
+Use the correct vector store to get the relevant documents
+Use the documents to generate a response
+Return the response to the frontend with a language field in
+the response to associate the language with the response
+then same as prompt_conversation_history we will use the same
+function to save the conversation to the database
+and use history in our response generation for context and conversation
+the focus here is that there is no need to translate or touch the user input,
+speed is the key here
+"""
+
+
+def prompt_conversation_admin(
+    self, user_prompt, conversation_id, admin_id, bot_id, user_id, language_code=LANGUAGE_DEFAULT):
+
+    start_time = time.time()
+    logger.info(
+        f"Starting prompt_conversation_admin request - Language: {language_code}"
+    )
+    db = None
+
+    try:
+        # Database connection with timeout
+        db = self.get_db()
+        logger.debug(
+            f"MongoDB connection established in {time.time() - start_time:.2f}s"
+        )
+
+        # Conversation retrieval
+        existing_conversation = db.conversations.find_one(
+            {"session_id": conversation_id},
+            {"messages": 1, "_id": 0},
+        )
+
+        messages = (
+            existing_conversation.get("messages", [])
+            if existing_conversation
+            else [{"role": "system", "content": ADMIN_CONVERSATION_PROMPT}]
+        )
+
+        # Add user message
+        messages.append(
+            {
+                "role": "user",
+                "content": user_prompt,
+                "timestamp": datetime.now().isoformat(),
+            }
+        )
+
+        # Vector store retrieval
+        vector_start = time.time()
+        try:
+            vector_store = get_vector_store(language_code)
+            docs_retrieve = vector_store.similarity_search(
+                user_prompt, k=3  # Limit to top 3 results for performance
+            )
+            logger.debug(
+                f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
+            )
+        except Exception as ve:
+            logger.error(f"Vector store error: {str(ve)}")
+            docs_retrieve = []
+            print(docs_retrieve)
+
+        # OpenAI response generation
+        generation_start = time.time()
+        try:
+            client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), timeout=OPENAI_TIMEOUT)
+
+            # the history of messages is the context
+            messages_history = messages.copy()
+            if docs_retrieve:
+                context_text = " ".join([doc.page_content for doc in docs_retrieve])
+                messages_history.append(
+                    {"role": "system", "content": f"Relevant context: {context_text}"}
+                )
+
+            response = client.chat.completions.create(
+            model=OPENAI_MODEL,
+                messages=messages_history,
+                temperature=MAX_TEMPERATURE,
+                max_tokens=MAX_TOKENS,
+                timeout=OPENAI_TIMEOUT,
+            )
+            ai_response = response.choices[0].message.content
+            logger.debug(
+                f"AI response generated in {time.time() - generation_start:.2f}s"
+            )
+        except Exception as oe:
+            logger.error(f"OpenAI error: {str(oe)}")
+            raise
+
+        is_last_message = is_finalizing_phrase(ai_response)
+
+        # Update conversation
+        messages.append(
+            {
+                "role": "assistant",
+                "content": ai_response,
+                "timestamp": datetime.now().isoformat(),
+            }
+        )
+
+        # Prepare and save conversation
+        conversation = {
+            "session_id": conversation_id,
+            "admin_id": admin_id,
+            "bot_id": bot_id,
+            "user_id": user_id,
+            "language": language_code,
+            "messages": messages,
+            "updated_at": datetime.now().isoformat(),
+        }
+
+        # Upsert with retry logic
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                db.conversations.update_one(
+                    {"session_id": conversation_id}, {"$set": conversation}, upsert=True
+                )
+                break
+            except Exception as me:
+                if attempt == max_retries - 1:
+                    raise
+                logger.warning(f"MongoDB retry {attempt + 1}/{max_retries}: {str(me)}")
+                time.sleep(0.5)
+
+        total_time = time.time() - start_time
+        logger.info(f"Request completed in {total_time:.2f}s")
+
+        return {
+            "generation": ai_response,
+            "conversation_id": conversation_id,
+            "language": language_code,
+            "is_last_message": is_last_message,
+        }
+
+    except Exception as e:
+        logger.error(f"Error in prompt_conversation_admin: {str(e)}", exc_info=True)
+        raise
+    finally:
+        if db is not None:
+            self.close_db()
 
 
 def save_conversation(conversation):

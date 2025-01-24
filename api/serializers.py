@@ -37,7 +37,7 @@ class MessageSerializer(serializers.Serializer):
 class ConversationMetadataSerializer(BaseSerializer):
     session_id = serializers.CharField(max_length=100)
     user_id = serializers.CharField(max_length=100)
-    agent_id = serializers.CharField(max_length=100)
+    bot_id = serializers.CharField(max_length=100)
     admin_id = serializers.CharField(max_length=100)
     timestamp = serializers.DateTimeField(default=datetime.now)
     messages = MessageSerializer(many=True)
@@ -66,12 +66,19 @@ class PromptConversationSerializer(serializers.Serializer):
     user_id = serializers.CharField(max_length=100, required=True)
 
 
+class PromptConversationHistorySerializer(serializers.Serializer):
+    prompt = serializers.CharField(max_length=1000, required=True)
+    conversation_id = serializers.CharField(max_length=100, required=True)
+    user_id = serializers.CharField(max_length=100, required=True)
+    use_mongo = serializers.BooleanField(default=True, required=False)
+
+
 class MessageDataSerializer(serializers.Serializer):
     text = serializers.JSONField(allow_null=True)  # For array or string
     sender = serializers.CharField(max_length=100)
     user = serializers.CharField(max_length=100)
     timestamp = serializers.DateTimeField()
-    agent_id = serializers.CharField(max_length=100, required=False)
+    bot_id = serializers.CharField(max_length=100, required=False)
 
     def to_representation(self, instance):
         try:
@@ -93,7 +100,7 @@ class MessageDataSerializer(serializers.Serializer):
                 "sender": data["role"],
                 "user": data.get("user", ""),
                 "timestamp": data["timestamp"],
-                "agent_id": data.get("agent_id", ""),
+                "bot_id": data.get("bot_id", ""),
             }
         return super().to_internal_value(data)
 
@@ -111,15 +118,34 @@ class CompleteConversationsSerializer(serializers.Serializer):
 class CaptureFeedbackSerializer(serializers.Serializer):
     conversation_id = serializers.CharField(max_length=100)
     user_input = serializers.CharField(max_length=1000)
-    ai_response = serializers.CharField(max_length=2000)
+    ai_response = serializers.CharField(max_length=2000, required=False, allow_blank=True)
     correct_bool = serializers.BooleanField()
     chat_rating = serializers.IntegerField(min_value=0, max_value=6)
+    language = serializers.CharField(max_length=10, required=False, allow_blank=True)
     correct_answer = serializers.CharField(
         max_length=2000, required=False, allow_blank=True
     )
     metadata = serializers.DictField(required=False)
 
-    def validate_metadata(self, value):
-        if len(str(value)) > 2000:
-            raise serializers.ValidationError("Metadata field is too large")
+
+class PromptConversationAdminSerializer(serializers.Serializer):
+    prompt = serializers.CharField(required=True)
+    conversation_id = serializers.CharField(required=True)
+    user_id = serializers.CharField(required=True)
+    admin_id = serializers.CharField(required=False, default="")
+    bot_id = serializers.CharField(required=False, default="")
+    language = serializers.CharField(
+        max_length=10,
+        required=False,
+        default="en",
+    )
+    
+
+    def validate_language(self, value):
+        """Validate the language code is supported"""
+        supported_languages = ["en", "ms_MY", "zh_CN", "zh_TW"]
+        if value not in supported_languages:
+            raise serializers.ValidationError(
+                f"Unsupported language code. Must be one of: {supported_languages}"
+            )
         return value

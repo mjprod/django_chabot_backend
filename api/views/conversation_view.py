@@ -1,25 +1,37 @@
-from ..chatbot import (
-    generate_prompt_conversation,
-)
-from ..serializers import (
-    CompleteConversationsSerializer,
-    PromptConversationSerializer,
-)
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from asgiref.sync import async_to_sync
 
 import logging
 from datetime import datetime
 from ..mixins.mongodb_mixin import MongoDBMixin
 import time
 
+from ..chatbot import (
+    generate_prompt_conversation,
+    prompt_conversation_history,
+    translate_and_clean,
+    prompt_conversation_admin,
+    is_finalizing_phrase
+)
+from ..serializers import (
+    CompleteConversationsSerializer,
+    PromptConversationSerializer,
+    PromptConversationHistorySerializer,
+    PromptConversationAdminSerializer,
+)
+from ai_config.ai_prompts import (
+    FIRST_MESSAGE_PROMPT,
+)
+from ai_config.ai_constants import (
+    LANGUAGE_DEFAULT,
+)
+
 logger = logging.getLogger(__name__)
 
 
 # new api for start conversation
-
-
 class PromptConversationView(MongoDBMixin, APIView):
     def post(self, request):
         db = None
@@ -48,7 +60,7 @@ class PromptConversationView(MongoDBMixin, APIView):
                 user_prompt=prompt,
                 conversation_id=conversation_id,
                 admin_id="",
-                agent_id="",
+                bot_id="",
                 user_id=user_id,
             )
             logger.info(
@@ -95,6 +107,325 @@ class PromptConversationView(MongoDBMixin, APIView):
                 self.close_db()
             # Uncomment memory cleanup if needed
             # gc.collect()
+
+
+def parse_to_json(data):
+    # Extract the required fields
+    conversation_id = data.get("conversation_id", "")
+    user_input = data.get("user_input", "")
+    correct_answer = data.get("correct_answer", "")
+    confidence = data.get("confidence", 0.0)
+    translations = data.get("metadata", {}).get("translations", [])
+
+    # Format the parsed data
+    parsed_data = {
+        "conversation_id": conversation_id,
+        "user_input": user_input,
+        "generation": correct_answer,
+        "confidence": confidence,
+        "translations": [
+            {
+                "language": translation.get("language", ""),
+                "text": translation.get("text", ""),
+            }
+            for translation in translations
+        ],
+    }
+    return parsed_data
+
+
+# Search and translate the top correct answer
+def search_top_answer_and_translate(self, query, conversation_id, collection_name):
+
+    db = self.get_db()
+    collection = db[collection_name]
+
+    # Check if a text index exists and create it if not
+    index_exists = False
+
+    # Get all existing indexes
+    indexes = collection.index_information()
+
+    # Check if there's an existing text index
+    for index_data in indexes.items():
+        if index_data.get("key") == [("user_input", "text")]:
+            index_exists = True
+            break
+
+    # Create the index if it doesn't exist
+    if not index_exists:
+        print("Creating text index on 'user_input'...")
+        collection.create_index([("user_input", "text")])
+        print("Text index created successfully.")
+    else:
+        print("Text index already exists.")
+
+    print(f"Searching for: '{query}' in collection '{collection_name}'")
+    try:
+        # Use the existing text index (on user_input)
+        results = collection.find(
+            {
+                "$text": {"$search": query},  # Search in the existing text index
+                #  # Search in the existing text index
+            },
+            {
+                "score": {"$meta": "textScore"},  # Include relevance score
+                "correct_answer": 1,
+                "conversation_id": 1,
+                "user_input": 1,
+                "metadata": 1,
+                "timestamp": 1,
+            },
+        ).sort(
+            "score", {"$meta": "textScore"}
+        )  # Sort by relevance
+
+        if results is None:
+            print("No results found.")
+            return {
+                "correct_answer": None,
+                "confidence": 0,
+                "message": "No related correct answers found.",
+            }
+
+        results_list = list(results)
+        if results_list:
+
+            # Sort results by timestamp
+            sorted_results = sorted(
+                results_list, key=lambda x: x.get("timestamp", 0), reverse=True
+            )
+
+            # Filter results with score > 0.7
+            filtered_results = [
+                doc for doc in sorted_results if doc.get("score", 0) > 0.5
+            ]
+            # Check if filtered_results is empty
+
+            if filtered_results is not None:
+                top_result = filtered_results[0]
+
+                # Safely retrieve keys with .get() to avoid KeyErrors
+                correct_answer = top_result.get("correct_answer")
+                confidence = top_result.get("score", 0)
+                conversation_id = conversation_id
+                user_input = top_result.get("user_input", query)
+                metadata = top_result.get("metadata", {})
+
+                if isinstance(metadata, list):
+                    translations = (
+                        metadata  # Use the list directly if it's already structured
+                    )
+                else:
+                    translations = []
+
+                # make sure we have an existing conversation, if not, we will create a new one
+                existing_conversation = db.conversations.find_one(
+                    {"session_id": conversation_id}
+                )
+
+                if existing_conversation:
+                    # Load existing conversation and get the messages list
+                    messages = existing_conversation.get("messages", [])
+                else:
+                    # Create new conversation with system prompt
+                    messages = [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
+
+                # Add our new message with the role of user and the content of the user prompt
+                messages.append(
+                    {
+                        "role": "user",
+                        "content": query,
+                        "timestamp": datetime.now().isoformat(),
+                    }
+                )
+
+                # Prepare our conversation as before but without is_first_message
+                conversation = {
+                    "session_id": conversation_id,
+                    "admin_id": "admin_id",
+                    "bot_id": "bot_id",
+                    "user_id": "user_id",
+                    "messages": messages,
+                    "translations": translations,
+                    "updated_at": datetime.now().isoformat(),
+                }
+
+                # Upsert conversation to MongoDB
+                db.conversations.update_one(
+                    {"session_id": conversation_id}, {"$set": conversation}, upsert=True
+                )
+
+                # Return the top answer and confidence score
+                return {
+                    "correct_answer": correct_answer,
+                    "conversation_id": conversation_id,
+                    "user_input": user_input,
+                    "generation": correct_answer,
+                    "confidence": confidence,
+                    "translations": translations,
+                }
+            else:
+                # Handle case when no results match the criteria
+                print("No results found with a score > 0.7.")
+                return {
+                    "correct_answer": None,
+                    "confidence": 0,
+                    "message": "No related correct answers found.",
+                }
+        else:
+            print("No related correct answers found.")
+            return {
+                "correct_answer": None,
+                "confidence": 0,
+                "message": "No related correct answers found.",
+            }
+
+    except Exception as e:
+        print(f"Error fetching highest confidence answer: {e}")
+    finally:
+        # Cleanup database connection
+        if db is not None:
+            self.close_db()
+
+
+"""
+this is the new View for the prompt_conversation_history,
+it will be used to get the history of a conversation
+with the context and conversation_id, it will be able to
+get the history of the conversation along with the new question
+and if the user where to ask "What was the first message i sent,
+it will be able to find it and return that to the user
+"""
+
+
+class PromptConversationHistoryView(MongoDBMixin, APIView):
+    def post(self, request):
+        try:
+
+            # db = self.get_db()
+            # Log start of request processing
+            logger.info("Starting prompt_conversation_history request")
+            start_time = time.time()
+
+            # Get the header value as a string
+            use_mongo_str = request.GET.get(
+                "use_mongo", "0"
+            )  # Default to "0" if not provided
+            use_mongo = use_mongo_str in ("1", "true", "yes")
+            print("Mongo: " + str(use_mongo))
+
+            # Language
+            language = request.GET.get("language", LANGUAGE_DEFAULT)
+            print("Language " + language)
+
+            # Validate input data
+            serializer = PromptConversationHistorySerializer(data=request.data)
+            if not serializer.is_valid():
+                return Response(
+                    {"error": "Invalid input data", "details": serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Extract validated data
+            prompt = serializer.validated_data["prompt"]
+            conversation_id = serializer.validated_data["conversation_id"]
+            user_id = serializer.validated_data["user_id"]
+
+            if use_mongo:
+                print("Using Mongo DB")
+                # Search for the answer on mongo db
+                response = search_top_answer_and_translate(
+                    self,
+                    prompt,
+                    conversation_id,
+                    collection_name="feedback_data_" + language,
+                )
+                if response["correct_answer"]:
+                    print("Correct answer found in Mongo DB")
+                    time.sleep(6)
+                    return Response(response, status=status.HTTP_200_OK)
+
+            # Generate AI response with timing
+            generation_start = time.time()
+            logger.info("Starting AI answer generation")
+            response = prompt_conversation_history(
+                self,
+                user_prompt=translate_and_clean(prompt),
+                conversation_id=conversation_id,
+                admin_id="",
+                bot_id="",
+                user_id=user_id,
+            )
+            logger.info(
+                f"AI Generation completed in {time.time() - generation_start:.2f}s"
+            )
+
+            # this is the response data that is sent to user
+            response_data = {
+                "conversation_id": conversation_id,
+                "user_input": prompt,
+                "generation": response["generation"],
+                "language": language,
+                "translations": response.get("translations", []),
+            }
+
+            logger.info(
+                f"Total request processing time: {time.time() - start_time:.2f}s"
+            )
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            logger.error(f"Error processing request: {str(e)}")
+            return Response(
+                {"error": f"Request processing failed: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+        # finally:
+        # if db is not None:
+        # self.close_db()
+
+    def get(self, request):
+        db = None
+        try:
+            # Get conversation_id from query params
+            conversation_id = request.query_params.get("conversation_id")
+            if not conversation_id:
+                return Response(
+                    {"error": "conversation_id is required"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Connect to MongoDB and get conversation history
+            db = self.get_db()
+            conversation = db.conversations.find_one({"session_id": conversation_id})
+
+            if not conversation:
+                return Response(
+                    {"error": "Conversation not found"},
+                    status=status.HTTP_404_NOT_FOUND,
+                )
+
+            # for our response data we have the updated_at
+            response_data = {
+                "conversation_id": conversation_id,
+                "messages": conversation.get("messages", []),
+                "translations": conversation.get("translations", []),
+                "user_id": conversation.get("user_id"),
+                "updated_at": conversation.get("updated_at"),
+            }
+
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            logger.error(f"Error retrieving conversation history: {str(e)}")
+            return Response(
+                {"error": f"Failed to retrieve conversation history: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+        finally:
+            if db is not None:
+                self.close_db()
 
 
 class CompleteConversationsView(MongoDBMixin, APIView):
@@ -215,3 +546,61 @@ class CompleteConversationsView(MongoDBMixin, APIView):
             if db is not None:
                 self.close_db()
             # gc.collect()
+
+
+"""
+this is the new api for the prompt_conversation_admin,
+it will be used for AI chat with the admin panel
+"""
+
+
+class PromptConversationAdminView(MongoDBMixin, APIView):
+    def post(self, request):
+        logger.info("Starting prompt_conversation_admin request")
+
+        try:
+            # Get language from query params or request data
+            language_code = request.GET.get("language", LANGUAGE_DEFAULT)
+            logger.info(f"Processing request for language: {language_code}")
+
+            # Validate input data
+            input_serializer = PromptConversationAdminSerializer(data=request.data)
+            if not input_serializer.is_valid():
+                logger.error(f"Validation failed: {input_serializer.errors}")
+                return Response(
+                    {"error": "Invalid input data", "details": input_serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Extract validated data
+            validated_data = input_serializer.validated_data
+
+            # Generate AI response
+            generation_start = time.time()
+            logger.info("Starting AI response generation")
+
+            response = prompt_conversation_admin(
+                self,
+                user_prompt=validated_data["prompt"],
+                conversation_id=validated_data["conversation_id"],
+                admin_id=validated_data.get("admin_id", ""),
+                bot_id=validated_data.get("bot_id", ""),
+                user_id=validated_data["user_id"],
+                language_code=language_code,
+            )
+
+            generation_time = time.time() - generation_start
+            #if generation_time < 3:
+            time.sleep(6 )
+
+
+            return Response(response, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            logger.error(
+                f"Error in prompt_conversation_admin view: {str(e)}", exc_info=True
+            )
+            return Response(
+                {"error": f"Request processing failed: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )

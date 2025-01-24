@@ -25,9 +25,9 @@ CSRF_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # MongoDB settings
-MONGODB_USERNAME = "jaredmjpro"
-MONGODB_PASSWORD = "JS19931989JR$"
-MONGODB_CLUSTER = "staging-cluster.ooyoj.mongodb.net"
+MONGODB_USERNAME = "dev"
+MONGODB_PASSWORD = "Yrr0szjwTuE1BU7Y"
+MONGODB_CLUSTER = "chatbotdb-staging.0bcs2.mongodb.net"
 MONGODB_DATABASE = "chatbotdb"
 
 # Construct MongoDB URI

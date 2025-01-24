@@ -3,7 +3,7 @@
         "session_id": "test123",
         "admin_id": "admin1",
         "user_id": "user1",
-        "agent_id": "agent1",
+        "bot_id": "agent1",
         "timestamp": "2024-12-02T23:48:34.013695",
         "messages": [
             {
@@ -23,7 +23,7 @@
         "session_id": "test123",
         "admin_id": "admin1",
         "user_id": "user1",
-        "agent_id": "agent1",
+        "bot_id": "agent1",
         "timestamp": "2024-12-02T23:55:30.862124",
         "messages": [
             {
@@ -61,7 +61,7 @@
         "session_id": "{{session_id}}",
         "admin_id": "{{admin_id}}",
         "user_id": "{{user_id}}",
-        "agent_id": "{{agent_id}}",
+        "bot_id": "{{bot_id}}",
         "timestamp": "2024-12-03T00:05:10.846614",
         "messages": [
             {
@@ -99,7 +99,7 @@
         "session_id": "{{session_id}}",
         "admin_id": "{{admin_id}}",
         "user_id": "{{user_id}}",
-        "agent_id": "{{agent_id}}",
+        "bot_id": "{{bot_id}}",
         "timestamp": "2024-12-03T00:32:29.848905",
         "messages": [
             {
@@ -137,7 +137,7 @@
         "session_id": "0099",
         "admin_id": "Jared",
         "user_id": "0098",
-        "agent_id": "Leo",
+        "bot_id": "Leo",
         "timestamp": "2024-12-03T00:34:23.763367",
         "messages": [
             {

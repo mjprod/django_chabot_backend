@@ -9,7 +9,7 @@ cd ~/chatbot
 python3.10 -m venv venv
 source venv/bin/activate
 
-cd ~/chatbot/django_chabot_backend
+cd ~/django_chabot_backend
 
 #cd ~/chatbot/django_chabot_backend/backend/chatbot_dir
 
@@ -22,6 +22,6 @@ export $(grep -v '^#' .env | xargs)
 
 # Run Django development server
 # python3 manage.py runserver 0.0.0.0:8000
-# python3 manage.py runserver 0.0.0.0:8000 --settings=settings.local
+python3 manage.py runserver 0.0.0.0:8000 --settings=settings.local
 # python3 manage.py runserver 0.0.0.0:8000 --settings=settings.staging
 # python3 manage.py runserver 0.0.0.0:8000 --settings=settings.production
