@@ -26,9 +26,6 @@ except Exception as e:
 
 # Download NLTK stopwords (if not already downloaded)
 nltk.download('stopwords')
-# stop_words = set(stopwords.words('english'))
-
-
 custom_stopwords = {
     "ms_MY": {
         "dan", "untuk", "dengan", "yang", "di", "ke", "atau", "pada", "adalah", "dari", "ini", "itu", "saya", "kami", "anda",
@@ -43,7 +40,6 @@ custom_stopwords = {
         "的", "了", "在", "是", "我", "你", "他", "她", "它", "我們", "你們", "他們", "這個", "那個", "的", "和", "與", "就", "也",
         "不", "都", "而", "為", "上", "下", "對", "和", "說", "來", "去", "為", "要", "自己", "有", "可以", "是不是", "等", "如果"
     }
-   
 }
 
 def get_stopwords(language="en"):
@@ -123,7 +119,6 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
 
         # Calculate keyword overlap score
         overlap_score = len(query_keywords & document_keywords) / max(len(query_keywords), 1) * 100
-        # print(f"Keyword Overlap Score: {overlap_score}%")
 
         # Combine similarity and keyword overlap for the final score
         final_score = (similarity * 0.6 + overlap_score * 0.4)
