@@ -53,7 +53,6 @@ from ai_config.ai_prompts import (
     CONFIDENCE_GRADER_PROMPT,
     TRANSLATION_EN_TO_CN_PROMPT,
     RAG_PROMPT_TEMPLATE,
-    ADMIN_CONVERSATION_PROMPT,
 )
 
 
@@ -1258,7 +1257,7 @@ def prompt_conversation_admin(
         messages = (
             existing_conversation.get("messages", [])
             if existing_conversation
-            else [{"role": "system", "content": ADMIN_CONVERSATION_PROMPT}]
+            else [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
         )
 
         # Add user message

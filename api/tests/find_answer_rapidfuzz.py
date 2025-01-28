@@ -83,7 +83,7 @@ def extract_keywords(text, language="en"):
     return set(keywords)
 
 
-def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", language = "en", threshold=50):
+def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", language = "en", threshold=80):
     """
     Perform fuzzy matching with dynamic keyword extraction for context.
     :param query: User's query as a string.
@@ -138,7 +138,7 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
     # Print matches in sorted order
     print("\nSimilarity Scores (Ordered):")
     for match in matches:
-        print(f"Similarity: {match['similarity']}% | Combined: {match['user_input']} {match['correct_answer']}")
+        print(f"Similarity: {match['similarity']}% | {match['correct_answer']}")
 
     return matches              
     
@@ -161,13 +161,13 @@ queries = [
 
 # Run Fuzzy Matching for Each Query
 for query in queries:
-    results = fuzzy_match_with_dynamic_context(query, "feedback_data_ms_MY", "ms_MY", threshold=50)  # Lower threshold for better results
+    results = fuzzy_match_with_dynamic_context(query, "feedback_data_ms_MY", "ms_MY", threshold=80)  # Lower threshold for better results
     if results:
         print(f"\nTop Matches for Query: '{query}':")
         for result in results[:3]:  # Print top 3 matches
             print(
                 (
-                    # f"Similarity: {result['similarity']}% | "
+                    f"Similarity: {result['similarity']}% | "
                     # f"Question: {result['user_input']} | "
                     f"{result['correct_answer']}"
                 )
