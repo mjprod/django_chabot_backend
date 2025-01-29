@@ -709,8 +709,11 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
                 )
                 if response:
                     print("Correct answer found in Mongo DB")
+                    response_data = {
+                        "generation": response,
+                    }
                     time.sleep(6)
-                    return Response(response, status=status.HTTP_200_OK)
+                    return Response(response_data, status=status.HTTP_200_OK)
 
             # Extract validated data
             validated_data = input_serializer.validated_data
@@ -832,9 +835,12 @@ class PromptConversationView(MongoDBMixin, APIView):
                     language = language,
                 )
                 if response:
+                    response_data = {
+                        "generation": response,
+                    }
                     print("Correct answer found in Mongo DB")
-                    time.sleep(6)
-                    return Response(response, status=status.HTTP_200_OK)
+                    # time.sleep(6)
+                    return Response(response_data, status=status.HTTP_200_OK)
 
             # Extract validated data
             validated_data = input_serializer.validated_data
