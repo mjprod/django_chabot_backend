@@ -8,8 +8,15 @@ from datetime import datetime
 from ..mixins.mongodb_mixin import MongoDBMixin
 import time
 
+from rapidfuzz import fuzz
+import re
+import nltk
+from nltk.corpus import stopwords
+import jieba
+
+
 from ..chatbot import (
-    generate_prompt_conversation,
+    prompt_conversation,
     prompt_conversation_history,
     translate_and_clean,
     prompt_conversation_admin,
@@ -32,6 +39,7 @@ logger = logging.getLogger(__name__)
 
 
 # new api for start conversation
+'''
 class PromptConversationView(MongoDBMixin, APIView):
     def post(self, request):
         db = None
@@ -107,31 +115,6 @@ class PromptConversationView(MongoDBMixin, APIView):
                 self.close_db()
             # Uncomment memory cleanup if needed
             # gc.collect()
-
-
-def parse_to_json(data):
-    # Extract the required fields
-    conversation_id = data.get("conversation_id", "")
-    user_input = data.get("user_input", "")
-    correct_answer = data.get("correct_answer", "")
-    confidence = data.get("confidence", 0.0)
-    translations = data.get("metadata", {}).get("translations", [])
-
-    # Format the parsed data
-    parsed_data = {
-        "conversation_id": conversation_id,
-        "user_input": user_input,
-        "generation": correct_answer,
-        "confidence": confidence,
-        "translations": [
-            {
-                "language": translation.get("language", ""),
-                "text": translation.get("text", ""),
-            }
-            for translation in translations
-        ],
-    }
-    return parsed_data
 '''
 
 nltk.download('stopwords')
@@ -182,9 +165,9 @@ def extract_keywords(text, language="en"):
     keywords = [word for word in words if word not in stop_words and len(word.strip()) > 1]
 
     return set(keywords)
-'''
-'''
-def fuzzy_match_with_dynamic_context(self,query, collection_name, language = "en", threshold=50):
+
+
+def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold, language="en"):
     db = self.get_db()
     collection = db[collection_name]
 
@@ -195,8 +178,8 @@ def fuzzy_match_with_dynamic_context(self,query, collection_name, language = "en
     indexes = collection.index_information()
 
     # Check if there's an existing text index
-    for index_data in indexes.items():
-        if index_data.get("key") == [("user_input", "text")]:
+    for index_name, index_info in indexes.items():  # Unpack index name and info
+        if index_info.get("key") == [("user_input", "text")]:  # Access 'key' in index_info
             index_exists = True
             break
 
@@ -248,26 +231,13 @@ def fuzzy_match_with_dynamic_context(self,query, collection_name, language = "en
     # Sort matches by similarity in descending order
     matches = sorted(matches, key=lambda x: -x["similarity"])
 
-    # Print matches in sorted order
-    print("\nSimilarity Scores (Ordered):")
-    for match in matches:
-        print(f"Similarity: {match['similarity']}% | Combined: {match['user_input']} {match['correct_answer']}")
-
-    # return matches
-    results = [match for match in matches if match["similarity"] >= 70]
-    if results:
-        print(f"\nTop Matches for Query: '{query}':")
-        for result in results[:3]:  # Print top 3 matches
-            print(
-                (
-                    f"{result['correct_answer']}"
-                )
-            )
-            return f"{result['correct_answer']}"
+   # Return the first correct_answer if matches exist, otherwise return False
+    if matches:
+        return matches[0]['correct_answer'] 
     else:
-        print(f"*******--No relevant matches found for query: '{query}'.")
-'''
+        print(f"No documents found in collection '{collection_name}'.")
 
+'''
 # Search and translate the top correct answer
 def search_top_answer_and_translate(self, query, conversation_id, collection_name):
 
@@ -423,7 +393,7 @@ def search_top_answer_and_translate(self, query, conversation_id, collection_nam
         # Cleanup database connection
         if db is not None:
             self.close_db()
-
+'''
 
 """
 this is the new View for the prompt_conversation_history,
@@ -434,11 +404,9 @@ and if the user where to ask "What was the first message i sent,
 it will be able to find it and return that to the user
 """
 
-
 class PromptConversationHistoryView(MongoDBMixin, APIView):
     def post(self, request):
         try:
-
             # db = self.get_db()
             # Log start of request processing
             logger.info("Starting prompt_conversation_history request")
@@ -476,10 +444,11 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
                     self = self,
                     query = prompt,
                     collection_name = "feedback_data_" + language,
+                    threshold=80,
                     language = language,
                 )
                 
-                if response["correct_answer"]:
+                if response:
                     print("Correct answer found in Mongo DB")
                     time.sleep(6)
                     return Response(response, status=status.HTTP_200_OK)
@@ -728,17 +697,17 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
             conversation_id = input_serializer.validated_data["conversation_id"]
             user_id = input_serializer.validated_data["user_id"]
             
-
             if use_mongo:
                 print("Using Mongo DB")
                 # Search for the answer on mongo db
-                response = search_top_answer_and_translate(
-                    self,
-                    prompt,
-                    conversation_id,
-                    collection_name="feedback_data_" + language,
+                response = fuzzy_match_with_dynamic_context(
+                    self = self,
+                    query = prompt,
+                    collection_name = "feedback_data_" + language,
+                    threshold=80,
+                    language = language,
                 )
-                if response["correct_answer"]:
+                if response:
                     print("Correct answer found in Mongo DB")
                     time.sleep(6)
                     return Response(response, status=status.HTTP_200_OK)
@@ -763,6 +732,126 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
             generation_time = time.time() - generation_start
             #if generation_time < 3:
             time.sleep(6 )
+
+
+            return Response(response, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            logger.error(
+                f"Error in prompt_conversation_admin view: {str(e)}", exc_info=True
+            )
+            return Response(
+                {"error": f"Request processing failed: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+    
+    def get(self, request):
+        db = None
+        try:
+            # Get conversation_id from query params
+            conversation_id = request.query_params.get("conversation_id")
+            if not conversation_id:
+                return Response(
+                    {"error": "conversation_id is required"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Connect to MongoDB and get conversation history
+            db = self.get_db()
+            conversation = db.conversations.find_one({"session_id": conversation_id})
+
+            if not conversation:
+                return Response(
+                    {"error": "Conversation not found"},
+                    status=status.HTTP_404_NOT_FOUND,
+                )
+
+            # for our response data we have the updated_at
+            response_data = {
+                "conversation_id": conversation_id,
+                "messages": conversation.get("messages", []),
+                "translations": conversation.get("translations", []),
+                "user_id": conversation.get("user_id"),
+                "updated_at": conversation.get("updated_at"),
+            }
+
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            logger.error(f"Error retrieving conversation history: {str(e)}")
+            return Response(
+                {"error": f"Failed to retrieve conversation history: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+        finally:
+            if db is not None:
+                self.close_db()
+
+class PromptConversationView(MongoDBMixin, APIView):
+    def post(self, request):
+        logger.info("Starting prompt_conversation_admin request")
+
+        try:
+
+             # Get the header value as a string
+            use_mongo_str = request.GET.get(
+                "use_mongo", "0"
+            )  # Default to "0" if not provided
+            use_mongo = use_mongo_str in ("1", "true", "yes")
+            print("Mongo: " + str(use_mongo))
+
+            # Language
+            language = request.GET.get("language", LANGUAGE_DEFAULT)
+            print("Language " + language)
+
+            # Get language from query params or request data
+            language_code = request.GET.get("language", LANGUAGE_DEFAULT)
+            logger.info(f"Processing request for language: {language_code}")
+
+            # Validate input data
+            input_serializer = PromptConversationSerializer(data=request.data)
+            if not input_serializer.is_valid():
+                logger.error(f"Validation failed: {input_serializer.errors}")
+                return Response(
+                    {"error": "Invalid input data", "details": input_serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            
+
+            # Extract validated data
+            prompt = input_serializer.validated_data["prompt"]
+            
+            if use_mongo:
+                print("Using Mongo DB")
+                # Search for the answer on mongo db
+                response = fuzzy_match_with_dynamic_context(
+                    self = self,
+                    query = prompt,
+                    collection_name = "feedback_data_" + language,
+                    threshold=80,
+                    language = language,
+                )
+                if response:
+                    print("Correct answer found in Mongo DB")
+                    time.sleep(6)
+                    return Response(response, status=status.HTTP_200_OK)
+
+            # Extract validated data
+            validated_data = input_serializer.validated_data
+
+            # Generate AI response
+            generation_start = time.time()
+            logger.info("Starting AI response generation")
+
+            response = prompt_conversation(
+                self,
+                user_prompt=validated_data["prompt"],
+                language_code=language_code,
+            )
+
+            #generation_time = time.time() - generation_start
+            #if generation_time < 3:
+            #time.sleep(6)
 
 
             return Response(response, status=status.HTTP_200_OK)

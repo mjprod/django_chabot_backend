@@ -62,8 +62,8 @@ class UserInputSerializer(serializers.Serializer):
 
 class PromptConversationSerializer(serializers.Serializer):
     prompt = serializers.CharField(max_length=1000, required=True)
-    conversation_id = serializers.CharField(max_length=100, required=True)
-    user_id = serializers.CharField(max_length=100, required=True)
+    conversation_id = serializers.CharField(max_length=100, required=False)
+    user_id = serializers.CharField(max_length=100, required=False)
 
 
 class PromptConversationHistorySerializer(serializers.Serializer):
@@ -115,6 +115,13 @@ class CompleteConversationsSerializer(serializers.Serializer):
         return value
 
 
+class CaptureFeedbackSimpleSerializer(serializers.Serializer):
+    user_input = serializers.CharField(max_length=1000)
+    language = serializers.CharField(max_length=10, required=False, allow_blank=True)
+    correct_answer = serializers.CharField(
+        max_length=2000, required=False, allow_blank=True
+    )
+    
 class CaptureFeedbackSerializer(serializers.Serializer):
     conversation_id = serializers.CharField(max_length=100)
     user_input = serializers.CharField(max_length=1000)

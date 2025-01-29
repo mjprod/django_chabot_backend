@@ -958,7 +958,7 @@ def generate_user_input(cleaned_prompt):
 
 
 def generate_prompt_conversation(
-    user_prompt, conversation_id, admin_id, bot_id, user_id
+    user_prompt, admin_id, bot_id, user_id
 ):
     # memory_snapshot = monitor_memory()
     # start_time = time.time()
@@ -1089,6 +1089,96 @@ def generate_prompt_conversation(
         # compare_memory(memory_snapshot)
         gc.collect()
 
+def prompt_conversation(
+    self, user_prompt, language_code=LANGUAGE_DEFAULT):
+
+    start_time = time.time()
+    logger.info(
+        f"Starting prompt_conversation request - Language: {language_code}"
+    )
+    db = None
+
+    try:
+        # Database connection with timeout
+        db = self.get_db()
+        logger.debug(
+            f"MongoDB connection established in {time.time() - start_time:.2f}s"
+        )
+
+        # Conversation retrieval
+        existing_conversation = db.conversations.find_one(
+            {"session_id": ""},
+            {"messages": 1, "_id": 0},
+        )
+
+        messages = (
+            existing_conversation.get("messages", [])
+            if existing_conversation
+            else [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
+        )
+
+        # Add user message
+        messages.append(
+            {
+                "role": "user",
+                "content": user_prompt,
+                "timestamp": datetime.now().isoformat(),
+            }
+        )
+
+        # Vector store retrieval
+        vector_start = time.time()
+        try:
+            vector_store = get_vector_store(language_code)
+            docs_retrieve = vector_store.similarity_search(
+                user_prompt, k=3  # Limit to top 3 results for performance
+            )
+            logger.debug(
+                f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
+            )
+        except Exception as ve:
+            logger.error(f"Vector store error: {str(ve)}")
+            docs_retrieve = []
+            print(docs_retrieve)
+
+        # OpenAI response generation
+        generation_start = time.time()
+        try:
+            client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), timeout=OPENAI_TIMEOUT)
+
+            # the history of messages is the context
+            messages_history = messages.copy()
+            if docs_retrieve:
+                context_text = " ".join([doc.page_content for doc in docs_retrieve])
+                messages_history.append(
+                    {"role": "system", "content": f"Relevant context: {context_text}"}
+                )
+
+            response = client.chat.completions.create(
+            model=OPENAI_MODEL,
+                messages=messages_history,
+                temperature=MAX_TEMPERATURE,
+                max_tokens=MAX_TOKENS,
+                timeout=OPENAI_TIMEOUT,
+            )
+            ai_response = response.choices[0].message.content
+            logger.debug(
+                f"AI response generated in {time.time() - generation_start:.2f}s"
+            )
+        except Exception as oe:
+            logger.error(f"OpenAI error: {str(oe)}")
+            raise
+
+        return {
+            "generation": ai_response,
+        }
+
+    except Exception as e:
+        logger.error(f"Error in prompt_conversation: {str(e)}", exc_info=True)
+        raise
+    finally:
+        if db is not None:
+            self.close_db()
 
 def prompt_conversation_history(
     self, user_prompt, conversation_id, admin_id, bot_id, user_id
@@ -1189,8 +1279,6 @@ def prompt_conversation_history(
 this is the new vector store function that will be used to get the vector store for the language
 the user has selected
 """
-
-
 def get_vector_store(language_code: str = LANGUAGE_DEFAULT):
     try:
         if language_code not in SUPPORTED_LANGUAGES:
@@ -1230,8 +1318,6 @@ and use history in our response generation for context and conversation
 the focus here is that there is no need to translate or touch the user input,
 speed is the key here
 """
-
-
 def prompt_conversation_admin(
     self, user_prompt, conversation_id, admin_id, bot_id, user_id, language_code=LANGUAGE_DEFAULT):
 

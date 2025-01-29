@@ -135,13 +135,11 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
     # Sort matches by similarity in descending order
     matches = sorted(matches, key=lambda x: -x["similarity"])
 
-    # Print matches in sorted order
-    print("\nSimilarity Scores (Ordered):")
-    for match in matches:
-        print(f"Similarity: {match['similarity']}% | {match['correct_answer']}")
-
-    return matches              
-    
+   # Return the first correct_answer if matches exist, otherwise return False
+    if matches:
+        return matches[0]['correct_answer']      
+    else:
+        return False    
     
 
    
@@ -154,23 +152,16 @@ queries = [
     # "Can I get anything for referring a friend?",
     # "Any restrictions to play a games",
     # "what is the authentication process",
-    "Apakah kaedah pembayaran yang anda",
-    "Apak deposit yang anda terima?",
-    "Berapa lama masa yang diperlukan untuk deposit diproses?"
+    # "Apakah kaedah pembayaran yang anda",
+     "Apak deposit yang anda terima?",
+    # "Berapa lama masa yang diperlukan untuk deposit diproses?"
 ]
 
 # Run Fuzzy Matching for Each Query
 for query in queries:
-    results = fuzzy_match_with_dynamic_context(query, "feedback_data_ms_MY", "ms_MY", threshold=80)  # Lower threshold for better results
-    if results:
-        print(f"\nTop Matches for Query: '{query}':")
-        for result in results[:3]:  # Print top 3 matches
-            print(
-                (
-                    f"Similarity: {result['similarity']}% | "
-                    # f"Question: {result['user_input']} | "
-                    f"{result['correct_answer']}"
-                )
-            )
+    result = fuzzy_match_with_dynamic_context(query, "feedback_data_ms_MY", "ms_MY", threshold=80)  # Lower threshold for better results
+
+    if result:
+        print(f"\n '{result}'")
     else:
         print(f"*******--No relevant matches found for query: '{query}'.")
