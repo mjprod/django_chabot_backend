@@ -1623,15 +1623,10 @@ def check_answer_with_openai(user_question, matches):
     prompt = f"User question: {user_question}\n\n"
     prompt += "Here are some possible answers found in the database:\n"
 
-   # merged_answers = []
     for idx, match in enumerate(matches):
         question = match.get('user_input', 'N/A')
         answer = match.get('correct_answer', 'N/A')
         prompt += f"\nQ{idx + 1}: {question}\nA{idx + 1}: {answer}\n"
-        # merged_answers.append(answer)
-
-    # Join and format all answers for OpenAI processing
-    # merged_text = " ".join(merged_answers)
 
     prompt += f"\nGiven the above answers, please generate the **best possible response** for the user question: '{user_question}'.\n"
     prompt += "Ensure the response is clear, concise, and well-structured. If no answer fully matches, synthesize the best information available."
@@ -1645,7 +1640,7 @@ def check_answer_with_openai(user_question, matches):
         - Do **not** include: "The information provided does not specify details about..." or "I need more context."
         - Do **not** say "Yes, I have information about..." Just return the relevant answer.
     """
-    
+
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         logger.error("Missing OPENAI_API_KEY environment variable.")
@@ -1661,9 +1656,9 @@ def check_answer_with_openai(user_question, matches):
     )
 
     final_response = response.choices[0].message.content.strip()
+    final_response = re.sub(r'^["\']|["\']$', '', final_response)
 
-    # If OpenAI returns exactly "NO", we return that as a response
-    if final_response.lower() == "no":
-        return None
+    if "no" in final_response.lower() and len(final_response) < 5:
+        return None 
 
     return final_response

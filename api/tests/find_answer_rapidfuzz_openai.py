@@ -94,7 +94,6 @@ def check_answer_with_openai(user_question, matches):
     prompt = f"User question: {user_question}\n\n"
     prompt += "Here are some possible answers found in the database:\n"
 
-    merged_answers = []
     for idx, match in enumerate(matches):
         question = match.get('user_input', 'N/A')
         answer = match.get('correct_answer', 'N/A')
@@ -130,9 +129,8 @@ def check_answer_with_openai(user_question, matches):
 
     final_response = response.choices[0].message.content.strip()
 
-    # If OpenAI returns exactly "NO", we return that as a response
-    if final_response.lower() == "no":
-        return None
+    if "no" in final_response.lower() and len(final_response) < 5:
+        return None 
 
     return final_response
 
@@ -157,7 +155,7 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
         return []
 
     # Extract keywords from the query
-    query_keywords = extract_keywords(query, language)
+    # query_keywords = extract_keywords(query, language)
 
     matches = []
 
@@ -168,21 +166,21 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
 
         combined_text = f"{user_input} {timestamp}".strip()
         # Extract keywords from the document
-        document_keywords = extract_keywords(combined_text, language)
+        # document_keywords = extract_keywords(combined_text, language)
         # print(f"Document Keywords: {document_keywords}")
 
         # Calculate fuzzy similarity
         similarity = fuzz.partial_ratio(query, combined_text)
 
         # Calculate keyword overlap score
-        overlap_score = len(query_keywords & document_keywords) / max(len(query_keywords), 1) * 100
+        # overlap_score = len(query_keywords & document_keywords) / max(len(query_keywords), 1) * 100
 
         # Combine similarity and keyword overlap for the final score
-        final_score = (similarity * 0.6 + overlap_score * 0.4)
+        # final_score = (similarity * 0.6 + overlap_score * 0.4)
 
         # Only include matches above the threshold
-        if final_score >= threshold:
-            matches.append({"similarity": min(final_score, 100), **doc})
+        if similarity >= threshold:
+            matches.append({"similarity": min(similarity, 100), **doc})
 
     # Sort matches by similarity in descending order
     matches = sorted(matches, key=lambda x: -x["similarity"])
