@@ -231,14 +231,31 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold, la
     matches = sorted(matches, key=lambda x: -x["similarity"])
 
     # Return the first correct_answer if matches exist, otherwise return False
-    # if matches:
-      #  return matches[0]['correct_answer'] 
-   # else:
-    #    print(f"No documents found in collection '{collection_name}'.")
-    print(f"No documents found in collection '{matches}'.")
+    for match in matches:
+        match["timestamp"] = match.get("timestamp", "")  # Ensure field exists
+        if isinstance(match["timestamp"], str):  # Convert timestamp string to datetime
+            try:
+                match["timestamp"] = datetime.fromisoformat(match["timestamp"])
+            except ValueError:
+                match["timestamp"] = datetime.min
+    
+    # Sort by similarity (descending) and then by timestamp (latest first)
+    matches = sorted(matches, key=lambda x: (-x["similarity"], -x["timestamp"].timestamp()))
+   
+    # Return the first correct_answer if matches exist, otherwise return False
     if matches:
-        print(f"Found {len(matches)} matches.")
-        openai_response = check_answer_with_openai(query, matches)
+    # Check if the first match has a similarity score greater than 80
+        if matches[0]["similarity"] > 80:
+            best_answer = matches[0]["correct_answer"]
+            print("\nHigh Similarity Match Found:")
+            print(best_answer)
+            return best_answer  # Return immediately if it's a strong match
+
+        # Otherwise, proceed with OpenAI validation
+        limited_matches = matches[:5]  
+
+        openai_response = check_answer_with_openai(query, limited_matches)
+    
         if openai_response:
             print("\nOpenAI Response:")
             print(openai_response)

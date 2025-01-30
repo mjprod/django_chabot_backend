@@ -11,7 +11,9 @@ from datetime import datetime
 # MongoDB Configuration
 MONGODB_USERNAME = "dev"
 MONGODB_PASSWORD = "Yrr0szjwTuE1BU7Y"
-MONGODB_CLUSTER = "chatbotdb-dev.0bcs2.mongodb.net"
+#MONGODB_CLUSTER = "chatbotdb-dev.0bcs2.mongodb.net"
+MONGODB_CLUSTER = "chatbotdb-staging.0bcs2.mongodb.net"
+
 MONGODB_DATABASE = "chatbotdb"
 
 # Connect to MongoDB
@@ -96,21 +98,22 @@ def check_answer_with_openai(user_question, matches):
     for idx, match in enumerate(matches):
         question = match.get('user_input', 'N/A')
         answer = match.get('correct_answer', 'N/A')
-        prompt += f"\nQ{idx + 1}: {question}\nA{idx + 1}: {answer}\n"
-        merged_answers.append(answer)
-
-    # Join and format all answers for OpenAI processing
-    merged_text = " ".join(merged_answers)
+        prompt += f"\nQ{idx + 1}: {question}\nA{idx + 1}: {answer}\n"   
 
     prompt += f"\nGiven the above answers, please generate the **best possible response** for the user question: '{user_question}'.\n"
     prompt += "Ensure the response is clear, concise, and well-structured. If no answer fully matches, synthesize the best information available."
     prompt += f"\nGenerate a **direct and concise answer** to the user's question: '{user_question}'.\n"
     prompt += """
-    - Do **not** include "Yes, I have information on... or yes,"
-    - If no relevant answer is found, simply say: "NO"
-    - Ensure the response is clear and natural, without unnecessary preface.
-    - Use the latest timestamp to determine the most relevant response.
+        You must determine the best possible response to the user's question: '{user_question}'.
+        - If at least one answer contains relevant information, **return the best-matching answer exactly as found**.
+        - Do **not** modify, rephrase, or summarize the answer. **Return it word-for-word**.
+        - If multiple answers match, **prioritize the most recent one (use timestamps)**.
+        - If no relevant answer exists, respond with **only**: `"NO"`
+        - Do **not** include: "The information provided does not specify details about..." or "I need more context."
+        - Do **not** say "Yes, I have information about..." Just return the relevant answer.
     """
+
+    print(prompt)
     api_key = ''
     if not api_key:
         logger.error("Missing OPENAI_API_KEY environment variable.")
@@ -153,11 +156,8 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
         print(f"No documents found in collection '{collection_name}'.")
         return []
 
-    print(f"\n--- Testing Query: '{query}' against {len(documents)} documents ---")
-
     # Extract keywords from the query
     query_keywords = extract_keywords(query, language)
-    print(f"Query Keywords: {query_keywords}")
 
     matches = []
 
@@ -166,7 +166,7 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
         correct_answer = doc.get("correct_answer", "")
         timestamp = doc.get("timestamp", "")
 
-        combined_text = f"{user_input} {correct_answer} {timestamp}".strip()
+        combined_text = f"{user_input} {timestamp}".strip()
         # Extract keywords from the document
         document_keywords = extract_keywords(combined_text, language)
         # print(f"Document Keywords: {document_keywords}")
@@ -186,7 +186,7 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
 
     # Sort matches by similarity in descending order
     matches = sorted(matches, key=lambda x: -x["similarity"])
-    print(f"@@ BEFORE Found {len(matches)} matches.")
+    # print(f"@@ BEFORE Found {str(matches)} matches.")
     # Ensure timestamp is correctly formatted before sorting
     for match in matches:
         match["timestamp"] = match.get("timestamp", "")  # Ensure field exists
@@ -198,13 +198,22 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
 
     # Sort by similarity (descending) and then by timestamp (latest first)
     matches = sorted(matches, key=lambda x: (-x["similarity"], -x["timestamp"].timestamp()))
-    print(f"@@ AFTER Found {len(matches)} matches.")
+    # print(f"@@ AFTER Found {str(matches)} matches.")
 
    # Return the first correct_answer if matches exist, otherwise return False
     if matches:
-        print(f"Found {len(matches)} matches.")
-        openai_response = check_answer_with_openai(query, matches)
-       
+    # Check if the first match has a similarity score greater than 80
+        if matches[0]["similarity"] > 80:
+            best_answer = matches[0]["correct_answer"]
+            print("\nHigh Similarity Match Found:")
+            print(best_answer)
+            return best_answer  # Return immediately if it's a strong match
+
+        # Otherwise, proceed with OpenAI validation
+        limited_matches = matches[:5]  
+
+        openai_response = check_answer_with_openai(query, limited_matches)
+    
         if openai_response:
             print("\nOpenAI Response:")
             print(openai_response)
@@ -228,7 +237,7 @@ queries = [
     # "Apakah kaedah pembayaran yang anda",
     #  "Apak deposit yang anda terima?",
      # "Berapa lama masa yang diperlukan untuk deposit diproses?",
-     "Have you heard of Glauco?"
+     "DO you have any information of Leo?"
 ]
 
 # Run Fuzzy Matching for Each Query

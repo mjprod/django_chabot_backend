@@ -1637,13 +1637,15 @@ def check_answer_with_openai(user_question, matches):
     prompt += "Ensure the response is clear, concise, and well-structured. If no answer fully matches, synthesize the best information available."
     prompt += f"\nGenerate a **direct and concise answer** to the user's question: '{user_question}'.\n"
     prompt += """
-    - Do **not** include "Yes, I have information on... or yes,"
-    - If no relevant answer is found, respond with **ONLY** "NO" (without quotes).
-    - Ensure the response is clear and natural, without unnecessary preface.
-    - Use the latest timestamp to determine the most relevant response.
+        You must determine the best possible response to the user's question: '{user_question}'.
+        - If at least one answer contains relevant information, **return the best-matching answer exactly as found**.
+        - Do **not** modify, rephrase, or summarize the answer. **Return it word-for-word**.
+        - If multiple answers match, **prioritize the most recent one (use timestamps)**.
+        - If no relevant answer exists, respond with **only**: `"NO"`
+        - Do **not** include: "The information provided does not specify details about..." or "I need more context."
+        - Do **not** say "Yes, I have information about..." Just return the relevant answer.
     """
-    print(f"Prompt: {prompt}")  
-
+    
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         logger.error("Missing OPENAI_API_KEY environment variable.")
