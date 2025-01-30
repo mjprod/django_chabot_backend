@@ -1638,7 +1638,7 @@ def check_answer_with_openai(user_question, matches):
     prompt += f"\nGenerate a **direct and concise answer** to the user's question: '{user_question}'.\n"
     prompt += """
     - Do **not** include "Yes, I have information on... or yes,"
-    - If no relevant answer is found, simply say: "NO"
+    - If no relevant answer is found, respond with **ONLY** "NO" (without quotes).
     - Ensure the response is clear and natural, without unnecessary preface.
     - Use the latest timestamp to determine the most relevant response.
     """

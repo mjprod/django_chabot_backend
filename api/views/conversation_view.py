@@ -240,7 +240,7 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold, la
         print(f"Found {len(matches)} matches.")
         openai_response = check_answer_with_openai(query, matches)
         if openai_response:
-            print("\nOpenAI Response:")
+            print("\nOpenAI Response:" )
             print(openai_response)
             return openai_response
         else:
