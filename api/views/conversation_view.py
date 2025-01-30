@@ -227,20 +227,9 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold, la
         if final_score >= threshold:
             matches.append({"similarity": min(final_score, 100), **doc})
 
+    # Sort matches by similarity in descending order
     matches = sorted(matches, key=lambda x: -x["similarity"])
 
-    # Ensure timestamp is correctly formatted before sorting
-    for match in matches:
-        match["timestamp"] = match.get("timestamp", "")  # Ensure field exists
-        if isinstance(match["timestamp"], str):  # Convert timestamp string to datetime
-            try:
-                match["timestamp"] = datetime.fromisoformat(match["timestamp"])
-            except ValueError:
-                match["timestamp"] = datetime.min  # Set to minimum if invalid format
-
-    # Sort by similarity (descending) and then by timestamp (latest first)
-    matches = sorted(matches, key=lambda x: (-x["similarity"], -x["timestamp"].timestamp()))
-    
     # Return the first correct_answer if matches exist, otherwise return False
     # if matches:
       #  return matches[0]['correct_answer'] 
@@ -251,7 +240,7 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold, la
         print(f"Found {len(matches)} matches.")
         openai_response = check_answer_with_openai(query, matches)
         if openai_response:
-            print("\nOpenAI Response:" )
+            print("\nOpenAI Response:")
             print(openai_response)
             return openai_response
         else:
