@@ -5,6 +5,7 @@ import nltk
 from nltk.corpus import stopwords
 import jieba
 from openai import OpenAI
+from datetime import datetime
 
 
 # MongoDB Configuration
@@ -185,6 +186,19 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
 
     # Sort matches by similarity in descending order
     matches = sorted(matches, key=lambda x: -x["similarity"])
+    print(f"@@ BEFORE Found {len(matches)} matches.")
+    # Ensure timestamp is correctly formatted before sorting
+    for match in matches:
+        match["timestamp"] = match.get("timestamp", "")  # Ensure field exists
+        if isinstance(match["timestamp"], str):  # Convert timestamp string to datetime
+            try:
+                match["timestamp"] = datetime.fromisoformat(match["timestamp"])
+            except ValueError:
+                match["timestamp"] = datetime.min  # Set to minimum if invalid format
+
+    # Sort by similarity (descending) and then by timestamp (latest first)
+    matches = sorted(matches, key=lambda x: (-x["similarity"], -x["timestamp"].timestamp()))
+    print(f"@@ AFTER Found {len(matches)} matches.")
 
    # Return the first correct_answer if matches exist, otherwise return False
     if matches:

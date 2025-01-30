@@ -1623,15 +1623,15 @@ def check_answer_with_openai(user_question, matches):
     prompt = f"User question: {user_question}\n\n"
     prompt += "Here are some possible answers found in the database:\n"
 
-    merged_answers = []
+   # merged_answers = []
     for idx, match in enumerate(matches):
         question = match.get('user_input', 'N/A')
         answer = match.get('correct_answer', 'N/A')
         prompt += f"\nQ{idx + 1}: {question}\nA{idx + 1}: {answer}\n"
-        merged_answers.append(answer)
+        # merged_answers.append(answer)
 
     # Join and format all answers for OpenAI processing
-    merged_text = " ".join(merged_answers)
+    # merged_text = " ".join(merged_answers)
 
     prompt += f"\nGiven the above answers, please generate the **best possible response** for the user question: '{user_question}'.\n"
     prompt += "Ensure the response is clear, concise, and well-structured. If no answer fully matches, synthesize the best information available."
