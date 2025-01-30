@@ -722,7 +722,7 @@ class PromptConversationView(MongoDBMixin, APIView):
                         "generation": response,
                     }
                     print("Correct answer found in Mongo DB")
-                    time.sleep(12)
+                    time.sleep(6)
                     return Response(response_data, status=status.HTTP_200_OK)
 
             # Extract validated data
