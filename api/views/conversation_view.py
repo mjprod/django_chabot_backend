@@ -10,7 +10,6 @@ import time
 
 from rapidfuzz import fuzz
 
-
 from ..chatbot import (
     prompt_conversation,
     prompt_conversation_history,
@@ -32,86 +31,6 @@ from ai_config.ai_constants import (
 )
 
 logger = logging.getLogger(__name__)
-
-
-# new api for start conversation
-'''
-class PromptConversationView(MongoDBMixin, APIView):
-    def post(self, request):
-        db = None
-        try:
-            # Log start of request processing
-            logger.info("Starting prompt_conversation request")
-            start_time = time.time()
-
-            # Validate input data
-            serializer = PromptConversationSerializer(data=request.data)
-            if not serializer.is_valid():
-                return Response(
-                    {"error": "Invalid input data", "details": serializer.errors},
-                    status=status.HTTP_400_BAD_REQUEST,
-                )
-
-            # Extract validated data
-            prompt = serializer.validated_data["prompt"]
-            conversation_id = serializer.validated_data["conversation_id"]
-            user_id = serializer.validated_data["user_id"]
-
-            # Generate AI response with timing
-            generation_start = time.time()
-            logger.info("Starting AI response generation")
-            response = generate_prompt_conversation(
-                user_prompt=prompt,
-                conversation_id=conversation_id,
-                admin_id="",
-                bot_id="",
-                user_id=user_id,
-            )
-            logger.info(
-                f"AI Generation completed in {time.time() - generation_start:.2f}s"
-            )
-
-            # Prepare MongoDB document
-            db = self.get_db()
-            conversation_data = {
-                "conversation_id": conversation_id,
-                "prompt": prompt,
-                "generation": response["generation"],
-                "user_id": user_id,
-                "translations": response.get("translations", []),
-                "timestamp": datetime.now().isoformat(),
-            }
-
-            # Insert into MongoDB
-            db.conversations.insert_one(conversation_data)
-            logger.info("MongoDB operation successful.")
-
-            # Prepare and send response
-            response_data = {
-                "conversation_id": conversation_id,
-                "user_input": prompt,
-                "generation": response["generation"],
-                "confidence": response["confidence_score"],
-                "translations": response.get("translations", []),
-            }
-
-            logger.info(
-                f"Total request processing time: {time.time() - start_time:.2f}s"
-            )
-            return Response(response_data, status=status.HTTP_200_OK)
-        except Exception as e:
-            logger.error(f"Error processing request: {str(e)}")
-            return Response(
-                {"error": f"Request processing failed: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            )
-        finally:
-            # Cleanup database connection
-            if db is not None:
-                self.close_db()
-            # Uncomment memory cleanup if needed
-            # gc.collect()
-'''
 
 
 def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold, language="en"):
@@ -411,8 +330,7 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
                 )
                 print(response)
                 if response:
-                    print("Correct answer found in Mongo DB")
-                    time.sleep(6)
+                    time.sleep(5)            
                     return Response(response, status=status.HTTP_200_OK)
 
             # Generate AI response with timing
@@ -673,6 +591,9 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
                     print("Correct answer found in Mongo DB")
                     response_data = {
                         "generation": response,
+                        "conversation_id": conversation_id,
+                        "is_last_message": "false",
+                        "language": language,
                     }
                     time.sleep(6)
                     return Response(response_data, status=status.HTTP_200_OK)
@@ -801,7 +722,7 @@ class PromptConversationView(MongoDBMixin, APIView):
                         "generation": response,
                     }
                     print("Correct answer found in Mongo DB")
-                    # time.sleep(6)
+                    time.sleep(12)
                     return Response(response_data, status=status.HTTP_200_OK)
 
             # Extract validated data
@@ -819,7 +740,7 @@ class PromptConversationView(MongoDBMixin, APIView):
 
             #generation_time = time.time() - generation_start
             #if generation_time < 3:
-            #time.sleep(6)
+            time.sleep(6)
 
 
             return Response(response, status=status.HTTP_200_OK)
