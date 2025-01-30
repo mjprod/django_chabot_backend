@@ -20,7 +20,7 @@ from ..chatbot import (
     prompt_conversation_history,
     translate_and_clean,
     prompt_conversation_admin,
-    is_finalizing_phrase
+    check_answer_with_openai
 )
 from ..serializers import (
     CompleteConversationsSerializer,
@@ -192,7 +192,7 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold, la
         print("Text index already exists.")
 
     # Fetch all documents with 'user_input' and 'correct_answer'
-    documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1}))
+    documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}))
 
     if not documents:
         print(f"No documents found in collection '{collection_name}'.")
@@ -206,7 +206,9 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold, la
     for doc in documents:
         user_input = doc.get("user_input", "")
         correct_answer = doc.get("correct_answer", "")
-        combined_text = f"{user_input} {correct_answer}".strip()
+        timestamp = doc.get("timestamp", "")
+
+        combined_text = f"{user_input} {correct_answer} {timestamp}".strip()
 
         # Extract keywords from the document
         document_keywords = extract_keywords(combined_text, language)
@@ -229,11 +231,22 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold, la
     matches = sorted(matches, key=lambda x: -x["similarity"])
 
     # Return the first correct_answer if matches exist, otherwise return False
+    # if matches:
+      #  return matches[0]['correct_answer'] 
+   # else:
+    #    print(f"No documents found in collection '{collection_name}'.")
+    print(f"No documents found in collection '{matches}'.")
     if matches:
-        return matches[0]['correct_answer'] 
+        print(f"Found {len(matches)} matches.")
+        openai_response = check_answer_with_openai(query, matches)
+        if openai_response:
+            print("\nOpenAI Response:")
+            print(openai_response)
+            return openai_response
+        else:
+            print("No matches found.")
     else:
-        print(f"No documents found in collection '{collection_name}'.")
-
+        print("No matches found.")
 '''
 # Search and translate the top correct answer
 def search_top_answer_and_translate(self, query, conversation_id, collection_name):
@@ -441,10 +454,10 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
                     self = self,
                     query = prompt,
                     collection_name = "feedback_data_" + language,
-                    threshold=80,
+                    threshold=10,
                     language = language,
                 )
-                
+                print(response)
                 if response:
                     print("Correct answer found in Mongo DB")
                     time.sleep(6)
@@ -701,7 +714,7 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
                     self = self,
                     query = prompt,
                     collection_name = "feedback_data_" + language,
-                    threshold=80,
+                    threshold=10,
                     language = language,
                 )
                 if response:
@@ -828,7 +841,7 @@ class PromptConversationView(MongoDBMixin, APIView):
                     self = self,
                     query = prompt,
                     collection_name = "feedback_data_" + language,
-                    threshold=80,
+                    threshold=10,
                     language = language,
                 )
                 if response:

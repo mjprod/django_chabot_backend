@@ -1614,3 +1614,54 @@ def compare_answers(generation, feedback_answers, docs_to_use):
     except Exception as e:
         logger.error(f"Error comparing answers: {str(e)}")
         return None
+
+
+def check_answer_with_openai(user_question, matches):
+    if not matches:
+        return None
+
+    prompt = f"User question: {user_question}\n\n"
+    prompt += "Here are some possible answers found in the database:\n"
+
+    merged_answers = []
+    for idx, match in enumerate(matches):
+        question = match.get('user_input', 'N/A')
+        answer = match.get('correct_answer', 'N/A')
+        prompt += f"\nQ{idx + 1}: {question}\nA{idx + 1}: {answer}\n"
+        merged_answers.append(answer)
+
+    # Join and format all answers for OpenAI processing
+    merged_text = " ".join(merged_answers)
+
+    prompt += f"\nGiven the above answers, please generate the **best possible response** for the user question: '{user_question}'.\n"
+    prompt += "Ensure the response is clear, concise, and well-structured. If no answer fully matches, synthesize the best information available."
+    prompt += f"\nGenerate a **direct and concise answer** to the user's question: '{user_question}'.\n"
+    prompt += """
+    - Do **not** include "Yes, I have information on... or yes,"
+    - If no relevant answer is found, simply say: "NO"
+    - Ensure the response is clear and natural, without unnecessary preface.
+    - Use the latest timestamp to determine the most relevant response.
+    """
+    print(f"Prompt: {prompt}")  
+
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        logger.error("Missing OPENAI_API_KEY environment variable.")
+        return "false"
+
+    client = OpenAI(api_key=api_key)
+   
+    response = client.chat.completions.create(
+        model="gpt-4",
+        messages=[{"role": "system", "content": "You are an AI assistant evaluating answers to user questions."},
+                  {"role": "user", "content": prompt}],
+        temperature=0.1
+    )
+
+    final_response = response.choices[0].message.content.strip()
+
+    # If OpenAI returns exactly "NO", we return that as a response
+    if final_response.lower() == "no":
+        return None
+
+    return final_response
