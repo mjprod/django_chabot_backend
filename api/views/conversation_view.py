@@ -197,12 +197,9 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold, la
     if not documents:
         print(f"No documents found in collection '{collection_name}'.")
         return []
-
-    print(f"\n--- Testing Query: '{query}' against {len(documents)} documents ---")
-
+    
     # Extract keywords from the query
     query_keywords = extract_keywords(query, language)
-    print(f"Query Keywords: {query_keywords}")
 
     matches = []
 
@@ -231,7 +228,7 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold, la
     # Sort matches by similarity in descending order
     matches = sorted(matches, key=lambda x: -x["similarity"])
 
-   # Return the first correct_answer if matches exist, otherwise return False
+    # Return the first correct_answer if matches exist, otherwise return False
     if matches:
         return matches[0]['correct_answer'] 
     else:
