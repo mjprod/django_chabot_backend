@@ -201,7 +201,8 @@ def check_answer_mongo_and_openai(user_question, matches):
         prompt += f"\nQ{idx + 1}: {question}\nA{idx + 1}: {answer}\n"
 
     prompt += f"\nGiven the above answers, please generate the **best possible response** for the user question: '{user_question}'.\n"
-    prompt += "Ensure the response is clear, concise, and well-structured. If no answer fully matches, synthesize the best information available."
+    prompt += "Ensure the response is clear, concise, and well-structured. \
+        If no answer fully matches, synthesize the best information available."
     prompt += f"\nGenerate a **direct and concise answer** to the user's question: '{user_question}'.\n"
     prompt += """
         You must determine the best possible response to the user's question: '{user_question}'.
