@@ -187,7 +187,7 @@ def extract_keywords(text, language="en"):
     return set(keywords)
 
 
-def check_answer_with_openai(user_question, matches):
+def check_answer_mongo_and_openai(user_question, matches):
     if not matches:
         return None
 
@@ -321,7 +321,7 @@ def fuzzy_match_with_dynamic_context(
         # Otherwise, proceed with OpenAI validation
         limited_matches = matches[:5]
 
-        openai_response = check_answer_with_openai(query, limited_matches)
+        openai_response = check_answer_mongo_and_openai(query, limited_matches)
 
         if openai_response:
             print("\nOpenAI Response:")

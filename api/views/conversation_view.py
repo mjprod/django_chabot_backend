@@ -2,8 +2,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-# from asgiref.sync import async_to_sync
-
 import logging
 from datetime import datetime
 from ..mixins.mongodb_mixin import MongoDBMixin
@@ -16,7 +14,7 @@ from ..chatbot import (
     prompt_conversation_history,
     translate_and_clean,
     prompt_conversation_admin,
-    check_answer_with_openai,
+    check_answer_mongo_and_openai,
 )
 from ..serializers import (
     CompleteConversationsSerializer,
@@ -24,9 +22,7 @@ from ..serializers import (
     PromptConversationHistorySerializer,
     PromptConversationAdminSerializer,
 )
-from ai_config.ai_prompts import (
-    FIRST_MESSAGE_PROMPT,
-)
+
 from ai_config.ai_constants import (
     LANGUAGE_DEFAULT,
 )
@@ -116,7 +112,7 @@ def fuzzy_match_with_dynamic_context(
         # Otherwise, proceed with OpenAI validation
         limited_matches = matches[:5]
 
-        openai_response = check_answer_with_openai(query, limited_matches)
+        openai_response = check_answer_mongo_and_openai(query, limited_matches)
 
         if openai_response:
             print("\nOpenAI Response:")
@@ -126,174 +122,6 @@ def fuzzy_match_with_dynamic_context(
             print("No matches found.")
     else:
         print("No matches found.")
-
-
-"""
-# Search and translate the top correct answer
-def search_top_answer_and_translate(self, query, conversation_id, collection_name):
-
-    db = self.get_db()
-    collection = db[collection_name]
-
-    # Check if a text index exists and create it if not
-    index_exists = False
-
-    # Get all existing indexes
-    index_information = collection.index_information()
-
-    # Check if there's an existing text index
-    for index_name, index_data in index_information.items():
-        if "key" in index_data and index_data["key"] == [("user_input", "text")]:
-            print(f"Text index on 'user_input' found: {index_name}")
-            break
-        else:
-            print("No text index found on 'user_input'.")   
-
-    # Create the index if it doesn't exist
-    if not index_exists:
-        print("Creating text index on 'user_input'...")
-        collection.create_index([("user_input", "text")], name="user_input_text")
-        print("Text index created successfully.")
-    else:
-        print("Text index already exists.")
-
-    print(f"Searching for: '{query}' in collection '{collection_name}'")
-    try:
-        # Use the existing text index (on user_input)
-        results = collection.find(
-            {
-                "$text": {"$search": query},  # Search in the existing text index
-                #  # Search in the existing text index
-            },
-            {
-                "score": {"$meta": "textScore"},  # Include relevance score
-                "correct_answer": 1,
-                "conversation_id": 1,
-                "user_input": 1,
-                "metadata": 1,
-                "timestamp": 1,
-            },
-        ).sort(
-            "score", {"$meta": "textScore"}
-        )  # Sort by relevance
-
-        if results is None:
-            print("No results found.")
-            return {
-                "correct_answer": None,
-                "confidence": 0,
-                "message": "No related correct answers found.",
-            }
-
-        results_list = list(results)
-        if results_list:
-
-            # Sort results by timestamp
-            sorted_results = sorted(
-                results_list, key=lambda x: x.get("timestamp", 0), reverse=True
-            )
-
-            # Filter results with score > 0.7
-            filtered_results = [
-                doc for doc in sorted_results if doc.get("score", 0) > 0.5
-            ]
-            # Check if filtered_results is empty
-
-            if filtered_results is not None:
-                top_result = filtered_results[0]
-
-                # Safely retrieve keys with .get() to avoid KeyErrors
-                correct_answer = top_result.get("correct_answer")
-                confidence = top_result.get("score", 0)
-                conversation_id = conversation_id
-                user_input = top_result.get("user_input", query)
-                metadata = top_result.get("metadata", {})
-
-                if isinstance(metadata, list):
-                    translations = (
-                        metadata  # Use the list directly if it's already structured
-                    )
-                else:
-                    translations = []
-
-                # make sure we have an existing conversation, if not, we will create a new one
-                existing_conversation = db.conversations.find_one(
-                    {"session_id": conversation_id}
-                )
-
-                if existing_conversation:
-                    # Load existing conversation and get the messages list
-                    messages = existing_conversation.get("messages", [])
-                else:
-                    # Create new conversation with system prompt
-                    messages = [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
-
-                # Add our new message with the role of user and the content of the user prompt
-                messages.append(
-                    {
-                        "role": "user",
-                        "content": query,
-                        "timestamp": datetime.now().isoformat(),
-                    }
-                )
-
-                # Prepare our conversation as before but without is_first_message
-                conversation = {
-                    "session_id": conversation_id,
-                    "admin_id": "admin_id",
-                    "bot_id": "bot_id",
-                    "user_id": "user_id",
-                    "messages": messages,
-                    "translations": translations,
-                    "updated_at": datetime.now().isoformat(),
-                }
-
-                # Upsert conversation to MongoDB
-                db.conversations.update_one(
-                    {"session_id": conversation_id}, {"$set": conversation}, upsert=True
-                )
-
-                # Return the top answer and confidence score
-                return {
-                    "correct_answer": correct_answer,
-                    "conversation_id": conversation_id,
-                    "user_input": user_input,
-                    "generation": correct_answer,
-                    "confidence": confidence,
-                    "translations": translations,
-                }
-            else:
-                # Handle case when no results match the criteria
-                print("No results found with a score > 0.7.")
-                return {
-                    "correct_answer": None,
-                    "confidence": 0,
-                    "message": "No related correct answers found.",
-                }
-        else:
-            print("No related correct answers found.")
-            return {
-                "correct_answer": None,
-                "confidence": 0,
-                "message": "No related correct answers found.",
-            }
-
-    except Exception as e:
-        print(f"Error fetching highest confidence answer: {e}")
-    finally:
-        # Cleanup database connection
-        if db is not None:
-            self.close_db()
-"""
-
-"""
-this is the new View for the prompt_conversation_history,
-it will be used to get the history of a conversation
-with the context and conversation_id, it will be able to
-get the history of the conversation along with the new question
-and if the user where to ask "What was the first message i sent,
-it will be able to find it and return that to the user
-"""
 
 
 class PromptConversationHistoryView(MongoDBMixin, APIView):
@@ -731,7 +559,6 @@ class PromptConversationView(MongoDBMixin, APIView):
                         "generation": response,
                     }
                     print("Correct answer found in Mongo DB")
-                    time.sleep(6)
                     return Response(response_data, status=status.HTTP_200_OK)
 
             # Extract validated data

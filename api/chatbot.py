@@ -53,6 +53,7 @@ from ai_config.ai_prompts import (
     CONFIDENCE_GRADER_PROMPT,
     TRANSLATION_EN_TO_CN_PROMPT,
     RAG_PROMPT_TEMPLATE,
+    PROMPT_TEMPLATE_MONGO_AND_OPENAI,
 )
 
 
@@ -888,8 +889,6 @@ def translate_en_to_ms(input_text, to_lang="ms", model="base"):
     try:
         print(f"Sending translation request for: {input_text}")  # Debug print
         response = requests.post(url, json=payload, headers=headers)
-        # print(f"Response status: {response.status_code}")  # Debug print
-        # print(f"Response content: {response.text}")  # Debug print
 
         if response.status_code == 200:
             translation_data = response.json()
@@ -930,8 +929,6 @@ def process_feedback_translation(feedback_data):
 
 # ahsfahssf this is an old functuion that will be removed in prod
 def generate_user_input(cleaned_prompt):
-    # Clean and translate prompt
-    # cleaned_prompt = translate_and_clean(user_prompt)
 
     # Get relevant documents
     docs_retrieve = retriever.get_relevant_documents(cleaned_prompt)
@@ -966,8 +963,6 @@ def generate_user_input(cleaned_prompt):
 
 
 def generate_prompt_conversation(user_prompt, admin_id, bot_id, user_id):
-    # memory_snapshot = monitor_memory()
-    # start_time = time.time()
     logger.info("Starting prompt_conversation request")
 
     try:
@@ -1071,15 +1066,6 @@ def generate_prompt_conversation(user_prompt, admin_id, bot_id, user_id):
         translation_start = time.time()
         translations = asyncio.run(generate_translations(generation))
         logger.info(f"Translations completed in {time.time() - translation_start:.2f}s")
-
-        # Save conversation
-        # db_start = time.time()
-        # conversation.add_message("assistant", generation)
-        # save_conversation(conversation)
-        # logger.info(f"Database operation completed in {time.time() - db_start:.2f}s")
-        #
-        # total_time = time.time() - start_time
-        # logger.info(f"Total request processing time: {total_time:.2f}s")
 
         return {
             "generation": generation,
@@ -1468,59 +1454,6 @@ def prompt_conversation_admin(
             self.close_db()
 
 
-def save_conversation(conversation):
-    # memory_snapshot = monitor_memory()
-    try:
-        # db = get_mongodb_client()
-        # conversations = db.conversations
-        # conversation_dict = conversation.to_dict()
-
-        # Remove _id to prevent duplicate key errors
-        #  if "_id" in conversation_dict:
-        #    del conversation_dict["_id"]
-
-        # Update conversation state
-        # conversation_dict["is_first_message"] = False
-
-        # MongoDB operation with error handling
-        # result = conversations.update_one(
-        # {"session_id": conversation.session_id},
-        #    {"$set": conversation_dict},
-        #     upsert=True,
-        # )
-
-        # Verify operation success
-        # if result.modified_count > 0 or result.upserted_id:
-        #    logger.info(f"Successfully saved conversation {conversation.session_id}")
-        # else:
-        #   logger.warning(f"No changes made to conversation {conversation.session_id}")
-
-        return result
-    except Exception as e:
-        logger.error(f"Failed to save conversation: {str(e)}")
-        raise
-    finally:
-        # Clean up and memory management
-        # compare_memory(memory_snapshot)
-        gc.collect()
-        # del conversation_dict  # Explicit cleanup of large dictionary
-
-
-def save_interaction(interaction_type, data):
-    # db = get_mongodb_client()
-    # interactions = db.interactions
-
-    # new_interaction = {
-    # "timestamp": datetime.now().isoformat(),
-    # "type": interaction_type,
-    # "data": data,
-    # }
-
-    # interactions.insert_one(new_interaction)
-    # return {"message": f"{interaction_type} interaction saved successfully"}
-    return {"message": "TODO interaction saved successfully"}
-
-
 def handle_mongodb_operation(operation):
     try:
         return operation()
@@ -1561,32 +1494,6 @@ def get_relevant_feedback_data(cleaned_prompt, db):
     except Exception as e:
         logger.error(f"Error retrieving feedback answers: {str(e)}")
         return []
-
-
-"""
- def get_relevant_feedback_data(cleaned_prompt, db):
-    logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
-    try:
-        db.feedback_data.create_index([("user_input", "text")])
-        logger.info("create text index for feedback search")
-
-        similar_answers = (
-          db.feedback_data.find(
-                {
-                    "$text": {"$search": cleaned_prompt},
-                    "correct_answer": {"$exists": True, "$ne": ""},
-                }
-            )
-            .sort([("score", {"$meta": "textScore"}), ("timestamp", -1)])
-            .limit(3)
-        )
-        feedback_list = list(similar_answers)
-        logger.info(f"found {len(feedback_list)} potential feedback matches")
-        return feedback_list
-    except Exception as e:
-        logger.error(f"Error retrieving feedback answers: {str(e)}")
-       return []
-"""
 
 
 def compare_answers(generation, feedback_answers, docs_to_use):
@@ -1632,7 +1539,7 @@ def compare_answers(generation, feedback_answers, docs_to_use):
         return None
 
 
-def check_answer_with_openai(user_question, matches):
+def check_answer_mongo_and_openai(user_question, matches):
     if not matches:
         return None
 
@@ -1644,19 +1551,7 @@ def check_answer_with_openai(user_question, matches):
         answer = match.get("correct_answer", "N/A")
         prompt += f"\nQ{idx + 1}: {question}\nA{idx + 1}: {answer}\n"
 
-    prompt += f"\nGiven the above answers, please generate the **best possible response** for the user question: '{user_question}'.\n"
-    prompt += "Ensure the response is clear, concise, and well-structured. If no answer fully matches, synthesize the best information available."
-    prompt += f"\nGenerate a **direct and concise answer** to the user's question: '{user_question}'.\n"
-    prompt += """
-        You must determine the best possible response to the user's question: '{user_question}'.
-        - If at least one answer contains relevant information, **return the best-matching answer exactly as found**.
-        - Do **not** modify, rephrase, or summarize the answer. **Return it word-for-word**.
-        - If multiple answers match, **prioritize the most recent one (use timestamps)**.
-        - If no relevant answer exists, respond with **only**: `"NO"`
-        - Do **not** include: "The information provided does not specify details about..." or "I need more context."
-        - Do **not** say "Yes, I have information about..." Just return the relevant answer.
-        - Do not generate "A1:","A2:","A3:","A4:", or any additional responses.
-    """
+    prompt += PROMPT_TEMPLATE_MONGO_AND_OPENAI.format(user_question=user_question)
 
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
@@ -1666,7 +1561,7 @@ def check_answer_with_openai(user_question, matches):
     client = OpenAI(api_key=api_key)
 
     response = client.chat.completions.create(
-        model="gpt-4",
+        model=OPENAI_MODEL,
         messages=[
             {
                 "role": "system",
