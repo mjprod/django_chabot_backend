@@ -296,7 +296,8 @@ If you encounter any issues during setup, our support team is ready to assist yo
 
 
 PROMPT_TEMPLATE_MONGO_AND_OPENAI = """
-            Given the above answers, please generate the **best possible response** for the user's question: '{user_question}'.
+            Given the above answers, 
+            please generate the **best possible response** for the user's question: '{user_question}'.
             Ensure the response is clear, concise, and well-structured. If no answer fully matches,
             synthesize the best information available.
 

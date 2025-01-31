@@ -805,7 +805,8 @@ def is_finalizing_phrase(phrase):
         },
         {
             "role": "user",
-            "content": f"Does the following phrase indicate the end of a conversation?\n\nPhrase: \"{phrase}\"\n\n \
+            "content": f"Does the following phrase indicate the end of a conversation? \
+                \n\nPhrase: \"{phrase}\"\n\n \
                 Respond with 'Yes' or 'No'.",
         },
     ]
