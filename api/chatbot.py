@@ -1639,6 +1639,7 @@ def check_answer_with_openai(user_question, matches):
         - If no relevant answer exists, respond with **only**: `"NO"`
         - Do **not** include: "The information provided does not specify details about..." or "I need more context."
         - Do **not** say "Yes, I have information about..." Just return the relevant answer.
+        - Do not generate "A1:","A2:","A3:","A4:", or any additional responses.
     """
 
     api_key = os.getenv("OPENAI_API_KEY")
