@@ -1,6 +1,5 @@
 from pymongo import MongoClient
 from datetime import datetime
-import logging
 import json
 
 # MongoDB Configuration
@@ -58,7 +57,6 @@ def insert_feedback(user_input, correct_answer, language="en"):
 
         # Inserir o documento no MongoDB
         result = collection.insert_one(translated_data)
-        logger.info(f"Feedback inserido com sucesso: ID {result.inserted_id}")
 
         # Fechar conexão
         client.close()
@@ -66,7 +64,6 @@ def insert_feedback(user_input, correct_answer, language="en"):
         return {"message": "Feedback saved successfully", "id": str(result.inserted_id)}
 
     except Exception as e:
-        logger.error(f"Erro ao inserir no MongoDB: {e}")
         return {"error": f"Database operation failed: {str(e)}"}
 
 
@@ -76,7 +73,6 @@ json_data = """[
         "user_input": "您接受哪些存款支付方式？",
         "correct_answer": "你好！我们目前接受以下存款支付方式：ATM转账、网上转账和电子钱包（E-Wallet）。每种方式都是安全的，处理时间在5-30分钟内。在存款页面选择最适合您的方式。"
     },
-   
 ]"""
 
 # Exemplo de uso

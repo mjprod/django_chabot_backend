@@ -10,7 +10,6 @@ import re
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from typing import List
-from unittest import result
 
 import requests
 from bson import ObjectId
@@ -806,7 +805,8 @@ def is_finalizing_phrase(phrase):
         },
         {
             "role": "user",
-            "content": f"Does the following phrase indicate the end of a conversation?\n\nPhrase: \"{phrase}\"\n\nRespond with 'Yes' or 'No'.",
+            "content": f"Does the following phrase indicate the end of a conversation?\n\nPhrase: \"{phrase}\"\n\n \
+                Respond with 'Yes' or 'No'.",
         },
     ]
 
@@ -962,7 +962,9 @@ def generate_user_input(cleaned_prompt):
     }
 
 
-def generate_prompt_conversation(user_prompt, admin_id, bot_id, user_id):
+def generate_prompt_conversation(
+    user_prompt, conversation_id, admin_id, bot_id, user_id
+):
     logger.info("Starting prompt_conversation request")
 
     try:

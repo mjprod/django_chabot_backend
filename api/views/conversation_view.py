@@ -413,7 +413,7 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
             # Extract validated data
             prompt = input_serializer.validated_data["prompt"]
             conversation_id = input_serializer.validated_data["conversation_id"]
-            user_id = input_serializer.validated_data["user_id"]
+            # user_id = input_serializer.validated_data["user_id"]
 
             if use_mongo:
                 print("Using Mongo DB")
@@ -440,7 +440,7 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
             validated_data = input_serializer.validated_data
 
             # Generate AI response
-            generation_start = time.time()
+            # generation_start = time.time()
             logger.info("Starting AI response generation")
 
             response = prompt_conversation_admin(
@@ -453,7 +453,7 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
                 language_code=language_code,
             )
 
-            generation_time = time.time() - generation_start
+            # generation_time = time.time() - generation_start
             # if generation_time < 3:
             time.sleep(6)
 
@@ -565,7 +565,7 @@ class PromptConversationView(MongoDBMixin, APIView):
             validated_data = input_serializer.validated_data
 
             # Generate AI response
-            generation_start = time.time()
+            # generation_start = time.time()
             logger.info("Starting AI response generation")
 
             response = prompt_conversation(
