@@ -155,7 +155,8 @@ def get_stopwords(language="en"):
     try:
         # Try fetching stopwords from NLTK
         return set(stopwords.words(language))
-    except:
+    except Exception as e:
+        print(f"Error connecting to MongoDB: {e}")
         # If NLTK stopwords are unavailable, use custom stopwords
         return custom_stopwords.get(language, set())
 
@@ -215,8 +216,8 @@ def check_answer_mongo_and_openai(user_question, matches):
     print(prompt)
     api_key = ""
     if not api_key:
-        logger.error("Missing OPENAI_API_KEY environment variable.")
-        return text
+        # logger.error("Missing OPENAI_API_KEY environment variable.")
+        return None
 
     client = OpenAI(api_key=api_key)
 
@@ -273,7 +274,7 @@ def fuzzy_match_with_dynamic_context(
         correct_answer = doc.get("correct_answer", "")
         timestamp = doc.get("timestamp", "")
 
-        combined_text = f"{user_input} {timestamp}".strip()
+        combined_text = f"{correct_answer} {user_input} {timestamp}".strip()
         # Extract keywords from the document
         # document_keywords = extract_keywords(combined_text, language)
         # print(f"Document Keywords: {document_keywords}")

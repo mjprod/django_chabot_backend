@@ -150,7 +150,8 @@ def get_stopwords(language="en"):
     try:
         # Try fetching stopwords from NLTK
         return set(stopwords.words(language))
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         # If NLTK stopwords are unavailable, use custom stopwords
         return custom_stopwords.get(language, set())
 
