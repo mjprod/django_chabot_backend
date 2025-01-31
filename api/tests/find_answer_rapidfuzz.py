@@ -25,25 +25,121 @@ except Exception as e:
     exit()
 
 # Download NLTK stopwords (if not already downloaded)
-nltk.download('stopwords')
+nltk.download("stopwords")
 custom_stopwords = {
     "ms_MY": {
-        "dan", "untuk", "dengan", "yang", "di", "ke", "atau", "pada", "adalah", "dari", "ini", 
-        "itu", "saya", "kami", "anda", "mereka", "semua", "tersebut", "sebuah", "oleh", "pada", 
-        "sama", "maksud", "apa", "akan", "dapat", "belum", "lebih"
+        "dan",
+        "untuk",
+        "dengan",
+        "yang",
+        "di",
+        "ke",
+        "atau",
+        "pada",
+        "adalah",
+        "dari",
+        "ini",
+        "itu",
+        "saya",
+        "kami",
+        "anda",
+        "mereka",
+        "semua",
+        "tersebut",
+        "sebuah",
+        "oleh",
+        "pada",
+        "sama",
+        "maksud",
+        "apa",
+        "akan",
+        "dapat",
+        "belum",
+        "lebih",
         # Add more Malay stopwords if needed
     },
     "zh_CN": {
-        "的", "了", "在", "是", "我", "你", "他", "她", "它", "我们", "你们", "他们", "这个", "那个", 
-        "的", "和", "与", "就", "也", "不", "都", "而", "为", "上", "下", "对", "和", "说", "来", 
-        "去", "为", "要", "自己", "有", "可以", "是不是", "等", "如果"
+        "的",
+        "了",
+        "在",
+        "是",
+        "我",
+        "你",
+        "他",
+        "她",
+        "它",
+        "我们",
+        "你们",
+        "他们",
+        "这个",
+        "那个",
+        "的",
+        "和",
+        "与",
+        "就",
+        "也",
+        "不",
+        "都",
+        "而",
+        "为",
+        "上",
+        "下",
+        "对",
+        "和",
+        "说",
+        "来",
+        "去",
+        "为",
+        "要",
+        "自己",
+        "有",
+        "可以",
+        "是不是",
+        "等",
+        "如果",
     },
     "zh_TW": {
-        "的", "了", "在", "是", "我", "你", "他", "她", "它", "我們", "你們", "他們", "這個", 
-        "那個", "的", "和", "與", "就", "也","不", "都", "而", "為", "上", "下", "對", "和",
-        "說", "來", "去", "為", "要", "自己", "有", "可以", "是不是", "等", "如果"
-    }
+        "的",
+        "了",
+        "在",
+        "是",
+        "我",
+        "你",
+        "他",
+        "她",
+        "它",
+        "我們",
+        "你們",
+        "他們",
+        "這個",
+        "那個",
+        "的",
+        "和",
+        "與",
+        "就",
+        "也",
+        "不",
+        "都",
+        "而",
+        "為",
+        "上",
+        "下",
+        "對",
+        "和",
+        "說",
+        "來",
+        "去",
+        "為",
+        "要",
+        "自己",
+        "有",
+        "可以",
+        "是不是",
+        "等",
+        "如果",
+    },
 }
+
 
 def get_stopwords(language="en"):
     """
@@ -57,6 +153,7 @@ def get_stopwords(language="en"):
     except:
         # If NLTK stopwords are unavailable, use custom stopwords
         return custom_stopwords.get(language, set())
+
 
 # Function to extract dynamic keywords (improved version)
 def extract_keywords(text, language="en"):
@@ -75,15 +172,19 @@ def extract_keywords(text, language="en"):
         words = jieba.cut(text)
     else:
         # Extract words from non-Chinese text
-        words = re.findall(r'\b[A-Za-z]{2,}\b', text.lower())
+        words = re.findall(r"\b[A-Za-z]{2,}\b", text.lower())
 
     # keywords = [word for word in words if word not in stop_words]
-    keywords = [word for word in words if word not in stop_words and len(word.strip()) > 1]
+    keywords = [
+        word for word in words if word not in stop_words and len(word.strip()) > 1
+    ]
 
     return set(keywords)
 
 
-def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", language = "en", threshold=80):
+def fuzzy_match_with_dynamic_context(
+    query, collection_name="feedback_data", language="en", threshold=80
+):
     """
     Perform fuzzy matching with dynamic keyword extraction for context.
     :param query: User's query as a string.
@@ -123,10 +224,12 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
         similarity = fuzz.partial_ratio(query, combined_text)
 
         # Calculate keyword overlap score
-        overlap_score = len(query_keywords & document_keywords) / max(len(query_keywords), 1) * 100
+        overlap_score = (
+            len(query_keywords & document_keywords) / max(len(query_keywords), 1) * 100
+        )
 
         # Combine similarity and keyword overlap for the final score
-        final_score = (similarity * 0.6 + overlap_score * 0.4)
+        final_score = similarity * 0.6 + overlap_score * 0.4
 
         # Only include matches above the threshold
         if final_score >= threshold:
@@ -135,14 +238,12 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
     # Sort matches by similarity in descending order
     matches = sorted(matches, key=lambda x: -x["similarity"])
 
-   # Return the first correct_answer if matches exist, otherwise return False
+    # Return the first correct_answer if matches exist, otherwise return False
     if matches:
-        return matches[0]['correct_answer']      
+        return matches[0]["correct_answer"]
     else:
-        return False    
-    
+        return False
 
-   
 
 # Define test queries
 queries = [
@@ -153,13 +254,15 @@ queries = [
     # "Any restrictions to play a games",
     # "what is the authentication process",
     # "Apakah kaedah pembayaran yang anda",
-     "Apak deposit yang anda terima?",
+    "Apak deposit yang anda terima?",
     # "Berapa lama masa yang diperlukan untuk deposit diproses?"
 ]
 
 # Run Fuzzy Matching for Each Query
 for query in queries:
-    result = fuzzy_match_with_dynamic_context(query, "feedback_data_ms_MY", "ms_MY", threshold=80)  # Lower threshold for better results
+    result = fuzzy_match_with_dynamic_context(
+        query, "feedback_data_ms_MY", "ms_MY", threshold=80
+    )  # Lower threshold for better results
 
     if result:
         print(f"\n '{result}'")

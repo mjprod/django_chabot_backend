@@ -787,6 +787,7 @@ async def generate_translations(generation):
         logger.error(f"Error in generate_translations: {str(e)}", exc_info=True)
         raise
 
+
 def is_finalizing_phrase(phrase):
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
@@ -798,10 +799,16 @@ def is_finalizing_phrase(phrase):
     Analyzes whether a given phrase is likely to be a conversation-ender.
     """
     messages = [
-        {"role": "system", "content": "You are an assistant that determines if a phrase ends a conversation."},
-        {"role": "user", "content": f"Does the following phrase indicate the end of a conversation?\n\nPhrase: \"{phrase}\"\n\nRespond with 'Yes' or 'No'."}
+        {
+            "role": "system",
+            "content": "You are an assistant that determines if a phrase ends a conversation.",
+        },
+        {
+            "role": "user",
+            "content": f"Does the following phrase indicate the end of a conversation?\n\nPhrase: \"{phrase}\"\n\nRespond with 'Yes' or 'No'.",
+        },
     ]
-    
+
     try:
         response = client.chat.completions.create(
             model=OPENAI_MODEL,
@@ -809,7 +816,7 @@ def is_finalizing_phrase(phrase):
             temperature=0,
             timeout=OPENAI_TIMEOUT,
         )
-       
+
         result = response.choices[0].message.content.strip()
         if result.lower() == "yes":
             return "true"
@@ -819,6 +826,7 @@ def is_finalizing_phrase(phrase):
     except Exception as e:
         print(f"Error during OpenAI API call: {e}")
         return False
+
 
 def translate_en_to_cn(input_text):
     logger.info("Translating text to Chinese...")
@@ -957,9 +965,7 @@ def generate_user_input(cleaned_prompt):
     }
 
 
-def generate_prompt_conversation(
-    user_prompt, admin_id, bot_id, user_id
-):
+def generate_prompt_conversation(user_prompt, admin_id, bot_id, user_id):
     # memory_snapshot = monitor_memory()
     # start_time = time.time()
     logger.info("Starting prompt_conversation request")
@@ -1089,13 +1095,11 @@ def generate_prompt_conversation(
         # compare_memory(memory_snapshot)
         gc.collect()
 
-def prompt_conversation(
-    self, user_prompt, language_code=LANGUAGE_DEFAULT):
+
+def prompt_conversation(self, user_prompt, language_code=LANGUAGE_DEFAULT):
 
     start_time = time.time()
-    logger.info(
-        f"Starting prompt_conversation request - Language: {language_code}"
-    )
+    logger.info(f"Starting prompt_conversation request - Language: {language_code}")
     db = None
 
     try:
@@ -1155,7 +1159,7 @@ def prompt_conversation(
                 )
 
             response = client.chat.completions.create(
-            model=OPENAI_MODEL,
+                model=OPENAI_MODEL,
                 messages=messages_history,
                 temperature=MAX_TEMPERATURE,
                 max_tokens=MAX_TOKENS,
@@ -1179,6 +1183,7 @@ def prompt_conversation(
     finally:
         if db is not None:
             self.close_db()
+
 
 def prompt_conversation_history(
     self, user_prompt, conversation_id, admin_id, bot_id, user_id
@@ -1279,6 +1284,8 @@ def prompt_conversation_history(
 this is the new vector store function that will be used to get the vector store for the language
 the user has selected
 """
+
+
 def get_vector_store(language_code: str = LANGUAGE_DEFAULT):
     try:
         if language_code not in SUPPORTED_LANGUAGES:
@@ -1318,8 +1325,17 @@ and use history in our response generation for context and conversation
 the focus here is that there is no need to translate or touch the user input,
 speed is the key here
 """
+
+
 def prompt_conversation_admin(
-    self, user_prompt, conversation_id, admin_id, bot_id, user_id, language_code=LANGUAGE_DEFAULT):
+    self,
+    user_prompt,
+    conversation_id,
+    admin_id,
+    bot_id,
+    user_id,
+    language_code=LANGUAGE_DEFAULT,
+):
 
     start_time = time.time()
     logger.info(
@@ -1384,7 +1400,7 @@ def prompt_conversation_admin(
                 )
 
             response = client.chat.completions.create(
-            model=OPENAI_MODEL,
+                model=OPENAI_MODEL,
                 messages=messages_history,
                 temperature=MAX_TEMPERATURE,
                 max_tokens=MAX_TOKENS,
@@ -1624,8 +1640,8 @@ def check_answer_with_openai(user_question, matches):
     prompt += "Here are some possible answers found in the database:\n"
 
     for idx, match in enumerate(matches):
-        question = match.get('user_input', 'N/A')
-        answer = match.get('correct_answer', 'N/A')
+        question = match.get("user_input", "N/A")
+        answer = match.get("correct_answer", "N/A")
         prompt += f"\nQ{idx + 1}: {question}\nA{idx + 1}: {answer}\n"
 
     prompt += f"\nGiven the above answers, please generate the **best possible response** for the user question: '{user_question}'.\n"
@@ -1648,18 +1664,23 @@ def check_answer_with_openai(user_question, matches):
         return "false"
 
     client = OpenAI(api_key=api_key)
-   
+
     response = client.chat.completions.create(
         model="gpt-4",
-        messages=[{"role": "system", "content": "You are an AI assistant evaluating answers to user questions."},
-                  {"role": "user", "content": prompt}],
-        temperature=0.1
+        messages=[
+            {
+                "role": "system",
+                "content": "You are an AI assistant evaluating answers to user questions.",
+            },
+            {"role": "user", "content": prompt},
+        ],
+        temperature=0.1,
     )
 
     final_response = response.choices[0].message.content.strip()
-    final_response = re.sub(r'^["\']|["\']$', '', final_response)
+    final_response = re.sub(r'^["\']|["\']$', "", final_response)
 
     if "no" in final_response.lower() and len(final_response) < 5:
-        return None 
+        return None
 
     return final_response

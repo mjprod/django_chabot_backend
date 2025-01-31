@@ -10,6 +10,7 @@ MONGODB_CLUSTER = "chatbotdb-dev.0bcs2.mongodb.net"
 
 MONGODB_DATABASE = "chatbotdb"
 
+
 def insert_feedback(user_input, correct_answer, language="en"):
     try:
         client = MongoClient(
@@ -52,7 +53,7 @@ def insert_feedback(user_input, correct_answer, language="en"):
 
     try:
         # Conectar ao banco de dados
-       
+
         collection = db[collection_name]
 
         # Inserir o documento no MongoDB
@@ -70,13 +71,13 @@ def insert_feedback(user_input, correct_answer, language="en"):
 
 
 # Simulação de JSON recebido (pode ser de um arquivo ou API)
-json_data = '''[
+json_data = """[
     {
         "user_input": "您接受哪些存款支付方式？",
         "correct_answer": "你好！我们目前接受以下存款支付方式：ATM转账、网上转账和电子钱包（E-Wallet）。每种方式都是安全的，处理时间在5-30分钟内。在存款页面选择最适合您的方式。"
     },
    
-]'''
+]"""
 
 # Exemplo de uso
 if __name__ == "__main__":
@@ -87,7 +88,7 @@ if __name__ == "__main__":
     for entry in data:
         user_input = entry["user_input"]
         correct_answer = entry["correct_answer"]
-    
+
         # Definir o idioma baseado no contexto (ajuste conforme necessário)
         language = "zh_CN"  # Exemplo para chinês simplificado, mude conforme necessário
 

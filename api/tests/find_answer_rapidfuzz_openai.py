@@ -11,7 +11,7 @@ from datetime import datetime
 # MongoDB Configuration
 MONGODB_USERNAME = "dev"
 MONGODB_PASSWORD = "Yrr0szjwTuE1BU7Y"
-#MONGODB_CLUSTER = "chatbotdb-dev.0bcs2.mongodb.net"
+# MONGODB_CLUSTER = "chatbotdb-dev.0bcs2.mongodb.net"
 MONGODB_CLUSTER = "chatbotdb-staging.0bcs2.mongodb.net"
 
 MONGODB_DATABASE = "chatbotdb"
@@ -30,25 +30,121 @@ except Exception as e:
     exit()
 
 # Download NLTK stopwords (if not already downloaded)
-nltk.download('stopwords')
+nltk.download("stopwords")
 custom_stopwords = {
     "ms_MY": {
-        "dan", "untuk", "dengan", "yang", "di", "ke", "atau", "pada", "adalah", "dari", "ini", 
-        "itu", "saya", "kami", "anda", "mereka", "semua", "tersebut", "sebuah", "oleh", "pada", 
-        "sama", "maksud", "apa", "akan", "dapat", "belum", "lebih"
+        "dan",
+        "untuk",
+        "dengan",
+        "yang",
+        "di",
+        "ke",
+        "atau",
+        "pada",
+        "adalah",
+        "dari",
+        "ini",
+        "itu",
+        "saya",
+        "kami",
+        "anda",
+        "mereka",
+        "semua",
+        "tersebut",
+        "sebuah",
+        "oleh",
+        "pada",
+        "sama",
+        "maksud",
+        "apa",
+        "akan",
+        "dapat",
+        "belum",
+        "lebih",
         # Add more Malay stopwords if needed
     },
     "zh_CN": {
-        "的", "了", "在", "是", "我", "你", "他", "她", "它", "我们", "你们", "他们", "这个", "那个", 
-        "的", "和", "与", "就", "也", "不", "都", "而", "为", "上", "下", "对", "和", "说", "来", 
-        "去", "为", "要", "自己", "有", "可以", "是不是", "等", "如果"
+        "的",
+        "了",
+        "在",
+        "是",
+        "我",
+        "你",
+        "他",
+        "她",
+        "它",
+        "我们",
+        "你们",
+        "他们",
+        "这个",
+        "那个",
+        "的",
+        "和",
+        "与",
+        "就",
+        "也",
+        "不",
+        "都",
+        "而",
+        "为",
+        "上",
+        "下",
+        "对",
+        "和",
+        "说",
+        "来",
+        "去",
+        "为",
+        "要",
+        "自己",
+        "有",
+        "可以",
+        "是不是",
+        "等",
+        "如果",
     },
     "zh_TW": {
-        "的", "了", "在", "是", "我", "你", "他", "她", "它", "我們", "你們", "他們", "這個", 
-        "那個", "的", "和", "與", "就", "也","不", "都", "而", "為", "上", "下", "對", "和",
-        "說", "來", "去", "為", "要", "自己", "有", "可以", "是不是", "等", "如果"
-    }
+        "的",
+        "了",
+        "在",
+        "是",
+        "我",
+        "你",
+        "他",
+        "她",
+        "它",
+        "我們",
+        "你們",
+        "他們",
+        "這個",
+        "那個",
+        "的",
+        "和",
+        "與",
+        "就",
+        "也",
+        "不",
+        "都",
+        "而",
+        "為",
+        "上",
+        "下",
+        "對",
+        "和",
+        "說",
+        "來",
+        "去",
+        "為",
+        "要",
+        "自己",
+        "有",
+        "可以",
+        "是不是",
+        "等",
+        "如果",
+    },
 }
+
 
 def get_stopwords(language="en"):
     """
@@ -62,6 +158,7 @@ def get_stopwords(language="en"):
     except:
         # If NLTK stopwords are unavailable, use custom stopwords
         return custom_stopwords.get(language, set())
+
 
 # Function to extract dynamic keywords (improved version)
 def extract_keywords(text, language="en"):
@@ -80,12 +177,15 @@ def extract_keywords(text, language="en"):
         words = jieba.cut(text)
     else:
         # Extract words from non-Chinese text
-        words = re.findall(r'\b[A-Za-z]{2,}\b', text.lower())
+        words = re.findall(r"\b[A-Za-z]{2,}\b", text.lower())
 
     # keywords = [word for word in words if word not in stop_words]
-    keywords = [word for word in words if word not in stop_words and len(word.strip()) > 1]
+    keywords = [
+        word for word in words if word not in stop_words and len(word.strip()) > 1
+    ]
 
     return set(keywords)
+
 
 def check_answer_with_openai(user_question, matches):
     if not matches:
@@ -95,9 +195,9 @@ def check_answer_with_openai(user_question, matches):
     prompt += "Here are some possible answers found in the database:\n"
 
     for idx, match in enumerate(matches):
-        question = match.get('user_input', 'N/A')
-        answer = match.get('correct_answer', 'N/A')
-        prompt += f"\nQ{idx + 1}: {question}\nA{idx + 1}: {answer}\n"   
+        question = match.get("user_input", "N/A")
+        answer = match.get("correct_answer", "N/A")
+        prompt += f"\nQ{idx + 1}: {question}\nA{idx + 1}: {answer}\n"
 
     prompt += f"\nGiven the above answers, please generate the **best possible response** for the user question: '{user_question}'.\n"
     prompt += "Ensure the response is clear, concise, and well-structured. If no answer fully matches, synthesize the best information available."
@@ -113,29 +213,36 @@ def check_answer_with_openai(user_question, matches):
     """
 
     print(prompt)
-    api_key = ''
+    api_key = ""
     if not api_key:
         logger.error("Missing OPENAI_API_KEY environment variable.")
         return text
 
     client = OpenAI(api_key=api_key)
-   
+
     response = client.chat.completions.create(
         model="gpt-4",
-        messages=[{"role": "system", "content": "You are an AI assistant evaluating answers to user questions."},
-                  {"role": "user", "content": prompt}],
-        temperature=0.1
+        messages=[
+            {
+                "role": "system",
+                "content": "You are an AI assistant evaluating answers to user questions.",
+            },
+            {"role": "user", "content": prompt},
+        ],
+        temperature=0.1,
     )
 
     final_response = response.choices[0].message.content.strip()
 
     if "no" in final_response.lower() and len(final_response) < 5:
-        return None 
+        return None
 
     return final_response
 
 
-def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", language = "en", threshold=10):
+def fuzzy_match_with_dynamic_context(
+    query, collection_name="feedback_data", language="en", threshold=10
+):
     """
     Perform fuzzy matching with dynamic keyword extraction for context.
     :param query: User's query as a string.
@@ -148,7 +255,9 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
     index_information = collection.index_information()
     print(index_information)
     # Fetch all documents with 'user_input' and 'correct_answer'
-    documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}))
+    documents = list(
+        collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1})
+    )
 
     if not documents:
         print(f"No documents found in collection '{collection_name}'.")
@@ -195,12 +304,14 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
                 match["timestamp"] = datetime.min  # Set to minimum if invalid format
 
     # Sort by similarity (descending) and then by timestamp (latest first)
-    matches = sorted(matches, key=lambda x: (-x["similarity"], -x["timestamp"].timestamp()))
+    matches = sorted(
+        matches, key=lambda x: (-x["similarity"], -x["timestamp"].timestamp())
+    )
     # print(f"@@ AFTER Found {str(matches)} matches.")
 
-   # Return the first correct_answer if matches exist, otherwise return False
+    # Return the first correct_answer if matches exist, otherwise return False
     if matches:
-    # Check if the first match has a similarity score greater than 80
+        # Check if the first match has a similarity score greater than 80
         if matches[0]["similarity"] > 80:
             best_answer = matches[0]["correct_answer"]
             print("\nHigh Similarity Match Found:")
@@ -208,10 +319,10 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
             return best_answer  # Return immediately if it's a strong match
 
         # Otherwise, proceed with OpenAI validation
-        limited_matches = matches[:5]  
+        limited_matches = matches[:5]
 
         openai_response = check_answer_with_openai(query, limited_matches)
-    
+
         if openai_response:
             print("\nOpenAI Response:")
             print(openai_response)
@@ -220,9 +331,7 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data", lan
             print("No matches found.")
     else:
         print("No matches found.")
-  
 
-   
 
 # Define test queries
 queries = [
@@ -234,15 +343,17 @@ queries = [
     # "what is the authentication process",
     # "Apakah kaedah pembayaran yang anda",
     #  "Apak deposit yang anda terima?",
-     # "Berapa lama masa yang diperlukan untuk deposit diproses?",
-     "DO you have any information of Leo?"
+    # "Berapa lama masa yang diperlukan untuk deposit diproses?",
+    "DO you have any information of Leo?"
 ]
 
 # Run Fuzzy Matching for Each Query
 for query in queries:
-    result = fuzzy_match_with_dynamic_context(query, "feedback_data_en", "en", threshold=10)  # Lower threshold for better results
+    result = fuzzy_match_with_dynamic_context(
+        query, "feedback_data_en", "en", threshold=10
+    )  # Lower threshold for better results
 
     # if result:
-        # print(f"\n '{result}'")
+    # print(f"\n '{result}'")
     # else:
-        # print(f"*******--No relevant matches found for query: '{query}'.")
+    # print(f"*******--No relevant matches found for query: '{query}'.")

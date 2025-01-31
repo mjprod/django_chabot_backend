@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from ..mixins.mongodb_mixin import MongoDBMixin
-from ..serializers import CaptureFeedbackSerializer,CaptureFeedbackSimpleSerializer
+from ..serializers import CaptureFeedbackSerializer, CaptureFeedbackSimpleSerializer
 
 from ..chatbot import (
     translate_and_clean,
@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 
 # TODO: Implement confidence score for feedback
-'''
+"""
 class CaptureFeedbackView(MongoDBMixin, APIView):
     def post(self, request):
         start_time = time.time()
@@ -160,7 +160,8 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
                 {"error": f"Failed to retrieve feedback: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-'''
+"""
+
 
 class CaptureFeedbackView(MongoDBMixin, APIView):
     def post(self, request):
@@ -189,11 +190,10 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
             logger.info("Processing feedback translations")
             translated_data = {
                 "user_input": transformed_data["user_input"],
-                "correct_answer":
-                    transformed_data.get("correct_answer", ""),
-                "ai_response" : "",
-                "correct_bool" : False ,
-                "chat_rating" : 0, 
+                "correct_answer": transformed_data.get("correct_answer", ""),
+                "ai_response": "",
+                "correct_bool": False,
+                "chat_rating": 0,
                 "conversation_id": "",
                 "timestamp": datetime.now().isoformat(),
                 "metadata": {
@@ -301,7 +301,8 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
                 {"error": f"Failed to retrieve feedback: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-        
+
+
 class CaptureFeedbackMultiView(MongoDBMixin, APIView):
     def post(self, request):
         start_time = time.time()
