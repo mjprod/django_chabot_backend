@@ -10,7 +10,6 @@ import re
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from typing import List
-from unittest import result
 
 import requests
 from bson import ObjectId
@@ -53,6 +52,7 @@ from ai_config.ai_prompts import (
     CONFIDENCE_GRADER_PROMPT,
     TRANSLATION_EN_TO_CN_PROMPT,
     RAG_PROMPT_TEMPLATE,
+    PROMPT_TEMPLATE_MONGO_AND_OPENAI,
 )
 
 
@@ -787,6 +787,7 @@ async def generate_translations(generation):
         logger.error(f"Error in generate_translations: {str(e)}", exc_info=True)
         raise
 
+
 def is_finalizing_phrase(phrase):
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
@@ -798,10 +799,18 @@ def is_finalizing_phrase(phrase):
     Analyzes whether a given phrase is likely to be a conversation-ender.
     """
     messages = [
-        {"role": "system", "content": "You are an assistant that determines if a phrase ends a conversation."},
-        {"role": "user", "content": f"Does the following phrase indicate the end of a conversation?\n\nPhrase: \"{phrase}\"\n\nRespond with 'Yes' or 'No'."}
+        {
+            "role": "system",
+            "content": "You are an assistant that determines if a phrase ends a conversation.",
+        },
+        {
+            "role": "user",
+            "content": f"Does the following phrase indicate the end of a conversation? \
+                \n\nPhrase: \"{phrase}\"\n\n \
+                Respond with 'Yes' or 'No'.",
+        },
     ]
-    
+
     try:
         response = client.chat.completions.create(
             model=OPENAI_MODEL,
@@ -809,7 +818,7 @@ def is_finalizing_phrase(phrase):
             temperature=0,
             timeout=OPENAI_TIMEOUT,
         )
-       
+
         result = response.choices[0].message.content.strip()
         if result.lower() == "yes":
             return "true"
@@ -819,6 +828,7 @@ def is_finalizing_phrase(phrase):
     except Exception as e:
         print(f"Error during OpenAI API call: {e}")
         return False
+
 
 def translate_en_to_cn(input_text):
     logger.info("Translating text to Chinese...")
@@ -880,8 +890,6 @@ def translate_en_to_ms(input_text, to_lang="ms", model="base"):
     try:
         print(f"Sending translation request for: {input_text}")  # Debug print
         response = requests.post(url, json=payload, headers=headers)
-        # print(f"Response status: {response.status_code}")  # Debug print
-        # print(f"Response content: {response.text}")  # Debug print
 
         if response.status_code == 200:
             translation_data = response.json()
@@ -922,8 +930,6 @@ def process_feedback_translation(feedback_data):
 
 # ahsfahssf this is an old functuion that will be removed in prod
 def generate_user_input(cleaned_prompt):
-    # Clean and translate prompt
-    # cleaned_prompt = translate_and_clean(user_prompt)
 
     # Get relevant documents
     docs_retrieve = retriever.get_relevant_documents(cleaned_prompt)
@@ -960,8 +966,6 @@ def generate_user_input(cleaned_prompt):
 def generate_prompt_conversation(
     user_prompt, conversation_id, admin_id, bot_id, user_id
 ):
-    # memory_snapshot = monitor_memory()
-    # start_time = time.time()
     logger.info("Starting prompt_conversation request")
 
     try:
@@ -1066,15 +1070,6 @@ def generate_prompt_conversation(
         translations = asyncio.run(generate_translations(generation))
         logger.info(f"Translations completed in {time.time() - translation_start:.2f}s")
 
-        # Save conversation
-        # db_start = time.time()
-        # conversation.add_message("assistant", generation)
-        # save_conversation(conversation)
-        # logger.info(f"Database operation completed in {time.time() - db_start:.2f}s")
-        #
-        # total_time = time.time() - start_time
-        # logger.info(f"Total request processing time: {total_time:.2f}s")
-
         return {
             "generation": generation,
             "conversation": conversation.to_dict(),
@@ -1088,6 +1083,95 @@ def generate_prompt_conversation(
     finally:
         # compare_memory(memory_snapshot)
         gc.collect()
+
+
+def prompt_conversation(self, user_prompt, language_code=LANGUAGE_DEFAULT):
+
+    start_time = time.time()
+    logger.info(f"Starting prompt_conversation request - Language: {language_code}")
+    db = None
+
+    try:
+        # Database connection with timeout
+        db = self.get_db()
+        logger.debug(
+            f"MongoDB connection established in {time.time() - start_time:.2f}s"
+        )
+
+        # Conversation retrieval
+        existing_conversation = db.conversations.find_one(
+            {"session_id": ""},
+            {"messages": 1, "_id": 0},
+        )
+
+        messages = (
+            existing_conversation.get("messages", [])
+            if existing_conversation
+            else [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
+        )
+
+        # Add user message
+        messages.append(
+            {
+                "role": "user",
+                "content": user_prompt,
+                "timestamp": datetime.now().isoformat(),
+            }
+        )
+
+        # Vector store retrieval
+        vector_start = time.time()
+        try:
+            vector_store = get_vector_store(language_code)
+            docs_retrieve = vector_store.similarity_search(
+                user_prompt, k=3  # Limit to top 3 results for performance
+            )
+            logger.debug(
+                f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
+            )
+        except Exception as ve:
+            logger.error(f"Vector store error: {str(ve)}")
+            docs_retrieve = []
+            print(docs_retrieve)
+
+        # OpenAI response generation
+        generation_start = time.time()
+        try:
+            client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), timeout=OPENAI_TIMEOUT)
+
+            # the history of messages is the context
+            messages_history = messages.copy()
+            if docs_retrieve:
+                context_text = " ".join([doc.page_content for doc in docs_retrieve])
+                messages_history.append(
+                    {"role": "system", "content": f"Relevant context: {context_text}"}
+                )
+
+            response = client.chat.completions.create(
+                model=OPENAI_MODEL,
+                messages=messages_history,
+                temperature=MAX_TEMPERATURE,
+                max_tokens=MAX_TOKENS,
+                timeout=OPENAI_TIMEOUT,
+            )
+            ai_response = response.choices[0].message.content
+            logger.debug(
+                f"AI response generated in {time.time() - generation_start:.2f}s"
+            )
+        except Exception as oe:
+            logger.error(f"OpenAI error: {str(oe)}")
+            raise
+
+        return {
+            "generation": ai_response,
+        }
+
+    except Exception as e:
+        logger.error(f"Error in prompt_conversation: {str(e)}", exc_info=True)
+        raise
+    finally:
+        if db is not None:
+            self.close_db()
 
 
 def prompt_conversation_history(
@@ -1233,7 +1317,14 @@ speed is the key here
 
 
 def prompt_conversation_admin(
-    self, user_prompt, conversation_id, admin_id, bot_id, user_id, language_code=LANGUAGE_DEFAULT):
+    self,
+    user_prompt,
+    conversation_id,
+    admin_id,
+    bot_id,
+    user_id,
+    language_code=LANGUAGE_DEFAULT,
+):
 
     start_time = time.time()
     logger.info(
@@ -1298,7 +1389,7 @@ def prompt_conversation_admin(
                 )
 
             response = client.chat.completions.create(
-            model=OPENAI_MODEL,
+                model=OPENAI_MODEL,
                 messages=messages_history,
                 temperature=MAX_TEMPERATURE,
                 max_tokens=MAX_TOKENS,
@@ -1366,59 +1457,6 @@ def prompt_conversation_admin(
             self.close_db()
 
 
-def save_conversation(conversation):
-    # memory_snapshot = monitor_memory()
-    try:
-        # db = get_mongodb_client()
-        # conversations = db.conversations
-        # conversation_dict = conversation.to_dict()
-
-        # Remove _id to prevent duplicate key errors
-        #  if "_id" in conversation_dict:
-        #    del conversation_dict["_id"]
-
-        # Update conversation state
-        # conversation_dict["is_first_message"] = False
-
-        # MongoDB operation with error handling
-        # result = conversations.update_one(
-        # {"session_id": conversation.session_id},
-        #    {"$set": conversation_dict},
-        #     upsert=True,
-        # )
-
-        # Verify operation success
-        # if result.modified_count > 0 or result.upserted_id:
-        #    logger.info(f"Successfully saved conversation {conversation.session_id}")
-        # else:
-        #   logger.warning(f"No changes made to conversation {conversation.session_id}")
-
-        return result
-    except Exception as e:
-        logger.error(f"Failed to save conversation: {str(e)}")
-        raise
-    finally:
-        # Clean up and memory management
-        # compare_memory(memory_snapshot)
-        gc.collect()
-        # del conversation_dict  # Explicit cleanup of large dictionary
-
-
-def save_interaction(interaction_type, data):
-    # db = get_mongodb_client()
-    # interactions = db.interactions
-
-    # new_interaction = {
-    # "timestamp": datetime.now().isoformat(),
-    # "type": interaction_type,
-    # "data": data,
-    # }
-
-    # interactions.insert_one(new_interaction)
-    # return {"message": f"{interaction_type} interaction saved successfully"}
-    return {"message": "TODO interaction saved successfully"}
-
-
 def handle_mongodb_operation(operation):
     try:
         return operation()
@@ -1459,32 +1497,6 @@ def get_relevant_feedback_data(cleaned_prompt, db):
     except Exception as e:
         logger.error(f"Error retrieving feedback answers: {str(e)}")
         return []
-
-
-"""
- def get_relevant_feedback_data(cleaned_prompt, db):
-    logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
-    try:
-        db.feedback_data.create_index([("user_input", "text")])
-        logger.info("create text index for feedback search")
-
-        similar_answers = (
-          db.feedback_data.find(
-                {
-                    "$text": {"$search": cleaned_prompt},
-                    "correct_answer": {"$exists": True, "$ne": ""},
-                }
-            )
-            .sort([("score", {"$meta": "textScore"}), ("timestamp", -1)])
-            .limit(3)
-        )
-        feedback_list = list(similar_answers)
-        logger.info(f"found {len(feedback_list)} potential feedback matches")
-        return feedback_list
-    except Exception as e:
-        logger.error(f"Error retrieving feedback answers: {str(e)}")
-       return []
-"""
 
 
 def compare_answers(generation, feedback_answers, docs_to_use):
@@ -1528,3 +1540,45 @@ def compare_answers(generation, feedback_answers, docs_to_use):
     except Exception as e:
         logger.error(f"Error comparing answers: {str(e)}")
         return None
+
+
+def check_answer_mongo_and_openai(user_question, matches):
+    if not matches:
+        return None
+
+    prompt = f"User question: {user_question}\n\n"
+    prompt += "Here are some possible answers found in the database:\n"
+
+    for idx, match in enumerate(matches):
+        question = match.get("user_input", "N/A")
+        answer = match.get("correct_answer", "N/A")
+        prompt += f"\nQ{idx + 1}: {question}\nA{idx + 1}: {answer}\n"
+
+    prompt += PROMPT_TEMPLATE_MONGO_AND_OPENAI.format(user_question=user_question)
+
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        logger.error("Missing OPENAI_API_KEY environment variable.")
+        return "false"
+
+    client = OpenAI(api_key=api_key)
+
+    response = client.chat.completions.create(
+        model=OPENAI_MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": "You are an AI assistant evaluating answers to user questions.",
+            },
+            {"role": "user", "content": prompt},
+        ],
+        temperature=0.1,
+    )
+
+    final_response = response.choices[0].message.content.strip()
+    final_response = re.sub(r'^["\']|["\']$', "", final_response)
+
+    if "no" in final_response.lower() and len(final_response) < 5:
+        return None
+
+    return final_response

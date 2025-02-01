@@ -4,11 +4,16 @@ import re
 import nltk
 from nltk.corpus import stopwords
 import jieba
+from openai import OpenAI
+from datetime import datetime
+
 
 # MongoDB Configuration
 MONGODB_USERNAME = "dev"
 MONGODB_PASSWORD = "Yrr0szjwTuE1BU7Y"
-MONGODB_CLUSTER = "chatbotdb-dev.0bcs2.mongodb.net"
+# MONGODB_CLUSTER = "chatbotdb-dev.0bcs2.mongodb.net"
+MONGODB_CLUSTER = "chatbotdb-staging.0bcs2.mongodb.net"
+
 MONGODB_DATABASE = "chatbotdb"
 
 # Connect to MongoDB
@@ -151,7 +156,7 @@ def get_stopwords(language="en"):
         # Try fetching stopwords from NLTK
         return set(stopwords.words(language))
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"Error connecting to MongoDB: {e}")
         # If NLTK stopwords are unavailable, use custom stopwords
         return custom_stopwords.get(language, set())
 
@@ -183,8 +188,62 @@ def extract_keywords(text, language="en"):
     return set(keywords)
 
 
+def check_answer_mongo_and_openai(user_question, matches):
+    if not matches:
+        return None
+
+    prompt = f"User question: {user_question}\n\n"
+    prompt += "Here are some possible answers found in the database:\n"
+
+    for idx, match in enumerate(matches):
+        question = match.get("user_input", "N/A")
+        answer = match.get("correct_answer", "N/A")
+        prompt += f"\nQ{idx + 1}: {question}\nA{idx + 1}: {answer}\n"
+
+    prompt += f"\nGiven the above answers, please generate the **best possible response** for the user question: '{user_question}'.\n"
+    prompt += "Ensure the response is clear, concise, and well-structured. \
+        If no answer fully matches, synthesize the best information available."
+    prompt += f"\nGenerate a **direct and concise answer** to the user's question: '{user_question}'.\n"
+    prompt += """
+        You must determine the best possible response to the user's question: '{user_question}'.
+        - If at least one answer contains relevant information, **return the best-matching answer exactly as found**.
+        - Do **not** modify, rephrase, or summarize the answer. **Return it word-for-word**.
+        - If multiple answers match, **prioritize the most recent one (use timestamps)**.
+        - If no relevant answer exists, respond with **only**: `"NO"`
+        - Do **not** include: "The information provided does not specify details about..." or "I need more context."
+        - Do **not** say "Yes, I have information about..." Just return the relevant answer.
+    """
+
+    print(prompt)
+    api_key = ""
+    if not api_key:
+        # logger.error("Missing OPENAI_API_KEY environment variable.")
+        return None
+
+    client = OpenAI(api_key=api_key)
+
+    response = client.chat.completions.create(
+        model="gpt-4",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are an AI assistant evaluating answers to user questions.",
+            },
+            {"role": "user", "content": prompt},
+        ],
+        temperature=0.1,
+    )
+
+    final_response = response.choices[0].message.content.strip()
+
+    if "no" in final_response.lower() and len(final_response) < 5:
+        return None
+
+    return final_response
+
+
 def fuzzy_match_with_dynamic_context(
-    query, collection_name="feedback_data", language="en", threshold=80
+    query, collection_name="feedback_data", language="en", threshold=10
 ):
     """
     Perform fuzzy matching with dynamic keyword extraction for context.
@@ -198,52 +257,82 @@ def fuzzy_match_with_dynamic_context(
     index_information = collection.index_information()
     print(index_information)
     # Fetch all documents with 'user_input' and 'correct_answer'
-    documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1}))
+    documents = list(
+        collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1})
+    )
 
     if not documents:
         print(f"No documents found in collection '{collection_name}'.")
         return []
 
-    print(f"\n--- Testing Query: '{query}' against {len(documents)} documents ---")
-
     # Extract keywords from the query
-    query_keywords = extract_keywords(query, language)
-    print(f"Query Keywords: {query_keywords}")
+    # query_keywords = extract_keywords(query, language)
 
     matches = []
 
     for doc in documents:
         user_input = doc.get("user_input", "")
         correct_answer = doc.get("correct_answer", "")
-        combined_text = f"{user_input} {correct_answer}".strip()
+        timestamp = doc.get("timestamp", "")
 
+        combined_text = f"{correct_answer} {user_input} {timestamp}".strip()
         # Extract keywords from the document
-        document_keywords = extract_keywords(combined_text, language)
+        # document_keywords = extract_keywords(combined_text, language)
         # print(f"Document Keywords: {document_keywords}")
 
         # Calculate fuzzy similarity
         similarity = fuzz.partial_ratio(query, combined_text)
 
         # Calculate keyword overlap score
-        overlap_score = (
-            len(query_keywords & document_keywords) / max(len(query_keywords), 1) * 100
-        )
+        # overlap_score = len(query_keywords & document_keywords) / max(len(query_keywords), 1) * 100
 
         # Combine similarity and keyword overlap for the final score
-        final_score = similarity * 0.6 + overlap_score * 0.4
+        # final_score = (similarity * 0.6 + overlap_score * 0.4)
 
         # Only include matches above the threshold
-        if final_score >= threshold:
-            matches.append({"similarity": min(final_score, 100), **doc})
+        if similarity >= threshold:
+            matches.append({"similarity": min(similarity, 100), **doc})
 
     # Sort matches by similarity in descending order
     matches = sorted(matches, key=lambda x: -x["similarity"])
+    # print(f"@@ BEFORE Found {str(matches)} matches.")
+    # Ensure timestamp is correctly formatted before sorting
+    for match in matches:
+        match["timestamp"] = match.get("timestamp", "")  # Ensure field exists
+        if isinstance(match["timestamp"], str):  # Convert timestamp string to datetime
+            try:
+                match["timestamp"] = datetime.fromisoformat(match["timestamp"])
+            except ValueError:
+                match["timestamp"] = datetime.min  # Set to minimum if invalid format
+
+    # Sort by similarity (descending) and then by timestamp (latest first)
+    matches = sorted(
+        matches, key=lambda x: (-x["similarity"], -x["timestamp"].timestamp())
+    )
+    # print(f"@@ AFTER Found {str(matches)} matches.")
 
     # Return the first correct_answer if matches exist, otherwise return False
     if matches:
-        return matches[0]["correct_answer"]
+        # Check if the first match has a similarity score greater than 80
+        if matches[0]["similarity"] > 80:
+            best_answer = matches[0]["correct_answer"]
+            print("\nHigh Similarity Match Found:")
+            print(best_answer)
+            return best_answer  # Return immediately if it's a strong match
+
+        # Otherwise, proceed with OpenAI validation
+        limited_matches = matches[:5]
+
+        openai_response = check_answer_mongo_and_openai(query, limited_matches)
+
+        if openai_response:
+            print("\nOpenAI Response:")
+            print(openai_response)
+            return openai_response
+        else:
+            print("No matches found.")
     else:
-        return False
+        print("No matches found.")
 
 
 # Define test queries
@@ -255,17 +344,18 @@ queries = [
     # "Any restrictions to play a games",
     # "what is the authentication process",
     # "Apakah kaedah pembayaran yang anda",
-    "Apak deposit yang anda terima?",
-    # "Berapa lama masa yang diperlukan untuk deposit diproses?"
+    #  "Apak deposit yang anda terima?",
+    # "Berapa lama masa yang diperlukan untuk deposit diproses?",
+    "DO you have any information of Leo?"
 ]
 
 # Run Fuzzy Matching for Each Query
 for query in queries:
     result = fuzzy_match_with_dynamic_context(
-        query, "feedback_data_ms_MY", "ms_MY", threshold=80
+        query, "feedback_data_en", "en", threshold=10
     )  # Lower threshold for better results
 
-    if result:
-        print(f"\n '{result}'")
-    else:
-        print(f"*******--No relevant matches found for query: '{query}'.")
+    # if result:
+    # print(f"\n '{result}'")
+    # else:
+    # print(f"*******--No relevant matches found for query: '{query}'.")

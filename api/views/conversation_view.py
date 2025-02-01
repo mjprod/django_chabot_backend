@@ -1,19 +1,20 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-# from asgiref.sync import async_to_sync
 
 import logging
 from datetime import datetime
 from ..mixins.mongodb_mixin import MongoDBMixin
 import time
 
+from rapidfuzz import fuzz
+
 from ..chatbot import (
-    generate_prompt_conversation,
+    prompt_conversation,
     prompt_conversation_history,
     translate_and_clean,
     prompt_conversation_admin,
-    is_finalizing_phrase
+    check_answer_mongo_and_openai,
 )
 from ..serializers import (
     CompleteConversationsSerializer,
@@ -21,9 +22,7 @@ from ..serializers import (
     PromptConversationHistorySerializer,
     PromptConversationAdminSerializer,
 )
-from ai_config.ai_prompts import (
-    FIRST_MESSAGE_PROMPT,
-)
+
 from ai_config.ai_constants import (
     LANGUAGE_DEFAULT,
 )
@@ -31,160 +30,9 @@ from ai_config.ai_constants import (
 logger = logging.getLogger(__name__)
 
 
-# new api for start conversation
-class PromptConversationView(MongoDBMixin, APIView):
-    def post(self, request):
-        db = None
-        try:
-            # Log start of request processing
-            logger.info("Starting prompt_conversation request")
-            start_time = time.time()
-
-            # Validate input data
-            serializer = PromptConversationSerializer(data=request.data)
-            if not serializer.is_valid():
-                return Response(
-                    {"error": "Invalid input data", "details": serializer.errors},
-                    status=status.HTTP_400_BAD_REQUEST,
-                )
-
-            # Extract validated data
-            prompt = serializer.validated_data["prompt"]
-            conversation_id = serializer.validated_data["conversation_id"]
-            user_id = serializer.validated_data["user_id"]
-
-            # Generate AI response with timing
-            generation_start = time.time()
-            logger.info("Starting AI response generation")
-            response = generate_prompt_conversation(
-                user_prompt=prompt,
-                conversation_id=conversation_id,
-                admin_id="",
-                bot_id="",
-                user_id=user_id,
-            )
-            logger.info(
-                f"AI Generation completed in {time.time() - generation_start:.2f}s"
-            )
-
-            # Prepare MongoDB document
-            db = self.get_db()
-            conversation_data = {
-                "conversation_id": conversation_id,
-                "prompt": prompt,
-                "generation": response["generation"],
-                "user_id": user_id,
-                "translations": response.get("translations", []),
-                "timestamp": datetime.now().isoformat(),
-            }
-
-            # Insert into MongoDB
-            db.conversations.insert_one(conversation_data)
-            logger.info("MongoDB operation successful.")
-
-            # Prepare and send response
-            response_data = {
-                "conversation_id": conversation_id,
-                "user_input": prompt,
-                "generation": response["generation"],
-                "confidence": response["confidence_score"],
-                "translations": response.get("translations", []),
-            }
-
-            logger.info(
-                f"Total request processing time: {time.time() - start_time:.2f}s"
-            )
-            return Response(response_data, status=status.HTTP_200_OK)
-        except Exception as e:
-            logger.error(f"Error processing request: {str(e)}")
-            return Response(
-                {"error": f"Request processing failed: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            )
-        finally:
-            # Cleanup database connection
-            if db is not None:
-                self.close_db()
-            # Uncomment memory cleanup if needed
-            # gc.collect()
-
-
-def parse_to_json(data):
-    # Extract the required fields
-    conversation_id = data.get("conversation_id", "")
-    user_input = data.get("user_input", "")
-    correct_answer = data.get("correct_answer", "")
-    confidence = data.get("confidence", 0.0)
-    translations = data.get("metadata", {}).get("translations", [])
-
-    # Format the parsed data
-    parsed_data = {
-        "conversation_id": conversation_id,
-        "user_input": user_input,
-        "generation": correct_answer,
-        "confidence": confidence,
-        "translations": [
-            {
-                "language": translation.get("language", ""),
-                "text": translation.get("text", ""),
-            }
-            for translation in translations
-        ],
-    }
-    return parsed_data
-'''
-
-nltk.download('stopwords')
-custom_stopwords = {
-    "ms_MY": {
-        "dan", "untuk", "dengan", "yang", "di", "ke", "atau", "pada", "adalah", "dari", "ini", 
-        "itu", "saya", "kami", "anda", "mereka", "semua", "tersebut", "sebuah", "oleh", "pada", 
-        "sama", "maksud", "apa", "akan", "dapat", "belum", "lebih"
-        # Add more Malay stopwords if needed
-    },
-    "zh_CN": {
-        "的", "了", "在", "是", "我", "你", "他", "她", "它", "我们", "你们", "他们", "这个", "那个", 
-        "的", "和", "与", "就", "也", "不", "都", "而", "为", "上", "下", "对", "和", "说", "来", 
-        "去", "为", "要", "自己", "有", "可以", "是不是", "等", "如果"
-    },
-    "zh_TW": {
-        "的", "了", "在", "是", "我", "你", "他", "她", "它", "我們", "你們", "他們", "這個", 
-        "那個", "的", "和", "與", "就", "也","不", "都", "而", "為", "上", "下", "對", "和",
-        "說", "來", "去", "為", "要", "自己", "有", "可以", "是不是", "等", "如果"
-    }
-}
-
-def get_stopwords(language="en"):
-    try:
-        return set(stopwords.words(language))
-    except:
-       return custom_stopwords.get(language, set())
-
-def extract_keywords(text, language="en"):
-    """
-    Dynamically extract significant words from the text (excluding common stopwords).
-    :param text: Text from which keywords will be extracted
-    :param language: Language of the input text
-    :return: List of keywords
-    """
-    stop_words = get_stopwords(language)  # Dynamically get stopwords
-    # Remove stopwords and non-alphabetic characters, and extract keywords
-    # words = re.findall(r'\b[A-Za-z]{2,}\b', text.lower())  # Use lowercase for better matching
-
-    if language in ["zh_CN", "zh_TW"]:
-        # Tokenize Chinese text using jieba
-        words = jieba.cut(text)
-    else:
-        # Extract words from non-Chinese text
-        words = re.findall(r'\b[A-Za-z]{2,}\b', text.lower())
-
-    # keywords = [word for word in words if word not in stop_words]
-    keywords = [word for word in words if word not in stop_words and len(word.strip()) > 1]
-
-    return set(keywords)
-'''
-'''
-def fuzzy_match_with_dynamic_context(self,query, collection_name, language = "en", threshold=50):
+def fuzzy_match_with_dynamic_context(
+    self, query, collection_name, threshold, language="en"
+):
     db = self.get_db()
     collection = db[collection_name]
 
@@ -195,8 +43,10 @@ def fuzzy_match_with_dynamic_context(self,query, collection_name, language = "en
     indexes = collection.index_information()
 
     # Check if there's an existing text index
-    for index_data in indexes.items():
-        if index_data.get("key") == [("user_input", "text")]:
+    for index_name, index_info in indexes.items():  # Unpack index name and info
+        if index_info.get("key") == [
+            ("user_input", "text")
+        ]:  # Access 'key' in index_info
             index_exists = True
             break
 
@@ -209,236 +59,74 @@ def fuzzy_match_with_dynamic_context(self,query, collection_name, language = "en
         print("Text index already exists.")
 
     # Fetch all documents with 'user_input' and 'correct_answer'
-    documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1}))
+    documents = list(
+        collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1})
+    )
 
     if not documents:
         print(f"No documents found in collection '{collection_name}'.")
         return []
-
-    print(f"\n--- Testing Query: '{query}' against {len(documents)} documents ---")
-
-    # Extract keywords from the query
-    query_keywords = extract_keywords(query, language)
-    print(f"Query Keywords: {query_keywords}")
 
     matches = []
 
     for doc in documents:
         user_input = doc.get("user_input", "")
         correct_answer = doc.get("correct_answer", "")
-        combined_text = f"{user_input} {correct_answer}".strip()
+        timestamp = doc.get("timestamp", "")
 
-        # Extract keywords from the document
-        document_keywords = extract_keywords(combined_text, language)
-        # print(f"Document Keywords: {document_keywords}")
+        combined_text = f"{user_input} {correct_answer} {timestamp}".strip()
 
         # Calculate fuzzy similarity
         similarity = fuzz.partial_ratio(query, combined_text)
 
-        # Calculate keyword overlap score
-        overlap_score = len(query_keywords & document_keywords) / max(len(query_keywords), 1) * 100
-
-        # Combine similarity and keyword overlap for the final score
-        final_score = (similarity * 0.6 + overlap_score * 0.4)
-
         # Only include matches above the threshold
-        if final_score >= threshold:
-            matches.append({"similarity": min(final_score, 100), **doc})
+        if similarity >= threshold:
+            matches.append({"similarity": min(similarity, 100), **doc})
 
     # Sort matches by similarity in descending order
     matches = sorted(matches, key=lambda x: -x["similarity"])
 
-    # Print matches in sorted order
-    print("\nSimilarity Scores (Ordered):")
+    # Return the first correct_answer if matches exist, otherwise return False
     for match in matches:
-        print(f"Similarity: {match['similarity']}% | Combined: {match['user_input']} {match['correct_answer']}")
+        match["timestamp"] = match.get("timestamp", "")  # Ensure field exists
+        if isinstance(match["timestamp"], str):  # Convert timestamp string to datetime
+            try:
+                match["timestamp"] = datetime.fromisoformat(match["timestamp"])
+            except ValueError:
+                match["timestamp"] = datetime.min
 
-    # return matches
-    results = [match for match in matches if match["similarity"] >= 70]
-    if results:
-        print(f"\nTop Matches for Query: '{query}':")
-        for result in results[:3]:  # Print top 3 matches
-            print(
-                (
-                    f"{result['correct_answer']}"
-                )
-            )
-            return f"{result['correct_answer']}"
-    else:
-        print(f"*******--No relevant matches found for query: '{query}'.")
-'''
+    # Sort by similarity (descending) and then by timestamp (latest first)
+    matches = sorted(
+        matches, key=lambda x: (-x["similarity"], -x["timestamp"].timestamp())
+    )
 
-# Search and translate the top correct answer
-def search_top_answer_and_translate(self, query, conversation_id, collection_name):
+    # Return the first correct_answer if matches exist, otherwise return False
+    if matches:
+        # Check if the first match has a similarity score greater than 80
+        if matches[0]["similarity"] > 80:
+            best_answer = matches[0]["correct_answer"]
+            print("\nHigh Similarity Match Found:")
+            print(best_answer)
+            return best_answer  # Return immediately if it's a strong match
 
-    db = self.get_db()
-    collection = db[collection_name]
+        # Otherwise, proceed with OpenAI validation
+        limited_matches = matches[:5]
 
-    # Check if a text index exists and create it if not
-    index_exists = False
+        openai_response = check_answer_mongo_and_openai(query, limited_matches)
 
-    # Get all existing indexes
-    index_information = collection.index_information()
-
-    # Check if there's an existing text index
-    for index_name, index_data in index_information.items():
-        if "key" in index_data and index_data["key"] == [("user_input", "text")]:
-            print(f"Text index on 'user_input' found: {index_name}")
-            break
+        if openai_response:
+            print("\nOpenAI Response:")
+            print(openai_response)
+            return openai_response
         else:
-            print("No text index found on 'user_input'.")   
-
-    # Create the index if it doesn't exist
-    if not index_exists:
-        print("Creating text index on 'user_input'...")
-        collection.create_index([("user_input", "text")], name="user_input_text")
-        print("Text index created successfully.")
+            print("No matches found.")
     else:
-        print("Text index already exists.")
-
-    print(f"Searching for: '{query}' in collection '{collection_name}'")
-    try:
-        # Use the existing text index (on user_input)
-        results = collection.find(
-            {
-                "$text": {"$search": query},  # Search in the existing text index
-                #  # Search in the existing text index
-            },
-            {
-                "score": {"$meta": "textScore"},  # Include relevance score
-                "correct_answer": 1,
-                "conversation_id": 1,
-                "user_input": 1,
-                "metadata": 1,
-                "timestamp": 1,
-            },
-        ).sort(
-            "score", {"$meta": "textScore"}
-        )  # Sort by relevance
-
-        if results is None:
-            print("No results found.")
-            return {
-                "correct_answer": None,
-                "confidence": 0,
-                "message": "No related correct answers found.",
-            }
-
-        results_list = list(results)
-        if results_list:
-
-            # Sort results by timestamp
-            sorted_results = sorted(
-                results_list, key=lambda x: x.get("timestamp", 0), reverse=True
-            )
-
-            # Filter results with score > 0.7
-            filtered_results = [
-                doc for doc in sorted_results if doc.get("score", 0) > 0.5
-            ]
-            # Check if filtered_results is empty
-
-            if filtered_results is not None:
-                top_result = filtered_results[0]
-
-                # Safely retrieve keys with .get() to avoid KeyErrors
-                correct_answer = top_result.get("correct_answer")
-                confidence = top_result.get("score", 0)
-                conversation_id = conversation_id
-                user_input = top_result.get("user_input", query)
-                metadata = top_result.get("metadata", {})
-
-                if isinstance(metadata, list):
-                    translations = (
-                        metadata  # Use the list directly if it's already structured
-                    )
-                else:
-                    translations = []
-
-                # make sure we have an existing conversation, if not, we will create a new one
-                existing_conversation = db.conversations.find_one(
-                    {"session_id": conversation_id}
-                )
-
-                if existing_conversation:
-                    # Load existing conversation and get the messages list
-                    messages = existing_conversation.get("messages", [])
-                else:
-                    # Create new conversation with system prompt
-                    messages = [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
-
-                # Add our new message with the role of user and the content of the user prompt
-                messages.append(
-                    {
-                        "role": "user",
-                        "content": query,
-                        "timestamp": datetime.now().isoformat(),
-                    }
-                )
-
-                # Prepare our conversation as before but without is_first_message
-                conversation = {
-                    "session_id": conversation_id,
-                    "admin_id": "admin_id",
-                    "bot_id": "bot_id",
-                    "user_id": "user_id",
-                    "messages": messages,
-                    "translations": translations,
-                    "updated_at": datetime.now().isoformat(),
-                }
-
-                # Upsert conversation to MongoDB
-                db.conversations.update_one(
-                    {"session_id": conversation_id}, {"$set": conversation}, upsert=True
-                )
-
-                # Return the top answer and confidence score
-                return {
-                    "correct_answer": correct_answer,
-                    "conversation_id": conversation_id,
-                    "user_input": user_input,
-                    "generation": correct_answer,
-                    "confidence": confidence,
-                    "translations": translations,
-                }
-            else:
-                # Handle case when no results match the criteria
-                print("No results found with a score > 0.7.")
-                return {
-                    "correct_answer": None,
-                    "confidence": 0,
-                    "message": "No related correct answers found.",
-                }
-        else:
-            print("No related correct answers found.")
-            return {
-                "correct_answer": None,
-                "confidence": 0,
-                "message": "No related correct answers found.",
-            }
-
-    except Exception as e:
-        print(f"Error fetching highest confidence answer: {e}")
-    finally:
-        # Cleanup database connection
-        if db is not None:
-            self.close_db()
-
-
-"""
-this is the new View for the prompt_conversation_history,
-it will be used to get the history of a conversation
-with the context and conversation_id, it will be able to
-get the history of the conversation along with the new question
-and if the user where to ask "What was the first message i sent,
-it will be able to find it and return that to the user
-"""
+        print("No matches found.")
 
 
 class PromptConversationHistoryView(MongoDBMixin, APIView):
     def post(self, request):
         try:
-
             # db = self.get_db()
             # Log start of request processing
             logger.info("Starting prompt_conversation_history request")
@@ -471,17 +159,17 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
             if use_mongo:
                 print("Using Mongo DB")
                 # Search for the answer on mongo db
-                                                 
+
                 response = fuzzy_match_with_dynamic_context(
-                    self = self,
-                    query = prompt,
-                    collection_name = "feedback_data_" + language,
-                    language = language,
+                    self=self,
+                    query=prompt,
+                    collection_name="feedback_data_" + language,
+                    threshold=10,
+                    language=language,
                 )
-                
-                if response["correct_answer"]:
-                    print("Correct answer found in Mongo DB")
-                    time.sleep(6)
+                print(response)
+                if response:
+                    time.sleep(5)
                     return Response(response, status=status.HTTP_200_OK)
 
             # Generate AI response with timing
@@ -698,7 +386,7 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
 
         try:
 
-             # Get the header value as a string
+            # Get the header value as a string
             use_mongo_str = request.GET.get(
                 "use_mongo", "0"
             )  # Default to "0" if not provided
@@ -721,33 +409,38 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
                     {"error": "Invalid input data", "details": input_serializer.errors},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
-            
 
             # Extract validated data
             prompt = input_serializer.validated_data["prompt"]
             conversation_id = input_serializer.validated_data["conversation_id"]
-            user_id = input_serializer.validated_data["user_id"]
-            
+            # user_id = input_serializer.validated_data["user_id"]
 
             if use_mongo:
                 print("Using Mongo DB")
                 # Search for the answer on mongo db
-                response = search_top_answer_and_translate(
-                    self,
-                    prompt,
-                    conversation_id,
+                response = fuzzy_match_with_dynamic_context(
+                    self=self,
+                    query=prompt,
                     collection_name="feedback_data_" + language,
+                    threshold=10,
+                    language=language,
                 )
-                if response["correct_answer"]:
+                if response:
                     print("Correct answer found in Mongo DB")
+                    response_data = {
+                        "generation": response,
+                        "conversation_id": conversation_id,
+                        "is_last_message": "false",
+                        "language": language,
+                    }
                     time.sleep(6)
-                    return Response(response, status=status.HTTP_200_OK)
+                    return Response(response_data, status=status.HTTP_200_OK)
 
             # Extract validated data
             validated_data = input_serializer.validated_data
 
             # Generate AI response
-            generation_start = time.time()
+            # generation_start = time.time()
             logger.info("Starting AI response generation")
 
             response = prompt_conversation_admin(
@@ -760,10 +453,9 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
                 language_code=language_code,
             )
 
-            generation_time = time.time() - generation_start
-            #if generation_time < 3:
-            time.sleep(6 )
-
+            # generation_time = time.time() - generation_start
+            # if generation_time < 3:
+            time.sleep(6)
 
             return Response(response, status=status.HTTP_200_OK)
 
@@ -775,7 +467,128 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
                 {"error": f"Request processing failed: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-    
+
+    def get(self, request):
+        db = None
+        try:
+            # Get conversation_id from query params
+            conversation_id = request.query_params.get("conversation_id")
+            if not conversation_id:
+                return Response(
+                    {"error": "conversation_id is required"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Connect to MongoDB and get conversation history
+            db = self.get_db()
+            conversation = db.conversations.find_one({"session_id": conversation_id})
+
+            if not conversation:
+                return Response(
+                    {"error": "Conversation not found"},
+                    status=status.HTTP_404_NOT_FOUND,
+                )
+
+            # for our response data we have the updated_at
+            response_data = {
+                "conversation_id": conversation_id,
+                "messages": conversation.get("messages", []),
+                "translations": conversation.get("translations", []),
+                "user_id": conversation.get("user_id"),
+                "updated_at": conversation.get("updated_at"),
+            }
+
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            logger.error(f"Error retrieving conversation history: {str(e)}")
+            return Response(
+                {"error": f"Failed to retrieve conversation history: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+        finally:
+            if db is not None:
+                self.close_db()
+
+
+class PromptConversationView(MongoDBMixin, APIView):
+    def post(self, request):
+        logger.info("Starting prompt_conversation_admin request")
+
+        try:
+
+            # Get the header value as a string
+            use_mongo_str = request.GET.get(
+                "use_mongo", "0"
+            )  # Default to "0" if not provided
+            use_mongo = use_mongo_str in ("1", "true", "yes")
+            print("Mongo: " + str(use_mongo))
+
+            # Language
+            language = request.GET.get("language", LANGUAGE_DEFAULT)
+            print("Language " + language)
+
+            # Get language from query params or request data
+            language_code = request.GET.get("language", LANGUAGE_DEFAULT)
+            logger.info(f"Processing request for language: {language_code}")
+
+            # Validate input data
+            input_serializer = PromptConversationSerializer(data=request.data)
+            if not input_serializer.is_valid():
+                logger.error(f"Validation failed: {input_serializer.errors}")
+                return Response(
+                    {"error": "Invalid input data", "details": input_serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Extract validated data
+            prompt = input_serializer.validated_data["prompt"]
+
+            if use_mongo:
+                print("Using Mongo DB")
+                # Search for the answer on mongo db
+                response = fuzzy_match_with_dynamic_context(
+                    self=self,
+                    query=prompt,
+                    collection_name="feedback_data_" + language,
+                    threshold=10,
+                    language=language,
+                )
+                if response:
+                    response_data = {
+                        "generation": response,
+                    }
+                    print("Correct answer found in Mongo DB")
+                    return Response(response_data, status=status.HTTP_200_OK)
+
+            # Extract validated data
+            validated_data = input_serializer.validated_data
+
+            # Generate AI response
+            # generation_start = time.time()
+            logger.info("Starting AI response generation")
+
+            response = prompt_conversation(
+                self,
+                user_prompt=validated_data["prompt"],
+                language_code=language_code,
+            )
+
+            # generation_time = time.time() - generation_start
+            # if generation_time < 3:
+            time.sleep(6)
+
+            return Response(response, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            logger.error(
+                f"Error in prompt_conversation_admin view: {str(e)}", exc_info=True
+            )
+            return Response(
+                {"error": f"Request processing failed: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
     def get(self, request):
         db = None
         try:
