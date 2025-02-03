@@ -27,7 +27,7 @@ from ai_config.ai_constants import (
 
 logger = logging.getLogger(__name__)
 
-model = SentenceTransformer('sentence-t5-large')
+model = SentenceTransformer("sentence-t5-large")
 
 
 def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10):
@@ -66,7 +66,11 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10)
 
     # Fetch all documents with 'user_input' (question) and 'correct_answer' (answer)
     # documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}))
-    documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}).sort("timestamp", -1))
+    documents = list(
+        collection.find(
+            {}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}
+        ).sort("timestamp", -1)
+    )
 
     if not documents:
         return []
@@ -83,7 +87,9 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10)
 
     matches = []
 
-    for doc in latest_questions.values():  # Iterate only through unique latest questions
+    for (
+        doc
+    ) in latest_questions.values():  # Iterate only through unique latest questions
         user_input = doc.get("user_input", "")
         correct_answer = doc.get("correct_answer", "")
         timestamp = doc.get("timestamp", "")
@@ -95,12 +101,16 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10)
         document_embedding = model.encode(combined_text, convert_to_tensor=True)
 
         # Compute similarity using embeddings
-        similarity = util.pytorch_cos_sim(query_embedding, document_embedding).item() * 100
+        similarity = (
+            util.pytorch_cos_sim(query_embedding, document_embedding).item() * 100
+        )
 
         # Word Overlap Score (Ensures proper nouns like 'Glauco' match better)
         query_words = set(query.lower().split())
         answer_words = set(correct_answer.lower().split())
-        overlap_score = (len(query_words & answer_words) / max(len(query_words), 1)) * 100
+        overlap_score = (
+            len(query_words & answer_words) / max(len(query_words), 1)
+        ) * 100
 
         # Final Weighted Similarity: 90% on Answer, 10% on Overlap Boost
         final_similarity = (similarity * 0.9) + (overlap_score * 0.1)
@@ -108,12 +118,14 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10)
 
         # Only include matches above the threshold
         if final_similarity >= threshold:
-            matches.append({
-                "similarity": final_similarity,
-                "user_input": user_input,
-                "correct_answer": correct_answer,
-                "timestamp": timestamp
-            })
+            matches.append(
+                {
+                    "similarity": final_similarity,
+                    "user_input": user_input,
+                    "correct_answer": correct_answer,
+                    "timestamp": timestamp,
+                }
+            )
 
     # Sort matches by similarity in descending order
     matches = sorted(matches, key=lambda x: -x["similarity"])
@@ -182,7 +194,7 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
                     self=self,
                     query=prompt,
                     collection_name="feedback_data_" + language,
-                    threshold=10
+                    threshold=10,
                 )
                 print(response)
                 if response:
@@ -567,7 +579,7 @@ class PromptConversationView(MongoDBMixin, APIView):
                     self=self,
                     query=prompt,
                     collection_name="feedback_data_" + language,
-                    threshold=10
+                    threshold=10,
                 )
                 if response:
                     response_data = {

@@ -9,7 +9,7 @@ from datetime import datetime
 from sentence_transformers import SentenceTransformer, util
 
 # Load a better model (More accurate for question-answer tasks)
-model = SentenceTransformer('sentence-t5-large')
+model = SentenceTransformer("sentence-t5-large")
 
 # MongoDB Configuration
 MONGODB_USERNAME = "dev"
@@ -245,7 +245,9 @@ def check_answer_mongo_and_openai(user_question, matches):
     return final_response
 
 
-def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data_en", threshold=10):
+def fuzzy_match_with_dynamic_context(
+    query, collection_name="feedback_data_en", threshold=10
+):
     """
     Find the most semantically similar question-answer pair in MongoDB.
 
@@ -258,8 +260,12 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data_en", 
 
     # Fetch all documents with 'user_input' (question) and 'correct_answer' (answer)
     # documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}))
-    documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}).sort("timestamp", -1))
-    
+    documents = list(
+        collection.find(
+            {}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}
+        ).sort("timestamp", -1)
+    )
+
     if not documents:
         return []
 
@@ -275,7 +281,9 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data_en", 
 
     matches = []
 
-    for doc in latest_questions.values():  # Iterate only through unique latest questions
+    for (
+        doc
+    ) in latest_questions.values():  # Iterate only through unique latest questions
         user_input = doc.get("user_input", "")
         correct_answer = doc.get("correct_answer", "")
         timestamp = doc.get("timestamp", "")
@@ -287,12 +295,16 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data_en", 
         document_embedding = model.encode(combined_text, convert_to_tensor=True)
 
         # Compute similarity using embeddings
-        similarity = util.pytorch_cos_sim(query_embedding, document_embedding).item() * 100
+        similarity = (
+            util.pytorch_cos_sim(query_embedding, document_embedding).item() * 100
+        )
 
         # Word Overlap Score (Ensures proper nouns like 'Glauco' match better)
         query_words = set(query.lower().split())
         answer_words = set(correct_answer.lower().split())
-        overlap_score = (len(query_words & answer_words) / max(len(query_words), 1)) * 100
+        overlap_score = (
+            len(query_words & answer_words) / max(len(query_words), 1)
+        ) * 100
 
         # Final Weighted Similarity: 90% on Answer, 10% on Overlap Boost
         final_similarity = (similarity * 0.9) + (overlap_score * 0.1)
@@ -300,12 +312,14 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data_en", 
 
         # Only include matches above the threshold
         if final_similarity >= threshold:
-            matches.append({
-                "similarity": final_similarity,
-                "user_input": user_input,
-                "correct_answer": correct_answer,
-                "timestamp": timestamp
-            })
+            matches.append(
+                {
+                    "similarity": final_similarity,
+                    "user_input": user_input,
+                    "correct_answer": correct_answer,
+                    "timestamp": timestamp,
+                }
+            )
 
     # Sort matches by similarity in descending order
     matches = sorted(matches, key=lambda x: -x["similarity"])
@@ -334,7 +348,9 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data_en", 
         print("No matches found.")
 
 
-def fuzzy_match_with_dynamic_context_old(query, collection_name="feedback_data", language="en", threshold=10):
+def fuzzy_match_with_dynamic_context_old(
+    query, collection_name="feedback_data", language="en", threshold=10
+):
     """
     Perform fuzzy matching with dynamic keyword extraction for context.
     :param query: User's query as a string.
@@ -391,7 +407,9 @@ def fuzzy_match_with_dynamic_context_old(query, collection_name="feedback_data",
     # Return the first correct_answer if matches exist, otherwise return False
     print("\nSimilarity Scores (Ordered):")
     for match in matches:
-        print(f"Similarity: {match['similarity']}% | Combined: {match['user_input']} {match['correct_answer']}")
+        print(
+            f"Similarity: {match['similarity']}% | Combined: {match['user_input']} {match['correct_answer']}"
+        )
 
     if matches:
         # Check if the first match has a similarity score greater than 80
