@@ -66,8 +66,7 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10)
 
     # Fetch all documents with 'user_input' (question) and 'correct_answer' (answer)
     # documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}))
-    documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1})
-                    .sort("timestamp", -1))  # Sort by timestamp (latest first)
+    documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}).sort("timestamp", -1))
 
     if not documents:
         return []
