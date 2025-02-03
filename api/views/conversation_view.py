@@ -27,7 +27,8 @@ from ai_config.ai_constants import (
 
 logger = logging.getLogger(__name__)
 
-model = SentenceTransformer('sentence-t5-large')  
+model = SentenceTransformer('sentence-t5-large')
+
 
 def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10):
     """
@@ -66,7 +67,7 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10)
     # Fetch all documents with 'user_input' (question) and 'correct_answer' (answer)
     # documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}))
     documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1})
-                      .sort("timestamp", -1))  # Sort by timestamp (latest first)
+                    .sort("timestamp", -1))  # Sort by timestamp (latest first)
 
     if not documents:
         return []
@@ -117,7 +118,7 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10)
 
     # Sort matches by similarity in descending order
     matches = sorted(matches, key=lambda x: -x["similarity"])
-    
+
     # Return the first correct_answer if matches exist, otherwise return False
     if matches:
         # Check if the first match has a similarity score greater than 80
@@ -129,7 +130,7 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10)
 
         # Otherwise, proceed with OpenAI validation
         limited_matches = matches[:5]
-    
+
         openai_response = check_answer_mongo_and_openai(query, limited_matches)
 
         if openai_response:
