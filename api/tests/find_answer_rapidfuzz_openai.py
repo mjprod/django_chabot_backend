@@ -11,7 +11,6 @@ from sentence_transformers import SentenceTransformer, util
 # Load a better model (More accurate for question-answer tasks)
 model = SentenceTransformer('sentence-t5-large')  
 
-
 # MongoDB Configuration
 MONGODB_USERNAME = "dev"
 MONGODB_PASSWORD = "Yrr0szjwTuE1BU7Y"
@@ -259,8 +258,7 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data_en", 
 
     # Fetch all documents with 'user_input' (question) and 'correct_answer' (answer)
     # documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}))
-    documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1})
-                      .sort("timestamp", -1))  # Sort by timestamp (latest first)
+    documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}).sort("timestamp", -1))  # Sort by timestamp (latest first)
 
     if not documents:
         return []
@@ -324,7 +322,6 @@ def fuzzy_match_with_dynamic_context(query, collection_name="feedback_data_en", 
         # Otherwise, proceed with OpenAI validation
         limited_matches = matches[:5]
 
-    
         openai_response = check_answer_mongo_and_openai(query, limited_matches)
 
         if openai_response:
@@ -407,7 +404,6 @@ def fuzzy_match_with_dynamic_context_old(query, collection_name="feedback_data",
         # Otherwise, proceed with OpenAI validation
         limited_matches = matches[:5]
 
-    
         openai_response = check_answer_mongo_and_openai(query, limited_matches)
 
         if openai_response:

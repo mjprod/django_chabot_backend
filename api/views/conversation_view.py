@@ -1,14 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-
 import logging
 from datetime import datetime
 from ..mixins.mongodb_mixin import MongoDBMixin
 import time
 from sentence_transformers import SentenceTransformer, util
-
-from rapidfuzz import fuzz
 
 from ..chatbot import (
     prompt_conversation,
@@ -32,12 +29,9 @@ logger = logging.getLogger(__name__)
 
 model = SentenceTransformer('sentence-t5-large')  
 
-
-
 def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10):
     """
     Find the most semantically similar question-answer pair in MongoDB.
-
     :param query: User's input query.
     :param collection_name: Name of the MongoDB collection.
     :param threshold: Minimum similarity score to return results.
@@ -47,7 +41,7 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10)
     db = self.get_db()
     collection = db[collection_name]
 
-     # Check if a text index exists and create it if not
+    # Check if a text index exists and create it if not
     index_exists = False
 
     # Get all existing indexes
@@ -135,7 +129,6 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10)
 
         # Otherwise, proceed with OpenAI validation
         limited_matches = matches[:5]
-
     
         openai_response = check_answer_mongo_and_openai(query, limited_matches)
 
