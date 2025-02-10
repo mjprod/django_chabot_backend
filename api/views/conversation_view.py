@@ -1,13 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-
 import logging
 from datetime import datetime
 from ..mixins.mongodb_mixin import MongoDBMixin
 import time
-
-from rapidfuzz import fuzz
+from sentence_transformers import SentenceTransformer, util
 
 from ..chatbot import (
     prompt_conversation,
@@ -29,10 +27,18 @@ from ai_config.ai_constants import (
 
 logger = logging.getLogger(__name__)
 
+model = SentenceTransformer("sentence-t5-large")
 
-def fuzzy_match_with_dynamic_context(
-    self, query, collection_name, threshold, language="en"
-):
+
+def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10):
+    """
+    Find the most semantically similar question-answer pair in MongoDB.
+    :param query: User's input query.
+    :param collection_name: Name of the MongoDB collection.
+    :param threshold: Minimum similarity score to return results.
+    :return: List of top matches sorted by similarity.
+    """
+
     db = self.get_db()
     collection = db[collection_name]
 
@@ -58,47 +64,71 @@ def fuzzy_match_with_dynamic_context(
     else:
         print("Text index already exists.")
 
-    # Fetch all documents with 'user_input' and 'correct_answer'
+    # Fetch all documents with 'user_input' (question) and 'correct_answer' (answer)
+    # documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}))
     documents = list(
-        collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1})
+        collection.find(
+            {}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}
+        ).sort("timestamp", -1)
     )
 
     if not documents:
-        print(f"No documents found in collection '{collection_name}'.")
         return []
+
+    # Compute embeddings for the query
+    latest_questions = {}
+    for doc in documents:
+        user_input = doc.get("user_input", "").strip().lower()
+        if user_input and user_input not in latest_questions:
+            latest_questions[user_input] = doc  # Store only the latest entry
+
+    # Compute embeddings for the query
+    query_embedding = model.encode(query, convert_to_tensor=True)
 
     matches = []
 
-    for doc in documents:
+    for (
+        doc
+    ) in latest_questions.values():  # Iterate only through unique latest questions
         user_input = doc.get("user_input", "")
         correct_answer = doc.get("correct_answer", "")
         timestamp = doc.get("timestamp", "")
 
-        combined_text = f"{user_input} {correct_answer} {timestamp}".strip()
+        # Merge question + answer for better context
+        combined_text = f"Q: {user_input} A: {correct_answer}"
 
-        # Calculate fuzzy similarity
-        similarity = fuzz.partial_ratio(query, combined_text)
+        # Compute embeddings for combined question + answer
+        document_embedding = model.encode(combined_text, convert_to_tensor=True)
+
+        # Compute similarity using embeddings
+        similarity = (
+            util.pytorch_cos_sim(query_embedding, document_embedding).item() * 100
+        )
+
+        # Word Overlap Score (Ensures proper nouns like 'Glauco' match better)
+        query_words = set(query.lower().split())
+        answer_words = set(correct_answer.lower().split())
+        overlap_score = (
+            len(query_words & answer_words) / max(len(query_words), 1)
+        ) * 100
+
+        # Final Weighted Similarity: 90% on Answer, 10% on Overlap Boost
+        final_similarity = (similarity * 0.9) + (overlap_score * 0.1)
+        final_similarity = min(final_similarity, 100)
 
         # Only include matches above the threshold
-        if similarity >= threshold:
-            matches.append({"similarity": min(similarity, 100), **doc})
+        if final_similarity >= threshold:
+            matches.append(
+                {
+                    "similarity": final_similarity,
+                    "user_input": user_input,
+                    "correct_answer": correct_answer,
+                    "timestamp": timestamp,
+                }
+            )
 
     # Sort matches by similarity in descending order
     matches = sorted(matches, key=lambda x: -x["similarity"])
-
-    # Return the first correct_answer if matches exist, otherwise return False
-    for match in matches:
-        match["timestamp"] = match.get("timestamp", "")  # Ensure field exists
-        if isinstance(match["timestamp"], str):  # Convert timestamp string to datetime
-            try:
-                match["timestamp"] = datetime.fromisoformat(match["timestamp"])
-            except ValueError:
-                match["timestamp"] = datetime.min
-
-    # Sort by similarity (descending) and then by timestamp (latest first)
-    matches = sorted(
-        matches, key=lambda x: (-x["similarity"], -x["timestamp"].timestamp())
-    )
 
     # Return the first correct_answer if matches exist, otherwise return False
     if matches:
@@ -165,7 +195,6 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
                     query=prompt,
                     collection_name="feedback_data_" + language,
                     threshold=10,
-                    language=language,
                 )
                 print(response)
                 if response:
@@ -423,7 +452,6 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
                     query=prompt,
                     collection_name="feedback_data_" + language,
                     threshold=10,
-                    language=language,
                 )
                 if response:
                     print("Correct answer found in Mongo DB")
@@ -552,7 +580,6 @@ class PromptConversationView(MongoDBMixin, APIView):
                     query=prompt,
                     collection_name="feedback_data_" + language,
                     threshold=10,
-                    language=language,
                 )
                 if response:
                     response_data = {
