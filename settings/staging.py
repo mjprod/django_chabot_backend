@@ -7,7 +7,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "api-staging.mjproapps.com",
     "https://staging.mjproapps.com",
-    "54.206.216.180",
+    "13.239.238.239",
 ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
@@ -25,10 +25,10 @@ CSRF_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # MongoDB settings
-MONGODB_USERNAME = "dev"
-MONGODB_PASSWORD = "Yrr0szjwTuE1BU7Y"
-MONGODB_CLUSTER = "chatbotdb-staging.0bcs2.mongodb.net"
-MONGODB_DATABASE = "chatbotdb"
+MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
+MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
+MONGODB_CLUSTER = os.getenv("MONGODB_CLUSTER")
+MONGODB_DATABASE = os.getenv("MONGODB_DATABASE", "ChatbotDB")
 
 # Construct MongoDB URI
 MONGODB_URI = (
