@@ -9,7 +9,7 @@ from sentence_transformers import SentenceTransformer, util
 
 from ..chatbot import (
     prompt_conversation,
-    prompt_conversation_history,
+    prompt_conversation_deepseek,
     translate_and_clean,
     prompt_conversation_admin,
     check_answer_mongo_and_openai,
@@ -154,12 +154,12 @@ def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10)
         print("No matches found.")
 
 
-class PromptConversationHistoryView(MongoDBMixin, APIView):
+class PromptConversationDeepSeekView(MongoDBMixin, APIView):
     def post(self, request):
         try:
             # db = self.get_db()
             # Log start of request processing
-            logger.info("Starting prompt_conversation_history request")
+            logger.info("Starting prompt_conversation_deepseek request")
             start_time = time.time()
 
             # Get the header value as a string
@@ -204,7 +204,7 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
             # Generate AI response with timing
             generation_start = time.time()
             logger.info("Starting AI answer generation")
-            response = prompt_conversation_history(
+            response = prompt_conversation_deepseek(
                 self,
                 user_prompt=translate_and_clean(prompt),
                 conversation_id=conversation_id,
@@ -282,133 +282,10 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
             if db is not None:
                 self.close_db()
 
-
-class CompleteConversationsView(MongoDBMixin, APIView):
-    def get(self, request):
-        db = None
-        start_time = time.time()
-        logger.info("Starting complete_conversations GET request")
-
-        try:
-            # Get pagination parameters
-            page = int(request.query_params.get("page", 1))
-            limit = int(request.query_params.get("limit", 10))
-
-            # Connect to MongoDB
-            db = self.get_db()
-            logger.info("Connected to MongoDB")
-
-            # Query filter
-            query_filter = {}
-
-            # Get total count and paginated results
-            total_count = db.complete_conversations.count_documents(query_filter)
-            cursor = (
-                db.complete_conversations.find(query_filter)
-                .sort("timestamp", -1)
-                .skip((page - 1) * limit)
-                .limit(limit)
-            )
-
-            # Process results
-            results = []
-            for doc in cursor:
-                doc["_id"] = str(doc["_id"])  # Convert ObjectId to string
-                results.append(doc)
-
-            logger.info(f"Retrieved {len(results)} conversations from MongoDB")
-
-            # Prepare response
-            response_data = {
-                "total": total_count,
-                "page": page,
-                "limit": limit,
-                "results": results,
-            }
-
-            logger.info(
-                f"Total request processing time: {time.time() - start_time:.2f}s"
-            )
-
-            return Response(response_data, status=status.HTTP_200_OK)
-        except ValueError as e:
-            logger.error(f"Invalid pagination parameters: {str(e)}")
-            return Response(
-                {"error": "Invalid pagination parameters"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-        except Exception as e:
-            logger.error(f"Error processing request: {str(e)}")
-            return Response(
-                {"error": f"Failed to retrieve conversations: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            )
-        finally:
-            # Cleanup database connection
-            if db is not None:
-                self.close_db()
-
-    def post(self, request):
-        db = None
-        start_time = time.time()
-        logger.info("Starting complete_conversations POST request")
-
-        try:
-            # Log incoming request details
-            logger.info(f"Request Data: {request.data}")
-            logger.info(f"Request Content-Type: {request.content_type}")
-            logger.info(f"Request Headers: {request.headers}")
-
-            # Validate request data
-            logger.info("Validating request data")
-            serializer = CompleteConversationsSerializer(data=request.data)
-            if not serializer.is_valid():
-                logger.error(f"Validation failed: {serializer.errors}")
-                return Response(
-                    {"error": "Invalid input data", "details": serializer.errors},
-                    status=status.HTTP_400_BAD_REQUEST,
-                )
-
-            # Prepare document for MongoDB
-            logger.info("Starting MongoDB Write Operations")
-            conversation_data = {
-                "conversation_id": serializer.validated_data["conversation_id"],
-                "messages": serializer.validated_data["messages"],
-                "timestamp": datetime.utcnow().isoformat(),  # Use UTC for consistency
-            }
-
-            db = self.get_db()
-            result = db.complete_conversations.insert_one(conversation_data)
-            inserted_id = str(result.inserted_id)
-
-            # Prepare and return response
-            response_data = {
-                "message": "Conversation saved successfully",
-                "conversation_id": inserted_id,
-            }
-
-            logger.info(
-                f"MongoDB operation completed in {time.time() - start_time:.2f}s"
-            )
-            return Response(response_data, status=status.HTTP_201_CREATED)
-        except Exception as e:
-            logger.error(f"Error processing request: {str(e)}", exc_info=True)
-            return Response(
-                {"error": f"Request processing failed: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            )
-        finally:
-            if db is not None:
-                self.close_db()
-            # gc.collect()
-
-
 """
 this is the new api for the prompt_conversation_admin,
 it will be used for AI chat with the admin panel
 """
-
-
 class PromptConversationAdminView(MongoDBMixin, APIView):
     def post(self, request):
         logger.info("Starting prompt_conversation_admin request")
@@ -657,3 +534,122 @@ class PromptConversationView(MongoDBMixin, APIView):
         finally:
             if db is not None:
                 self.close_db()
+
+class CompleteConversationsView(MongoDBMixin, APIView):
+    def get(self, request):
+        db = None
+        start_time = time.time()
+        logger.info("Starting complete_conversations GET request")
+
+        try:
+            # Get pagination parameters
+            page = int(request.query_params.get("page", 1))
+            limit = int(request.query_params.get("limit", 10))
+
+            # Connect to MongoDB
+            db = self.get_db()
+            logger.info("Connected to MongoDB")
+
+            # Query filter
+            query_filter = {}
+
+            # Get total count and paginated results
+            total_count = db.complete_conversations.count_documents(query_filter)
+            cursor = (
+                db.complete_conversations.find(query_filter)
+                .sort("timestamp", -1)
+                .skip((page - 1) * limit)
+                .limit(limit)
+            )
+
+            # Process results
+            results = []
+            for doc in cursor:
+                doc["_id"] = str(doc["_id"])  # Convert ObjectId to string
+                results.append(doc)
+
+            logger.info(f"Retrieved {len(results)} conversations from MongoDB")
+
+            # Prepare response
+            response_data = {
+                "total": total_count,
+                "page": page,
+                "limit": limit,
+                "results": results,
+            }
+
+            logger.info(
+                f"Total request processing time: {time.time() - start_time:.2f}s"
+            )
+
+            return Response(response_data, status=status.HTTP_200_OK)
+        except ValueError as e:
+            logger.error(f"Invalid pagination parameters: {str(e)}")
+            return Response(
+                {"error": "Invalid pagination parameters"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        except Exception as e:
+            logger.error(f"Error processing request: {str(e)}")
+            return Response(
+                {"error": f"Failed to retrieve conversations: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+        finally:
+            # Cleanup database connection
+            if db is not None:
+                self.close_db()
+
+    def post(self, request):
+        db = None
+        start_time = time.time()
+        logger.info("Starting complete_conversations POST request")
+
+        try:
+            # Log incoming request details
+            logger.info(f"Request Data: {request.data}")
+            logger.info(f"Request Content-Type: {request.content_type}")
+            logger.info(f"Request Headers: {request.headers}")
+
+            # Validate request data
+            logger.info("Validating request data")
+            serializer = CompleteConversationsSerializer(data=request.data)
+            if not serializer.is_valid():
+                logger.error(f"Validation failed: {serializer.errors}")
+                return Response(
+                    {"error": "Invalid input data", "details": serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Prepare document for MongoDB
+            logger.info("Starting MongoDB Write Operations")
+            conversation_data = {
+                "conversation_id": serializer.validated_data["conversation_id"],
+                "messages": serializer.validated_data["messages"],
+                "timestamp": datetime.utcnow().isoformat(),  # Use UTC for consistency
+            }
+
+            db = self.get_db()
+            result = db.complete_conversations.insert_one(conversation_data)
+            inserted_id = str(result.inserted_id)
+
+            # Prepare and return response
+            response_data = {
+                "message": "Conversation saved successfully",
+                "conversation_id": inserted_id,
+            }
+
+            logger.info(
+                f"MongoDB operation completed in {time.time() - start_time:.2f}s"
+            )
+            return Response(response_data, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            logger.error(f"Error processing request: {str(e)}", exc_info=True)
+            return Response(
+                {"error": f"Request processing failed: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+        finally:
+            if db is not None:
+                self.close_db()
+            # gc.collect()
