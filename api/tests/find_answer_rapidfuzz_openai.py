@@ -16,7 +16,6 @@ MONGODB_USERNAME = "dev"
 MONGODB_PASSWORD = "Yrr0szjwTuE1BU7Y"
 MONGODB_CLUSTER = "chatbotdb-dev.0bcs2.mongodb.net"
 # MONGODB_CLUSTER = "chatbotdb-staging.0bcs2.mongodb.net"
-
 MONGODB_DATABASE = "chatbotdb"
 
 # Connect to MongoDB

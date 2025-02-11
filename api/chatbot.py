@@ -1174,29 +1174,42 @@ def prompt_conversation(self, user_prompt, language_code=LANGUAGE_DEFAULT):
             self.close_db()
 
 
-def prompt_conversation_history(
-    self, user_prompt, conversation_id, admin_id, bot_id, user_id
+def prompt_conversation_deepseek(
+  self,
+    user_prompt,
+    conversation_id,
+    admin_id,
+    bot_id,
+    user_id,
+    language_code=LANGUAGE_DEFAULT,
 ):
 
-    logger.info("Starting prompt_conversation_history request")
+    start_time = time.time()
+    logger.info(
+        f"Starting prompt_conversation_admin prompt_conversation_deepseek - Language: {language_code}"
+    )
+    db = None
 
     try:
-        # get our connection with MongoDB
+        # Database connection with timeout
         db = self.get_db()
-
-        # make sure we have an existing conversation, if not, we will create a new one
-        existing_conversation = db.conversations.find_one(
-            {"session_id": conversation_id}
+        logger.debug(
+            f"MongoDB connection get history in {time.time() - start_time:.2f}s"
         )
 
-        if existing_conversation:
-            # Load existing conversation and get the messages list
-            messages = existing_conversation.get("messages", [])
-        else:
-            # Create new conversation with system prompt
-            messages = [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
+        # Conversation retrieval
+        existing_conversation = db.conversations.find_one(
+            {"session_id": conversation_id},
+            {"messages": 1, "_id": 0},
+        )
 
-        # Add our new message with the role of user and the content of the user prompt
+        messages = (
+            existing_conversation.get("messages", [])
+            if existing_conversation
+            else [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
+        )
+
+        # Add user message
         messages.append(
             {
                 "role": "user",
@@ -1205,68 +1218,114 @@ def prompt_conversation_history(
             }
         )
 
-        # this is the same as before, no changes here
-        docs_retrieve = retriever.invoke(user_prompt)[:3]
-        docs_to_use = []
-
-        # Filter documents same as before with confidence score
-        for doc in docs_retrieve:
-            relevance_score = retrieval_grader.invoke(
-                {"prompt": user_prompt, "document": doc.page_content}
+        # Vector store retrieval
+        vector_start = time.time()
+        try:
+            vector_store = get_vector_store(language_code)
+            docs_retrieve = vector_store.similarity_search(
+                user_prompt, k=3  # Limit to top 3 results for performance
             )
-            if relevance_score.confidence_score >= 0.7:
-                docs_to_use.append(doc)
+            logger.debug(
+                f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
+            )
+        except Exception as ve:
+            logger.error(f"Vector store error: {str(ve)}")
+            docs_retrieve = []
+            print(docs_retrieve)
 
-        # Prepare the OpenAI call with the history we have made
-        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        response = client.chat.completions.create(
-            model=OPENAI_MODEL,
-            messages=messages,
-            temperature=MAX_TEMPERATURE,
-            max_tokens=MAX_TOKENS,
-            timeout=OPENAI_TIMEOUT,
-        )
+        # OpenAI response generation
+        generation_start = time.time()
+        try:
+            messages_history = messages.copy()
+            if docs_retrieve:
+                context_text = " ".join([doc.page_content for doc in docs_retrieve])
+                messages_history.append(
+                    {"role": "system", "content": f"Relevant context: {context_text}"}
+                )
+                
+            # Enter your API Key
+            API_KEY = "sk-9b2f1bc7d7464468bfe1a97496ecd471"  
 
-        # Extract and append AI response
-        ai_response = response.choices[0].message.content
+            url = "https://api.deepseek.com/chat/completions"
+            headers = {
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {API_KEY}"
+            }
+
+            data = {
+                "model": "deepseek-chat",  # Use 'deepseek-reasoner' for R1 model or 'deepseek-chat' for V3 model
+                "messages": messages_history,
+                "stream": False  # Disable streaming
+            }
+
+            response = requests.post(url, headers=headers, json=data)
+
+            if response.status_code == 200:
+                result = response.json()
+                print(result['choices'][0]['message']['content'])
+                # ai_response = result['choices'][0]['message']['content']
+                logger.debug(
+                    f"AI response generated in {time.time() - generation_start:.2f}s"
+                )
+            else:
+                print("Request failed, error code:", response.status_code)
+
+        except Exception as oe:
+            logger.error(f"OpenAI error: {str(oe)}")
+            raise
+
+        #is_last_message = is_finalizing_phrase(ai_response)
+
+        # Update conversation
         messages.append(
             {
                 "role": "assistant",
-                "content": ai_response,
+               # "content": ai_response,
                 "timestamp": datetime.now().isoformat(),
             }
         )
 
-        # hit our translations function
-        translations = asyncio.run(generate_translations(ai_response))
-
-        # Prepare our conversation as before but without is_first_message
+        # Prepare and save conversation
         conversation = {
             "session_id": conversation_id,
             "admin_id": admin_id,
             "bot_id": bot_id,
             "user_id": user_id,
+            "language": language_code,
             "messages": messages,
-            "translations": translations,
             "updated_at": datetime.now().isoformat(),
         }
 
-        # Upsert conversation to MongoDB
-        db.conversations.update_one(
-            {"session_id": conversation_id}, {"$set": conversation}, upsert=True
-        )
+        # Upsert with retry logic
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                db.conversations.update_one(
+                    {"session_id": conversation_id}, {"$set": conversation}, upsert=True
+                )
+                break
+            except Exception as me:
+                if attempt == max_retries - 1:
+                    raise
+                logger.warning(f"MongoDB retry {attempt + 1}/{max_retries}: {str(me)}")
+                time.sleep(0.5)
+
+        total_time = time.time() - start_time
+        logger.info(f"Request completed in {total_time:.2f}s")
 
         return {
-            "generation": ai_response,
+           # "generation": ai_response,
             "conversation_id": conversation_id,
-            "translations": translations,
+            "language": language_code,
+            # "is_last_message": is_last_message,
         }
 
     except Exception as e:
-        logger.error(f"Error in prompt_conversation_history: {str(e)}")
+        logger.error(f"Error in prompt_conversation_admin: {str(e)}", exc_info=True)
         raise
     finally:
-        gc.collect()
+        if db is not None:
+            self.close_db()
 
 
 """
@@ -1308,7 +1367,7 @@ Use the correct vector store to get the relevant documents
 Use the documents to generate a response
 Return the response to the frontend with a language field in
 the response to associate the language with the response
-then same as prompt_conversation_history we will use the same
+then same as prompt_conversation_deepseek we will use the same
 function to save the conversation to the database
 and use history in our response generation for context and conversation
 the focus here is that there is no need to translate or touch the user input,
