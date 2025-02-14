@@ -10,6 +10,7 @@ from .views.conversation_view import (
 )
 from .views.feedback_view import (
     CaptureFeedbackView,
+    CaptureFeedbackCompareView,
     CaptureFeedbackMultiView,
 )
 from .views.user_input_view import (
@@ -39,6 +40,8 @@ urlpatterns = [
     ),
     # Route for capturing feedback
     path("capture_feedback/", CaptureFeedbackView.as_view(), name="capture_feedback"),
+    # Route for capturing feedback compare
+    path("capture_feedback_compare/", CaptureFeedbackCompareView.as_view(), name="capture_feedback_compare"),
     # Route for capturing feedback
     path(
         "capture_feedback_multi/",

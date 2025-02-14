@@ -122,6 +122,15 @@ class CaptureFeedbackSimpleSerializer(serializers.Serializer):
         max_length=2000, required=False, allow_blank=True
     )
 
+class CaptureFeedbackCompareSerializer(serializers.Serializer):
+    user_input = serializers.CharField(max_length=1000)
+    language = serializers.CharField(max_length=10, required=False, allow_blank=True)
+    original_answer = serializers.CharField(
+        max_length=2000, required=False, allow_blank=True
+    )
+    correct_answer = serializers.CharField(
+        max_length=2000, required=False, allow_blank=True
+    )
 
 class CaptureFeedbackSerializer(serializers.Serializer):
     conversation_id = serializers.CharField(max_length=100)
