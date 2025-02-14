@@ -1,17 +1,15 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-
 import logging
 from datetime import datetime
 from ..mixins.mongodb_mixin import MongoDBMixin
 import time
-
-from rapidfuzz import fuzz
+from sentence_transformers import SentenceTransformer, util
 
 from ..chatbot import (
     prompt_conversation,
-    prompt_conversation_history,
+    prompt_conversation_deepseek,
     translate_and_clean,
     prompt_conversation_admin,
     check_answer_mongo_and_openai,
@@ -29,10 +27,18 @@ from ai_config.ai_constants import (
 
 logger = logging.getLogger(__name__)
 
+model = SentenceTransformer("sentence-t5-large")
 
-def fuzzy_match_with_dynamic_context(
-    self, query, collection_name, threshold, language="en"
-):
+
+def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10):
+    """
+    Find the most semantically similar question-answer pair in MongoDB.
+    :param query: User's input query.
+    :param collection_name: Name of the MongoDB collection.
+    :param threshold: Minimum similarity score to return results.
+    :return: List of top matches sorted by similarity.
+    """
+
     db = self.get_db()
     collection = db[collection_name]
 
@@ -58,47 +64,71 @@ def fuzzy_match_with_dynamic_context(
     else:
         print("Text index already exists.")
 
-    # Fetch all documents with 'user_input' and 'correct_answer'
+    # Fetch all documents with 'user_input' (question) and 'correct_answer' (answer)
+    # documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}))
     documents = list(
-        collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1})
+        collection.find(
+            {}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}
+        ).sort("timestamp", -1)
     )
 
     if not documents:
-        print(f"No documents found in collection '{collection_name}'.")
         return []
+
+    # Compute embeddings for the query
+    latest_questions = {}
+    for doc in documents:
+        user_input = doc.get("user_input", "").strip().lower()
+        if user_input and user_input not in latest_questions:
+            latest_questions[user_input] = doc  # Store only the latest entry
+
+    # Compute embeddings for the query
+    query_embedding = model.encode(query, convert_to_tensor=True)
 
     matches = []
 
-    for doc in documents:
+    for (
+        doc
+    ) in latest_questions.values():  # Iterate only through unique latest questions
         user_input = doc.get("user_input", "")
         correct_answer = doc.get("correct_answer", "")
         timestamp = doc.get("timestamp", "")
 
-        combined_text = f"{user_input} {correct_answer} {timestamp}".strip()
+        # Merge question + answer for better context
+        combined_text = f"Q: {user_input} A: {correct_answer}"
 
-        # Calculate fuzzy similarity
-        similarity = fuzz.partial_ratio(query, combined_text)
+        # Compute embeddings for combined question + answer
+        document_embedding = model.encode(combined_text, convert_to_tensor=True)
+
+        # Compute similarity using embeddings
+        similarity = (
+            util.pytorch_cos_sim(query_embedding, document_embedding).item() * 100
+        )
+
+        # Word Overlap Score (Ensures proper nouns like 'Glauco' match better)
+        query_words = set(query.lower().split())
+        answer_words = set(correct_answer.lower().split())
+        overlap_score = (
+            len(query_words & answer_words) / max(len(query_words), 1)
+        ) * 100
+
+        # Final Weighted Similarity: 90% on Answer, 10% on Overlap Boost
+        final_similarity = (similarity * 0.9) + (overlap_score * 0.1)
+        final_similarity = min(final_similarity, 100)
 
         # Only include matches above the threshold
-        if similarity >= threshold:
-            matches.append({"similarity": min(similarity, 100), **doc})
+        if final_similarity >= threshold:
+            matches.append(
+                {
+                    "similarity": final_similarity,
+                    "user_input": user_input,
+                    "correct_answer": correct_answer,
+                    "timestamp": timestamp,
+                }
+            )
 
     # Sort matches by similarity in descending order
     matches = sorted(matches, key=lambda x: -x["similarity"])
-
-    # Return the first correct_answer if matches exist, otherwise return False
-    for match in matches:
-        match["timestamp"] = match.get("timestamp", "")  # Ensure field exists
-        if isinstance(match["timestamp"], str):  # Convert timestamp string to datetime
-            try:
-                match["timestamp"] = datetime.fromisoformat(match["timestamp"])
-            except ValueError:
-                match["timestamp"] = datetime.min
-
-    # Sort by similarity (descending) and then by timestamp (latest first)
-    matches = sorted(
-        matches, key=lambda x: (-x["similarity"], -x["timestamp"].timestamp())
-    )
 
     # Return the first correct_answer if matches exist, otherwise return False
     if matches:
@@ -124,12 +154,12 @@ def fuzzy_match_with_dynamic_context(
         print("No matches found.")
 
 
-class PromptConversationHistoryView(MongoDBMixin, APIView):
+class PromptConversationDeepSeekView(MongoDBMixin, APIView):
     def post(self, request):
         try:
             # db = self.get_db()
             # Log start of request processing
-            logger.info("Starting prompt_conversation_history request")
+            logger.info("Starting prompt_conversation_deepseek request")
             start_time = time.time()
 
             # Get the header value as a string
@@ -165,7 +195,6 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
                     query=prompt,
                     collection_name="feedback_data_" + language,
                     threshold=10,
-                    language=language,
                 )
                 print(response)
                 if response:
@@ -175,7 +204,7 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
             # Generate AI response with timing
             generation_start = time.time()
             logger.info("Starting AI answer generation")
-            response = prompt_conversation_history(
+            response = prompt_conversation_deepseek(
                 self,
                 user_prompt=translate_and_clean(prompt),
                 conversation_id=conversation_id,
@@ -253,133 +282,10 @@ class PromptConversationHistoryView(MongoDBMixin, APIView):
             if db is not None:
                 self.close_db()
 
-
-class CompleteConversationsView(MongoDBMixin, APIView):
-    def get(self, request):
-        db = None
-        start_time = time.time()
-        logger.info("Starting complete_conversations GET request")
-
-        try:
-            # Get pagination parameters
-            page = int(request.query_params.get("page", 1))
-            limit = int(request.query_params.get("limit", 10))
-
-            # Connect to MongoDB
-            db = self.get_db()
-            logger.info("Connected to MongoDB")
-
-            # Query filter
-            query_filter = {}
-
-            # Get total count and paginated results
-            total_count = db.complete_conversations.count_documents(query_filter)
-            cursor = (
-                db.complete_conversations.find(query_filter)
-                .sort("timestamp", -1)
-                .skip((page - 1) * limit)
-                .limit(limit)
-            )
-
-            # Process results
-            results = []
-            for doc in cursor:
-                doc["_id"] = str(doc["_id"])  # Convert ObjectId to string
-                results.append(doc)
-
-            logger.info(f"Retrieved {len(results)} conversations from MongoDB")
-
-            # Prepare response
-            response_data = {
-                "total": total_count,
-                "page": page,
-                "limit": limit,
-                "results": results,
-            }
-
-            logger.info(
-                f"Total request processing time: {time.time() - start_time:.2f}s"
-            )
-
-            return Response(response_data, status=status.HTTP_200_OK)
-        except ValueError as e:
-            logger.error(f"Invalid pagination parameters: {str(e)}")
-            return Response(
-                {"error": "Invalid pagination parameters"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-        except Exception as e:
-            logger.error(f"Error processing request: {str(e)}")
-            return Response(
-                {"error": f"Failed to retrieve conversations: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            )
-        finally:
-            # Cleanup database connection
-            if db is not None:
-                self.close_db()
-
-    def post(self, request):
-        db = None
-        start_time = time.time()
-        logger.info("Starting complete_conversations POST request")
-
-        try:
-            # Log incoming request details
-            logger.info(f"Request Data: {request.data}")
-            logger.info(f"Request Content-Type: {request.content_type}")
-            logger.info(f"Request Headers: {request.headers}")
-
-            # Validate request data
-            logger.info("Validating request data")
-            serializer = CompleteConversationsSerializer(data=request.data)
-            if not serializer.is_valid():
-                logger.error(f"Validation failed: {serializer.errors}")
-                return Response(
-                    {"error": "Invalid input data", "details": serializer.errors},
-                    status=status.HTTP_400_BAD_REQUEST,
-                )
-
-            # Prepare document for MongoDB
-            logger.info("Starting MongoDB Write Operations")
-            conversation_data = {
-                "conversation_id": serializer.validated_data["conversation_id"],
-                "messages": serializer.validated_data["messages"],
-                "timestamp": datetime.utcnow().isoformat(),  # Use UTC for consistency
-            }
-
-            db = self.get_db()
-            result = db.complete_conversations.insert_one(conversation_data)
-            inserted_id = str(result.inserted_id)
-
-            # Prepare and return response
-            response_data = {
-                "message": "Conversation saved successfully",
-                "conversation_id": inserted_id,
-            }
-
-            logger.info(
-                f"MongoDB operation completed in {time.time() - start_time:.2f}s"
-            )
-            return Response(response_data, status=status.HTTP_201_CREATED)
-        except Exception as e:
-            logger.error(f"Error processing request: {str(e)}", exc_info=True)
-            return Response(
-                {"error": f"Request processing failed: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            )
-        finally:
-            if db is not None:
-                self.close_db()
-            # gc.collect()
-
-
 """
 this is the new api for the prompt_conversation_admin,
 it will be used for AI chat with the admin panel
 """
-
-
 class PromptConversationAdminView(MongoDBMixin, APIView):
     def post(self, request):
         logger.info("Starting prompt_conversation_admin request")
@@ -423,7 +329,6 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
                     query=prompt,
                     collection_name="feedback_data_" + language,
                     threshold=10,
-                    language=language,
                 )
                 if response:
                     print("Correct answer found in Mongo DB")
@@ -552,7 +457,6 @@ class PromptConversationView(MongoDBMixin, APIView):
                     query=prompt,
                     collection_name="feedback_data_" + language,
                     threshold=10,
-                    language=language,
                 )
                 if response:
                     response_data = {
@@ -630,3 +534,122 @@ class PromptConversationView(MongoDBMixin, APIView):
         finally:
             if db is not None:
                 self.close_db()
+
+class CompleteConversationsView(MongoDBMixin, APIView):
+    def get(self, request):
+        db = None
+        start_time = time.time()
+        logger.info("Starting complete_conversations GET request")
+
+        try:
+            # Get pagination parameters
+            page = int(request.query_params.get("page", 1))
+            limit = int(request.query_params.get("limit", 10))
+
+            # Connect to MongoDB
+            db = self.get_db()
+            logger.info("Connected to MongoDB")
+
+            # Query filter
+            query_filter = {}
+
+            # Get total count and paginated results
+            total_count = db.complete_conversations.count_documents(query_filter)
+            cursor = (
+                db.complete_conversations.find(query_filter)
+                .sort("timestamp", -1)
+                .skip((page - 1) * limit)
+                .limit(limit)
+            )
+
+            # Process results
+            results = []
+            for doc in cursor:
+                doc["_id"] = str(doc["_id"])  # Convert ObjectId to string
+                results.append(doc)
+
+            logger.info(f"Retrieved {len(results)} conversations from MongoDB")
+
+            # Prepare response
+            response_data = {
+                "total": total_count,
+                "page": page,
+                "limit": limit,
+                "results": results,
+            }
+
+            logger.info(
+                f"Total request processing time: {time.time() - start_time:.2f}s"
+            )
+
+            return Response(response_data, status=status.HTTP_200_OK)
+        except ValueError as e:
+            logger.error(f"Invalid pagination parameters: {str(e)}")
+            return Response(
+                {"error": "Invalid pagination parameters"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        except Exception as e:
+            logger.error(f"Error processing request: {str(e)}")
+            return Response(
+                {"error": f"Failed to retrieve conversations: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+        finally:
+            # Cleanup database connection
+            if db is not None:
+                self.close_db()
+
+    def post(self, request):
+        db = None
+        start_time = time.time()
+        logger.info("Starting complete_conversations POST request")
+
+        try:
+            # Log incoming request details
+            logger.info(f"Request Data: {request.data}")
+            logger.info(f"Request Content-Type: {request.content_type}")
+            logger.info(f"Request Headers: {request.headers}")
+
+            # Validate request data
+            logger.info("Validating request data")
+            serializer = CompleteConversationsSerializer(data=request.data)
+            if not serializer.is_valid():
+                logger.error(f"Validation failed: {serializer.errors}")
+                return Response(
+                    {"error": "Invalid input data", "details": serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Prepare document for MongoDB
+            logger.info("Starting MongoDB Write Operations")
+            conversation_data = {
+                "conversation_id": serializer.validated_data["conversation_id"],
+                "messages": serializer.validated_data["messages"],
+                "timestamp": datetime.utcnow().isoformat(),  # Use UTC for consistency
+            }
+
+            db = self.get_db()
+            result = db.complete_conversations.insert_one(conversation_data)
+            inserted_id = str(result.inserted_id)
+
+            # Prepare and return response
+            response_data = {
+                "message": "Conversation saved successfully",
+                "conversation_id": inserted_id,
+            }
+
+            logger.info(
+                f"MongoDB operation completed in {time.time() - start_time:.2f}s"
+            )
+            return Response(response_data, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            logger.error(f"Error processing request: {str(e)}", exc_info=True)
+            return Response(
+                {"error": f"Request processing failed: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+        finally:
+            if db is not None:
+                self.close_db()
+            # gc.collect()

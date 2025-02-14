@@ -6,14 +6,16 @@ from nltk.corpus import stopwords
 import jieba
 from openai import OpenAI
 from datetime import datetime
+from sentence_transformers import SentenceTransformer, util
 
+# Load a better model (More accurate for question-answer tasks)
+model = SentenceTransformer("sentence-t5-large")
 
 # MongoDB Configuration
 MONGODB_USERNAME = "dev"
 MONGODB_PASSWORD = "Yrr0szjwTuE1BU7Y"
-# MONGODB_CLUSTER = "chatbotdb-dev.0bcs2.mongodb.net"
-MONGODB_CLUSTER = "chatbotdb-staging.0bcs2.mongodb.net"
-
+MONGODB_CLUSTER = "chatbotdb-dev.0bcs2.mongodb.net"
+# MONGODB_CLUSTER = "chatbotdb-staging.0bcs2.mongodb.net"
 MONGODB_DATABASE = "chatbotdb"
 
 # Connect to MongoDB
@@ -243,6 +245,109 @@ def check_answer_mongo_and_openai(user_question, matches):
 
 
 def fuzzy_match_with_dynamic_context(
+    query, collection_name="feedback_data_en", threshold=10
+):
+    """
+    Find the most semantically similar question-answer pair in MongoDB.
+
+    :param query: User's input query.
+    :param collection_name: Name of the MongoDB collection.
+    :param threshold: Minimum similarity score to return results.
+    :return: List of top matches sorted by similarity.
+    """
+    collection = db[collection_name]
+
+    # Fetch all documents with 'user_input' (question) and 'correct_answer' (answer)
+    # documents = list(collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}))
+    documents = list(
+        collection.find(
+            {}, {"user_input": 1, "correct_answer": 1, "timestamp": 1}
+        ).sort("timestamp", -1)
+    )
+
+    if not documents:
+        return []
+
+    # Compute embeddings for the query
+    latest_questions = {}
+    for doc in documents:
+        user_input = doc.get("user_input", "").strip().lower()
+        if user_input and user_input not in latest_questions:
+            latest_questions[user_input] = doc  # Store only the latest entry
+
+    # Compute embeddings for the query
+    query_embedding = model.encode(query, convert_to_tensor=True)
+
+    matches = []
+
+    for (
+        doc
+    ) in latest_questions.values():  # Iterate only through unique latest questions
+        user_input = doc.get("user_input", "")
+        correct_answer = doc.get("correct_answer", "")
+        timestamp = doc.get("timestamp", "")
+
+        # Merge question + answer for better context
+        combined_text = f"Q: {user_input} A: {correct_answer}"
+
+        # Compute embeddings for combined question + answer
+        document_embedding = model.encode(combined_text, convert_to_tensor=True)
+
+        # Compute similarity using embeddings
+        similarity = (
+            util.pytorch_cos_sim(query_embedding, document_embedding).item() * 100
+        )
+
+        # Word Overlap Score (Ensures proper nouns like 'Glauco' match better)
+        query_words = set(query.lower().split())
+        answer_words = set(correct_answer.lower().split())
+        overlap_score = (
+            len(query_words & answer_words) / max(len(query_words), 1)
+        ) * 100
+
+        # Final Weighted Similarity: 90% on Answer, 10% on Overlap Boost
+        final_similarity = (similarity * 0.9) + (overlap_score * 0.1)
+        final_similarity = min(final_similarity, 100)
+
+        # Only include matches above the threshold
+        if final_similarity >= threshold:
+            matches.append(
+                {
+                    "similarity": final_similarity,
+                    "user_input": user_input,
+                    "correct_answer": correct_answer,
+                    "timestamp": timestamp,
+                }
+            )
+
+    # Sort matches by similarity in descending order
+    matches = sorted(matches, key=lambda x: -x["similarity"])
+
+    # Return the first correct_answer if matches exist, otherwise return False
+    if matches:
+        # Check if the first match has a similarity score greater than 80
+        if matches[0]["similarity"] > 80:
+            best_answer = matches[0]["correct_answer"]
+            print("\nHigh Similarity Match Found:")
+            print(best_answer)
+            return best_answer  # Return immediately if it's a strong match
+
+        # Otherwise, proceed with OpenAI validation
+        limited_matches = matches[:5]
+
+        openai_response = check_answer_mongo_and_openai(query, limited_matches)
+
+        if openai_response:
+            print("\nOpenAI Response:")
+            print(openai_response)
+            return openai_response
+        else:
+            print("No matches found.")
+    else:
+        print("No matches found.")
+
+
+def fuzzy_match_with_dynamic_context_old(
     query, collection_name="feedback_data", language="en", threshold=10
 ):
     """
@@ -276,20 +381,7 @@ def fuzzy_match_with_dynamic_context(
         timestamp = doc.get("timestamp", "")
 
         combined_text = f"{correct_answer} {user_input} {timestamp}".strip()
-        # Extract keywords from the document
-        # document_keywords = extract_keywords(combined_text, language)
-        # print(f"Document Keywords: {document_keywords}")
-
-        # Calculate fuzzy similarity
         similarity = fuzz.partial_ratio(query, combined_text)
-
-        # Calculate keyword overlap score
-        # overlap_score = len(query_keywords & document_keywords) / max(len(query_keywords), 1) * 100
-
-        # Combine similarity and keyword overlap for the final score
-        # final_score = (similarity * 0.6 + overlap_score * 0.4)
-
-        # Only include matches above the threshold
         if similarity >= threshold:
             matches.append({"similarity": min(similarity, 100), **doc})
 
@@ -312,6 +404,12 @@ def fuzzy_match_with_dynamic_context(
     # print(f"@@ AFTER Found {str(matches)} matches.")
 
     # Return the first correct_answer if matches exist, otherwise return False
+    print("\nSimilarity Scores (Ordered):")
+    for match in matches:
+        print(
+            f"Similarity: {match['similarity']}% | Combined: {match['user_input']} {match['correct_answer']}"
+        )
+
     if matches:
         # Check if the first match has a similarity score greater than 80
         if matches[0]["similarity"] > 80:
@@ -346,13 +444,13 @@ queries = [
     # "Apakah kaedah pembayaran yang anda",
     #  "Apak deposit yang anda terima?",
     # "Berapa lama masa yang diperlukan untuk deposit diproses?",
-    "DO you have any information of Leo?"
+    "DO you have any information of Glauco?",
 ]
 
 # Run Fuzzy Matching for Each Query
 for query in queries:
     result = fuzzy_match_with_dynamic_context(
-        query, "feedback_data_en", "en", threshold=10
+        query, "feedback_data_en", threshold=10
     )  # Lower threshold for better results
 
     # if result:

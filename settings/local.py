@@ -20,12 +20,10 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_HSTS_PRELOAD = True
 
 # MongoDB settings
-MONGODB_USERNAME = "dev"
-MONGODB_PASSWORD = "Yrr0szjwTuE1BU7Y"
-MONGODB_CLUSTER = "chatbotdb-dev.0bcs2.mongodb.net"
-# MONGODB_CLUSTER = "chatbotdb-staging.0bcs2.mongodb.net"
-
-MONGODB_DATABASE = "chatbotdb"
+MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
+MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
+MONGODB_CLUSTER = os.getenv("MONGODB_CLUSTER")
+MONGODB_DATABASE = os.getenv("MONGODB_DATABASE", "ChatbotDB")
 
 # Construct MongoDB URI
 MONGODB_URI = (
