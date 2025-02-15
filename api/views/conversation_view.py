@@ -27,7 +27,9 @@ from ai_config.ai_constants import (
 
 logger = logging.getLogger(__name__)
 
-model = SentenceTransformer("sentence-t5-large")
+# model = SentenceTransformer("sentence-t5-large")
+model = SentenceTransformer("all-mpnet-base-v2")
+#model = SentenceTransformer("all-MiniLM-L6-v2")
 
 
 def fuzzy_match_with_dynamic_context(self, query, collection_name, threshold=10):
@@ -198,7 +200,7 @@ class PromptConversationDeepSeekView(MongoDBMixin, APIView):
                 )
                 print(response)
                 if response:
-                    time.sleep(5)
+                    # time.sleep(5)
                     return Response(response, status=status.HTTP_200_OK)
 
             # Generate AI response with timing
@@ -338,7 +340,7 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
                         "is_last_message": "false",
                         "language": language,
                     }
-                    time.sleep(6)
+                    # time.sleep(6)
                     return Response(response_data, status=status.HTTP_200_OK)
 
             # Extract validated data
@@ -360,7 +362,7 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
 
             # generation_time = time.time() - generation_start
             # if generation_time < 3:
-            time.sleep(6)
+            # time.sleep(6)
 
             return Response(response, status=status.HTTP_200_OK)
 
@@ -480,7 +482,7 @@ class PromptConversationView(MongoDBMixin, APIView):
 
             # generation_time = time.time() - generation_start
             # if generation_time < 3:
-            time.sleep(6)
+            # time.sleep(6)
 
             return Response(response, status=status.HTTP_200_OK)
 
