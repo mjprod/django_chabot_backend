@@ -483,7 +483,7 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
                         "is_last_message": "false",
                         "language": language,
                     }
-                    time.sleep(6)
+                    # time.sleep(6)
                     return Response(response_data, status=status.HTTP_200_OK)
 
             # Extract validated data
@@ -505,7 +505,7 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
 
             # generation_time = time.time() - generation_start
             # if generation_time < 3:
-            time.sleep(6)
+            # time.sleep(6)
 
             return Response(response, status=status.HTTP_200_OK)
 
@@ -626,7 +626,7 @@ class PromptConversationView(MongoDBMixin, APIView):
 
             # generation_time = time.time() - generation_start
             # if generation_time < 3:
-            time.sleep(6)
+            # time.sleep(6)
 
             return Response(response, status=status.HTTP_200_OK)
 
