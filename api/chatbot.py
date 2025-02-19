@@ -29,6 +29,9 @@ from pydantic import BaseModel, Field
 # mongodb imports
 from pymongo import MongoClient
 
+from chromadb import Client
+
+
 # constants
 from ai_config.ai_constants import (
     OPENAI_MODEL,
@@ -408,7 +411,7 @@ class MultiRetriever:
                 logger.info(
                     f"Processing completed with {len(all_results)} total results."
                 )
-
+            print(str(all_results))
             return all_results[:3]
         finally:
             gc.collect()
@@ -1173,7 +1176,6 @@ def prompt_conversation(self, user_prompt, language_code=LANGUAGE_DEFAULT):
         if db is not None:
             self.close_db()
 
-
 def prompt_conversation_deepseek(
   self,
     user_prompt,
@@ -1223,7 +1225,7 @@ def prompt_conversation_deepseek(
         try:
             vector_store = get_vector_store(language_code)
             docs_retrieve = vector_store.similarity_search(
-                user_prompt, k=3  # Limit to top 3 results for performance
+                user_prompt, k=3
             )
             logger.debug(
                 f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
@@ -1332,8 +1334,6 @@ def prompt_conversation_deepseek(
 this is the new vector store function that will be used to get the vector store for the language
 the user has selected
 """
-
-
 def get_vector_store(language_code: str = LANGUAGE_DEFAULT):
     try:
         if language_code not in SUPPORTED_LANGUAGES:
@@ -1373,7 +1373,6 @@ and use history in our response generation for context and conversation
 the focus here is that there is no need to translate or touch the user input,
 speed is the key here
 """
-
 
 def prompt_conversation_admin(
     self,
@@ -1464,6 +1463,17 @@ def prompt_conversation_admin(
 
         is_last_message = is_finalizing_phrase(ai_response)
 
+        # Chama o confidence grader para obter um score de confiança
+        try:
+            # Aqui usamos os documentos recuperados para o contexto
+            confidence_result = confidence_grader.invoke({
+                "documents": format_docs(docs_retrieve),
+                "generation": ai_response,
+            })
+        except Exception as ce:
+            logger.error(f"Error obtaining confidence: {str(ce)}")
+            confidence_result = None
+
         # Update conversation
         messages.append(
             {
@@ -1506,6 +1516,7 @@ def prompt_conversation_admin(
             "conversation_id": conversation_id,
             "language": language_code,
             "is_last_message": is_last_message,
+            "confidence_score": confidence_result.confidence_score if confidence_result else None,
         }
 
     except Exception as e:
@@ -1641,3 +1652,182 @@ def check_answer_mongo_and_openai(user_question, matches):
         return None
 
     return final_response
+
+
+
+
+logger = logging.getLogger()
+
+def extrair_knowledge_items(conversation):
+    """
+    Analisa a conversa, extrai os pontos de resolução e cria um resumo conciso desses pontos.
+    Retorna um item de conhecimento multilíngue com um resumo desses trechos.
+    """
+    # Concatene todas as mensagens da conversa (ou selecione apenas as que podem conter resolução)
+    full_text = "\n".join(
+        msg.get("content", "") for msg in conversation.get("messages", []) if msg.get("content")
+    )
+    
+    # Crie um prompt para extrair os pontos de resolução e gerar um resumo conciso ao mesmo tempo
+    extraction_prompt = (
+        "Analyze the conversation below and extract the parts where the user's problem was solved "
+        "or the issue was resolved. Provide a concise summary in English, capturing the resolutions or "
+        "key decisions made. Do not include any extraneous details. Provide the full resolution details first, "
+        "followed by a concise, reduced summary.\n\nConversation:\n" + full_text
+    )
+    
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise Exception("OPENAI_API_KEY is missing")
+    
+    client = OpenAI(api_key=api_key)
+    try:
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant that extracts and summarizes resolution points from a conversation."},
+                {"role": "user", "content": extraction_prompt},
+            ],
+            temperature=0.2,
+            max_tokens=200,  # Ajuste para o comprimento do texto extraído e resumido
+            timeout=OPENAI_TIMEOUT,
+        )
+    except Exception as e:
+        logger.error(f"Error during resolution extraction and summary generation: {str(e)}")
+        return []
+
+    extracted_text = response.choices[0].message.content.strip()
+    
+    # Se nada foi extraído ou o LLM retornar "None", retorne uma lista vazia
+    if not extracted_text or extracted_text.lower() == "none":
+        return []
+
+    # Divida o texto extraído em duas partes, a resolução completa e a versão resumida
+    if "Summary:" in extracted_text:
+        full_resolution, reduced_summary = extracted_text.split("Summary:", 1)
+        reduced_summary = reduced_summary.strip()
+    else:
+        full_resolution = extracted_text
+        reduced_summary = full_resolution
+   
+    full_resolution = full_resolution.replace("Resolution:", "").strip()
+    
+    # Crie o item de conhecimento multilíngue
+    candidate_item = {
+        "id": conversation["session_id"] + "_resolucao",
+        "question": {
+            "text": "What are the resolution points of the conversation?", 
+            "variations": [],
+            "intent": "extracted_resolution_points",
+            "languages": {
+                "en": "Resolution points of the conversation",
+            }
+        },
+        "answer": {
+            "short": {
+                "en": reduced_summary,
+            },
+            "detailed": {
+                "en": full_resolution,
+            },
+            "conditions": ["Derived from conversation resolution"]
+        },
+        "metadata": {
+            "category": ["extracted"],
+            "subCategory": "conversation_resolution",
+            "confidence": 0.7,
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [],
+            "followUpQuestions": {}
+        }
+    }
+    
+    # Passo 3: Buscar documentos relevantes para gerar a resposta
+    vector_start = time.time()
+    try:
+
+        
+        docs_retrieve = retriever.get_relevant_documents(extracted_text)
+        logger.debug(f"Retrieved {len(docs_retrieve)} documents.")
+
+        docs_to_use = []
+        reasoning = []  # Lista para armazenar o raciocínio de cada documento
+        top_documents = []  # Lista para armazenar as 3 principais mensagens (documentos)
+
+        # Passo 4: Filtrar os documentos com base na relevância
+        for doc in docs_retrieve:
+            relevance_score = retrieval_grader.invoke(
+                {"prompt": extracted_text, "document": doc.page_content}
+            )
+            print(docs_retrieve)
+            logger.debug(f"Document content preview: {doc.page_content[:200]}... Relevance Score: {relevance_score.confidence_score}")
+            
+            if relevance_score.confidence_score >= 0.7:
+                docs_to_use.append(doc)
+                reasoning.append({
+                    "document": doc.page_content,
+                    "score": relevance_score.confidence_score,
+                    "rationale": f"Document is relevant with score {relevance_score.confidence_score}."
+                })
+
+                top_documents.append({
+                    "id":  doc.metadata.get('id'),
+                    "content": doc.page_content
+                })
+
+        logger.debug(f"Filtered down to {len(docs_to_use)} relevant documents.")
+        
+        # Passo 5: Formatar os documentos para o modelo
+        context = format_docs(docs_to_use)
+
+        # Passo 6: Gerar a resposta usando os documentos relevantes
+        response = rag_chain.invoke(
+            {
+                "context": context,
+                "prompt": extracted_text,
+                "reasoning": reasoning
+            }
+        )
+
+        logger.debug("Response generated using the following documents:")
+        for r in reasoning:
+            logger.debug(f"Rationale: {r['rationale']}\nDocument Content: {r['document'][:200]}...")
+
+        candidate_item["answer"]["rag_response"] = response
+        candidate_item["answer"]["top_documents"] = top_documents
+
+        return [candidate_item]
+
+    except Exception as ve:
+        logger.error(f"Error during vector store retrieval: {str(ve)}")
+        return []
+    
+def get_embedding(text):
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise Exception("OPENAI_API_KEY is missing")
+    
+    client = OpenAI(api_key=api_key)
+    response = client.Embedding.create(
+        input=[text],
+        model="text-embedding-ada-002"
+    )
+    return response["data"][0]["embedding"]
+
+def verificar_existencia(chroma_client, item, similarity_threshold=0.8):
+
+    embedding = get_embedding(item["question"]["text"])
+    collection = chroma_client.get_collection(name="knowledge")
+    query_result = collection.query(query_embeddings=[embedding], n_results=1)
+    
+    # Log para depuração (opcional)
+    print(f"Query result for {item['id']}: {query_result}")
+    
+    if query_result and query_result.get("distances") and query_result["distances"][0]:
+        best_distance = query_result["distances"][0][0]
+        # Assumindo que distância menor indica maior similaridade
+        if best_distance < similarity_threshold:
+            return True
+    return False

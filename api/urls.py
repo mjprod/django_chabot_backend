@@ -4,6 +4,8 @@ from django.views.decorators.cache import cache_page
 # Import views from conversation_view, feedback_view, and user_input_view
 from .views.conversation_view import (
     PromptConversationView,
+    ConversationDetailView,
+    UpdateKnowledgeView,
     # PromptConversationDeepSeekView,
     PromptConversationAdminView,
 )
@@ -26,6 +28,10 @@ urlpatterns = [
         PromptConversationView.as_view(),
         name="prompt_conversation",
     ),
+    path(
+      "conversation/<conversation_id>/",ConversationDetailView.as_view(), name="conversation",
+    ),
+     path('update_knowledge/', UpdateKnowledgeView.as_view(), name='update_knowledge'),
     # path(
     #    "prompt_conversation_deepseek/",
     #    PromptConversationDeepSeekView.as_view(),
