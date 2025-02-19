@@ -456,3 +456,34 @@ class UpdateKnowledgeView(MongoDBMixin, APIView):
         finally:
             if db is not None:
                 self.close_db()
+
+class DeleteConversationView(MongoDBMixin, APIView):
+    def delete(self, request, *args, **kwargs):
+        # Obtém o conversation_id dos kwargs (já que está na URL)
+        conversation_id = kwargs.get("conversation_id")
+        if not conversation_id:
+            return Response(
+                {"error": "conversation_id is required"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        db = None
+        try:
+            db = self.get_db()
+            result = db.conversations.delete_one({"session_id": conversation_id})
+            if result.deleted_count == 0:
+                return Response(
+                    {"error": "Conversation not found"},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+            return Response(
+                {"message": "Conversation deleted successfully"},
+                status=status.HTTP_200_OK
+            )
+        except Exception as e:
+            return Response(
+                {"error": f"Error deleting conversation: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+        finally:
+            if db is not None:
+                self.close_db()

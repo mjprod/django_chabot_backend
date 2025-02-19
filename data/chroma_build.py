@@ -101,6 +101,10 @@ def build_language_vector_store(lang_code: str, documents: List[dict]) -> Chroma
     """Build vector store for a specific language."""
     try:
         logger.info(
+            f"@@@@@@@ build_language_vector_store @@ {LANGUAGE_CONFIG[lang_code]['name']}"
+        )
+         
+        logger.info(
             f"Starting vector store build for {LANGUAGE_CONFIG[lang_code]['name']}"
         )
         chroma_path = os.path.join(os.path.dirname(__file__), "chroma_db", lang_code)
@@ -120,10 +124,12 @@ def build_language_vector_store(lang_code: str, documents: List[dict]) -> Chroma
                 "text"
             ]  # The question text is directly in 'text'
             answer = doc["answer"]["detailed"]  # The answer is directly in 'detailed'
+            id_doc = doc["id"]
 
-            page_content = f"Question: {question}\nAnswer: {answer}"
-
+            page_content = f"Question: {question}\nAnswer: {answer}\nID: {id_doc}"
+            
             metadata = {
+                "id": doc.get("id", "no_id"),
                 "category": ",".join(doc["metadata"].get("category", [])),
                 "subCategory": doc["metadata"].get("subCategory", ""),
                 "difficulty": doc["metadata"].get("difficulty", 0),

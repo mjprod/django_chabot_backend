@@ -29,7 +29,7 @@ from pydantic import BaseModel, Field
 # mongodb imports
 from pymongo import MongoClient
 
-from chromadb import Client
+# from chromadb import Client
 
 
 # constants
@@ -193,19 +193,26 @@ documents = load_and_process_json_file()
 
 
 class CustomDocument:
-    def __init__(self, page_content, metadata):
+    def __init__(self, page_content, metadata, id="0"):
+        self.id = id
         self.page_content = page_content
         self.metadata = metadata
+
+    def __str__(self):
+        # Mostra o id e os primeiros 100 caracteres do conteúdo para não poluir o log
+        return f"CustomDocument(id={self.id}, page_content={self.page_content[:100]}..., metadata={self.metadata})"
 
 
 # Create Document Objects
 doc_objects = [
     CustomDocument(
+        id=doc.get("id", "no_id"),
         page_content=(
             f"Question: {doc['question']['text']}\n"
             f"Answer: {doc['answer']['detailed']['en']}"
         ),
         metadata={
+            "id": doc.get("id", "no_id"),
             "category": ",".join(doc["metadata"].get("category", [])),
             "subCategory": doc["metadata"].get("subCategory", ""),
             "difficulty": doc["metadata"].get("difficulty", 0),
@@ -217,7 +224,6 @@ doc_objects = [
     )
     for doc in documents
 ]
-
 
 # Text Splitter Class
 class CustomTextSplitter(RecursiveCharacterTextSplitter):
@@ -236,14 +242,17 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
             return []
 
         chunks = []
+       
         for doc in documents:
+            # logger.info("@@@@ :"+str((doc)))
             try:
                 text = doc.page_content
                 metadata = doc.metadata
+                id_doc = doc.id
 
                 # Handle short documents
                 if self.length_function(text) <= self.chunk_size:
-                    chunks.append(CustomDocument(page_content=text, metadata=metadata))
+                    chunks.append(CustomDocument(id=id_doc,page_content=text, metadata=metadata))
                     continue
 
                 # Split into sentences
@@ -259,6 +268,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                         if current_chunk:
                             chunks.append(
                                 CustomDocument(
+                                    id=id_doc,
                                     page_content="".join(current_chunk),
                                     metadata=metadata,
                                 )
@@ -276,6 +286,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                             if current_word_length + word_length > self.chunk_size:
                                 chunks.append(
                                     CustomDocument(
+                                        id=id_doc,
                                         page_content=" ".join(current_words),
                                         metadata=metadata,
                                     )
@@ -296,6 +307,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                         if current_chunk:
                             chunks.append(
                                 CustomDocument(
+                                    id=id_doc,
                                     page_content="".join(current_chunk),
                                     metadata=metadata,
                                 )
@@ -317,7 +329,9 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                 if current_chunk:
                     chunks.append(
                         CustomDocument(
-                            page_content="".join(current_chunk), metadata=metadata
+                            id=id_doc,
+                            page_content="".join(current_chunk),
+                            metadata=metadata
                         )
                     )
 
@@ -351,6 +365,9 @@ def create_vector_store(documents, batch_size=500):
 
         logger.info("Initializing Chroma vector store for legacy data")
         store_start = time.time()
+
+        # logger.info("@@@@: "+str(split_data[0]))
+
 
         # Create store specifically for the old JSON files
         store = Chroma.from_documents(
@@ -412,7 +429,7 @@ class MultiRetriever:
                 logger.info(
                     f"Processing completed with {len(all_results)} total results."
                 )
-            print(str(all_results))
+            # print(str(all_results))
             return all_results[:3]
         finally:
             gc.collect()
@@ -1753,27 +1770,31 @@ def extrair_knowledge_items(conversation):
         logger.debug(f"Retrieved {len(docs_retrieve)} documents.")
 
         docs_to_use = []
-        reasoning = []       # Lista para armazenar o raciocínio de cada documento
-        top_documents = []   # Lista para armazenar as principais mensagens (documentos)
-        seen_ids = set()     # Conjunto para rastrear os IDs já adicionados
+        reasoning = []
+        top_documents = []
+        seen_ids = set()
+        
 
         # Passo 4: Filtrar os documentos com base na relevância
         for doc in docs_retrieve:
-            relevance_score = retrieval_grader.invoke({"prompt": extracted_text, "document": doc.page_content})
-            logger.debug(f"Document preview: {doc.page_content[:200]}... Score: {relevance_score.confidence_score}")
+            # Registra somente o documento atual
+            doc_id = doc.metadata.get('id', 'no_id')
+            logger.info(f"@@@@@KAKO: {doc.id} - Preview: {doc.page_content[:200]}...")
+            relevance_score = retrieval_grader.invoke({
+                "prompt": extracted_text, 
+                "document": doc.page_content
+            })
+            logger.debug(f"Document (ID: {doc.id}) preview: {doc.page_content[:200]}... Score: {relevance_score.confidence_score}")
             if relevance_score.confidence_score >= 0.7:
                 doc_id = doc.metadata.get('id', 'no_id')
                 if doc_id not in seen_ids:
                     seen_ids.add(doc_id)
                     docs_to_use.append(doc)
                     reasoning.append({
+                        "id": doc_id,
                         "document": doc.page_content,
                         "score": relevance_score.confidence_score,
-                        "rationale": f"Document is relevant with score {relevance_score.confidence_score}."
-                    })
-                    top_documents.append({
-                        "id": doc_id,
-                        "content": doc.page_content
+                        "rationale": f"Document (ID: {doc.id}) is relevant with score {relevance_score.confidence_score}."
                     })
 
         # Passo 5: Formatar os documentos para o modelo
@@ -1792,7 +1813,6 @@ def extrair_knowledge_items(conversation):
 
         # Adiciona a resposta, os top_documents e o reasoning no candidate_item
         candidate_item["answer"]["rag_response"] = response
-        candidate_item["answer"]["top_documents"] = top_documents
         candidate_item["answer"]["reasoning"] = reasoning
 
         return [candidate_item]

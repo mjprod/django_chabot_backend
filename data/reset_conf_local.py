@@ -48,7 +48,7 @@ def rebuild_vector_store(documents):
                 "conditions": ", ".join(doc["answer"].get("conditions", [])),
             }
             doc_objects.append(
-                LangchainDocument(page_content=page_content, metadata=metadata)
+                LangchainDocument(id='KAKO_ID',page_content=page_content, metadata=metadata)
             )
 
         # Create store

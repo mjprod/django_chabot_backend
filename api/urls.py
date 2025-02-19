@@ -7,6 +7,7 @@ from .views.conversation_view import (
     ConversationDetailView,
     UpdateKnowledgeView,
     AllConversationsIdsView,
+    DeleteConversationView,
     # PromptConversationDeepSeekView,
     PromptConversationAdminView,
 )
@@ -35,7 +36,8 @@ urlpatterns = [
     path(
        "all_conversations_ids/",AllConversationsIdsView.as_view(), name="all_conversations_ids",
     ),
-     path('update_knowledge/', UpdateKnowledgeView.as_view(), name='update_knowledge'),
+    path('update_knowledge/', UpdateKnowledgeView.as_view(), name='update_knowledge'),
+    path("delete_conversation/<conversation_id>/", DeleteConversationView.as_view(), name="delete_conversation"),
     # path(
     #    "prompt_conversation_deepseek/",
     #    PromptConversationDeepSeekView.as_view(),
