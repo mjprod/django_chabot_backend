@@ -165,6 +165,7 @@ def load_and_process_json_file() -> List[dict]:
                                     "conditions", []
                                 ),
                             },
+                            "id": item.get("id", ""),
                             "metadata": processed_metadata,
                             "context": item.get("context", {}),
                         }
@@ -1673,8 +1674,10 @@ def extrair_knowledge_items(conversation):
         "Analyze the conversation below and extract the parts where the user's problem was solved "
         "or the issue was resolved. Provide a concise summary in English, capturing the resolutions or "
         "key decisions made. Do not include any extraneous details. Provide the full resolution details first, "
-        "followed by a concise, reduced summary.\n\nConversation:\n" + full_text
-    )
+        "followed by a concise, reduced summary. "
+        "If the conversation does not contain a resolution regarding a real problem, please state in English that "
+        "there is no relevant resolution in this conversation.\n\nConversation:\n" + full_text
+    )   
     
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
@@ -1689,7 +1692,7 @@ def extrair_knowledge_items(conversation):
                 {"role": "user", "content": extraction_prompt},
             ],
             temperature=0.2,
-            max_tokens=200,  # Ajuste para o comprimento do texto extraído e resumido
+            max_tokens=130,
             timeout=OPENAI_TIMEOUT,
         )
     except Exception as e:
@@ -1744,59 +1747,53 @@ def extrair_knowledge_items(conversation):
         }
     }
     
-    # Passo 3: Buscar documentos relevantes para gerar a resposta
     vector_start = time.time()
     try:
-
-        
         docs_retrieve = retriever.get_relevant_documents(extracted_text)
         logger.debug(f"Retrieved {len(docs_retrieve)} documents.")
 
         docs_to_use = []
-        reasoning = []  # Lista para armazenar o raciocínio de cada documento
-        top_documents = []  # Lista para armazenar as 3 principais mensagens (documentos)
+        reasoning = []       # Lista para armazenar o raciocínio de cada documento
+        top_documents = []   # Lista para armazenar as principais mensagens (documentos)
+        seen_ids = set()     # Conjunto para rastrear os IDs já adicionados
 
         # Passo 4: Filtrar os documentos com base na relevância
         for doc in docs_retrieve:
-            relevance_score = retrieval_grader.invoke(
-                {"prompt": extracted_text, "document": doc.page_content}
-            )
-            print(docs_retrieve)
-            logger.debug(f"Document content preview: {doc.page_content[:200]}... Relevance Score: {relevance_score.confidence_score}")
-            
+            relevance_score = retrieval_grader.invoke({"prompt": extracted_text, "document": doc.page_content})
+            logger.debug(f"Document preview: {doc.page_content[:200]}... Score: {relevance_score.confidence_score}")
             if relevance_score.confidence_score >= 0.7:
-                docs_to_use.append(doc)
-                reasoning.append({
-                    "document": doc.page_content,
-                    "score": relevance_score.confidence_score,
-                    "rationale": f"Document is relevant with score {relevance_score.confidence_score}."
-                })
+                doc_id = doc.metadata.get('id', 'no_id')
+                if doc_id not in seen_ids:
+                    seen_ids.add(doc_id)
+                    docs_to_use.append(doc)
+                    reasoning.append({
+                        "document": doc.page_content,
+                        "score": relevance_score.confidence_score,
+                        "rationale": f"Document is relevant with score {relevance_score.confidence_score}."
+                    })
+                    top_documents.append({
+                        "id": doc_id,
+                        "content": doc.page_content
+                    })
 
-                top_documents.append({
-                    "id":  doc.metadata.get('id'),
-                    "content": doc.page_content
-                })
-
-        logger.debug(f"Filtered down to {len(docs_to_use)} relevant documents.")
-        
         # Passo 5: Formatar os documentos para o modelo
         context = format_docs(docs_to_use)
 
-        # Passo 6: Gerar a resposta usando os documentos relevantes
-        response = rag_chain.invoke(
-            {
-                "context": context,
-                "prompt": extracted_text,
-                "reasoning": reasoning
-            }
-        )
+        # Passo 6: Gerar a resposta usando os documentos relevantes, passando também o reasoning
+        response = rag_chain.invoke({
+            "context": context,
+            "prompt": extracted_text,
+            "reasoning": reasoning
+        })
 
         logger.debug("Response generated using the following documents:")
         for r in reasoning:
             logger.debug(f"Rationale: {r['rationale']}\nDocument Content: {r['document'][:200]}...")
 
+        # Adiciona a resposta, os top_documents e o reasoning no candidate_item
         candidate_item["answer"]["rag_response"] = response
         candidate_item["answer"]["top_documents"] = top_documents
+        candidate_item["answer"]["reasoning"] = reasoning
 
         return [candidate_item]
 
@@ -1804,30 +1801,5 @@ def extrair_knowledge_items(conversation):
         logger.error(f"Error during vector store retrieval: {str(ve)}")
         return []
     
-def get_embedding(text):
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        raise Exception("OPENAI_API_KEY is missing")
-    
-    client = OpenAI(api_key=api_key)
-    response = client.Embedding.create(
-        input=[text],
-        model="text-embedding-ada-002"
-    )
-    return response["data"][0]["embedding"]
 
-def verificar_existencia(chroma_client, item, similarity_threshold=0.8):
 
-    embedding = get_embedding(item["question"]["text"])
-    collection = chroma_client.get_collection(name="knowledge")
-    query_result = collection.query(query_embeddings=[embedding], n_results=1)
-    
-    # Log para depuração (opcional)
-    print(f"Query result for {item['id']}: {query_result}")
-    
-    if query_result and query_result.get("distances") and query_result["distances"][0]:
-        best_distance = query_result["distances"][0][0]
-        # Assumindo que distância menor indica maior similaridade
-        if best_distance < similarity_threshold:
-            return True
-    return False
