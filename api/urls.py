@@ -6,6 +6,7 @@ from .views.conversation_view import (
     PromptConversationView,
     ConversationDetailView,
     UpdateKnowledgeView,
+    AllConversationsIdsView,
     # PromptConversationDeepSeekView,
     PromptConversationAdminView,
 )
@@ -30,6 +31,9 @@ urlpatterns = [
     ),
     path(
       "conversation/<conversation_id>/",ConversationDetailView.as_view(), name="conversation",
+    ),
+    path(
+       "all_conversations_ids/",AllConversationsIdsView.as_view(), name="all_conversations_ids",
     ),
      path('update_knowledge/', UpdateKnowledgeView.as_view(), name='update_knowledge'),
     # path(

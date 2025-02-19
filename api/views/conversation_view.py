@@ -400,6 +400,23 @@ class ConversationDetailView(MongoDBMixin, APIView):
             if db is not None:
                 self.close_db()
 
+class AllConversationsIdsView(MongoDBMixin, APIView):
+    def get(self, request):
+        db = None
+        try:
+            db = self.get_db()
+            # Retorna apenas o campo "session_id" de todas as conversas
+            sessions = list(db.conversations.find({}, {"session_id": 1, "_id": 0}))
+            return Response(sessions, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(
+                {"error": f"Error retrieving session ids: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+        finally:
+            if db is not None:
+                self.close_db()
+
 
 class UpdateKnowledgeView(MongoDBMixin, APIView):
     def post(self, request):

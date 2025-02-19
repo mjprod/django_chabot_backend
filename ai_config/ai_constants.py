@@ -4,7 +4,7 @@ from enum import Enum
 OPENAI_MODEL = "gpt-4o-mini"
 OPENAI_MODEL_EN_TO_CN = "gpt-4o"
 COHERE_MODEL = "embed-multilingual-v3.0"
-OPENAI_TIMEOUT = 20
+OPENAI_TIMEOUT = 30
 
 # Max Tokens
 class MaxTokens(Enum):
