@@ -57,7 +57,9 @@ from ai_config.ai_prompts import (
     RAG_PROMPT_TEMPLATE,
     PROMPT_TEMPLATE_MONGO_AND_OPENAI,
 )
-
+from api.brain import (
+  get_document_by_id,
+)
 
 # this is split to allow the old database to be stored in a different directory
 CHROMA_BASE_PATH = os.path.join(
@@ -117,6 +119,7 @@ def load_and_process_json_file() -> List[dict]:
         "database_part_1.json",
         "database_part_2.json",
         "database_part_3.json",
+        "4d_joker.json",
     ]
 
     all_documents = []
@@ -246,9 +249,10 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
         for doc in documents:
             # logger.info("@@@@ :"+str((doc)))
             try:
+                metadata = {**(doc.metadata if isinstance(doc.metadata, dict) else {}), "id": getattr(doc, "id", "no_id")}
                 text = doc.page_content
-                metadata = doc.metadata
-                id_doc = doc.id
+                id_doc = getattr(doc, "id", "no_id")
+           
 
                 # Handle short documents
                 if self.length_function(text) <= self.chunk_size:
@@ -415,6 +419,8 @@ class MultiRetriever:
         all_results = []
         try:
             for store in vectorstores:
+                # logger.info(f"Attributes of store: {dir(store)}")
+                logger.info(f"@@@@ Collection details: {store._collection}")
                 retriever = store.as_retriever(
                     search_type="mmr",
                     search_kwargs={
@@ -423,7 +429,11 @@ class MultiRetriever:
                         "lambda_mult": MMR_LAMBDA_MULT,
                     },
                 )
+                # logger.info(f"@@@ Retrieving documents from {str(store.collection_name)}")
+                # logger.info(f"@@@ Query: {str(query)}")
+
                 results = retriever.invoke(query)
+                # logger.info(f"@@@ Results: {str(results)}")
                 all_results.extend(results)
                 # compare_memory(memory_snapshot)
                 logger.info(
@@ -1764,30 +1774,28 @@ def extrair_knowledge_items(conversation):
         }
     }
     
-    vector_start = time.time()
     try:
         docs_retrieve = retriever.get_relevant_documents(extracted_text)
         logger.debug(f"Retrieved {len(docs_retrieve)} documents.")
+        
 
         docs_to_use = []
         reasoning = []
-        top_documents = []
         seen_ids = set()
         
-
-        # Passo 4: Filtrar os documentos com base na relevância
+        doc_ids = []
         for doc in docs_retrieve:
-            # Registra somente o documento atual
+            logger.info("@@@@@@@@ "+ str(doc))
             doc_id = doc.metadata.get('id', 'no_id')
-            logger.info(f"@@@@@KAKO: {doc.id} - Preview: {doc.page_content[:200]}...")
+            # logger.info(f"@@@@ Retrieved Document ID: {doc_id} - Preview: {doc.page_content[:200]}...")
             relevance_score = retrieval_grader.invoke({
                 "prompt": extracted_text, 
                 "document": doc.page_content
             })
-            logger.debug(f"Document (ID: {doc.id}) preview: {doc.page_content[:200]}... Score: {relevance_score.confidence_score}")
             if relevance_score.confidence_score >= 0.7:
-                doc_id = doc.metadata.get('id', 'no_id')
+                doc_id = doc.metadata.get('id', 'D_id')
                 if doc_id not in seen_ids:
+                    doc_ids.append(doc_id)
                     seen_ids.add(doc_id)
                     docs_to_use.append(doc)
                     reasoning.append({
@@ -1797,10 +1805,8 @@ def extrair_knowledge_items(conversation):
                         "rationale": f"Document (ID: {doc.id}) is relevant with score {relevance_score.confidence_score}."
                     })
 
-        # Passo 5: Formatar os documentos para o modelo
         context = format_docs(docs_to_use)
 
-        # Passo 6: Gerar a resposta usando os documentos relevantes, passando também o reasoning
         response = rag_chain.invoke({
             "context": context,
             "prompt": extracted_text,
@@ -1808,12 +1814,24 @@ def extrair_knowledge_items(conversation):
         })
 
         logger.debug("Response generated using the following documents:")
+        responseRaw = []
         for r in reasoning:
             logger.debug(f"Rationale: {r['rationale']}\nDocument Content: {r['document'][:200]}...")
 
-        # Adiciona a resposta, os top_documents e o reasoning no candidate_item
+        
+        # logger.info("@@@@@@@@@@@@@  "+str(doc_ids))
+        valid_doc_ids = [doc_id for doc_id in doc_ids if doc_id != "no_id"]
+        # logger.info("@@@@@@@@@@@@@  "+str(valid_doc_ids))
+
+        if valid_doc_ids:
+            for ID in valid_doc_ids:
+                doc = get_document_by_id(ID) 
+            if doc:
+                responseRaw.append(json.dumps(doc, indent=4, ensure_ascii=False))
+            
         candidate_item["answer"]["rag_response"] = response
         candidate_item["answer"]["reasoning"] = reasoning
+        candidate_item["answer"]["raw"] = (responseRaw)
 
         return [candidate_item]
 
