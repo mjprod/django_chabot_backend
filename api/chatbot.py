@@ -1117,7 +1117,6 @@ def prompt_conversation(self, user_prompt, language_code=LANGUAGE_DEFAULT):
         # Vector store retrieval
         vector_start = time.time()
         try:
-           # vector_store = get_vector_store(language_code)
             docs_retrieve = store.similarity_search(
                 user_prompt, k=3  # Limit to top 3 results for performance
             )
@@ -1320,32 +1319,6 @@ def prompt_conversation_deepseek(
     finally:
         if db is not None:
             self.close_db()
-
-
-"""
-this is the new vector store function that will be used to get the vector store for the language
-the user has selected
-"""
-def get_vector_store(language_code: str = LANGUAGE_DEFAULT):
-    try:
-        if language_code not in SUPPORTED_LANGUAGES:
-            logger.warning(
-                f"Unsupported language code: {language_code}, falling back to English"
-            )
-            language_code = LANGUAGE_DEFAULT
-
-        store_path = VECTOR_STORE_PATHS.get(language_code)
-
-        logger.info(f"Loading vector store for language: {language_code}")
-        return Chroma(
-            persist_directory=store_path,
-            embedding_function=embedding_model,
-            collection_name=f"docs_{language_code}",
-        )
-
-    except Exception as e:
-        logger.error(f"Error loading vector store: {str(e)}")
-        raise
 
 
 """
@@ -1748,9 +1721,7 @@ def extrair_knowledge_items(conversation):
         
         doc_ids = []
         for doc in docs_retrieve:
-            logger.info("@@@@@@@@ "+ str(doc))
             doc_id = doc.metadata.get('id', 'no_id')
-            # logger.info(f"@@@@ Retrieved Document ID: {doc_id} - Preview: {doc.page_content[:200]}...")
             relevance_score = retrieval_grader.invoke({
                 "prompt": extracted_text, 
                 "document": doc.page_content
@@ -1758,11 +1729,8 @@ def extrair_knowledge_items(conversation):
             if relevance_score.confidence_score >= 0.7:
                 doc_id = doc.metadata.get('id', 'no_id')
                 if doc_id == "no_id":
-                    # Divide a string pelo marcador "Answer:" e pega a primeira parte
                     question_part = doc.page_content.split("Answer:")[0]
-                    # Remove o prefixo "Question:" e espaços extras
                     question_only = question_part.replace("Question:", "").strip()
-                    print("@@@@@@ "+ question_only)
                     doc_id=get_document_by_question_text(question_only)
                     
                 
@@ -1790,10 +1758,7 @@ def extrair_knowledge_items(conversation):
         for r in reasoning:
             logger.debug(f"Rationale: {r['rationale']}\nDocument Content: {r['document'][:200]}...")
 
-        
-        # logger.info("@@@@@@@@@@@@@  "+str(doc_ids))
         valid_doc_ids = [doc_id for doc_id in doc_ids if doc_id != "no_id"]
-        # logger.info("@@@@@@@@@@@@@  "+str(valid_doc_ids))
 
         if valid_doc_ids:
             for ID in valid_doc_ids:
