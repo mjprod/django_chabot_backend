@@ -29,8 +29,6 @@ from pydantic import BaseModel, Field
 # mongodb imports
 from pymongo import MongoClient
 
-# from chromadb import Client
-
 
 # constants
 from ai_config.ai_constants import (
@@ -42,11 +40,9 @@ from ai_config.ai_constants import (
     MAX_TEMPERATURE,
     EMBEDDING_CHUNK_SIZE,
     EMBEDDING_OVERLAP,
-    MMR_SEARCH_K,
-    MMR_FETCH_K,
-    MMR_LAMBDA_MULT,
     URL_TRANSLATE_EN_TO_MS,
 )
+
 from ai_config.ai_prompts import (
     FIRST_MESSAGE_PROMPT,
     FOLLOW_UP_PROMPT,
@@ -57,8 +53,13 @@ from ai_config.ai_prompts import (
     RAG_PROMPT_TEMPLATE,
     PROMPT_TEMPLATE_MONGO_AND_OPENAI,
 )
+
 from api.brain import (
   get_document_by_id,
+)
+
+from api.brain_store import (
+  MultiRetriever,
 )
 
 # this is split to allow the old database to be stored in a different directory
@@ -407,45 +408,6 @@ try:
     logger.info("Vector store creation completed successfully")
 except Exception as e:
     logger.error(f"Failed to create vector store: {str(e)}")
-
-
-# retriever to retrieve across all 4 vector stores
-class MultiRetriever:
-    def __init__(self, query):
-        self.vectorstores = vectorstores
-
-    def get_relevant_documents(self, query):
-        # memory_snapshot = monitor_memory()
-        all_results = []
-        try:
-            for store in vectorstores:
-                # logger.info(f"Attributes of store: {dir(store)}")
-                logger.info(f"@@@@ Collection details: {store._collection}")
-                retriever = store.as_retriever(
-                    search_type="mmr",
-                    search_kwargs={
-                        "k": MMR_SEARCH_K,
-                        "fetch_k": MMR_FETCH_K,
-                        "lambda_mult": MMR_LAMBDA_MULT,
-                    },
-                )
-                # logger.info(f"@@@ Retrieving documents from {str(store.collection_name)}")
-                # logger.info(f"@@@ Query: {str(query)}")
-
-                results = retriever.invoke(query)
-                # logger.info(f"@@@ Results: {str(results)}")
-                all_results.extend(results)
-                # compare_memory(memory_snapshot)
-                logger.info(
-                    f"Processing completed with {len(all_results)} total results."
-                )
-            # print(str(all_results))
-            return all_results[:3]
-        finally:
-            gc.collect()
-
-    def invoke(self, query):
-        return self.get_relevant_documents(query)
 
 
 retriever = MultiRetriever(vectorstores)
@@ -1778,7 +1740,6 @@ def extrair_knowledge_items(conversation):
         docs_retrieve = retriever.get_relevant_documents(extracted_text)
         logger.debug(f"Retrieved {len(docs_retrieve)} documents.")
         
-
         docs_to_use = []
         reasoning = []
         seen_ids = set()
@@ -1802,7 +1763,7 @@ def extrair_knowledge_items(conversation):
                         "id": doc_id,
                         "document": doc.page_content,
                         "score": relevance_score.confidence_score,
-                        "rationale": f"Document (ID: {doc.id}) is relevant with score {relevance_score.confidence_score}."
+                        "rationale": f"Document (ID: {doc_id}) is relevant with score {relevance_score.confidence_score}."
                     })
 
         context = format_docs(docs_to_use)

@@ -487,3 +487,38 @@ class DeleteConversationView(MongoDBMixin, APIView):
         finally:
             if db is not None:
                 self.close_db()
+
+class FinaliseConversationView(MongoDBMixin, APIView):
+    def post(self, request, *args, **kwargs):
+        # Get the conversation_id from the URL kwargs
+        conversation_id = kwargs.get("conversation_id")
+        if not conversation_id:
+            return Response(
+                {"error": "conversation_id is required"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        db = None
+        try:
+            db = self.get_db()
+            # Update the conversation document by setting 'status' to 'done'
+            result = db.conversations.update_one(
+                {"session_id": conversation_id},
+                {"$set": {"status": "done"}}
+            )
+            if result.matched_count == 0:
+                return Response(
+                    {"error": "Conversation not found"},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+            return Response(
+                {"message": "Conversation finalized successfully"},
+                status=status.HTTP_200_OK
+            )
+        except Exception as e:
+            return Response(
+                {"error": f"Error finalizing conversation: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+        finally:
+            if db is not None:
+                self.close_db()

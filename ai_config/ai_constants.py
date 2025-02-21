@@ -1,8 +1,8 @@
 from enum import Enum
 
 # AI Models
-OPENAI_MODEL = "gpt-4o-mini"
-OPENAI_MODEL_EN_TO_CN = "gpt-4o"
+OPENAI_MODEL = "gpt-3.5-turbo"
+OPENAI_MODEL_EN_TO_CN = "gpt-4o-mini"
 COHERE_MODEL = "embed-multilingual-v3.0"
 OPENAI_TIMEOUT = 30
 
@@ -19,9 +19,7 @@ class MaxTemperatures(Enum):
     MEDIUM = 0.7
     HIGH = 1.0
 
-
 MAX_TEMPERATURE = MaxTemperatures.LOW.value
-
 
 # Embedding and Search Parameters
 EMBEDDING_CHUNK_SIZE = 1000
