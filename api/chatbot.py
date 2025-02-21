@@ -54,14 +54,17 @@ from ai_config.ai_prompts import (
     PROMPT_TEMPLATE_MONGO_AND_OPENAI,
 )
 
-from api.brain import (
-  get_document_by_id,
+from api.brain_view import (
+    get_document_by_id,
+    get_document_by_question_text,
 )
 
 from api.brain_store import (
   MultiRetriever,
 )
 
+
+'''
 # this is split to allow the old database to be stored in a different directory
 CHROMA_BASE_PATH = os.path.join(
     os.path.dirname(os.path.dirname(__file__)), "data/chroma_db"
@@ -75,7 +78,7 @@ VECTOR_STORE_PATHS = {
     "zh_CN": os.path.join(CHROMA_BASE_PATH, "zh_CN"),
     "zh_TW": os.path.join(CHROMA_BASE_PATH, "zh_TW"),
 }
-
+'''
 
 def monitor_memory():
     """Start memory monitoring and return initial snapshot"""
@@ -120,7 +123,6 @@ def load_and_process_json_file() -> List[dict]:
         "database_part_1.json",
         "database_part_2.json",
         "database_part_3.json",
-        "4d_joker.json",
     ]
 
     all_documents = []
@@ -350,6 +352,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
 # Process documents in batches
 def create_vector_store(documents, batch_size=500):
     try:
+        '''
         if not documents:
             logger.error("No documents provided for vector store creation")
             return None
@@ -357,7 +360,8 @@ def create_vector_store(documents, batch_size=500):
         # Create the old directory if it doesn't exist
         os.makedirs(CHROMA_OLD_PATH, exist_ok=True)
         logger.info(f"Ensuring old vector store directory exists: {CHROMA_OLD_PATH}")
-
+        '''
+    
         logger.info("Starting document splitting process")
         split_start = time.time()
 
@@ -368,18 +372,16 @@ def create_vector_store(documents, batch_size=500):
         split_data = text_splitter.split_documents(documents)
         logger.info(f"Document splitting completed in {time.time() - split_start:.2f}s")
 
-        logger.info("Initializing Chroma vector store for legacy data")
+        logger.info("Initializing Chroma vector store")
         store_start = time.time()
 
         # logger.info("@@@@: "+str(split_data[0]))
-
-
         # Create store specifically for the old JSON files
         store = Chroma.from_documents(
             documents=split_data,
-            collection_name="legacy_RAG",  # Changed collection name to differentiate
+            collection_name="RAG",  # Changed collection name to differentiate
             embedding=embedding_model,
-            persist_directory=CHROMA_OLD_PATH,  # Use the old path
+            persist_directory="./chroma_db",
             collection_metadata={
                 "hnsw:space": "cosine",
                 "hnsw:construction_ef": 100,
@@ -388,7 +390,7 @@ def create_vector_store(documents, batch_size=500):
         )
 
         logger.info(
-            f"Legacy vector store creation completed in {time.time() - store_start:.2f}s"
+            f"Vector store creation completed in {time.time() - store_start:.2f}s"
         )
         vectorstores.append(store)
         return store
@@ -406,7 +408,7 @@ try:
     logger.info("Starting vector store creation with filtered documents")
     store = create_vector_store(filtered_docs)
     logger.info("Vector store creation completed successfully")
-except Exception as e:
+except Exception as e: 
     logger.error(f"Failed to create vector store: {str(e)}")
 
 
@@ -1115,8 +1117,8 @@ def prompt_conversation(self, user_prompt, language_code=LANGUAGE_DEFAULT):
         # Vector store retrieval
         vector_start = time.time()
         try:
-            vector_store = get_vector_store(language_code)
-            docs_retrieve = vector_store.similarity_search(
+           # vector_store = get_vector_store(language_code)
+            docs_retrieve = store.similarity_search(
                 user_prompt, k=3  # Limit to top 3 results for performance
             )
             logger.debug(
@@ -1213,8 +1215,8 @@ def prompt_conversation_deepseek(
         # Vector store retrieval
         vector_start = time.time()
         try:
-            vector_store = get_vector_store(language_code)
-            docs_retrieve = vector_store.similarity_search(
+            # vector_store = get_vector_store(language_code)
+            docs_retrieve = store.similarity_search(
                 user_prompt, k=3
             )
             logger.debug(
@@ -1411,8 +1413,8 @@ def prompt_conversation_admin(
         # Vector store retrieval
         vector_start = time.time()
         try:
-            vector_store = get_vector_store(language_code)
-            docs_retrieve = vector_store.similarity_search(
+            # vector_store = get_vector_store(language_code)
+            docs_retrieve = store.similarity_search(
                 user_prompt, k=3  # Limit to top 3 results for performance
             )
             logger.debug(
@@ -1754,7 +1756,16 @@ def extrair_knowledge_items(conversation):
                 "document": doc.page_content
             })
             if relevance_score.confidence_score >= 0.7:
-                doc_id = doc.metadata.get('id', 'D_id')
+                doc_id = doc.metadata.get('id', 'no_id')
+                if doc_id == "no_id":
+                    # Divide a string pelo marcador "Answer:" e pega a primeira parte
+                    question_part = doc.page_content.split("Answer:")[0]
+                    # Remove o prefixo "Question:" e espaços extras
+                    question_only = question_part.replace("Question:", "").strip()
+                    print("@@@@@@ "+ question_only)
+                    doc_id=get_document_by_question_text(question_only)
+                    
+                
                 if doc_id not in seen_ids:
                     doc_ids.append(doc_id)
                     seen_ids.add(doc_id)

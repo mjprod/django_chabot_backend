@@ -26,7 +26,6 @@ from ai_config.ai_constants import (
 
 logger = logging.getLogger(__name__)
 
-
 def fuzzy_match_with_dynamic_context(
     self, query, collection_name, threshold, language="en"
 ):
@@ -59,8 +58,6 @@ def fuzzy_match_with_dynamic_context(
 
     documents = list(
         collection.find({}, {"user_input": 1, "correct_answer": 1, "timestamp": 1})
-
-
     )
 
     if not documents:
@@ -127,7 +124,6 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
         logger.info("Starting prompt_conversation_admin request")
 
         try:
-
             # Get the header value as a string
             use_mongo_str = request.GET.get(
                 "use_mongo", "0"
@@ -195,10 +191,6 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
                 language_code=language_code,
             )
 
-            # generation_time = time.time() - generation_start
-            # if generation_time < 3:
-            # time.sleep(6)
-
             return Response(response, status=status.HTTP_200_OK)
 
         except Exception as e:
@@ -252,13 +244,11 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
             if db is not None:
                 self.close_db()
 
-
 class PromptConversationView(MongoDBMixin, APIView):
     def post(self, request):
         logger.info("Starting prompt_conversation_admin request")
 
         try:
-
             # Get the header value as a string
             use_mongo_str = request.GET.get(
                 "use_mongo", "0"

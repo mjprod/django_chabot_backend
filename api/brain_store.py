@@ -188,16 +188,13 @@ class MultiRetriever:
             for store in self.vectorstores:
                 logger.info(f"Retrieving from collection: {store._collection}")
                 retriever = store.as_retriever(
-                    search_type="mmr",
-                    search_kwargs={
-                        "k": MMR_SEARCH_K,
-                        "fetch_k": MMR_FETCH_K,
-                        "lambda_mult": MMR_LAMBDA_MULT,
-                    },
-                )
+                search_type="similarity",
+                search_kwargs={"k": 5}
+)
                 results = retriever.invoke(query)
                 all_results.extend(results)
-                logger.info(f"Accumulated {len(all_results)} results so far.")
+                logger.info(f"Collection: {store._collection} → Retrieved {len(results)} results")
+                logger.info(f"Results: {[r.metadata.get('id', 'unknown') for r in results]}")
             return all_results[:3]
         finally:
             gc.collect()
