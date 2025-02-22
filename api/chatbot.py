@@ -29,6 +29,7 @@ from pydantic import BaseModel, Field
 # mongodb imports
 from pymongo import MongoClient
 
+
 # constants
 from ai_config.ai_constants import (
     OPENAI_MODEL,
@@ -39,11 +40,9 @@ from ai_config.ai_constants import (
     MAX_TEMPERATURE,
     EMBEDDING_CHUNK_SIZE,
     EMBEDDING_OVERLAP,
-    MMR_SEARCH_K,
-    MMR_FETCH_K,
-    MMR_LAMBDA_MULT,
     URL_TRANSLATE_EN_TO_MS,
 )
+
 from ai_config.ai_prompts import (
     FIRST_MESSAGE_PROMPT,
     FOLLOW_UP_PROMPT,
@@ -55,7 +54,17 @@ from ai_config.ai_prompts import (
     PROMPT_TEMPLATE_MONGO_AND_OPENAI,
 )
 
+from api.brain_view import (
+    get_document_by_id,
+    get_document_by_question_text,
+)
 
+from api.brain_store import (
+  MultiRetriever,
+)
+
+
+'''
 # this is split to allow the old database to be stored in a different directory
 CHROMA_BASE_PATH = os.path.join(
     os.path.dirname(os.path.dirname(__file__)), "data/chroma_db"
@@ -69,7 +78,7 @@ VECTOR_STORE_PATHS = {
     "zh_CN": os.path.join(CHROMA_BASE_PATH, "zh_CN"),
     "zh_TW": os.path.join(CHROMA_BASE_PATH, "zh_TW"),
 }
-
+'''
 
 def monitor_memory():
     """Start memory monitoring and return initial snapshot"""
@@ -162,6 +171,7 @@ def load_and_process_json_file() -> List[dict]:
                                     "conditions", []
                                 ),
                             },
+                            "id": item.get("id", ""),
                             "metadata": processed_metadata,
                             "context": item.get("context", {}),
                         }
@@ -189,19 +199,26 @@ documents = load_and_process_json_file()
 
 
 class CustomDocument:
-    def __init__(self, page_content, metadata):
+    def __init__(self, page_content, metadata, id="0"):
+        self.id = id
         self.page_content = page_content
         self.metadata = metadata
+
+    def __str__(self):
+        # Mostra o id e os primeiros 100 caracteres do conteúdo para não poluir o log
+        return f"CustomDocument(id={self.id}, page_content={self.page_content[:100]}..., metadata={self.metadata})"
 
 
 # Create Document Objects
 doc_objects = [
     CustomDocument(
+        id=doc.get("id", "no_id"),
         page_content=(
             f"Question: {doc['question']['text']}\n"
             f"Answer: {doc['answer']['detailed']['en']}"
         ),
         metadata={
+            "id": doc.get("id", "no_id"),
             "category": ",".join(doc["metadata"].get("category", [])),
             "subCategory": doc["metadata"].get("subCategory", ""),
             "difficulty": doc["metadata"].get("difficulty", 0),
@@ -213,7 +230,6 @@ doc_objects = [
     )
     for doc in documents
 ]
-
 
 # Text Splitter Class
 class CustomTextSplitter(RecursiveCharacterTextSplitter):
@@ -232,14 +248,18 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
             return []
 
         chunks = []
+       
         for doc in documents:
+            # logger.info("@@@@ :"+str((doc)))
             try:
+                metadata = {**(doc.metadata if isinstance(doc.metadata, dict) else {}), "id": getattr(doc, "id", "no_id")}
                 text = doc.page_content
-                metadata = doc.metadata
+                id_doc = getattr(doc, "id", "no_id")
+           
 
                 # Handle short documents
                 if self.length_function(text) <= self.chunk_size:
-                    chunks.append(CustomDocument(page_content=text, metadata=metadata))
+                    chunks.append(CustomDocument(id=id_doc,page_content=text, metadata=metadata))
                     continue
 
                 # Split into sentences
@@ -255,6 +275,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                         if current_chunk:
                             chunks.append(
                                 CustomDocument(
+                                    id=id_doc,
                                     page_content="".join(current_chunk),
                                     metadata=metadata,
                                 )
@@ -272,6 +293,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                             if current_word_length + word_length > self.chunk_size:
                                 chunks.append(
                                     CustomDocument(
+                                        id=id_doc,
                                         page_content=" ".join(current_words),
                                         metadata=metadata,
                                     )
@@ -292,6 +314,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                         if current_chunk:
                             chunks.append(
                                 CustomDocument(
+                                    id=id_doc,
                                     page_content="".join(current_chunk),
                                     metadata=metadata,
                                 )
@@ -313,7 +336,9 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                 if current_chunk:
                     chunks.append(
                         CustomDocument(
-                            page_content="".join(current_chunk), metadata=metadata
+                            id=id_doc,
+                            page_content="".join(current_chunk),
+                            metadata=metadata
                         )
                     )
 
@@ -327,6 +352,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
 # Process documents in batches
 def create_vector_store(documents, batch_size=500):
     try:
+        '''
         if not documents:
             logger.error("No documents provided for vector store creation")
             return None
@@ -334,7 +360,8 @@ def create_vector_store(documents, batch_size=500):
         # Create the old directory if it doesn't exist
         os.makedirs(CHROMA_OLD_PATH, exist_ok=True)
         logger.info(f"Ensuring old vector store directory exists: {CHROMA_OLD_PATH}")
-
+        '''
+    
         logger.info("Starting document splitting process")
         split_start = time.time()
 
@@ -345,15 +372,16 @@ def create_vector_store(documents, batch_size=500):
         split_data = text_splitter.split_documents(documents)
         logger.info(f"Document splitting completed in {time.time() - split_start:.2f}s")
 
-        logger.info("Initializing Chroma vector store for legacy data")
+        logger.info("Initializing Chroma vector store")
         store_start = time.time()
 
+        # logger.info("@@@@: "+str(split_data[0]))
         # Create store specifically for the old JSON files
         store = Chroma.from_documents(
             documents=split_data,
-            collection_name="legacy_RAG",  # Changed collection name to differentiate
+            collection_name="RAG",  # Changed collection name to differentiate
             embedding=embedding_model,
-            persist_directory=CHROMA_OLD_PATH,  # Use the old path
+            persist_directory="./chroma_db",
             collection_metadata={
                 "hnsw:space": "cosine",
                 "hnsw:construction_ef": 100,
@@ -362,7 +390,7 @@ def create_vector_store(documents, batch_size=500):
         )
 
         logger.info(
-            f"Legacy vector store creation completed in {time.time() - store_start:.2f}s"
+            f"Vector store creation completed in {time.time() - store_start:.2f}s"
         )
         vectorstores.append(store)
         return store
@@ -380,41 +408,8 @@ try:
     logger.info("Starting vector store creation with filtered documents")
     store = create_vector_store(filtered_docs)
     logger.info("Vector store creation completed successfully")
-except Exception as e:
+except Exception as e: 
     logger.error(f"Failed to create vector store: {str(e)}")
-
-
-# retriever to retrieve across all 4 vector stores
-class MultiRetriever:
-    def __init__(self, query):
-        self.vectorstores = vectorstores
-
-    def get_relevant_documents(self, query):
-        # memory_snapshot = monitor_memory()
-        all_results = []
-        try:
-            for store in vectorstores:
-                retriever = store.as_retriever(
-                    search_type="mmr",
-                    search_kwargs={
-                        "k": MMR_SEARCH_K,
-                        "fetch_k": MMR_FETCH_K,
-                        "lambda_mult": MMR_LAMBDA_MULT,
-                    },
-                )
-                results = retriever.invoke(query)
-                all_results.extend(results)
-                # compare_memory(memory_snapshot)
-                logger.info(
-                    f"Processing completed with {len(all_results)} total results."
-                )
-
-            return all_results[:3]
-        finally:
-            gc.collect()
-
-    def invoke(self, query):
-        return self.get_relevant_documents(query)
 
 
 retriever = MultiRetriever(vectorstores)
@@ -1122,8 +1117,7 @@ def prompt_conversation(self, user_prompt, language_code=LANGUAGE_DEFAULT):
         # Vector store retrieval
         vector_start = time.time()
         try:
-            vector_store = get_vector_store(language_code)
-            docs_retrieve = vector_store.similarity_search(
+            docs_retrieve = store.similarity_search(
                 user_prompt, k=3  # Limit to top 3 results for performance
             )
             logger.debug(
@@ -1173,7 +1167,6 @@ def prompt_conversation(self, user_prompt, language_code=LANGUAGE_DEFAULT):
         if db is not None:
             self.close_db()
 
-
 def prompt_conversation_deepseek(
   self,
     user_prompt,
@@ -1221,9 +1214,9 @@ def prompt_conversation_deepseek(
         # Vector store retrieval
         vector_start = time.time()
         try:
-            vector_store = get_vector_store(language_code)
-            docs_retrieve = vector_store.similarity_search(
-                user_prompt, k=3  # Limit to top 3 results for performance
+            # vector_store = get_vector_store(language_code)
+            docs_retrieve = store.similarity_search(
+                user_prompt, k=3
             )
             logger.debug(
                 f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
@@ -1329,34 +1322,6 @@ def prompt_conversation_deepseek(
 
 
 """
-this is the new vector store function that will be used to get the vector store for the language
-the user has selected
-"""
-
-
-def get_vector_store(language_code: str = LANGUAGE_DEFAULT):
-    try:
-        if language_code not in SUPPORTED_LANGUAGES:
-            logger.warning(
-                f"Unsupported language code: {language_code}, falling back to English"
-            )
-            language_code = LANGUAGE_DEFAULT
-
-        store_path = VECTOR_STORE_PATHS.get(language_code)
-
-        logger.info(f"Loading vector store for language: {language_code}")
-        return Chroma(
-            persist_directory=store_path,
-            embedding_function=embedding_model,
-            collection_name=f"docs_{language_code}",
-        )
-
-    except Exception as e:
-        logger.error(f"Error loading vector store: {str(e)}")
-        raise
-
-
-"""
 this new function called prompt_conversation_admin
 the leanest smartest chatbot function, the goal here is to:
 Take the user input from our frontend with a language code in the url
@@ -1373,7 +1338,6 @@ and use history in our response generation for context and conversation
 the focus here is that there is no need to translate or touch the user input,
 speed is the key here
 """
-
 
 def prompt_conversation_admin(
     self,
@@ -1422,8 +1386,8 @@ def prompt_conversation_admin(
         # Vector store retrieval
         vector_start = time.time()
         try:
-            vector_store = get_vector_store(language_code)
-            docs_retrieve = vector_store.similarity_search(
+            # vector_store = get_vector_store(language_code)
+            docs_retrieve = store.similarity_search(
                 user_prompt, k=3  # Limit to top 3 results for performance
             )
             logger.debug(
@@ -1463,6 +1427,17 @@ def prompt_conversation_admin(
             raise
 
         is_last_message = is_finalizing_phrase(ai_response)
+
+        # Chama o confidence grader para obter um score de confiança
+        try:
+            # Aqui usamos os documentos recuperados para o contexto
+            confidence_result = confidence_grader.invoke({
+                "documents": format_docs(docs_retrieve),
+                "generation": ai_response,
+            })
+        except Exception as ce:
+            logger.error(f"Error obtaining confidence: {str(ce)}")
+            confidence_result = None
 
         # Update conversation
         messages.append(
@@ -1506,6 +1481,7 @@ def prompt_conversation_admin(
             "conversation_id": conversation_id,
             "language": language_code,
             "is_last_message": is_last_message,
+            "confidence_score": confidence_result.confidence_score if confidence_result else None,
         }
 
     except Exception as e:
@@ -1641,3 +1617,164 @@ def check_answer_mongo_and_openai(user_question, matches):
         return None
 
     return final_response
+
+
+
+
+logger = logging.getLogger()
+
+def extrair_knowledge_items(conversation):
+    """
+    Analisa a conversa, extrai os pontos de resolução e cria um resumo conciso desses pontos.
+    Retorna um item de conhecimento multilíngue com um resumo desses trechos.
+    """
+    # Concatene todas as mensagens da conversa (ou selecione apenas as que podem conter resolução)
+    full_text = "\n".join(
+        msg.get("content", "") for msg in conversation.get("messages", []) if msg.get("content")
+    )
+    
+    # Crie um prompt para extrair os pontos de resolução e gerar um resumo conciso ao mesmo tempo
+    extraction_prompt = (
+        "Analyze the conversation below and extract the parts where the user's problem was solved "
+        "or the issue was resolved. Provide a concise summary in English, capturing the resolutions or "
+        "key decisions made. Do not include any extraneous details. Provide the full resolution details first, "
+        "followed by a concise, reduced summary. "
+        "If the conversation does not contain a resolution regarding a real problem, please state in English that "
+        "there is no relevant resolution in this conversation.\n\nConversation:\n" + full_text
+    )   
+    
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise Exception("OPENAI_API_KEY is missing")
+    
+    client = OpenAI(api_key=api_key)
+    try:
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant that extracts and summarizes resolution points from a conversation."},
+                {"role": "user", "content": extraction_prompt},
+            ],
+            temperature=0.2,
+            max_tokens=130,
+            timeout=OPENAI_TIMEOUT,
+        )
+    except Exception as e:
+        logger.error(f"Error during resolution extraction and summary generation: {str(e)}")
+        return []
+
+    extracted_text = response.choices[0].message.content.strip()
+    
+    # Se nada foi extraído ou o LLM retornar "None", retorne uma lista vazia
+    if not extracted_text or extracted_text.lower() == "none":
+        return []
+
+    # Divida o texto extraído em duas partes, a resolução completa e a versão resumida
+    if "Summary:" in extracted_text:
+        full_resolution, reduced_summary = extracted_text.split("Summary:", 1)
+        reduced_summary = reduced_summary.strip()
+    else:
+        full_resolution = extracted_text
+        reduced_summary = full_resolution
+   
+    full_resolution = full_resolution.replace("Resolution:", "").strip()
+    
+    # Crie o item de conhecimento multilíngue
+    candidate_item = {
+        "id": conversation["session_id"] + "_resolucao",
+        "question": {
+            "text": "What are the resolution points of the conversation?", 
+            "variations": [],
+            "intent": "extracted_resolution_points",
+            "languages": {
+                "en": "Resolution points of the conversation",
+            }
+        },
+        "answer": {
+            "short": {
+                "en": reduced_summary,
+            },
+            "detailed": {
+                "en": full_resolution,
+            },
+            "conditions": ["Derived from conversation resolution"]
+        },
+        "metadata": {
+            "category": ["extracted"],
+            "subCategory": "conversation_resolution",
+            "confidence": 0.7,
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [],
+            "followUpQuestions": {}
+        }
+    }
+    
+    try:
+        docs_retrieve = retriever.get_relevant_documents(extracted_text)
+        logger.debug(f"Retrieved {len(docs_retrieve)} documents.")
+        
+        docs_to_use = []
+        reasoning = []
+        seen_ids = set()
+        
+        doc_ids = []
+        for doc in docs_retrieve:
+            doc_id = doc.metadata.get('id', 'no_id')
+            relevance_score = retrieval_grader.invoke({
+                "prompt": extracted_text, 
+                "document": doc.page_content
+            })
+            if relevance_score.confidence_score >= 0.7:
+                doc_id = doc.metadata.get('id', 'no_id')
+                if doc_id == "no_id":
+                    question_part = doc.page_content.split("Answer:")[0]
+                    question_only = question_part.replace("Question:", "").strip()
+                    doc_id=get_document_by_question_text(question_only)
+                    
+                
+                if doc_id not in seen_ids:
+                    doc_ids.append(doc_id)
+                    seen_ids.add(doc_id)
+                    docs_to_use.append(doc)
+                    reasoning.append({
+                        "id": doc_id,
+                        "document": doc.page_content,
+                        "score": relevance_score.confidence_score,
+                        "rationale": f"Document (ID: {doc_id}) is relevant with score {relevance_score.confidence_score}."
+                    })
+
+        context = format_docs(docs_to_use)
+
+        response = rag_chain.invoke({
+            "context": context,
+            "prompt": extracted_text,
+            "reasoning": reasoning
+        })
+
+        logger.debug("Response generated using the following documents:")
+        responseRaw = []
+        for r in reasoning:
+            logger.debug(f"Rationale: {r['rationale']}\nDocument Content: {r['document'][:200]}...")
+
+        valid_doc_ids = [doc_id for doc_id in doc_ids if doc_id != "no_id"]
+
+        if valid_doc_ids:
+            for ID in valid_doc_ids:
+                doc = get_document_by_id(ID) 
+            if doc:
+                responseRaw.append(json.dumps(doc, indent=4, ensure_ascii=False))
+            
+        candidate_item["answer"]["rag_response"] = response
+        candidate_item["answer"]["reasoning"] = reasoning
+        candidate_item["answer"]["raw"] = (responseRaw)
+
+        return [candidate_item]
+
+    except Exception as ve:
+        logger.error(f"Error during vector store retrieval: {str(ve)}")
+        return []
+    
+
+

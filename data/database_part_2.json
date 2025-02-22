@@ -925,1089 +925,1087 @@
             "lastQueried": null
         }
     },
-    [
-        {
-            "id": "0038",
-            "question": {
-                "text": "What should I do if I suspect my account has been hacked?",
-                "variations": [
-                    "Account hacked help",
-                    "Suspicious account activity",
-                    "Account security breach"
-                ],
-                "intent": "account_security_breach",
-                "languages": {
-                    "en": "What should I do if I suspect my account has been hacked?",
-                    "ms": "Apa yang perlu saya lakukan jika saya mengesyaki akaun saya telah digodam?",
-                    "cn": "\u5982\u679c\u6211\u6000\u7591\u8d26\u6237\u88ab\u9ed1\u5ba2\u5165\u4fb5\u8be5\u600e\u4e48\u529e\uff1f"
-                }
-            },
-            "answer": {
-                "short": {
-                    "en": "Change your password immediately and contact customer support with details of suspicious activity.",
-                    "ms": "Tukar kata laluan anda dengan segera dan hubungi khidmat pelanggan dengan butiran aktiviti yang mencurigakan.",
-                    "cn": "\u7acb\u5373\u66f4\u6539\u5bc6\u7801\u5e76\u8054\u7cfb\u5ba2\u670d\u63d0\u4f9b\u53ef\u7591\u6d3b\u52a8\u7684\u8be6\u7ec6\u4fe1\u606f\u3002"
-                },
-                "detailed": {
-                    "en": "If you suspect your account has been hacked, take these steps immediately: 1. Change your password. 2. Contact our customer support team right away with details of any suspicious activity. 3. Check your recent transaction history for any unauthorized actions. We'll investigate and take necessary measures to secure your account.",
-                    "ms": "Jika anda mengesyaki akaun anda telah digodam, ambil langkah-langkah ini dengan segera: 1. Tukar kata laluan anda. 2. Hubungi pasukan sokongan pelanggan kami dengan segera dengan butiran sebarang aktiviti yang mencurigakan. 3. Periksa sejarah transaksi terkini anda untuk sebarang tindakan yang tidak dibenarkan. Kami akan menyiasat dan mengambil langkah-langkah yang perlu untuk melindungi akaun anda.",
-                    "cn": "\u5982\u679c\u60a8\u6000\u7591\u60a8\u7684\u8d26\u6237\u6709\u672a\u6388\u6743\u7684\u6d3b\u52a8\uff0c\u7b2c\u4e00\u6b65\u662f\u7acb\u5373\u66f4\u6539\u60a8\u7684\u8d26\u6237\u5bc6\u7801\uff0c\u4ee5\u786e\u4fdd\u8d26\u6237\u7684\u5b89\u5168\u3002\u540c\u65f6\uff0c\u8bf7\u60a8\u68c0\u67e5\u6700\u8fd1\u7684\u4ea4\u6613\u8bb0\u5f55\uff0c\u786e\u8ba4\u662f\u5426\u6709\u60a8\u672a\u6388\u6743\u7684\u4ea4\u6613\u3002\u5982\u679c\u60a8\u53d1\u73b0\u4efb\u4f55\u53ef\u7591\u6d3b\u52a8\uff0c\u8bf7\u7acb\u5373\u4e0e\u6211\u4eec\u8054\u7cfb\uff0c\u63d0\u4f9b\u76f8\u5173\u7684\u4fe1\u606f\u548c\u622a\u56fe\uff0c\u6211\u4eec\u4f1a\u5c3d\u5feb\u4e3a\u60a8\u8c03\u67e5\u5e76\u91c7\u53d6\u5fc5\u8981\u7684\u63aa\u65bd\uff0c\u786e\u4fdd\u60a8\u7684\u8d26\u6237\u5b89\u5168\u3002"
-                },
-                "conditions": [
-                    "Active account",
-                    "Suspicious activity detected",
-                    "Customer support available"
-                ]
-            },
-            "metadata": {
-                "category": [
-                    "account_security",
-                    "customer_support",
-                    "security"
-                ],
-                "subCategory": "security_breach",
-                "difficulty": 2,
-                "confidence": 0.98,
-                "dateCreated": "2024-10-24T15:31:00Z",
-                "lastUpdated": "2024-11-25T09:00:00Z",
-                "version": "1.0",
-                "source": "security_documentation",
-                "status": "active"
-            },
-            "context": {
-                "relatedTopics": [
-                    "account_security",
-                    "password_reset",
-                    "unauthorized_access"
-                ],
-                "prerequisites": [
-                    "active_account"
-                ],
-                "followUpQuestions": {
-                    "en": [
-                        "How do I enable two-factor authentication?",
-                        "Can I see my account login history?"
-                    ],
-                    "ms": [
-                        "Bagaimana saya boleh mengaktifkan pengesahan dua faktor?",
-                        "Bolehkah saya melihat sejarah log masuk akaun saya?"
-                    ],
-                    "cn": [
-                        "\u5982\u4f55\u542f\u7528\u53cc\u91cd\u8ba4\u8bc1\uff1f",
-                        "\u6211\u53ef\u4ee5\u67e5\u770b\u8d26\u6237\u767b\u5f55\u5386\u53f2\u5417\uff1f"
-                    ]
-                }
-            },
-            "usage": {
-                "searchFrequency": 0,
-                "successRate": 0,
-                "lastQueried": null
+    {
+        "id": "0038",
+        "question": {
+            "text": "What should I do if I suspect my account has been hacked?",
+            "variations": [
+                "Account hacked help",
+                "Suspicious account activity",
+                "Account security breach"
+            ],
+            "intent": "account_security_breach",
+            "languages": {
+                "en": "What should I do if I suspect my account has been hacked?",
+                "ms": "Apa yang perlu saya lakukan jika saya mengesyaki akaun saya telah digodam?",
+                "cn": "\u5982\u679c\u6211\u6000\u7591\u8d26\u6237\u88ab\u9ed1\u5ba2\u5165\u4fb5\u8be5\u600e\u4e48\u529e\uff1f"
             }
         },
-        {
-            "id": "0039",
-            "question": {
-                "text": "How can I set a daily betting limit on my account?",
-                "variations": [
-                    "Set betting limits",
-                    "Daily gambling limit",
-                    "Restrict betting amount"
-                ],
-                "intent": "set_betting_limits",
-                "languages": {
-                    "en": "How can I set a daily betting limit on my account?",
-                    "ms": "Bagaimana saya boleh menetapkan had pertaruhan harian pada akaun saya?",
-                    "cn": "\u5982\u4f55\u5728\u6211\u7684\u8d26\u6237\u4e0a\u8bbe\u7f6e\u6bcf\u65e5\u6295\u6ce8\u9650\u989d\uff1f"
-                }
+        "answer": {
+            "short": {
+                "en": "Change your password immediately and contact customer support with details of suspicious activity.",
+                "ms": "Tukar kata laluan anda dengan segera dan hubungi khidmat pelanggan dengan butiran aktiviti yang mencurigakan.",
+                "cn": "\u7acb\u5373\u66f4\u6539\u5bc6\u7801\u5e76\u8054\u7cfb\u5ba2\u670d\u63d0\u4f9b\u53ef\u7591\u6d3b\u52a8\u7684\u8be6\u7ec6\u4fe1\u606f\u3002"
             },
-            "answer": {
-                "short": {
-                    "en": "Go to Responsible Gaming section in account settings to set daily, weekly, or monthly betting limits.",
-                    "ms": "Pergi ke bahagian Perjudian Bertanggungjawab dalam tetapan akaun untuk menetapkan had pertaruhan harian, mingguan, atau bulanan.",
-                    "cn": "\u76ee\u524d\u6211\u4eec\u5e73\u53f0\u4e0a\u8fd8\u6ca1\u6709\u63d0\u4f9b\u8bbe\u7f6e\u6295\u6ce8\u9650\u989d\u7684\u529f\u80fd\u3002"
-                },
-                "detailed": {
-                    "en": "To set a daily betting limit, go to your account settings and look for the 'Responsible Gaming' section. Here, you can set daily, weekly, or monthly limits on your bets. Once set, you won't be able to exceed these limits until the time period resets. This feature helps you manage your gaming activity responsibly.",
-                    "ms": "Untuk menetapkan had pertaruhan harian, pergi ke tetapan akaun anda dan cari bahagian 'Perjudian Bertanggungjawab'. Di sini, anda boleh menetapkan had harian, mingguan, atau bulanan pada pertaruhan anda. Setelah ditetapkan, anda tidak akan dapat melebihi had ini sehingga tempoh masa ditetapkan semula. Ciri ini membantu anda mengurus aktiviti permainan anda secara bertanggungjawab.",
-                    "cn": "\u76ee\u524d\u6211\u4eec\u5e73\u53f0\u4e0a\u8fd8\u6ca1\u6709\u63d0\u4f9b\u8bbe\u7f6e\u6295\u6ce8\u9650\u989d\u7684\u529f\u80fd\u3002\u4e0d\u8fc7\uff0c\u60a8\u53ef\u4ee5\u901a\u8fc7\u63a7\u5236\u5b58\u6b3e\u91d1\u989d\u6765\u6709\u6548\u7ba1\u7406\u81ea\u5df1\u7684\u652f\u51fa\uff0c\u5efa\u8bae\u60a8\u4ece\u5c0f\u989d\u5f00\u59cb\u6295\u6ce8\uff0c\u8fd9\u6837\u53ef\u4ee5\u66f4\u597d\u5730\u638c\u63a7\u6e38\u620f\u7684\u4e50\u8da3\u3002"
-                },
-                "conditions": [
-                    "Active account",
-                    "Account settings access",
-                    "Responsible gaming enabled"
+            "detailed": {
+                "en": "If you suspect your account has been hacked, take these steps immediately: 1. Change your password. 2. Contact our customer support team right away with details of any suspicious activity. 3. Check your recent transaction history for any unauthorized actions. We'll investigate and take necessary measures to secure your account.",
+                "ms": "Jika anda mengesyaki akaun anda telah digodam, ambil langkah-langkah ini dengan segera: 1. Tukar kata laluan anda. 2. Hubungi pasukan sokongan pelanggan kami dengan segera dengan butiran sebarang aktiviti yang mencurigakan. 3. Periksa sejarah transaksi terkini anda untuk sebarang tindakan yang tidak dibenarkan. Kami akan menyiasat dan mengambil langkah-langkah yang perlu untuk melindungi akaun anda.",
+                "cn": "\u5982\u679c\u60a8\u6000\u7591\u60a8\u7684\u8d26\u6237\u6709\u672a\u6388\u6743\u7684\u6d3b\u52a8\uff0c\u7b2c\u4e00\u6b65\u662f\u7acb\u5373\u66f4\u6539\u60a8\u7684\u8d26\u6237\u5bc6\u7801\uff0c\u4ee5\u786e\u4fdd\u8d26\u6237\u7684\u5b89\u5168\u3002\u540c\u65f6\uff0c\u8bf7\u60a8\u68c0\u67e5\u6700\u8fd1\u7684\u4ea4\u6613\u8bb0\u5f55\uff0c\u786e\u8ba4\u662f\u5426\u6709\u60a8\u672a\u6388\u6743\u7684\u4ea4\u6613\u3002\u5982\u679c\u60a8\u53d1\u73b0\u4efb\u4f55\u53ef\u7591\u6d3b\u52a8\uff0c\u8bf7\u7acb\u5373\u4e0e\u6211\u4eec\u8054\u7cfb\uff0c\u63d0\u4f9b\u76f8\u5173\u7684\u4fe1\u606f\u548c\u622a\u56fe\uff0c\u6211\u4eec\u4f1a\u5c3d\u5feb\u4e3a\u60a8\u8c03\u67e5\u5e76\u91c7\u53d6\u5fc5\u8981\u7684\u63aa\u65bd\uff0c\u786e\u4fdd\u60a8\u7684\u8d26\u6237\u5b89\u5168\u3002"
+            },
+            "conditions": [
+                "Active account",
+                "Suspicious activity detected",
+                "Customer support available"
+            ]
+        },
+        "metadata": {
+            "category": [
+                "account_security",
+                "customer_support",
+                "security"
+            ],
+            "subCategory": "security_breach",
+            "difficulty": 2,
+            "confidence": 0.98,
+            "dateCreated": "2024-10-24T15:31:00Z",
+            "lastUpdated": "2024-11-25T09:00:00Z",
+            "version": "1.0",
+            "source": "security_documentation",
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [
+                "account_security",
+                "password_reset",
+                "unauthorized_access"
+            ],
+            "prerequisites": [
+                "active_account"
+            ],
+            "followUpQuestions": {
+                "en": [
+                    "How do I enable two-factor authentication?",
+                    "Can I see my account login history?"
+                ],
+                "ms": [
+                    "Bagaimana saya boleh mengaktifkan pengesahan dua faktor?",
+                    "Bolehkah saya melihat sejarah log masuk akaun saya?"
+                ],
+                "cn": [
+                    "\u5982\u4f55\u542f\u7528\u53cc\u91cd\u8ba4\u8bc1\uff1f",
+                    "\u6211\u53ef\u4ee5\u67e5\u770b\u8d26\u6237\u767b\u5f55\u5386\u53f2\u5417\uff1f"
                 ]
-            },
-            "metadata": {
-                "category": [
-                    "responsible_gaming",
-                    "account_settings",
-                    "player_protection"
-                ],
-                "subCategory": "betting_limits",
-                "difficulty": 2,
-                "confidence": 0.97,
-                "dateCreated": "2024-10-24T15:32:00Z",
-                "lastUpdated": "2024-11-25T09:00:00Z",
-                "version": "1.0",
-                "source": "responsible_gaming_documentation",
-                "status": "active"
-            },
-            "context": {
-                "relatedTopics": [
-                    "responsible_gaming",
-                    "account_limits",
-                    "player_protection"
-                ],
-                "prerequisites": [
-                    "active_account"
-                ],
-                "followUpQuestions": {
-                    "en": [
-                        "Can I change my betting limits?",
-                        "What other responsible gaming tools are available?"
-                    ],
-                    "ms": [
-                        "Bolehkah saya mengubah had pertaruhan saya?",
-                        "Apakah alat perjudian bertanggungjawab lain yang tersedia?"
-                    ],
-                    "cn": [
-                        "\u6211\u53ef\u4ee5\u66f4\u6539\u6295\u6ce8\u9650\u989d\u5417\uff1f",
-                        "\u8fd8\u6709\u4ec0\u4e48\u5176\u4ed6\u6e38\u620f\u9053\u5177\u53ef\u4ee5\u7528\uff1f"
-                    ]
-                }
-            },
-            "usage": {
-                "searchFrequency": 0,
-                "successRate": 0,
-                "lastQueried": null
             }
         },
-        {
-            "id": "0040",
-            "question": {
-                "text": "Are there any bonuses for referring friends to the platform?",
-                "variations": [
-                    "Friend referral rewards",
-                    "Referral program benefits",
-                    "Bonus for inviting friends"
-                ],
-                "intent": "referral_bonus_inquiry",
-                "languages": {
-                    "en": "Are there any bonuses for referring friends to the platform?",
-                    "ms": "Adakah terdapat bonus untuk merujuk rakan ke platform ini?",
-                    "cn": "\u63a8\u8350\u670b\u53cb\u52a0\u5165\u5e73\u53f0\u6709\u5956\u52b1\u5417\uff1f"
-                }
-            },
-            "answer": {
-                "short": {
-                    "en": "Yes, receive a bonus when referred friends sign up and make their first deposit.",
-                    "ms": "Ya, terima bonus apabila rakan yang dirujuk mendaftar dan membuat deposit pertama mereka.",
-                    "cn": "\u662f\u7684\uff0c\u5f53\u88ab\u63a8\u8350\u7684\u670b\u53cb\u6ce8\u518c\u5e76\u9996\u6b21\u5b58\u6b3e\u65f6\u53ef\u83b7\u5f97\u5956\u52b1\u3002"
-                },
-                "detailed": {
-                    "en": "Yes, we offer a referral bonus program! When you refer a friend, and they sign up and make their first deposit, you'll receive a bonus. The exact amount varies, but it's typically a percentage of their first deposit. Check the 'Promotions' section in your account for current referral bonus details.",
-                    "ms": "Ya, kami menawarkan program bonus rujukan! Apabila anda merujuk rakan, dan mereka mendaftar dan membuat deposit pertama mereka, anda akan menerima bonus. Jumlah sebenar berbeza-beza, tetapi biasanya peratusan daripada deposit pertama mereka. Semak bahagian 'Promosi' dalam akaun anda untuk butiran bonus rujukan semasa.",
-                    "cn": "\u63a8\u8350\u65b0\u4f1a\u5458\u7684\u4f63\u91d1\u7387\u4e3a\u8be5\u4f1a\u54584D\u603b\u6295\u8d44\u989d\u76843%\uff01\u800c\u4e14\u60a8\u8fd8\u53ef\u4ee5\u83b7\u5f97\u989d\u5916\u7684VIP\u79ef\u5206\uff0c\u63a8\u8350\u8d8a\u591a\uff0c\u8d5a\u5f97\u8d8a\u591a\uff01\u60f3\u4e86\u89e3\u66f4\u591a\u8be6\u60c5\uff0c\u8bf7\u8bbf\u95ee\u5e94\u7528\u7a0b\u5e8f\u91cc\u7684VIP\u798f\u5229\u90e8\u5206\u3002"
-                },
-                "conditions": [
-                    "Active account",
-                    "Valid referral",
-                    "First deposit made"
-                ]
-            },
-            "metadata": {
-                "category": [
-                    "promotions",
-                    "referral_program",
-                    "rewards"
-                ],
-                "subCategory": "referral_bonus",
-                "difficulty": 2,
-                "confidence": 0.96,
-                "dateCreated": "2024-10-24T15:33:00Z",
-                "lastUpdated": "2024-11-25T09:00:00Z",
-                "version": "1.0",
-                "source": "promotion_documentation",
-                "status": "active"
-            },
-            "context": {
-                "relatedTopics": [
-                    "promotions",
-                    "bonus_terms",
-                    "referral_program"
-                ],
-                "prerequisites": [
-                    "active_account"
-                ],
-                "followUpQuestions": {
-                    "en": [
-                        "How many friends can I refer?",
-                        "When will I receive my referral bonus?"
-                    ],
-                    "ms": [
-                        "Berapa ramai rakan yang boleh saya rujuk?",
-                        "Bilakah saya akan menerima bonus rujukan saya?"
-                    ],
-                    "cn": [
-                        "\u6211\u53ef\u4ee5\u63a8\u8350\u591a\u5c11\u4e2a\u670b\u53cb\uff1f",
-                        "\u6211\u4ec0\u4e48\u65f6\u5019\u80fd\u6536\u5230\u63a8\u8350\u5956\u52b1\uff1f"
-                    ]
-                }
-            },
-            "usage": {
-                "searchFrequency": 0,
-                "successRate": 0,
-                "lastQueried": null
-            }
-        },
-        {
-            "id": "0041",
-            "question": {
-                "text": "What should I do if I get disconnected during a game?",
-                "variations": [
-                    "Game disconnection issue",
-                    "Lost connection while playing",
-                    "Game connection problems"
-                ],
-                "intent": "game_disconnection_help",
-                "languages": {
-                    "en": "What should I do if I get disconnected during a game?",
-                    "ms": "Apa yang perlu saya lakukan jika terputus sambungan semasa permainan?",
-                    "cn": "\u5982\u679c\u5728\u6e38\u620f\u8fc7\u7a0b\u4e2d\u65ad\u5f00\u8fde\u63a5\u8be5\u600e\u4e48\u529e\uff1f"
-                }
-            },
-            "answer": {
-                "short": {
-                    "en": "Reconnect to network, log in again, and your game progress will be restored.",
-                    "ms": "Sambung semula ke rangkaian, log masuk semula, dan kemajuan permainan anda akan dipulihkan.",
-                    "cn": "\u91cd\u65b0\u8fde\u63a5\u7f51\u7edc\uff0c\u91cd\u65b0\u767b\u5f55\uff0c\u60a8\u7684\u6e38\u620f\u8fdb\u5ea6\u5c06\u4f1a\u6062\u590d\u3002"
-                },
-                "detailed": {
-                    "en": "If you get disconnected during a game, follow these steps: 1. Try to reconnect to the network to ensure your network connection is stable. 2. Log in to the game again. In most cases, the system will automatically restore your game progress. 3. If the problem persists, contact online customer service. We will check and ensure your gaming experience will not be affected.",
-                    "ms": "Jika anda terputus sambungan semasa permainan, ikuti langkah-langkah ini: 1. Cuba sambung semula ke rangkaian untuk memastikan sambungan rangkaian anda stabil. 2. Log masuk semula ke permainan. Dalam kebanyakan kes, sistem akan memulihkan kemajuan permainan anda secara automatik. 3. Jika masalah berterusan, hubungi khidmat pelanggan dalam talian. Kami akan memeriksa dan memastikan pengalaman permainan anda tidak terjejas.",
-                    "cn": "\u4eb2\u7231\u7684\u73a9\u5bb6\uff0c\u5982\u679c\u60a8\u5728\u6e38\u620f\u8fc7\u7a0b\u4e2d\u65ad\u7ebf\uff0c\u5efa\u8bae\u60a8\u6309\u7167\u4ee5\u4e0b\u6b65\u9aa4\u64cd\u4f5c\uff1a\u5c1d\u8bd5\u91cd\u65b0\u8fde\u63a5\u7f51\u7edc\uff0c\u786e\u4fdd\u60a8\u7684\u7f51\u7edc\u8fde\u63a5\u7a33\u5b9a\u3002\u91cd\u65b0\u767b\u5f55\u6e38\u620f\uff0c\u5927\u591a\u6570\u60c5\u51b5\u4e0b\uff0c\u7cfb\u7edf\u4f1a\u81ea\u52a8\u6062\u590d\u60a8\u7684\u6e38\u620f\u8fdb\u5ea6\u3002\u5982\u679c\u95ee\u9898\u4ecd\u7136\u5b58\u5728\uff0c\u60a8\u53ef\u4ee5\u8054\u7cfb\u5728\u7ebf\u5ba2\u670d\uff0c\u6211\u4eec\u5c06\u4e3a\u60a8\u68c0\u67e5\u5e76\u786e\u4fdd\u60a8\u7684\u6e38\u620f\u4f53\u9a8c\u4e0d\u4f1a\u53d7\u5230\u5f71\u54cd\u3002\u611f\u8c22\u60a8\u7684\u7406\u89e3\u4e0e\u652f\u6301\uff01\u5982\u6709\u5176\u4ed6\u95ee\u9898\uff0c\u6211\u4eec\u968f\u65f6\u4e3a\u60a8\u63d0\u4f9b\u5e2e\u52a9\u3002\u795d\u60a8\u6e38\u620f\u6109\u5feb\uff01"
-                },
-                "conditions": [
-                    "Internet connection",
-                    "Valid account login",
-                    "Recent game session"
-                ]
-            },
-            "metadata": {
-                "category": [
-                    "technical_support",
-                    "gaming",
-                    "connectivity"
-                ],
-                "subCategory": "game_issues",
-                "difficulty": 2,
-                "confidence": 0.97,
-                "dateCreated": "2024-10-24T15:39:00Z",
-                "lastUpdated": "2024-11-25T09:00:00Z",
-                "version": "1.0",
-                "source": "technical_documentation",
-                "status": "active"
-            },
-            "context": {
-                "relatedTopics": [
-                    "network_issues",
-                    "game_recovery",
-                    "technical_support"
-                ],
-                "prerequisites": [
-                    "active_account"
-                ],
-                "followUpQuestions": {
-                    "en": [
-                        "Will I lose my game progress?",
-                        "How do I contact customer service?"
-                    ],
-                    "ms": [
-                        "Adakah saya akan kehilangan kemajuan permainan saya?",
-                        "Bagaimana saya boleh menghubungi khidmat pelanggan?"
-                    ],
-                    "cn": [
-                        "\u6211\u4f1a\u5931\u53bb\u6e38\u620f\u8fdb\u5ea6\u5417\uff1f",
-                        "\u5982\u4f55\u8054\u7cfb\u5ba2\u670d\uff1f"
-                    ]
-                }
-            },
-            "usage": {
-                "searchFrequency": 0,
-                "successRate": 0,
-                "lastQueried": null
-            }
-        },
-        {
-            "id": "0042",
-            "question": {
-                "text": "Why do I have to wait 5 minutes between transactions?",
-                "variations": [
-                    "Transaction wait time",
-                    "5-minute transaction delay",
-                    "Time between transactions"
-                ],
-                "intent": "transaction_delay_explanation",
-                "languages": {
-                    "en": "Why do I have to wait 5 minutes between transactions?",
-                    "ms": "Mengapa saya perlu menunggu 5 minit antara transaksi?",
-                    "cn": "\u4e3a\u4ec0\u4e48\u6211\u9700\u8981\u5728\u4ea4\u6613\u4e4b\u95f4\u7b49\u5f855\u5206\u949f\uff1f"
-                }
-            },
-            "answer": {
-                "short": {
-                    "en": "The 5-minute wait is a security measure to prevent frequent trading and protect your account.",
-                    "ms": "Tempoh menunggu 5 minit adalah langkah keselamatan untuk mencegah perdagangan kerap dan melindungi akaun anda.",
-                    "cn": "5\u5206\u949f\u7b49\u5f85\u65f6\u95f4\u662f\u4e00\u9879\u5b89\u5168\u63aa\u65bd\uff0c\u7528\u4e8e\u9632\u6b62\u9891\u7e41\u4ea4\u6613\u5e76\u4fdd\u62a4\u60a8\u7684\u8d26\u6237\u3002"
-                },
-                "detailed": {
-                    "en": "The system requires you to wait for 5 minutes between transactions, usually because you have conducted many identical or similar transactions in a short period of time. To ensure the security of the account and prevent any potential abnormal operation, the system temporarily restricts frequent trading requests.",
-                    "ms": "Sistem memerlukan anda menunggu selama 5 minit antara transaksi, biasanya kerana anda telah melakukan banyak transaksi yang sama atau serupa dalam tempoh masa yang singkat. Untuk memastikan keselamatan akaun dan mencegah sebarang operasi tidak normal yang mungkin berlaku, sistem menyekat sementara permintaan perdagangan yang kerap.",
-                    "cn": "\u5982\u679c\u7cfb\u7edf\u8981\u6c42\u60a8\u7b49\u5f855\u5206\u949f\u8fdb\u884c\u4ea4\u6613\uff0c\u901a\u5e38\u662f\u56e0\u4e3a\u60a8\u8fdb\u884c\u4e86\u9ad8\u9891\u7387\u7684\u76f8\u540c\u4ea4\u6613\u3002\u4e3a\u4e86\u4fdd\u969c\u6240\u6709\u73a9\u5bb6\u7684\u4ea4\u6613\u5b89\u5168\uff0c\u6211\u4eec\u4f1a\u5728\u8fd9\u79cd\u60c5\u51b5\u4e0b\u8bbe\u7f6e\u77ed\u6682\u7684\u5ef6\u8fdf\u3002\u8bf7\u60a8\u8010\u5fc3\u7b49\u5019\uff0c\u8fc7\u4e86\u8fd9\u6bb5\u65f6\u95f4\u518d\u5c1d\u8bd5\u8fdb\u884c\u4ea4\u6613\u3002"
-                },
-                "conditions": [
-                    "Multiple transactions detected",
-                    "Security protocols active",
-                    "System monitoring"
-                ]
-            },
-            "metadata": {
-                "category": [
-                    "account_security",
-                    "transactions",
-                    "system_rules"
-                ],
-                "subCategory": "security_measures",
-                "difficulty": 2,
-                "confidence": 0.98,
-                "dateCreated": "2024-10-24T15:40:00Z",
-                "lastUpdated": "2024-11-25T09:00:00Z",
-                "version": "1.0",
-                "source": "security_documentation",
-                "status": "active"
-            },
-            "context": {
-                "relatedTopics": [
-                    "security_measures",
-                    "transaction_limits",
-                    "account_protection"
-                ],
-                "prerequisites": [],
-                "followUpQuestions": {
-                    "en": [
-                        "Can this waiting time be reduced?",
-                        "What counts as too many transactions?"
-                    ],
-                    "ms": [
-                        "Bolehkah masa menunggu ini dikurangkan?",
-                        "Apakah yang dikira sebagai terlalu banyak transaksi?"
-                    ],
-                    "cn": [
-                        "\u8fd9\u4e2a\u7b49\u5f85\u65f6\u95f4\u53ef\u4ee5\u51cf\u5c11\u5417\uff1f",
-                        "\u4ec0\u4e48\u7b97\u4f5c\u592a\u591a\u4ea4\u6613\uff1f"
-                    ]
-                }
-            },
-            "usage": {
-                "searchFrequency": 0,
-                "successRate": 0,
-                "lastQueried": null
-            }
-        },
-        {
-            "id": "0043",
-            "question": {
-                "text": "What games offer the highest RTP (Return to Player) percentage?",
-                "variations": [
-                    "Best RTP games",
-                    "Highest return games",
-                    "Games with best odds"
-                ],
-                "intent": "game_rtp_inquiry",
-                "languages": {
-                    "en": "What games offer the highest RTP (Return to Player) percentage?",
-                    "ms": "Permainan apa yang menawarkan peratusan RTP (Pulangan kepada Pemain) tertinggi?",
-                    "cn": "\u54ea\u4e9b\u6e38\u620f\u63d0\u4f9b\u6700\u9ad8\u7684RTP\uff08\u8fd4\u8fd8\u73a9\u5bb6\uff09\u767e\u5206\u6bd4\uff1f"
-                }
-            },
-            "answer": {
-                "short": {
-                    "en": "The winning rate of slot games is actually determined by the game's random mechanisms. Sometimes, you may feel that the chances of winning are decreasing, which is actually a normal fluctuation phenomenon; after all, each spin is an independent random event.",
-                    "ms": "Blackjack menawarkan RTP 99.5%, manakala slot seperti Mega Joker (99%) dan Jackpot 6000 (98.9%) menawarkan pulangan tinggi.",
-                    "cn": "\u8001\u864e\u673a\u6e38\u620f\u7684\u8d62\u7387\uff0c\u5b9e\u9645\u4e0a\u662f\u7531\u6e38\u620f\u7684\u968f\u673a\u673a\u5236\u51b3\u5b9a\u7684\u3002\u6709\u65f6\u5019\uff0c\u60a8\u53ef\u80fd\u4f1a\u611f\u89c9\u5230\u8d62\u7684\u673a\u4f1a\u53d8\u5c11\uff0c\u8fd9\u5176\u5b9e\u662f\u6b63\u5e38\u7684\u6ce2\u52a8\u73b0\u8c61\uff0c\u6bd5\u7adf\u6bcf\u6b21\u65cb\u8f6c\u90fd\u662f\u72ec\u7acb\u7684\u968f\u673a\u4e8b\u4ef6\u3002"
-                },
-                "detailed": {
-                    "en": "The winning rate of slot games is actually determined by the game's random mechanisms. Sometimes, you may feel that the chances of winning are decreasing, which is a normal fluctuation phenomenon; after all, each spin is an independent random event. Don't be discouraged! Each game's return to player (RTP) is predetermined, and you still have the chance to win substantial prizes. Remember to enjoy the gaming experience, and feel free to try different games to discover more fun and possibilities!",
-                    "ms": "Secara umum, permainan slot kami dengan RTP tertinggi adalah Mega Joker (99%), Jackpot 6000 (98.9%), dan Blood Suckers (98%). Untuk permainan meja, Blackjack biasanya menawarkan RTP tertinggi sekitar 99.5% dengan strategi sempurna. Sentiasa periksa maklumat permainan untuk peratusan RTP tertentu.",
-                    "cn": "\u5173\u4e8e\u8001\u864e\u673a\u6e38\u620f\u7684\u8d62\u7387\uff0c\u5b9e\u9645\u4e0a\u662f\u7531\u6e38\u620f\u7684\u968f\u673a\u673a\u5236\u51b3\u5b9a\u7684\u3002\u6709\u65f6\u5019\uff0c\u60a8\u53ef\u80fd\u4f1a\u611f\u89c9\u5230\u8d62\u7684\u673a\u4f1a\u53d8\u5c11\uff0c\u8fd9\u5176\u5b9e\u662f\u6b63\u5e38\u7684\u6ce2\u52a8\u73b0\u8c61\uff0c\u6bd5\u7adf\u6bcf\u6b21\u65cb\u8f6c\u90fd\u662f\u72ec\u7acb\u7684\u968f\u673a\u4e8b\u4ef6\u3002\u522b\u7070\u5fc3\uff01\u6bcf\u4e2a\u6e38\u620f\u7684\u56de\u62a5\u7387\uff08RTP\uff09\u90fd\u662f\u4e8b\u5148\u8bbe\u5b9a\u7684\uff0c\u60a8\u4f9d\u7136\u6709\u673a\u4f1a\u8d62\u5f97\u4e30\u539a\u7684\u5956\u91d1\u3002\u8bb0\u5f97\u4eab\u53d7\u6e38\u620f\u7684\u8fc7\u7a0b\uff0c\u540c\u65f6\u4e5f\u53ef\u4ee5\u5c1d\u8bd5\u4e0d\u540c\u7684\u6e38\u620f\uff0c\u5bfb\u627e\u66f4\u591a\u7684\u4e50\u8da3\u548c\u53ef\u80fd\u6027\uff01"
-                },
-                "conditions": [
-                    "Perfect strategy used",
-                    "Game rules followed",
-                    "RTP percentages may vary"
-                ]
-            },
-            "metadata": {
-                "category": [
-                    "gaming",
-                    "game_info",
-                    "statistics"
-                ],
-                "subCategory": "game_statistics",
-                "difficulty": 2,
-                "confidence": 0.98,
-                "dateCreated": "2024-10-24T15:35:00Z",
-                "lastUpdated": "2024-11-25T09:00:00Z",
-                "version": "1.0",
-                "source": "game_documentation",
-                "status": "active"
-            },
-            "context": {
-                "relatedTopics": [
-                    "game_strategies",
-                    "odds_calculation",
-                    "game_rules"
-                ],
-                "prerequisites": [],
-                "followUpQuestions": {
-                    "en": [
-                        "How do I calculate RTP?",
-                        "What strategies improve my odds?"
-                    ],
-                    "ms": [
-                        "Bagaimana saya mengira RTP?",
-                        "Apakah strategi yang meningkatkan peluang saya?"
-                    ],
-                    "cn": [
-                        "\u6211\u8981\u5982\u4f55\u8ba1\u7b97RTP\uff1f",
-                        "\u6709\u4ec0\u4e48\u7b56\u7565\u53ef\u4ee5\u63d0\u9ad8\u6211\u7684\u80dc\u7b97\u5417\uff1f"
-                    ]
-                }
-            },
-            "usage": {
-                "searchFrequency": 0,
-                "successRate": 0,
-                "lastQueried": null
-            }
-        },
-        {
-            "id": "0044",
-            "question": {
-                "text": "Why is it taking so long for my credit to be updated after a deposit?",
-                "variations": [
-                    "Credit update delay after deposit",
-                    "Deposit credit taking long time",
-                    "Slow credit update"
-                ],
-                "intent": "deposit_credit_delay",
-                "languages": {
-                    "en": "Why is it taking so long for my credit to be updated after a deposit?",
-                    "ms": "Mengapa masa yang lama diperlukan untuk kredit saya dikemas kini selepas deposit?",
-                    "cn": "\u4e3a\u4ec0\u4e48\u5b58\u6b3e\u540e\u66f4\u65b0\u4fe1\u7528\u989d\u5ea6\u9700\u8981\u8fd9\u4e48\u957f\u65f6\u95f4\uff1f"
-                }
-            },
-            "answer": {
-                "short": {
-                    "en": "Deposits typically take 5-30 minutes to process and update.",
-                    "ms": "Deposit biasanya mengambil masa 5-30 minit untuk diproses dan dikemas kini.",
-                    "cn": "\u6211\u5f88\u62b1\u6b49\u8ba9\u60a8\u611f\u5230\u56f0\u6270\uff01\u5b58\u6b3e\u5904\u7406\u6709\u65f6\u53ef\u80fd\u4f1a\u56e0\u4e3a\u7cfb\u7edf\u5ba1\u6838\u6216\u9ad8\u5cf0\u671f\u800c\u5ef6\u8fdf\uff0c\u901a\u5e38\u6211\u4eec\u4f1a\u57285\u523030\u5206\u949f\u5185\u5904\u7406\uff0c\u4f46\u5076\u5c14\u4e5f\u4f1a\u6709\u4e00\u4e9b\u5ef6\u8fdf\u3002"
-                },
-                "detailed": {
-                    "en": "Usually, the deposit update will take 5 to 30 minutes. Our customer service team will review your deposit during this period. After the review is completed, the funds will be automatically updated to your account. If you experience longer delays, please contact our customer service team.",
-                    "ms": "Biasanya, kemas kini deposit akan mengambil masa 5 hingga 30 minit. Pasukan perkhidmatan pelanggan kami akan menyemak deposit anda dalam tempoh ini. Selepas semakan selesai, dana akan dikemas kini secara automatik ke akaun anda.",
-                    "cn": "\u6211\u5f88\u62b1\u6b49\u8ba9\u60a8\u611f\u5230\u56f0\u6270\uff01\u5b58\u6b3e\u5904\u7406\u6709\u65f6\u53ef\u80fd\u4f1a\u56e0\u4e3a\u7cfb\u7edf\u5ba1\u6838\u6216\u9ad8\u5cf0\u671f\u800c\u5ef6\u8fdf\uff0c\u901a\u5e38\u6211\u4eec\u4f1a\u57285\u523030\u5206\u949f\u5185\u5904\u7406\uff0c\u4f46\u5076\u5c14\u4e5f\u4f1a\u6709\u4e00\u4e9b\u5ef6\u8fdf\u3002\u5982\u679c\u60a8\u7684\u5b58\u6b3e\u5728\u51e0\u4e2a\u5c0f\u65f6\u540e\u4ecd\u7136\u6ca1\u6709\u5904\u7406\uff0c\u8bf7\u60a8\u622a\u56fe\u76f8\u5173\u4fe1\u606f\u53d1\u7ed9\u6211\u4eec\uff0c\u6211\u4eec\u4f1a\u5c3d\u5feb\u4e3a\u60a8\u67e5\u660e\u60c5\u51b5\u5e76\u5e2e\u52a9\u60a8\u89e3\u51b3\u95ee\u9898\u3002"
-                },
-                "conditions": [
-                    "Valid deposit made",
-                    "System operational",
-                    "Correct reference number"
-                ]
-            },
-            "metadata": {
-                "category": [
-                    "financial",
-                    "deposits",
-                    "transactions"
-                ],
-                "subCategory": "deposit_processing",
-                "difficulty": 2,
-                "confidence": 0.97,
-                "dateCreated": "2024-10-22T11:29:26Z",
-                "lastUpdated": "2024-11-25T09:00:00Z",
-                "version": "1.0",
-                "source": "financial_documentation",
-                "status": "active"
-            },
-            "context": {
-                "relatedTopics": [
-                    "deposit_process",
-                    "payment_verification",
-                    "transaction_times"
-                ],
-                "prerequisites": [
-                    "active_account"
-                ],
-                "followUpQuestions": {
-                    "en": [
-                        "What if my deposit takes longer than 30 minutes?",
-                        "How can I check my deposit status?"
-                    ],
-                    "ms": [
-                        "Bagaimana jika deposit saya mengambil masa lebih dari 30 minit?",
-                        "Bagaimana saya boleh memeriksa status deposit saya?"
-                    ],
-                    "cn": [
-                        "\u5982\u679c\u5b58\u6b3e\u8d85\u8fc730\u5206\u949f\u600e\u4e48\u529e\uff1f",
-                        "\u6211\u5982\u4f55\u67e5\u770b\u5b58\u6b3e\u72b6\u6001\uff1f"
-                    ]
-                }
-            },
-            "usage": {
-                "searchFrequency": 0,
-                "successRate": 0,
-                "lastQueried": null
-            }
-        },
-        {
-            "id": "0045",
-            "question": {
-                "text": "Is there an issue with deposits made in Newtown?",
-                "variations": [
-                    "Newtown deposit problems",
-                    "Issues with Newtown deposits",
-                    "Newtown deposit status"
-                ],
-                "intent": "newtown_deposit_issues",
-                "languages": {
-                    "en": "Is there an issue with deposits made in Newtown?",
-                    "ms": "Adakah terdapat masalah dengan deposit yang dibuat di Newtown?",
-                    "cn": "\u5728Newtown\u8fdb\u884c\u7684\u5b58\u6b3e\u6709\u95ee\u9898\u5417\uff1f"
-                }
-            },
-            "answer": {
-                "short": {
-                    "en": "If you have tried several times and still haven't received your funds, please provide relevant screenshot information, and I would be happy to help you investigate the situation to ensure your funds are safe and secure!",
-                    "ms": "Sistem deposit kami kini beroperasi seperti biasa dengan masa pemprosesan standard 5-30 minit.",
-                    "cn": "\u5982\u679c\u60a8\u5df2\u7ecf\u5c1d\u8bd5\u51e0\u6b21\u8fd8\u662f\u6ca1\u6709\u5230\u8d26\uff0c\u8bf7\u60a8\u63d0\u4f9b\u76f8\u5173\u7684\u622a\u56fe\u4fe1\u606f\uff0c\u6211\u4f1a\u5f88\u4e50\u610f\u5e2e\u60a8\u67e5\u660e\u60c5\u51b5\uff0c\u786e\u4fdd\u60a8\u7684\u8d44\u91d1\u5b89\u5168\u65e0\u5fe7\uff01"
-                },
-                "detailed": {
-                    "en": "Regarding deposits with Newtown, they are usually smooth, and funds typically arrive in your account quickly. If you encounter issues while making a deposit with Newtown, it may be due to the system being temporarily busy or undergoing maintenance. If you have tried several times and still haven't received your funds, please provide relevant screenshot information, and I would be happy to help you investigate the situation to ensure your funds are safe and secure!",
-                    "ms": "Sistem deposit kami kini beroperasi seperti biasa. Biasanya, masa pemprosesan deposit adalah 5 hingga 30 minit. Jika anda mengalami kelewatan, ia mungkin kerana masa pemprosesan sistem rangkaian sedikit dilanjutkan.",
-                    "cn": "\u5173\u4e8eNewtown\u7684\u5b58\u6b3e\uff0c\u901a\u5e38\u60c5\u51b5\u4e0b\u662f\u987a\u5229\u7684\uff0c\u8d44\u91d1\u4f1a\u8fc5\u901f\u5230\u8fbe\u60a8\u7684\u8d26\u6237\u3002\u5982\u679c\u60a8\u5728\u4f7f\u7528Newtown\u8fdb\u884c\u5b58\u6b3e\u65f6\u9047\u5230\u95ee\u9898\uff0c\u53ef\u80fd\u662f\u7cfb\u7edf\u6682\u65f6\u7e41\u5fd9\u6216\u6b63\u5728\u7ef4\u62a4\u3002\u5982\u679c\u60a8\u5df2\u7ecf\u5c1d\u8bd5\u51e0\u6b21\u8fd8\u662f\u6ca1\u6709\u5230\u8d26\uff0c\u8bf7\u60a8\u63d0\u4f9b\u76f8\u5173\u7684\u622a\u56fe\u4fe1\u606f\uff0c\u6211\u4f1a\u5f88\u4e50\u610f\u5e2e\u60a8\u67e5\u660e\u60c5\u51b5\uff0c\u786e\u4fdd\u60a8\u7684\u8d44\u91d1\u5b89\u5168\u65e0\u5fe7\uff01"
-                },
-                "conditions": [
-                    "System operational",
-                    "Network stability",
-                    "Valid deposit attempt"
-                ]
-            },
-            "metadata": {
-                "category": [
-                    "financial",
-                    "deposits",
-                    "system_status"
-                ],
-                "subCategory": "deposit_issues",
-                "difficulty": 2,
-                "confidence": 0.96,
-                "dateCreated": "2024-10-22T12:22:55Z",
-                "lastUpdated": "2024-11-25T09:00:00Z",
-                "version": "1.0",
-                "source": "system_documentation",
-                "status": "active"
-            },
-            "context": {
-                "relatedTopics": [
-                    "deposit_process",
-                    "system_maintenance",
-                    "payment_verification"
-                ],
-                "prerequisites": [],
-                "followUpQuestions": {
-                    "en": [
-                        "How long should I wait before contacting support?",
-                        "Can I make another deposit attempt?"
-                    ],
-                    "ms": [
-                        "Berapa lama saya harus tunggu sebelum menghubungi sokongan?",
-                        "Bolehkah saya membuat percubaan deposit lain?"
-                    ],
-                    "cn": [
-                        "\u6211\u5e94\u8be5\u7b49\u591a\u4e45\u624d\u8054\u7cfb\u5ba2\u670d\uff1f",
-                        "\u6211\u53ef\u4ee5\u5c1d\u8bd5\u518d\u6b21\u5b58\u6b3e\u5417\uff1f"
-                    ]
-                }
-            },
-            "usage": {
-                "searchFrequency": 0,
-                "successRate": 0,
-                "lastQueried": null
-            }
-        },
-        {
-            "id": "0046",
-            "question": {
-                "text": "Why was I only paid 8 RM for a Special bet that should have paid 210 RM?",
-                "variations": [
-                    "Incorrect bet payout",
-                    "Wrong betting payment",
-                    "Special bet payment issue"
-                ],
-                "intent": "incorrect_payout",
-                "languages": {
-                    "en": "What should I do if I suspect that the amount of my betting payment is incorrect?",
-                    "ms": "Mengapa saya hanya dibayar 8 RM untuk pertaruhan Khas yang sepatutnya dibayar 210 RM?",
-                    "cn": "\u6211\u6000\u7591\u6211\u7684\u6295\u6ce8\u652f\u4ed8\u91d1\u989d\u6709\u8bef\u6211\u8be5\u600e\u4e48\u529e\uff1f"
-                }
-            },
-            "answer": {
-                "short": {
-                    "en": "Please contact customer service with your bet details for immediate verification.",
-                    "ms": "Sila hubungi khidmat pelanggan dengan butiran pertaruhan anda untuk pengesahan segera.",
-                    "cn": "\u8bf7\u60a8\u5148\u68c0\u67e5\u4e00\u4e0b\u60a8\u7684\u6295\u6ce8\u5355\u636e\uff0c\u786e\u4fdd\u6295\u6ce8\u7684\u683c\u5f0f\u6b63\u786e\u3002\n\n\u5982\u679c\u786e\u8ba4\u65e0\u8bef\uff0c\u60a8\u53ef\u4ee5\u63d0\u4f9b\u76f8\u5173\u7684\u622a\u56fe\u7ed9\u6211\u4eec\uff0c\u6211\u4eec\u4f1a\u5c3d\u5feb\u5e2e\u60a8\u67e5\u6e05\u695a\u539f\u56e0\u3002"
-                },
-                "detailed": {
-                    "en": "If you believe there's a discrepancy in your payout, please contact our customer service team immediately. Provide your bet ID and transaction details so we can verify the correct payout amount. Our team will investigate and ensure you receive the correct payment if an error occurred.",
-                    "ms": "Jika anda percaya terdapat percanggahan dalam pembayaran anda, sila hubungi pasukan khidmat pelanggan kami dengan segera. Berikan ID pertaruhan dan butiran transaksi anda supaya kami dapat mengesahkan jumlah pembayaran yang betul.",
-                    "cn": "\u6211\u5f88\u62b1\u6b49\u60a8\u9047\u5230\u8fd9\u6837\u7684\u60c5\u51b5\uff01\u5173\u4e8e\u60a8\u53ea\u6536\u52308 RM\u800c\u5e94\u652f\u4ed8210 RM\u7684\u7279\u522b\u6295\u6ce8\uff0c\u8bf7\u60a8\u5148\u68c0\u67e5\u4e00\u4e0b\u60a8\u7684\u6295\u6ce8\u5355\u636e\uff0c\u786e\u4fdd\u6295\u6ce8\u7684\u683c\u5f0f\u6b63\u786e\u3002\n\n\u5982\u679c\u786e\u8ba4\u65e0\u8bef\uff0c\u60a8\u53ef\u4ee5\u63d0\u4f9b\u76f8\u5173\u7684\u622a\u56fe\u7ed9\u6211\u4eec\uff0c\u6211\u4eec\u4f1a\u5c3d\u5feb\u5e2e\u60a8\u67e5\u6e05\u695a\u539f\u56e0\u3002"
-                },
-                "conditions": [
-                    "Valid bet placement",
-                    "Correct bet type",
-                    "Transaction record available"
-                ]
-            },
-            "metadata": {
-                "category": [
-                    "gaming",
-                    "betting",
-                    "payouts"
-                ],
-                "subCategory": "payout_issues",
-                "difficulty": 3,
-                "confidence": 0.95,
-                "dateCreated": "2024-10-22T14:15:00Z",
-                "lastUpdated": "2024-11-25T09:00:00Z",
-                "version": "1.0",
-                "source": "betting_documentation",
-                "status": "active"
-            },
-            "context": {
-                "relatedTopics": [
-                    "betting_rules",
-                    "payout_calculation",
-                    "special_bets"
-                ],
-                "prerequisites": [
-                    "active_account"
-                ],
-                "followUpQuestions": {
-                    "en": [
-                        "How are Special bet payouts calculated?",
-                        "Can I see my betting history?"
-                    ],
-                    "ms": [
-                        "Bagaimana pembayaran pertaruhan Khas dikira?",
-                        "Bolehkah saya melihat sejarah pertaruhan saya?"
-                    ],
-                    "cn": [
-                        "\u7279\u6b8a\u6295\u6ce8\u7684\u8d54\u7387\u662f\u5982\u4f55\u8ba1\u7b97\u7684\uff1f",
-                        "\u6211\u53ef\u4ee5\u67e5\u770b\u6211\u7684\u6295\u6ce8\u5386\u53f2\u5417\uff1f"
-                    ]
-                }
-            },
-            "usage": {
-                "searchFrequency": 0,
-                "successRate": 0,
-                "lastQueried": null
-            }
-        },
-        {
-            "id": "0047",
-            "question": {
-                "text": "What should I do if I can't print a transaction slip?",
-                "variations": [
-                    "Transaction slip printing issue",
-                    "Can't print receipt",
-                    "Transaction receipt problems"
-                ],
-                "intent": "transaction_slip_issue",
-                "languages": {
-                    "en": "What should I do if I can't print a transaction slip?",
-                    "ms": "Apa yang perlu saya lakukan jika saya tidak dapat mencetak slip transaksi?",
-                    "cn": "\u5982\u679c\u6211\u65e0\u6cd5\u6253\u5370\u4ea4\u6613\u5355\u636e\u8be5\u600e\u4e48\u529e\uff1f"
-                }
-            },
-            "answer": {
-                "short": {
-                    "en": "Take a screenshot of your transaction history or bank record as proof.",
-                    "ms": "Ambil tangkapan skrin sejarah transaksi atau rekod bank sebagai bukti.",
-                    "cn": "\u60a8\u53ef\u4ee5\u622a\u53d6\u4ea4\u6613\u5386\u53f2\u8bb0\u5f55\u6216\u94f6\u884c\u8bb0\u5f55\u7684\u622a\u56fe\u3002"
-                },
-                "detailed": {
-                    "en": "If you cannot print the transaction slip, you can take a screenshot of your transaction history or bank record. Access your bank's transaction records, find the corresponding transaction, and capture a screenshot of the document. This can serve as proof of your transaction.",
-                    "ms": "Jika anda tidak dapat mencetak slip transaksi, anda boleh mengambil tangkapan skrin sejarah transaksi atau rekod bank anda. Akses rekod transaksi bank anda, cari transaksi yang berkenaan, dan ambil tangkapan skrin dokumen tersebut.",
-                    "cn": "\u5982\u679c\u60a8\u65e0\u6cd5\u622a\u53d6\u94f6\u884c\u5e94\u7528\u7a0b\u5e8f\u7684\u622a\u56fe\u8fdb\u884c\u5b58\u6b3e\uff0c\u4e0d\u7528\u62c5\u5fc3\uff01\u60a8\u53ef\u4ee5\u5c1d\u8bd5\u91cd\u65b0\u767b\u5f55\u60a8\u7684\u94f6\u884c\u5e94\u7528\uff0c\u67e5\u770b\u5386\u53f2\u4ea4\u6613\u8bb0\u5f55\uff0c\u627e\u5230\u76f8\u5e94\u7684\u5b58\u6b3e\u5355\u636e\uff0c\u5e76\u5728\u90a3\u4e2a\u9875\u9762\u8fdb\u884c\u622a\u56fe\u3002"
-                },
-                "conditions": [
-                    "Valid transaction",
-                    "Bank app access",
-                    "Transaction history available"
-                ]
-            },
-            "metadata": {
-                "category": [
-                    "technical_support",
-                    "transactions",
-                    "documentation"
-                ],
-                "subCategory": "transaction_proof",
-                "difficulty": 2,
-                "confidence": 0.95,
-                "dateCreated": "2024-10-22T14:30:00Z",
-                "lastUpdated": "2024-11-25T09:00:00Z",
-                "version": "1.0",
-                "source": "support_documentation",
-                "status": "active"
-            },
-            "context": {
-                "relatedTopics": [
-                    "transaction_verification",
-                    "documentation_requirements",
-                    "technical_support"
-                ],
-                "prerequisites": [],
-                "followUpQuestions": {
-                    "en": [
-                        "How do I access my transaction history?",
-                        "What other proof of transaction is accepted?"
-                    ],
-                    "ms": [
-                        "Bagaimana saya mengakses sejarah transaksi saya?",
-                        "Apakah bukti transaksi lain yang diterima?"
-                    ],
-                    "cn": [
-                        "\u5982\u4f55\u8fdb\u5165\u6211\u7684\u4ea4\u6613\u5386\u53f2\u8bb0\u5f55\uff1f",
-                        "\u8fd8\u63a5\u53d7\u4ec0\u4e48\u5176\u4ed6\u4ea4\u6613\u8bc1\u660e\uff1f"
-                    ]
-                }
-            },
-            "usage": {
-                "searchFrequency": 0,
-                "successRate": 0,
-                "lastQueried": null
-            }
-        },
-        {
-            "id": "0048",
-            "question": {
-                "text": "What's the commission rate for referring new members?",
-                "variations": [
-                    "Referral commission percentage",
-                    "New member referral rewards",
-                    "Member referral rates"
-                ],
-                "intent": "referral_commission",
-                "languages": {
-                    "en": "What's the commission rate for referring new members?",
-                    "ms": "Berapakah kadar komisen untuk merujuk ahli baru?",
-                    "cn": "\u63a8\u8350\u65b0\u4f1a\u5458\u7684\u4f63\u91d1\u6bd4\u4f8b\u662f\u591a\u5c11\uff1f"
-                }
-            },
-            "answer": {
-                "short": {
-                    "en": "The commission rate for referring new members is 3% of the total investment amount of that member in 4D! Additionally, you can earn extra VIP points; the more referrals you make, the more you earn!",
-                    "ms": "Terima mata bonus untuk setiap rakan yang dirujuk yang mendaftar dan membuat deposit pertama mereka.",
-                    "cn": "\u63a8\u8350\u65b0\u4f1a\u5458\u7684\u4f63\u91d1\u7387\u4e3a\u8be5\u4f1a\u54584D\u603b\u6295\u8d44\u989d\u76843%\uff01\u800c\u4e14\u60a8\u8fd8\u53ef\u4ee5\u83b7\u5f97\u989d\u5916\u7684VIP\u79ef\u5206\uff0c\u63a8\u8350\u8d8a\u591a\uff0c\u8d5a\u5f97\u8d8a\u591a\uff01"
-                },
-                "detailed": {
-                    "en": "The commission rate for referring new members is 3% of that member's total investment amount in 4D! Additionally, you can earn extra VIP points; the more referrals you make, the more you earn! To learn more details, please visit the VIP benefits section in the app.",
-                    "ms": "Apabila anda merujuk ahli baru, anda akan menerima mata VIP untuk setiap rujukan yang berjaya. Pemain baru mendapat 20 mata VIP apabila menyertai, dan anda akan menerima bonus apabila mereka membuat deposit pertama.",
-                    "cn": "\u63a8\u8350\u65b0\u4f1a\u5458\u7684\u4f63\u91d1\u7387\u4e3a\u8be5\u4f1a\u54584D\u603b\u6295\u8d44\u989d\u76843%\uff01\u800c\u4e14\u60a8\u8fd8\u53ef\u4ee5\u83b7\u5f97\u989d\u5916\u7684VIP\u79ef\u5206\uff0c\u63a8\u8350\u8d8a\u591a\uff0c\u8d5a\u5f97\u8d8a\u591a\uff01\u60f3\u4e86\u89e3\u66f4\u591a\u8be6\u60c5\uff0c\u8bf7\u8bbf\u95ee\u5e94\u7528\u7a0b\u5e8f\u91cc\u7684VIP\u798f\u5229\u90e8\u5206\u3002"
-                },
-                "conditions": [
-                    "Valid referral",
-                    "First deposit made",
-                    "Active account"
-                ]
-            },
-            "metadata": {
-                "category": [
-                    "referral_program",
-                    "rewards",
-                    "promotions"
-                ],
-                "subCategory": "referral_rewards",
-                "difficulty": 2,
-                "confidence": 0.96,
-                "dateCreated": "2024-10-22T14:35:00Z",
-                "lastUpdated": "2024-11-25T09:00:00Z",
-                "version": "1.0",
-                "source": "promotion_documentation",
-                "status": "active"
-            },
-            "context": {
-                "relatedTopics": [
-                    "vip_benefits",
-                    "reward_points",
-                    "promotion_rules"
-                ],
-                "prerequisites": [
-                    "active_account"
-                ],
-                "followUpQuestions": {
-                    "en": [
-                        "How do I refer a friend?",
-                        "When will I receive my referral bonus?"
-                    ],
-                    "ms": [
-                        "Bagaimana saya merujuk rakan?",
-                        "Bilakah saya akan menerima bonus rujukan saya?"
-                    ],
-                    "cn": [
-                        "\u5982\u4f55\u63a8\u8350\u670b\u53cb\uff1f",
-                        "\u6211\u4ec0\u4e48\u65f6\u5019\u80fd\u6536\u5230\u63a8\u8350\u5956\u52b1\uff1f"
-                    ]
-                }
-            },
-            "usage": {
-                "searchFrequency": 0,
-                "successRate": 0,
-                "lastQueried": null
-            }
-        },
-        {
-            "id": "0049",
-            "question": {
-                "text": "Can I make withdrawals from live casino games like Ocean King?",
-                "variations": [
-                    "Ocean King game withdrawals",
-                    "Live casino withdrawal process",
-                    "Withdrawing from live games"
-                ],
-                "intent": "live_casino_withdrawal",
-                "languages": {
-                    "en": "Can I make withdrawals from live casino games like Ocean King?",
-                    "ms": "Bolehkah saya membuat pengeluaran dari permainan kasino langsung seperti Ocean King?",
-                    "cn": "\u6211\u53ef\u4ee5\u4ece\u6d77\u738b\u7b49\u771f\u4eba\u5a31\u4e50\u573a\u6e38\u620f\u4e2d\u63d0\u6b3e\u5417\uff1f"
-                }
-            },
-            "answer": {
-                "short": {
-                    "en": "Simply exit the Ocean King live casino game, and your funds will be automatically returned to your JOKER wallet without any additional actions required.",
-                    "ms": "Ya, pengeluaran dari permainan kasino langsung diproses dalam masa 5-30 minit selepas permainan tamat.",
-                    "cn": "\u53ea\u9700\u9000\u51faOcean King\u771f\u4eba\u5a31\u4e50\u573a\u6e38\u620f\uff0c\u60a8\u7684\u8d44\u91d1\u4f1a\u81ea\u52a8\u9000\u56de\u5230\u60a8\u7684JOKER\u94b1\u5305\u4e2d\uff0c\u65e0\u9700\u4efb\u4f55\u989d\u5916\u64cd\u4f5c\u3002"
-                },
-                "detailed": {
-                    "en": "Of course! Simply exit the Ocean King live casino game, and your funds will be automatically returned to your JOKER wallet without any additional actions required.",
-                    "ms": "Ya, anda boleh membuat pengeluaran dari permainan kasino langsung termasuk Ocean King. Masa pemprosesan pengeluaran biasanya adalah 5 hingga 30 minit. Pasukan perkhidmatan pelanggan kami akan menyemak permintaan anda dalam tempoh ini.",
-                    "cn": "\u662f\u5f53\u7136\u53ef\u4ee5\uff01\u53ea\u9700\u9000\u51faOcean King\u771f\u4eba\u5a31\u4e50\u573a\u6e38\u620f\uff0c\u60a8\u7684\u8d44\u91d1\u4f1a\u81ea\u52a8\u9000\u56de\u5230\u60a8\u7684JOKER\u94b1\u5305\u4e2d\uff0c\u65e0\u9700\u4efb\u4f55\u989d\u5916\u64cd\u4f5c\u3002"
-                },
-                "conditions": [
-                    "Completed game session",
-                    "Valid withdrawal amount",
-                    "Account verification"
-                ]
-            },
-            "metadata": {
-                "category": [
-                    "gaming",
-                    "withdrawals",
-                    "live_casino"
-                ],
-                "subCategory": "game_withdrawals",
-                "difficulty": 2,
-                "confidence": 0.97,
-                "dateCreated": "2024-10-22T14:40:00Z",
-                "lastUpdated": "2024-11-25T09:00:00Z",
-                "version": "1.0",
-                "source": "gaming_documentation",
-                "status": "active"
-            },
-            "context": {
-                "relatedTopics": [
-                    "withdrawal_process",
-                    "live_casino_games",
-                    "payment_methods"
-                ],
-                "prerequisites": [
-                    "active_account"
-                ],
-                "followUpQuestions": {
-                    "en": [
-                        "What's the minimum withdrawal amount?",
-                        "How do I check my withdrawal status?"
-                    ],
-                    "ms": [
-                        "Berapakah jumlah pengeluaran minimum?",
-                        "Bagaimana saya memeriksa status pengeluaran saya?"
-                    ],
-                    "cn": [
-                        "\u6700\u4f4e\u63d0\u6b3e\u91d1\u989d\u662f\u591a\u5c11\uff1f",
-                        "\u5982\u4f55\u67e5\u770b\u63d0\u6b3e\u72b6\u6001\uff1f"
-                    ]
-                }
-            },
-            "usage": {
-                "searchFrequency": 0,
-                "successRate": 0,
-                "lastQueried": null
-            }
-        },
-        {
-            "id": "0050",
-            "question": {
-                "text": "How can I check my betting history for the past week?",
-                "variations": [
-                    "View past week's bets",
-                    "Recent betting history",
-                    "Last week's betting record"
-                ],
-                "intent": "betting_history_check",
-                "languages": {
-                    "en": "How can I check my betting history for the past week?",
-                    "ms": "Bagaimana saya boleh memeriksa sejarah pertaruhan saya untuk minggu lepas?",
-                    "cn": "\u5982\u4f55\u67e5\u770b\u8fc7\u53bb\u4e00\u5468\u7684\u6295\u6ce8\u8bb0\u5f55\uff1f"
-                }
-            },
-            "answer": {
-                "short": {
-                    "en": "Access transaction records through the wallet icon to view your betting history.",
-                    "ms": "Akses rekod transaksi melalui ikon dompet untuk melihat sejarah pertaruhan anda.",
-                    "cn": "\u8bf7\u767b\u5f55\u60a8\u7684\u8d26\u6237\u5e76\u70b9\u51fb\u94b1\u5305\u56fe\u6807\u3002\u8fdb\u5165\u4ea4\u6613\u8bb0\u5f55\u90e8\u5206\uff0c\u60a8\u53ef\u4ee5\u67e5\u770b\u6240\u6709\u6295\u6ce8\u6d3b\u52a8\u3002"
-                },
-                "detailed": {
-                    "en": "To check your betting history, log into your account and click the wallet icon. Enter the transaction records section where you can view all your betting activities. You can filter the records to see your bets from the past week.",
-                    "ms": "Untuk memeriksa sejarah pertaruhan anda, log masuk ke akaun anda dan klik ikon dompet. Masuk ke bahagian rekod transaksi di mana anda boleh melihat semua aktiviti pertaruhan anda.",
-                    "cn": "\u8981\u67e5\u770b\u60a8\u7684\u6295\u6ce8\u5386\u53f2\uff0c\u8bf7\u767b\u5f55\u60a8\u7684\u8d26\u6237\u5e76\u70b9\u51fb\u94b1\u5305\u56fe\u6807\u3002\u8fdb\u5165\u4ea4\u6613\u8bb0\u5f55\u90e8\u5206\uff0c\u60a8\u53ef\u4ee5\u67e5\u770b\u6240\u6709\u6295\u6ce8\u6d3b\u52a8\u3002\u60a8\u53ef\u4ee5\u7b5b\u9009\u8bb0\u5f55\u4ee5\u67e5\u770b\u8fc7\u53bb\u4e00\u5468\u7684\u6295\u6ce8\u3002"
-                },
-                "conditions": [
-                    "Active account",
-                    "Transaction history available",
-                    "Recent betting activity"
-                ]
-            },
-            "metadata": {
-                "category": [
-                    "account_management",
-                    "betting",
-                    "history"
-                ],
-                "subCategory": "transaction_history",
-                "difficulty": 2,
-                "confidence": 0.95,
-                "dateCreated": "2024-10-24T15:47:00Z",
-                "lastUpdated": "2024-11-25T09:00:00Z",
-                "version": "1.0",
-                "source": "account_documentation",
-                "status": "active"
-            },
-            "context": {
-                "relatedTopics": [
-                    "transaction_history",
-                    "betting_records",
-                    "account_activity"
-                ],
-                "prerequisites": [
-                    "active_account"
-                ],
-                "followUpQuestions": {
-                    "en": [
-                        "How long are betting records kept?",
-                        "Can I download my betting history?"
-                    ],
-                    "ms": [
-                        "Berapa lama rekod pertaruhan disimpan?",
-                        "Bolehkah saya memuat turun sejarah pertaruhan saya?"
-                    ],
-                    "cn": [
-                        "\u6295\u6ce8\u8bb0\u5f55\u4fdd\u5b58\u591a\u4e45\uff1f",
-                        "\u6211\u53ef\u4ee5\u4e0b\u8f7d\u6295\u6ce8\u5386\u53f2\u8bb0\u5f55\u5417\uff1f"
-                    ]
-                }
-            },
-            "usage": {
-                "searchFrequency": 0,
-                "successRate": 0,
-                "lastQueried": null
-            }
-        },
-        {
-            "id": "0099",
-            "question": {
-                "text": "What are the 4D Lottery drawtimes for different Lottery companies today?",
-                "variations": [
-                    "Lottery 4D times today",
-                    "Recovery/4d times for lotteries",
-                    "Today's lottery schedules"
-                ],
-                "intent": "lottery_schedules",
-                "languages": {
-                    "en": "What is the latest purchase time for 4D and different lotteries today?",
-                    "ms": "Apakah masa pemulihan berhenti untuk loteri berbeza hari ini?",
-                    "cn": "\u4eca\u5929\u4e0d\u540c\u5f69\u7968\u7684\u5f00\u5956\u65f6\u95f4\u662f\u4ec0\u4e48\u65f6\u5019\uff1f"
-                }
-            },
-            "answer": {
-                "short": {
-                    "en": "MKT: 07:00 PM, Singapore: 06:00 PM, CBD: 06:35 PM, GDLOTTO: 07:00 PM, 9LOTTO: 07:25 PM",
-                    "ms": "MKT: 07:00 PM, Singapura: 06:00 PM, CBD: 06:35 PM, GDLOTTO: 07:00 PM, 9LOTTO: 07:25 PM",
-                    "cn": "\u4ee5\u4e0b\u662f\u5404\u4e2a\u516c\u53f8\u7684\u5f00\u5956\u65f6\u95f4\uff1a\n\n\t\u2022\tMagnum: 7:00 PM\n\t\u2022\tKuda: 7:00 PM\n\t\u2022\tToto: 7:00 PM\n\t\u2022\tSingapore: 6:00 PM\n\t\u2022\tCBD: 6:35 PM\n\t\u2022\tGDLOTTO: 7:00 PM\n\t\u2022\t9Lotto: 7:25 PM\n\n\u8bf7\u786e\u4fdd\u5728\u622a\u6b62\u65f6\u95f4\u4e4b\u524d\u8d2d\u4e70\uff0c\u4ee5\u514d\u9519\u8fc7\u673a\u4f1a\uff01"
-                },
-                "detailed": {
-                    "en": "The 4D times for different lotteries today are as follows: MKT: 07:00 PM, Singapore: 06:00 PM, CBD: 06:35 PM, GDLOTTO: 07:00 PM, 9LOTTO: 07:25 PM. Please place your bets in advance according to the type of lottery you want to buy.",
-                    "ms": "Masa pemulihan berhenti untuk loteri berbeza hari ini adalah seperti berikut: MKT: 07:00 PM, Singapura: 06:00 PM, CBD: 06:35 PM, GDLOTTO: 07:00 PM, 9LOTTO: 07:25 PM. Sila letakkan pertaruhan anda lebih awal mengikut jenis loteri yang anda ingin beli.",
-                    "cn": "\u5f69\u7968\u7684\u5f00\u5956\u65f6\u95f4\u53d6\u51b3\u4e8e\u5404\u4e2a\u5f69\u7968\u516c\u53f8\u3002\u4ee5\u4e0b\u662f\u5404\u4e2a\u516c\u53f8\u7684\u5f00\u5956\u65f6\u95f4\uff1a\n\n\t\u2022\tMagnum: 7:00 PM\n\t\u2022\tKuda: 7:00 PM\n\t\u2022\tToto: 7:00 PM\n\t\u2022\tSingapore: 6:00 PM\n\t\u2022\tCBD: 6:35 PM\n\t\u2022\tGDLOTTO: 7:00 PM\n\t\u2022\t9Lotto: 7:25 PM\n\n\u8bf7\u786e\u4fdd\u5728\u622a\u6b62\u65f6\u95f4\u4e4b\u524d\u8d2d\u4e70\uff0c\u4ee5\u514d\u9519\u8fc7\u673a\u4f1a\uff01"
-                },
-                "conditions": [
-                    "Times subject to change",
-                    "Different timezone adjustments",
-                    "System availability"
-                ]
-            },
-            "metadata": {
-                "category": [
-                    "gaming",
-                    "lottery",
-                    "schedules",
-                    "4D"
-                ],
-                "subCategory": "lottery_timing",
-                "difficulty": 2,
-                "confidence": 0.96,
-                "dateCreated": "2024-10-24T15:43:00Z",
-                "lastUpdated": "2024-11-27T09:00:00Z",
-                "version": "1.0",
-                "source": "lottery_documentation",
-                "status": "active"
-            },
-            "context": {
-                "relatedTopics": [
-                    "lottery_rules",
-                    "betting_deadlines",
-                    "game_schedules"
-                ],
-                "prerequisites": [],
-                "followUpQuestions": {
-                    "en": [
-                        "How do I place a bet?",
-                        "What happens if I miss the deadline?"
-                    ],
-                    "ms": [
-                        "Bagaimana saya membuat pertaruhan?",
-                        "Apa yang berlaku jika saya terlepas tarikh akhir?"
-                    ],
-                    "cn": [
-                        "\u5982\u4f55\u4e0b\u6ce8\uff1f",
-                        "\u5982\u679c\u9519\u8fc7\u622a\u6b62\u65f6\u95f4\u4f1a\u600e\u6837\uff1f"
-                    ]
-                }
-            },
-            "usage": {
-                "searchFrequency": 0,
-                "successRate": 0,
-                "lastQueried": null
-            }
+        "usage": {
+            "searchFrequency": 0,
+            "successRate": 0,
+            "lastQueried": null
         }
-    ]
+    },
+    {
+        "id": "0039",
+        "question": {
+            "text": "How can I set a daily betting limit on my account?",
+            "variations": [
+                "Set betting limits",
+                "Daily gambling limit",
+                "Restrict betting amount"
+            ],
+            "intent": "set_betting_limits",
+            "languages": {
+                "en": "How can I set a daily betting limit on my account?",
+                "ms": "Bagaimana saya boleh menetapkan had pertaruhan harian pada akaun saya?",
+                "cn": "\u5982\u4f55\u5728\u6211\u7684\u8d26\u6237\u4e0a\u8bbe\u7f6e\u6bcf\u65e5\u6295\u6ce8\u9650\u989d\uff1f"
+            }
+        },
+        "answer": {
+            "short": {
+                "en": "Go to Responsible Gaming section in account settings to set daily, weekly, or monthly betting limits.",
+                "ms": "Pergi ke bahagian Perjudian Bertanggungjawab dalam tetapan akaun untuk menetapkan had pertaruhan harian, mingguan, atau bulanan.",
+                "cn": "\u76ee\u524d\u6211\u4eec\u5e73\u53f0\u4e0a\u8fd8\u6ca1\u6709\u63d0\u4f9b\u8bbe\u7f6e\u6295\u6ce8\u9650\u989d\u7684\u529f\u80fd\u3002"
+            },
+            "detailed": {
+                "en": "To set a daily betting limit, go to your account settings and look for the 'Responsible Gaming' section. Here, you can set daily, weekly, or monthly limits on your bets. Once set, you won't be able to exceed these limits until the time period resets. This feature helps you manage your gaming activity responsibly.",
+                "ms": "Untuk menetapkan had pertaruhan harian, pergi ke tetapan akaun anda dan cari bahagian 'Perjudian Bertanggungjawab'. Di sini, anda boleh menetapkan had harian, mingguan, atau bulanan pada pertaruhan anda. Setelah ditetapkan, anda tidak akan dapat melebihi had ini sehingga tempoh masa ditetapkan semula. Ciri ini membantu anda mengurus aktiviti permainan anda secara bertanggungjawab.",
+                "cn": "\u76ee\u524d\u6211\u4eec\u5e73\u53f0\u4e0a\u8fd8\u6ca1\u6709\u63d0\u4f9b\u8bbe\u7f6e\u6295\u6ce8\u9650\u989d\u7684\u529f\u80fd\u3002\u4e0d\u8fc7\uff0c\u60a8\u53ef\u4ee5\u901a\u8fc7\u63a7\u5236\u5b58\u6b3e\u91d1\u989d\u6765\u6709\u6548\u7ba1\u7406\u81ea\u5df1\u7684\u652f\u51fa\uff0c\u5efa\u8bae\u60a8\u4ece\u5c0f\u989d\u5f00\u59cb\u6295\u6ce8\uff0c\u8fd9\u6837\u53ef\u4ee5\u66f4\u597d\u5730\u638c\u63a7\u6e38\u620f\u7684\u4e50\u8da3\u3002"
+            },
+            "conditions": [
+                "Active account",
+                "Account settings access",
+                "Responsible gaming enabled"
+            ]
+        },
+        "metadata": {
+            "category": [
+                "responsible_gaming",
+                "account_settings",
+                "player_protection"
+            ],
+            "subCategory": "betting_limits",
+            "difficulty": 2,
+            "confidence": 0.97,
+            "dateCreated": "2024-10-24T15:32:00Z",
+            "lastUpdated": "2024-11-25T09:00:00Z",
+            "version": "1.0",
+            "source": "responsible_gaming_documentation",
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [
+                "responsible_gaming",
+                "account_limits",
+                "player_protection"
+            ],
+            "prerequisites": [
+                "active_account"
+            ],
+            "followUpQuestions": {
+                "en": [
+                    "Can I change my betting limits?",
+                    "What other responsible gaming tools are available?"
+                ],
+                "ms": [
+                    "Bolehkah saya mengubah had pertaruhan saya?",
+                    "Apakah alat perjudian bertanggungjawab lain yang tersedia?"
+                ],
+                "cn": [
+                    "\u6211\u53ef\u4ee5\u66f4\u6539\u6295\u6ce8\u9650\u989d\u5417\uff1f",
+                    "\u8fd8\u6709\u4ec0\u4e48\u5176\u4ed6\u6e38\u620f\u9053\u5177\u53ef\u4ee5\u7528\uff1f"
+                ]
+            }
+        },
+        "usage": {
+            "searchFrequency": 0,
+            "successRate": 0,
+            "lastQueried": null
+        }
+    },
+    {
+        "id": "0040",
+        "question": {
+            "text": "Are there any bonuses for referring friends to the platform?",
+            "variations": [
+                "Friend referral rewards",
+                "Referral program benefits",
+                "Bonus for inviting friends"
+            ],
+            "intent": "referral_bonus_inquiry",
+            "languages": {
+                "en": "Are there any bonuses for referring friends to the platform?",
+                "ms": "Adakah terdapat bonus untuk merujuk rakan ke platform ini?",
+                "cn": "\u63a8\u8350\u670b\u53cb\u52a0\u5165\u5e73\u53f0\u6709\u5956\u52b1\u5417\uff1f"
+            }
+        },
+        "answer": {
+            "short": {
+                "en": "Yes, receive a bonus when referred friends sign up and make their first deposit.",
+                "ms": "Ya, terima bonus apabila rakan yang dirujuk mendaftar dan membuat deposit pertama mereka.",
+                "cn": "\u662f\u7684\uff0c\u5f53\u88ab\u63a8\u8350\u7684\u670b\u53cb\u6ce8\u518c\u5e76\u9996\u6b21\u5b58\u6b3e\u65f6\u53ef\u83b7\u5f97\u5956\u52b1\u3002"
+            },
+            "detailed": {
+                "en": "Yes, we offer a referral bonus program! When you refer a friend, and they sign up and make their first deposit, you'll receive a bonus. The exact amount varies, but it's typically a percentage of their first deposit. Check the 'Promotions' section in your account for current referral bonus details.",
+                "ms": "Ya, kami menawarkan program bonus rujukan! Apabila anda merujuk rakan, dan mereka mendaftar dan membuat deposit pertama mereka, anda akan menerima bonus. Jumlah sebenar berbeza-beza, tetapi biasanya peratusan daripada deposit pertama mereka. Semak bahagian 'Promosi' dalam akaun anda untuk butiran bonus rujukan semasa.",
+                "cn": "\u63a8\u8350\u65b0\u4f1a\u5458\u7684\u4f63\u91d1\u7387\u4e3a\u8be5\u4f1a\u54584D\u603b\u6295\u8d44\u989d\u76843%\uff01\u800c\u4e14\u60a8\u8fd8\u53ef\u4ee5\u83b7\u5f97\u989d\u5916\u7684VIP\u79ef\u5206\uff0c\u63a8\u8350\u8d8a\u591a\uff0c\u8d5a\u5f97\u8d8a\u591a\uff01\u60f3\u4e86\u89e3\u66f4\u591a\u8be6\u60c5\uff0c\u8bf7\u8bbf\u95ee\u5e94\u7528\u7a0b\u5e8f\u91cc\u7684VIP\u798f\u5229\u90e8\u5206\u3002"
+            },
+            "conditions": [
+                "Active account",
+                "Valid referral",
+                "First deposit made"
+            ]
+        },
+        "metadata": {
+            "category": [
+                "promotions",
+                "referral_program",
+                "rewards"
+            ],
+            "subCategory": "referral_bonus",
+            "difficulty": 2,
+            "confidence": 0.96,
+            "dateCreated": "2024-10-24T15:33:00Z",
+            "lastUpdated": "2024-11-25T09:00:00Z",
+            "version": "1.0",
+            "source": "promotion_documentation",
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [
+                "promotions",
+                "bonus_terms",
+                "referral_program"
+            ],
+            "prerequisites": [
+                "active_account"
+            ],
+            "followUpQuestions": {
+                "en": [
+                    "How many friends can I refer?",
+                    "When will I receive my referral bonus?"
+                ],
+                "ms": [
+                    "Berapa ramai rakan yang boleh saya rujuk?",
+                    "Bilakah saya akan menerima bonus rujukan saya?"
+                ],
+                "cn": [
+                    "\u6211\u53ef\u4ee5\u63a8\u8350\u591a\u5c11\u4e2a\u670b\u53cb\uff1f",
+                    "\u6211\u4ec0\u4e48\u65f6\u5019\u80fd\u6536\u5230\u63a8\u8350\u5956\u52b1\uff1f"
+                ]
+            }
+        },
+        "usage": {
+            "searchFrequency": 0,
+            "successRate": 0,
+            "lastQueried": null
+        }
+    },
+    {
+        "id": "0041",
+        "question": {
+            "text": "What should I do if I get disconnected during a game?",
+            "variations": [
+                "Game disconnection issue",
+                "Lost connection while playing",
+                "Game connection problems"
+            ],
+            "intent": "game_disconnection_help",
+            "languages": {
+                "en": "What should I do if I get disconnected during a game?",
+                "ms": "Apa yang perlu saya lakukan jika terputus sambungan semasa permainan?",
+                "cn": "\u5982\u679c\u5728\u6e38\u620f\u8fc7\u7a0b\u4e2d\u65ad\u5f00\u8fde\u63a5\u8be5\u600e\u4e48\u529e\uff1f"
+            }
+        },
+        "answer": {
+            "short": {
+                "en": "Reconnect to network, log in again, and your game progress will be restored.",
+                "ms": "Sambung semula ke rangkaian, log masuk semula, dan kemajuan permainan anda akan dipulihkan.",
+                "cn": "\u91cd\u65b0\u8fde\u63a5\u7f51\u7edc\uff0c\u91cd\u65b0\u767b\u5f55\uff0c\u60a8\u7684\u6e38\u620f\u8fdb\u5ea6\u5c06\u4f1a\u6062\u590d\u3002"
+            },
+            "detailed": {
+                "en": "If you get disconnected during a game, follow these steps: 1. Try to reconnect to the network to ensure your network connection is stable. 2. Log in to the game again. In most cases, the system will automatically restore your game progress. 3. If the problem persists, contact online customer service. We will check and ensure your gaming experience will not be affected.",
+                "ms": "Jika anda terputus sambungan semasa permainan, ikuti langkah-langkah ini: 1. Cuba sambung semula ke rangkaian untuk memastikan sambungan rangkaian anda stabil. 2. Log masuk semula ke permainan. Dalam kebanyakan kes, sistem akan memulihkan kemajuan permainan anda secara automatik. 3. Jika masalah berterusan, hubungi khidmat pelanggan dalam talian. Kami akan memeriksa dan memastikan pengalaman permainan anda tidak terjejas.",
+                "cn": "\u4eb2\u7231\u7684\u73a9\u5bb6\uff0c\u5982\u679c\u60a8\u5728\u6e38\u620f\u8fc7\u7a0b\u4e2d\u65ad\u7ebf\uff0c\u5efa\u8bae\u60a8\u6309\u7167\u4ee5\u4e0b\u6b65\u9aa4\u64cd\u4f5c\uff1a\u5c1d\u8bd5\u91cd\u65b0\u8fde\u63a5\u7f51\u7edc\uff0c\u786e\u4fdd\u60a8\u7684\u7f51\u7edc\u8fde\u63a5\u7a33\u5b9a\u3002\u91cd\u65b0\u767b\u5f55\u6e38\u620f\uff0c\u5927\u591a\u6570\u60c5\u51b5\u4e0b\uff0c\u7cfb\u7edf\u4f1a\u81ea\u52a8\u6062\u590d\u60a8\u7684\u6e38\u620f\u8fdb\u5ea6\u3002\u5982\u679c\u95ee\u9898\u4ecd\u7136\u5b58\u5728\uff0c\u60a8\u53ef\u4ee5\u8054\u7cfb\u5728\u7ebf\u5ba2\u670d\uff0c\u6211\u4eec\u5c06\u4e3a\u60a8\u68c0\u67e5\u5e76\u786e\u4fdd\u60a8\u7684\u6e38\u620f\u4f53\u9a8c\u4e0d\u4f1a\u53d7\u5230\u5f71\u54cd\u3002\u611f\u8c22\u60a8\u7684\u7406\u89e3\u4e0e\u652f\u6301\uff01\u5982\u6709\u5176\u4ed6\u95ee\u9898\uff0c\u6211\u4eec\u968f\u65f6\u4e3a\u60a8\u63d0\u4f9b\u5e2e\u52a9\u3002\u795d\u60a8\u6e38\u620f\u6109\u5feb\uff01"
+            },
+            "conditions": [
+                "Internet connection",
+                "Valid account login",
+                "Recent game session"
+            ]
+        },
+        "metadata": {
+            "category": [
+                "technical_support",
+                "gaming",
+                "connectivity"
+            ],
+            "subCategory": "game_issues",
+            "difficulty": 2,
+            "confidence": 0.97,
+            "dateCreated": "2024-10-24T15:39:00Z",
+            "lastUpdated": "2024-11-25T09:00:00Z",
+            "version": "1.0",
+            "source": "technical_documentation",
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [
+                "network_issues",
+                "game_recovery",
+                "technical_support"
+            ],
+            "prerequisites": [
+                "active_account"
+            ],
+            "followUpQuestions": {
+                "en": [
+                    "Will I lose my game progress?",
+                    "How do I contact customer service?"
+                ],
+                "ms": [
+                    "Adakah saya akan kehilangan kemajuan permainan saya?",
+                    "Bagaimana saya boleh menghubungi khidmat pelanggan?"
+                ],
+                "cn": [
+                    "\u6211\u4f1a\u5931\u53bb\u6e38\u620f\u8fdb\u5ea6\u5417\uff1f",
+                    "\u5982\u4f55\u8054\u7cfb\u5ba2\u670d\uff1f"
+                ]
+            }
+        },
+        "usage": {
+            "searchFrequency": 0,
+            "successRate": 0,
+            "lastQueried": null
+        }
+    },
+    {
+        "id": "0042",
+        "question": {
+            "text": "Why do I have to wait 5 minutes between transactions?",
+            "variations": [
+                "Transaction wait time",
+                "5-minute transaction delay",
+                "Time between transactions"
+            ],
+            "intent": "transaction_delay_explanation",
+            "languages": {
+                "en": "Why do I have to wait 5 minutes between transactions?",
+                "ms": "Mengapa saya perlu menunggu 5 minit antara transaksi?",
+                "cn": "\u4e3a\u4ec0\u4e48\u6211\u9700\u8981\u5728\u4ea4\u6613\u4e4b\u95f4\u7b49\u5f855\u5206\u949f\uff1f"
+            }
+        },
+        "answer": {
+            "short": {
+                "en": "The 5-minute wait is a security measure to prevent frequent trading and protect your account.",
+                "ms": "Tempoh menunggu 5 minit adalah langkah keselamatan untuk mencegah perdagangan kerap dan melindungi akaun anda.",
+                "cn": "5\u5206\u949f\u7b49\u5f85\u65f6\u95f4\u662f\u4e00\u9879\u5b89\u5168\u63aa\u65bd\uff0c\u7528\u4e8e\u9632\u6b62\u9891\u7e41\u4ea4\u6613\u5e76\u4fdd\u62a4\u60a8\u7684\u8d26\u6237\u3002"
+            },
+            "detailed": {
+                "en": "The system requires you to wait for 5 minutes between transactions, usually because you have conducted many identical or similar transactions in a short period of time. To ensure the security of the account and prevent any potential abnormal operation, the system temporarily restricts frequent trading requests.",
+                "ms": "Sistem memerlukan anda menunggu selama 5 minit antara transaksi, biasanya kerana anda telah melakukan banyak transaksi yang sama atau serupa dalam tempoh masa yang singkat. Untuk memastikan keselamatan akaun dan mencegah sebarang operasi tidak normal yang mungkin berlaku, sistem menyekat sementara permintaan perdagangan yang kerap.",
+                "cn": "\u5982\u679c\u7cfb\u7edf\u8981\u6c42\u60a8\u7b49\u5f855\u5206\u949f\u8fdb\u884c\u4ea4\u6613\uff0c\u901a\u5e38\u662f\u56e0\u4e3a\u60a8\u8fdb\u884c\u4e86\u9ad8\u9891\u7387\u7684\u76f8\u540c\u4ea4\u6613\u3002\u4e3a\u4e86\u4fdd\u969c\u6240\u6709\u73a9\u5bb6\u7684\u4ea4\u6613\u5b89\u5168\uff0c\u6211\u4eec\u4f1a\u5728\u8fd9\u79cd\u60c5\u51b5\u4e0b\u8bbe\u7f6e\u77ed\u6682\u7684\u5ef6\u8fdf\u3002\u8bf7\u60a8\u8010\u5fc3\u7b49\u5019\uff0c\u8fc7\u4e86\u8fd9\u6bb5\u65f6\u95f4\u518d\u5c1d\u8bd5\u8fdb\u884c\u4ea4\u6613\u3002"
+            },
+            "conditions": [
+                "Multiple transactions detected",
+                "Security protocols active",
+                "System monitoring"
+            ]
+        },
+        "metadata": {
+            "category": [
+                "account_security",
+                "transactions",
+                "system_rules"
+            ],
+            "subCategory": "security_measures",
+            "difficulty": 2,
+            "confidence": 0.98,
+            "dateCreated": "2024-10-24T15:40:00Z",
+            "lastUpdated": "2024-11-25T09:00:00Z",
+            "version": "1.0",
+            "source": "security_documentation",
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [
+                "security_measures",
+                "transaction_limits",
+                "account_protection"
+            ],
+            "prerequisites": [],
+            "followUpQuestions": {
+                "en": [
+                    "Can this waiting time be reduced?",
+                    "What counts as too many transactions?"
+                ],
+                "ms": [
+                    "Bolehkah masa menunggu ini dikurangkan?",
+                    "Apakah yang dikira sebagai terlalu banyak transaksi?"
+                ],
+                "cn": [
+                    "\u8fd9\u4e2a\u7b49\u5f85\u65f6\u95f4\u53ef\u4ee5\u51cf\u5c11\u5417\uff1f",
+                    "\u4ec0\u4e48\u7b97\u4f5c\u592a\u591a\u4ea4\u6613\uff1f"
+                ]
+            }
+        },
+        "usage": {
+            "searchFrequency": 0,
+            "successRate": 0,
+            "lastQueried": null
+        }
+    },
+    {
+        "id": "0043",
+        "question": {
+            "text": "What games offer the highest RTP (Return to Player) percentage?",
+            "variations": [
+                "Best RTP games",
+                "Highest return games",
+                "Games with best odds"
+            ],
+            "intent": "game_rtp_inquiry",
+            "languages": {
+                "en": "What games offer the highest RTP (Return to Player) percentage?",
+                "ms": "Permainan apa yang menawarkan peratusan RTP (Pulangan kepada Pemain) tertinggi?",
+                "cn": "\u54ea\u4e9b\u6e38\u620f\u63d0\u4f9b\u6700\u9ad8\u7684RTP\uff08\u8fd4\u8fd8\u73a9\u5bb6\uff09\u767e\u5206\u6bd4\uff1f"
+            }
+        },
+        "answer": {
+            "short": {
+                "en": "The winning rate of slot games is actually determined by the game's random mechanisms. Sometimes, you may feel that the chances of winning are decreasing, which is actually a normal fluctuation phenomenon; after all, each spin is an independent random event.",
+                "ms": "Blackjack menawarkan RTP 99.5%, manakala slot seperti Mega Joker (99%) dan Jackpot 6000 (98.9%) menawarkan pulangan tinggi.",
+                "cn": "\u8001\u864e\u673a\u6e38\u620f\u7684\u8d62\u7387\uff0c\u5b9e\u9645\u4e0a\u662f\u7531\u6e38\u620f\u7684\u968f\u673a\u673a\u5236\u51b3\u5b9a\u7684\u3002\u6709\u65f6\u5019\uff0c\u60a8\u53ef\u80fd\u4f1a\u611f\u89c9\u5230\u8d62\u7684\u673a\u4f1a\u53d8\u5c11\uff0c\u8fd9\u5176\u5b9e\u662f\u6b63\u5e38\u7684\u6ce2\u52a8\u73b0\u8c61\uff0c\u6bd5\u7adf\u6bcf\u6b21\u65cb\u8f6c\u90fd\u662f\u72ec\u7acb\u7684\u968f\u673a\u4e8b\u4ef6\u3002"
+            },
+            "detailed": {
+                "en": "The winning rate of slot games is actually determined by the game's random mechanisms. Sometimes, you may feel that the chances of winning are decreasing, which is a normal fluctuation phenomenon; after all, each spin is an independent random event. Don't be discouraged! Each game's return to player (RTP) is predetermined, and you still have the chance to win substantial prizes. Remember to enjoy the gaming experience, and feel free to try different games to discover more fun and possibilities!",
+                "ms": "Secara umum, permainan slot kami dengan RTP tertinggi adalah Mega Joker (99%), Jackpot 6000 (98.9%), dan Blood Suckers (98%). Untuk permainan meja, Blackjack biasanya menawarkan RTP tertinggi sekitar 99.5% dengan strategi sempurna. Sentiasa periksa maklumat permainan untuk peratusan RTP tertentu.",
+                "cn": "\u5173\u4e8e\u8001\u864e\u673a\u6e38\u620f\u7684\u8d62\u7387\uff0c\u5b9e\u9645\u4e0a\u662f\u7531\u6e38\u620f\u7684\u968f\u673a\u673a\u5236\u51b3\u5b9a\u7684\u3002\u6709\u65f6\u5019\uff0c\u60a8\u53ef\u80fd\u4f1a\u611f\u89c9\u5230\u8d62\u7684\u673a\u4f1a\u53d8\u5c11\uff0c\u8fd9\u5176\u5b9e\u662f\u6b63\u5e38\u7684\u6ce2\u52a8\u73b0\u8c61\uff0c\u6bd5\u7adf\u6bcf\u6b21\u65cb\u8f6c\u90fd\u662f\u72ec\u7acb\u7684\u968f\u673a\u4e8b\u4ef6\u3002\u522b\u7070\u5fc3\uff01\u6bcf\u4e2a\u6e38\u620f\u7684\u56de\u62a5\u7387\uff08RTP\uff09\u90fd\u662f\u4e8b\u5148\u8bbe\u5b9a\u7684\uff0c\u60a8\u4f9d\u7136\u6709\u673a\u4f1a\u8d62\u5f97\u4e30\u539a\u7684\u5956\u91d1\u3002\u8bb0\u5f97\u4eab\u53d7\u6e38\u620f\u7684\u8fc7\u7a0b\uff0c\u540c\u65f6\u4e5f\u53ef\u4ee5\u5c1d\u8bd5\u4e0d\u540c\u7684\u6e38\u620f\uff0c\u5bfb\u627e\u66f4\u591a\u7684\u4e50\u8da3\u548c\u53ef\u80fd\u6027\uff01"
+            },
+            "conditions": [
+                "Perfect strategy used",
+                "Game rules followed",
+                "RTP percentages may vary"
+            ]
+        },
+        "metadata": {
+            "category": [
+                "gaming",
+                "game_info",
+                "statistics"
+            ],
+            "subCategory": "game_statistics",
+            "difficulty": 2,
+            "confidence": 0.98,
+            "dateCreated": "2024-10-24T15:35:00Z",
+            "lastUpdated": "2024-11-25T09:00:00Z",
+            "version": "1.0",
+            "source": "game_documentation",
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [
+                "game_strategies",
+                "odds_calculation",
+                "game_rules"
+            ],
+            "prerequisites": [],
+            "followUpQuestions": {
+                "en": [
+                    "How do I calculate RTP?",
+                    "What strategies improve my odds?"
+                ],
+                "ms": [
+                    "Bagaimana saya mengira RTP?",
+                    "Apakah strategi yang meningkatkan peluang saya?"
+                ],
+                "cn": [
+                    "\u6211\u8981\u5982\u4f55\u8ba1\u7b97RTP\uff1f",
+                    "\u6709\u4ec0\u4e48\u7b56\u7565\u53ef\u4ee5\u63d0\u9ad8\u6211\u7684\u80dc\u7b97\u5417\uff1f"
+                ]
+            }
+        },
+        "usage": {
+            "searchFrequency": 0,
+            "successRate": 0,
+            "lastQueried": null
+        }
+    },
+    {
+        "id": "0044",
+        "question": {
+            "text": "Why is it taking so long for my credit to be updated after a deposit?",
+            "variations": [
+                "Credit update delay after deposit",
+                "Deposit credit taking long time",
+                "Slow credit update"
+            ],
+            "intent": "deposit_credit_delay",
+            "languages": {
+                "en": "Why is it taking so long for my credit to be updated after a deposit?",
+                "ms": "Mengapa masa yang lama diperlukan untuk kredit saya dikemas kini selepas deposit?",
+                "cn": "\u4e3a\u4ec0\u4e48\u5b58\u6b3e\u540e\u66f4\u65b0\u4fe1\u7528\u989d\u5ea6\u9700\u8981\u8fd9\u4e48\u957f\u65f6\u95f4\uff1f"
+            }
+        },
+        "answer": {
+            "short": {
+                "en": "Deposits typically take 5-30 minutes to process and update.",
+                "ms": "Deposit biasanya mengambil masa 5-30 minit untuk diproses dan dikemas kini.",
+                "cn": "\u6211\u5f88\u62b1\u6b49\u8ba9\u60a8\u611f\u5230\u56f0\u6270\uff01\u5b58\u6b3e\u5904\u7406\u6709\u65f6\u53ef\u80fd\u4f1a\u56e0\u4e3a\u7cfb\u7edf\u5ba1\u6838\u6216\u9ad8\u5cf0\u671f\u800c\u5ef6\u8fdf\uff0c\u901a\u5e38\u6211\u4eec\u4f1a\u57285\u523030\u5206\u949f\u5185\u5904\u7406\uff0c\u4f46\u5076\u5c14\u4e5f\u4f1a\u6709\u4e00\u4e9b\u5ef6\u8fdf\u3002"
+            },
+            "detailed": {
+                "en": "Usually, the deposit update will take 5 to 30 minutes. Our customer service team will review your deposit during this period. After the review is completed, the funds will be automatically updated to your account. If you experience longer delays, please contact our customer service team.",
+                "ms": "Biasanya, kemas kini deposit akan mengambil masa 5 hingga 30 minit. Pasukan perkhidmatan pelanggan kami akan menyemak deposit anda dalam tempoh ini. Selepas semakan selesai, dana akan dikemas kini secara automatik ke akaun anda.",
+                "cn": "\u6211\u5f88\u62b1\u6b49\u8ba9\u60a8\u611f\u5230\u56f0\u6270\uff01\u5b58\u6b3e\u5904\u7406\u6709\u65f6\u53ef\u80fd\u4f1a\u56e0\u4e3a\u7cfb\u7edf\u5ba1\u6838\u6216\u9ad8\u5cf0\u671f\u800c\u5ef6\u8fdf\uff0c\u901a\u5e38\u6211\u4eec\u4f1a\u57285\u523030\u5206\u949f\u5185\u5904\u7406\uff0c\u4f46\u5076\u5c14\u4e5f\u4f1a\u6709\u4e00\u4e9b\u5ef6\u8fdf\u3002\u5982\u679c\u60a8\u7684\u5b58\u6b3e\u5728\u51e0\u4e2a\u5c0f\u65f6\u540e\u4ecd\u7136\u6ca1\u6709\u5904\u7406\uff0c\u8bf7\u60a8\u622a\u56fe\u76f8\u5173\u4fe1\u606f\u53d1\u7ed9\u6211\u4eec\uff0c\u6211\u4eec\u4f1a\u5c3d\u5feb\u4e3a\u60a8\u67e5\u660e\u60c5\u51b5\u5e76\u5e2e\u52a9\u60a8\u89e3\u51b3\u95ee\u9898\u3002"
+            },
+            "conditions": [
+                "Valid deposit made",
+                "System operational",
+                "Correct reference number"
+            ]
+        },
+        "metadata": {
+            "category": [
+                "financial",
+                "deposits",
+                "transactions"
+            ],
+            "subCategory": "deposit_processing",
+            "difficulty": 2,
+            "confidence": 0.97,
+            "dateCreated": "2024-10-22T11:29:26Z",
+            "lastUpdated": "2024-11-25T09:00:00Z",
+            "version": "1.0",
+            "source": "financial_documentation",
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [
+                "deposit_process",
+                "payment_verification",
+                "transaction_times"
+            ],
+            "prerequisites": [
+                "active_account"
+            ],
+            "followUpQuestions": {
+                "en": [
+                    "What if my deposit takes longer than 30 minutes?",
+                    "How can I check my deposit status?"
+                ],
+                "ms": [
+                    "Bagaimana jika deposit saya mengambil masa lebih dari 30 minit?",
+                    "Bagaimana saya boleh memeriksa status deposit saya?"
+                ],
+                "cn": [
+                    "\u5982\u679c\u5b58\u6b3e\u8d85\u8fc730\u5206\u949f\u600e\u4e48\u529e\uff1f",
+                    "\u6211\u5982\u4f55\u67e5\u770b\u5b58\u6b3e\u72b6\u6001\uff1f"
+                ]
+            }
+        },
+        "usage": {
+            "searchFrequency": 0,
+            "successRate": 0,
+            "lastQueried": null
+        }
+    },
+    {
+        "id": "0045",
+        "question": {
+            "text": "Is there an issue with deposits made in Newtown?",
+            "variations": [
+                "Newtown deposit problems",
+                "Issues with Newtown deposits",
+                "Newtown deposit status"
+            ],
+            "intent": "newtown_deposit_issues",
+            "languages": {
+                "en": "Is there an issue with deposits made in Newtown?",
+                "ms": "Adakah terdapat masalah dengan deposit yang dibuat di Newtown?",
+                "cn": "\u5728Newtown\u8fdb\u884c\u7684\u5b58\u6b3e\u6709\u95ee\u9898\u5417\uff1f"
+            }
+        },
+        "answer": {
+            "short": {
+                "en": "If you have tried several times and still haven't received your funds, please provide relevant screenshot information, and I would be happy to help you investigate the situation to ensure your funds are safe and secure!",
+                "ms": "Sistem deposit kami kini beroperasi seperti biasa dengan masa pemprosesan standard 5-30 minit.",
+                "cn": "\u5982\u679c\u60a8\u5df2\u7ecf\u5c1d\u8bd5\u51e0\u6b21\u8fd8\u662f\u6ca1\u6709\u5230\u8d26\uff0c\u8bf7\u60a8\u63d0\u4f9b\u76f8\u5173\u7684\u622a\u56fe\u4fe1\u606f\uff0c\u6211\u4f1a\u5f88\u4e50\u610f\u5e2e\u60a8\u67e5\u660e\u60c5\u51b5\uff0c\u786e\u4fdd\u60a8\u7684\u8d44\u91d1\u5b89\u5168\u65e0\u5fe7\uff01"
+            },
+            "detailed": {
+                "en": "Regarding deposits with Newtown, they are usually smooth, and funds typically arrive in your account quickly. If you encounter issues while making a deposit with Newtown, it may be due to the system being temporarily busy or undergoing maintenance. If you have tried several times and still haven't received your funds, please provide relevant screenshot information, and I would be happy to help you investigate the situation to ensure your funds are safe and secure!",
+                "ms": "Sistem deposit kami kini beroperasi seperti biasa. Biasanya, masa pemprosesan deposit adalah 5 hingga 30 minit. Jika anda mengalami kelewatan, ia mungkin kerana masa pemprosesan sistem rangkaian sedikit dilanjutkan.",
+                "cn": "\u5173\u4e8eNewtown\u7684\u5b58\u6b3e\uff0c\u901a\u5e38\u60c5\u51b5\u4e0b\u662f\u987a\u5229\u7684\uff0c\u8d44\u91d1\u4f1a\u8fc5\u901f\u5230\u8fbe\u60a8\u7684\u8d26\u6237\u3002\u5982\u679c\u60a8\u5728\u4f7f\u7528Newtown\u8fdb\u884c\u5b58\u6b3e\u65f6\u9047\u5230\u95ee\u9898\uff0c\u53ef\u80fd\u662f\u7cfb\u7edf\u6682\u65f6\u7e41\u5fd9\u6216\u6b63\u5728\u7ef4\u62a4\u3002\u5982\u679c\u60a8\u5df2\u7ecf\u5c1d\u8bd5\u51e0\u6b21\u8fd8\u662f\u6ca1\u6709\u5230\u8d26\uff0c\u8bf7\u60a8\u63d0\u4f9b\u76f8\u5173\u7684\u622a\u56fe\u4fe1\u606f\uff0c\u6211\u4f1a\u5f88\u4e50\u610f\u5e2e\u60a8\u67e5\u660e\u60c5\u51b5\uff0c\u786e\u4fdd\u60a8\u7684\u8d44\u91d1\u5b89\u5168\u65e0\u5fe7\uff01"
+            },
+            "conditions": [
+                "System operational",
+                "Network stability",
+                "Valid deposit attempt"
+            ]
+        },
+        "metadata": {
+            "category": [
+                "financial",
+                "deposits",
+                "system_status"
+            ],
+            "subCategory": "deposit_issues",
+            "difficulty": 2,
+            "confidence": 0.96,
+            "dateCreated": "2024-10-22T12:22:55Z",
+            "lastUpdated": "2024-11-25T09:00:00Z",
+            "version": "1.0",
+            "source": "system_documentation",
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [
+                "deposit_process",
+                "system_maintenance",
+                "payment_verification"
+            ],
+            "prerequisites": [],
+            "followUpQuestions": {
+                "en": [
+                    "How long should I wait before contacting support?",
+                    "Can I make another deposit attempt?"
+                ],
+                "ms": [
+                    "Berapa lama saya harus tunggu sebelum menghubungi sokongan?",
+                    "Bolehkah saya membuat percubaan deposit lain?"
+                ],
+                "cn": [
+                    "\u6211\u5e94\u8be5\u7b49\u591a\u4e45\u624d\u8054\u7cfb\u5ba2\u670d\uff1f",
+                    "\u6211\u53ef\u4ee5\u5c1d\u8bd5\u518d\u6b21\u5b58\u6b3e\u5417\uff1f"
+                ]
+            }
+        },
+        "usage": {
+            "searchFrequency": 0,
+            "successRate": 0,
+            "lastQueried": null
+        }
+    },
+    {
+        "id": "0046",
+        "question": {
+            "text": "Why was I only paid 8 RM for a Special bet that should have paid 210 RM?",
+            "variations": [
+                "Incorrect bet payout",
+                "Wrong betting payment",
+                "Special bet payment issue"
+            ],
+            "intent": "incorrect_payout",
+            "languages": {
+                "en": "What should I do if I suspect that the amount of my betting payment is incorrect?",
+                "ms": "Mengapa saya hanya dibayar 8 RM untuk pertaruhan Khas yang sepatutnya dibayar 210 RM?",
+                "cn": "\u6211\u6000\u7591\u6211\u7684\u6295\u6ce8\u652f\u4ed8\u91d1\u989d\u6709\u8bef\u6211\u8be5\u600e\u4e48\u529e\uff1f"
+            }
+        },
+        "answer": {
+            "short": {
+                "en": "Please contact customer service with your bet details for immediate verification.",
+                "ms": "Sila hubungi khidmat pelanggan dengan butiran pertaruhan anda untuk pengesahan segera.",
+                "cn": "\u8bf7\u60a8\u5148\u68c0\u67e5\u4e00\u4e0b\u60a8\u7684\u6295\u6ce8\u5355\u636e\uff0c\u786e\u4fdd\u6295\u6ce8\u7684\u683c\u5f0f\u6b63\u786e\u3002\n\n\u5982\u679c\u786e\u8ba4\u65e0\u8bef\uff0c\u60a8\u53ef\u4ee5\u63d0\u4f9b\u76f8\u5173\u7684\u622a\u56fe\u7ed9\u6211\u4eec\uff0c\u6211\u4eec\u4f1a\u5c3d\u5feb\u5e2e\u60a8\u67e5\u6e05\u695a\u539f\u56e0\u3002"
+            },
+            "detailed": {
+                "en": "If you believe there's a discrepancy in your payout, please contact our customer service team immediately. Provide your bet ID and transaction details so we can verify the correct payout amount. Our team will investigate and ensure you receive the correct payment if an error occurred.",
+                "ms": "Jika anda percaya terdapat percanggahan dalam pembayaran anda, sila hubungi pasukan khidmat pelanggan kami dengan segera. Berikan ID pertaruhan dan butiran transaksi anda supaya kami dapat mengesahkan jumlah pembayaran yang betul.",
+                "cn": "\u6211\u5f88\u62b1\u6b49\u60a8\u9047\u5230\u8fd9\u6837\u7684\u60c5\u51b5\uff01\u5173\u4e8e\u60a8\u53ea\u6536\u52308 RM\u800c\u5e94\u652f\u4ed8210 RM\u7684\u7279\u522b\u6295\u6ce8\uff0c\u8bf7\u60a8\u5148\u68c0\u67e5\u4e00\u4e0b\u60a8\u7684\u6295\u6ce8\u5355\u636e\uff0c\u786e\u4fdd\u6295\u6ce8\u7684\u683c\u5f0f\u6b63\u786e\u3002\n\n\u5982\u679c\u786e\u8ba4\u65e0\u8bef\uff0c\u60a8\u53ef\u4ee5\u63d0\u4f9b\u76f8\u5173\u7684\u622a\u56fe\u7ed9\u6211\u4eec\uff0c\u6211\u4eec\u4f1a\u5c3d\u5feb\u5e2e\u60a8\u67e5\u6e05\u695a\u539f\u56e0\u3002"
+            },
+            "conditions": [
+                "Valid bet placement",
+                "Correct bet type",
+                "Transaction record available"
+            ]
+        },
+        "metadata": {
+            "category": [
+                "gaming",
+                "betting",
+                "payouts"
+            ],
+            "subCategory": "payout_issues",
+            "difficulty": 3,
+            "confidence": 0.95,
+            "dateCreated": "2024-10-22T14:15:00Z",
+            "lastUpdated": "2024-11-25T09:00:00Z",
+            "version": "1.0",
+            "source": "betting_documentation",
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [
+                "betting_rules",
+                "payout_calculation",
+                "special_bets"
+            ],
+            "prerequisites": [
+                "active_account"
+            ],
+            "followUpQuestions": {
+                "en": [
+                    "How are Special bet payouts calculated?",
+                    "Can I see my betting history?"
+                ],
+                "ms": [
+                    "Bagaimana pembayaran pertaruhan Khas dikira?",
+                    "Bolehkah saya melihat sejarah pertaruhan saya?"
+                ],
+                "cn": [
+                    "\u7279\u6b8a\u6295\u6ce8\u7684\u8d54\u7387\u662f\u5982\u4f55\u8ba1\u7b97\u7684\uff1f",
+                    "\u6211\u53ef\u4ee5\u67e5\u770b\u6211\u7684\u6295\u6ce8\u5386\u53f2\u5417\uff1f"
+                ]
+            }
+        },
+        "usage": {
+            "searchFrequency": 0,
+            "successRate": 0,
+            "lastQueried": null
+        }
+    },
+    {
+        "id": "0047",
+        "question": {
+            "text": "What should I do if I can't print a transaction slip?",
+            "variations": [
+                "Transaction slip printing issue",
+                "Can't print receipt",
+                "Transaction receipt problems"
+            ],
+            "intent": "transaction_slip_issue",
+            "languages": {
+                "en": "What should I do if I can't print a transaction slip?",
+                "ms": "Apa yang perlu saya lakukan jika saya tidak dapat mencetak slip transaksi?",
+                "cn": "\u5982\u679c\u6211\u65e0\u6cd5\u6253\u5370\u4ea4\u6613\u5355\u636e\u8be5\u600e\u4e48\u529e\uff1f"
+            }
+        },
+        "answer": {
+            "short": {
+                "en": "Take a screenshot of your transaction history or bank record as proof.",
+                "ms": "Ambil tangkapan skrin sejarah transaksi atau rekod bank sebagai bukti.",
+                "cn": "\u60a8\u53ef\u4ee5\u622a\u53d6\u4ea4\u6613\u5386\u53f2\u8bb0\u5f55\u6216\u94f6\u884c\u8bb0\u5f55\u7684\u622a\u56fe\u3002"
+            },
+            "detailed": {
+                "en": "If you cannot print the transaction slip, you can take a screenshot of your transaction history or bank record. Access your bank's transaction records, find the corresponding transaction, and capture a screenshot of the document. This can serve as proof of your transaction.",
+                "ms": "Jika anda tidak dapat mencetak slip transaksi, anda boleh mengambil tangkapan skrin sejarah transaksi atau rekod bank anda. Akses rekod transaksi bank anda, cari transaksi yang berkenaan, dan ambil tangkapan skrin dokumen tersebut.",
+                "cn": "\u5982\u679c\u60a8\u65e0\u6cd5\u622a\u53d6\u94f6\u884c\u5e94\u7528\u7a0b\u5e8f\u7684\u622a\u56fe\u8fdb\u884c\u5b58\u6b3e\uff0c\u4e0d\u7528\u62c5\u5fc3\uff01\u60a8\u53ef\u4ee5\u5c1d\u8bd5\u91cd\u65b0\u767b\u5f55\u60a8\u7684\u94f6\u884c\u5e94\u7528\uff0c\u67e5\u770b\u5386\u53f2\u4ea4\u6613\u8bb0\u5f55\uff0c\u627e\u5230\u76f8\u5e94\u7684\u5b58\u6b3e\u5355\u636e\uff0c\u5e76\u5728\u90a3\u4e2a\u9875\u9762\u8fdb\u884c\u622a\u56fe\u3002"
+            },
+            "conditions": [
+                "Valid transaction",
+                "Bank app access",
+                "Transaction history available"
+            ]
+        },
+        "metadata": {
+            "category": [
+                "technical_support",
+                "transactions",
+                "documentation"
+            ],
+            "subCategory": "transaction_proof",
+            "difficulty": 2,
+            "confidence": 0.95,
+            "dateCreated": "2024-10-22T14:30:00Z",
+            "lastUpdated": "2024-11-25T09:00:00Z",
+            "version": "1.0",
+            "source": "support_documentation",
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [
+                "transaction_verification",
+                "documentation_requirements",
+                "technical_support"
+            ],
+            "prerequisites": [],
+            "followUpQuestions": {
+                "en": [
+                    "How do I access my transaction history?",
+                    "What other proof of transaction is accepted?"
+                ],
+                "ms": [
+                    "Bagaimana saya mengakses sejarah transaksi saya?",
+                    "Apakah bukti transaksi lain yang diterima?"
+                ],
+                "cn": [
+                    "\u5982\u4f55\u8fdb\u5165\u6211\u7684\u4ea4\u6613\u5386\u53f2\u8bb0\u5f55\uff1f",
+                    "\u8fd8\u63a5\u53d7\u4ec0\u4e48\u5176\u4ed6\u4ea4\u6613\u8bc1\u660e\uff1f"
+                ]
+            }
+        },
+        "usage": {
+            "searchFrequency": 0,
+            "successRate": 0,
+            "lastQueried": null
+        }
+    },
+    {
+        "id": "0048",
+        "question": {
+            "text": "What's the commission rate for referring new members?",
+            "variations": [
+                "Referral commission percentage",
+                "New member referral rewards",
+                "Member referral rates"
+            ],
+            "intent": "referral_commission",
+            "languages": {
+                "en": "What's the commission rate for referring new members?",
+                "ms": "Berapakah kadar komisen untuk merujuk ahli baru?",
+                "cn": "\u63a8\u8350\u65b0\u4f1a\u5458\u7684\u4f63\u91d1\u6bd4\u4f8b\u662f\u591a\u5c11\uff1f"
+            }
+        },
+        "answer": {
+            "short": {
+                "en": "The commission rate for referring new members is 3% of the total investment amount of that member in 4D! Additionally, you can earn extra VIP points; the more referrals you make, the more you earn!",
+                "ms": "Terima mata bonus untuk setiap rakan yang dirujuk yang mendaftar dan membuat deposit pertama mereka.",
+                "cn": "\u63a8\u8350\u65b0\u4f1a\u5458\u7684\u4f63\u91d1\u7387\u4e3a\u8be5\u4f1a\u54584D\u603b\u6295\u8d44\u989d\u76843%\uff01\u800c\u4e14\u60a8\u8fd8\u53ef\u4ee5\u83b7\u5f97\u989d\u5916\u7684VIP\u79ef\u5206\uff0c\u63a8\u8350\u8d8a\u591a\uff0c\u8d5a\u5f97\u8d8a\u591a\uff01"
+            },
+            "detailed": {
+                "en": "The commission rate for referring new members is 3% of that member's total investment amount in 4D! Additionally, you can earn extra VIP points; the more referrals you make, the more you earn! To learn more details, please visit the VIP benefits section in the app.",
+                "ms": "Apabila anda merujuk ahli baru, anda akan menerima mata VIP untuk setiap rujukan yang berjaya. Pemain baru mendapat 20 mata VIP apabila menyertai, dan anda akan menerima bonus apabila mereka membuat deposit pertama.",
+                "cn": "\u63a8\u8350\u65b0\u4f1a\u5458\u7684\u4f63\u91d1\u7387\u4e3a\u8be5\u4f1a\u54584D\u603b\u6295\u8d44\u989d\u76843%\uff01\u800c\u4e14\u60a8\u8fd8\u53ef\u4ee5\u83b7\u5f97\u989d\u5916\u7684VIP\u79ef\u5206\uff0c\u63a8\u8350\u8d8a\u591a\uff0c\u8d5a\u5f97\u8d8a\u591a\uff01\u60f3\u4e86\u89e3\u66f4\u591a\u8be6\u60c5\uff0c\u8bf7\u8bbf\u95ee\u5e94\u7528\u7a0b\u5e8f\u91cc\u7684VIP\u798f\u5229\u90e8\u5206\u3002"
+            },
+            "conditions": [
+                "Valid referral",
+                "First deposit made",
+                "Active account"
+            ]
+        },
+        "metadata": {
+            "category": [
+                "referral_program",
+                "rewards",
+                "promotions"
+            ],
+            "subCategory": "referral_rewards",
+            "difficulty": 2,
+            "confidence": 0.96,
+            "dateCreated": "2024-10-22T14:35:00Z",
+            "lastUpdated": "2024-11-25T09:00:00Z",
+            "version": "1.0",
+            "source": "promotion_documentation",
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [
+                "vip_benefits",
+                "reward_points",
+                "promotion_rules"
+            ],
+            "prerequisites": [
+                "active_account"
+            ],
+            "followUpQuestions": {
+                "en": [
+                    "How do I refer a friend?",
+                    "When will I receive my referral bonus?"
+                ],
+                "ms": [
+                    "Bagaimana saya merujuk rakan?",
+                    "Bilakah saya akan menerima bonus rujukan saya?"
+                ],
+                "cn": [
+                    "\u5982\u4f55\u63a8\u8350\u670b\u53cb\uff1f",
+                    "\u6211\u4ec0\u4e48\u65f6\u5019\u80fd\u6536\u5230\u63a8\u8350\u5956\u52b1\uff1f"
+                ]
+            }
+        },
+        "usage": {
+            "searchFrequency": 0,
+            "successRate": 0,
+            "lastQueried": null
+        }
+    },
+    {
+        "id": "0049",
+        "question": {
+            "text": "Can I make withdrawals from live casino games like Ocean King?",
+            "variations": [
+                "Ocean King game withdrawals",
+                "Live casino withdrawal process",
+                "Withdrawing from live games"
+            ],
+            "intent": "live_casino_withdrawal",
+            "languages": {
+                "en": "Can I make withdrawals from live casino games like Ocean King?",
+                "ms": "Bolehkah saya membuat pengeluaran dari permainan kasino langsung seperti Ocean King?",
+                "cn": "\u6211\u53ef\u4ee5\u4ece\u6d77\u738b\u7b49\u771f\u4eba\u5a31\u4e50\u573a\u6e38\u620f\u4e2d\u63d0\u6b3e\u5417\uff1f"
+            }
+        },
+        "answer": {
+            "short": {
+                "en": "Simply exit the Ocean King live casino game, and your funds will be automatically returned to your JOKER wallet without any additional actions required.",
+                "ms": "Ya, pengeluaran dari permainan kasino langsung diproses dalam masa 5-30 minit selepas permainan tamat.",
+                "cn": "\u53ea\u9700\u9000\u51faOcean King\u771f\u4eba\u5a31\u4e50\u573a\u6e38\u620f\uff0c\u60a8\u7684\u8d44\u91d1\u4f1a\u81ea\u52a8\u9000\u56de\u5230\u60a8\u7684JOKER\u94b1\u5305\u4e2d\uff0c\u65e0\u9700\u4efb\u4f55\u989d\u5916\u64cd\u4f5c\u3002"
+            },
+            "detailed": {
+                "en": "Of course! Simply exit the Ocean King live casino game, and your funds will be automatically returned to your JOKER wallet without any additional actions required.",
+                "ms": "Ya, anda boleh membuat pengeluaran dari permainan kasino langsung termasuk Ocean King. Masa pemprosesan pengeluaran biasanya adalah 5 hingga 30 minit. Pasukan perkhidmatan pelanggan kami akan menyemak permintaan anda dalam tempoh ini.",
+                "cn": "\u662f\u5f53\u7136\u53ef\u4ee5\uff01\u53ea\u9700\u9000\u51faOcean King\u771f\u4eba\u5a31\u4e50\u573a\u6e38\u620f\uff0c\u60a8\u7684\u8d44\u91d1\u4f1a\u81ea\u52a8\u9000\u56de\u5230\u60a8\u7684JOKER\u94b1\u5305\u4e2d\uff0c\u65e0\u9700\u4efb\u4f55\u989d\u5916\u64cd\u4f5c\u3002"
+            },
+            "conditions": [
+                "Completed game session",
+                "Valid withdrawal amount",
+                "Account verification"
+            ]
+        },
+        "metadata": {
+            "category": [
+                "gaming",
+                "withdrawals",
+                "live_casino"
+            ],
+            "subCategory": "game_withdrawals",
+            "difficulty": 2,
+            "confidence": 0.97,
+            "dateCreated": "2024-10-22T14:40:00Z",
+            "lastUpdated": "2024-11-25T09:00:00Z",
+            "version": "1.0",
+            "source": "gaming_documentation",
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [
+                "withdrawal_process",
+                "live_casino_games",
+                "payment_methods"
+            ],
+            "prerequisites": [
+                "active_account"
+            ],
+            "followUpQuestions": {
+                "en": [
+                    "What's the minimum withdrawal amount?",
+                    "How do I check my withdrawal status?"
+                ],
+                "ms": [
+                    "Berapakah jumlah pengeluaran minimum?",
+                    "Bagaimana saya memeriksa status pengeluaran saya?"
+                ],
+                "cn": [
+                    "\u6700\u4f4e\u63d0\u6b3e\u91d1\u989d\u662f\u591a\u5c11\uff1f",
+                    "\u5982\u4f55\u67e5\u770b\u63d0\u6b3e\u72b6\u6001\uff1f"
+                ]
+            }
+        },
+        "usage": {
+            "searchFrequency": 0,
+            "successRate": 0,
+            "lastQueried": null
+        }
+    },
+    {
+        "id": "0050",
+        "question": {
+            "text": "How can I check my betting history for the past week?",
+            "variations": [
+                "View past week's bets",
+                "Recent betting history",
+                "Last week's betting record"
+            ],
+            "intent": "betting_history_check",
+            "languages": {
+                "en": "How can I check my betting history for the past week?",
+                "ms": "Bagaimana saya boleh memeriksa sejarah pertaruhan saya untuk minggu lepas?",
+                "cn": "\u5982\u4f55\u67e5\u770b\u8fc7\u53bb\u4e00\u5468\u7684\u6295\u6ce8\u8bb0\u5f55\uff1f"
+            }
+        },
+        "answer": {
+            "short": {
+                "en": "Access transaction records through the wallet icon to view your betting history.",
+                "ms": "Akses rekod transaksi melalui ikon dompet untuk melihat sejarah pertaruhan anda.",
+                "cn": "\u8bf7\u767b\u5f55\u60a8\u7684\u8d26\u6237\u5e76\u70b9\u51fb\u94b1\u5305\u56fe\u6807\u3002\u8fdb\u5165\u4ea4\u6613\u8bb0\u5f55\u90e8\u5206\uff0c\u60a8\u53ef\u4ee5\u67e5\u770b\u6240\u6709\u6295\u6ce8\u6d3b\u52a8\u3002"
+            },
+            "detailed": {
+                "en": "To check your betting history, log into your account and click the wallet icon. Enter the transaction records section where you can view all your betting activities. You can filter the records to see your bets from the past week.",
+                "ms": "Untuk memeriksa sejarah pertaruhan anda, log masuk ke akaun anda dan klik ikon dompet. Masuk ke bahagian rekod transaksi di mana anda boleh melihat semua aktiviti pertaruhan anda.",
+                "cn": "\u8981\u67e5\u770b\u60a8\u7684\u6295\u6ce8\u5386\u53f2\uff0c\u8bf7\u767b\u5f55\u60a8\u7684\u8d26\u6237\u5e76\u70b9\u51fb\u94b1\u5305\u56fe\u6807\u3002\u8fdb\u5165\u4ea4\u6613\u8bb0\u5f55\u90e8\u5206\uff0c\u60a8\u53ef\u4ee5\u67e5\u770b\u6240\u6709\u6295\u6ce8\u6d3b\u52a8\u3002\u60a8\u53ef\u4ee5\u7b5b\u9009\u8bb0\u5f55\u4ee5\u67e5\u770b\u8fc7\u53bb\u4e00\u5468\u7684\u6295\u6ce8\u3002"
+            },
+            "conditions": [
+                "Active account",
+                "Transaction history available",
+                "Recent betting activity"
+            ]
+        },
+        "metadata": {
+            "category": [
+                "account_management",
+                "betting",
+                "history"
+            ],
+            "subCategory": "transaction_history",
+            "difficulty": 2,
+            "confidence": 0.95,
+            "dateCreated": "2024-10-24T15:47:00Z",
+            "lastUpdated": "2024-11-25T09:00:00Z",
+            "version": "1.0",
+            "source": "account_documentation",
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [
+                "transaction_history",
+                "betting_records",
+                "account_activity"
+            ],
+            "prerequisites": [
+                "active_account"
+            ],
+            "followUpQuestions": {
+                "en": [
+                    "How long are betting records kept?",
+                    "Can I download my betting history?"
+                ],
+                "ms": [
+                    "Berapa lama rekod pertaruhan disimpan?",
+                    "Bolehkah saya memuat turun sejarah pertaruhan saya?"
+                ],
+                "cn": [
+                    "\u6295\u6ce8\u8bb0\u5f55\u4fdd\u5b58\u591a\u4e45\uff1f",
+                    "\u6211\u53ef\u4ee5\u4e0b\u8f7d\u6295\u6ce8\u5386\u53f2\u8bb0\u5f55\u5417\uff1f"
+                ]
+            }
+        },
+        "usage": {
+            "searchFrequency": 0,
+            "successRate": 0,
+            "lastQueried": null
+        }
+    },
+    {
+        "id": "0099",
+        "question": {
+            "text": "What are the 4D Lottery drawtimes for different Lottery companies today?",
+            "variations": [
+                "Lottery 4D times today",
+                "Recovery/4d times for lotteries",
+                "Today's lottery schedules"
+            ],
+            "intent": "lottery_schedules",
+            "languages": {
+                "en": "What is the latest purchase time for 4D and different lotteries today?",
+                "ms": "Apakah masa pemulihan berhenti untuk loteri berbeza hari ini?",
+                "cn": "\u4eca\u5929\u4e0d\u540c\u5f69\u7968\u7684\u5f00\u5956\u65f6\u95f4\u662f\u4ec0\u4e48\u65f6\u5019\uff1f"
+            }
+        },
+        "answer": {
+            "short": {
+                "en": "MKT: 07:00 PM, Singapore: 06:00 PM, CBD: 06:35 PM, GDLOTTO: 07:00 PM, 9LOTTO: 07:25 PM",
+                "ms": "MKT: 07:00 PM, Singapura: 06:00 PM, CBD: 06:35 PM, GDLOTTO: 07:00 PM, 9LOTTO: 07:25 PM",
+                "cn": "\u4ee5\u4e0b\u662f\u5404\u4e2a\u516c\u53f8\u7684\u5f00\u5956\u65f6\u95f4\uff1a\n\n\t\u2022\tMagnum: 7:00 PM\n\t\u2022\tKuda: 7:00 PM\n\t\u2022\tToto: 7:00 PM\n\t\u2022\tSingapore: 6:00 PM\n\t\u2022\tCBD: 6:35 PM\n\t\u2022\tGDLOTTO: 7:00 PM\n\t\u2022\t9Lotto: 7:25 PM\n\n\u8bf7\u786e\u4fdd\u5728\u622a\u6b62\u65f6\u95f4\u4e4b\u524d\u8d2d\u4e70\uff0c\u4ee5\u514d\u9519\u8fc7\u673a\u4f1a\uff01"
+            },
+            "detailed": {
+                "en": "The 4D times for different lotteries today are as follows: MKT: 07:00 PM, Singapore: 06:00 PM, CBD: 06:35 PM, GDLOTTO: 07:00 PM, 9LOTTO: 07:25 PM. Please place your bets in advance according to the type of lottery you want to buy.",
+                "ms": "Masa pemulihan berhenti untuk loteri berbeza hari ini adalah seperti berikut: MKT: 07:00 PM, Singapura: 06:00 PM, CBD: 06:35 PM, GDLOTTO: 07:00 PM, 9LOTTO: 07:25 PM. Sila letakkan pertaruhan anda lebih awal mengikut jenis loteri yang anda ingin beli.",
+                "cn": "\u5f69\u7968\u7684\u5f00\u5956\u65f6\u95f4\u53d6\u51b3\u4e8e\u5404\u4e2a\u5f69\u7968\u516c\u53f8\u3002\u4ee5\u4e0b\u662f\u5404\u4e2a\u516c\u53f8\u7684\u5f00\u5956\u65f6\u95f4\uff1a\n\n\t\u2022\tMagnum: 7:00 PM\n\t\u2022\tKuda: 7:00 PM\n\t\u2022\tToto: 7:00 PM\n\t\u2022\tSingapore: 6:00 PM\n\t\u2022\tCBD: 6:35 PM\n\t\u2022\tGDLOTTO: 7:00 PM\n\t\u2022\t9Lotto: 7:25 PM\n\n\u8bf7\u786e\u4fdd\u5728\u622a\u6b62\u65f6\u95f4\u4e4b\u524d\u8d2d\u4e70\uff0c\u4ee5\u514d\u9519\u8fc7\u673a\u4f1a\uff01"
+            },
+            "conditions": [
+                "Times subject to change",
+                "Different timezone adjustments",
+                "System availability"
+            ]
+        },
+        "metadata": {
+            "category": [
+                "gaming",
+                "lottery",
+                "schedules",
+                "4D"
+            ],
+            "subCategory": "lottery_timing",
+            "difficulty": 2,
+            "confidence": 0.96,
+            "dateCreated": "2024-10-24T15:43:00Z",
+            "lastUpdated": "2024-11-27T09:00:00Z",
+            "version": "1.0",
+            "source": "lottery_documentation",
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [
+                "lottery_rules",
+                "betting_deadlines",
+                "game_schedules"
+            ],
+            "prerequisites": [],
+            "followUpQuestions": {
+                "en": [
+                    "How do I place a bet?",
+                    "What happens if I miss the deadline?"
+                ],
+                "ms": [
+                    "Bagaimana saya membuat pertaruhan?",
+                    "Apa yang berlaku jika saya terlepas tarikh akhir?"
+                ],
+                "cn": [
+                    "\u5982\u4f55\u4e0b\u6ce8\uff1f",
+                    "\u5982\u679c\u9519\u8fc7\u622a\u6b62\u65f6\u95f4\u4f1a\u600e\u6837\uff1f"
+                ]
+            }
+        },
+        "usage": {
+            "searchFrequency": 0,
+            "successRate": 0,
+            "lastQueried": null
+        }
+    }
 ]

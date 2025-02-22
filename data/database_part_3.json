@@ -540,84 +540,6 @@
     {
         "id": "0057",
         "question": {
-            "text": "How can I check my betting history for the past week?",
-            "variations": [
-                "View past week's bets",
-                "Recent betting history",
-                "Last week's betting record"
-            ],
-            "intent": "betting_history_check",
-            "languages": {
-                "en": "How can I check my betting history for the past week?",
-                "ms": "Bagaimana saya boleh memeriksa sejarah pertaruhan saya untuk minggu lepas?",
-                "cn": "\u5982\u4f55\u67e5\u770b\u8fc7\u53bb\u4e00\u5468\u7684\u6295\u6ce8\u8bb0\u5f55\uff1f"
-            }
-        },
-        "answer": {
-            "short": {
-                "en": "Click the wallet icon and enter transaction records to view your betting history.",
-                "ms": "Klik ikon dompet dan masuk ke rekod transaksi untuk melihat sejarah pertaruhan anda.",
-                "cn": "\u70b9\u51fb\u94b1\u5305\u56fe\u6807\u5e76\u8fdb\u5165\u4ea4\u6613\u8bb0\u5f55\u5373\u53ef\u67e5\u770b\u60a8\u7684\u6295\u6ce8\u5386\u53f2\u3002"
-            },
-            "detailed": {
-                "en": "To check your betting history, log into your account and click the wallet icon. Enter the transaction records section where you can view all your betting activities. You can filter the records to see your bets from the past week.",
-                "ms": "Untuk memeriksa sejarah pertaruhan anda, log masuk ke akaun anda dan klik ikon dompet. Masuk ke bahagian rekod transaksi di mana anda boleh melihat semua aktiviti pertaruhan anda.",
-                "cn": "\u67e5\u770b\u60a8\u8fc7\u53bb\u4e00\u5468\u7684\u6295\u6ce8\u8bb0\u5f55\u5176\u5b9e\u975e\u5e38\u7b80\u5355\uff01\u60a8\u53ea\u9700\u6253\u5f00\u5e94\u7528\u7a0b\u5e8f\uff0c\u70b9\u51fb\u94b1\u5305\u56fe\u6807\uff0c\u7136\u540e\u627e\u5230\u4ea4\u6613\u8bb0\u5f55\uff0c\u5728\u8fd9\u91cc\u60a8\u53ef\u4ee5\u8f7b\u677e\u7b5b\u9009\u51fa\u8fc7\u53bb\u4e00\u5468\u7684\u6240\u6709\u6295\u6ce8\u8be6\u60c5\u3002"
-            },
-            "conditions": [
-                "Active account",
-                "Transaction history available",
-                "Recent betting activity"
-            ]
-        },
-        "metadata": {
-            "category": [
-                "account_management",
-                "betting",
-                "history"
-            ],
-            "subCategory": "transaction_history",
-            "difficulty": 2,
-            "confidence": 0.5,
-            "dateCreated": "2024-10-24T15:47:00Z",
-            "lastUpdated": "2024-11-25T09:00:00Z",
-            "version": "1.0",
-            "source": "account_documentation",
-            "status": "active"
-        },
-        "context": {
-            "relatedTopics": [
-                "transaction_history",
-                "betting_records",
-                "account_activity"
-            ],
-            "prerequisites": [
-                "active_account"
-            ],
-            "followUpQuestions": {
-                "en": [
-                    "How long are betting records kept?",
-                    "Can I download my betting history?"
-                ],
-                "ms": [
-                    "Berapa lama rekod pertaruhan disimpan?",
-                    "Bolehkah saya memuat turun sejarah pertaruhan saya?"
-                ],
-                "cn": [
-                    "\u6295\u6ce8\u8bb0\u5f55\u4fdd\u5b58\u591a\u4e45\uff1f",
-                    "\u6211\u53ef\u4ee5\u4e0b\u8f7d\u6295\u6ce8\u5386\u53f2\u8bb0\u5f55\u5417\uff1f"
-                ]
-            }
-        },
-        "usage": {
-            "searchFrequency": 0,
-            "successRate": 0,
-            "lastQueried": null
-        }
-    },
-    {
-        "id": "0058",
-        "question": {
             "text": "Is there a maximum limit for daily withdrawals?",
             "variations": [
                 "Daily withdrawal limit",
@@ -694,7 +616,7 @@
         }
     },
     {
-        "id": "0059",
+        "id": "0058",
         "question": {
             "text": "Are there any fees associated with deposits or withdrawals?",
             "variations": [
@@ -770,7 +692,7 @@
         }
     },
     {
-        "id": "0060",
+        "id": "0059",
         "question": {
             "text": "What's the minimum deposit amount required to start playing?",
             "variations": [
@@ -848,7 +770,7 @@
         }
     },
     {
-        "id": "0061",
+        "id": "0060",
         "question": {
             "text": "How do I report a technical issue with a specific game?",
             "variations": [
@@ -924,7 +846,7 @@
         }
     },
     {
-        "id": "0062",
+        "id": "0061",
         "question": {
             "text": "How often are new games added to the platform?",
             "variations": [
@@ -1000,7 +922,7 @@
         }
     },
     {
-        "id": "0063",
+        "id": "0062",
         "question": {
             "text": "What should I do if my password isn't working?",
             "variations": [
@@ -1078,7 +1000,7 @@
         }
     },
     {
-        "id": "0064",
+        "id": "0063",
         "question": {
             "text": "How long does it take for a 500 deposit to be credited?",
             "variations": [
@@ -1156,7 +1078,7 @@
         }
     },
     {
-        "id": "0065",
+        "id": "0064",
         "question": {
             "text": "Is there a mobile app available for easier access to games?",
             "variations": [
@@ -1232,7 +1154,7 @@
         }
     },
     {
-        "id": "0066",
+        "id": "0065",
         "question": {
             "text": "How can I check if my deposit has been successfully processed?",
             "variations": [
@@ -1310,7 +1232,7 @@
         }
     },
     {
-        "id": "0067",
+        "id": "0066",
         "question": {
             "text": "What should I do if I experience a disconnection during a live game?",
             "variations": [
@@ -1388,7 +1310,7 @@
         }
     },
     {
-        "id": "0068",
+        "id": "0067",
         "question": {
             "text": "What's the procedure for closing my account if I wish to stop playing?",
             "variations": [
@@ -1466,7 +1388,7 @@
         }
     },
     {
-        "id": "0069",
+        "id": "0068",
         "question": {
             "text": "Can I set up notifications for my favorite games or sports events?",
             "variations": [
