@@ -24,6 +24,10 @@ from ai_config.ai_constants import (
     LANGUAGE_DEFAULT,
 )
 
+from api.brain_view import (
+    get_document_count,
+)
+
 logger = logging.getLogger(__name__)
 
 def fuzzy_match_with_dynamic_context(
@@ -658,6 +662,42 @@ class SeparateConversationsView(MongoDBMixin, APIView):
             return Response({
                 "error": f"Error processing conversations: {str(e)}"
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        finally:
+            if db is not None:
+                self.close_db()
+
+class DashboardCountsView(MongoDBMixin, APIView):
+    """
+    This endpoint returns the counts for:
+      - Total conversations
+      - Useless conversations
+      - No Brain conversations
+      - Into Brain conversations
+      - Total knowledge in brain (sum of the three latter)
+    """
+    def get(self, request):
+        db = None
+        try:
+            db = self.get_db()
+            conversations_count = db.conversations.count_documents({})
+            useless_count = db.read_conversation_useless.count_documents({})
+            no_brain_count = db.read_conversation_no_brain.count_documents({})
+            into_brain_count = db.read_conversation_into_brain.count_documents({})
+            brain_count =  get_document_count()
+
+            data = {
+                "conversations": conversations_count,
+                "useless": useless_count,
+                "noBrain": no_brain_count,
+                "intoBrain": into_brain_count,
+                "brainCount": brain_count,
+            }
+            return Response(data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(
+                {"error": f"Error retrieving dashboard counts: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
         finally:
             if db is not None:
                 self.close_db()
