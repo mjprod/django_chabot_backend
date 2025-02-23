@@ -11,6 +11,7 @@ from .views.conversation_view import (
     FinaliseConversationView,
     FinaliseAllConversationsView,
     SeparateConversationsView,
+    DashboardCountsView,
     # PromptConversationDeepSeekView,
     PromptConversationAdminView,
 )
@@ -44,6 +45,7 @@ urlpatterns = [
     path("delete_conversation/<conversation_id>/", DeleteConversationView.as_view(), name="delete_conversation"),
     path("finalise_conversation/<conversation_id>/", FinaliseConversationView.as_view(), name="finalise_conversation"),
     path("finalise_all_conversation/", FinaliseAllConversationsView.as_view(), name="finalise_all_conversation"),
+    path("dashboard_counts/", cache_page(60 * 15)(DashboardCountsView.as_view()), name="dashboard_counts"),
 
     # path(
     #    "prompt_conversation_deepseek/",
