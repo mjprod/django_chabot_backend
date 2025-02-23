@@ -24,6 +24,10 @@ from ai_config.ai_constants import (
     LANGUAGE_DEFAULT,
 )
 
+from api.brain_view import (
+    get_document_count,
+)
+
 logger = logging.getLogger(__name__)
 
 def fuzzy_match_with_dynamic_context(
@@ -507,6 +511,191 @@ class FinaliseConversationView(MongoDBMixin, APIView):
         except Exception as e:
             return Response(
                 {"error": f"Error finalizing conversation: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+        finally:
+            if db is not None:
+                self.close_db()
+                
+class FinaliseAllConversationsView(MongoDBMixin, APIView):
+    """
+    This view finalizes all conversations by setting their status to "done".
+    """
+    def post(self, request, *args, **kwargs):
+        db = None
+        try:
+            db = self.get_db()
+            # Update all documents in the "conversations" collection,
+            # setting the "status" field to "done"
+            result = db.conversations.update_many(
+                {},
+                {"$set": {"status": "done"}}
+            )
+            return Response(
+                {
+                    "message": "All conversations finalized successfully.",
+                    "modified_count": result.modified_count
+                },
+                status=status.HTTP_200_OK
+            )
+        except Exception as e:
+            return Response(
+                {"error": f"Error finalizing all conversations: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+        finally:
+            if db is not None:
+                self.close_db()
+
+def categorize_conversation_resolution(conversation: dict, db) -> dict:
+    """
+    Analyzes the conversation by extracting knowledge items.
+    
+    If candidate items are present:
+      - If the short answer indicates that there is no relevant resolution,
+        the conversation is categorized as "useless": it is inserted into the
+        'read_conversation_useless' collection and removed from 'conversations'.
+      - Else, if the candidate item has a non-empty 'raw' field,
+        the candidate answer is added to the conversation, which is then moved
+        to 'read_conversation_into_brain' and deleted from 'conversations'.
+      - Else if the 'raw' field is empty,
+        the conversation is updated with the candidate answer, moved to the
+        'read_conversation_no_brain' collection, and deleted from 'conversations'.
+        
+    Returns:
+        A dictionary representing the candidate answer if a relevant resolution is found,
+        or an empty dictionary if the conversation is categorized as useless.
+    """
+    candidate_items = extrair_knowledge_items(conversation)
+    
+    if candidate_items:
+        candidate_item = candidate_items[0]
+        answer = candidate_item.get("answer", {})
+        # Retrieve and standardize the short answer text
+        short_text = answer.get("short", {}).get("en", "").strip().lower()
+        
+        # If the short answer explicitly indicates no relevant resolution
+        if short_text == "there is no relevant resolution in this conversation.":
+            db.read_conversation_useless.insert_one(conversation)
+            db.conversations.delete_one({"session_id": conversation["session_id"]})
+            return {}
+        
+        # Add the candidate answer into the conversation object.
+        conversation["extracted_answer"] = answer
+        
+        # Check the 'raw' field in the candidate answer
+        raw_value = answer.get("raw")
+        if raw_value:
+            # If 'raw' is not empty, move to 'read_conversation_into_brain'
+            db.read_conversation_into_brain.insert_one(conversation)
+        else:
+            # If 'raw' is empty, move to 'read_conversation_no_brain'
+            db.read_conversation_no_brain.insert_one(conversation)
+            
+        # Remove the conversation from the main 'conversations' collection
+        db.conversations.delete_one({"session_id": conversation["session_id"]})
+        
+        return answer
+    else:
+        # If no candidate items were extracted, treat the conversation as useless.
+        db.read_conversation_useless.insert_one(conversation)
+        db.conversations.delete_one({"session_id": conversation["session_id"]})
+        return {}
+
+class SeparateConversationsView(MongoDBMixin, APIView):
+    """
+    This view retrieves all conversation session IDs from the "conversations" collection.
+    For each conversation with status "done", it processes the conversation using the
+    categorize_conversation_resolution function and moves it to the appropriate collection.
+    It returns an array that shows which session ID was moved to which collection.
+    """
+    def get(self, request):
+        db = None
+        results = []
+        try:
+            db = self.get_db()
+            # Retrieve only the "session_id" field from all conversations
+            sessions = list(db.conversations.find({}, {"session_id": 1, "_id": 0}))
+            logger.debug(f"Retrieved session IDs: {sessions}")
+
+            for session in sessions:
+                session_id = session.get("session_id")
+                if not session_id:
+                    logger.warning("Skipping a conversation with missing session_id.")
+                    continue
+
+                # Retrieve the full conversation based on session_id
+                conversation = db.conversations.find_one({"session_id": session_id})
+                if conversation is None:
+                    logger.warning(f"Conversation with session_id {session_id} not found.")
+                    continue
+
+                # Process only conversations with status "done"
+                if conversation.get("status") != "done":
+                    logger.debug(f"Skipping conversation {session_id} with status: {conversation.get('status')}")
+                    continue
+
+                # Call the categorization method to process the conversation.
+                candidate_answer = categorize_conversation_resolution(conversation, db)
+
+                # Determine the category based on the candidate answer:
+                if candidate_answer == {}:
+                    category = "useless"
+                else:
+                    if candidate_answer.get("raw"):
+                        category = "into_brain"
+                    else:
+                        category = "no_brain"
+
+                results.append({
+                    "session_id": session_id,
+                    "category": category
+                })
+                logger.debug(f"Processed conversation {session_id} categorized as {category}")
+
+            return Response({
+                "message": "Conversations processed successfully.",
+                "results": results
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            logger.exception("Error processing conversations")
+            return Response({
+                "error": f"Error processing conversations: {str(e)}"
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        finally:
+            if db is not None:
+                self.close_db()
+
+class DashboardCountsView(MongoDBMixin, APIView):
+    """
+    This endpoint returns the counts for:
+      - Total conversations
+      - Useless conversations
+      - No Brain conversations
+      - Into Brain conversations
+      - Total knowledge in brain (sum of the three latter)
+    """
+    def get(self, request):
+        db = None
+        try:
+            db = self.get_db()
+            conversations_count = db.conversations.count_documents({})
+            useless_count = db.read_conversation_useless.count_documents({})
+            no_brain_count = db.read_conversation_no_brain.count_documents({})
+            into_brain_count = db.read_conversation_into_brain.count_documents({})
+            brain_count =  get_document_count()
+
+            data = {
+                "conversations": conversations_count,
+                "useless": useless_count,
+                "noBrain": no_brain_count,
+                "intoBrain": into_brain_count,
+                "brainCount": brain_count,
+            }
+            return Response(data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(
+                {"error": f"Error retrieving dashboard counts: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
         finally:

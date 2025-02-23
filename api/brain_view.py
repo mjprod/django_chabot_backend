@@ -57,6 +57,12 @@ def load_all_documents() -> List[Dict]:
     logger.debug(f"Total de documentos carregados: {len(all_documents)}")
     return all_documents
 
+def get_document_count() -> Optional[Dict]:
+    documents = load_all_documents()
+    num_registros = len(documents)
+    print(f"Número de registros: {num_registros}")
+    return num_registros
+
 def get_document_by_id(document_id: str) -> Optional[Dict]:
     """
     Busca e retorna o documento (como dict) que possui o ID informado.
