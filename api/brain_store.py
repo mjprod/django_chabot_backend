@@ -193,8 +193,9 @@ class MultiRetriever:
 )
                 results = retriever.invoke(query)
                 all_results.extend(results)
-                logger.info(f"Collection: {store._collection} → Retrieved {len(results)} results")
-                logger.info(f"Results: {[r.metadata.get('id', 'unknown') for r in results]}")
+                
+                # logger.info(f"Collection: {store._collection} → Retrieved {len(results)} results")
+                # logger.info(f"Results: {[r.metadata.get('id', 'unknown') for r in results]}")
             return all_results[:3]
         finally:
             gc.collect()
