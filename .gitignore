@@ -85,3 +85,4 @@ chroma_db/977d8e6a-467c-45e7-b0bb-3a8a908b0e7c/header.bin
 chroma_db/977d8e6a-467c-45e7-b0bb-3a8a908b0e7c/index_metadata.pickle
 chroma_db/977d8e6a-467c-45e7-b0bb-3a8a908b0e7c/length.bin
 chroma_db/977d8e6a-467c-45e7-b0bb-3a8a908b0e7c/link_lists.bin
+*.bin

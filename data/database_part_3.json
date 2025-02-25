@@ -38,7 +38,7 @@
                 "betting",
                 "history"
             ],
-            "subCategory": "transaction_history",
+            "subCategory": "4D Lotto",
             "difficulty": 2,
             "confidence": 0.5,
             "dateCreated": "2024-10-24T15:47:00Z",
@@ -116,7 +116,7 @@
                 "technical_support",
                 "service"
             ],
-            "subCategory": "live_support",
+            "subCategory": "Feedback",
             "difficulty": 1,
             "confidence": 0.5,
             "dateCreated": "2024-10-24T15:48:00Z",
@@ -192,7 +192,7 @@
                 "demo_games",
                 "practice"
             ],
-            "subCategory": "game_demo",
+            "subCategory": "4D Lotto",
             "difficulty": 1,
             "confidence": 0.5,
             "dateCreated": "2024-10-24T15:49:00Z",
@@ -268,7 +268,7 @@
                 "withdrawals",
                 "account_management"
             ],
-            "subCategory": "withdrawal_status",
+            "subCategory": "Account",
             "difficulty": 2,
             "confidence": 0.5,
             "dateCreated": "2024-10-24T15:50:00Z",
@@ -346,7 +346,7 @@
                 "customer_support",
                 "transactions"
             ],
-            "subCategory": "transaction_disputes",
+            "subCategory": "Finance",
             "difficulty": 2,
             "confidence": 0.5,
             "dateCreated": "2024-10-24T15:53:00Z",
@@ -424,7 +424,7 @@
                 "user_interface",
                 "customization"
             ],
-            "subCategory": "language_settings",
+            "subCategory": "Other",
             "difficulty": 1,
             "confidence": 0.5,
             "dateCreated": "2024-10-22T09:41:18Z",
@@ -576,7 +576,7 @@
                 "withdrawals",
                 "limits"
             ],
-            "subCategory": "withdrawal_limits",
+            "subCategory": "Finance",
             "difficulty": 2,
             "confidence": 0.5,
             "dateCreated": "2024-10-23T11:34:31Z",
@@ -654,7 +654,7 @@
                 "fees",
                 "transactions"
             ],
-            "subCategory": "transaction_fees",
+            "subCategory": "Finance",
             "difficulty": 1,
             "confidence": 0.5,
             "dateCreated": "2024-10-23T11:25:21Z",
@@ -730,7 +730,7 @@
                 "deposits",
                 "requirements"
             ],
-            "subCategory": "deposit_limits",
+            "subCategory": "Finance",
             "difficulty": 2,
             "confidence": 0.5,
             "dateCreated": "2024-10-24T15:44:00Z",
@@ -808,7 +808,7 @@
                 "gaming",
                 "customer_service"
             ],
-            "subCategory": "technical_issues",
+            "subCategory": "4D Lotto",
             "difficulty": 2,
             "confidence": 0.5,
             "dateCreated": "2024-10-24T15:55:00Z",
@@ -884,7 +884,7 @@
                 "platform_updates",
                 "new_content"
             ],
-            "subCategory": "game_updates",
+            "subCategory": "4D Lotto",
             "difficulty": 1,
             "confidence": 0.5,
             "dateCreated": "2024-10-24T15:56:00Z",
@@ -960,7 +960,7 @@
                 "login",
                 "technical_support"
             ],
-            "subCategory": "password_issues",
+            "subCategory": "Security",
             "difficulty": 2,
             "confidence": 0.5,
             "dateCreated": "2024-10-22T12:52:20Z",
@@ -1038,7 +1038,7 @@
                 "deposits",
                 "transactions"
             ],
-            "subCategory": "deposit_timing",
+            "subCategory": "Finance",
             "difficulty": 2,
             "confidence": 0.5,
             "dateCreated": "2024-10-22T13:00:36Z",
@@ -1116,7 +1116,7 @@
                 "mobile_access",
                 "downloads"
             ],
-            "subCategory": "mobile_app",
+            "subCategory": "Technical",
             "difficulty": 1,
             "confidence": 0.5,
             "dateCreated": "2024-10-22T11:20:01Z",
@@ -1192,7 +1192,7 @@
                 "deposits",
                 "transactions"
             ],
-            "subCategory": "deposit_verification",
+            "subCategory": "Finance",
             "difficulty": 2,
             "confidence": 0.5,
             "dateCreated": "2024-10-23T02:27:38Z",
@@ -1270,7 +1270,7 @@
                 "gaming",
                 "connectivity"
             ],
-            "subCategory": "game_issues",
+            "subCategory": "4D Lotto",
             "difficulty": 2,
             "confidence": 0.5,
             "dateCreated": "2024-10-22T12:21:23Z",
@@ -1348,7 +1348,7 @@
                 "customer_support",
                 "closure"
             ],
-            "subCategory": "account_closure",
+            "subCategory": "Account",
             "difficulty": 2,
             "confidence": 0.5,
             "dateCreated": "2024-10-24T15:57:00Z",
@@ -1426,7 +1426,7 @@
                 "notifications",
                 "preferences"
             ],
-            "subCategory": "notification_settings",
+            "subCategory": "Other",
             "difficulty": 2,
             "confidence": 0.5,
             "dateCreated": "2024-10-24T15:58:00Z",
