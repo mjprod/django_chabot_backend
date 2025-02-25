@@ -1,0 +1,248 @@
+[
+    {
+        "name": "3rd Party",
+        "subcategory": [
+            {
+                "name": "Live Casino",
+                "subcategory": [
+                    {
+                        "name": "ALLBET",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "DREAMGAMING",
+                        "subcategory": []
+                    }
+                ]
+            },
+            {
+                "name": "Slot Game",
+                "subcategory": [
+                    {
+                        "name": "918 KISS",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "PUSST 888",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "MEGA888",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "XE88",
+                        "subcategory": []
+                    }
+                ]
+            },
+            {
+                "name": "Soccer",
+                "subcategory": []
+            }
+        ]
+    },
+    {
+        "name": "4D Lotto",
+        "subcategory": [
+            {
+                "name": "Grand Tiger",
+                "subcategory": []
+            },
+            {
+                "name": "MAGNUM",
+                "subcategory": []
+            },
+            {
+                "name": "Grand Dragon 6D",
+                "subcategory": []
+            },
+            {
+                "name": "Toto 5D6D",
+                "subcategory": []
+            },
+            {
+                "name": "9Lotto",
+                "subcategory": []
+            },
+            {
+                "name": "9Lotto 6D",
+                "subcategory": []
+            },
+            {
+                "name": "Betting",
+                "subcategory": []
+            },
+            {
+                "name": "Result",
+                "subcategory": []
+            },
+            {
+                "name": "Bet History",
+                "subcategory": []
+            }
+        ]
+    },
+    {
+        "name": "Account",
+        "subcategory": [
+            {
+                "name": "Personal Data",
+                "subcategory": [
+                    {
+                        "name": "Change Profile Photo",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "Change Name",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "Change Email",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "Change Phone Number",
+                        "subcategory": []
+                    }
+                ]
+            },
+            {
+                "name": "Change Password",
+                "subcategory": []
+            },
+            {
+                "name": "Change Language",
+                "subcategory": []
+            },
+            {
+                "name": "VIP",
+                "subcategory": [
+                    {
+                        "name": "Lucky Spin",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "redeem Store",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "Points to redeem",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "Commission",
+                        "subcategory": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Customers Service",
+        "subcategory": [
+            {
+                "name": "Customers Feedback",
+                "subcategory": []
+            }
+        ]
+    },
+    {
+        "name": "Finance / Wallet",
+        "subcategory": [
+            {
+                "name": "Top up / deposits",
+                "subcategory": [
+                    {
+                        "name": "ATM",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "Transactions",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "Fast Payment",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "Banks",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "Maybank",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "CIMB Bank",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "Update Receipt",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "JokerID",
+                        "subcategory": []
+                    }
+                ]
+            },
+            {
+                "name": "Withdrawals",
+                "subcategory": [
+                    {
+                        "name": "Add Account",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "Payouts /",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "Prize",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "Payments",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "Pay Delay",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "Fees",
+                        "subcategory": []
+                    }
+                ]
+            },
+            {
+                "name": "Credit share",
+                "subcategory": []
+            },
+            {
+                "name": "Transactions history",
+                "subcategory": []
+            }
+        ]
+    },
+    {
+        "name": "Technical / Security",
+        "subcategory": [
+            {
+                "name": "Systems Error",
+                "subcategory": [
+                    {
+                        "name": "VPN",
+                        "subcategory": []
+                    },
+                    {
+                        "name": "Account Security",
+                        "subcategory": []
+                    }
+                ]
+            }
+        ]
+    }
+
+]

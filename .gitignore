@@ -51,6 +51,7 @@ db.sqlite3
 
 # Environments
 .env
+.venv
 
 # Jupyter Notebook files:
 .ipynb_checkpoints/
