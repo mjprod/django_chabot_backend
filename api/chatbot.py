@@ -15,14 +15,17 @@ import requests
 from bson import ObjectId
 from django.conf import settings
 from dotenv import load_dotenv
+
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_cohere import CohereEmbeddings
-from langchain_community.vectorstores import Chroma
+from langchain.embeddings import CohereEmbeddings
+from langchain.vectorstores import Chroma
+
 from langchain_community.vectorstores.utils import filter_complex_metadata
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_openai import ChatOpenAI
+
 from openai import OpenAI
 from pydantic import BaseModel, Field
 
@@ -54,7 +57,7 @@ from ai_config.ai_prompts import (
     PROMPT_TEMPLATE_MONGO_AND_OPENAI,
 )
 
-from api.brain_view import (
+from api.views.brain_view import (
     get_document_by_id,
     get_document_by_question_text,
 )
@@ -150,6 +153,7 @@ def load_and_process_json_file() -> List[dict]:
                             "lastUpdated": metadata.get("lastUpdated", ""),
                             "version": metadata.get("version", "1.0"),
                             "status": metadata.get("status", "active"),
+                            "id": item.get("id", "")
                         }
 
                         # Create structured document
@@ -193,7 +197,7 @@ def load_and_process_json_file() -> List[dict]:
     return all_documents
 
 
-embedding_model = CohereEmbeddings(model=COHERE_MODEL)
+embedding_model = CohereEmbeddings(model=COHERE_MODEL, user_agent="glaucomp")
 vectorstores = []
 documents = load_and_process_json_file()
 
@@ -207,8 +211,7 @@ class CustomDocument:
     def __str__(self):
         # Mostra o id e os primeiros 100 caracteres do conteúdo para não poluir o log
         return f"CustomDocument(id={self.id}, page_content={self.page_content[:100]}..., metadata={self.metadata})"
-
-
+    
 # Create Document Objects
 doc_objects = [
     CustomDocument(
@@ -351,17 +354,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
 
 # Process documents in batches
 def create_vector_store(documents, batch_size=500):
-    try:
-        '''
-        if not documents:
-            logger.error("No documents provided for vector store creation")
-            return None
-
-        # Create the old directory if it doesn't exist
-        os.makedirs(CHROMA_OLD_PATH, exist_ok=True)
-        logger.info(f"Ensuring old vector store directory exists: {CHROMA_OLD_PATH}")
-        '''
-    
+    try:    
         logger.info("Starting document splitting process")
         split_start = time.time()
 
@@ -375,7 +368,9 @@ def create_vector_store(documents, batch_size=500):
         logger.info("Initializing Chroma vector store")
         store_start = time.time()
 
-        # logger.info("@@@@: "+str(split_data[0]))
+        for doc in split_data:
+            logger.info(f"Adding document to Chroma with ID: {doc.id} and metadata ID: {doc.metadata.get('id')}")
+
         # Create store specifically for the old JSON files
         store = Chroma.from_documents(
             documents=split_data,
@@ -403,10 +398,9 @@ def create_vector_store(documents, batch_size=500):
 
 
 # Process docs
-filtered_docs = filter_complex_metadata(doc_objects)
 try:
     logger.info("Starting vector store creation with filtered documents")
-    store = create_vector_store(filtered_docs)
+    store = create_vector_store(doc_objects)
     logger.info("Vector store creation completed successfully")
 except Exception as e: 
     logger.error(f"Failed to create vector store: {str(e)}")
@@ -1650,7 +1644,7 @@ def extrair_knowledge_items(conversation):
     client = OpenAI(api_key=api_key)
     try:
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model=OPENAI_MODEL,
             messages=[
                 {"role": "system", "content": "You are a helpful assistant that extracts and summarizes resolution points from a conversation."},
                 {"role": "user", "content": extraction_prompt},
@@ -1776,5 +1770,85 @@ def extrair_knowledge_items(conversation):
         logger.error(f"Error during vector store retrieval: {str(ve)}")
         return []
     
+def update_chroma_document(doc_id, new_data):
+    """
+    Update an existing document in the ChromaDB collection.
+    
+    :param store: The ChromaDB collection object
+    :param doc_id: The unique ID of the document to update
+    :param new_data: Dictionary containing updated data fields
+    """
+    try:
 
+        if store:  # Only search if store was successfully created
+            search_results = search_by_id(store, "0068")  # Replace "0001" with your ID
+            print("Search Results:", search_results)
+        else:
+            print("Vector store creation failed, cannot perform search.")
+
+        all_docs = store.get()
+
+        print(json.dumps(all_docs, indent=2)[:2000])  
+        existing_docs = store.get(ids=[doc_id])
+
+        if not existing_docs["documents"]:
+            print(f"Document with ID {doc_id} not found.")
+            return False
+
+        # Retrieve the existing document
+        existing_doc = json.loads(existing_docs["documents"][0])  # Convert back to dictionary if stored as JSON string
+
+        # Merge the existing document with new data
+        updated_doc = {**existing_doc, **new_data}
+
+        # Remove the old document before re-adding
+        store.delete(ids=[doc_id])
+
+        # Reinsert the updated document
+        store.add(
+            documents=[json.dumps(updated_doc)],  # Store as JSON string
+            ids=[doc_id],
+            metadatas=[updated_doc.get("metadata", {})]
+        )
+
+        print(f"Document with ID {doc_id} updated successfully.")
+        return True
+
+    except Exception as e:
+        print(f"Error updating document: {e}")
+        return False
+    
+def search_by_id(store, custom_id):
+   results = store.get(
+       where={"metadata.id": custom_id},  # Filter by the 'id' in metadata
+       include=["documents", "metadatas"]
+   )
+   return results
+
+def update_by_id(store, custom_id, new_page_content=None, new_metadata=None):
+    results = search_by_id(store, custom_id)  # Use the search function
+
+    if not results or not results["ids"]:
+        print(f"Document with id '{custom_id}' not found.")
+        return
+
+    chroma_id = results["ids"][0] # Take the first ID if multiple are returned
+
+    update_data = {}
+
+    if new_page_content:
+        update_data["documents"] = [new_page_content]
+    if new_metadata:
+        # Ensure the 'id' is still present in the updated metadata. This is extremely important
+        new_metadata["id"] = custom_id
+        update_data["metadatas"] = [new_metadata]
+
+    if not update_data:
+        print("No updates specified.")
+        return
+
+    update_data["ids"] = [chroma_id]
+
+    store.update(**update_data)
+    print(f"Document with id '{custom_id}' updated.")
 

@@ -12,6 +12,7 @@ from .views.conversation_view import (
     FinaliseAllConversationsView,
     SeparateConversationsView,
     DashboardCountsView,
+    UpdateBrainView,
     # PromptConversationDeepSeekView,
     PromptConversationAdminView,
 )
@@ -46,6 +47,7 @@ urlpatterns = [
     path("finalise_conversation/<conversation_id>/", FinaliseConversationView.as_view(), name="finalise_conversation"),
     path("finalise_all_conversation/", FinaliseAllConversationsView.as_view(), name="finalise_all_conversation"),
     path("dashboard_counts/", cache_page(60 * 15)(DashboardCountsView.as_view()), name="dashboard_counts"),
+    path("update_brain/", cache_page(60 * 15)(UpdateBrainView.as_view()), name="update_brain"),
 
     # path(
     #    "prompt_conversation_deepseek/",

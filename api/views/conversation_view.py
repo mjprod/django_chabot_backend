@@ -14,6 +14,7 @@ from ..chatbot import (
     prompt_conversation_admin,
     check_answer_mongo_and_openai,
     extrair_knowledge_items,
+    update_chroma_document,
 )
 from ..serializers import (
     PromptConversationSerializer,
@@ -24,7 +25,7 @@ from ai_config.ai_constants import (
     LANGUAGE_DEFAULT,
 )
 
-from api.brain_view import (
+from api.views.brain_view import (
     get_document_count,
 )
 
@@ -701,3 +702,43 @@ class DashboardCountsView(MongoDBMixin, APIView):
         finally:
             if db is not None:
                 self.close_db()
+
+
+
+class UpdateBrainView(APIView):
+    """
+    This endpoint returns the counts for:
+      - Total conversations
+      - Useless conversations
+      - No Brain conversations
+      - Into Brain conversations
+      - Total knowledge in brain (sum of the three latter)
+    """
+    def get(self, request):
+        try:
+            conversations = update_chroma_document(
+                "0068",
+                {
+                    "metadata": {
+                    "status": "archived",
+                    "lastUpdated": "2025-02-24"
+                },
+                    "answer": {
+                "short": {"en": "Updated short answer"},
+                "detailed": {
+                    "en": "This is the updated detailed answer with more information."
+                }
+        }
+    }
+)
+           
+
+            data = {
+                "conversations": conversations,
+            }
+            return Response(data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(
+                {"error": f"Error retrieving dashboard counts: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )        
