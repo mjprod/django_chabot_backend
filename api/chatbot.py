@@ -19,6 +19,7 @@ from dotenv import load_dotenv
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import CohereEmbeddings
 from langchain.vectorstores import Chroma
+from langchain.schema import Document
 
 from langchain_community.vectorstores.utils import filter_complex_metadata
 from langchain_core.output_parsers import StrOutputParser
@@ -44,6 +45,7 @@ from ai_config.ai_constants import (
     EMBEDDING_CHUNK_SIZE,
     EMBEDDING_OVERLAP,
     URL_TRANSLATE_EN_TO_MS,
+    LANGUAGE_DEFAULT,
 )
 
 from ai_config.ai_prompts import (
@@ -57,31 +59,15 @@ from ai_config.ai_prompts import (
     PROMPT_TEMPLATE_MONGO_AND_OPENAI,
 )
 
-from api.views.brain_view import (
+from api.views.brain_file_reader import (
     get_document_by_id,
     get_document_by_question_text,
+    update_answer_detailed_en
 )
 
-from api.brain_store import (
+from api.brain_retriever import (
   MultiRetriever,
 )
-
-
-'''
-# this is split to allow the old database to be stored in a different directory
-CHROMA_BASE_PATH = os.path.join(
-    os.path.dirname(os.path.dirname(__file__)), "data/chroma_db"
-)
-CHROMA_OLD_PATH = os.path.join(CHROMA_BASE_PATH, "old")
-
-# Keep the original VECTOR_STORE_PATHS for multi-language
-VECTOR_STORE_PATHS = {
-    "en": os.path.join(CHROMA_BASE_PATH, "en"),
-    "ms_MY": os.path.join(CHROMA_BASE_PATH, "ms_MY"),
-    "zh_CN": os.path.join(CHROMA_BASE_PATH, "zh_CN"),
-    "zh_TW": os.path.join(CHROMA_BASE_PATH, "zh_TW"),
-}
-'''
 
 def monitor_memory():
     """Start memory monitoring and return initial snapshot"""
@@ -108,15 +94,6 @@ prompt = ""
 
 # Load environment variables
 load_dotenv()
-
-# Language constants
-LANGUAGE_DEFAULT = "en"
-SUPPORTED_LANGUAGES = {
-    "en": "english",
-    "ms_MY": "malay",
-    "zh_CN": "chinese_simplified",
-    "zh_TW": "chinese_traditional",
-}
 
 
 # added function for loading and processing the json file
@@ -169,7 +146,7 @@ def load_and_process_json_file() -> List[dict]:
                                 ),
                             },
                             "answer": {
-                                "short": item.get("answer", {}).get("short", {}),
+                                # "short": item.get("answer", {}).get("short", {}),
                                 "detailed": item.get("answer", {}).get("detailed", {}),
                                 "conditions": item.get("answer", {}).get(
                                     "conditions", []
@@ -221,7 +198,6 @@ doc_objects = [
             f"Answer: {doc['answer']['detailed']['en']}"
         ),
         metadata={
-            "id": doc.get("id", "no_id"),
             "category": ",".join(doc["metadata"].get("category", [])),
             "subCategory": doc["metadata"].get("subCategory", ""),
             "difficulty": doc["metadata"].get("difficulty", 0),
@@ -253,13 +229,11 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
         chunks = []
        
         for doc in documents:
-            # logger.info("@@@@ :"+str((doc)))
             try:
                 metadata = {**(doc.metadata if isinstance(doc.metadata, dict) else {}), "id": getattr(doc, "id", "no_id")}
                 text = doc.page_content
                 id_doc = getattr(doc, "id", "no_id")
-           
-
+        
                 # Handle short documents
                 if self.length_function(text) <= self.chunk_size:
                     chunks.append(CustomDocument(id=id_doc,page_content=text, metadata=metadata))
@@ -344,11 +318,9 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                             metadata=metadata
                         )
                     )
-
             except Exception as e:
                 logger.error(f"Error splitting document: {str(e)}")
                 continue
-
         return chunks
 
 
@@ -368,13 +340,11 @@ def create_vector_store(documents, batch_size=500):
         logger.info("Initializing Chroma vector store")
         store_start = time.time()
 
-        for doc in split_data:
-            logger.info(f"Adding document to Chroma with ID: {doc.id} and metadata ID: {doc.metadata.get('id')}")
-
         # Create store specifically for the old JSON files
         store = Chroma.from_documents(
+            ids=[doc.id for doc in doc_objects],
             documents=split_data,
-            collection_name="RAG",  # Changed collection name to differentiate
+            collection_name="RAG",
             embedding=embedding_model,
             persist_directory="./chroma_db",
             collection_metadata={
@@ -383,19 +353,16 @@ def create_vector_store(documents, batch_size=500):
                 "hnsw:search_ef": 50,
             },
         )
-
         logger.info(
             f"Vector store creation completed in {time.time() - store_start:.2f}s"
         )
         vectorstores.append(store)
         return store
-
     except Exception as e:
         logger.error(f"Vector store creation failed: {str(e)}")
         raise
     finally:
         del split_data
-
 
 # Process docs
 try:
@@ -496,7 +463,6 @@ class ConversationMetaData:
             "translations": self.translations,
         }
 
-
 # this is the OPENAI translate function
 def translate_and_clean(text):
     logger.error("translate_and_clean")
@@ -523,9 +489,7 @@ def translate_and_clean(text):
         )
 
         translated_text = response.choices[0].message.content.strip()
-
         translated_text = re.sub(r"^(Translated.*?:)", "", translated_text).strip()
-
         return translated_text
 
     except Exception as e:
@@ -543,7 +507,6 @@ class GradeDocuments(BaseModel):
         ge=0.0,
         le=1.0,
     )
-
 
 # Initialize LLM for Grading
 llm_grader = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
@@ -563,7 +526,6 @@ document_grade_prompt = ChatPromptTemplate.from_messages(
 # Runnable Chain for Document Grader
 retrieval_grader = document_grade_prompt | structured_llm_grader
 
-
 # Define GradeHallucinations Model
 class GradeConfidenceLevel(BaseModel):
     confidence_score: float = Field(
@@ -572,7 +534,6 @@ class GradeConfidenceLevel(BaseModel):
         ge=0.0,
         le=1.0,
     )
-
 
 # Initialize LLM for Hallucination Grading
 llm_confidence = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
@@ -593,7 +554,6 @@ confidence_prompt = ChatPromptTemplate.from_messages(
 # Runnable Chain for Confidence Grader
 confidence_grader = confidence_prompt | structured_confidence_grader
 
-
 # Define Prompt Template for RAG Chain
 rag_prompt_template = ChatPromptTemplate.from_messages(
     [
@@ -613,7 +573,6 @@ rag_llm = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
 # Define Formatting Function
 def format_docs(docs):
     return "\n".join(doc.page_content for doc in docs)
-
 
 # Create RAG Chain
 rag_chain = (
@@ -1075,7 +1034,6 @@ def generate_prompt_conversation(
 
 
 def prompt_conversation(self, user_prompt, language_code=LANGUAGE_DEFAULT):
-
     start_time = time.time()
     logger.info(f"Starting prompt_conversation request - Language: {language_code}")
     db = None
@@ -1612,9 +1570,6 @@ def check_answer_mongo_and_openai(user_question, matches):
 
     return final_response
 
-
-
-
 logger = logging.getLogger()
 
 def extrair_knowledge_items(conversation):
@@ -1627,7 +1582,6 @@ def extrair_knowledge_items(conversation):
         msg.get("content", "") for msg in conversation.get("messages", []) if msg.get("content")
     )
     
-    # Crie um prompt para extrair os pontos de resolução e gerar um resumo conciso ao mesmo tempo
     extraction_prompt = (
         "Analyze the conversation below and extract the parts where the user's problem was solved "
         "or the issue was resolved. Provide a concise summary in English, capturing the resolutions or "
@@ -1659,11 +1613,9 @@ def extrair_knowledge_items(conversation):
 
     extracted_text = response.choices[0].message.content.strip()
     
-    # Se nada foi extraído ou o LLM retornar "None", retorne uma lista vazia
     if not extracted_text or extracted_text.lower() == "none":
         return []
 
-    # Divida o texto extraído em duas partes, a resolução completa e a versão resumida
     if "Summary:" in extracted_text:
         full_resolution, reduced_summary = extracted_text.split("Summary:", 1)
         reduced_summary = reduced_summary.strip()
@@ -1673,7 +1625,6 @@ def extrair_knowledge_items(conversation):
    
     full_resolution = full_resolution.replace("Resolution:", "").strip()
     
-    # Crie o item de conhecimento multilíngue
     candidate_item = {
         "id": conversation["session_id"] + "_resolucao",
         "question": {
@@ -1685,9 +1636,9 @@ def extrair_knowledge_items(conversation):
             }
         },
         "answer": {
-            "short": {
-                "en": reduced_summary,
-            },
+           # "short": {
+            #    "en": reduced_summary,
+            # },
             "detailed": {
                 "en": full_resolution,
             },
@@ -1727,7 +1678,6 @@ def extrair_knowledge_items(conversation):
                     question_only = question_part.replace("Question:", "").strip()
                     doc_id=get_document_by_question_text(question_only)
                     
-                
                 if doc_id not in seen_ids:
                     doc_ids.append(doc_id)
                     seen_ids.add(doc_id)
@@ -1773,7 +1723,6 @@ def extrair_knowledge_items(conversation):
 def update_chroma_document(doc_id, new_data):
     """
     Update an existing document in the ChromaDB collection.
-    
     :param store: The ChromaDB collection object
     :param doc_id: The unique ID of the document to update
     :param new_data: Dictionary containing updated data fields
@@ -1786,11 +1735,14 @@ def update_chroma_document(doc_id, new_data):
         else:
             print("Vector store creation failed, cannot perform search.")
 
+        return True
         all_docs = store.get()
 
-        print(json.dumps(all_docs, indent=2)[:2000])  
-        existing_docs = store.get(ids=[doc_id])
+        for key, value in all_docs.items():
+                print(f"{key}: {value}")
 
+        existing_docs = store.get(ids=[doc_id], include=["documents", "metadatas"])
+        
         if not existing_docs["documents"]:
             print(f"Document with ID {doc_id} not found.")
             return False
@@ -1818,37 +1770,62 @@ def update_chroma_document(doc_id, new_data):
         print(f"Error updating document: {e}")
         return False
     
-def search_by_id(store, custom_id):
-   results = store.get(
-       where={"metadata.id": custom_id},  # Filter by the 'id' in metadata
-       include=["documents", "metadatas"]
-   )
-   return results
+def search_by_id(store: Chroma, custom_id: str):
+    results = store.get(
+        where={"id": custom_id},
+        include=["documents", "metadatas"]
+    )
+    return results
 
-def update_by_id(store, custom_id, new_page_content=None, new_metadata=None):
-    results = search_by_id(store, custom_id)  # Use the search function
+def atualizar_documento_by_custom_id(custom_id: str, answer: str):
+    try:
+        search_results = store.get(
+            where={"id": custom_id},
+            include=["metadatas","documents"]
+        )
 
-    if not results or not results["ids"]:
-        print(f"Document with id '{custom_id}' not found.")
-        return
+        if not search_results['ids']:
+            print(f"Documento com custom ID '{custom_id}' não encontrado.")
+            return
 
-    chroma_id = results["ids"][0] # Take the first ID if multiple are returned
+        document_id = search_results['ids'][0]
+        
+        doc = get_document_by_id(document_id) 
+        
+        
+        if doc:
+            update_answer_detailed_en(doc, answer)
 
-    update_data = {}
+        existing_metadata = search_results['metadatas'][0]
+        document = search_results['documents'][0]
+        question_text = document.split("\n")[0].replace("Question: ", "").strip()
 
-    if new_page_content:
-        update_data["documents"] = [new_page_content]
-    if new_metadata:
-        # Ensure the 'id' is still present in the updated metadata. This is extremely important
-        new_metadata["id"] = custom_id
-        update_data["metadatas"] = [new_metadata]
+        store.delete(ids=[document_id])
 
-    if not update_data:
-        print("No updates specified.")
-        return
+        new_document = CustomDocument(
+            id=custom_id,  # ou use document_id, se preferir manter o mesmo embedding_id
+            page_content=(
+                f"Question: {question_text}\n"
+                f"Answer: {answer}"
+            ),
+            metadata={
+                "category": ",".join(existing_metadata.get("category", [])),
+                "subCategory": existing_metadata.get("subCategory", ""),
+                "difficulty": existing_metadata.get("difficulty", 0),
+                "confidence": existing_metadata.get("confidence", 0.0),
+                # "intent": doc["question"].get("intent", ""),
+                # "variations": ", ".join(doc["question"].get("variations", [])),
+                #"conditions": ", ".join(doc["answer"].get("conditions", [])),
+            },
+        )
 
-    update_data["ids"] = [chroma_id]
 
-    store.update(**update_data)
-    print(f"Document with id '{custom_id}' updated.")
+        store.add_documents(documents=[new_document])
+        
 
+        print(f"Documento com custom ID '{custom_id}' atualizado com sucesso.")
+
+    except Exception as e:
+        print(f"Erro ao atualizar documento: {str(e)}")
+
+        

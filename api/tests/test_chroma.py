@@ -7,6 +7,7 @@ from typing import List
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import CohereEmbeddings
 from langchain.vectorstores import Chroma
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -199,7 +200,7 @@ def load_and_process_json_file() -> List[dict]:
                                 ),
                             },
                             "answer": {
-                                "short": item.get("answer", {}).get("short", {}),
+                                # "short": item.get("answer", {}).get("short", {}),
                                 "detailed": item.get("answer", {}).get("detailed", {}),
                                 "conditions": item.get("conditions", []
                                 ),
@@ -232,10 +233,10 @@ documents = load_and_process_json_file()
 # Create Document Objects
 doc_objects = [
     CustomDocument(
-        id=str(doc.get("id", "no_id")),  # Ensure ID is a string
+        id=str(doc.get("id", "no_id")),
         page_content=str(doc['answer']['detailed']['en']),
         metadata={
-            "id": str(doc.get("id", "no_id")),  # Ensure ID is a string and duplicated here
+            "id": str(doc.get("id", "no_id")),
             "category": ",".join(doc["metadata"].get("category", [])),
             "subCategory": doc["metadata"].get("subCategory", ""),
             "difficulty": doc["metadata"].get("difficulty", 0),
@@ -274,6 +275,7 @@ def create_vector_store(documents, batch_size=500):
 
         # Create store specifically for the old JSON files
         store = Chroma.from_documents(
+            ids=[doc.id for doc in doc_objects],
             documents=split_data,
             embedding=embedding_model,
             collection_name="RAG",  # Changed collection name to differentiate

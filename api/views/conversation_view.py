@@ -15,17 +15,19 @@ from ..chatbot import (
     check_answer_mongo_and_openai,
     extrair_knowledge_items,
     update_chroma_document,
+    atualizar_documento_by_custom_id,
 )
 from ..serializers import (
     PromptConversationSerializer,
     PromptConversationAdminSerializer,
+    UpdateAnswerBrain,
 )
 
 from ai_config.ai_constants import (
     LANGUAGE_DEFAULT,
 )
 
-from api.views.brain_view import (
+from api.views.brain_file_reader import (
     get_document_count,
 )
 
@@ -251,7 +253,7 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
 
 class PromptConversationView(MongoDBMixin, APIView):
     def post(self, request):
-        logger.info("Starting prompt_conversation_admin request")
+        logger.info("Starting prompt_conversation request")
 
         try:
             # Get the header value as a string
@@ -310,10 +312,6 @@ class PromptConversationView(MongoDBMixin, APIView):
                 user_prompt=validated_data["prompt"],
                 language_code=language_code,
             )
-
-            # generation_time = time.time() - generation_start
-            # if generation_time < 3:
-            # time.sleep(6)
 
             return Response(response, status=status.HTTP_200_OK)
 
@@ -573,7 +571,7 @@ def categorize_conversation_resolution(conversation: dict, db) -> dict:
         candidate_item = candidate_items[0]
         answer = candidate_item.get("answer", {})
         # Retrieve and standardize the short answer text
-        short_text = answer.get("short", {}).get("en", "").strip().lower()
+        short_text = answer.get("detailed", {}).get("en", "").strip().lower()
         
         # If the short answer explicitly indicates no relevant resolution
         if short_text == "there is no relevant resolution in this conversation.":
@@ -716,23 +714,22 @@ class UpdateBrainView(APIView):
     """
     def get(self, request):
         try:
-            conversations = update_chroma_document(
-                "0068",
-                {
-                    "metadata": {
-                    "status": "archived",
-                    "lastUpdated": "2025-02-24"
-                },
-                    "answer": {
-                "short": {"en": "Updated short answer"},
-                "detailed": {
-                    "en": "This is the updated detailed answer with more information."
-                }
-        }
-    }
-)
-           
 
+            # Validate input data
+            input_serializer = UpdateAnswerBrain(data=request.data)
+            if not input_serializer.is_valid():
+                logger.error(f"Validation failed: {input_serializer.errors}")
+                return Response(
+                    {"error": "Invalid input data", "details": input_serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Extract validated data
+            doc_id = input_serializer.validated_data["doc_id"]
+            new_answer = input_serializer.validated_data["new_answer"]
+
+            conversations = atualizar_documento_by_custom_id(
+                doc_id, new_answer)
             data = {
                 "conversations": conversations,
             }

@@ -26,11 +26,7 @@ def flatten_data(data: Any) -> List[Dict]:
     return flattened
 
 def load_all_documents() -> List[Dict]:
-    """
-    Carrega os documentos dos três arquivos JSON e retorna uma lista com todos eles,
-    garantindo que a estrutura seja uma lista de dicionários.
-    """
-    base_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
+    base_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..","..", "data")
     database_files = [
         "database_part_1.json",
         "database_part_2.json",
@@ -42,48 +38,64 @@ def load_all_documents() -> List[Dict]:
         file_path = os.path.join(base_dir, file_name)
         logger.debug(f"Processando arquivo: {file_path}")
         if not os.path.exists(file_path):
-            logger.error(f"Arquivo não encontrado: {file_path}")
+            logger.error(f"File not found: {file_path}")
             continue
         
         try:
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
-            # Achata a estrutura caso necessário
+        
             docs = flatten_data(data)
             all_documents.extend(docs)
         except Exception as e:
-            logger.exception(f"Erro ao ler {file_path}: {e}")
+            logger.exception(f"Erro to read {file_path}: {e}")
     
-    logger.debug(f"Total de documentos carregados: {len(all_documents)}")
+    logger.debug(f"Total of docs: {len(all_documents)}")
     return all_documents
 
 def get_document_count() -> Optional[Dict]:
     documents = load_all_documents()
-    num_registros = len(documents)
-    print(f"Número de registros: {num_registros}")
-    return num_registros
+    num_datas = len(documents)
+    print(f": {num_datas}")
+    return num_datas
 
 def get_document_by_id(document_id: str) -> Optional[Dict]:
-    """
-    Busca e retorna o documento (como dict) que possui o ID informado.
-    """
     documents = load_all_documents()
     for doc in documents:
         if doc.get("id") == document_id:
             return doc
 
-    logger.warning(f"Documento com ID {document_id} não encontrado.")
+    logger.warning(f"Document ID {document_id} not found.")
     return None
 
 def get_document_by_question_text(question_text: str) -> Optional[str]:
-    """
-    Busca o documento pelo texto da pergunta e retorna apenas o seu ID.
-    """
     documents = load_all_documents()
     for doc in documents:
-        # Verifica se o campo "question" existe e se o "text" confere com o parâmetro passado
         if doc.get("question", {}).get("text") == question_text:
             return doc.get("id")
 
     logger.warning(f"Documento com texto de pergunta '{question_text}' não encontrado.")
     return None
+
+def update_answer_detailed_en(document_id: str, new_value: str):
+    # Load all documents from JSON files
+    documents = load_all_documents()
+    updated = False
+
+    # Iterate over the documents to find the one with the matching id
+    for doc in documents:
+        if doc.get("id") == document_id:
+            # Check if the structure answer -> detailed exists
+            if "answer" in doc and "detailed" in doc["answer"]:
+                doc["answer"]["detailed"]["en"] = new_value
+                updated = True
+                break
+
+    if updated:
+        # Define the output file path for the updated JSON
+        output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "data", "updated_documents.json")
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(documents, f, indent=4, ensure_ascii=False)
+        print(f"Document {document_id} updated successfully. New answer.detailed.en: {new_value}")
+    else:
+        print(f"Document with ID {document_id} not found or 'answer/detailed' structure is missing.")
