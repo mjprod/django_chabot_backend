@@ -7,8 +7,8 @@ logger = logging.getLogger(__name__)
 
 def flatten_data(data: Any) -> List[Dict]:
     """
-    Se data for uma lista aninhada, achata-a e retorna uma lista de dicionários.
-    Se data já for uma lista de dicionários, retorna-a.
+    If 'data' is a nested list, flatten it and return a list of dictionaries.
+    If 'data' is already a list of dictionaries, return it.
     """
     flattened = []
     if isinstance(data, list):
@@ -18,15 +18,15 @@ def flatten_data(data: Any) -> List[Dict]:
             elif isinstance(item, dict):
                 flattened.append(item)
             else:
-                logger.error(f"Item inesperado: {item}")
+                logger.error(f"Unexpected item: {item}")
     elif isinstance(data, dict):
         flattened.append(data)
     else:
-        logger.error(f"Tipo de dado inesperado: {type(data)}")
+        logger.error(f"Unexpected data type: {type(data)}")
     return flattened
 
 def load_all_documents() -> List[Dict]:
-    base_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..","..", "data")
+    base_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "data")
     database_files = [
         "database_part_1.json",
         "database_part_2.json",
@@ -43,19 +43,18 @@ def load_all_documents() -> List[Dict]:
         try:
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
-        
             docs = flatten_data(data)
             all_documents.extend(docs)
         except Exception as e:
-            logger.exception(f"Error to read {file_path}: {e}")
+            logger.exception(f"Error reading {file_path}: {e}")
     
     return all_documents
 
-def get_document_count() -> Optional[Dict]:
+def get_document_count() -> Optional[int]:
     documents = load_all_documents()
-    num_datas = len(documents)
-    print(f": {num_datas}")
-    return num_datas
+    count = len(documents)
+    print(f"Total documents: {count}")
+    return count
 
 def get_document_by_id(document_id: str) -> Optional[Dict]:
     documents = load_all_documents()
@@ -72,10 +71,17 @@ def get_document_by_question_text(question_text: str) -> Optional[str]:
         if doc.get("question", {}).get("text") == question_text:
             return doc.get("id")
 
-    logger.warning(f"Documento com texto de pergunta '{question_text}' não encontrado.")
+    logger.warning(f"Document with question text '{question_text}' not found.")
     return None
 
-def update_answer_detailed_en(document: str, new_value: str):
+def update_answer_detailed_en(document: Dict, new_value: str):
+    """
+    Update the value of answer.detailed.en for the given document (identified by its 'id')
+    across multiple JSON files. If the document is found in one file, update that file in-place.
+    
+    :param document: The document dictionary (must contain the key "id").
+    :param new_value: The new value for answer.detailed.en.
+    """
     base_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "data")
     database_files = [
         "database_part_1.json",
@@ -91,29 +97,29 @@ def update_answer_detailed_en(document: str, new_value: str):
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
             
-            # Achata os dados caso estejam aninhados
+            # Flatten the data in case it is nested
             docs = flatten_data(data)
             updated = False
 
-            # Itera pelos documentos para encontrar o documento com o id desejado
+            # Iterate through documents to find the one with the matching id
             for doc in docs:
                 if doc.get("id") == document.get("id"):
                     if "answer" in doc and "detailed" in doc["answer"]:
                         doc["answer"]["detailed"]["en"] = new_value
                         updated = True
                         found = True
-                        break  # Documento encontrado; atualiza e sai do loop desse arquivo
+                        break  # Document found; update and exit the loop for this file
 
             if updated:
-                # Escreve de volta no mesmo arquivo
+                # Write back to the same file
                 with open(file_path, "w", encoding="utf-8") as f:
                     json.dump(docs, f, indent=4, ensure_ascii=False)
-                print(f"Documento {document} atualizado com sucesso em {file_name}.")
-                break  # Sai do loop geral, pois o documento foi atualizado
+                logger.debug(f"Document {document.get('id')} updated successfully in {file_name}.")
+                break  # Exit the overall loop since the document has been updated
             else:
-                print(f"Documento {document} não encontrado em {file_name}.")
+                logger.debug(f"Document {document.get('id')} not found in {file_name}.")
         except Exception as e:
-            print(f"Erro ao atualizar o arquivo {file_path}: {str(e)}")
+            logger.debug(f"Error updating file {file_path}: {str(e)}")
     
     if not found:
-        print(f"Documento {document} não encontrado em nenhum arquivo.")
+         logger.debug(f"Document {document.get('id')} not found in any file.")
