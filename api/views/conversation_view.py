@@ -704,17 +704,8 @@ class DashboardCountsView(MongoDBMixin, APIView):
 
 
 class UpdateBrainView(APIView):
-    """
-    This endpoint returns the counts for:
-      - Total conversations
-      - Useless conversations
-      - No Brain conversations
-      - Into Brain conversations
-      - Total knowledge in brain (sum of the three latter)
-    """
     def get(self, request):
         try:
-
             # Validate input data
             input_serializer = UpdateAnswerBrain(data=request.data)
             if not input_serializer.is_valid():
@@ -724,12 +715,12 @@ class UpdateBrainView(APIView):
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
-            # Extract validated data
             doc_id = input_serializer.validated_data["doc_id"]
             new_answer = input_serializer.validated_data["new_answer"]
 
             conversations = atualizar_documento_by_custom_id(
                 doc_id, new_answer)
+            
             data = {
                 "conversations": conversations,
             }

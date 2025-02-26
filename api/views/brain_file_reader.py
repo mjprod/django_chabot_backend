@@ -36,7 +36,6 @@ def load_all_documents() -> List[Dict]:
     all_documents = []
     for file_name in database_files:
         file_path = os.path.join(base_dir, file_name)
-        logger.debug(f"Processando arquivo: {file_path}")
         if not os.path.exists(file_path):
             logger.error(f"File not found: {file_path}")
             continue
@@ -48,9 +47,8 @@ def load_all_documents() -> List[Dict]:
             docs = flatten_data(data)
             all_documents.extend(docs)
         except Exception as e:
-            logger.exception(f"Erro to read {file_path}: {e}")
+            logger.exception(f"Error to read {file_path}: {e}")
     
-    logger.debug(f"Total of docs: {len(all_documents)}")
     return all_documents
 
 def get_document_count() -> Optional[Dict]:
@@ -77,25 +75,45 @@ def get_document_by_question_text(question_text: str) -> Optional[str]:
     logger.warning(f"Documento com texto de pergunta '{question_text}' não encontrado.")
     return None
 
-def update_answer_detailed_en(document_id: str, new_value: str):
-    # Load all documents from JSON files
-    documents = load_all_documents()
-    updated = False
+def update_answer_detailed_en(document: str, new_value: str):
+    base_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "data")
+    database_files = [
+        "database_part_1.json",
+        "database_part_2.json",
+        "database_part_3.json"
+    ]
+    
+    found = False
 
-    # Iterate over the documents to find the one with the matching id
-    for doc in documents:
-        if doc.get("id") == document_id:
-            # Check if the structure answer -> detailed exists
-            if "answer" in doc and "detailed" in doc["answer"]:
-                doc["answer"]["detailed"]["en"] = new_value
-                updated = True
-                break
+    for file_name in database_files:
+        file_path = os.path.join(base_dir, file_name)
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            
+            # Achata os dados caso estejam aninhados
+            docs = flatten_data(data)
+            updated = False
 
-    if updated:
-        # Define the output file path for the updated JSON
-        output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "data", "updated_documents.json")
-        with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(documents, f, indent=4, ensure_ascii=False)
-        print(f"Document {document_id} updated successfully. New answer.detailed.en: {new_value}")
-    else:
-        print(f"Document with ID {document_id} not found or 'answer/detailed' structure is missing.")
+            # Itera pelos documentos para encontrar o documento com o id desejado
+            for doc in docs:
+                if doc.get("id") == document.get("id"):
+                    if "answer" in doc and "detailed" in doc["answer"]:
+                        doc["answer"]["detailed"]["en"] = new_value
+                        updated = True
+                        found = True
+                        break  # Documento encontrado; atualiza e sai do loop desse arquivo
+
+            if updated:
+                # Escreve de volta no mesmo arquivo
+                with open(file_path, "w", encoding="utf-8") as f:
+                    json.dump(docs, f, indent=4, ensure_ascii=False)
+                print(f"Documento {document} atualizado com sucesso em {file_name}.")
+                break  # Sai do loop geral, pois o documento foi atualizado
+            else:
+                print(f"Documento {document} não encontrado em {file_name}.")
+        except Exception as e:
+            print(f"Erro ao atualizar o arquivo {file_path}: {str(e)}")
+    
+    if not found:
+        print(f"Documento {document} não encontrado em nenhum arquivo.")

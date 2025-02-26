@@ -14,7 +14,6 @@ from ..mixins.mongodb_mixin import MongoDBMixin
 
 logger = logging.getLogger(__name__)
 
-
 class UserInputView(MongoDBMixin, APIView):
     def post(self, request):
         db = None

@@ -1792,7 +1792,6 @@ def atualizar_documento_by_custom_id(custom_id: str, answer: str):
         
         doc = get_document_by_id(document_id) 
         
-        
         if doc:
             update_answer_detailed_en(doc, answer)
 
@@ -1803,7 +1802,7 @@ def atualizar_documento_by_custom_id(custom_id: str, answer: str):
         store.delete(ids=[document_id])
 
         new_document = CustomDocument(
-            id=custom_id,  # ou use document_id, se preferir manter o mesmo embedding_id
+            id=custom_id,
             page_content=(
                 f"Question: {question_text}\n"
                 f"Answer: {answer}"
@@ -1813,17 +1812,15 @@ def atualizar_documento_by_custom_id(custom_id: str, answer: str):
                 "subCategory": existing_metadata.get("subCategory", ""),
                 "difficulty": existing_metadata.get("difficulty", 0),
                 "confidence": existing_metadata.get("confidence", 0.0),
-                # "intent": doc["question"].get("intent", ""),
-                # "variations": ", ".join(doc["question"].get("variations", [])),
-                #"conditions": ", ".join(doc["answer"].get("conditions", [])),
+                "intent": doc["question"].get("intent", ""),
+                "variations": ", ".join(doc["question"].get("variations", [])),
+                "conditions": ", ".join(doc["answer"].get("conditions", [])),
             },
         )
 
-
         store.add_documents(documents=[new_document])
-        
-
-        print(f"Documento com custom ID '{custom_id}' atualizado com sucesso.")
+    
+        return (f"ID '{custom_id}' updated ")
 
     except Exception as e:
         print(f"Erro ao atualizar documento: {str(e)}")
