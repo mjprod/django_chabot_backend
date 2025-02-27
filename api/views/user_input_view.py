@@ -1,4 +1,4 @@
-from api.chatbot import (
+from api.translation import (
     translate_and_clean,
 )
 

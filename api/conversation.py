@@ -26,14 +26,18 @@ from ai_config.ai_constants import (
 from ai_config.ai_prompts import (
     FIRST_MESSAGE_PROMPT,
 )
+
 from api.chatbot import (
     confidence_grader,
     format_docs,
     retriever,
     retrieval_grader,
     rag_chain,
-    generate_translations
 )
+
+from api.translation import (
+  generate_translations,
+  )
 
 
 logger = logging.getLogger(__name__)
