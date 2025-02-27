@@ -1,7 +1,11 @@
-from ..chatbot import (
-    generate_user_input,
+from api.translation import (
     translate_and_clean,
 )
+
+from api.conversation import (
+    generate_user_input
+)
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -13,7 +17,6 @@ from ..serializers import UserInputSerializer
 from ..mixins.mongodb_mixin import MongoDBMixin
 
 logger = logging.getLogger(__name__)
-
 
 class UserInputView(MongoDBMixin, APIView):
     def post(self, request):

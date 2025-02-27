@@ -9,8 +9,8 @@ from rest_framework import status
 from ..mixins.mongodb_mixin import MongoDBMixin
 from ..serializers import CaptureFeedbackSerializer, CaptureFeedbackSimpleSerializer, CaptureFeedbackCompareSerializer
 
-from ..chatbot import (
-    generate_translations,
+from api.translation import (
+  generate_translations,
 )
 
 from ai_config.ai_constants import LANGUAGE_DEFAULT

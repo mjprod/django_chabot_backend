@@ -159,6 +159,7 @@ class PromptConversationAdminSerializer(serializers.Serializer):
         default="en",
     )
 
+
     def validate_language(self, value):
         """Validate the language code is supported"""
         supported_languages = ["en", "ms_MY", "zh_CN", "zh_TW"]
@@ -167,3 +168,8 @@ class PromptConversationAdminSerializer(serializers.Serializer):
                 f"Unsupported language code. Must be one of: {supported_languages}"
             )
         return value
+
+
+class UpdateAnswerBrain(serializers.Serializer):
+    doc_id = serializers.CharField(required=True)
+    new_answer = serializers.CharField(required=True)
