@@ -12,16 +12,12 @@ from datetime import datetime
 from typing import List
 
 import requests
-from bson import ObjectId
 from django.conf import settings
 from dotenv import load_dotenv
 
-from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import CohereEmbeddings
 from langchain.vectorstores import Chroma
-from langchain.schema import Document
 
-from langchain_community.vectorstores.utils import filter_complex_metadata
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
@@ -42,10 +38,7 @@ from ai_config.ai_constants import (
     MAX_TOKENS,
     COHERE_MODEL,
     MAX_TEMPERATURE,
-    EMBEDDING_CHUNK_SIZE,
-    EMBEDDING_OVERLAP,
     URL_TRANSLATE_EN_TO_MS,
-    LANGUAGE_DEFAULT,
 )
 
 from ai_config.ai_prompts import (
@@ -69,12 +62,19 @@ from api.brain_retriever import (
   MultiRetriever,
 )
 
+from .models import (
+  CustomDocument,
+  CustomTextSplitter,
+  GradeDocuments,
+  GradeConfidenceLevel,
+ )
+
+
 def monitor_memory():
     """Start memory monitoring and return initial snapshot"""
     tracemalloc.start()
     snapshot1 = tracemalloc.take_snapshot()
     return snapshot1
-
 
 def compare_memory(snapshot1):
     """Compare memory usage against initial snapshot"""
@@ -84,7 +84,6 @@ def compare_memory(snapshot1):
     for stat in top_stats[:10]:
         print(stat)
     gc.collect()  # Force garbage collection after comparison
-
 
 # create our gloabl variables
 logger = logging.getLogger(__name__)
@@ -173,22 +172,10 @@ def load_and_process_json_file() -> List[dict]:
 
     return all_documents
 
-
 embedding_model = CohereEmbeddings(model=COHERE_MODEL, user_agent="glaucomp")
 vectorstores = []
 documents = load_and_process_json_file()
 
-
-class CustomDocument:
-    def __init__(self, page_content, metadata, id="0"):
-        self.id = id
-        self.page_content = page_content
-        self.metadata = metadata
-
-    def __str__(self):
-        # Mostra o id e os primeiros 100 caracteres do conteúdo para não poluir o log
-        return f"CustomDocument(id={self.id}, page_content={self.page_content[:100]}..., metadata={self.metadata})"
-    
 # Create Document Objects
 doc_objects = [
     CustomDocument(
@@ -209,120 +196,6 @@ doc_objects = [
     )
     for doc in documents
 ]
-
-# Text Splitter Class
-class CustomTextSplitter(RecursiveCharacterTextSplitter):
-    def __init__(
-        self,
-        chunk_size=EMBEDDING_CHUNK_SIZE,
-        chunk_overlap=EMBEDDING_OVERLAP,
-        length_function=len,
-    ):
-        self.chunk_size = chunk_size
-        self.chunk_overlap = chunk_overlap
-        self.length_function = length_function
-
-    def split_documents(self, documents):
-        if not documents:
-            return []
-
-        chunks = []
-       
-        for doc in documents:
-            try:
-                metadata = {**(doc.metadata if isinstance(doc.metadata, dict) else {}), "id": getattr(doc, "id", "no_id")}
-                text = doc.page_content
-                id_doc = getattr(doc, "id", "no_id")
-        
-                # Handle short documents
-                if self.length_function(text) <= self.chunk_size:
-                    chunks.append(CustomDocument(id=id_doc,page_content=text, metadata=metadata))
-                    continue
-
-                # Split into sentences
-                sentences = [s.strip() + ". " for s in text.split(". ") if s.strip()]
-                current_chunk = []
-                current_length = 0
-
-                for sentence in sentences:
-                    sentence_length = self.length_function(sentence)
-
-                    # Handle sentences longer than chunk_size
-                    if sentence_length > self.chunk_size:
-                        if current_chunk:
-                            chunks.append(
-                                CustomDocument(
-                                    id=id_doc,
-                                    page_content="".join(current_chunk),
-                                    metadata=metadata,
-                                )
-                            )
-                            current_chunk = []
-                            current_length = 0
-
-                        # Split long sentence
-                        words = sentence.split()
-                        current_words = []
-                        current_word_length = 0
-
-                        for word in words:
-                            word_length = self.length_function(word + " ")
-                            if current_word_length + word_length > self.chunk_size:
-                                chunks.append(
-                                    CustomDocument(
-                                        id=id_doc,
-                                        page_content=" ".join(current_words),
-                                        metadata=metadata,
-                                    )
-                                )
-                                current_words = [word]
-                                current_word_length = word_length
-                            else:
-                                current_words.append(word)
-                                current_word_length += word_length
-
-                        if current_words:
-                            current_chunk = [" ".join(current_words)]
-                            current_length = self.length_function(current_chunk[0])
-                        continue
-
-                    # Normal sentence processing
-                    if current_length + sentence_length > self.chunk_size:
-                        if current_chunk:
-                            chunks.append(
-                                CustomDocument(
-                                    id=id_doc,
-                                    page_content="".join(current_chunk),
-                                    metadata=metadata,
-                                )
-                            )
-
-                            # Handle overlap
-                            overlap_start = max(
-                                0, len(current_chunk) - self.chunk_overlap
-                            )
-                            current_chunk = current_chunk[overlap_start:]
-                            current_length = sum(
-                                self.length_function(s) for s in current_chunk
-                            )
-
-                    current_chunk.append(sentence)
-                    current_length += sentence_length
-
-                # Add remaining text
-                if current_chunk:
-                    chunks.append(
-                        CustomDocument(
-                            id=id_doc,
-                            page_content="".join(current_chunk),
-                            metadata=metadata
-                        )
-                    )
-            except Exception as e:
-                logger.error(f"Error splitting document: {str(e)}")
-                continue
-        return chunks
-
 
 # Process documents in batches
 def create_vector_store(documents, batch_size=500):
@@ -388,81 +261,6 @@ def get_rag_prompt_template(is_first_message):
     )
 
 
-# created message class to keep track of messages that build up a Conversation
-class Message:
-    def __init__(self, role, content, timestamp=None):
-        self.role = role
-        self.content = content
-        self.timestamp = timestamp or datetime.now().isoformat()
-
-
-# TODO: add new language translations here
-# added Conversation class here that created our session specific information
-class ConversationMetaData:
-    def __init__(self, session_id, user_id, bot_id, admin_id, timestamp=None):
-        self.session_id = session_id
-        self.admin_id = admin_id
-        self.user_id = user_id
-        self.bot_id = bot_id
-        self.timestamp = timestamp or datetime.now().isoformat()
-        self.messages = []
-        self.translations = []
-        self._id = ObjectId()
-        self.is_first_message = True
-
-    def add_message(self, role, content):
-        message = Message(role, content)
-        self.messages.append(message)
-
-        # translation layer
-        if role == "assistant":
-            malay_translation = translate_en_to_ms(content)
-            chinese_translation = content
-
-            self.translations.append(
-                {
-                    "message_id": len(self.messages) - 1,
-                    "translations": [
-                        {"language": "en", "text": content},
-                        {
-                            "language": "ms_MY",
-                            "text": malay_translation.get("text", ""),
-                        },
-                        {
-                            "language": "zh_CN",
-                            "text": chinese_translation.get("text", ""),
-                        },
-                        {
-                            "language": "zh_TW",
-                            "text": chinese_translation.get("text", ""),
-                        },
-                    ],
-                }
-            )
-            return message
-
-    def get_conversation_history(self):
-        return [
-            {"role": msg.role, "content": msg.content, "timestamp": msg.timestamp}
-            for msg in self.messages
-        ]
-
-    # save the output to a dict for using API
-    def to_dict(self):
-        return {
-            "_id": self._id,
-            "session_id": self.session_id,
-            "admin_id": self.admin_id,
-            "user_id": self.user_id,
-            "bot_id": self.bot_id,
-            "timestamp": self.timestamp,
-            "messages": [
-                {"role": msg.role, "content": msg.content, "timestamp": msg.timestamp}
-                for msg in self.messages
-            ],
-            "translations": self.translations,
-        }
-
 # this is the OPENAI translate function
 def translate_and_clean(text):
     logger.error("translate_and_clean")
@@ -500,14 +298,6 @@ def translate_and_clean(text):
         gc.collect()
 
 
-# Define grading of docs
-class GradeDocuments(BaseModel):
-    confidence_score: float = Field(
-        description="Confidence score between 0.0 and 1.0 indicating document relevance",
-        ge=0.0,
-        le=1.0,
-    )
-
 # Initialize LLM for Grading
 llm_grader = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
 structured_llm_grader = llm_grader.with_structured_output(GradeDocuments)
@@ -526,14 +316,6 @@ document_grade_prompt = ChatPromptTemplate.from_messages(
 # Runnable Chain for Document Grader
 retrieval_grader = document_grade_prompt | structured_llm_grader
 
-# Define GradeHallucinations Model
-class GradeConfidenceLevel(BaseModel):
-    confidence_score: float = Field(
-        description="""Confidence score between 0.0 and 1.0
-        indicating how well the answer is grounded in source facts""",
-        ge=0.0,
-        le=1.0,
-    )
 
 # Initialize LLM for Hallucination Grading
 llm_confidence = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
@@ -587,7 +369,6 @@ rag_chain = (
 
 mongo_client = None
 
-
 # API functions
 def get_mongodb_client():
     global mongo_client
@@ -595,6 +376,15 @@ def get_mongodb_client():
         mongo_client = MongoClient(settings.MONGODB_URI)
     return mongo_client[settings.MONGODB_DATABASE]
 
+def get_store():
+    return store
+
+def handle_mongodb_operation(operation):
+    try:
+        return operation()
+    except Exception as e:
+        print(f"MongoDB operation failed: {str(e)}")
+        return None
 
 def update_local_confidence(generation, confidence_diff):
     try:
@@ -651,7 +441,6 @@ def update_local_confidence(generation, confidence_diff):
     except Exception as e:
         logger.error(f"Error updating local confidence: {str(e)}")
 
-
 def update_database_confidence(comparison_result, docs_to_use):
     try:
         logger.info("Starting database confidence update")
@@ -701,8 +490,6 @@ def update_database_confidence(comparison_result, docs_to_use):
     except Exception as e:
         logger.error(f"Error updating database confidence: {str(e)}")
 
-
-# async for translations
 async def generate_translations(generation):
     try:
         logger.info(f"Starting translations for: {generation}")
@@ -734,49 +521,6 @@ async def generate_translations(generation):
     except Exception as e:
         logger.error(f"Error in generate_translations: {str(e)}", exc_info=True)
         raise
-
-
-def is_finalizing_phrase(phrase):
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        logger.error("Missing OPENAI_API_KEY environment variable.")
-        return "false"
-
-    client = OpenAI(api_key=api_key)
-    """
-    Analyzes whether a given phrase is likely to be a conversation-ender.
-    """
-    messages = [
-        {
-            "role": "system",
-            "content": "You are an assistant that determines if a phrase ends a conversation.",
-        },
-        {
-            "role": "user",
-            "content": f"Does the following phrase indicate the end of a conversation? \
-                \n\nPhrase: \"{phrase}\"\n\n \
-                Respond with 'Yes' or 'No'.",
-        },
-    ]
-
-    try:
-        response = client.chat.completions.create(
-            model=OPENAI_MODEL,
-            messages=messages,
-            temperature=0,
-            timeout=OPENAI_TIMEOUT,
-        )
-
-        result = response.choices[0].message.content.strip()
-        if result.lower() == "yes":
-            return "true"
-        else:
-            return "false"
-
-    except Exception as e:
-        print(f"Error during OpenAI API call: {e}")
-        return False
-
 
 def translate_en_to_cn(input_text):
     logger.info("Translating text to Chinese...")
@@ -814,7 +558,6 @@ def translate_en_to_cn(input_text):
         print(f"Translation error: {str(e)}")
         return {"text": "", "prompt_tokens": 0, "total_tokens": 0}
 
-
 def translate_en_to_ms(input_text, to_lang="ms", model="base"):
     # this is the url we send the payload to for translation
     url = URL_TRANSLATE_EN_TO_MS
@@ -850,7 +593,6 @@ def translate_en_to_ms(input_text, to_lang="ms", model="base"):
 
     return {"text": "", "prompt_tokens": 0, "total_tokens": 0}
 
-
 def process_feedback_translation(feedback_data):
     try:
         logger.info("Processing feedback translation")
@@ -875,588 +617,10 @@ def process_feedback_translation(feedback_data):
         logger.error(f"Error processing feedback translation: {str(e)}")
         return feedback_data
 
-
-# ahsfahssf this is an old functuion that will be removed in prod
-def generate_user_input(cleaned_prompt):
-
-    # Get relevant documents
-    docs_retrieve = retriever.get_relevant_documents(cleaned_prompt)
-    logger.error(f"Retrieved {len(docs_retrieve)} documents")
-
-    docs_to_use = []
-
-    # Filter documents
-    for doc in docs_retrieve:
-        relevance_score = retrieval_grader.invoke(
-            {"prompt": cleaned_prompt, "document": doc.page_content}
-        )
-        if relevance_score.confidence_score >= 0.7:
-            docs_to_use.append(doc)
-
-    # Generate response
-    generation = rag_chain.invoke(
-        {
-            "context": format_docs(docs_to_use),
-            "prompt": cleaned_prompt,
-        }
-    )
-
-    # Generate translations asynchronously
-    translations = asyncio.run(generate_translations(generation))
-
-    return {
-        "generation": generation,
-        "translations": translations,
-        "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
-    }
-
-
-def generate_prompt_conversation(
-    user_prompt, conversation_id, admin_id, bot_id, user_id
-):
-    logger.info("Starting prompt_conversation request")
-
-    try:
-        # this is a check for the conversation to remove Dear player
-        db = get_mongodb_client()
-        existing_conversation = db.conversations.find_one(
-            {"session_id": conversation_id}
-        )
-        is_first_message = not existing_conversation
-
-        # Initialize conversation
-        conversation = ConversationMetaData(
-            session_id=conversation_id,
-            admin_id=admin_id,
-            bot_id=bot_id,
-            user_id=user_id,
-        )
-        conversation.is_first_message = is_first_message
-
-        rag_prompt = get_rag_prompt_template(is_first_message)
-
-        # Process prompt and add message
-        logger.info("Processing user prompt")
-        cleaned_prompt = translate_and_clean(user_prompt)
-        conversation.add_message("user", user_prompt)
-
-        # Get and filter relevant documents
-        logger.info("Retrieving relevant documents")
-        docs_start = time.time()
-        docs_retrieve = retriever.invoke(cleaned_prompt)[:3]  # Limit initial retrieval
-        docs_to_use = []
-
-        for doc in docs_retrieve:
-            relevance_score = retrieval_grader.invoke(
-                {"prompt": cleaned_prompt, "document": doc.page_content}
-            )
-            if relevance_score.confidence_score >= 0.7:
-                docs_to_use.append(doc)
-        logger.info(f"Document retrieval completed in {time.time() - docs_start:.2f}s")
-
-        # Generate  inital response
-        logger.info("Generating AI response")
-        dynamic_chain = (
-            {
-                "context": lambda x: format_docs(docs_to_use),
-                "prompt": RunnablePassthrough(),
-            }
-            | rag_prompt
-            | rag_llm
-            | StrOutputParser()
-        )
-
-        # generation_start = time.time()
-        generation = dynamic_chain.invoke(
-            {
-                "context": format_docs(docs_to_use),
-                "prompt": cleaned_prompt,
-                "history": conversation.get_conversation_history(),
-            }
-        )
-        # logger.info(f"AI Generation completed in {time.time() - generation_start:.2f}s")
-
-        # this is where the self learning comes in, Its rough but will be worked on over time
-        # logger.info("Starting self-learning comparison")
-
-        """
-        db = get_mongodb_client()
-        relevant_feedbacks = get_relevant_feedback_data(cleaned_prompt, db)
-
-        comparison_result = {
-            "better_answer": None,
-            "confidence_diff": 0.0,
-            "generated_score": 0.0,
-            "feedback_score": 0.0,
-            "best_feedback": None,
-        }
-
-        if relevant_feedbacks:
-            logger.info(f"Found {len(relevant_feedbacks)} relevant feedback answers")
-            comparison_result = compare_answers(
-               generation, relevant_feedbacks, docs_to_use
-           )
-
-        if comparison_result and comparison_result["better_answer"] == "feedback":
-            logger.info("Using feedback answer with higher confidence")
-            generation = comparison_result["best_feedback"]["correct_answer"]
-            update_database_confidence(comparison_result, docs_to_use)
-        else:
-            logger.info("Generated answer maintained, updating confidence")
-            update_local_confidence(
-                 generation, comparison_result["confidence_diff"]
-            )
-        """
-
-        # Calculate confidence
-        confidence_result = confidence_grader.invoke(
-            {"documents": format_docs(docs_to_use), "generation": generation}
-        )
-
-        # Generate translations asynchronously
-        translation_start = time.time()
-        translations = asyncio.run(generate_translations(generation))
-        logger.info(f"Translations completed in {time.time() - translation_start:.2f}s")
-
-        return {
-            "generation": generation,
-            "conversation": conversation.to_dict(),
-            "confidence_score": confidence_result.confidence_score,
-            "translations": translations,
-        }
-
-    except Exception as e:
-        logger.error(f"Error in prompt_conversation: {str(e)}")
-        raise
-    finally:
-        # compare_memory(memory_snapshot)
-        gc.collect()
-
-
-def prompt_conversation(self, user_prompt, language_code=LANGUAGE_DEFAULT):
-    start_time = time.time()
-    logger.info(f"Starting prompt_conversation request - Language: {language_code}")
-    db = None
-
-    try:
-        # Database connection with timeout
-        db = self.get_db()
-        logger.debug(
-            f"MongoDB connection established in {time.time() - start_time:.2f}s"
-        )
-
-        # Conversation retrieval
-        existing_conversation = db.conversations.find_one(
-            {"session_id": ""},
-            {"messages": 1, "_id": 0},
-        )
-
-        messages = (
-            existing_conversation.get("messages", [])
-            if existing_conversation
-            else [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
-        )
-
-        # Add user message
-        messages.append(
-            {
-                "role": "user",
-                "content": user_prompt,
-                "timestamp": datetime.now().isoformat(),
-            }
-        )
-
-        # Vector store retrieval
-        vector_start = time.time()
-        try:
-            docs_retrieve = store.similarity_search(
-                user_prompt, k=3  # Limit to top 3 results for performance
-            )
-            logger.debug(
-                f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
-            )
-        except Exception as ve:
-            logger.error(f"Vector store error: {str(ve)}")
-            docs_retrieve = []
-            print(docs_retrieve)
-
-        # OpenAI response generation
-        generation_start = time.time()
-        try:
-            client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), timeout=OPENAI_TIMEOUT)
-
-            # the history of messages is the context
-            messages_history = messages.copy()
-            if docs_retrieve:
-                context_text = " ".join([doc.page_content for doc in docs_retrieve])
-                messages_history.append(
-                    {"role": "system", "content": f"Relevant context: {context_text}"}
-                )
-
-            response = client.chat.completions.create(
-                model=OPENAI_MODEL,
-                messages=messages_history,
-                temperature=MAX_TEMPERATURE,
-                max_tokens=MAX_TOKENS,
-                timeout=OPENAI_TIMEOUT,
-            )
-            ai_response = response.choices[0].message.content
-            logger.debug(
-                f"AI response generated in {time.time() - generation_start:.2f}s"
-            )
-        except Exception as oe:
-            logger.error(f"OpenAI error: {str(oe)}")
-            raise
-
-        return {
-            "generation": ai_response,
-        }
-
-    except Exception as e:
-        logger.error(f"Error in prompt_conversation: {str(e)}", exc_info=True)
-        raise
-    finally:
-        if db is not None:
-            self.close_db()
-
-def prompt_conversation_deepseek(
-  self,
-    user_prompt,
-    conversation_id,
-    admin_id,
-    bot_id,
-    user_id,
-    language_code=LANGUAGE_DEFAULT,
-):
-
-    start_time = time.time()
-    logger.info(
-        f"Starting prompt_conversation_admin prompt_conversation_deepseek - Language: {language_code}"
-    )
-    db = None
-
-    try:
-        # Database connection with timeout
-        db = self.get_db()
-        logger.debug(
-            f"MongoDB connection get history in {time.time() - start_time:.2f}s"
-        )
-
-        # Conversation retrieval
-        existing_conversation = db.conversations.find_one(
-            {"session_id": conversation_id},
-            {"messages": 1, "_id": 0},
-        )
-
-        messages = (
-            existing_conversation.get("messages", [])
-            if existing_conversation
-            else [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
-        )
-
-        # Add user message
-        messages.append(
-            {
-                "role": "user",
-                "content": user_prompt,
-                "timestamp": datetime.now().isoformat(),
-            }
-        )
-
-        # Vector store retrieval
-        vector_start = time.time()
-        try:
-            # vector_store = get_vector_store(language_code)
-            docs_retrieve = store.similarity_search(
-                user_prompt, k=3
-            )
-            logger.debug(
-                f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
-            )
-        except Exception as ve:
-            logger.error(f"Vector store error: {str(ve)}")
-            docs_retrieve = []
-            print(docs_retrieve)
-
-        # OpenAI response generation
-        generation_start = time.time()
-        try:
-            messages_history = messages.copy()
-            if docs_retrieve:
-                context_text = " ".join([doc.page_content for doc in docs_retrieve])
-                messages_history.append(
-                    {"role": "system", "content": f"Relevant context: {context_text}"}
-                )
-                
-            # Enter your API Key
-            API_KEY = "sk-9b2f1bc7d7464468bfe1a97496ecd471"  
-
-            url = "https://api.deepseek.com/chat/completions"
-            headers = {
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {API_KEY}"
-            }
-
-            data = {
-                "model": "deepseek-chat",  # Use 'deepseek-reasoner' for R1 model or 'deepseek-chat' for V3 model
-                "messages": messages_history,
-                "stream": False  # Disable streaming
-            }
-
-            response = requests.post(url, headers=headers, json=data)
-
-            if response.status_code == 200:
-                result = response.json()
-                print(result['choices'][0]['message']['content'])
-                # ai_response = result['choices'][0]['message']['content']
-                logger.debug(
-                    f"AI response generated in {time.time() - generation_start:.2f}s"
-                )
-            else:
-                print("Request failed, error code:", response.status_code)
-
-        except Exception as oe:
-            logger.error(f"OpenAI error: {str(oe)}")
-            raise
-
-        #is_last_message = is_finalizing_phrase(ai_response)
-
-        # Update conversation
-        messages.append(
-            {
-                "role": "assistant",
-               # "content": ai_response,
-                "timestamp": datetime.now().isoformat(),
-            }
-        )
-
-        # Prepare and save conversation
-        conversation = {
-            "session_id": conversation_id,
-            "admin_id": admin_id,
-            "bot_id": bot_id,
-            "user_id": user_id,
-            "language": language_code,
-            "messages": messages,
-            "updated_at": datetime.now().isoformat(),
-        }
-
-        # Upsert with retry logic
-        max_retries = 3
-        for attempt in range(max_retries):
-            try:
-                db.conversations.update_one(
-                    {"session_id": conversation_id}, {"$set": conversation}, upsert=True
-                )
-                break
-            except Exception as me:
-                if attempt == max_retries - 1:
-                    raise
-                logger.warning(f"MongoDB retry {attempt + 1}/{max_retries}: {str(me)}")
-                time.sleep(0.5)
-
-        total_time = time.time() - start_time
-        logger.info(f"Request completed in {total_time:.2f}s")
-
-        return {
-           # "generation": ai_response,
-            "conversation_id": conversation_id,
-            "language": language_code,
-            # "is_last_message": is_last_message,
-        }
-
-    except Exception as e:
-        logger.error(f"Error in prompt_conversation_admin: {str(e)}", exc_info=True)
-        raise
-    finally:
-        if db is not None:
-            self.close_db()
-
-
-"""
-this new function called prompt_conversation_admin
-the leanest smartest chatbot function, the goal here is to:
-Take the user input from our frontend with a language code in the url
-(/prompt_conversation_admin/?language=zh_CN)
-Use the language code to get the relevant vector store from the chroma_db folder
-if not language is sent we will make the default language en
-Use the correct vector store to get the relevant documents
-Use the documents to generate a response
-Return the response to the frontend with a language field in
-the response to associate the language with the response
-then same as prompt_conversation_deepseek we will use the same
-function to save the conversation to the database
-and use history in our response generation for context and conversation
-the focus here is that there is no need to translate or touch the user input,
-speed is the key here
-"""
-
-def prompt_conversation_admin(
-    self,
-    user_prompt,
-    conversation_id,
-    admin_id,
-    bot_id,
-    user_id,
-    language_code=LANGUAGE_DEFAULT,
-):
-
-    start_time = time.time()
-    logger.info(
-        f"Starting prompt_conversation_admin request - Language: {language_code}"
-    )
-    db = None
-
-    try:
-        # Database connection with timeout
-        db = self.get_db()
-        logger.debug(
-            f"MongoDB connection established in {time.time() - start_time:.2f}s"
-        )
-
-        # Conversation retrieval
-        existing_conversation = db.conversations.find_one(
-            {"session_id": conversation_id},
-            {"messages": 1, "_id": 0},
-        )
-
-        messages = (
-            existing_conversation.get("messages", [])
-            if existing_conversation
-            else [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
-        )
-
-        # Add user message
-        messages.append(
-            {
-                "role": "user",
-                "content": user_prompt,
-                "timestamp": datetime.now().isoformat(),
-            }
-        )
-
-        # Vector store retrieval
-        vector_start = time.time()
-        try:
-            # vector_store = get_vector_store(language_code)
-            docs_retrieve = store.similarity_search(
-                user_prompt, k=3  # Limit to top 3 results for performance
-            )
-            logger.debug(
-                f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
-            )
-        except Exception as ve:
-            logger.error(f"Vector store error: {str(ve)}")
-            docs_retrieve = []
-            print(docs_retrieve)
-
-        # OpenAI response generation
-        generation_start = time.time()
-        try:
-            client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), timeout=OPENAI_TIMEOUT)
-
-            # the history of messages is the context
-            messages_history = messages.copy()
-            if docs_retrieve:
-                context_text = " ".join([doc.page_content for doc in docs_retrieve])
-                messages_history.append(
-                    {"role": "system", "content": f"Relevant context: {context_text}"}
-                )
-
-            response = client.chat.completions.create(
-                model=OPENAI_MODEL,
-                messages=messages_history,
-                temperature=MAX_TEMPERATURE,
-                max_tokens=MAX_TOKENS,
-                timeout=OPENAI_TIMEOUT,
-            )
-            ai_response = response.choices[0].message.content
-            logger.debug(
-                f"AI response generated in {time.time() - generation_start:.2f}s"
-            )
-        except Exception as oe:
-            logger.error(f"OpenAI error: {str(oe)}")
-            raise
-
-        is_last_message = is_finalizing_phrase(ai_response)
-
-        # Chama o confidence grader para obter um score de confiança
-        try:
-            # Aqui usamos os documentos recuperados para o contexto
-            confidence_result = confidence_grader.invoke({
-                "documents": format_docs(docs_retrieve),
-                "generation": ai_response,
-            })
-        except Exception as ce:
-            logger.error(f"Error obtaining confidence: {str(ce)}")
-            confidence_result = None
-
-        # Update conversation
-        messages.append(
-            {
-                "role": "assistant",
-                "content": ai_response,
-                "timestamp": datetime.now().isoformat(),
-            }
-        )
-
-        # Prepare and save conversation
-        conversation = {
-            "session_id": conversation_id,
-            "admin_id": admin_id,
-            "bot_id": bot_id,
-            "user_id": user_id,
-            "language": language_code,
-            "messages": messages,
-            "updated_at": datetime.now().isoformat(),
-        }
-
-        # Upsert with retry logic
-        max_retries = 3
-        for attempt in range(max_retries):
-            try:
-                db.conversations.update_one(
-                    {"session_id": conversation_id}, {"$set": conversation}, upsert=True
-                )
-                break
-            except Exception as me:
-                if attempt == max_retries - 1:
-                    raise
-                logger.warning(f"MongoDB retry {attempt + 1}/{max_retries}: {str(me)}")
-                time.sleep(0.5)
-
-        total_time = time.time() - start_time
-        logger.info(f"Request completed in {total_time:.2f}s")
-
-        return {
-            "generation": ai_response,
-            "conversation_id": conversation_id,
-            "language": language_code,
-            "is_last_message": is_last_message,
-            "confidence_score": confidence_result.confidence_score if confidence_result else None,
-        }
-
-    except Exception as e:
-        logger.error(f"Error in prompt_conversation_admin: {str(e)}", exc_info=True)
-        raise
-    finally:
-        if db is not None:
-            self.close_db()
-
-
-def handle_mongodb_operation(operation):
-    try:
-        return operation()
-    except Exception as e:
-        print(f"MongoDB operation failed: {str(e)}")
-        return None
-
-
 def ensure_feedback_index(db):
     if "feedback_index" not in db.feedback_data.index_information():
         db.feedback_data.create_index([("user_input", "text")], name="feedback_index")
         logger.info("Created text index for feedback search")
-
 
 def get_relevant_feedback_data(cleaned_prompt, db):
     logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
@@ -1484,7 +648,6 @@ def get_relevant_feedback_data(cleaned_prompt, db):
     except Exception as e:
         logger.error(f"Error retrieving feedback answers: {str(e)}")
         return []
-
 
 def compare_answers(generation, feedback_answers, docs_to_use):
     logger.info("Starting answer comparison process")
@@ -1527,7 +690,6 @@ def compare_answers(generation, feedback_answers, docs_to_use):
     except Exception as e:
         logger.error(f"Error comparing answers: {str(e)}")
         return None
-
 
 def check_answer_mongo_and_openai(user_question, matches):
     if not matches:
@@ -1777,7 +939,7 @@ def search_by_id(store: Chroma, custom_id: str):
     )
     return results
 
-def atualizar_documento_by_custom_id(custom_id: str, answer: str):
+def update_document_by_custom_id(custom_id: str, answer: str):
     try:
         search_results = store.get(
             where={"id": custom_id},

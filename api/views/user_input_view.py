@@ -1,7 +1,11 @@
-from ..chatbot import (
-    generate_user_input,
+from api.chatbot import (
     translate_and_clean,
 )
+
+from api.conversation import (
+    generate_user_input
+)
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status

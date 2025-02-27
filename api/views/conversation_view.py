@@ -9,14 +9,19 @@ import time
 
 from rapidfuzz import fuzz
 
-from ..chatbot import (
-    prompt_conversation,
-    prompt_conversation_admin,
+from api.chatbot import (
     check_answer_mongo_and_openai,
     extrair_knowledge_items,
     update_chroma_document,
-    atualizar_documento_by_custom_id,
+    update_document_by_custom_id,
+    get_store,
 )
+
+from api.conversation import (
+    prompt_conversation,
+    prompt_conversation_admin,
+ )
+
 from ..serializers import (
     PromptConversationSerializer,
     PromptConversationAdminSerializer,
@@ -190,6 +195,7 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
 
             response = prompt_conversation_admin(
                 self,
+                store=get_store,
                 user_prompt=validated_data["prompt"],
                 conversation_id=validated_data["conversation_id"],
                 admin_id=validated_data.get("admin_id", ""),
@@ -310,6 +316,7 @@ class PromptConversationView(MongoDBMixin, APIView):
             response = prompt_conversation(
                 self,
                 user_prompt=validated_data["prompt"],
+                store=get_store,
                 language_code=language_code,
             )
 
@@ -718,7 +725,7 @@ class UpdateBrainView(APIView):
             doc_id = input_serializer.validated_data["doc_id"]
             new_answer = input_serializer.validated_data["new_answer"]
 
-            conversations = atualizar_documento_by_custom_id(
+            conversations = update_document_by_custom_id(
                 doc_id, new_answer)
             
             data = {
