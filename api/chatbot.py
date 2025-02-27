@@ -51,7 +51,7 @@ from api.brain_retriever import (
   MultiRetriever,
 )
 
-from .models import (
+from .ai_services import (
   CustomDocument,
   CustomTextSplitter,
   GradeDocuments,
