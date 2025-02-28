@@ -36,3 +36,6 @@ URL_TRANSLATE_EN_TO_MS = "https://api.mesolitica.com/translation"
 
 # Language Default
 LANGUAGE_DEFAULT = "en"
+
+PERSIST_DIR= "./chroma_db"
+COLLECTION_NAME = "RAG"

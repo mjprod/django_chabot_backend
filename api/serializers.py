@@ -173,3 +173,6 @@ class PromptConversationAdminSerializer(serializers.Serializer):
 class UpdateAnswerBrain(serializers.Serializer):
     doc_id = serializers.CharField(required=True)
     new_answer = serializers.CharField(required=True)
+
+class BrainSerialzer(serializers.Serializer):
+    doc_id = serializers.CharField(required=True)

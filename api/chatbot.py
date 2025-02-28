@@ -30,6 +30,8 @@ from ai_config.ai_constants import (
     OPENAI_TIMEOUT,
     COHERE_MODEL,
     MAX_TEMPERATURE,
+    PERSIST_DIR,
+    COLLECTION_NAME
 )
 
 from ai_config.ai_prompts import (
@@ -39,6 +41,7 @@ from ai_config.ai_prompts import (
     CONFIDENCE_GRADER_PROMPT,
     RAG_PROMPT_TEMPLATE,
     PROMPT_TEMPLATE_MONGO_AND_OPENAI,
+    
 )
 
 from api.views.brain_file_reader import (
@@ -205,9 +208,9 @@ def create_vector_store(documents, batch_size=500):
         store = Chroma.from_documents(
             ids=[doc.id for doc in doc_objects],
             documents=split_data,
-            collection_name="RAG",
+            collection_name=COLLECTION_NAME,
             embedding=embedding_model,
-            persist_directory="./chroma_db",
+            persist_directory=PERSIST_DIR,
             collection_metadata={
                 "hnsw:space": "cosine",
                 "hnsw:construction_ef": 100,
@@ -791,32 +794,25 @@ def search_by_id(store: Chroma, custom_id: str):
     )
     return results
 
-def update_document_by_custom_id(custom_id: str, answer: str):
-    try:
-        search_results = store.get(
-            where={"id": custom_id},
-            include=["metadatas","documents"]
-        )
+def update_document_by_custom_id(doc_id: str, answer: str):
+    
+    import chromadb
+    client = chromadb.PersistentClient(path=PERSIST_DIR)
+    collection = client.get_collection(name=COLLECTION_NAME)
 
-        if not search_results['ids']:
-            print(f"Document ID '{custom_id}' not found.")
-            return
+    if not collection.get(ids=[doc_id]):
+        raise Exception(f"Document ID '{doc_id}' not found.")
+    else:
+        doc = collection.get(ids=[doc_id])
 
-        document_id = search_results['ids'][0]
-        
-        doc = get_document_by_id(document_id) 
-        
-        if doc:
-            update_answer_detailed_en(doc, answer)
+        update_answer_detailed_en(doc, answer)
 
-        existing_metadata = search_results['metadatas'][0]
-        document = search_results['documents'][0]
+        existing_metadata = doc['metadatas'][0]
+        document = doc['documents'][0]
         question_text = document.split("\n")[0].replace("Question: ", "").strip()
 
-        store.delete(ids=[document_id])
-
         new_document = CustomDocument(
-            id=custom_id,
+            id=doc_id,
             page_content=(
                 f"Question: {question_text}\n"
                 f"Answer: {answer}"
@@ -832,11 +828,43 @@ def update_document_by_custom_id(custom_id: str, answer: str):
             },
         )
 
-        store.add_documents(documents=[new_document])
-    
-        return (f"ID '{custom_id}' updated ")
-
-    except Exception as e:
-        print(f"Erro ao atualizar documento: {str(e)}")
-
+        try:
+            collection.update(
+                ids=[doc_id],
+                metadatas=[new_document.metadata],
+                documents=[str(new_document.page_content)],
+            )
+        except Exception as e:
+            raise Exception(f"Error updating document: {str(e)}")
         
+        
+def update_brain_document_by_id(doc_id: str, conversation: object):
+    
+    import chromadb
+    client = chromadb.PersistentClient(path=PERSIST_DIR)
+    collection = client.get_collection(name=COLLECTION_NAME)
+
+    logger.info(f"Updating document with ID: {doc_id}")
+    logger.info(f"collection: {collection}")
+    logger.info(f"conversation: {conversation}")
+
+    if not collection.get(ids=[doc_id]):
+        logger.error(f"Document ID '{doc_id}' not found.")
+        raise Exception(f"Document ID '{doc_id}' not found.")
+    else:
+        logger.info(f"{collection.get(ids=[doc_id])}")
+        metadata = conversation.get("metadata", {})
+        metadata["category"] = metadata["category"][0]
+        page_content=f"Question: \n"f"Answer:"
+        logger.info(f"page_content: {page_content}")
+
+        try:
+            collection.upsert(
+                ids=[doc_id],
+                metadatas=[metadata],
+                embeddings=CohereEmbeddings(model=COHERE_MODEL, user_agent="glaucomp"),
+                documents=[page_content],
+            )
+        except Exception as e:
+            logger.error(f"Error updating document: {str(e)}")
+            raise Exception(f"Error updating document: {str(e)}")

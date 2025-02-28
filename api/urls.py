@@ -25,6 +25,8 @@ from .views.user_input_view import (
     UserInputView,
 )
 
+from .views.brain import BrainView
+
 # Define URL patterns
 urlpatterns = [
     # TODO: DEPRECATED
@@ -45,6 +47,8 @@ urlpatterns = [
     path("finalise_conversation/<conversation_id>/", FinaliseConversationView.as_view(), name="finalise_conversation"),
     path("finalise_all_conversation/", FinaliseAllConversationsView.as_view(), name="finalise_all_conversation"),
     path("update_brain/", UpdateBrainView.as_view(), name="update_brain"),
+    path("brain/", BrainView.as_view(), name="brain"),
+
     # Dashboard
     path("dashboard_counts/", DashboardCountsView.as_view(), name="dashboard_counts"),
 ]
