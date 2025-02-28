@@ -30,24 +30,22 @@ class BrainView(MongoDBMixin,APIView):
 
         doc_id = input_serializer.validated_data["doc_id"]
 
-
         # check if the conversation exists in mongo db
-        # ??
         db = self.get_db()
         conversation = db.review_and_update_brain.find_one({"id": doc_id})
 
         if not conversation:
             return Response(
-                {"error": "Conversation not found"},
+                {"error": "Conversation not found in the review list"},
                 status=status.HTTP_404_NOT_FOUND,
             )
         else:
             # check if the review status is finalised in mongo db
             review_status = conversation.get("review_status")
-            # if len(review_status)!= 3:
-            #     return Response(
-            #         {"error": "Conversation review is not finalised"},
-            #         status=status.HTTP_400_BAD_REQUEST)
+            if len(review_status)!= 3:
+                return Response(
+                    {"error": "Conversation review is not finalised"},
+                    status=status.HTTP_400_BAD_REQUEST)
 
         # update the answer in knowledge base (chromadb)
         try:

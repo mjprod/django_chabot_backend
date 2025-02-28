@@ -837,21 +837,24 @@ def update_document_by_custom_id(doc_id: str, answer: str):
         except Exception as e:
             raise Exception(f"Error updating document: {str(e)}")
         
-        
+
+#   TODO: this func should be a part of a class e.g., class Brain(). refactoring needed
 def update_brain_document_by_id(doc_id: str, conversation: object):
     
-    # need to load this on start
+    # TODO: chromadb need to be loaded on project start
+    # as per doc: when the client object is no longer referenced, the client will naturally release resources, 
+    # including closing the database file.
     import chromadb
     client = chromadb.PersistentClient(path=PERSIST_DIR)
-
     collection = client.get_collection(name=COLLECTION_NAME)
 
     logger.info(f"Updating document with ID: {doc_id}")
-
+    
     if not collection.get(ids=[doc_id]):
         logger.error(f"Document ID '{doc_id}' not found.")
-        raise Exception(f"Document ID '{doc_id}' not found.")
+        raise Exception(f"Document ID '{doc_id}' not found in the brain.")
     else:
+        logger.info(f"original: {collection.get(ids=[doc_id])}")
         metadata = conversation.get("metadata", {})
         metadata["category"] = metadata["category"][0]
         questions = conversation.get("question", [])
@@ -860,11 +863,10 @@ def update_brain_document_by_id(doc_id: str, conversation: object):
             "question": questions,
             "answer": answers
         })
-        logger.info(f"page_content: {page_content}")    
 
+        # TODO: this need to be a global setting
         embeddings_model = CohereEmbeddings(model=COHERE_MODEL, user_agent="glaucomp")
         embedding_vector = embeddings_model.embed_query(page_content)
-
 
         try:
             collection.update(
@@ -873,6 +875,9 @@ def update_brain_document_by_id(doc_id: str, conversation: object):
                 documents=[page_content],
                 embeddings=[embedding_vector],
             )
+
+            del client
+
         except Exception as e:
-            logger.error(f"Error updating document: {str(e)}")
-            raise Exception(f"Error updating document: {str(e)}")
+            logger.error(f"Error updating document in brain: {str(e)}")
+            raise Exception(f"Error updating document in brain: {str(e)}")
