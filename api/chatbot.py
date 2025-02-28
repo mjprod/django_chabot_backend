@@ -794,25 +794,32 @@ def search_by_id(store: Chroma, custom_id: str):
     )
     return results
 
-def update_document_by_custom_id(doc_id: str, answer: str):
-    
-    import chromadb
-    client = chromadb.PersistentClient(path=PERSIST_DIR)
-    collection = client.get_collection(name=COLLECTION_NAME)
+def update_document_by_custom_id(custom_id: str, answer: str):
+    try:
+        search_results = store.get(
+            where={"id": custom_id},
+            include=["metadatas","documents"]
+        )
 
-    if not collection.get(ids=[doc_id]):
-        raise Exception(f"Document ID '{doc_id}' not found.")
-    else:
-        doc = collection.get(ids=[doc_id])
+        if not search_results['ids']:
+            print(f"Document ID '{custom_id}' not found.")
+            return
 
-        update_answer_detailed_en(doc, answer)
+        document_id = search_results['ids'][0]
+        
+        doc = get_document_by_id(document_id) 
+        
+        if doc:
+            update_answer_detailed_en(doc, answer)
 
-        existing_metadata = doc['metadatas'][0]
-        document = doc['documents'][0]
+        existing_metadata = search_results['metadatas'][0]
+        document = search_results['documents'][0]
         question_text = document.split("\n")[0].replace("Question: ", "").strip()
 
+        store.delete(ids=[document_id])
+
         new_document = CustomDocument(
-            id=doc_id,
+            id=custom_id,
             page_content=(
                 f"Question: {question_text}\n"
                 f"Answer: {answer}"
@@ -828,14 +835,12 @@ def update_document_by_custom_id(doc_id: str, answer: str):
             },
         )
 
-        try:
-            collection.update(
-                ids=[doc_id],
-                metadatas=[new_document.metadata],
-                documents=[str(new_document.page_content)],
-            )
-        except Exception as e:
-            raise Exception(f"Error updating document: {str(e)}")
+        store.add_documents(documents=[new_document])
+    
+        return (f"ID '{custom_id}' updated ")
+
+    except Exception as e:
+        print(f"Erro ao atualizar documento: {str(e)}")
         
 
 #   TODO: this func should be a part of a class e.g., class Brain(). refactoring needed
