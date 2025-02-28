@@ -75,13 +75,12 @@ Thumbs.db
 # Virtual environment:
 venv/
 env/
+.venv
 
 # Chroma
-/data/chroma_db/
-data/chroma_db/
-data/chroma_db/*
-chroma_db/977d8e6a-467c-45e7-b0bb-3a8a908b0e7c/data_level0.bin
-chroma_db/977d8e6a-467c-45e7-b0bb-3a8a908b0e7c/header.bin
-chroma_db/977d8e6a-467c-45e7-b0bb-3a8a908b0e7c/index_metadata.pickle
-chroma_db/977d8e6a-467c-45e7-b0bb-3a8a908b0e7c/length.bin
-chroma_db/977d8e6a-467c-45e7-b0bb-3a8a908b0e7c/link_lists.bin
+**/chroma_db/*
+**/chroma_db/*/
+**/chroma_db/*/*.bin
+**/chroma_db/*/*.pickle
+**/chroma_db/**
+*.bin

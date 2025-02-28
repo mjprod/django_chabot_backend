@@ -34,7 +34,6 @@ class BrainView(MongoDBMixin,APIView):
         # check if the conversation exists in mongo db
         # ??
         db = self.get_db()
-        logger.info(f"db: {db}")
         conversation = db.review_and_update_brain.find_one({"id": doc_id})
 
         if not conversation:

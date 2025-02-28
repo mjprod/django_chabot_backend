@@ -11,8 +11,8 @@ from typing import List
 from django.conf import settings
 from dotenv import load_dotenv
 
-from langchain.embeddings import CohereEmbeddings
-from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
+from langchain_community.embeddings import CohereEmbeddings
 
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
@@ -840,30 +840,38 @@ def update_document_by_custom_id(doc_id: str, answer: str):
         
 def update_brain_document_by_id(doc_id: str, conversation: object):
     
+    # need to load this on start
     import chromadb
     client = chromadb.PersistentClient(path=PERSIST_DIR)
+
     collection = client.get_collection(name=COLLECTION_NAME)
 
     logger.info(f"Updating document with ID: {doc_id}")
-    logger.info(f"collection: {collection}")
-    logger.info(f"conversation: {conversation}")
 
     if not collection.get(ids=[doc_id]):
         logger.error(f"Document ID '{doc_id}' not found.")
         raise Exception(f"Document ID '{doc_id}' not found.")
     else:
-        logger.info(f"{collection.get(ids=[doc_id])}")
         metadata = conversation.get("metadata", {})
         metadata["category"] = metadata["category"][0]
-        page_content=f"Question: \n"f"Answer:"
-        logger.info(f"page_content: {page_content}")
+        questions = conversation.get("question", [])
+        answers = conversation.get("answer", [])
+        page_content=json.dumps({
+            "question": questions,
+            "answer": answers
+        })
+        logger.info(f"page_content: {page_content}")    
+
+        embeddings_model = CohereEmbeddings(model=COHERE_MODEL, user_agent="glaucomp")
+        embedding_vector = embeddings_model.embed_query(page_content)
+
 
         try:
-            collection.upsert(
+            collection.update(
                 ids=[doc_id],
                 metadatas=[metadata],
-                embeddings=CohereEmbeddings(model=COHERE_MODEL, user_agent="glaucomp"),
                 documents=[page_content],
+                embeddings=[embedding_vector],
             )
         except Exception as e:
             logger.error(f"Error updating document: {str(e)}")
