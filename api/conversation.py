@@ -344,7 +344,7 @@ def prompt_conversation_admin(
         if db is not None:
             self.close_db()
 
-
+'''
 def generate_user_input(cleaned_prompt):
     # Get relevant documents
     docs_retrieve = retriever.get_relevant_documents(cleaned_prompt)
@@ -378,7 +378,7 @@ def generate_user_input(cleaned_prompt):
     }
 
 
-'''
+
 def generate_prompt_conversation(
     user_prompt, conversation_id, admin_id, bot_id, user_id
 ):

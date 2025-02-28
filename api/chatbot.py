@@ -89,7 +89,8 @@ def load_and_process_json_file() -> List[dict]:
         "database_part_1.json",
         "database_part_2.json",
         "database_part_3.json",
-        "customer_service_rag.json",
+        "customer_service_rag_1.json",
+        "customer_service_rag_2.json",
     ]
 
     all_documents = []
@@ -219,8 +220,8 @@ def create_vector_store(documents, batch_size=500):
         )
         vectorstores.append(store)
 
-        all_docs = store.get()
-        print("All docs IDs:", all_docs["ids"]) 
+        # all_docs = store.get()
+       # print("All docs IDs:", all_docs["ids"]) 
 
         return store
     except Exception as e:
@@ -803,7 +804,6 @@ def update_document_by_custom_id(custom_id: str, answer: str):
             return
 
         document_id = search_results['ids'][0]
-        
         doc = get_document_by_id(document_id) 
         
         if doc:
@@ -812,8 +812,6 @@ def update_document_by_custom_id(custom_id: str, answer: str):
         existing_metadata = search_results['metadatas'][0]
         document = search_results['documents'][0]
         question_text = document.split("\n")[0].replace("Question: ", "").strip()
-
-        store.delete(ids=[document_id])
 
         new_document = CustomDocument(
             id=custom_id,
@@ -833,9 +831,7 @@ def update_document_by_custom_id(custom_id: str, answer: str):
         )
 
         store.add_documents(documents=[new_document])
-    
         return (f"ID '{custom_id}' updated ")
-
     except Exception as e:
         print(f"Erro ao atualizar documento: {str(e)}")
 

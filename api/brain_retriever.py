@@ -4,7 +4,6 @@ import gc
 import logging
 
 from typing import List
-
 from langchain_community.vectorstores import Chroma
 
 logger = logging.getLogger(__name__)

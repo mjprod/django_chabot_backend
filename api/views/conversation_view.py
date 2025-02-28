@@ -404,7 +404,6 @@ class AllConversationsIdsView(MongoDBMixin, APIView):
         db = None
         try:
             db = self.get_db()
-            # Retorna apenas o campo "session_id" de todas as conversas
             sessions = list(db.conversations.find({}, {"session_id": 1, "_id": 0}))
             return Response(sessions, status=status.HTTP_200_OK)
         except Exception as e:

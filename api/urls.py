@@ -21,14 +21,13 @@ from .views.feedback_view import (
     CaptureFeedbackCompareView,
     CaptureFeedbackMultiView,
 )
-from .views.user_input_view import (
-    UserInputView,
+from .views.brain_view import (
+    ListReviewAndUpdateBrainView,
+    UpdateReviewStatusView
 )
 
 # Define URL patterns
 urlpatterns = [
-    # TODO: DEPRECATED
-    path("user_input/", UserInputView.as_view(), name="user_input"),
     # Prompt Conversation
     path("prompt_conversation/",PromptConversationView.as_view(),name="prompt_conversation"),
     path("prompt_conversation_admin/",PromptConversationAdminView.as_view(),name="prompt_conversation_admin",),
@@ -39,6 +38,9 @@ urlpatterns = [
     path("capture_feedback_compare/", CaptureFeedbackCompareView.as_view(), name="capture_feedback_compare"),
     path("capture_feedback_multi/",CaptureFeedbackMultiView.as_view(),name="capture_feedback_multi",),
     # Brain
+    path("list_review_update_brain/", ListReviewAndUpdateBrainView.as_view(), name="review_update_brain"),
+    path("update_review_status/", UpdateReviewStatusView.as_view(), name="update_review_status"),
+    # TODO: Wrong place -> move to brain_view
     path('update_knowledge/', UpdateKnowledgeView.as_view(), name='update_knowledge'),
     path('categorize_conversation/', SeparateConversationsView.as_view(), name='categorize_conversation'),
     path("delete_conversation/<conversation_id>/", DeleteConversationView.as_view(), name="delete_conversation"),

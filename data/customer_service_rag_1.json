@@ -14577,7 +14577,7 @@
     {
         "id": "0346",
         "question": {
-            "text": "I have a question related to app issue. Can you help clarify it?",
+            "text": "I have a question related to Pussy888 app issue. Can you help clarify it?",
             "variations": [
                 "Can you explain how app issue works?",
                 "I need assistance regarding app issue. What should I do?",
@@ -14586,8 +14586,8 @@
             ],
             "intent": "app_issue",
             "languages": {
-                "en": "\"Pussy 88 can’t be opened\"",
-                "ms": "\"pussy 88 takbole buka\"",
+                "en": "\"Pussy888 can’t be opened\"",
+                "ms": "\"pussy888 takbole buka\"",
                 "cn": ""
             }
         },
@@ -14683,7 +14683,7 @@
     {
         "id": "0348",
         "question": {
-            "text": "I have a question related to account info. Can you help clarify it?",
+            "text": "I have a question related to issue account info. Can you help clarify it?",
             "variations": [
                 "Can you explain how account info works?",
                 "I need assistance regarding account info. What should I do?",
@@ -14736,12 +14736,12 @@
     {
         "id": "0349",
         "question": {
-            "text": "I have a question related to credit transfer error. Can you help clarify it?",
+            "text": "I have a question related to transfer to wrong user id account. Can you help clarify it?",
             "variations": [
-                "Can you explain how credit transfer error works?",
-                "I need assistance regarding credit transfer error. What should I do?",
-                "My transaction related to credit transfer error isn’t going through. Can you check?",
-                "I am facing an issue with credit transfer error. How can I resolve it?"
+                "Can you explain how credit transfer wrong user id works?",
+                "I need assistance regarding credit transfer to wrong user. What should I do?",
+                "My transaction related to credit transfer wrong account isn’t going through. Can you check?",
+                "I am facing an issue with credit transfer wrong account. How can I resolve it?"
             ],
             "intent": "credit_transfer_error",
             "languages": {
@@ -14789,12 +14789,12 @@
     {
         "id": "0350",
         "question": {
-            "text": "I have a question related to credit transfer error. Can you help clarify it?",
+            "text": "I have a question related to credit transfer wrong id. Can you help clarify it?",
             "variations": [
-                "Can you explain how credit transfer error works?",
-                "I need assistance regarding credit transfer error. What should I do?",
-                "My transaction related to credit transfer error isn’t going through. Can you check?",
-                "I am facing an issue with credit transfer error. How can I resolve it?"
+                "Can you explain how credit transfer wrong id works?",
+                "I need assistance regarding credit transfer wrong id. What should I do?",
+                "My transaction related to credit transfer wrong id isn’t going through. Can you check?",
+                "I am facing an issue with credit transfer wrong id. How can I resolve it?"
             ],
             "intent": "credit_transfer_error",
             "languages": {
@@ -14806,7 +14806,7 @@
         "answer": {
             "detailed": {
                 "en": "Boss, you can only wait for that ID to reply and transfer it back If the issue persists, please provide more details or contact support for further assistance.",
-                "ms": "\"bos hanya boleh tunggu id tu balas dan sahre balik ja ya\"",
+                "ms": "\"boss, hanya boleh tunggu id tu balas dan sahre balik ja ya\"",
                 "cn": "\"老闆只能等那個ID回覆並再轉回來哦\""
             },
             "conditions": []
@@ -14911,9 +14911,9 @@
         },
         "answer": {
             "detailed": {
-                "en": "(No explicit solution, only user request to check, no staff response) If the issue persists, please provide more details or contact support for further assistance.",
-                "ms": "(無明確解決方案，僅用戶請求檢查，無客服回應)",
-                "cn": "(無明確解決方案，僅用戶請求檢查，無客服回應)"
+                "en": "you will receive a TAC code on your phone, you will need it to help you verify every transaction.",
+                "ms": "Anda akan menerima kod TAC di telefon anda, dan anda memerlukannya untuk membantu anda mengesahkan setiap transaksi.",
+                "cn": "您将在手机上收到TAC验证码，您需要它来帮助您验证每笔交易。"
             },
             "conditions": []
         },
@@ -15721,59 +15721,6 @@
             "confidence": 0.5,
             "dateCreated": "2025-02-27T06:39:18.824062Z",
             "lastUpdated": "2025-02-27T06:39:18.824064Z",
-            "version": "1.0",
-            "source": "customer_service",
-            "status": "active"
-        },
-        "context": {
-            "relatedTopics": [],
-            "prerequisites": [],
-            "followUpQuestions": {
-                "en": [],
-                "ms": [],
-                "cn": []
-            }
-        },
-        "usage": {
-            "searchFrequency": 0,
-            "successRate": 0,
-            "lastQueried": null
-        }
-    },
-    {
-        "id": "0368",
-        "question": {
-            "text": "I have a question related to credit transfer error. Can you help clarify it?",
-            "variations": [
-                "Can you explain how credit transfer error works?",
-                "I need assistance regarding credit transfer error. What should I do?",
-                "My transaction related to credit transfer error isn’t going through. Can you check?",
-                "I am facing an issue with credit transfer error. How can I resolve it?"
-            ],
-            "intent": "credit_transfer_error",
-            "languages": {
-                "en": "\"I received credit transferred to me by mistake\"",
-                "ms": "\"Saya terima kredit yang salah dari orang lain\"",
-                "cn": "\"我收到別人錯轉的信用\""
-            }
-        },
-        "answer": {
-            "detailed": {
-                "en": "Hi boss, earlier one of our customers accidentally transferred credit to your Joker wallet\\r\\nPlease transfer it back to them later using SHARE CREDIT\\r\\n\\r\\nID = 156025JK\\r\\nAmount = RM 10 If the issue persists, please provide more details or contact support for further assistance.",
-                "ms": "\"hi boss , tadi customer kami ada tersilap transfer credit ke wallet joker anda ya\\r\\nminta boss nnti buat trasnfer balik sama dia ye , pakai SHARE CREDIT\\r\\n\\r\\nID = 156025JK\\r\\nRM = rm 10\"",
-                "cn": "\"嗨，老闆，剛才我們的客戶不小心轉了信用到您的Joker錢包哦\\r\\n請老闆之後用SHARE CREDIT轉回去給他哦\\r\\n\\r\\nID = 156025JK\\r\\n金額 = 10令吉\""
-            },
-            "conditions": []
-        },
-        "metadata": {
-            "category": [
-                "technical"
-            ],
-            "subCategory": "credit_transfer_error",
-            "difficulty": 2,
-            "confidence": 0.5,
-            "dateCreated": "2025-02-27T06:39:18.824072Z",
-            "lastUpdated": "2025-02-27T06:39:18.824075Z",
             "version": "1.0",
             "source": "customer_service",
             "status": "active"

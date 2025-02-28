@@ -31,7 +31,8 @@ def load_all_documents() -> List[Dict]:
         "database_part_1.json",
         "database_part_2.json",
         "database_part_3.json",
-        "customer_service_rag.json"
+        "customer_service_rag_1.json",
+        "customer_service_rag_2.json",
     ]
     
     all_documents = []
@@ -88,7 +89,8 @@ def update_answer_detailed_en(document: Dict, new_value: str):
         "database_part_1.json",
         "database_part_2.json",
         "database_part_3.json",
-        "customer_service_rag.json"
+        "customer_service_rag_1.json",
+        "customer_service_rag_2.json",
     ]
     
     found = False
