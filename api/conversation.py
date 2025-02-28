@@ -6,6 +6,8 @@ import asyncio
 
 from openai import OpenAI
 from datetime import datetime
+from langchain.vectorstores import Chroma
+from langchain.embeddings import CohereEmbeddings
 
 from ai_config.ai_constants import (
     OPENAI_MODEL,
@@ -172,7 +174,6 @@ def prompt_conversation(self, user_prompt, store ,language_code=LANGUAGE_DEFAULT
 
 def prompt_conversation_admin(
     self,
-    store,
     user_prompt,
     conversation_id,
     admin_id,
@@ -218,10 +219,30 @@ def prompt_conversation_admin(
         # Vector store retrieval
         vector_start = time.time()
         try:
+            #TODO: I tried to send as prop but it didn't work
+            COHERE_MODEL = "embed-multilingual-v3.0"
+            embedding_model = CohereEmbeddings(model=COHERE_MODEL, user_agent="glaucomp")
+
+            store = Chroma(
+                persist_directory="./chroma_db",
+                embedding_function=embedding_model,
+                collection_name="RAG"
+            )
+
+            # Verificar os documentos carregados
+            all_docs = store.get()
+            # print("🔍 IDs dos documentos carregados:", all_docs["ids"])
             # vector_store = get_vector_store(language_code)
             docs_retrieve = store.similarity_search(
                 user_prompt, k=3  # Limit to top 3 results for performance
             )
+
+            for i, doc in enumerate(docs_retrieve, start=1):
+                print(f"📌 Resultado {i}:")
+                print(f"Conteúdo: {doc.page_content}\n")
+                print(f"Metadata: {doc.metadata}\n")
+                print("="*50)
+
             logger.debug(
                 f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
             )
@@ -233,6 +254,7 @@ def prompt_conversation_admin(
         # OpenAI response generation
         generation_start = time.time()
         try:
+            
             client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), timeout=OPENAI_TIMEOUT)
 
             # the history of messages is the context
@@ -250,6 +272,7 @@ def prompt_conversation_admin(
                 max_tokens=MAX_TOKENS,
                 timeout=OPENAI_TIMEOUT,
             )
+            logging.info(messages_history)
             ai_response = response.choices[0].message.content
             logger.debug(
                 f"AI response generated in {time.time() - generation_start:.2f}s"
@@ -260,9 +283,7 @@ def prompt_conversation_admin(
 
         is_last_message = is_finalizing_phrase(ai_response)
 
-        # Chama o confidence grader para obter um score de confiança
         try:
-            # Aqui usamos os documentos recuperados para o contexto
             confidence_result = confidence_grader.invoke({
                 "documents": format_docs(docs_retrieve),
                 "generation": ai_response,

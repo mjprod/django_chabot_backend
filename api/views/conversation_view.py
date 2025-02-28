@@ -195,7 +195,6 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
 
             response = prompt_conversation_admin(
                 self,
-                store=get_store,
                 user_prompt=validated_data["prompt"],
                 conversation_id=validated_data["conversation_id"],
                 admin_id=validated_data.get("admin_id", ""),

@@ -89,6 +89,7 @@ def load_and_process_json_file() -> List[dict]:
         "database_part_1.json",
         "database_part_2.json",
         "database_part_3.json",
+        "customer_service_rag.json",
     ]
 
     all_documents = []
@@ -217,6 +218,10 @@ def create_vector_store(documents, batch_size=500):
             f"Vector store creation completed in {time.time() - store_start:.2f}s"
         )
         vectorstores.append(store)
+
+        all_docs = store.get()
+        print("All docs IDs:", all_docs["ids"]) 
+
         return store
     except Exception as e:
         logger.error(f"Vector store creation failed: {str(e)}")
@@ -439,8 +444,6 @@ def update_database_confidence(comparison_result, docs_to_use):
 
     except Exception as e:
         logger.error(f"Error updating database confidence: {str(e)}")
-
-
 
 def process_feedback_translation(feedback_data):
     try:
@@ -796,7 +799,7 @@ def update_document_by_custom_id(custom_id: str, answer: str):
         )
 
         if not search_results['ids']:
-            print(f"Documento com custom ID '{custom_id}' não encontrado.")
+            print(f"Document ID '{custom_id}' not found.")
             return
 
         document_id = search_results['ids'][0]
