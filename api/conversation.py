@@ -6,8 +6,8 @@ import asyncio
 
 from openai import OpenAI
 from datetime import datetime
-from langchain.vectorstores import Chroma
-from langchain.embeddings import CohereEmbeddings
+from langchain_community.vectorstores import Chroma
+from langchain_community.embeddings import CohereEmbeddings
 
 from ai_config.ai_constants import (
     OPENAI_MODEL,

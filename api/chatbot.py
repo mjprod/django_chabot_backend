@@ -11,8 +11,8 @@ from typing import List
 from django.conf import settings
 from dotenv import load_dotenv
 
-from langchain.embeddings import CohereEmbeddings
-from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
+from langchain_community.embeddings import CohereEmbeddings
 
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
@@ -30,6 +30,8 @@ from ai_config.ai_constants import (
     OPENAI_TIMEOUT,
     COHERE_MODEL,
     MAX_TEMPERATURE,
+    PERSIST_DIR,
+    COLLECTION_NAME
 )
 
 from ai_config.ai_prompts import (
@@ -39,6 +41,7 @@ from ai_config.ai_prompts import (
     CONFIDENCE_GRADER_PROMPT,
     RAG_PROMPT_TEMPLATE,
     PROMPT_TEMPLATE_MONGO_AND_OPENAI,
+    
 )
 
 from api.views.brain_file_reader import (
@@ -206,9 +209,9 @@ def create_vector_store(documents, batch_size=500):
         store = Chroma.from_documents(
             ids=[doc.id for doc in doc_objects],
             documents=split_data,
-            collection_name="RAG",
+            collection_name=COLLECTION_NAME,
             embedding=embedding_model,
-            persist_directory="./chroma_db",
+            persist_directory=PERSIST_DIR,
             collection_metadata={
                 "hnsw:space": "cosine",
                 "hnsw:construction_ef": 100,
@@ -834,5 +837,48 @@ def update_document_by_custom_id(custom_id: str, answer: str):
         return (f"ID '{custom_id}' updated ")
     except Exception as e:
         print(f"Erro ao atualizar documento: {str(e)}")
-
         
+
+#   TODO: this func should be a part of a class e.g., class Brain(). refactoring needed
+def update_brain_document_by_id(doc_id: str, conversation: object):
+    
+    # TODO: chromadb need to be loaded on project start
+    # as per doc: when the client object is no longer referenced, the client will naturally release resources, 
+    # including closing the database file.
+    import chromadb
+    client = chromadb.PersistentClient(path=PERSIST_DIR)
+    collection = client.get_collection(name=COLLECTION_NAME)
+
+    logger.info(f"Updating document with ID: {doc_id}")
+    
+    if not collection.get(ids=[doc_id]):
+        logger.error(f"Document ID '{doc_id}' not found.")
+        raise Exception(f"Document ID '{doc_id}' not found in the brain.")
+    else:
+        logger.info(f"original: {collection.get(ids=[doc_id])}")
+        metadata = conversation.get("metadata", {})
+        metadata["category"] = metadata["category"][0]
+        questions = conversation.get("question", [])
+        answers = conversation.get("answer", [])
+        page_content=json.dumps({
+            "question": questions,
+            "answer": answers
+        })
+
+        # TODO: this need to be a global setting
+        embeddings_model = CohereEmbeddings(model=COHERE_MODEL, user_agent="glaucomp")
+        embedding_vector = embeddings_model.embed_query(page_content)
+
+        try:
+            collection.update(
+                ids=[doc_id],
+                metadatas=[metadata],
+                documents=[page_content],
+                embeddings=[embedding_vector],
+            )
+
+            del client
+
+        except Exception as e:
+            logger.error(f"Error updating document in brain: {str(e)}")
+            raise Exception(f"Error updating document in brain: {str(e)}")
