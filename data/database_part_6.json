@@ -4291,58 +4291,5 @@
             "lastQueried": null
         },
         "review_status": []
-    },
-    {
-        "id": "0582",
-        "question": {
-            "text": "ok",
-            "variations": [
-                "okay",
-                "nice",
-                "sweet"
-            ],
-            "intent": "incorrect_amount_submission",
-            "languages": {
-                "en": "ok",
-                "ms": "okay",
-                "cn": "好的"
-            }
-        },
-        "answer": {
-            "detailed": {
-                "en": "Great! Is there anything else I can help you with?",
-                "ms": "Hebat! Adakah ada apa-apa lagi yang boleh saya bantu anda?",
-                "cn": "太好了！还有什么我可以帮你的吗"
-            },
-            "conditions": []
-        },
-        "metadata": {
-            "category": [
-                "technical"
-            ],
-            "subCategory": "incorrect_amount_submission",
-            "difficulty": 2,
-            "confidence": 0.5,
-            "dateCreated": "2025-02-27T06:39:18.823757Z",
-            "lastUpdated": "2025-02-27T06:39:18.823759Z",
-            "version": "1.0",
-            "source": "customer_service",
-            "status": "active"
-        },
-        "context": {
-            "relatedTopics": [],
-            "prerequisites": [],
-            "followUpQuestions": {
-                "en": [],
-                "ms": [],
-                "cn": []
-            }
-        },
-        "usage": {
-            "searchFrequency": 0,
-            "successRate": 0,
-            "lastQueried": null
-        },
-        "review_status": []
     }
 ]
