@@ -258,9 +258,9 @@ def prompt_conversation_admin(
             messages_history = messages.copy()
             if docs_retrieve:
                 context_text = " ".join([doc.page_content for doc in docs_retrieve])
-                # messages_history.append(
-                  #  {"role": "system", "content": f"Relevant context: {context_text}"}
-                # )
+                messages_history.append(
+                    {"role": "system", "content": f"Relevant context: {context_text}"}
+                )
 
             logger.info(f"@@ Messages history: {messages_history}")
 
