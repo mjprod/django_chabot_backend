@@ -78,9 +78,7 @@ def reset_all_confidence_scores(target_score=0.5):
             "database_part_1.json",
             "database_part_2.json",
             "database_part_3.json",
-            "database_part_4.json",
-            "database_part_5.json",
-            "database_part_6.json",
+            "database_part_4.json"
         ]
 
         total_updates = 0
