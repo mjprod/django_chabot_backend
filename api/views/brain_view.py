@@ -57,7 +57,8 @@ class UpdateReviewStatusView(MongoDBMixin, APIView):
         data = request.data
         doc_id = data.get("doc_id")
         review_status = data.get("review_status")
-        
+        review_text = data.get("review_text")
+
         if not doc_id or not review_status:
             return Response(
                 {"error": "doc_id and review_status are required."},
@@ -66,13 +67,19 @@ class UpdateReviewStatusView(MongoDBMixin, APIView):
         
         db = None
         try:
+
             db = self.get_db()
+            # Build the field path for the answer text, e.g., "answer.detailed.en"
+            field_path = f"answer.detailed.{review_status}"
+            
+            # Update operation:
+            #  - $set to update the specific language answer text
+            #  - $addToSet to add the language code to review_status if not already present
             result = db.review_and_update_brain.update_one(
                 {"id": doc_id},
                 {
-                    "$push": {
-                        "review_status": review_status
-                    }
+                    "$set": {field_path: review_text},
+                    "$addToSet": {"review_status": review_status}
                 }
             )
             

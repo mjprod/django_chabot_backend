@@ -4210,57 +4210,5 @@
             "successRate": 0,
             "lastQueried": null
         }
-    },
-    {
-        "id": "0582",
-        "question": {
-            "text": "\"I want to top up, what’s the new rule?\" | I want to top up, what’s the new rule?",
-            "variations": [
-                "\"Saya nak top-up, ada peraturan baru apa?\"",
-                "\"我想充值，有什麼新規定？\"",
-                "\"I want to top up, what’s the new rule?\""
-            ],
-            "intent": "top-up_inquiry",
-            "languages": {
-                "en": "\"I want to top up, what’s the new rule?\" | I want to top up, what’s the new rule?",
-                "ms": "\"Saya nak top-up, ada peraturan baru apa?\"",
-                "cn": "\"我想充值，有什麼新規定？\""
-            }
-        },
-        "answer": {
-            "detailed": {
-                "en": "KAKO nick name",
-                "ms": "KAKO nick name",
-                "cn": "KAKO nick name"
-            },
-            "conditions": []
-        },
-        "metadata": {
-            "category": [
-                "finance"
-            ],
-            "subCategory": "top-up_inquiry",
-            "difficulty": 2,
-            "confidence": 0.5,
-            "dateCreated": "2025-02-27T06:39:18.823757Z",
-            "lastUpdated": "2025-02-27T06:39:18.823759Z",
-            "version": "1.0",
-            "source": "customer_service",
-            "status": "active"
-        },
-        "context": {
-            "relatedTopics": [],
-            "prerequisites": [],
-            "followUpQuestions": {
-                "en": [],
-                "ms": [],
-                "cn": []
-            }
-        },
-        "usage": {
-            "searchFrequency": 0,
-            "successRate": 0,
-            "lastQueried": null
-        }
     }
 ]
