@@ -262,8 +262,6 @@ def prompt_conversation_admin(
                     {"role": "system", "content": f"Relevant context: {context_text}"}
                 )
 
-            logger.info(f"@@ Messages history: {messages_history}")
-
             response = client.chat.completions.create(
                 model=OPENAI_MODEL,
                 messages=messages_history,
