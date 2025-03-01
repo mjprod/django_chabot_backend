@@ -229,18 +229,15 @@ def prompt_conversation_admin(
                 collection_name="RAG"
             )
 
-            # Verificar os documentos carregados
-            all_docs = store.get()
-            # print("🔍 IDs dos documentos carregados:", all_docs["ids"])
-            # vector_store = get_vector_store(language_code)
+        
             docs_retrieve = store.similarity_search(
                 user_prompt, k=3  # Limit to top 3 results for performance
             )
 
             for i, doc in enumerate(docs_retrieve, start=1):
-                print(f"📌 Resultado {i}:")
-                print(f"Conteúdo: {doc.page_content}\n")
-                print(f"Metadata: {doc.metadata}\n")
+                print(f"📌 Result {i}:")
+                print(f"content: {doc.page_content}\n")
+                print(f"metadata: {doc.metadata}\n")
                 print("="*50)
 
             logger.debug(
@@ -261,9 +258,11 @@ def prompt_conversation_admin(
             messages_history = messages.copy()
             if docs_retrieve:
                 context_text = " ".join([doc.page_content for doc in docs_retrieve])
-                messages_history.append(
-                    {"role": "system", "content": f"Relevant context: {context_text}"}
-                )
+                # messages_history.append(
+                  #  {"role": "system", "content": f"Relevant context: {context_text}"}
+                # )
+
+            logger.info(f"@@ Messages history: {messages_history}")
 
             response = client.chat.completions.create(
                 model=OPENAI_MODEL,
