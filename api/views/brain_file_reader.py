@@ -31,8 +31,9 @@ def load_all_documents() -> List[Dict]:
         "database_part_1.json",
         "database_part_2.json",
         "database_part_3.json",
-        "customer_service_rag_1.json",
-        "customer_service_rag_2.json",
+        "database_part_4.json",
+        "database_part_5.json",
+        "database_part_6.json",
     ]
     
     all_documents = []
@@ -76,7 +77,7 @@ def get_document_by_question_text(question_text: str) -> Optional[str]:
     logger.warning(f"Document with question text '{question_text}' not found.")
     return None
 
-def update_answer_detailed_en(document: Dict, new_value: str):
+def update_answer_detailed(document: Dict, answer_en: str, answer_ms: str, answer_cn: str):
     """
     Update the value of answer.detailed.en for the given document (identified by its 'id')
     across multiple JSON files. If the document is found in one file, update that file in-place.
@@ -89,8 +90,9 @@ def update_answer_detailed_en(document: Dict, new_value: str):
         "database_part_1.json",
         "database_part_2.json",
         "database_part_3.json",
-        "customer_service_rag_1.json",
-        "customer_service_rag_2.json",
+        "database_part_4.json",
+        "database_part_5.json",
+        "database_part_6.json",
     ]
     
     found = False
@@ -109,7 +111,9 @@ def update_answer_detailed_en(document: Dict, new_value: str):
             for doc in docs:
                 if doc.get("id") == document.get("id"):
                     if "answer" in doc and "detailed" in doc["answer"]:
-                        doc["answer"]["detailed"]["en"] = new_value
+                        doc["answer"]["detailed"]["en"] = answer_en
+                        doc["answer"]["detailed"]["ms"] = answer_ms
+                        doc["answer"]["detailed"]["cn"] = answer_cn
                         updated = True
                         found = True
                         break  # Document found; update and exit the loop for this file

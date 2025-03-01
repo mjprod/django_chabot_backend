@@ -172,4 +172,6 @@ class PromptConversationAdminSerializer(serializers.Serializer):
 
 class UpdateAnswerBrain(serializers.Serializer):
     doc_id = serializers.CharField(required=True)
-    new_answer = serializers.CharField(required=True)
+    answer_en = serializers.CharField(required=True)
+    answer_ms = serializers.CharField(required=True)
+    answer_cn = serializers.CharField(required=True)

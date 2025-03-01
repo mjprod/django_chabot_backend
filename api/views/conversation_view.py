@@ -12,8 +12,6 @@ from rapidfuzz import fuzz
 from api.chatbot import (
     check_answer_mongo_and_openai,
     extrair_knowledge_items,
-    update_chroma_document,
-    update_document_by_custom_id,
     get_store,
 )
 
@@ -25,7 +23,6 @@ from api.conversation import (
 from ..serializers import (
     PromptConversationSerializer,
     PromptConversationAdminSerializer,
-    UpdateAnswerBrain,
 )
 
 from ai_config.ai_constants import (
@@ -704,34 +701,4 @@ class DashboardCountsView(MongoDBMixin, APIView):
             )
         finally:
             if db is not None:
-                self.close_db()
-
-
-
-class UpdateBrainView(APIView):
-    def get(self, request):
-        try:
-            # Validate input data
-            input_serializer = UpdateAnswerBrain(data=request.data)
-            if not input_serializer.is_valid():
-                logger.error(f"Validation failed: {input_serializer.errors}")
-                return Response(
-                    {"error": "Invalid input data", "details": input_serializer.errors},
-                    status=status.HTTP_400_BAD_REQUEST,
-                )
-
-            doc_id = input_serializer.validated_data["doc_id"]
-            new_answer = input_serializer.validated_data["new_answer"]
-
-            conversations = update_document_by_custom_id(
-                doc_id, new_answer)
-            
-            data = {
-                "conversations": conversations,
-            }
-            return Response(data, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response(
-                {"error": f"Error retrieving dashboard counts: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )        
+                self.close_db()       

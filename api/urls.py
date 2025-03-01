@@ -1,7 +1,6 @@
 from django.urls import path
 from django.views.decorators.cache import cache_page
 
-# Import views from conversation_view, feedback_view, and user_input_view
 from .views.conversation_view import (
     PromptConversationView,
     ConversationDetailView,
@@ -12,7 +11,6 @@ from .views.conversation_view import (
     FinaliseAllConversationsView,
     SeparateConversationsView,
     DashboardCountsView,
-    UpdateBrainView,
     # PromptConversationDeepSeekView,
     PromptConversationAdminView,
 )
@@ -23,7 +21,8 @@ from .views.feedback_view import (
 )
 from .views.brain_view import (
     ListReviewAndUpdateBrainView,
-    UpdateReviewStatusView
+    UpdateReviewStatusView,
+    UpdateBrainView,
 )
 
 # Define URL patterns
@@ -40,13 +39,14 @@ urlpatterns = [
     # Brain
     path("list_review_update_brain/", ListReviewAndUpdateBrainView.as_view(), name="review_update_brain"),
     path("update_review_status/", UpdateReviewStatusView.as_view(), name="update_review_status"),
+    path("update_brain/", UpdateBrainView.as_view(), name="update_brain"),
+
     # TODO: Wrong place -> move to brain_view
     path('update_knowledge/', UpdateKnowledgeView.as_view(), name='update_knowledge'),
     path('categorize_conversation/', SeparateConversationsView.as_view(), name='categorize_conversation'),
     path("delete_conversation/<conversation_id>/", DeleteConversationView.as_view(), name="delete_conversation"),
     path("finalise_conversation/<conversation_id>/", FinaliseConversationView.as_view(), name="finalise_conversation"),
     path("finalise_all_conversation/", FinaliseAllConversationsView.as_view(), name="finalise_all_conversation"),
-    path("update_brain/", UpdateBrainView.as_view(), name="update_brain"),
     # Dashboard
     path("dashboard_counts/", DashboardCountsView.as_view(), name="dashboard_counts"),
 ]

@@ -44,7 +44,7 @@ from ai_config.ai_prompts import (
 from api.views.brain_file_reader import (
     get_document_by_id,
     get_document_by_question_text,
-    update_answer_detailed_en
+    update_answer_detailed
 )
 
 from api.brain_retriever import (
@@ -89,8 +89,9 @@ def load_and_process_json_file() -> List[dict]:
         "database_part_1.json",
         "database_part_2.json",
         "database_part_3.json",
-        "customer_service_rag_1.json",
-        "customer_service_rag_2.json",
+        "database_part_4.json",
+        "database_part_5.json",
+        "database_part_6.json",
     ]
 
     all_documents = []
@@ -110,6 +111,7 @@ def load_and_process_json_file() -> List[dict]:
                         # Process metadata with proper error handling
                         metadata = item.get("metadata", {})
                         processed_metadata = {
+                            "id": item.get("id", ""),
                             "category": ",".join(metadata.get("category", [])),
                             "subCategory": metadata.get("subCategory", ""),
                             "difficulty": metadata.get("difficulty", 0),
@@ -174,6 +176,7 @@ doc_objects = [
             f"Answer: {doc['answer']['detailed']['en']}"
         ),
         metadata={
+            "id": doc.get("id", ""),
             "category": ",".join(doc["metadata"].get("category", [])),
             "subCategory": doc["metadata"].get("subCategory", ""),
             "difficulty": doc["metadata"].get("difficulty", 0),
@@ -220,8 +223,8 @@ def create_vector_store(documents, batch_size=500):
         )
         vectorstores.append(store)
 
-        # all_docs = store.get()
-       # print("All docs IDs:", all_docs["ids"]) 
+        all_docs = store.get()
+        print("All docs IDs:", all_docs["ids"]) 
 
         return store
     except Exception as e:
@@ -352,6 +355,9 @@ def update_local_confidence(generation, confidence_diff):
             "database_part_1.json",
             "database_part_2.json",
             "database_part_3.json",
+            "database_part_4.json",
+            "database_part_5.json",
+            "database_part_6.json",
         ]
 
         updated = False
@@ -405,6 +411,9 @@ def update_database_confidence(comparison_result, docs_to_use):
             "database_part_1.json",
             "database_part_2.json",
             "database_part_3.json",
+            "database_part_4.json",
+            "database_part_5.json",
+            "database_part_6.json",
         ]
 
         for database_file in database_files:
@@ -792,7 +801,7 @@ def search_by_id(store: Chroma, custom_id: str):
     )
     return results
 
-def update_document_by_custom_id(custom_id: str, answer: str):
+def update_document_by_custom_id(custom_id: str, answer_en: str, answer_ms: str, answer_cn: str):
     try:
         search_results = store.get(
             where={"id": custom_id},
@@ -807,7 +816,7 @@ def update_document_by_custom_id(custom_id: str, answer: str):
         doc = get_document_by_id(document_id) 
         
         if doc:
-            update_answer_detailed_en(doc, answer)
+            update_answer_detailed(doc, answer_en, answer_ms, answer_cn)
 
         existing_metadata = search_results['metadatas'][0]
         document = search_results['documents'][0]
@@ -817,7 +826,7 @@ def update_document_by_custom_id(custom_id: str, answer: str):
             id=custom_id,
             page_content=(
                 f"Question: {question_text}\n"
-                f"Answer: {answer}"
+                f"Answer: {answer_en}"
             ),
             metadata={
                 "category": ",".join(existing_metadata.get("category", [])),
@@ -833,6 +842,6 @@ def update_document_by_custom_id(custom_id: str, answer: str):
         store.add_documents(documents=[new_document])
         return (f"ID '{custom_id}' updated ")
     except Exception as e:
-        print(f"Erro ao atualizar documento: {str(e)}")
+        print(f"Error to update document: {str(e)}")
 
         
