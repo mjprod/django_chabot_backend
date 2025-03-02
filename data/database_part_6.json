@@ -4291,5 +4291,58 @@
             "lastQueried": null
         },
         "review_status": []
+    },
+    {
+        "id": "0582",
+        "question": {
+            "text": "ok",
+            "variations": [
+                "okay",
+                "Yeah",
+                "Ok"
+            ],
+            "intent": "short_response",
+            "languages": {
+                "en": "ok",
+                "ms": "ok",
+                "cn": "ok"
+            }
+        },
+        "answer": {
+            "detailed": {
+                "en": "Any new questions?",
+                "ms": "Ada soalan baru?",
+                "cn": "有新问题吗？"
+            },
+            "conditions": []
+        },
+        "metadata": {
+            "category": [
+                "general"
+            ],
+            "subCategory": "short_response",
+            "difficulty": 1,
+            "confidence": 0.5,
+            "dateCreated": "2025-02-27T06:39:18.823757Z",
+            "lastUpdated": "2025-02-27T06:39:18.823759Z",
+            "version": "1.0",
+            "source": "customer_service",
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [],
+            "prerequisites": [],
+            "followUpQuestions": {
+                "en": [],
+                "ms": [],
+                "cn": []
+            }
+        },
+        "usage": {
+            "searchFrequency": 0,
+            "successRate": 0,
+            "lastQueried": null
+        },
+        "review_status": []
     }
 ]

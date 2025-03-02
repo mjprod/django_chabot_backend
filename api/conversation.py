@@ -230,13 +230,19 @@ def prompt_conversation_admin(
             )
 
         
-            docs_retrieve = store.similarity_search(
-                user_prompt, k=3  # Limit to top 3 results for performance
-            )
+            # docs_retrieve = store.similarity_search(
+              #  user_prompt, k=3  # Limit to top 3 results for performance
+            # )
 
+            # Exception handling for user prompt
+            if user_prompt.lower().strip() == "ok":
+                docs_retrieve = store.similarity_search(user_prompt, k=1)
+            else:
+                docs_retrieve = store.similarity_search(user_prompt, k=3)
+            
             for i, doc in enumerate(docs_retrieve, start=1):
                 print(f"📌 Result {i}:")
-                print(f"content: {doc.page_content}\n")
+                print(f"@@content: {doc}\n")
                 print(f"metadata: {doc.metadata}\n")
                 print("="*50)
 
