@@ -90,6 +90,11 @@ def load_and_process_json_file() -> List[dict]:
         "database_part_2.json",
         "database_part_3.json",
         "database_part_4.json",
+        "database_part_5.json",
+        "database_part_6.json",
+        "database_part_7.json",
+        "database_part_8.json",
+        "database_part_9.json",
     ]
 
     all_documents = []
@@ -354,6 +359,11 @@ def update_local_confidence(generation, confidence_diff):
             "database_part_2.json",
             "database_part_3.json",
             "database_part_4.json",
+                  "database_part_5.json",
+        "database_part_6.json",
+        "database_part_7.json",
+        "database_part_8.json",
+        "database_part_9.json",
         ]
 
         updated = False
@@ -408,6 +418,11 @@ def update_database_confidence(comparison_result, docs_to_use):
             "database_part_2.json",
             "database_part_3.json",
             "database_part_4.json",
+                  "database_part_5.json",
+        "database_part_6.json",
+        "database_part_7.json",
+        "database_part_8.json",
+        "database_part_9.json",
         ]
 
         for database_file in database_files:

@@ -7,7 +7,7 @@ with open('ALL_DATA_fixed.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
 new_data = []
-for i, record in enumerate(data, start=1):
+for i, record in enumerate(data, start=357):
     new_record = {}
     new_record["id"] = f"{i:04d}" 
 

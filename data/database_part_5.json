@@ -1,0 +1,5302 @@
+[
+  {
+    "id": "0400",
+    "question": {
+      "text": "Thanks for asking! Deposits usually take 5-30 minutes to process and credit. If it’s over 30, hit up our online customer service to check.",
+      "variations": [
+        "Terima kasih sebab tanya! Deposit biasanya ambil 5-30 minit untuk proses dan masuk. Kalau lebih 30, hubungi sokongan pelanggan dalam talian untuk semak.",
+        "Thanks for asking! Deposits usually take 5-30 minutes to process and credit. If it’s over 30, hit up our online customer service to check.",
+        "感謝您的詢問！存款通常需要5-30分鐘處理並入賬。若超過30分鐘，請聯繫我們的在線客服團隊核查。"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "How long does it typically take for funds to be credited after a deposit?",
+        "ms": "Berapa lama biasanya masa yang diambil untuk dana dikreditkan selepas deposit?",
+        "cn": "存款後資金通常需要多長時間入賬？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Great user_input_en, boss! Funds usually hit in 5-30 minutes after a deposit. Past 30? Let our online customer service know—I’ll fix it fast!",
+        "ms": "Soalan bagus, boss! Dana biasanya masuk dalam 5-30 minit lepas deposit. Lebih 30? Bagitahu sokongan pelanggan dalam talian—saya settle cepat!",
+        "cn": "問得好，老板！存款後資金通常5-30分鐘入賬。若超過30分鐘，請告訴我們的在線客服團隊，我會快速幫您解決！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0401",
+    "question": {
+      "text": "The system asked you to wait 5 minutes because you’ve made multiple same or similar transactions recently. It’s a safety check to prevent odd activity.",
+      "variations": [
+        "Sistem minta boss tunggu 5 minit sebab boss baru buat banyak transaksi sama atau serupa. Ini cek keselamatan untuk elak aktiviti pelik.",
+        "The system asked you to wait 5 minutes because you’ve made multiple same or similar transactions recently. It’s a safety check to prevent odd activity.",
+        "系統要求您等待5分鐘，是因為您近期進行了多次相同或類似的交易。這是為了確保賬戶安全，防止潛在的異常操作。"
+      ],
+      "intent": "transaction_records",
+      "languages": {
+        "en": "Why did the system ask me to wait 5 minutes for a transaction?",
+        "ms": "Kenapa sistem meminta saya menunggu 5 minit untuk transaksi?",
+        "cn": "為什麼系統要求我等待5分鐘進行交易？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "I see, boss! The system’s making you wait 5 minutes since you’ve done a bunch of similar transactions lately—it’s just a safety thing!",
+        "ms": "Oh, macam tu, boss! Sistem suruh tunggu 5 minit sebab boss dah buat banyak transaksi sama baru-baru ni—cek keselamatan je tu!",
+        "cn": "明白，老板！系統讓您等5分鐘，是因為您最近做了多次相似交易，這只是個安全檢查！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_records",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0402",
+    "question": {
+      "text": "Yes, you can use your e-wallet for transactions! We support various payment methods, including e-wallets, for fast and easy service.",
+      "variations": [
+        "Boleh, boss boleh guna e-dompet untuk transaksi! Kami sokong macam-macam cara bayar, termasuk e-dompet, untuk servis cepat dan senang.",
+        "Yes, you can use your e-wallet for transactions! We support various payment methods, including e-wallets, for fast and easy service.",
+        "是的，您可以使用您的電子錢包進行交易！我們支持多種支付方式，包括電子錢包，為您提供方便快捷的服務。"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Can I use my e-wallet account number for transactions?",
+        "ms": "Bolehkah saya menggunakan nombor akaun e-dompet saya untuk transaksi?",
+        "cn": "我可以使用我的電子錢包賬號進行交易嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Absolutely, boss! Your e-wallet works fine for transactions—we’ve got it covered for quick and easy payments!",
+        "ms": "Boleh lah, boss! E-dompet boss boleh guna untuk transaksi—kami dah sediakan untuk bayaran cepat dan senang!",
+        "cn": "當然可以，老板！您的電子錢包可以用來交易，我們支持這種方式，方便又快捷！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0403",
+    "question": {
+      "text": "Sorry, boss, one receipt can only be used for one top-up. If we see it’s been used before, we can’t process the deposit—it’s for safety!",
+      "variations": [
+        "Maaf, boss, satu resit cuma boleh guna untuk satu tambah nilai. Kalau kami nampak dah digunakan, kami tak boleh proses deposit—untuk keselamatan!",
+        "Sorry, boss, one receipt can only be used for one top-up. If we see it’s been used before, we can’t process the deposit—it’s for safety!",
+        "抱歉，老板，同一張收據只能用於一次充值。如果我們發現該收據已被使用，將無法通過存款申請，這是為了確保賬戶和交易安全。"
+      ],
+      "intent": "transaction_records",
+      "languages": {
+        "en": "Can I use the same receipt for multiple top-ups?",
+        "ms": "Bolehkah saya menggunakan resit yang sama untuk beberapa tambah nilai?",
+        "cn": "我可以使用同一張收據進行多次充值嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Sorry, boss! You can’t reuse a receipt—each one’s good for just one top-up. Keeps everything safe and sound!",
+        "ms": "Maaf lah, boss! Resit tak boleh guna banyak kali—satu resit untuk satu tambah nilai je. Jaga keselamatan!",
+        "cn": "抱歉，老板！一張收據不能多次用，每張只能充值一次，這樣是為了保持交易安全！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_records",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0404",
+    "question": {
+      "text": "There’s no specific minimum age to create an account. As long as you’ve got a smartphone and internet, you’re good to sign up and play!",
+      "variations": [
+        "Tak ada umur minimum khusus untuk buat akaun. Selagi boss ada telefon pintar dan internet, boleh daftar dan main!",
+        "There’s no specific minimum age to create an account. As long as you’ve got a smartphone and internet, you’re good to sign up and play!",
+        "創建賬戶沒有特定的最低年齡要求。只要您有一部智能手機並能連接到網絡，就可以輕鬆創建賬戶並開始遊戲！"
+      ],
+      "intent": "registration",
+      "languages": {
+        "en": "What's the minimum age requirement for creating an account?",
+        "ms": "Berapakah umur minimum yang diperlukan untuk membuat akaun?",
+        "cn": "創建賬戶的最低年齡要求是什麼？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Good news, boss! No minimum age—just grab a smartphone, get online, and you’re ready to make an account and play!",
+        "ms": "Berita baik, boss! Tak ada umur minimum—ambik telefon pintar, sambung internet, dah boleh buat akaun dan main!",
+        "cn": "好消息，老板！沒有最低年齡限制，只要您有智能手機和網絡，就能創建賬戶開始玩！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "account"
+      ],
+      "subCategory": "registration",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0405",
+    "question": {
+      "text": "To update your phone number, click the portrait icon at the bottom right, select update phone number, enter the new one, click Send TAC, input the code, and submit.",
+      "variations": [
+        "Untuk kemas kini nombor telefon, klik ikon potret kat sudut kanan bawah, pilih kemas kini nombor telefon, masukkan nombor baru, klik Hantar TAC, masuk kod, dan hantar.",
+        "To update your phone number, click the portrait icon at the bottom right, select update phone number, enter the new one, click Send TAC, input the code, and submit.",
+        "若您的聯繫方式發生更改，尤其是電話號碼，請點擊應用右下角人像圖標，選擇更換電話號碼，輸入新號碼，點擊發送TAC，輸入收到的驗證碼後提交即可。"
+      ],
+      "intent": "account_management",
+      "languages": {
+        "en": "How do I update my contact information if it has changed?",
+        "ms": "Bagaimana saya boleh mengemas kini maklumat hubungan saya jika ia telah berubah?",
+        "cn": "如果我的聯繫信息發生更改，我如何更新？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Easy, boss! Hit the portrait icon at the bottom right, pick update phone number, put in the new one, send TAC, enter the code, and you’re done!",
+        "ms": "Senang je, boss! Tekan ikon potret kat bawah kanan, pilih kemas kini nombor telefon, masukkan nombor baru, hantar TAC, masuk kod—siap!",
+        "cn": "簡單，老板！請點擊右下角人像圖標，選更換電話號碼，輸入新號碼，發送TAC後輸入驗證碼就完成啦！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "account"
+      ],
+      "subCategory": "account_management",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0406",
+    "question": {
+      "text": "To check odds for upcoming sports events, just click ‘More Games,’ then hit the ⚽️ icon—you’ll see all the events and odds there!",
+      "variations": [
+        "Untuk semak peluang acara sukan akan datang, klik ‘Lebih Banyak Permainan,’ lepas tu tekan ikon ⚽️—boss akan nampak semua acara dan peluang kat situ!",
+        "To check odds for upcoming sports events, just click ‘More Games,’ then hit the ⚽️ icon—you’ll see all the events and odds there!",
+        "要查看即將舉行的體育賽事的賠率，請您點擊‘更多遊戲’，然後選擇⚽️圖標，就能看到相關賽事和賠率信息啦！"
+      ],
+      "intent": "betting_rules",
+      "languages": {
+        "en": "How can I check the odds for upcoming sports events?",
+        "ms": "Bagaimana saya boleh memeriksa peluang untuk acara sukan yang akan datang?",
+        "cn": "如何查看即將舉行的體育賽事的賠率？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Alright, boss! Just tap ‘More Games,’ hit the ⚽️ icon, and bam—all the upcoming sports odds are right there for you!",
+        "ms": "Okey, boss! Tekan ‘Lebih Banyak Permainan,’ lepas tu klik ikon ⚽️—semua peluang sukan akan datang ada kat situ untuk boss!",
+        "cn": "好的，老板！請點擊‘更多遊戲’，選⚽️圖標，馬上就能看到即將舉行的體育賠率啦！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "sports_betting"
+      ],
+      "subCategory": "betting_rules",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0407",
+    "question": {
+      "text": "To check a pending withdrawal, log in, click the wallet icon, go to transaction records to see the status. If it’s still pending, our team’s working on it!",
+      "variations": [
+        "Untuk semak status pengeluaran tertunda, log masuk, klik ikon dompet, pergi ke rekod transaksi tengok status. Kalau masih tertunda, pasukan kami tengah buat!",
+        "To check a pending withdrawal, log in, click the wallet icon, go to transaction records to see the status. If it’s still pending, our team’s working on it!",
+        "要檢查待處理提款狀態，請您登錄賬戶，點擊錢包圖標，進入交易記錄查看狀態。若仍顯示待處理，我們的團隊正在加緊審核！"
+      ],
+      "intent": "withdrawal_conditions",
+      "languages": {
+        "en": "What's the process for checking the status of a pending withdrawal?",
+        "ms": "Apakah proses untuk memeriksa status pengeluaran yang tertunda?",
+        "cn": "檢查待處理提款狀態的過程是什麼？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Got it, boss! Log in, hit the wallet icon, check transaction records for your withdrawal status. Still pending? Our team’s on it!",
+        "ms": "Baik, boss! Log masuk, tekan ikon dompet, tengok rekod transaksi untuk status pengeluaran. Masih tertunda? Pasukan kami tengah urus!",
+        "cn": "好的，老板！請登錄，點擊錢包圖標，在交易記錄查您的提款狀態。若還在待處理，我們的團隊正在努力處理中！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_conditions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0408",
+    "question": {
+      "text": "Hi boss, our deposit processing usually takes 5-30 minutes—just hang in there a bit!",
+      "variations": [
+        "Hai boss, pemprosesan deposit kami biasanya ambil 5-30 minit—tunggu kejap je!",
+        "Hi boss, our deposit processing usually takes 5-30 minutes—just hang in there a bit!",
+        "您好，老板！我們的存款處理時間通常是5-30分鐘，請您耐心等待一下！"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Is there an issue with the deposit system causing delays?",
+        "ms": "Adakah terdapat masalah dengan sistem deposit yang menyebabkan kelewatan?",
+        "cn": "存款系統是否有問題導致延遲？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Deposits usually take 5-30 minutes—no big issues, just give it a little time!",
+        "ms": "Hai, boss! Deposit biasanya 5-30 minit je—tak ada masalah besar, tunggu sikit!",
+        "cn": "您好，老板！存款通常5-30分鐘就搞定，沒什麼大問題，請稍等片刻！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0409",
+    "question": {
+      "text": "Hi boss, deposits usually take 3-5 minutes, and there’s no betting limit even if it’s delayed!",
+      "variations": [
+        "Hai boss, deposit biasanya ambil 3-5 minit, dan tak ada had pertaruhan walaupun tertunda!",
+        "Hi boss, deposits usually take 3-5 minutes, and there’s no betting limit even if it’s delayed!",
+        "您好，老板！存款通常3-5分鐘完成，即使延遲也沒有投注上限哦！"
+      ],
+      "intent": "betting_rules",
+      "languages": {
+        "en": "Is there a limit on how much I can bet when deposits are delayed?",
+        "ms": "Adakah terdapat had pada jumlah pertaruhan apabila deposit tertunda?",
+        "cn": "當存款延遲時，我的投注有沒有上限？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Deposits take 3-5 minutes tops, and no worries—there’s no betting cap even if it’s slow!",
+        "ms": "Hai, boss! Deposit 3-5 minit je, dan jangan risau—tak ada had pertaruhan walaupun lambat sikit!",
+        "cn": "您好，老板！存款最多3-5分鐘，放心，即使延遲也沒有限制您的投注額！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "betting_rules",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0410",
+    "question": {
+      "text": "Hi boss, sports bet winnings usually take 30 minutes to 1 hour to credit—just wait a bit!",
+      "variations": [
+        "Hai boss, kemenangan pertaruhan sukan biasanya ambil 30 minit sampai 1 jam untuk masuk—tunggu jap!",
+        "Hi boss, sports bet winnings usually take 30 minutes to 1 hour to credit—just wait a bit!",
+        "您好，老板！體育投注獎金通常需要30分鐘到1小時入賬，請您耐心等一下！"
+      ],
+      "intent": "bet_status",
+      "languages": {
+        "en": "My sports bet winnings haven't been credited. What should I do?",
+        "ms": "Kemenangan pertaruhan sukan saya belum dikreditkan. Apa yang perlu saya lakukan?",
+        "cn": "我的體育投注獎金尚未入賬。我該怎麼辦？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Sports winnings take 30 minutes to an hour to hit your account—just hang tight for now!",
+        "ms": "Hai, boss! Kemenangan sukan ambil 30 minit sampai 1 jam untuk masuk—tunggu dulu ya!",
+        "cn": "您好，老板！體育獎金需要30分鐘到1小時入賬，請先耐心等等！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "sports_betting"
+      ],
+      "subCategory": "bet_status",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0411",
+    "question": {
+      "text": "Deposits usually take 3-5 minutes. Check ‘Wallet’ > ‘Transaction Records’ to see if it’s gone through—hope it’s smooth sailing!",
+      "variations": [
+        "Deposit biasanya ambil 3-5 minit. Semak ‘Dompet’ > ‘Rekod Transaksi’ untuk tengok kalau dah masuk—harap semuanya lancar!",
+        "Deposits usually take 3-5 minutes. Check ‘Wallet’ > ‘Transaction Records’ to see if it’s gone through—hope it’s smooth sailing!",
+        "充值通常在3-5分鐘完成，您可以通過‘錢包’>‘交易記錄’查看是否成功，希望一切順利！"
+      ],
+      "intent": "transaction_records",
+      "languages": {
+        "en": "Will I receive a confirmation receipt after uploading my deposit slip?",
+        "ms": "Adakah saya akan menerima resit pengesahan selepas memuat naik slip deposit saya?",
+        "cn": "上傳我的存款單後，我會收到確認收據嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Deposits take 3-5 minutes—pop into ‘Wallet’ > ‘Transaction Records’ to check if it’s done. Should be smooth!",
+        "ms": "Hai, boss! Deposit 3-5 minit je—tengok ‘Dompet’ > ‘Rekod Transaksi’ untuk pastikan dah masuk. Mesti lancar!",
+        "cn": "您好，老板！充值3-5分鐘就好，請到‘錢包’>‘交易記錄’確認是否完成，應該很順利！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_records",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0412",
+    "question": {
+      "text": "Hi boss, withdrawals usually take 5-30 minutes due to high demand—just wait a little, we’re on it!",
+      "variations": [
+        "Hai boss, pengeluaran biasanya ambil 5-30 minit sebab ramai orang—tunggu sikit, kami tengah urus!",
+        "Hi boss, withdrawals usually take 5-30 minutes due to high demand—just wait a little, we’re on it!",
+        "您好，老板！提款通常需5-30分鐘，因為會員提款人數多，請您耐心等待，我們正在處理！"
+      ],
+      "intent": "withdrawal_conditions",
+      "languages": {
+        "en": "Is there a way to speed up the withdrawal process?",
+        "ms": "Adakah terdapat cara untuk mempercepatkan proses pengeluaran?",
+        "cn": "有辦法加快提款過程嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Withdrawals take 5-30 minutes since it’s busy—hang in there, we’re working hard on it!",
+        "ms": "Hai, boss! Pengeluaran 5-30 minit sebab ramai orang—sabar ya, kami tengah usaha keras!",
+        "cn": "您好，老板！提款需要5-30分鐘，因為人多，請稍等一下，我們正在努力處理！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_conditions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0413",
+    "question": {
+      "text": "Hi boss, go back to Slot, pick Mega, click ‘Transfer,’ then ‘Logout’—your winnings will move to your account!",
+      "variations": [
+        "Hai boss, masuk balik Slot, pilih Mega, klik ‘Pindah,’ lepas tu ‘Log Keluar’—kemenangan boss akan masuk akaun!",
+        "Hi boss, go back to Slot, pick Mega, click ‘Transfer,’ then ‘Logout’—your winnings will move to your account!",
+        "您好，老板！請您再次進入Slot，選擇Mega，點擊‘轉入’，然後點‘登出’，獎金就會進入您的賬戶！"
+      ],
+      "intent": "game_rules",
+      "languages": {
+        "en": "Why hasn't my winnings from Mega been transferred to my wallet?",
+        "ms": "Kenapa kemenangan saya dari Mega belum dipindahkan ke e-dompet saya?",
+        "cn": "為什麼我的Mega獎金還沒有轉到我的電子錢包？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Head back to Slot, hit Mega, click ‘Transfer,’ then ‘Logout’—your Mega winnings will pop into your account!",
+        "ms": "Hai, boss! Balik ke Slot, pilih Mega, tekan ‘Pindah,’ lepas tu ‘Log Keluar’—kemenangan Mega boss akan masuk!",
+        "cn": "您好，老板！請回到Slot，選Mega，點‘轉入’再‘登出’，您的Mega獎金就到賬啦！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "game_inquiry"
+      ],
+      "subCategory": "game_rules",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0414",
+    "question": {
+      "text": "Hi boss, deposits usually take 3-5 minutes. Check ‘Wallet’ > ‘Transaction Records’ to see if it’s successful—reach out if there’s any issue!",
+      "variations": [
+        "Hai boss, deposit biasanya ambil 3-5 minit. Semak ‘Dompet’ > ‘Rekod Transaksi’ untuk tengok kalau dah berjaya—hubungi kami kalau ada masalah!",
+        "Hi boss, deposits usually take 3-5 minutes. Check ‘Wallet’ > ‘Transaction Records’ to see if it’s successful—reach out if there’s any issue!",
+        "您好，老板！存款通常為3-5分鐘，您可以通過‘錢包’>‘交易記錄’查看是否成功。如有任何問題，歡迎隨時聯繫我們！"
+      ],
+      "intent": "transaction_records",
+      "languages": {
+        "en": "Will I receive a confirmation receipt after uploading my deposit slip?",
+        "ms": "Adakah saya akan menerima resit pengesahan selepas memuat naik slip deposit saya?",
+        "cn": "上傳我的存款單後，我會收到確認收據嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Deposits take 3-5 minutes—peek at ‘Wallet’ > ‘Transaction Records’ to confirm. Any hiccups, just let me know!",
+        "ms": "Hai, boss! Deposit 3-5 minit je—tengok ‘Dompet’ > ‘Rekod Transaksi’ untuk pastikan. Ada masalah, cakap je dengan saya!",
+        "cn": "您好，老板！存款3-5分鐘就好，請到‘錢包’>‘交易記錄’確認。若有問題，隨時告訴我！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_records",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0415",
+    "question": {
+      "text": "Yes, boss! Click ‘Profile’ > ‘VIP Benefits’ to check it out. Here’s how it works: Every RM1 bet on 4D/soccer earns 1 point. Use points for lucky draws (10 points each), shop redemption (slots funds, wallet balance, etc.), or 4D Future (coming soon)!",
+      "variations": [
+        "Ya, boss! Klik ‘Profil’ > ‘Faedah VIP’ untuk tengok. Macam ni caranya: Setiap RM1 pertaruhan 4D/bola dapat 1 mata. Guna mata untuk cabutan bertuah (10 mata setiap kali), tukar di kedai (dana slot, baki dompet, dll.), atau 4D Future (akan datang)!",
+        "Yes, boss! Click ‘Profile’ > ‘VIP Benefits’ to check it out. Here’s how it works: Every RM1 bet on 4D/soccer earns 1 point. Use points for lucky draws (10 points each), shop redemption (slots funds, wallet balance, etc.), or 4D Future (coming soon)!",
+        "是的，老板！您可以點擊‘個人資料’>‘VIP福利’查看。以下是玩法說明：每下注RM1的4D或足球，您會獲得1個積分。積分可用於幸運抽獎（每次10個積分）、兌換商店（可兌換老虎機資金、錢包餘額等）或4D FUTURE（即將推出）！"
+      ],
+      "intent": "points_accumulation",
+      "languages": {
+        "en": "Are there any loyalty programs or VIP benefits for regular players?",
+        "ms": "Adakah terdapat program kesetiaan atau faedah VIP untuk pemain tetap?",
+        "cn": "是否有針對常規玩家的忠誠度計劃或VIP福利？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Oh yeah, boss! Pop into ‘Profile’ > ‘VIP Benefits’—every RM1 bet on 4D or soccer gets you 1 point. Swap ‘em for draws, goodies, or more—sweet deal!",
+        "ms": "Oh ya, boss! Masuk ‘Profil’ > ‘Faedah VIP’—setiap RM1 pertaruhan 4D atau bola dapat 1 mata. Tukar untuk cabutan, hadiah, atau lain—deal best lah!",
+        "cn": "當然有，老板！請進‘個人資料’>‘VIP福利’，每RM1的4D或足球投注得1積分，可換抽獎、禮品或其他，太棒了！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "points_shop"
+      ],
+      "subCategory": "points_accumulation",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0416",
+    "question": {
+      "text": "Hi boss, these slot machines run across Asia, and we’re just agents. Slots always have wins and losses—maybe your luck’s just warming up. Big wins soon!",
+      "variations": [
+        "Hai boss, mesin slot ni berjalan di seluruh Asia, kami cuma ejen. Slot memang ada menang dan kalah—mungkin luck boss tengah panas sikit. Menang besar tak lama lagi!",
+        "Hi boss, these slot machines run across Asia, and we’re just agents. Slots always have wins and losses—maybe your luck’s just warming up. Big wins soon!",
+        "您好，老板！這些老虎機在整個亞洲都有運營，我們只是代理。玩老虎機肯定有輸有贏，可能您的運氣還沒到，祝您不久後鴻運當頭！"
+      ],
+      "intent": "game_rules",
+      "languages": {
+        "en": "Why do the slot games seem more difficult to win lately?",
+        "ms": "Kenapa permainan slot kelihatan lebih sukar untuk menang sejak kebelakangan ini?",
+        "cn": "為什麼最近的老虎機遊戲變得更難贏了？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Slots are all over Asia, and we’re just the agents—wins and losses come with the game. Your lucky streak’s coming soon, hang in there!",
+        "ms": "Hai, boss! Slot ada kat seluruh Asia, kami ejen je—menang kalah biasa lah. Luck boss nak sampai tak lama lagi, sabar ya!",
+        "cn": "您好，老板！老虎機遍布亞洲，我們只是代理，輸贏很正常。您的好運很快會來，堅持一下！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "game_inquiry"
+      ],
+      "subCategory": "game_rules",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0417",
+    "question": {
+      "text": "Yes, boss! Go to ‘Wallet’ > ‘Top-Up,’ copy our account info, deposit via ATM, and upload the receipt—no need to add your Joker ID for ATM deposits!",
+      "variations": [
+        "Ya, boss! Pergi ‘Dompet’ > ‘Tambah Nilai,’ salin info akaun kami, deposit guna ATM, dan muat naik resit—tak perlu masukkan Joker ID untuk deposit ATM!",
+        "Yes, boss! Go to ‘Wallet’ > ‘Top-Up,’ copy our account info, deposit via ATM, and upload the receipt—no need to add your Joker ID for ATM deposits!",
+        "是的，老板！請您進入‘錢包’>‘充值’，複製我們的賬戶信息，通過ATM存款後上傳單據，ATM存款無需填寫您的Joker ID哦！"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Are ATM deposit receipts accepted for top-ups?",
+        "ms": "Adakah resit deposit ATM diterima untuk tambah nilai?",
+        "cn": "ATM存款收據是否被接受作為充值？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Sure thing, boss! Hit ‘Wallet’ > ‘Top-Up,’ copy our account, use the ATM, upload the receipt—no Joker ID needed for ATM top-ups!",
+        "ms": "Boleh lah, boss! Pergi ‘Dompet’ > ‘Tambah Nilai,’ salin akaun kami, guna ATM, muat naik resit—tak payah Joker ID untuk top-up ATM!",
+        "cn": "當然可以，老板！請進‘錢包’>‘充值’，複製我們的賬戶，用ATM存款後上傳單據，ATM充值不用填Joker ID哦！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0418",
+    "question": {
+      "text": "Withdrawals usually take 5-30 minutes. Our team processes them fast, but if it’s over 30 minutes, contact our online customer service to check.",
+      "variations": [
+        "Pengeluaran biasanya ambil 5-30 minit. Pasukan kami proses cepat, tapi kalau lebih 30 minit, hubungi sokongan pelanggan dalam talian untuk semak.",
+        "Withdrawals usually take 5-30 minutes. Our team processes them fast, but if it’s over 30 minutes, contact our online customer service to check.",
+        "提款通常需要5-30分鐘。我們的團隊會盡快處理，若超過30分鐘還未到賬，請聯繫我們的在線客服核查。"
+      ],
+      "intent": "withdrawal_conditions",
+      "languages": {
+        "en": "How long does it usually take for a withdrawal to be processed?",
+        "ms": "Berapa lama biasanya masa yang diambil untuk pemprosesan pengeluaran?",
+        "cn": "提款通常需要多長時間處理？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Withdrawals usually take 5-30 minutes—our team’s quick! Over 30? Ping our online customer service to sort it out!",
+        "ms": "Hai, boss! Pengeluaran biasanya 5-30 minit—pasukan kami pantas! Lebih 30? Hubungi sokongan pelanggan dalam talian untuk settle!",
+        "cn": "您好，老板！提款通常5-30分鐘，我們團隊很快！若超過30分鐘，請聯繫在線客服幫您解決！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_conditions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0419",
+    "question": {
+      "text": "To edit your personal info: log in, click the portrait icon at the bottom right, pick ‘Edit Profile’ or ‘Account Settings.’ For phone number, select update, enter the new one, verify with TAC, then save.",
+      "variations": [
+        "Untuk edit maklumat peribadi: log masuk, klik ikon potret kat sudut kanan bawah, pilih ‘Edit Profil’ atau ‘Tetapan Akaun.’ Untuk nombor telefon, pilih kemas kini, masukkan nombor baru, sahkan dengan TAC, lepas tu simpan.",
+        "To edit your personal info: log in, click the portrait icon at the bottom right, pick ‘Edit Profile’ or ‘Account Settings.’ For phone number, select update, enter the new one, verify with TAC, then save.",
+        "要編輯您的個人信息，請登錄賬戶，點擊右下角人像圖標，選擇編輯個人資料或賬戶設置。若需更改電話號碼，點擊更換電話號碼，輸入新號碼並驗證TAC，修改完成後點保存即可。"
+      ],
+      "intent": "account_management",
+      "languages": {
+        "en": "What's the procedure for editing personal information on my profile?",
+        "ms": "Apakah prosedur untuk mengedit maklumat peribadi pada profil saya?",
+        "cn": "編輯我個人資料的個人信息的程序是什麼？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Easy, boss! Log in, hit the portrait icon at the bottom right, go to ‘Edit Profile.’ For your phone, update it with a new number, verify with TAC, and save—done!",
+        "ms": "Senang je, boss! Log masuk, tekan ikon potret kat bawah kanan, pergi ‘Edit Profil.’ Untuk telefon, kemas kini nombor baru, sahkan dengan TAC, simpan—siap!",
+        "cn": "簡單，老板！請登錄，點右下角人像圖標，進編輯個人資料。電話號碼要改就輸入新的，用TAC驗證後保存，就搞定啦！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "account"
+      ],
+      "subCategory": "account_management",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0420",
+    "question": {
+      "text": "Yes, boss! Click ‘More Games’ on the game page—you can filter by provider or type like slots, live casino, and more to find what you love!",
+      "variations": [
+        "Ya, boss! Klik ‘Lebih Banyak Permainan’ kat laman permainan—boleh tapis ikut penyedia atau jenis macam slot, kasino langsung, dan lain untuk cari yang boss suka!",
+        "Yes, boss! Click ‘More Games’ on the game page—you can filter by provider or type like slots, live casino, and more to find what you love!",
+        "是的，老板！請點擊遊戲頁面的‘更多遊戲’，您可以按提供商或類型（如老虎機、真人娛樂場等）篩選，輕鬆找到您喜歡的遊戲。"
+      ],
+      "intent": "game_rules",
+      "languages": {
+        "en": "Is there a way to filter games by provider or type?",
+        "ms": "Adakah terdapat cara untuk menapis permainan mengikut penyedia atau jenis?",
+        "cn": "是否可以按提供商或類型篩選遊戲？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Sure thing, boss! Hit ‘More Games’ and filter by provider or type—slots, live casino, whatever you’re into—it’s all there!",
+        "ms": "Boleh lah, boss! Tekan ‘Lebih Banyak Permainan’ dan tapis ikut penyedia atau jenis—slot, kasino langsung, apa yang boss suka, semua ada!",
+        "cn": "當然可以，老板！點擊‘更多遊戲’，按提供商或類型篩選—like老虎機、真人娛樂場，您喜歡的都有！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "game_inquiry"
+      ],
+      "subCategory": "game_rules",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0421",
+    "question": {
+      "text": "Withdrawals usually take 5-30 minutes—we’ll get it done fast! If it’s over 30 minutes, hit up our online customer service to check it out.",
+      "variations": [
+        "Pengeluaran biasanya ambil 5-30 minit—kami buat cepat! Kalau lebih 30 minit, hubungi sokongan pelanggan dalam talian untuk tengok apa jadi.",
+        "Withdrawals usually take 5-30 minutes—we’ll get it done fast! If it’s over 30 minutes, hit up our online customer service to check it out.",
+        "提款通常需要5-30分鐘，我們會盡快處理！若超過30分鐘還沒到賬，請聯繫我們的在線客服幫您查明情況。"
+      ],
+      "intent": "withdrawal_conditions",
+      "languages": {
+        "en": "How long does it usually take for a withdrawal to be processed?",
+        "ms": "Berapa lama biasanya masa yang diambil untuk pemprosesan pengeluaran?",
+        "cn": "提款通常需要多長時間處理？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Withdrawals take 5-30 minutes—we’re speedy! Past 30? Let our online customer service know, and I’ll sort it!",
+        "ms": "Hai, boss! Pengeluaran 5-30 minit je—kami laju! Lebih 30? Bagitahu sokongan pelanggan dalam talian, saya settlekan!",
+        "cn": "您好，老板！提款5-30分鐘就行，我們很快！若超過30分鐘，請告訴在線客服，我會幫您處理！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_conditions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0422",
+    "question": {
+      "text": "New players get 20 VIP points—redeem them for free gifts or games in ‘VIP Benefits!’ Plus, keep an eye out for our regular promos for more perks!",
+      "variations": [
+        "Pemain baru dapat 20 mata VIP—tukar untuk hadiah atau permainan percuma kat ‘Faedah VIP!’ Jangan lupa tengok promosi biasa kami untuk lebih kelebihan!",
+        "New players get 20 VIP points—redeem them for free gifts or games in ‘VIP Benefits!’ Plus, keep an eye out for our regular promos for more perks!",
+        "新玩家可獲得20個VIP積分，在‘VIP福利’中免費兌換各種禮物和遊戲！另外，請隨時關注我們的平台，享受更多精彩優惠！"
+      ],
+      "intent": "redemption_rules",
+      "languages": {
+        "en": "How do I claim a welcome bonus for new players?",
+        "ms": "Bagaimana saya boleh menuntut bonus selamat datang untuk pemain baru?",
+        "cn": "如何領取新玩家的歡迎獎金？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Welcome aboard, boss! You’ve got 20 VIP points—swap ‘em for free stuff in ‘VIP Benefits.’ Watch for more promos too—tons of goodies!",
+        "ms": "Selamat datang, boss! Boss dapat 20 mata VIP—tukar untuk barang percuma kat ‘Faedah VIP.’ Tengok juga promosi lain—banyak benda best!",
+        "cn": "歡迎，老板！您有20個VIP積分，在‘VIP福利’換免費禮物吧。還有更多優惠活動，隨時關注哦！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "points_shop"
+      ],
+      "subCategory": "redemption_rules",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0423",
+    "question": {
+      "text": "Log in, click the wallet icon, check ‘Transaction Records’ for status—Pending or Approved. If it’s still Pending, hang tight; our team’s rushing it. Over 30 minutes? Hit up online customer service!",
+      "variations": [
+        "Log masuk, klik ikon dompet, tengok ‘Rekod Transaksi’ untuk status—Tertunda atau Diluluskan. Kalau masih Tertunda, sabar ya, pasukan kami tengah cepatkan. Lebih 30 minit? Hubungi sokongan pelanggan dalam talian!",
+        "Log in, click the wallet icon, check ‘Transaction Records’ for status—Pending or Approved. If it’s still Pending, hang tight; our team’s rushing it. Over 30 minutes? Hit up online customer service!",
+        "請登錄賬戶並點擊錢包圖標，在‘交易記錄’查看狀態，如Pending（待處理）或Approved（已批准）。若仍是待處理，請稍等，我們的團隊正在加緊審核。若超過30分鐘，請聯繫在線客服！"
+      ],
+      "intent": "withdrawal_conditions",
+      "languages": {
+        "en": "How can I follow up on a withdrawal request that hasn't been approved?",
+        "ms": "Bagaimana saya boleh membuat susulan pada permintaan pengeluaran yang belum diluluskan?",
+        "cn": "如何跟進尚未批准的提款請求？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Log in, tap the wallet icon, peek at ‘Transaction Records’—Pending? We’re hustling! Past 30 minutes? Ping online customer service!",
+        "ms": "Hai, boss! Log masuk, tekan ikon dompet, tengok ‘Rekod Transaksi’—Tertunda? Kami tengah usaha! Lebih 30 minit? Hubungi sokongan dalam talian!",
+        "cn": "您好，老板！請登錄，點錢包圖標，看‘交易記錄’—還在待處理？我們在趕！若超30分鐘，請聯繫在線客服！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_conditions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0424",
+    "question": {
+      "text": "Yes, boss! Just exit the Ocean King live casino game, and the funds will auto-transfer back to your JOKER wallet—then withdraw anytime!",
+      "variations": [
+        "Boleh, boss! Keluar je dari permainan kasino langsung Ocean King, dana akan auto pindah balik ke dompet JOKER boss—lepas tu tarik bila-bila!",
+        "Yes, boss! Just exit the Ocean King live casino game, and the funds will auto-transfer back to your JOKER wallet—then withdraw anytime!",
+        "當然可以，老板！您只需退出Ocean King真人娛樂場遊戲，資金會自動退回到您的JOKER錢包，之後您可隨時提取！"
+      ],
+      "intent": "game_rules",
+      "languages": {
+        "en": "Can I make withdrawals from live casino games like Ocean King?",
+        "ms": "Bolehkah saya membuat pengeluaran daripada permainan kasino secara langsung seperti Ocean King?",
+        "cn": "我可以從像Ocean King這樣的真人娛樂場遊戲中提取資金嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "You bet, boss! Exit Ocean King, and your funds zip back to your JOKER wallet—ready to withdraw whenever you want!",
+        "ms": "Mesti boleh, boss! Keluar dari Ocean King, dana masuk balik dompet JOKER—boleh tarik bila boss nak!",
+        "cn": "當然行，老板！退出Ocean King，資金會回到您的JOKER錢包，隨時想提就提！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "game_inquiry"
+      ],
+      "subCategory": "game_rules",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0425",
+    "question": {
+      "text": "Sorry, boss, we can’t credit deposits from someone else’s bank account. It has to come from your own account for safety—ask the account holder to deposit it themselves!",
+      "variations": [
+        "Maaf, boss, kami tak boleh kreditkan deposit dari akaun bank orang lain. Kena dari akaun boss sendiri untuk keselamatan—suruh pemilik akaun deposit sendiri!",
+        "Sorry, boss, we can’t credit deposits from someone else’s bank account. It has to come from your own account for safety—ask the account holder to deposit it themselves!",
+        "很抱歉，老板，我們不接受來自他人銀行賬戶的存款。只能處理您本人的匯款單據，為了安全，請讓該賬戶持有人親自存款。"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Can a deposit be credited if the receipt is from someone else's bank account?",
+        "ms": "Bolehkah deposit dikreditkan jika resit adalah daripada akaun bank orang lain?",
+        "cn": "如果收據來自別人的銀行賬戶，存款可以入賬嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Sorry, boss! No go on deposits from someone else’s account—gotta be yours for safety. Tell them to do it themselves!",
+        "ms": "Maaf lah, boss! Tak boleh deposit dari akaun orang lain—kene akaun boss untuk selamat. Suruh diaorang buat sendiri!",
+        "cn": "抱歉，老板！不能用別人賬戶的存款，必須是您自己的才行，為了安全，請讓賬戶持有人自己操作！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0426",
+    "question": {
+      "text": "Yes, boss, we accept ATM deposit receipts! Just make sure it’s clear, upload it as required, and your top-up will go through smooth!",
+      "variations": [
+        "Ya, boss, kami terima resit deposit ATM! Pastikan jelas, muat naik ikut cara yang betul, tambah nilai boss akan masuk lancar!",
+        "Yes, boss, we accept ATM deposit receipts! Just make sure it’s clear, upload it as required, and your top-up will go through smooth!",
+        "是的，老板！我們接受ATM存款收據作為充值憑證。只要確保收據清晰並按要求上傳，您的充值就會順利完成！"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Are ATM deposit receipts accepted for top-ups?",
+        "ms": "Adakah resit deposit ATM diterima untuk tambah nilai?",
+        "cn": "ATM存款收據是否被接受作為充值？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "You bet, boss! ATM receipts work fine—just keep ‘em clear, upload as needed, and your top-up’s good to go!",
+        "ms": "Mesti boleh, boss! Resit ATM ok je—pastikan jelas, muat naik ikut cara, tambah nilai masuk senang!",
+        "cn": "當然可以，老板！ATM收據完全沒問題，只要清晰並按要求上傳，您的充值就順利搞定！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0427",
+    "question": {
+      "text": "No worries if you entered the wrong password, boss! Try again, or if you can’t recall it, click ‘Forgot Password’ and reset it with the steps.",
+      "variations": [
+        "Jangan risau kalau masukkan kata laluan salah, boss! Cuba lagi, atau kalau tak ingat, klik ‘Lupa Kata Laluan’ dan tukar ikut langkah.",
+        "No worries if you entered the wrong password, boss! Try again, or if you can’t recall it, click ‘Forgot Password’ and reset it with the steps.",
+        "若您輸入了錯誤的密碼，別擔心！請再試一次，若還是想不起來，點擊‘忘記密碼’選項，按提示步驟重置即可。"
+      ],
+      "intent": "password_management",
+      "languages": {
+        "en": "What should I do if I entered the wrong password?",
+        "ms": "Apa yang harus saya lakukan jika saya memasukkan kata laluan yang salah?",
+        "cn": "如果輸入了錯誤的密碼，我應該怎麼做？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "No biggie, boss! If the password’s off, give it another shot. Forgot it? Hit ‘Forgot Password’ and reset—easy peasy!",
+        "ms": "Tak ada hal, boss! Kalau kata laluan salah, cuba lagi. Lupa? Tekan ‘Lupa Kata Laluan’ dan tukar—senang je!",
+        "cn": "沒事的老板！若密碼錯了，再試一次。忘了就點‘忘記密碼’，按步驟重設，很簡單！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "security"
+      ],
+      "subCategory": "password_management",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0428",
+    "question": {
+      "text": "Yes, boss! Go to the games page, click ‘More Games,’ and filter by provider or type—like slots or live casino—to pick your favorites!",
+      "variations": [
+        "Ya, boss! Pergi ke laman permainan, klik ‘Lebih Banyak Permainan,’ dan tapis ikut penyedia atau jenis—macam slot atau kasino langsung—pilih yang boss suka!",
+        "Yes, boss! Go to the games page, click ‘More Games,’ and filter by provider or type—like slots or live casino—to pick your favorites!",
+        "是的，老板！請進入遊戲頁面，點擊‘更多遊戲’，然後按提供商或類型（如老虎機、真人娛樂場）篩選，找到您喜歡的遊戲。"
+      ],
+      "intent": "game_rules",
+      "languages": {
+        "en": "Is there a way to filter games by provider or type?",
+        "ms": "Adakah terdapat cara untuk menapis permainan mengikut penyedia atau jenis?",
+        "cn": "是否可以按提供商或類型篩選遊戲？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "You bet, boss! Jump to the games page, tap ‘More Games,’ and sort by provider or type—slots, live casino, whatever you fancy!",
+        "ms": "Mesti boleh, boss! Masuk laman permainan, tekan ‘Lebih Banyak Permainan,’ tapis ikut penyedia atau jenis—slot, kasino langsung, apa yang boss minat!",
+        "cn": "當然可以，老板！進遊戲頁面，點‘更多遊戲’，按提供商或類型篩選—like老虎機或真人娛樂場，您喜歡的都有！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "game_inquiry"
+      ],
+      "subCategory": "game_rules",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0429",
+    "question": {
+      "text": "Normally, winnings transfer to your JOKER wallet after you exit the platform. Check your wallet, and if it’s not there, send us a screenshot—I’ll look into it!",
+      "variations": [
+        "Biasanya, kemenangan pindah ke dompet JOKER boss lepas keluar platform. Semak dompet boss, kalau tak ada, hantar screenshot kat kami—saya tengokkan!",
+        "Normally, winnings transfer to your JOKER wallet after you exit the platform. Check your wallet, and if it’s not there, send us a screenshot—I’ll look into it!",
+        "通常情況下，贏得的獎金會在您退出平台後直接轉入您的JOKER錢包。請您檢查一下錢包，若尚未入賬，麻煩提供相關截圖，我將為您進一步查詢並處理。"
+      ],
+      "intent": "bet_status",
+      "languages": {
+        "en": "My sports bet winnings haven't been credited. What should I do?",
+        "ms": "Kemenangan pertaruhan sukan saya belum dikreditkan. Apa yang perlu saya lakukan?",
+        "cn": "我的體育投注獎金尚未入賬。我該怎麼辦？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Your sports winnings should hit your JOKER wallet after exiting—check it out. Not there? Send a screenshot, and I’ll sort it fast!",
+        "ms": "Hai, boss! Kemenangan sukan sepatutnya masuk dompet JOKER lepas keluar—tengok lah. Tak ada? Hantar screenshot, saya settle cepat!",
+        "cn": "您好，老板！體育獎金退出平台後應轉到您的JOKER錢包，檢查一下。若沒入賬，發截圖給我，我會快速幫您解決！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "sports_betting"
+      ],
+      "subCategory": "bet_status",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0430",
+    "question": {
+      "text": "Yes, boss! For quick top-ups with your e-wallet: click the wallet icon, pick ‘Quick Top-Up,’ enter your amount, choose e-wallet, and follow the steps—funds arrive fast!",
+      "variations": [
+        "Boleh, boss! Untuk tambah nilai cepat guna e-dompet: klik ikon dompet, pilih ‘Tambah Nilai Cepat,’ masukkan jumlah, pilih e-dompet, ikut langkah—dana masuk laju!",
+        "Yes, boss! For quick top-ups with your e-wallet: click the wallet icon, pick ‘Quick Top-Up,’ enter your amount, choose e-wallet, and follow the steps—funds arrive fast!",
+        "是的，老板！您可以使用電子錢包進行交易！要快速充值，請點擊應用中的錢包圖標，選擇‘快速充值’，輸入金額並選電子錢包，按提示完成交易，資金很快到賬。"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Can I use my e-wallet account number for transactions?",
+        "ms": "Bolehkah saya menggunakan nombor akaun e-dompet saya untuk transaksi?",
+        "cn": "我可以使用我的電子錢包賬號進行交易嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "You bet, boss! Use your e-wallet—hit the wallet icon, pick ‘Quick Top-Up,’ set your amount, choose e-wallet, and boom—funds in no time!",
+        "ms": "Mesti boleh, boss! Guna e-dompet—tekan ikon dompet, pilih ‘Tambah Nilai Cepat,’ masuk jumlah, pilih e-dompet, dana masuk pantas!",
+        "cn": "當然可以，老板！用電子錢包，點錢包圖標，選‘快速充值’，輸入金額，選電子錢包，資金一下子就到！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0431",
+    "question": {
+      "text": "The minimum deposit to start playing is RM10, boss! Just a quick top-up, and you’re ready to jump into the games!",
+      "variations": [
+        "Jumlah deposit minimum untuk mula main ialah RM10, boss! Tambah nilai cepat je, dah boleh masuk permainan!",
+        "The minimum deposit to start playing is RM10, boss! Just a quick top-up, and you’re ready to jump into the games!",
+        "開始玩遊戲的最低存款金額為RM10，老板！只需簡單充值，您就可以立即享受我們的遊戲啦！"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "What's the minimum deposit amount required to start playing?",
+        "ms": "Berapakah jumlah deposit minimum yang diperlukan untuk mula bermain?",
+        "cn": "開始玩遊戲所需的最低存款金額是多少？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Just RM10 to kick off—top up quick, and you’re in the game!",
+        "ms": "Hai, boss! Hanya RM10 untuk mula—tambah nilai pantas, terus boleh main!",
+        "cn": "您好，老板！只要RM10就能開始，快速充值，您就可以玩遊戲啦！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0432",
+    "question": {
+      "text": "To boost your account safety, two-factor authentication is already set up, boss! Log in with your password and TAC code—it’s double protection!",
+      "variations": [
+        "Untuk tambah keselamatan akaun, pengesahan dua faktor dah diset, boss! Log masuk guna kata laluan dan kod TAC—perlindungan berganda!",
+        "To boost your account safety, two-factor authentication is already set up, boss! Log in with your password and TAC code—it’s double protection!",
+        "為增強您的賬戶安全性，我們平台已設置雙重身份驗證，老板！登錄時需輸入密碼和TAC驗證碼，雙重保護更安全！"
+      ],
+      "intent": "two-factor_authentication",
+      "languages": {
+        "en": "How can I enable two-factor authentication for added security?",
+        "ms": "Bagaimana saya boleh mengaktifkan pengesahan dua faktor untuk keselamatan tambahan?",
+        "cn": "如何啟用雙重身份驗證以增強安全性？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Good call, boss! Two-factor’s already on—just log in with your password and TAC code for extra safety!",
+        "ms": "Bijak, boss! Dua faktor dah aktif—log masuk je guna kata laluan dan kod TAC untuk keselamatan lebih!",
+        "cn": "聰明的老板！雙重驗證已啟用，登錄時用密碼和TAC碼，安全性加倍！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "security"
+      ],
+      "subCategory": "two-factor_authentication",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0433",
+    "question": {
+      "text": "Yes, boss, you can use multiple bank accounts for deposits and withdrawals! Just make sure they’re all yours, and transactions will go smooth!",
+      "variations": [
+        "Boleh, boss, boss boleh guna banyak akaun bank untuk deposit dan pengeluaran! Pastikan semua akaun boss punya, transaksi akan lancar!",
+        "Yes, boss, you can use multiple bank accounts for deposits and withdrawals! Just make sure they’re all yours, and transactions will go smooth!",
+        "是的，老板！您可以使用多個銀行賬戶進行存款和提款。只要確保每個賬戶都是您本人的，您的交易就會順利進行。"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Can I use multiple bank accounts for deposits and withdrawals?",
+        "ms": "Bolehkah saya menggunakan beberapa akaun bank untuk deposit dan pengeluaran?",
+        "cn": "我可以使用多個銀行賬戶進行存款和提款嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Sure thing, boss! Multiple bank accounts work fine for deposits and withdrawals—as long as they’re yours, it’s all good!",
+        "ms": "Mesti boleh, boss! Banyak akaun bank pun ok untuk deposit dan pengeluaran—selagi akaun boss, semua senang!",
+        "cn": "當然可以，老板！多個銀行賬戶都能用來存款和提款，只要是您自己的，一切順利！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0434",
+    "question": {
+      "text": "Tonight’s payment processing is a bit slower because lots of players are transacting—our team’s rushing it, usually 5-30 minutes!",
+      "variations": [
+        "Pemprosesan pembayaran malam ni lambat sikit sebab ramai pemain tengah buat transaksi—pasukan kami tengah cepatkan, biasanya 5-30 minit!",
+        "Tonight’s payment processing is a bit slower because lots of players are transacting—our team’s rushing it, usually 5-30 minutes!",
+        "今晚支付處理比平時稍慢，因為很多玩家在進行交易。我們的團隊正在加快處理，通常會在5-30分鐘內完成。"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Why is the payment processing slower than usual tonight?",
+        "ms": "Kenapa pemprosesan pembayaran lebih lambat dari biasa malam ini?",
+        "cn": "為什麼今晚支付處理比平時慢？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Payments are a tad slow tonight—so many players! We’re on it, should be 5-30 minutes tops!",
+        "ms": "Hai, boss! Pembayaran lambat sikit malam ni—ramai pemain sangat! Kami tengah urus, 5-30 minit je biasanya!",
+        "cn": "您好，老板！今晚支付慢了點，因為玩家太多！我們在趕，5-30分鐘內應該搞定！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0435",
+    "question": {
+      "text": "Sorry for the hassle, boss! Your 20 withdrawal usually takes 5-30 minutes. If it’s over 30, hit up our online customer service—I’ll check it fast!",
+      "variations": [
+        "Maaf sebab susah, boss! Pengeluaran 20 boss biasanya ambil 5-30 minit. Kalau lebih 30, hubungi sokongan pelanggan dalam talian—saya semak cepat!",
+        "Sorry for the hassle, boss! Your 20 withdrawal usually takes 5-30 minutes. If it’s over 30, hit up our online customer service—I’ll check it fast!",
+        "抱歉給您帶來不便，老板！20元的提款通常在5-30分鐘內完成。若超過30分鐘仍未收到，請聯繫我們的在線客服，我會立即為您核查。"
+      ],
+      "intent": "withdrawal_conditions",
+      "languages": {
+        "en": "Can you explain why my withdrawal of 20 hasn't been received yet?",
+        "ms": "Bolehkah anda jelaskan kenapa pengeluaran saya sebanyak 20 belum diterima?",
+        "cn": "你能解釋為什麼我20元的提款還沒收到嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Oops, sorry, boss! Your 20 withdrawal should be 5-30 minutes—if it’s late past 30, ping online customer service, and I’ll jump on it!",
+        "ms": "Aduh, maaf, boss! Pengeluaran 20 boss sepatutnya 5-30 minit—kalau lambat lebih 30, hubungi sokongan dalam talian, saya tolong cepat!",
+        "cn": "抱歉麻煩您了，老板！20元提款通常5-30分鐘，若超過30分鐘沒到，請聯繫在線客服，我會快幫您查！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_conditions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0436",
+    "question": {
+      "text": "Once approved, withdrawals usually hit your bank in 5-30 minutes. If it’s over 30 minutes, it might be a bank delay—send us a bank transaction screenshot, and I’ll check it out!",
+      "variations": [
+        "Bila dah diluluskan, pengeluaran biasanya masuk bank dalam 5-30 minit. Kalau lebih 30 minit, mungkin bank lambat—hantar screenshot transaksi bank, saya tengokkan!",
+        "Once approved, withdrawals usually hit your bank in 5-30 minutes. If it’s over 30 minutes, it might be a bank delay—send us a bank transaction screenshot, and I’ll check it out!",
+        "通常提款被批准後，會在5-30分鐘內到達您的銀行賬戶。若超過30分鐘還未入賬，可能是銀行處理延遲。請提供銀行交易記錄截圖，我們會立即為您審核並解決。"
+      ],
+      "intent": "withdrawal_conditions",
+      "languages": {
+        "en": "Why has my withdrawal been approved but not credited to my bank account?",
+        "ms": "Kenapa pengeluaran saya telah diluluskan tetapi belum dikreditkan ke akaun bank saya?",
+        "cn": "為什麼我的提款已經被批准但沒有入賬到我的銀行賬戶？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Approved withdrawals should land in 5-30 minutes—if it’s late, maybe the bank’s slow. Send a screenshot, and I’ll fix it quick!",
+        "ms": "Hai, boss! Pengeluaran diluluskan sepatutnya masuk 5-30 minit—kalau lambat, mungkin bank. Hantar screenshot, saya settle cepat!",
+        "cn": "您好，老板！批准的提款應在5-30分鐘到賬，若遲了可能是銀行慢。發截圖給我，我會快幫您解決！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_conditions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0437",
+    "question": {
+      "text": "To change the language: click the portrait icon at the bottom right, pick ‘Language’ from the menu, choose your language, hit confirm—it’s instant!",
+      "variations": [
+        "Untuk tukar bahasa: klik ikon potret kat sudut kanan bawah, pilih ‘Bahasa’ dari menu, pilih bahasa boss, tekan sahkan—terus jadi!",
+        "To change the language: click the portrait icon at the bottom right, pick ‘Language’ from the menu, choose your language, hit confirm—it’s instant!",
+        "要更改平台語言設置，請點擊應用右下角人像圖標，在菜單中選‘語言’，選擇您想要的語言，然後點確認，設置立即生效。"
+      ],
+      "intent": "app_issues",
+      "languages": {
+        "en": "How can I change the language settings on the platform?",
+        "ms": "Bagaimana saya boleh menukar tetapan bahasa di platform?",
+        "cn": "如何更改平台的語言設置？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Easy, boss! Tap the portrait icon at the bottom right, hit ‘Language,’ pick your choice, confirm—boom, it’s changed!",
+        "ms": "Senang je, boss! Tekan ikon potret kat bawah kanan, pilih ‘Bahasa,’ ambik yang boss nak, sahkan—siap tukar!",
+        "cn": "簡單，老板！點右下角人像圖標，選‘語言’，挑您想要的，確認後馬上就換好啦！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "technical"
+      ],
+      "subCategory": "app_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0438",
+    "question": {
+      "text": "Approved withdrawals usually hit your bank in 5-30 minutes. If it’s over 30, it could be a bank delay—send us a bank transaction screenshot, and I’ll sort it!",
+      "variations": [
+        "Pengeluaran diluluskan biasanya masuk bank dalam 5-30 minit. Kalau lebih 30, mungkin bank lambat—hantar screenshot transaksi bank, saya uruskan!",
+        "Approved withdrawals usually hit your bank in 5-30 minutes. If it’s over 30, it could be a bank delay—send us a bank transaction screenshot, and I’ll sort it!",
+        "提款被批准後通常5-30分鐘內會入賬到您的銀行賬戶。若超過30分鐘，可能是銀行延遲，請提供銀行交易截圖，我會幫您處理！"
+      ],
+      "intent": "withdrawal_conditions",
+      "languages": {
+        "en": "Why has my withdrawal been approved but not credited to my bank account?",
+        "ms": "Kenapa pengeluaran saya telah diluluskan tetapi belum dikreditkan ke akaun bank saya?",
+        "cn": "為什麼我的提款已經被批准但沒有入賬到我的銀行賬戶？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Approved withdrawals take 5-30 minutes—if it’s late, bank might be slow. Send a screenshot, and I’ll get it fixed fast!",
+        "ms": "Hai, boss! Pengeluaran diluluskan ambil 5-30 minit—kalau lambat, mungkin bank. Hantar screenshot, saya cepatkan settle!",
+        "cn": "您好，老板！批准的提款5-30分鐘到賬，若遲了可能是銀行慢。發截圖給我，我會快幫您搞定！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_conditions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0439",
+    "question": {
+      "text": "Yes, boss! Click the ‘More Games’ icon, then pick your provider or game type—like slots or live casino—to find what you’re into!",
+      "variations": [
+        "Ya, boss! Klik ikon ‘Lebih Banyak Permainan,’ lepas tu pilih penyedia atau jenis permainan—macam slot atau kasino langsung—cari yang boss minat!",
+        "Yes, boss! Click the ‘More Games’ icon, then pick your provider or game type—like slots or live casino—to find what you’re into!",
+        "是的，老板！點擊‘更多遊戲’圖標，然後選擇您感興趣的提供商或遊戲類型（如老虎機、真人娛樂場），輕鬆找到您喜歡的遊戲。"
+      ],
+      "intent": "game_rules",
+      "languages": {
+        "en": "Is there a way to filter games by provider or type?",
+        "ms": "Adakah terdapat cara untuk menapis permainan mengikut penyedia atau jenis?",
+        "cn": "是否可以按提供商或類型篩選遊戲？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "You bet, boss! Tap ‘More Games,’ sort by provider or type—slots, live casino—whatever you’re craving!",
+        "ms": "Mesti boleh, boss! Tekan ‘Lebih Banyak Permainan,’ tapis ikut penyedia atau jenis—slot, kasino langsung—apa yang boss teringin!",
+        "cn": "當然可以，老板！點‘更多遊戲’，按提供商或類型篩選—like老虎機或真人娛樂場，您想要的都有！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "game_inquiry"
+      ],
+      "subCategory": "game_rules",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0440",
+    "question": {
+      "text": "Payments are running fine today, boss! If you’re seeing a delay, it might be high traffic—usually takes 5-30 minutes. Over 30? Contact our online customer service!",
+      "variations": [
+        "Pembayaran ok je hari ni, boss! Kalau ada lambat, mungkin trafik tinggi—biasanya 5-30 minit. Lebih 30? Hubungi sokongan pelanggan dalam talian!",
+        "Payments are running fine today, boss! If you’re seeing a delay, it might be high traffic—usually takes 5-30 minutes. Over 30? Contact our online customer service!",
+        "今天付款處理一切正常，老板！若您遇到延遲，可能是因請求較多，通常為5-30分鐘。若超過30分鐘仍未完成，請聯繫我們的在線客服核查。"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Is there a delay in processing payments today?",
+        "ms": "Adakah terdapat kelewatan dalam pemprosesan pembayaran hari ini?",
+        "cn": "今天處理付款有延遲嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "All good today, boss! Payments take 5-30 minutes—if it’s slow, could be busy times. Past 30? Hit up online customer service!",
+        "ms": "Hari ni ok je, boss! Pembayaran 5-30 minit—kalau lambat, mungkin ramai orang. Lebih 30? Hubungi sokongan dalam talian!",
+        "cn": "今天沒問題，老板！付款5-30分鐘，若慢了可能是人多。超30分鐘？請聯繫在線客服查一下！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0441",
+    "question": {
+      "text": "Sorry, boss, old receipts can’t be reused. If we spot it’s already been used, we won’t process the deposit—it’s a safety thing!",
+      "variations": [
+        "Maaf, boss, resit lama tak boleh guna semula. Kalau kami nampak dah digunakan, kami tak proses deposit—untuk keselamatan!",
+        "Sorry, boss, old receipts can’t be reused. If we spot it’s already been used, we won’t process the deposit—it’s a safety thing!",
+        "抱歉，老板，舊的收據不能重複使用。若我們發現該收據已被使用，將不通過該存款申請，這是為了安全。"
+      ],
+      "intent": "transaction_records",
+      "languages": {
+        "en": "Can I use an older receipt for a new transaction?",
+        "ms": "Bolehkah saya menggunakan resit lama untuk transaksi baru?",
+        "cn": "我可以用舊的收據進行新的交易嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "No can do, boss! Old receipts are one-time only—if it’s used, no deposit. Keeps things secure!",
+        "ms": "Tak boleh, boss! Resit lama sekali guna je—kalau dah pakai, tak boleh deposit. Jaga keselamatan!",
+        "cn": "不行，老板！舊收據只能用一次，若已用過就不能存款，這是為了安全！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_records",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0442",
+    "question": {
+      "text": "The deposit system’s running smooth, boss! Delays might be from high traffic—usually 5-30 minutes. Over 30? Hit up our online customer service!",
+      "variations": [
+        "Sistem deposit ok je, boss! Lambat mungkin sebab trafik tinggi—biasanya 5-30 minit. Lebih 30? Hubungi sokongan pelanggan dalam talian!",
+        "The deposit system’s running smooth, boss! Delays might be from high traffic—usually 5-30 minutes. Over 30? Hit up our online customer service!",
+        "存款系統目前運行正常，老板！若有延遲，可能是請求較多，通常5-30分鐘。若超30分鐘未到賬，請聯繫我們的在線客服核查。"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Is there an issue with the deposit system causing delays?",
+        "ms": "Adakah terdapat masalah dengan sistem deposit yang menyebabkan kelewatan?",
+        "cn": "存款系統是否有問題導致延遲？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "No issues here, boss! Deposits take 5-30 minutes—busy times might slow it. Past 30? Ping online customer service!",
+        "ms": "Tak ada masalah, boss! Deposit 5-30 minit—masa sibuk mungkin lambat sikit. Lebih 30? Hubungi sokongan dalam talian!",
+        "cn": "沒問題，老板！存款5-30分鐘，人多時可能慢點。若超30分鐘，請聯繫在線客服查一下！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0443",
+    "question": {
+      "text": "To edit your info: log in, click the portrait icon at the bottom right, pick ‘Edit Profile’ or ‘Account Settings,’ update your details like name or contact, then save!",
+      "variations": [
+        "Untuk edit maklumat: log masuk, klik ikon potret kat sudut kanan bawah, pilih ‘Edit Profil’ atau ‘Tetapan Akaun,’ kemas kini butiran macam nama atau kontakt, lepas tu simpan!",
+        "To edit your info: log in, click the portrait icon at the bottom right, pick ‘Edit Profile’ or ‘Account Settings,’ update your details like name or contact, then save!",
+        "要編輯您的個人信息，請登錄賬戶，點擊右下角人像圖標，選擇‘編輯個人資料’或‘賬戶設置’，在此更改您的姓名或聯繫方式等信息，修改後點保存即可。"
+      ],
+      "intent": "account_management",
+      "languages": {
+        "en": "What's the procedure for editing personal information on my profile?",
+        "ms": "Apakah prosedur untuk mengedit maklumat peribadi pada profil saya?",
+        "cn": "編輯我個人資料的個人信息的程序是什麼？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Simple, boss! Log in, tap the portrait icon at the bottom right, hit ‘Edit Profile,’ tweak your name or contact, and save—done!",
+        "ms": "Mudah je, boss! Log masuk, tekan ikon potret kat bawah kanan, pilih ‘Edit Profil,’ ubah nama atau kontakt, simpan—siap!",
+        "cn": "簡單，老板！請登錄，點右下角人像圖標，選‘編輯個人資料’，改您的姓名或聯繫方式，保存就完成！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "account"
+      ],
+      "subCategory": "account_management",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0444",
+    "question": {
+      "text": "Sorry to hear you’re stopping, boss! To close your account, just clear your balance first, then uninstall the app—we’ll miss you! Come back anytime!",
+      "variations": [
+        "Sedih lah dengar boss nak berhenti! Untuk tutup akaun, kosongkan baki dulu, lepas tu uninstall app—kami akan rindu boss! Balik bila-bila!",
+        "Sorry to hear you’re stopping, boss! To close your account, just clear your balance first, then uninstall the app—we’ll miss you! Come back anytime!",
+        "很遺憾聽到您決定停止遊戲，老板！若要關閉賬戶，請先清空您的賬戶餘額，然後直接卸載我們的應用程序。我們會很想念您，隨時歡迎回來！"
+      ],
+      "intent": "account_management",
+      "languages": {
+        "en": "What's the procedure for closing my account if I wish to stop playing?",
+        "ms": "Apakah prosedur untuk menutup akaun saya jika saya ingin berhenti bermain?",
+        "cn": "如果我想停止玩遊戲，關閉我的賬戶的流程是什麼？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Aw, sad to see you go, boss! Clear your balance, uninstall the app—that’s it. Door’s always open if you change your mind!",
+        "ms": "Alamak, sedih lah boss nak stop! Kosongkan baki, uninstall app—tu je. Pintu sentiasa terbuka kalau boss tukar fikiran!",
+        "cn": "哎呀，很捨不得您走，老板！清空餘額，卸載應用就行。若改變主意，隨時歡迎回來！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "account"
+      ],
+      "subCategory": "account_management",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0445",
+    "question": {
+      "text": "Yes, boss! Exit Ocean King live casino, and your funds auto-transfer to your JOKER wallet—then withdraw whenever you like!",
+      "variations": [
+        "Boleh, boss! Keluar dari Ocean King kasino langsung, dana akan auto pindah ke dompet JOKER—lepas tu tarik bila boss nak!",
+        "Yes, boss! Exit Ocean King live casino, and your funds auto-transfer to your JOKER wallet—then withdraw whenever you like!",
+        "當然可以，老板！您只需退出Ocean King真人娛樂場遊戲，資金會自動轉入您的JOKER錢包，之後隨時可提款！"
+      ],
+      "intent": "game_rules",
+      "languages": {
+        "en": "Can I make withdrawals from live casino games like Ocean King?",
+        "ms": "Bolehkah saya membuat pengeluaran daripada permainan kasino secara langsung seperti Ocean King?",
+        "cn": "我可以從像Ocean King這樣的真人娛樂場遊戲中提取資金嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "You bet, boss! Quit Ocean King, funds zip to your JOKER wallet—withdraw anytime you want!",
+        "ms": "Mesti boleh, boss! Keluar Ocean King, dana masuk dompet JOKER—tarik bila boss suka!",
+        "cn": "當然行，老板！退出Ocean King，資金會到您的JOKER錢包，想什麼時候提都行！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "game_inquiry"
+      ],
+      "subCategory": "game_rules",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0446",
+    "question": {
+      "text": "To find the download link, boss, click the portrait icon at the bottom right, scroll to the bottom, and check the referral section—it’s right there!",
+      "variations": [
+        "Untuk cari pautan muat turun, boss, klik ikon potret kat sudut kanan bawah, skrol ke bawah, tengok bahagian rujukan—ada kat situ!",
+        "To find the download link, boss, click the portrait icon at the bottom right, scroll to the bottom, and check the referral section—it’s right there!",
+        "要找到遊戲下載鏈接，老板，請點擊應用界面右下角的人像圖標，滑到最下方的推薦鏈接部分，您就能看到下載鏈接啦！"
+      ],
+      "intent": "app_issues",
+      "languages": {
+        "en": "Where can I find the download link for the gaming app?",
+        "ms": "Di manakah saya boleh mencari pautan muat turun untuk aplikasi permainan?",
+        "cn": "我可以在哪裡找到遊戲應用程序的下載鏈接？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Got it, boss! Hit the portrait icon at the bottom right, scroll down to the referral section—the download link’s waiting for you!",
+        "ms": "Baik, boss! Tekan ikon potret kat bawah kanan, skrol ke bahagian rujukan—pautan muat turun ada kat situ untuk boss!",
+        "cn": "好的，老板！請點右下角人像圖標，滑到推薦鏈接部分，下載鏈接就在那等您！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "technical"
+      ],
+      "subCategory": "app_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0447",
+    "question": {
+      "text": "Yes, boss! Click the portrait icon at the bottom right, pick ‘Update Phone Number,’ enter the new one, hit Send TAC, input the code, and submit—done!",
+      "variations": [
+        "Boleh, boss! Klik ikon potret kat sudut kanan bawah, pilih ‘Kemas Kini Nombor Telefon,’ masukkan nombor baru, tekan Hantar TAC, masuk kod, hantar—siap!",
+        "Yes, boss! Click the portrait icon at the bottom right, pick ‘Update Phone Number,’ enter the new one, hit Send TAC, input the code, and submit—done!",
+        "當然可以，老板！請點擊右下角人像圖標，選擇‘更換電話號碼’，輸入新號碼，點擊發送TAC，輸入收到的驗證碼，然後提交就搞定啦！"
+      ],
+      "intent": "account_management",
+      "languages": {
+        "en": "Is it possible to change the phone number associated with my account?",
+        "ms": "Adakah mungkin untuk menukar nombor telefon yang dikaitkan dengan akaun saya?",
+        "cn": "我可以更改與我賬戶相關的手機號碼嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Sure thing, boss! Tap the portrait icon at the bottom right, hit ‘Update Phone Number,’ add the new one, send TAC, enter it—bam, you’re set!",
+        "ms": "Mesti boleh, boss! Tekan ikon potret kat bawah kanan, pilih ‘Kemas Kini Nombor Telefon,’ masuk nombor baru, hantar TAC, masukkan—settle!",
+        "cn": "當然可以，老板！點右下角人像圖標，選‘更換電話號碼’，輸入新號，發TAC後輸入驗證碼，搞定！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "account"
+      ],
+      "subCategory": "account_management",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0448",
+    "question": {
+      "text": "No worries if your account shows 0 after a deposit, boss! Try logging out and back in to refresh it. Still zero? Hit up our online customer service—we’ll fix it fast!",
+      "variations": [
+        "Jangan risau kalau akaun boss tunjuk 0 lepas deposit! Cuba log keluar masuk balik untuk refresh. Masih 0? Hubungi sokongan pelanggan dalam talian—kami setel cepat!",
+        "No worries if your account shows 0 after a deposit, boss! Try logging out and back in to refresh it. Still zero? Hit up our online customer service—we’ll fix it fast!",
+        "若存款後您的賬戶顯示為0學分，別擔心，老板！請先嘗試退出並重新打開應用，有時這樣能刷新餘額。若問題仍存在，請聯繫在線客服，我們會馬上為您核查並處理。"
+      ],
+      "intent": "transaction_records",
+      "languages": {
+        "en": "What should I do if my account shows 0 credits after a deposit?",
+        "ms": "Apa yang harus saya lakukan jika akaun saya menunjukkan 0 kredit selepas deposit?",
+        "cn": "如果存款後我的賬戶顯示為0學分，我應該怎麼做？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "No panic, boss! If it’s 0 after a deposit, log out and back in to refresh. Still nothing? Ping our online customer service—I’ll sort it quick!",
+        "ms": "Tak payah panik, boss! Kalau 0 lepas deposit, log keluar masuk balik untuk refresh. Masih kosong? Hubungi sokongan dalam talian—saya urus cepat!",
+        "cn": "別急，老板！存款後若顯示0學分，退出再登錄刷新看看。若還是沒變，請聯繫在線客服，我會快幫您解決！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_records",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0449",
+    "question": {
+      "text": "Deposits usually take 5-30 minutes, boss. If it’s over 30, reach out to our online customer service—we’ll check it out right away!",
+      "variations": [
+        "Deposit biasanya ambil 5-30 minit, boss. Kalau lebih 30, hubungi sokongan pelanggan dalam talian—kami tengok sekejap!",
+        "Deposits usually take 5-30 minutes, boss. If it’s over 30, reach out to our online customer service—we’ll check it out right away!",
+        "存款通常需要5-30分鐘，老板。若超過30分鐘還沒到賬，您可以聯繫我們的在線客服，我們會馬上幫您查一下情況。"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "How long should I wait for a deposit before contacting support?",
+        "ms": "Berapa lama saya harus menunggu untuk deposit sebelum menghubungi sokongan?",
+        "cn": "在聯繫客服團隊之前，我應該等待存款多久？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Give it 5-30 minutes for your deposit. Past 30? Hit up our online customer service—I’ll jump on it!",
+        "ms": "Hai, boss! Tunggu 5-30 minit untuk deposit. Lebih 30? Hubungi sokongan dalam talian—saya tolong cepat!",
+        "cn": "您好，老板！請等5-30分鐘讓存款入賬。若超30分鐘，聯繫我們的在線客服，我會立刻幫您查！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0450",
+    "question": {
+      "text": "Sorry, boss, you can’t use the same receipt for multiple top-ups. If it’s been used, the system won’t process it—keeps things safe!",
+      "variations": [
+        "Maaf, boss, tak boleh guna resit sama untuk banyak tambah nilai. Kalau dah guna, sistem tak proses—jaga keselamatan!",
+        "Sorry, boss, you can’t use the same receipt for multiple top-ups. If it’s been used, the system won’t process it—keeps things safe!",
+        "抱歉，老板，同一張收據不能用於多次充值。若我們發現該收據已被使用，系統將不會通過該存款申請，這是為了安全。"
+      ],
+      "intent": "transaction_records",
+      "languages": {
+        "en": "Can I use the same receipt for multiple top-ups?",
+        "ms": "Bolehkah saya menggunakan resit yang sama untuk beberapa tambah nilai?",
+        "cn": "我可以使用同一張收據進行多次充值嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "No dice, boss! One receipt, one top-up—if it’s used, no go. All for safety!",
+        "ms": "Tak boleh, boss! Satu resit, satu tambah nilai—kalau dah pakai, tak jadi. Semua untuk selamat!",
+        "cn": "不行，老板！一張收據只能充值一次，若用過就不能再用，這是為了安全！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_records",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0451",
+    "question": {
+      "text": "Payments are mostly fine today, boss! If there’s a delay, it’s likely high traffic—usually 5-30 minutes. Over 30? Contact our online customer service to check!",
+      "variations": [
+        "Pembayaran kebanyakannya ok hari ni, boss! Kalau lambat, mungkin trafik tinggi—biasanya 5-30 minit. Lebih 30? Hubungi sokongan pelanggan dalam talian untuk semak!",
+        "Payments are mostly fine today, boss! If there’s a delay, it’s likely high traffic—usually 5-30 minutes. Over 30? Contact our online customer service to check!",
+        "今天付款處理基本正常，老板！若您遇到延遲，可能是因為交易量大，通常5-30分鐘內完成。若超過30分鐘沒到賬，請聯繫在線客服查一下！"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Is there a delay in processing payments today?",
+        "ms": "Adakah terdapat kelewatan dalam pemprosesan pembayaran hari ini?",
+        "cn": "今天處理付款有延遲嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "All good today, boss! Payments take 5-30 minutes—busy day might slow it. Past 30? Ping our online customer service!",
+        "ms": "Hari ni ok je, boss! Pembayaran 5-30 minit—hari sibuk mungkin lambat sikit. Lebih 30? Hubungi sokongan dalam talian!",
+        "cn": "今天沒大問題，老板！付款5-30分鐘，若慢了可能是交易多。超30分鐘？請聯繫在線客服查查！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0452",
+    "question": {
+      "text": "Sorry for the trouble, boss! Deposits usually update in 5-30 minutes—system’s just processing. Over 30? Hit up our online customer service—we’ll speed it up!",
+      "variations": [
+        "Maaf sebab susah, boss! Deposit biasanya kemas kini dalam 5-30 minit—sistem tengah proses. Lebih 30? Hubungi sokongan pelanggan dalam talian—kami cepatkan!",
+        "Sorry for the trouble, boss! Deposits usually update in 5-30 minutes—system’s just processing. Over 30? Hit up our online customer service—we’ll speed it up!",
+        "不好意思給您帶來不便，老板！存款後資金通常5-30分鐘更新，主要是系統處理時間。若超過30分鐘還沒更新，請聯繫在線客服，我們會立刻幫您處理。"
+      ],
+      "intent": "transaction_records",
+      "languages": {
+        "en": "Why is it taking so long for my credit to be updated after a deposit?",
+        "ms": "Kenapa mengambil masa yang lama untuk kredit saya dikemas kini selepas deposit?",
+        "cn": "為什麼存款後學分更新需要這麼久？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Sorry about that, boss! Funds usually update in 5-30 minutes—bit of a system wait. Past 30? Tell our online customer service—I’ll rush it!",
+        "ms": "Maaf lah, boss! Dana biasanya kemas kini 5-30 minit—sistem tunggu sikit. Lebih 30? Cakap dengan sokongan dalam talian—saya cepatkan!",
+        "cn": "抱歉麻煩您了，老板！存款後學分通常5-30分鐘更新，系統在處理。若超30分鐘，告訴在線客服，我會幫您加快！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_records",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0453",
+    "question": {
+      "text": "If your withdrawal isn’t approved yet, it might be under review or need extra checks—usually takes 5-30 minutes. Over 30? Contact our online customer service to sort it!",
+      "variations": [
+        "Kalau pengeluaran boss belum diluluskan, mungkin tengah disemak atau perlu cek lebih—biasanya 5-30 minit. Lebih 30? Hubungi sokongan pelanggan dalam talian untuk settle!",
+        "If your withdrawal isn’t approved yet, it might be under review or need extra checks—usually takes 5-30 minutes. Over 30? Contact our online customer service to sort it!",
+        "若您的提款還未被批准，可能是信息正在審核中或需進一步確認，通常5-30分鐘內完成。若超過30分鐘沒批准，請聯繫在線客服幫您查清楚。"
+      ],
+      "intent": "withdrawal_conditions",
+      "languages": {
+        "en": "Why is my withdrawal not being approved?",
+        "ms": "Kenapa pengeluaran saya tidak diluluskan?",
+        "cn": "為什麼我的提款沒有被批准？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! If your withdrawal’s stuck, it’s probably in review—takes 5-30 minutes. Past 30? Hit up online customer service—I’ll fix it!",
+        "ms": "Hai, boss! Kalau pengeluaran tak lulus lagi, mungkin tengah semak—5-30 minit je. Lebih 30? Hubungi sokongan dalam talian—saya uruskan!",
+        "cn": "您好，老板！若提款還沒批准，可能在審核中，5-30分鐘就好。超30分鐘？請聯繫在線客服，我會幫您解決！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_conditions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0454",
+    "question": {
+      "text": "If you’re set on quitting, boss, it’s simple—clear your account balance, then uninstall the app. That’s it!",
+      "variations": [
+        "Kalau boss betul nak berhenti, senang je—kosongkan baki akaun, lepas tu uninstall app. Tu je!",
+        "If you’re set on quitting, boss, it’s simple—clear your account balance, then uninstall the app. That’s it!",
+        "若您決定不再玩遊戲，老板，流程很簡單。只需先清空賬戶餘額，然後直接卸載我們的應用即可。"
+      ],
+      "intent": "account_management",
+      "languages": {
+        "en": "What's the procedure for closing my account if I wish to stop playing?",
+        "ms": "Apakah prosedur untuk menutup akaun saya jika saya ingin berhenti bermain?",
+        "cn": "如果我想停止玩遊戲，關閉我的賬戶的流程是什麼？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Sorry you’re stopping, boss! Just empty your balance, uninstall the app—done deal. Come back if you miss us!",
+        "ms": "Sayur lah boss nak stop! Kosongkan baki je, uninstall app—settle. Balik lah kalau rindu kami!",
+        "cn": "很遺憾您要停，老板！清空餘額，卸載應用就行。若想我們，隨時回來！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "account"
+      ],
+      "subCategory": "account_management",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0455",
+    "question": {
+      "text": "Check your slip, boss—make sure the Special bet format’s right. RM210 is the payout for a RM1 Big bet. If it looks good, send us a screenshot—I’ll dig into it!",
+      "variations": [
+        "Semak slip boss—pastikan format pertaruhan Istimewa betul. RM210 tu bayaran untuk pertaruhan Besar RM1. Kalau ok, hantar screenshot—saya tengokkan!",
+        "Check your slip, boss—make sure the Special bet format’s right. RM210 is the payout for a RM1 Big bet. If it looks good, send us a screenshot—I’ll dig into it!",
+        "請您檢查一下單據，確認下注格式是否正確，老板。RM210是正字大萬下注RM1的賠率。若無誤，請提供單據截圖，我們將為您進一步核查。"
+      ],
+      "intent": "bet_status",
+      "languages": {
+        "en": "Why was I only paid 8 RM for a Special bet that should have paid 210 RM?",
+        "ms": "Kenapa saya hanya dibayar 8 RM untuk pertaruhan Istimewa yang sepatutnya membayar 210 RM?",
+        "cn": "為什麼我只收到8 RM的特別投注，而應該支付210 RM？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Whoa, boss! Only 8 RM instead of 210? Double-check your slip’s format—RM210’s for a RM1 Big. Looks right? Send a screenshot, I’ll sort it!",
+        "ms": "Wah, boss! Dapat 8 RM je, bukan 210? Semak format slip—RM210 tu untuk Besar RM1. Betul? Hantar screenshot, saya uruskan!",
+        "cn": "哇，老板！只收到8 RM而不是210？請檢查單據格式，RM210是大萬RM1的賠率。若沒錯，發截圖給我，我會幫您查！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "4d_lotto"
+      ],
+      "subCategory": "bet_status",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0456",
+    "question": {
+      "text": "No fees for deposits or withdrawals, boss! Just follow the usual steps, and it’s all free!",
+      "variations": [
+        "Tak ada yuran untuk deposit atau pengeluaran, boss! Ikut langkah biasa je, semua percuma!",
+        "No fees for deposits or withdrawals, boss! Just follow the usual steps, and it’s all free!",
+        "存款或提款沒有任何額外費用，老板！只需按正常流程操作即可，全程免費！"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Are there any fees associated with deposits or withdrawals?",
+        "ms": "Adakah terdapat yuran yang dikenakan untuk deposit atau pengeluaran?",
+        "cn": "存款或提款是否有相關費用？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Good news, boss! No fees on deposits or withdrawals—just do it as usual, all free!",
+        "ms": "Berita baik, boss! Tak ada yuran untuk deposit atau pengeluaran—buat macam biasa je, semua free!",
+        "cn": "好消息，老板！存款提款都沒費用，按正常步驟來就行，全免費！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0457",
+    "question": {
+      "text": "Funds usually hit your account in 5-30 minutes after a deposit, boss. Over 30? Contact our online customer service—we’ll check it out!",
+      "variations": [
+        "Dana biasanya masuk akaun dalam 5-30 minit lepas deposit, boss. Lebih 30? Hubungi sokongan pelanggan dalam talian—kami tengokkan!",
+        "Funds usually hit your account in 5-30 minutes after a deposit, boss. Over 30? Contact our online customer service—we’ll check it out!",
+        "存款後資金通常在5-30分鐘內到賬，老板。若超過30分鐘還沒入賬，請聯繫在線客服，我們會幫您查一下具體情況。"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "How long does it typically take for funds to be credited after a deposit?",
+        "ms": "Berapa lama biasanya masa yang diambil untuk dana dikreditkan selepas deposit?",
+        "cn": "存款後資金通常需要多長時間入賬？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Deposits usually credit in 5-30 minutes. Past 30? Hit up our online customer service—I’ll get it sorted!",
+        "ms": "Hai, boss! Deposit biasanya masuk 5-30 minit. Lebih 30? Hubungi sokongan dalam talian—saya settlekan!",
+        "cn": "您好，老板！存款通常5-30分鐘入賬。若超30分鐘，聯繫在線客服，我會幫您搞定！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0458",
+    "question": {
+      "text": "No worries if you put the wrong ID on your deposit receipt, boss! It might slow the review a bit, but we’ll still process it fast!",
+      "variations": [
+        "Jangan risau kalau masukkan nombor ID salah pada resit deposit, boss! Mungkin lambat sikit semak, tapi kami tetap proses cepat!",
+        "No worries if you put the wrong ID on your deposit receipt, boss! It might slow the review a bit, but we’ll still process it fast!",
+        "若您在存款收據上輸入了錯誤的ID號碼，沒關係，老板！這可能會稍微影響審核時間，但我們會盡快為您處理。"
+      ],
+      "intent": "transaction_records",
+      "languages": {
+        "en": "What should I do if I entered the wrong ID number on my deposit receipt?",
+        "ms": "Apa yang perlu saya lakukan jika saya memasukkan nombor ID yang salah pada resit deposit saya?",
+        "cn": "如果我在存款收據上輸入了錯誤的ID號碼，我應該怎麼做？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Oops, no stress, boss! Wrong ID on the receipt might delay the check a tad, but we’ll zip it through quick!",
+        "ms": "Aduh, tak apa, boss! ID salah kat resit mungkin lambat sikit semak, tapi kami lajukan proses!",
+        "cn": "哎呀，沒事，老板！收據上ID錯了可能稍微慢點審核，但我們會快幫您處理好！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_records",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0459",
+    "question": {
+      "text": "To bet on the latest 9 Lotto 4D numbers, boss: Click ‘More Games,’ pick 4D, hit ‘Bet 4D,’ choose your familiar format, find the 9 Lotto icon, and place your bet as usual!",
+      "variations": [
+        "Untuk pertaruhan nombor 9 Lotto 4D terbaru, boss: Klik ‘Lebih Banyak Permainan,’ pilih 4D, tekan ‘Pertaruhan 4D,’ pilih format boss biasa, cari ikon 9 Lotto, dan buat pertaruhan macam biasa!",
+        "To bet on the latest 9 Lotto 4D numbers, boss: Click ‘More Games,’ pick 4D, hit ‘Bet 4D,’ choose your familiar format, find the 9 Lotto icon, and place your bet as usual!",
+        "要投注最新的9 Lotto 4D號碼，老板，請按以下步驟操作：點擊‘更多遊戲’，選擇4D，然後點擊‘4D下注’，接下來選您熟悉的投注格式，找到9 Lotto圖標後，就像平時一樣下注即可！"
+      ],
+      "intent": "betting_rules",
+      "languages": {
+        "en": "How can I place a bet on the latest 9 Lotto 4D numbers?",
+        "ms": "Bagaimana saya boleh membuat pertaruhan pada nombor 9 Lotto 4D yang terbaru?",
+        "cn": "如何投注最新的9 Lotto 4D號碼？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Easy, boss! Hit ‘More Games,’ go to 4D, tap ‘Bet 4D,’ pick your style, spot the 9 Lotto icon, and bet like always—done!",
+        "ms": "Senang je, boss! Tekan ‘Lebih Banyak Permainan,’ pergi 4D, klik ‘Pertaruhan 4D,’ pilih gaya boss, cari ikon 9 Lotto, pertaruh macam biasa—siap!",
+        "cn": "簡單，老板！點‘更多遊戲’，選4D，點‘4D下注’，挑您熟悉的格式，找到9 Lotto圖標，像平時一樣投注就行！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "4d_lotto"
+      ],
+      "subCategory": "betting_rules",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0460",
+    "question": {
+      "text": "No worries, boss! Contact our online customer service with some account details—we’ll remove it from your spouse’s profile. It’ll switch back to your name only—give us your account name, number, and bank name to speed it up!",
+      "variations": [
+        "Jangan risau, boss! Hubungi sokongan pelanggan dalam talian dengan butiran akaun—kami akan keluarkan dari profil pasangan boss. Akaun akan tukar balik ke nama boss je—beri nama akaun, nombor, dan nama bank untuk cepatkan!",
+        "No worries, boss! Contact our online customer service with some account details—we’ll remove it from your spouse’s profile. It’ll switch back to your name only—give us your account name, number, and bank name to speed it up!",
+        "別擔心，老板！請聯繫在線客服並提供一些賬戶信息，我們會幫您從配偶的資料中刪除。賬戶只能換回您本人名下，請提供您的賬戶姓名、號碼和銀行名稱，我們會盡快處理。"
+      ],
+      "intent": "account_management",
+      "languages": {
+        "en": "I accidentally added my account to my spouse's profile. How can I remove it?",
+        "ms": "Saya secara tidak sengaja menambah akaun saya ke profil pasangan saya. Bagaimana saya boleh membuangnya?",
+        "cn": "我不小心將我的賬戶添加到我配偶的資料中。如何刪除？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "No panic, boss! Hit up online customer service with your account info—they’ll yank it from your spouse’s profile and tie it back to you. Just send your account name, number, and bank name!",
+        "ms": "Tak payah panik, boss! Hubungi sokongan dalam talian dengan info akaun—diaorang akan cabut dari profil pasangan boss, balik ke nama boss. Hantar je nama akaun, nombor, dan nama bank!",
+        "cn": "別急，老板！聯繫在線客服，提供您的賬戶信息，他們會從您配偶資料中移除，換回您名下。只要給賬戶姓名、號碼和銀行名稱就行！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "account"
+      ],
+      "subCategory": "account_management",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0461",
+    "question": {
+      "text": "Don’t stress if you disconnect mid-game, boss! Reconnect your network, log back in—your progress usually picks up. Still stuck? Contact our online customer service—we’ll fix it!",
+      "variations": [
+        "Jangan tekanan kalau terputus tengah game, boss! Sambung balik rangkaian, log masuk semula—progres biasanya sambung. Masih tak boleh? Hubungi sokongan pelanggan dalam talian—kami setelkan!",
+        "Don’t stress if you disconnect mid-game, boss! Reconnect your network, log back in—your progress usually picks up. Still stuck? Contact our online customer service—we’ll fix it!",
+        "若您在遊戲中斷線，別著急，老板！先嘗試重新連接網絡，然後重新登錄，大多數情況下系統會自動恢復您的進度。若問題還在，請聯繫在線客服，我們會幫您解決。"
+      ],
+      "intent": "network_connection",
+      "languages": {
+        "en": "What should I do if I experience a disconnection during a live game?",
+        "ms": "Apa yang perlu saya lakukan jika saya mengalami terputus sambungan semasa permainan langsung?",
+        "cn": "如果我在遊戲過程中斷線，應該怎麼做？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "No sweat, boss! If you drop mid-game, reconnect your network, log in—it should resume. Still off? Ping online customer service—I’ll get it rolling again!",
+        "ms": "Tak payah risau, boss! Kalau terputus tengah game, sambung balik rangkaian, log masuk—mesti sambung. Masih tak ok? Hubungi sokongan dalam talian—saya hidupkan balik!",
+        "cn": "別慌，老板！遊戲中斷線就重連網絡，再登錄，通常會恢復進度。若還不行，聯繫在線客服，我會幫您搞定！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "technical"
+      ],
+      "subCategory": "network_connection",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0462",
+    "question": {
+      "text": "Funds usually hit your account in 5-30 minutes after a deposit, boss. Over 30? Contact our online customer service—we’ll check it fast!",
+      "variations": [
+        "Dana biasanya masuk akaun dalam 5-30 minit lepas deposit, boss. Lebih 30? Hubungi sokongan pelanggan dalam talian—kami semak cepat!",
+        "Funds usually hit your account in 5-30 minutes after a deposit, boss. Over 30? Contact our online customer service—we’ll check it fast!",
+        "存款後資金通常在5-30分鐘內到賬，老板。若超過30分鐘還沒入賬，請聯繫在線客服，我們會幫您查一下情況。"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "How long does it typically take for funds to be credited after a deposit?",
+        "ms": "Berapa lama biasanya masa yang diambil untuk dana dikreditkan selepas deposit?",
+        "cn": "存款後資金通常需要多長時間入賬？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Deposits usually credit in 5-30 minutes. Past 30? Hit up our online customer service—I’ll sort it quick!",
+        "ms": "Hai, boss! Deposit biasanya masuk 5-30 minit. Lebih 30? Hubungi sokongan dalam talian—saya settle cepat!",
+        "cn": "您好，老板！存款通常5-30分鐘入賬。若超30分鐘，聯繫在線客服，我會快幫您解決！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0463",
+    "question": {
+      "text": "No big deal if you put the wrong reference, boss! It might slow the review a bit, but your funds are safe—just double-check next time!",
+      "variations": [
+        "Tak ada hal kalau rujukan salah, boss! Mungkin lambat sikit semak, tapi dana boss selamat—lain kali cek betul-betul!",
+        "No big deal if you put the wrong reference, boss! It might slow the review a bit, but your funds are safe—just double-check next time!",
+        "若您在存款收據上輸入了錯誤的參考號，沒關係，老板！這可能會稍微影響審核時間，但您的資金是安全的，下次多注意參考號的正確性即可。"
+      ],
+      "intent": "transaction_records",
+      "languages": {
+        "en": "I entered the wrong reference on my deposit receipt. How can I correct this?",
+        "ms": "Saya memasukkan rujukan yang salah pada resit deposit saya. Bagaimana saya boleh membetulkannya?",
+        "cn": "我在存款收據上輸入了錯誤的參考號。我如何更正？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "No stress, boss! Wrong reference might delay the check a little, but your money’s safe—watch that next time!",
+        "ms": "Tak apa, boss! Rujukan salah mungkin lambat sikit semak, tapi duit boss selamat—lain kali tengok betul!",
+        "cn": "沒事，老板！參考號錯了可能會稍微慢點審核，但您的資金安全，下次注意一下就行！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_records",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0464",
+    "question": {
+      "text": "To switch languages, boss: Click the portrait icon at the bottom right, pick ‘Language,’ choose your fave, hit confirm—done in a flash!",
+      "variations": [
+        "Untuk tukar bahasa, boss: Klik ikon potret kat sudut kanan bawah, pilih ‘Bahasa,’ pilih yang boss suka, tekan sahkan—siap sekejap!",
+        "To switch languages, boss: Click the portrait icon at the bottom right, pick ‘Language,’ choose your fave, hit confirm—done in a flash!",
+        "要更改平台的語言設置，老板，請按以下步驟：點擊右下角人像圖標，選擇‘語言’選項，選您想要的語言，再點確認，就完成啦！"
+      ],
+      "intent": "app_issues",
+      "languages": {
+        "en": "How can I change the language settings on the platform?",
+        "ms": "Bagaimana saya boleh menukar tetapan bahasa di platform?",
+        "cn": "如何更改平台的語言設置？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Piece of cake, boss! Tap the portrait icon at the bottom right, go ‘Language,’ pick yours, confirm—bam, it’s changed!",
+        "ms": "Senang je, boss! Tekan ikon potret kat bawah kanan, pergi ‘Bahasa,’ pilih yang boss nak, sahkan—tukar dalam sekejap!",
+        "cn": "輕鬆，老板！點右下角人像圖標，選‘語言’，挑您喜歡的，確認後就換好啦！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "technical"
+      ],
+      "subCategory": "app_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0465",
+    "question": {
+      "text": "Approved withdrawals usually hit your bank in 5-30 minutes, boss. Over 30? Might be a delay—send us your transaction details, and we’ll check it out!",
+      "variations": [
+        "Pengeluaran diluluskan biasanya masuk bank dalam 5-30 minit, boss. Lebih 30? Mungkin lambat—hantar butiran transaksi, kami semakkan!",
+        "Approved withdrawals usually hit your bank in 5-30 minutes, boss. Over 30? Might be a delay—send us your transaction details, and we’ll check it out!",
+        "通常提款被批准後，資金會在5-30分鐘內到您的銀行賬戶，老板。若超過30分鐘還沒入賬，可能是延遲，請提供交易信息，我們會幫您核查。"
+      ],
+      "intent": "withdrawal_conditions",
+      "languages": {
+        "en": "Why has my withdrawal been approved but not credited to my bank account?",
+        "ms": "Kenapa pengeluaran saya telah diluluskan tetapi belum dikreditkan ke akaun bank saya?",
+        "cn": "為什麼我的提款已經被批准但沒有入賬到我的銀行賬戶？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Approved withdrawals take 5-30 minutes—if it’s late, could be a snag. Send your details, I’ll dig in!",
+        "ms": "Hai, boss! Pengeluaran diluluskan ambil 5-30 minit—kalau lambat, mungkin ada halangan. Hantar butiran, saya check!",
+        "cn": "您好，老板！批准的提款5-30分鐘到，若遲了可能有問題。給我交易信息，我會幫您查！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_conditions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0466",
+    "question": {
+      "text": "Withdrawals usually take 5-30 minutes, boss. If it’s over 30, hit up our online customer service—we’ll sort it quick!",
+      "variations": [
+        "Pengeluaran biasanya ambil 5-30 minit, boss. Kalau lebih 30, hubungi sokongan pelanggan dalam talian—kami setel laju!",
+        "Withdrawals usually take 5-30 minutes, boss. If it’s over 30, hit up our online customer service—we’ll sort it quick!",
+        "提款處理時間通常是5-30分鐘，老板。若超過30分鐘還沒到賬，請聯繫在線客服，我們會立刻幫您查情況。"
+      ],
+      "intent": "withdrawal_conditions",
+      "languages": {
+        "en": "How long does it usually take for a withdrawal to be processed?",
+        "ms": "Berapa lama biasanya masa yang diambil untuk pemprosesan pengeluaran?",
+        "cn": "提款通常需要多長時間處理？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Withdrawals usually zip through in 5-30 minutes. Past 30? Ping our online customer service—I’ll speed it up!",
+        "ms": "Hai, boss! Pengeluaran biasanya laju, 5-30 minit je. Lebih 30? Hubungi sokongan dalam talian—saya cepatkan!",
+        "cn": "您好，老板！提款通常5-30分鐘就搞定。若超30分鐘，聯繫在線客服，我會幫您加快！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_conditions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0467",
+    "question": {
+      "text": "Not yet, boss—we don’t have specific game or event notifications. But we’ll send promos and big updates, so keep app notifications on!",
+      "variations": [
+        "Belum boleh, boss—kami tak ada pemberitahuan khusus untuk permainan atau acara. Tapi kami hantar promosi dan update besar, jadi hidupkan notifikasi app!",
+        "Not yet, boss—we don’t have specific game or event notifications. But we’ll send promos and big updates, so keep app notifications on!",
+        "目前還不行，老板，我們還沒為特定遊戲或體育賽事設置通知功能。不過我們會不定時推送優惠和重大升級通知，請在手機上開啟應用通知哦！"
+      ],
+      "intent": "app_issues",
+      "languages": {
+        "en": "Can I set up notifications for my favorite games or sports events?",
+        "ms": "Bolehkah saya menyediakan pemberitahuan untuk permainan atau acara sukan kegemaran saya?",
+        "cn": "我可以為我喜歡的遊戲或體育賽事設置通知嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Not quite, boss! No custom game or event alerts yet, but we’ll ping you with promos and updates—keep those app notifications on!",
+        "ms": "Belum lagi, boss! Tak ada notifikasi khusus permainan atau acara, tapi kami hantar promosi dan update—pastikan notifikasi app hidup!",
+        "cn": "還不行，老板！暫時沒針對遊戲或賽事設通知，但我們會發優惠和更新，記得開啟應用通知哦！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "technical"
+      ],
+      "subCategory": "app_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0468",
+    "question": {
+      "text": "No special promos or events today, boss. Check the speaker icon at the top left of the app for the latest deals—don’t miss out!",
+      "variations": [
+        "Tak ada promosi atau acara istimewa hari ni, boss. Tengok ikon pembesar suara kat atas kiri app untuk tawaran terkini—jangan terlepas!",
+        "No special promos or events today, boss. Check the speaker icon at the top left of the app for the latest deals—don’t miss out!",
+        "今天沒有特別的促銷或活動，老板。您可以點擊應用界面左上角的小喇叭圖標，查看最新的促銷公告，別錯過精彩優惠！"
+      ],
+      "intent": "redemption_rules",
+      "languages": {
+        "en": "Are there any special promotions or events happening today?",
+        "ms": "Adakah terdapat promosi atau acara istimewa yang sedang berlangsung hari ini?",
+        "cn": "今天有任何特別的促銷或活動嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Nothing special today, boss! Peek at the speaker icon up top left in the app—keeps you posted on hot deals!",
+        "ms": "Hari ni tak ada istimewa, boss! Tengok ikon pembesar suara kat atas kiri app—update boss dengan tawaran menarik!",
+        "cn": "今天沒特別活動，老板！點應用左上角小喇叭圖標，隨時了解最新優惠，別錯過！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "points_shop"
+      ],
+      "subCategory": "redemption_rules",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0469",
+    "question": {
+      "text": "Yes, boss, ATM cash deposits work great! Funds usually hit in 5-30 minutes. Over 30? Contact our online customer service—we’ll check it out!",
+      "variations": [
+        "Ya, boss, deposit tunai guna ATM memang boleh! Dana biasanya masuk dalam 5-30 minit. Lebih 30? Hubungi sokongan pelanggan dalam talian—kami tengokkan!",
+        "Yes, boss, ATM cash deposits work great! Funds usually hit in 5-30 minutes. Over 30? Contact our online customer service—we’ll check it out!",
+        "是的，老板，ATM現金存款是可以接受的充值方式！通常資金會在5-30分鐘內到賬。若超過30分鐘沒入賬，請聯繫在線客服，我們會幫您查情況。"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Is cash deposit via ATM an acceptable method for topping up my account?",
+        "ms": "Adakah deposit tunai melalui ATM kaedah yang boleh diterima untuk menambah akaun saya?",
+        "cn": "ATM現金存款是充值賬戶的可接受方法嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "You bet, boss! ATM cash deposits are fine—takes 5-30 minutes. Past 30? Ping our online customer service—I’ll jump on it!",
+        "ms": "Mesti boleh, boss! Deposit tunai ATM ok—5-30 minit je. Lebih 30? Hubungi sokongan dalam talian—saya tolong cepat!",
+        "cn": "當然可以，老板！ATM現金存款沒問題，5-30分鐘到賬。若超30分鐘，聯繫在線客服，我會快幫您查！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0470",
+    "question": {
+      "text": "No extra fees for deposits or withdrawals, boss—you’re good to go with no worries!",
+      "variations": [
+        "Tak ada yuran tambahan untuk deposit atau pengeluaran, boss—boss boleh teruskan tanpa risau!",
+        "No extra fees for deposits or withdrawals, boss—you’re good to go with no worries!",
+        "存款和提款沒有任何額外費用，老板，您可以放心操作！"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Are there any fees associated with deposits or withdrawals?",
+        "ms": "Adakah terdapat yuran yang dikenakan untuk deposit atau pengeluaran?",
+        "cn": "存款或提款是否有相關費用？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Nope, boss! Deposits and withdrawals are fee-free—go ahead, no stress!",
+        "ms": "Tak ada, boss! Deposit dan pengeluaran bebas yuran—teruskan je, tak payah risau!",
+        "cn": "沒有，老板！存款提款都免費，放心用吧！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0471",
+    "question": {
+      "text": "Yes, boss, multiple bank accounts are fine for deposits and withdrawals—just make sure they’re all under your name, and it’ll work smooth!",
+      "variations": [
+        "Boleh, boss, guna banyak akaun bank untuk deposit dan pengeluaran tak ada masalah—pastikan semua atas nama boss, lancar je!",
+        "Yes, boss, multiple bank accounts are fine for deposits and withdrawals—just make sure they’re all under your name, and it’ll work smooth!",
+        "是的，老板，您可以使用多個銀行賬戶進行存款和提款。只要確保這些賬戶都屬於您本人，就能順利操作。"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Can I use multiple bank accounts for deposits and withdrawals?",
+        "ms": "Bolehkah saya menggunakan beberapa akaun bank untuk deposit dan pengeluaran?",
+        "cn": "我可以使用多個銀行賬戶進行存款和提款嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "You got it, boss! Use as many bank accounts as you like for deposits and withdrawals—keep ‘em in your name, and it’s all good!",
+        "ms": "Ok lah, boss! Guna berapa akaun bank pun boleh untuk deposit dan pengeluaran—asalkan nama boss, semua senang!",
+        "cn": "沒問題，老板！想用幾個銀行賬戶存款提款都行，只要是您名下的，一切順利！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0472",
+    "question": {
+      "text": "Sorry, boss, old receipts can’t be used for new transactions. If the system sees it’s been used, it won’t process—safety first!",
+      "variations": [
+        "Maaf, boss, resit lama tak boleh guna untuk transaksi baru. Kalau sistem nampak dah digunakan, tak proses—keselamatan dulu!",
+        "Sorry, boss, old receipts can’t be used for new transactions. If the system sees it’s been used, it won’t process—safety first!",
+        "很抱歉，老板，您不能用舊的收據進行新的交易。若系統發現該收據已被使用過，將不會通過新存款申請。"
+      ],
+      "intent": "transaction_records",
+      "languages": {
+        "en": "Can I use an older receipt for a new transaction?",
+        "ms": "Bolehkah saya menggunakan resit lama untuk transaksi baru?",
+        "cn": "我可以用舊的收據進行新的交易嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "No go, boss! Old receipts won’t fly for new transactions—system blocks repeats for safety!",
+        "ms": "Tak boleh, boss! Resit lama tak laku untuk transaksi baru—sistem halang ulangan untuk selamat!",
+        "cn": "不行，老板！舊收據不能用於新交易，系統會擋重複的，為了安全！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_records",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0473",
+    "question": {
+      "text": "Yes, boss! For e-wallet transactions: click the wallet icon, pick ‘Quick Top-Up,’ choose e-wallet, enter your amount—simple and fast!",
+      "variations": [
+        "Boleh, boss! Untuk transaksi e-dompet: klik ikon dompet, pilih ‘Tambah Nilai Cepat,’ pilih e-dompet, masuk jumlah—senang dan pantas!",
+        "Yes, boss! For e-wallet transactions: click the wallet icon, pick ‘Quick Top-Up,’ choose e-wallet, enter your amount—simple and fast!",
+        "是的，老板！您可以使用電子錢包賬戶進行交易！請點擊應用中的錢包圖標，選擇‘快速充值’，選電子錢包，輸入您想充值的金額即可。"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Can I use my e-wallet account number for transactions?",
+        "ms": "Bolehkah saya menggunakan nombor akaun e-dompet saya untuk transaksi?",
+        "cn": "我可以使用我的電子錢包賬號進行交易嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Sure can, boss! Hit the wallet icon, go ‘Quick Top-Up,’ pick e-wallet, add your amount—quick as that!",
+        "ms": "Boleh lah, boss! Tekan ikon dompet, pergi ‘Tambah Nilai Cepat,’ pilih e-dompet, masuk jumlah—cepat macam tu je!",
+        "cn": "當然可以，老板！點錢包圖標，選‘快速充值’，挑電子錢包，輸入金額，就這麼快！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0474",
+    "question": {
+      "text": "If your funds aren’t updating after a deposit, boss, it might be a slight system delay—usually 5-30 minutes. Try logging out and back in to refresh. Still not there? Contact our online customer service—we’ll check it fast!",
+      "variations": [
+        "Kalau dana boss tak kemas kini lepas deposit, mungkin sistem lambat sikit—biasanya 5-30 minit. Cuba log keluar masuk balik untuk refresh. Masih tak ada? Hubungi sokongan pelanggan dalam talian—kami semak cepat!",
+        "If your funds aren’t updating after a deposit, boss, it might be a slight system delay—usually 5-30 minutes. Try logging out and back in to refresh. Still not there? Contact our online customer service—we’ll check it fast!",
+        "若您的存款後資金沒有自動更新，老板，可能是系統處理稍有延遲，通常5-30分鐘內到賬。您可以嘗試退出並重新打開應用刷新。若問題仍存在，請聯繫我們的在線客服，我們會馬上為您檢查。"
+      ],
+      "intent": "transaction_records",
+      "languages": {
+        "en": "Why isn't my credit automatically updating after a deposit?",
+        "ms": "Kenapa kredit saya tidak dikemas kini secara automatik selepas deposit?",
+        "cn": "為什麼我的存款後學分沒有自動更新？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! If your funds aren’t showing post-deposit, it’s likely a quick system hiccup—give it 5-30 minutes. Log out and in to refresh, or ping our online customer service—I’ll fix it fast!",
+        "ms": "Hai, boss! Kalau dana tak masuk lepas deposit, mungkin sistem terganggu sikit—tunggu 5-30 minit. Log keluar masuk refresh, atau hubungi sokongan dalam talian—saya settle cepat!",
+        "cn": "您好，老板！若存款後資金沒更新，可能是系統小延遲，5-30分鐘就好。試著退出重登刷新，若還不行，聯繫在線客服，我會快幫您解決！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_records",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0475",
+    "question": {
+      "text": "Yes, boss! For quick e-wallet top-ups: click the wallet icon, pick ‘Quick Top-Up,’ choose e-wallet, enter your amount—done fast!",
+      "variations": [
+        "Boleh, boss! Untuk tambah nilai cepat guna e-dompet: klik ikon dompet, pilih ‘Tambah Nilai Cepat,’ pilih e-dompet, masuk jumlah—siap pantas!",
+        "Yes, boss! For quick e-wallet top-ups: click the wallet icon, pick ‘Quick Top-Up,’ choose e-wallet, enter your amount—done fast!",
+        "是的，老板！要用電子錢包快速充值，請點擊應用中的錢包圖標，選擇‘快速充值’，選電子錢包作為支付方式，輸入金額，很快就完成了！"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Can I use my e-wallet account number for transactions?",
+        "ms": "Bolehkah saya menggunakan nombor akaun e-dompet saya untuk transaksi?",
+        "cn": "我可以使用我的電子錢包賬號進行交易嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "You bet, boss! Hit the wallet icon, go ‘Quick Top-Up,’ pick e-wallet, add your amount—bam, it’s in quick!",
+        "ms": "Mesti boleh, boss! Tekan ikon dompet, pilih ‘Tambah Nilai Cepat,’ ambik e-dompet, masuk jumlah—cepat masuk!",
+        "cn": "當然可以，老板！點錢包圖標，選‘快速充值’，挑電子錢包，輸入金額，馬上就搞定！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0476",
+    "question": {
+      "text": "No daily withdrawal limit, boss! Withdraw as much as you win—no cap, total freedom for your funds!",
+      "variations": [
+        "Tak ada had maksimum pengeluaran harian, boss! Tarik la berapa boss menang—tak ada limit, bebas urus dana!",
+        "No daily withdrawal limit, boss! Withdraw as much as you win—no cap, total freedom for your funds!",
+        "我們沒有每日提款的最高限額，老板！您贏多少就可以提多少，資金管理完全自由！"
+      ],
+      "intent": "withdrawal_conditions",
+      "languages": {
+        "en": "Is there a maximum limit for daily withdrawals?",
+        "ms": "Adakah terdapat had maksimum untuk pengeluaran harian?",
+        "cn": "每日提款有最高限額嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Nope, boss! No max limit on daily withdrawals—cash out all your winnings, no restrictions!",
+        "ms": "Tak ada, boss! Tiada had maksimum pengeluaran harian—tarik semua kemenangan, bebas!",
+        "cn": "沒有，老板！每日提款沒上限，您贏多少提多少，沒限制！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_conditions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0477",
+    "question": {
+      "text": "To check your withdrawal status, boss: Open the app, hit the wallet icon, go to ‘Transaction Records’—you’ll see Pending or Approved. If it’s still Pending after 30 minutes, ping me—I’ll sort it!",
+      "variations": [
+        "Untuk semak status pengeluaran, boss: Buka app, tekan ikon dompet, pergi ‘Rekod Transaksi’—nampak Tertunda atau Diluluskan. Kalau masih Tertunda lepas 30 minit, cakap dengan saya—saya uruskan!",
+        "To check your withdrawal status, boss: Open the app, hit the wallet icon, go to ‘Transaction Records’—you’ll see Pending or Approved. If it’s still Pending after 30 minutes, ping me—I’ll sort it!",
+        "要查看您的提款請求狀態，老板，請打開應用，點擊錢包圖標，進入‘交易記錄’，您會看到Pending（待處理）或Approved（已批准）。若30分鐘後仍待處理，請聯繫我，我會幫您處理！"
+      ],
+      "intent": "withdrawal_conditions",
+      "languages": {
+        "en": "Can you check the status of my withdrawal request?",
+        "ms": "Bolehkah anda periksa status permintaan pengeluaran saya?",
+        "cn": "你能檢查我的提款請求的狀態嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Sure thing, boss! Pop open the app, tap the wallet icon, check ‘Transaction Records’—Pending or Approved. Still Pending after 30? Hit me up, I’ll fix it fast!",
+        "ms": "Boleh je, boss! Buka app, tekan ikon dompet, tengok ‘Rekod Transaksi’—Tertunda atau Diluluskan. Masih Tertunda lepas 30? Cakap saya, saya cepatkan!",
+        "cn": "當然可以，老板！打開應用，點錢包圖標，看‘交易記錄’，是Pending還是Approved。若30分鐘後還在待處理，告訴我，我會快幫您解決！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_conditions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0478",
+    "question": {
+      "text": "Sure, boss! A small transfer’s a great way to check if your account’s running fine—no problem at all!",
+      "variations": [
+        "Boleh, boss! Pindahan kecil memang cara bagus nak sahkan akaun boss jalan elok—tak ada masalah!",
+        "Sure, boss! A small transfer’s a great way to check if your account’s running fine—no problem at all!",
+        "當然可以，老板！小額轉賬是個好方法，能確保您的賬戶和支付方式正常運作！"
+      ],
+      "intent": "transaction_records",
+      "languages": {
+        "en": "Can I make a small transfer to verify if my account is working correctly?",
+        "ms": "Bolehkah saya membuat pemindahan kecil untuk mengesahkan jika akaun saya berfungsi dengan betul?",
+        "cn": "我可以進行小額轉賬以驗證我的賬戶是否正常運作嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "You got it, boss! A small transfer’s perfect to test your account—go for it, works like a charm!",
+        "ms": "Ok lah, boss! Pindahan kecil bagus untuk test akaun boss—cubalah, jadi elok!",
+        "cn": "沒問題，老板！小額轉賬很適合驗證賬戶，試試看，保證順利！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_records",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0479",
+    "question": {
+      "text": "We’ve got two-factor authentication ready, boss! Log in with your password and a TAC code sent via SMS—double the safety!",
+      "variations": [
+        "Kami dah ada pengesahan dua faktor, boss! Log masuk guna kata laluan dan kod TAC hantar melalui SMS—keselamatan berganda!",
+        "We’ve got two-factor authentication ready, boss! Log in with your password and a TAC code sent via SMS—double the safety!",
+        "我們已設置雙重身份驗證功能，老板！登錄時除了密碼，還需輸入通過短信發送的TAC驗證碼，這樣能更好地保護您的賬戶安全。"
+      ],
+      "intent": "two-factor_authentication",
+      "languages": {
+        "en": "How can I enable two-factor authentication for added security?",
+        "ms": "Bagaimana saya boleh mengaktifkan pengesahan dua faktor untuk keselamatan tambahan?",
+        "cn": "如何啟用雙重身份驗證以增強安全性？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "All set, boss! Two-factor’s on—log in with your password and TAC from SMS, keeps your account super safe!",
+        "ms": "Dah siap, boss! Dua faktor aktif—log masuk pakai kata laluan dan kod TAC dari SMS, akaun selamat gila!",
+        "cn": "搞定了，老板！雙重驗證已開啟，用密碼和短信TAC登錄，您的賬戶超安全！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "security"
+      ],
+      "subCategory": "two-factor_authentication",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0480",
+    "question": {
+      "text": "No worries if you can’t screenshot your bank app, boss! Log back in, check your transaction history, and snap it from there—works fine!",
+      "variations": [
+        "Tak risau kalau tak boleh tangkap skrin app bank, boss! Log masuk balik, tengok sejarah transaksi, tangkap dari situ—jadi elok!",
+        "No worries if you can’t screenshot your bank app, boss! Log back in, check your transaction history, and snap it from there—works fine!",
+        "若您無法截取銀行應用截圖進行存款，別擔心，老板！請重新登錄銀行應用，查看歷史交易記錄，在那個頁面截圖即可。"
+      ],
+      "intent": "transaction_records",
+      "languages": {
+        "en": "What should I do if I can't take a screenshot of my bank app for the deposit?",
+        "ms": "Apa yang perlu saya lakukan jika saya tidak boleh mengambil tangkapan skrin aplikasi bank saya untuk deposit?",
+        "cn": "如果我無法截取銀行應用程序的屏幕截圖進行存款，我該怎麼辦？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "No sweat, boss! Can’t screenshot? Log into your bank app again, hit transaction history, snap it there—good to go!",
+        "ms": "Tak apa, boss! Tak boleh tangkap skrin? Log masuk app bank balik, pergi sejarah transaksi, tangkap situ—boleh lah!",
+        "cn": "沒關係，老板！截不了圖？重新登錄銀行應用，進交易記錄頁面截圖，這樣就行！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_records",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0481",
+    "question": {
+      "text": "Withdrawals typically take 5-30 minutes, boss. If it’s over 30, reach out to our online customer service—we’ll jump on it!",
+      "variations": [
+        "Pengeluaran biasanya ambil 5-30 minit, boss. Kalau lebih 30, hubungi sokongan pelanggan dalam talian—kami tolong cepat!",
+        "Withdrawals typically take 5-30 minutes, boss. If it’s over 30, reach out to our online customer service—we’ll jump on it!",
+        "提款處理通常需要5-30分鐘，老板。若超過30分鐘還沒到 ricord，請聯繫我們的在線客服，我們會幫您查一下情況。"
+      ],
+      "intent": "withdrawal_conditions",
+      "languages": {
+        "en": "How long does it usually take for a withdrawal to be processed?",
+        "ms": "Berapa lama biasanya masa yang diambil untuk pemprosesan pengeluaran?",
+        "cn": "提款通常需要多長時間處理？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Withdrawals usually zip through in 5-30 minutes. Past 30? Ping our online customer service—I’ll speed it up!",
+        "ms": "Hai, boss! Pengeluaran biasanya laju, 5-30 minit je. Lebih 30? Hubungi sokongan dalam talian—saya cepatkan!",
+        "cn": "您好，老板！提款通常5-30分鐘搞定。若超30分鐘，聯繫在線客服，我會幫您加速！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_conditions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0482",
+    "question": {
+      "text": "Yes, boss, there’s an iOS version of Mega888! To download: click ‘More Games,’ pick ‘Slots,’ find Mega, scroll down, hit the Mega888 download icon—done!",
+      "variations": [
+        "Ada, boss, versi iOS untuk Mega888 ada! Nak muat turun: klik ‘Lebih Banyak Permainan,’ pilih ‘Slot,’ cari Mega, skrol bawah, tekan ikon muat turun Mega888—siap!",
+        "Yes, boss, there’s an iOS version of Mega888! To download: click ‘More Games,’ pick ‘Slots,’ find Mega, scroll down, hit the Mega888 download icon—done!",
+        "是的，老板！Mega888有iOS版本的應用程序！下載步驟：點擊‘更多遊戲’，選擇‘老虎機’，找到Mega，向下拉，看到Mega888下載圖標，點擊即可下載！"
+      ],
+      "intent": "app_issues",
+      "languages": {
+        "en": "Is there an iOS version of the Mega888 app available?",
+        "ms": "Adakah terdapat versi iOS untuk aplikasi Mega888?",
+        "cn": "Mega888有iOS版本的應用程序嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "You bet, boss! Mega888’s got an iOS version—hit ‘More Games,’ go ‘Slots,’ find Mega, scroll to the download icon, tap it—bam, it’s yours!",
+        "ms": "Mesti ada, boss! Mega888 ada versi iOS—tekan ‘Lebih Banyak Permainan,’ pergi ‘Slot,’ cari Mega, skrol ke ikon muat turun, tekan—jadi punya boss!",
+        "cn": "當然有，老板！Mega888有iOS版，點‘更多遊戲’，選‘老虎機’，找到Mega，滑到下載圖標，點一下就到手啦！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "technical"
+      ],
+      "subCategory": "app_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0483",
+    "question": {
+      "text": "Not yet, boss—no specific game or event notifications. But we’ll send you promos and big updates, so keep app notifications on!",
+      "variations": [
+        "Belum ada, boss—tak ada notifikasi khusus untuk permainan atau acara. Tapi kami hantar promosi dan update besar, jadi pastikan notifikasi app on!",
+        "Not yet, boss—no specific game or event notifications. But we’ll send you promos and big updates, so keep app notifications on!",
+        "目前還不行，老板，我們還沒針對特定遊戲或體育賽事設置通知。但我們會不定時推送優惠和重大更新，請記得開啟應用程序通知哦！"
+      ],
+      "intent": "app_issues",
+      "languages": {
+        "en": "Can I set up notifications for my favorite games or sports events?",
+        "ms": "Bolehkah saya menyediakan pemberitahuan untuk permainan atau acara sukan kegemaran saya?",
+        "cn": "我可以為我喜歡的遊戲或體育賽事設置通知嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Not yet, boss! Can’t set game or event alerts, but we’ll ping you with promos and updates—keep app notifications rolling!",
+        "ms": "Belum boleh, boss! Tak boleh set notifikasi permainan atau acara, tapi kami hantar promosi dan update—pastikan notifikasi app hidup!",
+        "cn": "還不行，老板！無法為遊戲或賽事設通知，但我們會發優惠和更新，記得開應用通知哦！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "technical"
+      ],
+      "subCategory": "app_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0484",
+    "question": {
+      "text": "Yes, boss! Click ‘More Games’ on the game page, then pick your provider or type—like slots or live casino—to find your favorites!",
+      "variations": [
+        "Ada, boss! Klik ‘Lebih Banyak Permainan’ kat laman permainan, lepas tu pilih penyedia atau jenis—macam slot atau kasino langsung—cari yang boss suka!",
+        "Yes, boss! Click ‘More Games’ on the game page, then pick your provider or type—like slots or live casino—to find your favorites!",
+        "是的，老板！請在遊戲頁面點擊‘更多遊戲’，然後選擇您想玩的提供商或類型（如老虎機、真人娛樂場），就能找到您喜歡的遊戲。"
+      ],
+      "intent": "game_rules",
+      "languages": {
+        "en": "Is there a way to filter games by provider or type?",
+        "ms": "Adakah terdapat cara untuk menapis permainan mengikut penyedia atau jenis?",
+        "cn": "是否可以按提供商或類型篩選遊戲？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "You bet, boss! Hit ‘More Games,’ sort by provider or type—slots, live casino—whatever you’re into, it’s there!",
+        "ms": "Mesti boleh, boss! Tekan ‘Lebih Banyak Permainan,’ tapis ikut penyedia atau jenis—slot, kasino langsung—apa yang boss minat, ada!",
+        "cn": "當然可以，老板！點‘更多遊戲’，按提供商或類型篩選—like老虎機或真人娛樂場，您喜歡的都在！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "game_inquiry"
+      ],
+      "subCategory": "game_rules",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0485",
+    "question": {
+      "text": "Yes, boss! To change your phone number: click the portrait icon at the bottom right, pick ‘Update Phone Number,’ enter the new one, send the code, input it, and submit—easy!",
+      "variations": [
+        "Boleh, boss! Nak tukar nombor telefon: klik ikon potret kat sudut kanan bawah, pilih ‘Kemas Kini Nombor Telefon,’ masuk nombor baru, hantar kod, masukkan, hantar—senang!",
+        "Yes, boss! To change your phone number: click the portrait icon at the bottom right, pick ‘Update Phone Number,’ enter the new one, send the code, input it, and submit—easy!",
+        "當然可以，老板！要更改與賬戶相關的手機號碼，請點擊右下角人像圖標，選擇‘更換電話號碼’，輸入新號碼，點發送驗證碼，收到後輸入並提交即可！"
+      ],
+      "intent": "account_management",
+      "languages": {
+        "en": "Is it possible to change the phone number associated with my account?",
+        "ms": "Adakah mungkin untuk menukar nombor telefon yang dikaitkan dengan akaun saya?",
+        "cn": "我可以更改與我賬戶相關的手機號碼嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Sure can, boss! Tap the portrait icon at the bottom right, hit ‘Update Phone Number,’ add the new one, send the code, pop it in—done deal!",
+        "ms": "Boleh lah, boss! Tekan ikon potret kat bawah kanan, pilih ‘Kemas Kini Nombor Telefon,’ masuk nombor baru, hantar kod, masukkan—siap!",
+        "cn": "當然行，老板！點右下角人像圖標，選‘更換電話號碼’，輸入新號，發驗證碼，輸入後提交，搞定！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "account"
+      ],
+      "subCategory": "account_management",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0486",
+    "question": {
+      "text": "Sorry for the hassle, boss! Mega winnings auto-transfer to your JOKER wallet when you exit. If they’re not there, send us a screenshot—we’ll figure it out quick!",
+      "variations": [
+        "Maaf sebab susah, boss! Kemenangan Mega auto pindah ke dompet JOKER bila boss keluar. Kalau tak ada, hantar screenshot—kami tengok cepat!",
+        "Sorry for the hassle, boss! Mega winnings auto-transfer to your JOKER wallet when you exit. If they’re not there, send us a screenshot—we’ll figure it out quick!",
+        "抱歉給您帶來不便，老板！退出遊戲後，Mega獎金會自動轉入您的JOKER錢包。若仍未到賬，請提供截圖，我們會盡快幫您查清楚。"
+      ],
+      "intent": "game_rules",
+      "languages": {
+        "en": "Why hasn't my winnings from Mega been transferred to my wallet?",
+        "ms": "Kenapa kemenangan saya dari Mega belum dipindahkan ke e-dompet saya?",
+        "cn": "為什麼我的Mega獎金還沒有轉到我的電子錢包？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Oops, sorry, boss! Mega winnings should zip to your JOKER wallet on exit—if not, shoot us a screenshot, I’ll sort it fast!",
+        "ms": "Aduh, maaf, boss! Kemenangan Mega sepatutnya masuk dompet JOKER bila keluar—kalau tak ada, hantar screenshot, saya settle cepat!",
+        "cn": "抱歉麻煩您了，老板！Mega獎金退出遊戲後應轉到JOKER錢包，若沒到，發截圖給我，我會快幫您解決！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "game_inquiry"
+      ],
+      "subCategory": "game_rules",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0487",
+    "question": {
+      "text": "No panic if you put the wrong ID on your deposit receipt, boss! It might slow the review a bit—make sure it’s right next time!",
+      "variations": [
+        "Tak payah panik kalau masukkan nombor ID salah kat resit deposit, boss! Mungkin lambat sikit semak—pastikan betul lain kali!",
+        "No panic if you put the wrong ID on your deposit receipt, boss! It might slow the review a bit—make sure it’s right next time!",
+        "若您在存款收據上輸入了錯誤的ID號碼，不用擔心，老板！這可能會稍微影響審核時間，下次確保輸入正確的ID號即可。"
+      ],
+      "intent": "transaction_records",
+      "languages": {
+        "en": "What should I do if I entered the wrong ID number on my deposit receipt?",
+        "ms": "Apa yang perlu saya lakukan jika saya memasukkan nombor ID yang salah pada resit deposit saya?",
+        "cn": "如果我在存款收據上輸入了錯誤的ID號碼，我應該怎麼做？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "No biggie, boss! Wrong ID on the receipt might delay things a touch—just nail it next time!",
+        "ms": "Tak ada hal, boss! ID salah kat resit mungkin lambat sikit—pastikan betul lain kali!",
+        "cn": "沒事，老板！收據上ID錯了可能會稍微慢點，下次輸入正確就行！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_records",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0488",
+    "question": {
+      "text": "Hi boss, different 4D companies have different odds—check our app for ours! Your Special bet payout might vary—thanks for sticking with us!",
+      "variations": [
+        "Hai boss, syarikat 4D lain ada peluang berbeza—semak app kami untuk tengok punya kami! Bayaran pertaruhan Istimewa mungkin berubah—terima kasih sebab kekal bersama kami!",
+        "Hi boss, different 4D companies have different odds—check our app for ours! Your Special bet payout might vary—thanks for sticking with us!",
+        "您好，老板，不同的4D公司賠率可能不一樣哦，您可以通過我們的應用查看我們的賠率，特別投注的支付可能有變，感謝您的支持！"
+      ],
+      "intent": "bet_status",
+      "languages": {
+        "en": "Why was I only paid 8 RM for a Special bet that should have paid 210 RM?",
+        "ms": "Kenapa saya hanya dibayar 8 RM untuk pertaruhan Istimewa yang sepatutnya membayar 210 RM?",
+        "cn": "為什麼我只收到8 RM的特別投注，而應該支付210 RM？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! 4D odds differ by company—peek at ours in the app. Your Special bet might’ve shifted—thanks for rolling with us!",
+        "ms": "Hai, boss! Peluang 4D lain-lain ikut syarikat—tengok punya kami kat app. Pertaruhan Istimewa mungkin berubah—terima kasih kekal bersama!",
+        "cn": "您好，老板！4D賠率因公司而異，請在應用中查看我們的。您的特別投注可能有變，謝謝您一直支持！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "4d_lotto"
+      ],
+      "subCategory": "bet_status",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0489",
+    "question": {
+      "text": "Hi boss, just log out, click ‘Forgot Password’ below the login page, and follow the steps to reset your new password—easy peasy!",
+      "variations": [
+        "Hai boss, log keluar je, klik ‘Lupa Kata Laluan’ kat bawah laman log masuk, ikut langkah untuk set kata laluan baru—senang je!",
+        "Hi boss, just log out, click ‘Forgot Password’ below the login page, and follow the steps to reset your new password—easy peasy!",
+        "您好，老板，您可以先登出，然後在登入頁面下方點擊‘忘記密碼’，按提示重置新密碼哦，很簡單！"
+      ],
+      "intent": "password_management",
+      "languages": {
+        "en": "How can I reset my password if I've forgotten it?",
+        "ms": "Bagaimana saya boleh menetapkan semula kata laluan saya jika saya terlupa?",
+        "cn": "如果我忘記了密碼，我該如何重設密碼？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Forgot your password? Log out, hit ‘Forgot Password’ under login, follow the steps—new password in no time!",
+        "ms": "Hai, boss! Lupa kata laluan? Log keluar, tekan ‘Lupa Kata Laluan’ bawah log masuk, ikut langkah—kata laluan baru cepat je!",
+        "cn": "您好，老板！忘記密碼了？登出後點登入頁面下的‘忘記密碼’，按步驟走，新密碼很快就搞定！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "security"
+      ],
+      "subCategory": "password_management",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0490",
+    "question": {
+      "text": "Hi boss, deposits usually take 3-5 minutes—delays won’t cap your bets, you can still wager as normal!",
+      "variations": [
+        "Hai boss, deposit biasanya 3-5 minit—lambat tak hadkan pertaruhan, boss boleh bertaruh macam biasa!",
+        "Hi boss, deposits usually take 3-5 minutes—delays won’t cap your bets, you can still wager as normal!",
+        "您好，老板，存款時間通常為3-5分鐘，延遲不會影響您的投注或上限，您依然可以正常進行投注哦！"
+      ],
+      "intent": "betting_rules",
+      "languages": {
+        "en": "Is there a limit on how much I can bet when deposits are delayed?",
+        "ms": "Adakah terdapat had pada jumlah pertaruhan apabila deposit tertunda?",
+        "cn": "當存款延遲時，我的投注有沒有上限？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Deposits take 3-5 minutes—delays don’t limit your bets, keep wagering like usual!",
+        "ms": "Hai, boss! Deposit 3-5 minit je—lambat pun tak had pertaruhan, terus bertaruh macam biasa!",
+        "cn": "您好，老板！存款3-5分鐘就好，延遲也不限制投注，您照常下注沒問題！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "betting_rules",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0491",
+    "question": {
+      "text": "Hi boss, no extra fees for deposits or withdrawals—you can go ahead worry-free, no hidden costs!",
+      "variations": [
+        "Hai boss, tak ada yuran tambahan untuk deposit atau pengeluaran—boss boleh teruskan tanpa risau, tak ada kos tersembunyi!",
+        "Hi boss, no extra fees for deposits or withdrawals—you can go ahead worry-free, no hidden costs!",
+        "您好，老板，存款和提款不會收取任何額外費用，您可以放心操作，無需擔心隱藏收費哦！"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Are there any fees associated with deposits or withdrawals?",
+        "ms": "Adakah terdapat yuran yang dikenakan untuk deposit atau pengeluaran?",
+        "cn": "存款或提款是否有相關費用？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Good news, boss! No fees on deposits or withdrawals—do your thing with zero worries!",
+        "ms": "Berita baik, boss! Tak ada yuran untuk deposit atau pengeluaran—buat je tanpa risau!",
+        "cn": "好消息，老板！存款提款都沒費用，放心操作，沒啥好擔心的！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0492",
+    "question": {
+      "text": "Hi boss, please screenshot your transfer receipt—we need it to check if the Fast Payment went through!",
+      "variations": [
+        "Hai boss, tolong tangkap skrin resit pindahan boss—kami perlu untuk semak kalau tambah nilai Fast Payment dah masuk!",
+        "Hi boss, please screenshot your transfer receipt—we need it to check if the Fast Payment went through!",
+        "您好，老板，請您截屏您的轉賬單據。我們需要單據來核對信息，以確認是否成功充值哦！"
+      ],
+      "intent": "transaction_records",
+      "languages": {
+        "en": "Why isn't my Fast Payment top-up showing in my account?",
+        "ms": "Kenapa tambah nilai Fast Payment saya tidak dipaparkan dalam akaun saya?",
+        "cn": "為什麼我的快速支付充值沒有顯示在賬戶中？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Fast Payment not showing? Snap a screenshot of your receipt—send it over, I’ll check it quick!",
+        "ms": "Hai, boss! Tambah nilai Fast Payment tak keluar? Tangkap skrin resit—hantar kat saya, saya semak pantas!",
+        "cn": "您好，老板！快速支付沒顯示？請截圖您的轉賬單據，發給我，我會快幫您查！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_records",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0493",
+    "question": {
+      "text": "Hi boss, sports bet winnings usually hit your wallet in 30 minutes to 1 hour—just hang tight a bit!",
+      "variations": [
+        "Hai boss, kemenangan pertaruhan sukan biasanya masuk dompet dalam 30 minit sampai 1 jam—tunggu sikit je!",
+        "Hi boss, sports bet winnings usually hit your wallet in 30 minutes to 1 hour—just hang tight a bit!",
+        "您好，老板，體育投注的獎金通常在30分鐘到1小時內進入您的錢包，請您耐心等待哦！"
+      ],
+      "intent": "bet_status",
+      "languages": {
+        "en": "My sports bet winnings haven't been credited. What should I do?",
+        "ms": "Kemenangan pertaruhan sukan saya belum dikreditkan. Apa yang perlu saya lakukan?",
+        "cn": "我的體育投注獎金尚未入賬。我該怎麼辦？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Sports winnings take 30 minutes to an hour to land in your wallet—give it a little time!",
+        "ms": "Hai, boss! Kemenangan sukan ambil 30 minit sampai 1 jam masuk dompet—tunggu kejap je!",
+        "cn": "您好，老板！體育獎金30分鐘到1小時會進錢包，稍等一下就好！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "sports_betting"
+      ],
+      "subCategory": "bet_status",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0494",
+    "question": {
+      "text": "Hi boss, if your account’s locked, you might not be able to log in. If you can log in fine, it’s all good—you’re set to go!",
+      "variations": [
+        "Hai boss, kalau akaun boss kena kunci, mungkin tak boleh log masuk. Kalau boleh masuk elok, semua ok—boss boleh teruskan!",
+        "Hi boss, if your account’s locked, you might not be able to log in. If you can log in fine, it’s all good—you’re set to go!",
+        "您好，老板，若您的賬戶被鎖定，可能無法登錄哦。若您能成功登錄，那就說明一切正常，可以繼續操作！"
+      ],
+      "intent": "account_management",
+      "languages": {
+        "en": "How can I check if my account has been locked?",
+        "ms": "Bagaimana saya boleh periksa jika akaun saya telah dikunci?",
+        "cn": "我怎麼檢查我的賬戶是否已被鎖定？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Can’t log in? Might be locked. If you can log in smooth, no worries—you’re golden!",
+        "ms": "Hai, boss! Tak boleh log masuk? Mungkin kena kunci. Kalau masuk lancar, tak ada hal—boss hebat lah!",
+        "cn": "您好，老板！登不進去？可能被鎖了。若能順利登錄，沒問題，您可以繼續用！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "security"
+      ],
+      "subCategory": "account_management",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0495",
+    "question": {
+      "text": "Hi boss, each account’s tied to one name—deposits and withdrawals must match that name, so keep it consistent!",
+      "variations": [
+        "Hai boss, setiap akaun terikat satu nama—deposit dan pengeluaran kena sama nama tu, jadi kekalkan konsisten!",
+        "Hi boss, each account’s tied to one name—deposits and withdrawals must match that name, so keep it consistent!",
+        "您好，老板，每個賬戶只能綁定一個名字，存款和提款的姓名必須保持一致哦！"
+      ],
+      "intent": "payment_issues",
+      "languages": {
+        "en": "Can I use multiple bank accounts for deposits and withdrawals?",
+        "ms": "Bolehkah saya menggunakan beberapa akaun bank untuk deposit dan pengeluaran?",
+        "cn": "我可以使用多個銀行賬戶進行存款和提款嗎？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! One account, one name—deposits and withdrawals gotta match it, so stick to that!",
+        "ms": "Hai, boss! Satu akaun, satu nama—deposit dan pengeluaran kena ikut nama tu, jadi kekal je!",
+        "cn": "您好，老板！一個賬戶一個名字，存款提款都得一致，保持這樣就行！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "payment_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0496",
+    "question": {
+      "text": "Sorry for the trouble, boss! Mega winnings auto-transfer to your JOKER wallet after you exit—check your wallet history. Not there? Send us a screenshot, we’ll sort it fast!",
+      "variations": [
+        "Maaf sebab susah, boss! Kemenangan Mega auto pindah ke dompet JOKER lepas boss keluar—semak sejarah dompet. Tak ada? Hantar screenshot, kami cepatkan!",
+        "Sorry for the trouble, boss! Mega winnings auto-transfer to your JOKER wallet after you exit—check your wallet history. Not there? Send us a screenshot, we’ll sort it fast!",
+        "抱歉給您帶來不便，老板！退出遊戲後，Mega獎金會自動轉入您的JOKER錢包。請先檢查錢包交易記錄，若沒到賬，請提供截圖，我們會快幫您查清楚！"
+      ],
+      "intent": "game_rules",
+      "languages": {
+        "en": "Why hasn't my winnings from Mega been transferred to my wallet?",
+        "ms": "Kenapa kemenangan saya dari Mega belum dipindahkan ke e-dompet saya?",
+        "cn": "為什麼我的Mega獎金還沒有轉到我的電子錢包？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Oops, sorry, boss! Mega winnings should hit your JOKER wallet on exit—peek at your history. Missing? Screenshot it to us, I’ll fix it quick!",
+        "ms": "Aduh, maaf, boss! Kemenangan Mega sepatutnya masuk dompet JOKER bila keluar—tengok sejarah. Tak ada? Hantar screenshot, saya settle pantas!",
+        "cn": "抱歉麻煩您了，老板！Mega獎金退出後應進JOKER錢包，查一下記錄。若沒到，發截圖給我，我會快幫您解決！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "game_inquiry"
+      ],
+      "subCategory": "game_rules",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0497",
+    "question": {
+      "text": "Your full name’s set from registration, boss. If it’s wrong, just give us your correct full name below—make sure it’s yours so transactions stay smooth!",
+      "variations": [
+        "Nama penuh boss ditetapkan masa daftar. Kalau salah, bagi je nama penuh betul kat bawah—pastikan nama boss supaya transaksi lancar!",
+        "Your full name’s set from registration, boss. If it’s wrong, just give us your correct full name below—make sure it’s yours so transactions stay smooth!",
+        "您的全名是第一次註冊時輸入的，老板。若發現名字錯誤，可在下方提供您的正確全名，請確保是您本人的名字，這樣後續交易不會有問題。"
+      ],
+      "intent": "account_management",
+      "languages": {
+        "en": "How can I update my full name on my account?",
+        "ms": "Bagaimana saya boleh mengemas kini nama penuh saya pada akaun saya?",
+        "cn": "我如何在我的賬戶上更新我的全名？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Name’s locked from signup—if it’s off, drop your real full name below. Keep it yours for smooth deals!",
+        "ms": "Hai, boss! Nama kena ikut pendaftaran—kalau salah, bagi nama penuh betul kat bawah. Pastikan nama boss untuk transaksi senang!",
+        "cn": "您好，老板！全名從註冊時定下，若錯了，在下面給我您真正的全名。確保是您的，交易就順利！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "account"
+      ],
+      "subCategory": "account_management",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0498",
+    "question": {
+      "text": "No extra setup needed, boss—two-factor’s already on! Log in with your password and TAC code via SMS for double protection!",
+      "variations": [
+        "Tak perlu set lebih, boss—pengesahan dua faktor dah aktif! Log masuk guna kata laluan dan kod TAC dari SMS untuk perlindungan berganda!",
+        "No extra setup needed, boss—two-factor’s already on! Log in with your password and TAC code via SMS for double protection!",
+        "無需額外設置，老板，我們已提供雙重身份驗證功能！登錄時用密碼和短信發送的TAC驗證碼，就能保護您的賬戶安全。"
+      ],
+      "intent": "two-factor_authentication",
+      "languages": {
+        "en": "How can I enable two-factor authentication for added security?",
+        "ms": "Bagaimana saya boleh mengaktifkan pengesahan dua faktor untuk keselamatan tambahan?",
+        "cn": "如何啟用雙重身份驗證以增強安全性？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "All good, boss! Two-factor’s ready—log in with password and SMS TAC, double the safety, no fuss!",
+        "ms": "Semua ok, boss! Dua faktor dah siap—log masuk pakai kata laluan dan TAC SMS, selamat berganda, tak susah!",
+        "cn": "沒問題，老板！雙重驗證已準備好，用密碼和短信TAC登錄，安全加倍，簡單得很！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "security"
+      ],
+      "subCategory": "two-factor_authentication",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0499",
+    "question": {
+      "text": "If you can’t access the banking section, boss, it might be a rule violation locking that feature. Think it’s a mistake? Send us screenshots—we’ll review and fix it!",
+      "variations": [
+        "Kalau tak boleh masuk bahagian perbankan, boss, mungkin ada pelanggaran peraturan kunci fungsi tu. Rasa salah? Hantar screenshot—kami semak dan setelkan!",
+        "If you can’t access the banking section, boss, it might be a rule violation locking that feature. Think it’s a mistake? Send us screenshots—we’ll review and fix it!",
+        "若您無法在手機設備上訪問銀行部分，老板，可能是某些操作違反規定導致功能受限。若認為沒違規，請提供截圖，我們會幫您審核並解決問題。"
+      ],
+      "intent": "bank_issues",
+      "languages": {
+        "en": "Why can't I access the banking section on my mobile device?",
+        "ms": "Kenapa saya tidak boleh mengakses bahagian perbankan di peranti mudah alih saya?",
+        "cn": "為什麼我無法在我的手機設備上訪問銀行部分？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "Hey, boss! Banking section blocked? Could be a rule thing—send screenshots if you think it’s off, I’ll dig in and sort it!",
+        "ms": "Hai, boss! Bahagian perbankan tak boleh masuk? Mungkin peraturan—hantar screenshot kalau rasa salah, saya check dan settlekan!",
+        "cn": "您好，老板！銀行部分進不去？可能是違規限制，若覺得有誤，發截圖給我，我會查清楚幫您解決！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "bank_issues",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T08:29:49Z",
+      "lastUpdated": "2025-03-03T08:29:49Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  }
+]
