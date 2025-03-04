@@ -2,12 +2,8 @@
   {
     "id": "0800",
     "question": {
-      "text": "Funds usually land in 5-30 minutes after a deposit, boss—most times it’s quick, but a system check or peak rush might stretch it a bit. If it’s over 30 and still missing, hit me up—I’ll sort it out and get your cash safe! Thanks for hanging in—here’s to more fun and wins!",
-      "variations": [
-        "Duit biasanya masuk 5-30 minit lepas deposit, boss—kebanyakan masa cepat, tapi semak sistem atau waktu sibuk mungkin lambat sikit. Kalau lepas 30 masih tak ada, hubungi saya—saya uruskan pastikan duit boss selamat! Terima kasih sabar—semoga lebih seronok dan menang!",
-        "Funds usually land in 5-30 minutes after a deposit, boss—most times it’s quick, but a system check or peak rush might stretch it a bit. If it’s over 30 and still missing, hit me up—I’ll sort it out and get your cash safe! Thanks for hanging in—here’s to more fun and wins!",
-        "存款後，資金通常會在5到30分鐘內到賬，老板。雖然大多數情況下會很快處理，但有時由於系統審核或高峰期，可能會稍有延遲。若超過30分鐘仍未到賬，請聯繫我，我會幫您查看狀態，確保資金順利到位！感謝您的耐心，祝您遊戲愉快，多多勝利！"
-      ],
+      "text": "How long does it typically take for funds to be credited after a deposit?",
+      "variations": [],
       "intent": "payment_issues",
       "languages": {
         "en": "How long does it typically take for funds to be credited after a deposit?",
@@ -17,9 +13,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Hey, boss! Funds drop 5-30 post-deposit—checks or rush might lag it. Past 30? Ping me, I’ll lock it safe—cheers to wins!",
-        "ms": "Hai, boss! Duit masuk 5-30 lepas deposit—semak atau sibuk mungkin lelet. Lewat 30? Panggil saya, saya kunci selamat—selamat menang!",
-        "cn": "您好，老板！存款5-30到，審核或高峰或慢。超30？聯繫我，我保安全—祝您勝利哦！"
+        "en": "Funds usually land in 5-30 minutes after a deposit, boss—most times it’s quick, but a system check or peak rush might stretch it a bit. If it’s over 30 and still missing, hit me up—I’ll sort it out and get your cash safe! Thanks for hanging in—here’s to more fun and wins!",
+        "ms": "Duit biasanya masuk 5-30 minit lepas deposit, boss—kebanyakan masa cepat, tapi semak sistem atau waktu sibuk mungkin lambat sikit. Kalau lepas 30 masih tak ada, hubungi saya—saya uruskan pastikan duit boss selamat! Terima kasih sabar—semoga lebih seronok dan menang!",
+        "cn": "存款後，資金通常會在5到30分鐘內到賬，老板。雖然大多數情況下會很快處理，但有時由於系統審核或高峰期，可能會稍有延遲。若超過30分鐘仍未到賬，請聯繫我，我會幫您查看狀態，確保資金順利到位！感謝您的耐心，祝您遊戲愉快，多多勝利！"
       },
       "conditions": []
     },
@@ -30,8 +26,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -55,12 +51,8 @@
   {
     "id": "0801",
     "question": {
-      "text": "Sure can, boss! A small transfer’s a smart move to test if your account’s humming—start with the minimum deposit amount to make sure it’s all ticking, then go big when you’re ready!",
-      "variations": [
-        "Boleh lah, boss! Pindahan kecil langkah bijak nak test akaun boss berjalan elok—mula dengan jumlah deposit minimum untuk pastikan semua ok, lepas tu boleh masuk besar bila sedia!",
-        "Sure can, boss! A small transfer’s a smart move to test if your account’s humming—start with the minimum deposit amount to make sure it’s all ticking, then go big when you’re ready!",
-        "當然可以，老板！進行小額轉賬是驗證您賬戶是否正常運作的一個好方式。您可以選擇最低存款金額開始，確保一切正常後再進行更大額度的操作。"
-      ],
+      "text": "Can I make a small transfer to verify if my account is working correctly?",
+      "variations": [],
       "intent": "transaction_records",
       "languages": {
         "en": "Can I make a small transfer to verify if my account is working correctly?",
@@ -70,9 +62,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "You got it, boss! Small transfer’s savvy—minimum deposit, check it’s good, then scale up!",
-        "ms": "Ok je, boss! Pindahan kecil bijak—deposit minimum, semak ok, lepas tu naik besar!",
-        "cn": "當然行，老板！小額轉賬聰明—最低存款，確認順，再放大操作！"
+        "en": "Sure can, boss! A small transfer’s a smart move to test if your account’s humming—start with the minimum deposit amount to make sure it’s all ticking, then go big when you’re ready!",
+        "ms": "Boleh lah, boss! Pindahan kecil langkah bijak nak test akaun boss berjalan elok—mula dengan jumlah deposit minimum untuk pastikan semua ok, lepas tu boleh masuk besar bila sedia!",
+        "cn": "當然可以，老板！進行小額轉賬是驗證您賬戶是否正常運作的一個好方式。您可以選擇最低存款金額開始，確保一切正常後再進行更大額度的操作。"
       },
       "conditions": []
     },
@@ -83,8 +75,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -108,12 +100,8 @@
   {
     "id": "0802",
     "question": {
-      "text": "Switching up the language is a breeze, boss! Open the app, tap the profile icon bottom-right, hit the language option—pick your flavor, confirm, and enjoy your custom vibe!",
-      "variations": [
-        "Tukar bahasa senang je, boss! Buka app, tekan ikon profil kat bawah kanan, pilih pilihan bahasa—ambil rasa boss, sahkan, enjoy vibe custom boss!",
-        "Switching up the language is a breeze, boss! Open the app, tap the profile icon bottom-right, hit the language option—pick your flavor, confirm, and enjoy your custom vibe!",
-        "更改平台的語言設置其實很簡單，老板！只需打開應用程序，點擊右下角的人頭圖標，接著選擇語言選項，然後挑選您喜歡的語言，確認後就能享受個性化的體驗啦！"
-      ],
+      "text": "How can I change the language settings on the platform?",
+      "variations": [],
       "intent": "app_issues",
       "languages": {
         "en": "How can I change the language settings on the platform?",
@@ -123,9 +111,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Easy peasy, boss! App, profile bottom-right, language—set your pick, confirm, vibe’s yours!",
-        "ms": "Mudah je, boss! App, profil bawah kanan, bahasa—pilih yang boss nak, sahkan, vibe milik boss!",
-        "cn": "超簡單，老板！應用，右下人頭，語言—選您愛的，確認，個性體驗歸您！"
+        "en": "Switching up the language is a breeze, boss! Open the app, tap the profile icon bottom-right, hit the language option—pick your flavor, confirm, and enjoy your custom vibe!",
+        "ms": "Tukar bahasa senang je, boss! Buka app, tekan ikon profil kat bawah kanan, pilih pilihan bahasa—ambil rasa boss, sahkan, enjoy vibe custom boss!",
+        "cn": "更改平台的語言設置其實很簡單，老板！只需打開應用程序，點擊右下角的人頭圖標，接著選擇語言選項，然後挑選您喜歡的語言，確認後就能享受個性化的體驗啦！"
       },
       "conditions": []
     },
@@ -136,8 +124,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -161,12 +149,8 @@
   {
     "id": "0803",
     "question": {
-      "text": "About that 20 RM withdrawal not landing yet, boss—it could be a few things! Usually, the system processes it in 5-30 minutes, but peak times or a review might stretch it a bit. If it’s past 30 minutes, hit me with screenshots—I’ll zip in and make sure your funds get there safe!",
-      "variations": [
-        "Pasal pengeluaran 20 RM boss belum sampai lagi, mungkin ada beberapa sebab! Biasanya sistem proses dalam 5-30 minit, tapi masa puncak atau semakan boleh lambat sikit. Kalau lepas 30 minit, hantar screenshot—saya masuk laju pastikan duit boss sampai selamat!",
-        "About that 20 RM withdrawal not landing yet, boss—it could be a few things! Usually, the system processes it in 5-30 minutes, but peak times or a review might stretch it a bit. If it’s past 30 minutes, hit me with screenshots—I’ll zip in and make sure your funds get there safe!",
-        "關於您的20元提款未到賬，老板，可能有幾個原因。通常系統在處理提款請求時需要一些時間，大多數情況下資金會在5到30分鐘內到賬，但在高峰期或審核中可能會稍有延遲。若超過30分鐘仍未到賬，請提供截圖信息，我會幫您快速查明情況，確保資金順利到位！"
-      ],
+      "text": "Can you explain why my withdrawal of 20 hasn't been received yet?",
+      "variations": [],
       "intent": "withdrawal_conditions",
       "languages": {
         "en": "Can you explain why my withdrawal of 20 hasn't been received yet?",
@@ -176,9 +160,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Hey, boss! 20 RM withdrawal MIA? Takes 5-30 usually—peak or checks might lag. Past 30? Screenshots, I’ll zap it safe!",
-        "ms": "Hai, boss! Pengeluaran 20 RM tak ada? Biasa 5-30—puncak atau semak mungkin lelet. Lewat 30? Hantar skrin, saya hapuskan selamat!",
-        "cn": "您好，老板！20元提款沒到？通常5-30，高峰或審核或慢。超30？截圖給我，我快保安全！"
+        "en": "About that 20 RM withdrawal not landing yet, boss—it could be a few things! Usually, the system processes it in 5-30 minutes, but peak times or a review might stretch it a bit. If it’s past 30 minutes, hit me with screenshots—I’ll zip in and make sure your funds get there safe!",
+        "ms": "Pasal pengeluaran 20 RM boss belum sampai lagi, mungkin ada beberapa sebab! Biasanya sistem proses dalam 5-30 minit, tapi masa puncak atau semakan boleh lambat sikit. Kalau lepas 30 minit, hantar screenshot—saya masuk laju pastikan duit boss sampai selamat!",
+        "cn": "關於您的20元提款未到賬，老板，可能有幾個原因。通常系統在處理提款請求時需要一些時間，大多數情況下資金會在5到30分鐘內到賬，但在高峰期或審核中可能會稍有延遲。若超過30分鐘仍未到賬，請提供截圖信息，我會幫您快速查明情況，確保資金順利到位！"
       },
       "conditions": []
     },
@@ -189,8 +173,8 @@
       "subCategory": "withdrawal_conditions",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -214,12 +198,8 @@
   {
     "id": "0804",
     "question": {
-      "text": "No minimum age to join the party, boss! Got a smartphone and a connection? You’re all set to sign up and start your gaming journey—newbie or pro, welcome to the crew!",
-      "variations": [
-        "Tak ada umur minimum nak join parti ni, boss! Ada telefon pintar dan sambungan? Boss dah boleh daftar dan mulakan journey game—baru atau pro, selamat datang ke geng kami!",
-        "No minimum age to join the party, boss! Got a smartphone and a connection? You’re all set to sign up and start your gaming journey—newbie or pro, welcome to the crew!",
-        "關於創建賬戶的最低年齡要求，老板，其實我們沒有具體的限制哦！只要您擁有智能手機和網絡，就可以輕鬆註冊賬戶，開始您的遊戲旅程。無論您是新手還是老玩家，歡迎您加入我們的大家庭！"
-      ],
+      "text": "What's the minimum age requirement for creating an account?",
+      "variations": [],
       "intent": "registration",
       "languages": {
         "en": "What's the minimum age requirement for creating an account?",
@@ -229,9 +209,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "No age limit, boss! Smartphone and net—you’re in, game on, newbie or vet!",
-        "ms": "Tak ada had umur, boss! Telefon pintar dan net—boss masuk, game hidup, baru atau lama!",
-        "cn": "無年齡限制，老板！智能手機和網絡—您就進來，新老玩家都開玩吧！"
+        "en": "No minimum age to join the party, boss! Got a smartphone and a connection? You’re all set to sign up and start your gaming journey—newbie or pro, welcome to the crew!",
+        "ms": "Tak ada umur minimum nak join parti ni, boss! Ada telefon pintar dan sambungan? Boss dah boleh daftar dan mulakan journey game—baru atau pro, selamat datang ke geng kami!",
+        "cn": "關於創建賬戶的最低年齡要求，老板，其實我們沒有具體的限制哦！只要您擁有智能手機和網絡，就可以輕鬆註冊賬戶，開始您的遊戲旅程。無論您是新手還是老玩家，歡迎您加入我們的大家庭！"
       },
       "conditions": []
     },
@@ -242,8 +222,8 @@
       "subCategory": "registration",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -267,12 +247,8 @@
   {
     "id": "0805",
     "question": {
-      "text": "Switching language settings is a cinch, boss! Open the app, tap the profile icon bottom-right, find the language option—pick what suits you, hit confirm, and enjoy your custom groove!",
-      "variations": [
-        "Tukar tetapan bahasa senang je, boss! Buka app, tekan ikon profil kat bawah kanan, cari pilihan bahasa—pilih yang sesuai dengan boss, tekan sahkan, enjoy groove custom boss!",
-        "Switching language settings is a cinch, boss! Open the app, tap the profile icon bottom-right, find the language option—pick what suits you, hit confirm, and enjoy your custom groove!",
-        "更改平台的語言設置其實很簡單，老板！只需打開應用程序，點擊右下角的人頭圖標，接著找到語言選項，然後選擇您想要的語言，確認即可。這樣您就能享受更個性化的體驗啦！"
-      ],
+      "text": "How can I change the language settings on the platform?",
+      "variations": [],
       "intent": "app_issues",
       "languages": {
         "en": "How can I change the language settings on the platform?",
@@ -282,9 +258,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Piece of cake, boss! App, profile bottom-right, language—set your vibe, confirm, all you!",
-        "ms": "Senang je, boss! App, profil bawah kanan, bahasa—set vibe boss, sahkan, semua boss punya!",
-        "cn": "簡單得很，老板！應用，右下人頭，語言—定您風格，確認，全是您的！"
+        "en": "Switching language settings is a cinch, boss! Open the app, tap the profile icon bottom-right, find the language option—pick what suits you, hit confirm, and enjoy your custom groove!",
+        "ms": "Tukar tetapan bahasa senang je, boss! Buka app, tekan ikon profil kat bawah kanan, cari pilihan bahasa—pilih yang sesuai dengan boss, tekan sahkan, enjoy groove custom boss!",
+        "cn": "更改平台的語言設置其實很簡單，老板！只需打開應用程序，點擊右下角的人頭圖標，接著找到語言選項，然後選擇您想要的語言，確認即可。這樣您就能享受更個性化的體驗啦！"
       },
       "conditions": []
     },
@@ -295,8 +271,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -320,12 +296,8 @@
   {
     "id": "0806",
     "question": {
-      "text": "To track a withdrawal that’s still waiting approval, boss, pop open the app, hit the wallet icon, check ‘Transaction Records’—you’ll see if it’s ‘pending’ or ‘approved’ right there. No sweat if it’s still pending—just chill, it usually clears in 30 minutes tops!",
-      "variations": [
-        "Nak ikut permintaan pengeluaran yang belum lulus, boss, buka app, tekan ikon dompet, tengok ‘Rekod Transaksi’—boss akan nampak kalau ‘tertunda’ atau ‘diluluskan’ kat situ. Tak risau kalau masih tertunda—relax je, biasanya selesai dalam 30 minit je!",
-        "To track a withdrawal that’s still waiting approval, boss, pop open the app, hit the wallet icon, check ‘Transaction Records’—you’ll see if it’s ‘pending’ or ‘approved’ right there. No sweat if it’s still pending—just chill, it usually clears in 30 minutes tops!",
-        "要跟進尚未批准的提款請求，老板，您可以打開應用程序，點擊錢包圖標，然後查看您的‘交易記錄’。這裡會顯示您的提款狀態，比如‘待處理’或‘已批准’。若仍顯示待處理，別擔心，請耐心等待，通常會在30分鐘內完成處理。"
-      ],
+      "text": "How can I follow up on a withdrawal request that hasn't been approved?",
+      "variations": [],
       "intent": "withdrawal_conditions",
       "languages": {
         "en": "How can I follow up on a withdrawal request that hasn't been approved?",
@@ -335,9 +307,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Easy, boss! App, wallet, ‘Transaction Records’—pending or approved, chill, 30 minutes max!",
-        "ms": "Senang je, boss! App, dompet, ‘Rekod Transaksi’—tertunda atau lulus, relax, 30 minit paling lama!",
-        "cn": "簡單，老板！應用，錢包，‘交易記錄’—待批或已批，放鬆，最多30分鐘！"
+        "en": "To track a withdrawal that’s still waiting approval, boss, pop open the app, hit the wallet icon, check ‘Transaction Records’—you’ll see if it’s ‘pending’ or ‘approved’ right there. No sweat if it’s still pending—just chill, it usually clears in 30 minutes tops!",
+        "ms": "Nak ikut permintaan pengeluaran yang belum lulus, boss, buka app, tekan ikon dompet, tengok ‘Rekod Transaksi’—boss akan nampak kalau ‘tertunda’ atau ‘diluluskan’ kat situ. Tak risau kalau masih tertunda—relax je, biasanya selesai dalam 30 minit je!",
+        "cn": "要跟進尚未批准的提款請求，老板，您可以打開應用程序，點擊錢包圖標，然後查看您的‘交易記錄’。這裡會顯示您的提款狀態，比如‘待處理’或‘已批准’。若仍顯示待處理，別擔心，請耐心等待，通常會在30分鐘內完成處理。"
       },
       "conditions": []
     },
@@ -348,8 +320,8 @@
       "subCategory": "withdrawal_conditions",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -373,12 +345,8 @@
   {
     "id": "0807",
     "question": {
-      "text": "Changing the language settings is a snap, boss! Open the app, tap the profile icon bottom-right, spot the language option—pick your fave, confirm, and you’re set for a fresh vibe!",
-      "variations": [
-        "Tukar tetapan bahasa senang je, boss! Buka app, tekan ikon profil kat bawah kanan, cari pilihan bahasa—pilih yang boss suka, sahkan, boss dah siap untuk vibe baru!",
-        "Changing the language settings is a snap, boss! Open the app, tap the profile icon bottom-right, spot the language option—pick your fave, confirm, and you’re set for a fresh vibe!",
-        "更改平台的語言設置其實很簡單哦，老板！只需打開應用程序，點擊右下角的人頭圖標，接著找到語言選項。在這裡，您可以選擇自己喜歡的語言，確認後即可享受全新的體驗！"
-      ],
+      "text": "How can I change the language settings on the platform?",
+      "variations": [],
       "intent": "app_issues",
       "languages": {
         "en": "How can I change the language settings on the platform?",
@@ -388,9 +356,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "No sweat, boss! App, profile bottom-right, language—grab your pick, confirm, new groove!",
-        "ms": "Tak susah, boss! App, profil bawah kanan, bahasa—ambil yang boss suka, sahkan, groove baru!",
-        "cn": "輕鬆，老板！應用，右下人頭，語言—選您愛的，確認，新體驗來啦！"
+        "en": "Changing the language settings is a snap, boss! Open the app, tap the profile icon bottom-right, spot the language option—pick your fave, confirm, and you’re set for a fresh vibe!",
+        "ms": "Tukar tetapan bahasa senang je, boss! Buka app, tekan ikon profil kat bawah kanan, cari pilihan bahasa—pilih yang boss suka, sahkan, boss dah siap untuk vibe baru!",
+        "cn": "更改平台的語言設置其實很簡單哦，老板！只需打開應用程序，點擊右下角的人頭圖標，接著找到語言選項。在這裡，您可以選擇自己喜歡的語言，確認後即可享受全新的體驗！"
       },
       "conditions": []
     },
@@ -401,8 +369,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -426,12 +394,8 @@
   {
     "id": "0808",
     "question": {
-      "text": "Can’t say for sure if Maybank’s got maintenance glitches, boss—usually, if transfers are hiccuping, it’s their system getting a tune-up. Peek at Maybank’s official site for the latest scoop and alerts!",
-      "variations": [
-        "Tak boleh pastikan kalau Maybank ada masalah penyelenggaraan, boss—biasanya kalau pindahan terganggu, sistem dia tengah dapat tune-up. Tengok laman rasmi Maybank untuk scoop dan alert terkini!",
-        "Can’t say for sure if Maybank’s got maintenance glitches, boss—usually, if transfers are hiccuping, it’s their system getting a tune-up. Peek at Maybank’s official site for the latest scoop and alerts!",
-        "關於Maybank交易是否存在維護問題，老板，我們不確定，但若您在使用Maybank轉賬時遇到問題，很可能是銀行正在進行系統維護。建議您查看Maybank的官方網站，以獲取最新的維護信息和通知。"
-      ],
+      "text": "Is there a maintenance issue with Maybank transactions?",
+      "variations": [],
       "intent": "bank_issues",
       "languages": {
         "en": "Is there a maintenance issue with Maybank transactions?",
@@ -441,9 +405,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "No clue, boss! Maybank transfers snagging? Likely a tune-up—check their site for the dirt!",
-        "ms": "Tak tahu, boss! Pindahan Maybank tersangkut? Mungkin tengah tune-up—cek laman dia untuk info!",
-        "cn": "不清楚，老板！Maybank轉賬卡住？多半在維護—去官網查最新吧！"
+        "en": "Can’t say for sure if Maybank’s got maintenance glitches, boss—usually, if transfers are hiccuping, it’s their system getting a tune-up. Peek at Maybank’s official site for the latest scoop and alerts!",
+        "ms": "Tak boleh pastikan kalau Maybank ada masalah penyelenggaraan, boss—biasanya kalau pindahan terganggu, sistem dia tengah dapat tune-up. Tengok laman rasmi Maybank untuk scoop dan alert terkini!",
+        "cn": "關於Maybank交易是否存在維護問題，老板，我們不確定，但若您在使用Maybank轉賬時遇到問題，很可能是銀行正在進行系統維護。建議您查看Maybank的官方網站，以獲取最新的維護信息和通知。"
       },
       "conditions": []
     },
@@ -454,8 +418,8 @@
       "subCategory": "bank_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -479,12 +443,8 @@
   {
     "id": "0809",
     "question": {
-      "text": "Yeah, boss, there might be a bit of a hold-up today—peak hours with heaps of folks transacting can slow it down. No worries, though—we’ll get payments through in 5-30 minutes tops!",
-      "variations": [
-        "Ya, boss, mungkin ada sikit lambat hari ni—jam puncak dengan ramai orang buat transaksi boleh perlahan. Tak risau lah, kami selesaikan pembayaran dalam 5-30 minit je!",
-        "Yeah, boss, there might be a bit of a hold-up today—peak hours with heaps of folks transacting can slow it down. No worries, though—we’ll get payments through in 5-30 minutes tops!",
-        "今天的老板，的確可能會有些延遲，尤其是在高峰時段，很多顧客同時進行交易。不過請放心，我們會盡快處理所有請求，通常付款會在5到30分鐘內完成。"
-      ],
+      "text": "Is there a delay in processing payments today?",
+      "variations": [],
       "intent": "payment_issues",
       "languages": {
         "en": "Is there a delay in processing payments today?",
@@ -494,9 +454,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Yup, boss! Payments might lag today—peak crowd. Chill, 5-30 minutes max!",
-        "ms": "Ya, boss! Pembayaran mungkin lelet hari ni—ramai puncak. Relax, 5-30 minit je!",
-        "cn": "是的，老板！今天付款或慢，高峰人多。放鬆，最多5-30分鐘！"
+        "en": "Yeah, boss, there might be a bit of a hold-up today—peak hours with heaps of folks transacting can slow it down. No worries, though—we’ll get payments through in 5-30 minutes tops!",
+        "ms": "Ya, boss, mungkin ada sikit lambat hari ni—jam puncak dengan ramai orang buat transaksi boleh perlahan. Tak risau lah, kami selesaikan pembayaran dalam 5-30 minit je!",
+        "cn": "今天的老板，的確可能會有些延遲，尤其是在高峰時段，很多顧客同時進行交易。不過請放心，我們會盡快處理所有請求，通常付款會在5到30分鐘內完成。"
       },
       "conditions": []
     },
@@ -507,8 +467,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -532,12 +492,8 @@
   {
     "id": "0810",
     "question": {
-      "text": "That 20 RM withdrawal not hitting yet, boss, might be taking a bit longer—system usually wraps it in 5-30 minutes, but peak times can stretch it. If it’s over 30 minutes, send me screenshots—I’ll dive in quick to check it and get your funds safe! Thanks for hanging in—more fun awaits!",
-      "variations": [
-        "Pengeluaran 20 RM boss belum sampai lagi mungkin lambat sikit—sistem biasanya selesai dalam 5-30 minit, tapi masa puncak boleh panjang. Kalau lepas 30 minit, hantar screenshot—saya masuk cepat semak dan pastikan duit boss selamat! Terima kasih sabar—lagi seronok menanti!",
-        "That 20 RM withdrawal not hitting yet, boss, might be taking a bit longer—system usually wraps it in 5-30 minutes, but peak times can stretch it. If it’s over 30 minutes, send me screenshots—I’ll dive in quick to check it and get your funds safe! Thanks for hanging in—more fun awaits!",
-        "關於您20元的提款尚未到賬，老板，可能是處理時間較長所致。我們通常會在5到30分鐘內完成提款請求，但在高峰期可能會稍有延遲。若超過30分鐘仍未到賬，請提供截圖信息，我會立即幫您核實，確保資金順利到位！感謝您的耐心，期待您繼續享受更多樂趣！"
-      ],
+      "text": "Can you explain why my withdrawal of 20 hasn't been received yet?",
+      "variations": [],
       "intent": "withdrawal_conditions",
       "languages": {
         "en": "Can you explain why my withdrawal of 20 hasn't been received yet?",
@@ -547,9 +503,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Yo, boss! 20 RM withdrawal late? 5-30 norm, peak might drag. Past 30? Pics, I’ll zip it safe—fun’s coming!",
-        "ms": "Oi, boss! Pengeluaran 20 RM lambat? 5-30 biasa, puncak mungkin lelet. Lewat 30? Gambar, saya pacukan selamat—seronok depan!",
-        "cn": "嘿，老板！20元提款遲了？通常5-30，高峰或慢。超30？截圖給我，我快保安全—樂趣在等！"
+        "en": "That 20 RM withdrawal not hitting yet, boss, might be taking a bit longer—system usually wraps it in 5-30 minutes, but peak times can stretch it. If it’s over 30 minutes, send me screenshots—I’ll dive in quick to check it and get your funds safe! Thanks for hanging in—more fun awaits!",
+        "ms": "Pengeluaran 20 RM boss belum sampai lagi mungkin lambat sikit—sistem biasanya selesai dalam 5-30 minit, tapi masa puncak boleh panjang. Kalau lepas 30 minit, hantar screenshot—saya masuk cepat semak dan pastikan duit boss selamat! Terima kasih sabar—lagi seronok menanti!",
+        "cn": "關於您20元的提款尚未到賬，老板，可能是處理時間較長所致。我們通常會在5到30分鐘內完成提款請求，但在高峰期可能會稍有延遲。若超過30分鐘仍未到賬，請提供截圖信息，我會立即幫您核實，確保資金順利到位！感謝您的耐心，期待您繼續享受更多樂趣！"
       },
       "conditions": []
     },
@@ -560,8 +516,8 @@
       "subCategory": "withdrawal_conditions",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -585,12 +541,8 @@
   {
     "id": "0811",
     "question": {
-      "text": "To update your full name, boss, it starts with getting it right at signup—if it’s off, just drop me your real full name here: Name, Account Number, Bank Name. Make sure it’s your legit name to dodge future hiccups—we’ll sort it quick!",
-      "variations": [
-        "Nak kemas kini nama penuh, boss, mula dengan betul masa daftar—kalau salah, hantar je nama penuh betul boss kat sini: Nama, Nombor Akaun, Nama Bank. Pastikan nama sah boss untuk elak masalah nanti—kami urus cepat!",
-        "To update your full name, boss, it starts with getting it right at signup—if it’s off, just drop me your real full name here: Name, Account Number, Bank Name. Make sure it’s your legit name to dodge future hiccups—we’ll sort it quick!",
-        "要更新您賬戶上的全名，老板，您需要在首次註冊時輸入正確的名字。若發現名字輸入錯誤，可以直接在這裡告訴我您的全名，包括：姓名、賬戶號碼、銀行名稱。請確保提供的是您本人真實的全名，以免在將來的交易中遇到問題。我們會幫您盡快處理的！"
-      ],
+      "text": "How can I update my full name on my account?",
+      "variations": [],
       "intent": "account_management",
       "languages": {
         "en": "How can I update my full name on my account?",
@@ -600,9 +552,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Name fix, boss? Set it right at signup—messed up? Drop here: Name, Acct No., Bank, real stuff—I’ll zip it!",
-        "ms": "Betulkan nama, boss? Set betul masa daftar—silap? Hantar sini: Nama, No. Akaun, Bank, benda betul—saya lajukan!",
-        "cn": "改全名，老板？註冊時弄對—錯了？這兒給我：姓名、賬號、銀行，真名—我快搞定！"
+        "en": "To update your full name, boss, it starts with getting it right at signup—if it’s off, just drop me your real full name here: Name, Account Number, Bank Name. Make sure it’s your legit name to dodge future hiccups—we’ll sort it quick!",
+        "ms": "Nak kemas kini nama penuh, boss, mula dengan betul masa daftar—kalau salah, hantar je nama penuh betul boss kat sini: Nama, Nombor Akaun, Nama Bank. Pastikan nama sah boss untuk elak masalah nanti—kami urus cepat!",
+        "cn": "要更新您賬戶上的全名，老板，您需要在首次註冊時輸入正確的名字。若發現名字輸入錯誤，可以直接在這裡告訴我您的全名，包括：姓名、賬戶號碼、銀行名稱。請確保提供的是您本人真實的全名，以免在將來的交易中遇到問題。我們會幫您盡快處理的！"
       },
       "conditions": []
     },
@@ -613,8 +565,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -638,12 +590,8 @@
   {
     "id": "0812",
     "question": {
-      "text": "Your account balance usually refreshes right after a game session ends, boss—so you can see your winnings or bets instantly! If it’s not updating on time, might be a tiny system hiccup—give it a sec!",
-      "variations": [
-        "Baki akaun boss biasanya segarkan sebaik sesi game habis—jadi boss boleh tengok kemenangan atau pertaruhan terus! Kalau tak kemas kini tepat masa, mungkin sistem tersangkut sikit—tunggu jap!",
-        "Your account balance usually refreshes right after a game session ends, boss—so you can see your winnings or bets instantly! If it’s not updating on time, might be a tiny system hiccup—give it a sec!",
-        "遊戲結束後，您的賬戶餘額通常會立即更新，老板，這樣您可以第一時間看到您的贏利或投注結果。若未及時更新，可能是系統稍有延遲。"
-      ],
+      "text": "How often are account balances updated after a game session?",
+      "variations": [],
       "intent": "balance_updates",
       "languages": {
         "en": "How often are account balances updated after a game session?",
@@ -653,9 +601,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Post-game, boss! Balance flips instantly—see wins fast. Lag? System’s just catching its breath!",
-        "ms": "Lepas game, boss! Baki tukar sekejap—tengok menang laju. Lambat? Sistem tengah ambik nafas!",
-        "cn": "遊戲完，老板！餘額即刻刷—贏利速顯。慢點？系統在喘口氣！"
+        "en": "Your account balance usually refreshes right after a game session ends, boss—so you can see your winnings or bets instantly! If it’s not updating on time, might be a tiny system hiccup—give it a sec!",
+        "ms": "Baki akaun boss biasanya segarkan sebaik sesi game habis—jadi boss boleh tengok kemenangan atau pertaruhan terus! Kalau tak kemas kini tepat masa, mungkin sistem tersangkut sikit—tunggu jap!",
+        "cn": "遊戲結束後，您的賬戶餘額通常會立即更新，老板，這樣您可以第一時間看到您的贏利或投注結果。若未及時更新，可能是系統稍有延遲。"
       },
       "conditions": []
     },
@@ -666,8 +614,8 @@
       "subCategory": "balance_updates",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -691,12 +639,8 @@
   {
     "id": "0813",
     "question": {
-      "text": "To keep tabs on an unapproved withdrawal, boss, just fire up the app, tap the wallet icon, hit ‘Transaction Records’—you’ll spot its status, ‘pending’ or ‘approved.’ If it’s still pending, no panic—chill a bit, it usually clears in 30 minutes. Over that? Ping me, I’ll chase it down and get your funds safe!",
-      "variations": [
-        "Nak ikut permintaan pengeluaran belum lulus, boss, buka je app, tekan ikon dompet, masuk ‘Rekod Transaksi’—boss akan nampak status, ‘tertunda’ atau ‘diluluskan.’ Kalau masih tertunda, tak payah panik—relax sikit, biasanya selesai dalam 30 minit. Lewat tu? Hubungi saya, saya kejar pastikan duit boss selamat!",
-        "To keep tabs on an unapproved withdrawal, boss, just fire up the app, tap the wallet icon, hit ‘Transaction Records’—you’ll spot its status, ‘pending’ or ‘approved.’ If it’s still pending, no panic—chill a bit, it usually clears in 30 minutes. Over that? Ping me, I’ll chase it down and get your funds safe!",
-        "要跟進尚未批准的提款請求，老板，您只需打開應用程序，點擊錢包圖標，然後查看您的‘交易記錄’。在那裡，您可以看到提款狀態，比如‘待處理’還是‘已批准’。若仍顯示待處理，別擔心，請耐心等待，通常會在30分鐘內完成處理。若超過這個時間還沒變化，請聯繫我，我會幫您查詢，確保資金順利到位！"
-      ],
+      "text": "How can I follow up on a withdrawal request that hasn't been approved?",
+      "variations": [],
       "intent": "withdrawal_conditions",
       "languages": {
         "en": "How can I follow up on a withdrawal request that hasn't been approved?",
@@ -706,9 +650,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "No fuss, boss! App, wallet, ‘Transaction Records’—pending? Chill, 30 tops. Past that? Hit me, I’ll zap it safe!",
-        "ms": "Tak ribet, boss! App, dompet, ‘Rekod Transaksi’—tertunda? Relax, 30 je. Lewat? Panggil saya, saya hapuskan selamat!",
-        "cn": "沒麻煩，老板！應用，錢包，‘交易記錄’—待批？放鬆，最多30。超時？喊我，我快保安全！"
+        "en": "To keep tabs on an unapproved withdrawal, boss, just fire up the app, tap the wallet icon, hit ‘Transaction Records’—you’ll spot its status, ‘pending’ or ‘approved.’ If it’s still pending, no panic—chill a bit, it usually clears in 30 minutes. Over that? Ping me, I’ll chase it down and get your funds safe!",
+        "ms": "Nak ikut permintaan pengeluaran belum lulus, boss, buka je app, tekan ikon dompet, masuk ‘Rekod Transaksi’—boss akan nampak status, ‘tertunda’ atau ‘diluluskan.’ Kalau masih tertunda, tak payah panik—relax sikit, biasanya selesai dalam 30 minit. Lewat tu? Hubungi saya, saya kejar pastikan duit boss selamat!",
+        "cn": "要跟進尚未批准的提款請求，老板，您只需打開應用程序，點擊錢包圖標，然後查看您的‘交易記錄’。在那裡，您可以看到提款狀態，比如‘待處理’還是‘已批准’。若仍顯示待處理，別擔心，請耐心等待，通常會在30分鐘內完成處理。若超過這個時間還沒變化，請聯繫我，我會幫您查詢，確保資金順利到位！"
       },
       "conditions": []
     },
@@ -719,8 +663,8 @@
       "subCategory": "withdrawal_conditions",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -744,12 +688,8 @@
   {
     "id": "0814",
     "question": {
-      "text": "You bet, boss! Mega888’s got an iOS version ready—just head to ‘More Games’ in the app, scroll down, spot the Mega888 icon, tap download, and you’re rolling!",
-      "variations": [
-        "Mesti ada, boss! Mega888 ada versi iOS siap—pergi je ke ‘Lebih Banyak Permainan’ kat app, skrol bawah, nampak ikon Mega888, tekan muat turun, boss dah boleh main!",
-        "You bet, boss! Mega888’s got an iOS version ready—just head to ‘More Games’ in the app, scroll down, spot the Mega888 icon, tap download, and you’re rolling!",
-        "當然有，老板！Mega888確實提供iOS版本的應用程序。您只需在應用程序的‘更多遊戲’選項中找到Mega888的圖標，向下滾動，您會看到下載的選項，點擊一下就可以開始下載了。"
-      ],
+      "text": "Is there an iOS version of the Mega888 app available?",
+      "variations": [],
       "intent": "app_issues",
       "languages": {
         "en": "Is there an iOS version of the Mega888 app available?",
@@ -759,9 +699,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Sure thing, boss! Mega888 iOS is live—‘More Games,’ scroll, tap download, game on!",
-        "ms": "Ok lah, boss! Mega888 iOS dah ada—‘Lebih Banyak Permainan,’ skrol, tekan muat turun, main terus!",
-        "cn": "當然行，老板！Mega888 iOS版備好，‘更多遊戲’，滑下去，點下載，開玩！"
+        "en": "You bet, boss! Mega888’s got an iOS version ready—just head to ‘More Games’ in the app, scroll down, spot the Mega888 icon, tap download, and you’re rolling!",
+        "ms": "Mesti ada, boss! Mega888 ada versi iOS siap—pergi je ke ‘Lebih Banyak Permainan’ kat app, skrol bawah, nampak ikon Mega888, tekan muat turun, boss dah boleh main!",
+        "cn": "當然有，老板！Mega888確實提供iOS版本的應用程序。您只需在應用程序的‘更多遊戲’選項中找到Mega888的圖標，向下滾動，您會看到下載的選項，點擊一下就可以開始下載了。"
       },
       "conditions": []
     },
@@ -772,8 +712,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -797,12 +737,8 @@
   {
     "id": "0815",
     "question": {
-      "text": "Latest times to grab lottery numbers for today’s draw depend on the type, boss—Magnum, Kuda, Toto at 7:00 PM; Singapore at 6:00 PM; CBD at 6:35 PM; GDLOTTO at 7:00 PM; 9Lotto at 7:25 PM. Lock in before the cutoff so you don’t miss the action!",
-      "variations": [
-        "Masa terakhir nak beli nombor loteri untuk cabutan hari ni ikut jenis, boss—Magnum, Kuda, Toto pukul 7:00 malam; Singapore pukul 6:00 malam; CBD pukul 6:35 malam; GDLOTTO pukul 7:00 malam; 9Lotto pukul 7:25 malam. Kunci sebelum tamat supaya tak terlepas aksi!",
-        "Latest times to grab lottery numbers for today’s draw depend on the type, boss—Magnum, Kuda, Toto at 7:00 PM; Singapore at 6:00 PM; CBD at 6:35 PM; GDLOTTO at 7:00 PM; 9Lotto at 7:25 PM. Lock in before the cutoff so you don’t miss the action!",
-        "購買彩票號碼的截止時間取決於不同的彩票類型，老板。今天是：Magnum、Kuda、Toto晚上7:00；Singapore晚上6:00；CBD晚上6:35；GDLOTTO晚上7:00；9Lotto晚上7:25。請在截止時間前購買，以免錯過機會！"
-      ],
+      "text": "What's the latest time I can purchase lottery numbers for today's draw?",
+      "variations": [],
       "intent": "betting_rules",
       "languages": {
         "en": "What's the latest time I can purchase lottery numbers for today's draw?",
@@ -812,9 +748,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Depends, boss! Magnum, Kuda, Toto 7 PM; Singapore 6 PM; CBD 6:35; GDLOTTO 7; 9Lotto 7:25—nab ‘em before the bell!",
-        "ms": "Tengok lah, boss! Magnum, Kuda, Toto 7 malam; Singapore 6 malam; CBD 6:35; GDLOTTO 7; 9Lotto 7:25—cepat sebelum loceng!",
-        "cn": "看類型，老板！Magnum、Kuda、Toto 7點；Singapore 6點；CBD 6:35；GDLOTTO 7點；9Lotto 7:25—趕在截止前拿！"
+        "en": "Latest times to grab lottery numbers for today’s draw depend on the type, boss—Magnum, Kuda, Toto at 7:00 PM; Singapore at 6:00 PM; CBD at 6:35 PM; GDLOTTO at 7:00 PM; 9Lotto at 7:25 PM. Lock in before the cutoff so you don’t miss the action!",
+        "ms": "Masa terakhir nak beli nombor loteri untuk cabutan hari ni ikut jenis, boss—Magnum, Kuda, Toto pukul 7:00 malam; Singapore pukul 6:00 malam; CBD pukul 6:35 malam; GDLOTTO pukul 7:00 malam; 9Lotto pukul 7:25 malam. Kunci sebelum tamat supaya tak terlepas aksi!",
+        "cn": "購買彩票號碼的截止時間取決於不同的彩票類型，老板。今天是：Magnum、Kuda、Toto晚上7:00；Singapore晚上6:00；CBD晚上6:35；GDLOTTO晚上7:00；9Lotto晚上7:25。請在截止時間前購買，以免錯過機會！"
       },
       "conditions": []
     },
@@ -825,8 +761,8 @@
       "subCategory": "betting_rules",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -850,12 +786,8 @@
   {
     "id": "0816",
     "question": {
-      "text": "Not yet on custom notifications for fave games or sports events, boss—but no stress! Keep app notifications on, and we’ll blast you the latest deals and updates so you won’t miss any hot moments!",
-      "variations": [
-        "Belum ada notifikasi khusus untuk game atau acara sukan kegemaran, boss—tapi tak stress! Kekalkan notifikasi app hidup, kami hantar tawaran dan kemas kini terkini supaya boss tak terlepas moment panas!",
-        "Not yet on custom notifications for fave games or sports events, boss—but no stress! Keep app notifications on, and we’ll blast you the latest deals and updates so you won’t miss any hot moments!",
-        "目前，我們平台尚未提供為特定遊戲或體育賽事設置通知的功能，老板。不過，您可以打開應用程序，確保開啟了通知功能，我們會定期推送最新的優惠活動和重要更新，確保您不會錯過任何精彩內容。"
-      ],
+      "text": "Can I set up notifications for my favorite games or sports events?",
+      "variations": [],
       "intent": "app_issues",
       "languages": {
         "en": "Can I set up notifications for my favorite games or sports events?",
@@ -865,9 +797,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Not yet, boss! No custom alerts, but app notifications on—we’ll ping you the hot stuff!",
-        "ms": "Belum ada, boss! Tak ada alert khusus, tapi notifikasi app hidup—kami hantar benda panas!",
-        "cn": "還不行，老板！沒特定通知，但開應用通知—我們推送熱門內容給您！"
+        "en": "Not yet on custom notifications for fave games or sports events, boss—but no stress! Keep app notifications on, and we’ll blast you the latest deals and updates so you won’t miss any hot moments!",
+        "ms": "Belum ada notifikasi khusus untuk game atau acara sukan kegemaran, boss—tapi tak stress! Kekalkan notifikasi app hidup, kami hantar tawaran dan kemas kini terkini supaya boss tak terlepas moment panas!",
+        "cn": "目前，我們平台尚未提供為特定遊戲或體育賽事設置通知的功能，老板。不過，您可以打開應用程序，確保開啟了通知功能，我們會定期推送最新的優惠活動和重要更新，確保您不會錯過任何精彩內容。"
       },
       "conditions": []
     },
@@ -878,8 +810,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -903,12 +835,8 @@
   {
     "id": "0817",
     "question": {
-      "text": "If the banking section’s locked on your mobile, boss, it might be some move tripped our safety rules, putting a hold on it. Check your recent transactions for anything odd—if you reckon it’s a mix-up, send me screenshots, and I’ll gladly help review and get you back in quick!",
-      "variations": [
-        "Kalau bahagian perbankan kunci kat telefon boss, mungkin ada gerakan langgar peraturan keselamatan kami, jadi kena tahan. Semak transaksi terkini kalau ada benda pelik—kalau boss rasa silap, hantar screenshot, saya tolong semak dan pulihkan cepat!",
-        "If the banking section’s locked on your mobile, boss, it might be some move tripped our safety rules, putting a hold on it. Check your recent transactions for anything odd—if you reckon it’s a mix-up, send me screenshots, and I’ll gladly help review and get you back in quick!",
-        "若您無法在手機設備上訪問銀行部分，老板，這可能是因為一些操作違反了我們的安全政策，導致該功能被限制。建議您仔細檢查最近的交易記錄，確保沒有異常活動。若您認為這是個誤會，請提供相關的信息截圖，我會樂意協助您進行審核，以便盡快恢復您的訪問權限！"
-      ],
+      "text": "Why can't I access the banking section on my mobile device?",
+      "variations": [],
       "intent": "bank_issues",
       "languages": {
         "en": "Why can't I access the banking section on my mobile device?",
@@ -918,9 +846,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Banking blocked, boss? Might’ve hit a safety rule—check moves. Oops? Pics, I’ll fix it fast!",
-        "ms": "Perbankan kunci, boss? Mungkin terlanggar peraturan selamat—semak gerakan. Salah? Gambar, saya betulkan cepat!",
-        "cn": "銀行部分進不去，老板？或觸安全規則—查操作。誤會？截圖給我，我速修復！"
+        "en": "If the banking section’s locked on your mobile, boss, it might be some move tripped our safety rules, putting a hold on it. Check your recent transactions for anything odd—if you reckon it’s a mix-up, send me screenshots, and I’ll gladly help review and get you back in quick!",
+        "ms": "Kalau bahagian perbankan kunci kat telefon boss, mungkin ada gerakan langgar peraturan keselamatan kami, jadi kena tahan. Semak transaksi terkini kalau ada benda pelik—kalau boss rasa silap, hantar screenshot, saya tolong semak dan pulihkan cepat!",
+        "cn": "若您無法在手機設備上訪問銀行部分，老板，這可能是因為一些操作違反了我們的安全政策，導致該功能被限制。建議您仔細檢查最近的交易記錄，確保沒有異常活動。若您認為這是個誤會，請提供相關的信息截圖，我會樂意協助您進行審核，以便盡快恢復您的訪問權限！"
       },
       "conditions": []
     },
@@ -931,8 +859,8 @@
       "subCategory": "bank_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -956,12 +884,8 @@
   {
     "id": "0818",
     "question": {
-      "text": "Snagging your welcome bonus as a new player is a breeze, boss! Once you sign up, the system auto-drops 20 VIP points your way—head to the VIP perks zone to cash ‘em in for cool gifts and game vibes. Plus, keep an eye out for more hot deals on the platform!",
-      "variations": [
-        "Ambil bonus selamat datang untuk pemain baru senang je, boss! Lepas daftar, sistem auto bagi 20 mata VIP—pergi zon faedah VIP untuk tukar jadi hadiah cool dan vibe game. Lagi, tengok tawaran panas kat platform!",
-        "Snagging your welcome bonus as a new player is a breeze, boss! Once you sign up, the system auto-drops 20 VIP points your way—head to the VIP perks zone to cash ‘em in for cool gifts and game vibes. Plus, keep an eye out for more hot deals on the platform!",
-        "領取新玩家的歡迎獎金其實很簡單，老板！您在註冊後，系統會自動為您提供20個VIP積分，您可以在VIP福利區兌換各種精彩禮物和遊戲體驗。此外，別忘了定期關注我們平台上的其他優惠活動，時刻都有新的驚喜等著您！"
-      ],
+      "text": "How do I claim a welcome bonus for new players?",
+      "variations": [],
       "intent": "redemption_rules",
       "languages": {
         "en": "How do I claim a welcome bonus for new players?",
@@ -971,9 +895,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Easy, boss! Signup, nab 20 VIP points auto—hit VIP zone, swap for cool stuff, watch for more deals!",
-        "ms": "Senang je, boss! Daftar, dapat 20 mata VIP auto—pergi zon VIP, tukar barang cool, tengok tawaran lagi!",
-        "cn": "簡單，老板！註冊，自動拿20 VIP積分—進VIP區，換精彩東西，關注更多優惠！"
+        "en": "Snagging your welcome bonus as a new player is a breeze, boss! Once you sign up, the system auto-drops 20 VIP points your way—head to the VIP perks zone to cash ‘em in for cool gifts and game vibes. Plus, keep an eye out for more hot deals on the platform!",
+        "ms": "Ambil bonus selamat datang untuk pemain baru senang je, boss! Lepas daftar, sistem auto bagi 20 mata VIP—pergi zon faedah VIP untuk tukar jadi hadiah cool dan vibe game. Lagi, tengok tawaran panas kat platform!",
+        "cn": "領取新玩家的歡迎獎金其實很簡單，老板！您在註冊後，系統會自動為您提供20個VIP積分，您可以在VIP福利區兌換各種精彩禮物和遊戲體驗。此外，別忘了定期關注我們平台上的其他優惠活動，時刻都有新的驚喜等著您！"
       },
       "conditions": []
     },
@@ -984,8 +908,8 @@
       "subCategory": "redemption_rules",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1009,12 +933,8 @@
   {
     "id": "0819",
     "question": {
-      "text": "You bet you can swap your phone number anytime, boss! Open the app, tap the profile icon bottom-right, hit account settings—there’s your spot to update the number. Keep it your own to dodge any transaction snags down the road!",
-      "variations": [
-        "Boleh je tukar nombor telefon bila-bila, boss! Buka app, tekan ikon profil kat bawah kanan, masuk tetapan akaun—kat situ boss boleh kemas kini nombor. Pastikan nombor boss sendiri untuk elak masalah transaksi nanti!",
-        "You bet you can swap your phone number anytime, boss! Open the app, tap the profile icon bottom-right, hit account settings—there’s your spot to update the number. Keep it your own to dodge any transaction snags down the road!",
-        "當然可以，老板！您可以隨時更改與您賬戶相關的手機號碼。只需打開應用程序，點擊右下角的人頭圖標，然後選擇賬戶設置，在這裡您可以找到更換手機號碼的選項。請確保輸入的新號碼是您本人使用的，以免在將來進行交易時出現問題。"
-      ],
+      "text": "Is it possible to change the phone number associated with my account?",
+      "variations": [],
       "intent": "account_management",
       "languages": {
         "en": "Is it possible to change the phone number associated with my account?",
@@ -1024,9 +944,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Sure thing, boss! App, profile bottom-right, settings—swap number, keep it yours, smooth sailing!",
-        "ms": "Ok lah, boss! App, profil bawah kanan, tetapan—tukar nombor, pastikan punya boss, lancar je!",
-        "cn": "當然行，老板！應用，右下人頭，設置—換號碼，確保您的，順利無阻！"
+        "en": "You bet you can swap your phone number anytime, boss! Open the app, tap the profile icon bottom-right, hit account settings—there’s your spot to update the number. Keep it your own to dodge any transaction snags down the road!",
+        "ms": "Boleh je tukar nombor telefon bila-bila, boss! Buka app, tekan ikon profil kat bawah kanan, masuk tetapan akaun—kat situ boss boleh kemas kini nombor. Pastikan nombor boss sendiri untuk elak masalah transaksi nanti!",
+        "cn": "當然可以，老板！您可以隨時更改與您賬戶相關的手機號碼。只需打開應用程序，點擊右下角的人頭圖標，然後選擇賬戶設置，在這裡您可以找到更換手機號碼的選項。請確保輸入的新號碼是您本人使用的，以免在將來進行交易時出現問題。"
       },
       "conditions": []
     },
@@ -1037,8 +957,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1062,12 +982,8 @@
   {
     "id": "0820",
     "question": {
-      "text": "Glad you’re pumped about the platform, boss! No custom notifications for specific games or sports yet—just keep app notifications on, and we’ll ping you with the latest deals and updates to keep you in the hot seat!",
-      "variations": [
-        "Gembira boss excited pasal platform ni! Belum ada notifikasi khusus untuk game atau sukan tertentu—hidupkan je notifikasi app, kami hantar tawaran terkini dan kemas kini supaya boss kekal dalam kerusi panas!",
-        "Glad you’re pumped about the platform, boss! No custom notifications for specific games or sports yet—just keep app notifications on, and we’ll ping you with the latest deals and updates to keep you in the hot seat!",
-        "很高興您對我們的平台感興趣，老板！目前，我們還沒有提供為特定遊戲或體育賽事設置通知的功能。不過，您可以打開應用程序，確保開啟了通知功能，這樣我們會定期推送最新的優惠和更新，確保您不會錯過任何精彩內容。"
-      ],
+      "text": "Can I set up notifications for my favorite games or sports events?",
+      "variations": [],
       "intent": "app_issues",
       "languages": {
         "en": "Can I set up notifications for my favorite games or sports events?",
@@ -1077,9 +993,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Love the vibe, boss! No game-specific alerts yet—app notifications on, we’ll blast you the hot stuff!",
-        "ms": "Suka vibe ni, boss! Belum ada alert khusus game—notifikasi app hidup, kami hantar benda panas!",
-        "cn": "喜歡這感覺，老板！還沒特定遊戲通知—開應用通知，我們推送熱門內容給您！"
+        "en": "Glad you’re pumped about the platform, boss! No custom notifications for specific games or sports yet—just keep app notifications on, and we’ll ping you with the latest deals and updates to keep you in the hot seat!",
+        "ms": "Gembira boss excited pasal platform ni! Belum ada notifikasi khusus untuk game atau sukan tertentu—hidupkan je notifikasi app, kami hantar tawaran terkini dan kemas kini supaya boss kekal dalam kerusi panas!",
+        "cn": "很高興您對我們的平台感興趣，老板！目前，我們還沒有提供為特定遊戲或體育賽事設置通知的功能。不過，您可以打開應用程序，確保開啟了通知功能，這樣我們會定期推送最新的優惠和更新，確保您不會錯過任何精彩內容。"
       },
       "conditions": []
     },
@@ -1090,8 +1006,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1115,12 +1031,8 @@
   {
     "id": "0821",
     "question": {
-      "text": "Minimum deposit to kick off playing is just RM10, boss—lets you jump into all the hot games on the platform without breaking the bank!",
-      "variations": [
-        "Deposit minimum nak mula main cuma RM10, boss—bagi boss lompat masuk semua game panas kat platform tanpa pecah bank!",
-        "Minimum deposit to kick off playing is just RM10, boss—lets you jump into all the hot games on the platform without breaking the bank!",
-        "開始玩遊戲的最低存款金額是10令吉，老板。這讓您可以輕鬆體驗我們平台上的各種精彩遊戲，而不需要大額投入。"
-      ],
+      "text": "What's the minimum deposit amount required to start playing?",
+      "variations": [],
       "intent": "payment_issues",
       "languages": {
         "en": "What's the minimum deposit amount required to start playing?",
@@ -1130,9 +1042,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Low entry, boss! RM10 minimum deposit—dive into hot games, no big spend!",
-        "ms": "Masuk rendah, boss! RM10 deposit minimum—terjun game panas, tak payah belanja besar!",
-        "cn": "低門檻，老板！10令吉最低存款—跳進精彩遊戲，無需大投入！"
+        "en": "Minimum deposit to kick off playing is just RM10, boss—lets you jump into all the hot games on the platform without breaking the bank!",
+        "ms": "Deposit minimum nak mula main cuma RM10, boss—bagi boss lompat masuk semua game panas kat platform tanpa pecah bank!",
+        "cn": "開始玩遊戲的最低存款金額是10令吉，老板。這讓您可以輕鬆體驗我們平台上的各種精彩遊戲，而不需要大額投入。"
       },
       "conditions": []
     },
@@ -1143,8 +1055,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1168,12 +1080,8 @@
   {
     "id": "0822",
     "question": {
-      "text": "No biggie if you slipped up with the wrong ID on your deposit receipt, boss—it might slow things down a tad, but just make sure to nail the right info next time and you’re golden!",
-      "variations": [
-        "Tak apa kalau boss tersilap masukkan nombor ID salah kat resit deposit—mungkin lambat sikit, tapi pastikan betul je info lain kali, boss selamat!",
-        "No biggie if you slipped up with the wrong ID on your deposit receipt, boss—it might slow things down a tad, but just make sure to nail the right info next time and you’re golden!",
-        "若您在存款收據上輸入了錯誤的ID號碼，不用太擔心，老板！雖然這可能會影響處理速度，但下次存款時確保輸入正確的信息即可。"
-      ],
+      "text": "What should I do if I entered the wrong ID number on my deposit receipt?",
+      "variations": [],
       "intent": "transaction_records",
       "languages": {
         "en": "What should I do if I entered the wrong ID number on my deposit receipt?",
@@ -1183,9 +1091,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Chill, boss! Wrong ID on receipt? Might drag a bit—next time, get it right, you’re set!",
-        "ms": "Tenang, boss! ID salah kat resit? Mungkin lelet sikit—lain kali betulkan, boss siap!",
-        "cn": "別急，老板！收據ID錯了？可能慢點—下次弄對，就沒問題啦！"
+        "en": "No biggie if you slipped up with the wrong ID on your deposit receipt, boss—it might slow things down a tad, but just make sure to nail the right info next time and you’re golden!",
+        "ms": "Tak apa kalau boss tersilap masukkan nombor ID salah kat resit deposit—mungkin lambat sikit, tapi pastikan betul je info lain kali, boss selamat!",
+        "cn": "若您在存款收據上輸入了錯誤的ID號碼，不用太擔心，老板！雖然這可能會影響處理速度，但下次存款時確保輸入正確的信息即可。"
       },
       "conditions": []
     },
@@ -1196,8 +1104,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1221,12 +1129,8 @@
   {
     "id": "0823",
     "question": {
-      "text": "No upper limit on daily withdrawals, boss! You can yank out whatever you want, however much you win—it’s super flexible and all in your hands!",
-      "variations": [
-        "Tak ada had atas untuk pengeluaran harian, boss! Boss boleh tarik apa yang boss nak, berapa banyak boss menang—sangat fleksibel dan semua dalam tangan boss!",
-        "No upper limit on daily withdrawals, boss! You can yank out whatever you want, however much you win—it’s super flexible and all in your hands!",
-        "關於每日提款的最高限額，我們實際上是沒有設定的上限，老板！您可以根據自己的需要提取任何金額，贏多少就提多少，真是很靈活哦！"
-      ],
+      "text": "Is there a maximum limit for daily withdrawals?",
+      "variations": [],
       "intent": "withdrawal_conditions",
       "languages": {
         "en": "Is there a maximum limit for daily withdrawals?",
@@ -1236,9 +1140,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "No cap, boss! Daily withdrawals—pull what you need, win big, your call!",
-        "ms": "Tak ada limit, boss! Pengeluaran harian—tarik apa boss perlukan, menang besar, terserah boss!",
-        "cn": "沒上限，老板！每日提款—提您所需的，贏多少隨您，真靈活！"
+        "en": "No upper limit on daily withdrawals, boss! You can yank out whatever you want, however much you win—it’s super flexible and all in your hands!",
+        "ms": "Tak ada had atas untuk pengeluaran harian, boss! Boss boleh tarik apa yang boss nak, berapa banyak boss menang—sangat fleksibel dan semua dalam tangan boss!",
+        "cn": "關於每日提款的最高限額，我們實際上是沒有設定的上限，老板！您可以根據自己的需要提取任何金額，贏多少就提多少，真是很靈活哦！"
       },
       "conditions": []
     },
@@ -1249,8 +1153,8 @@
       "subCategory": "withdrawal_conditions",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1274,12 +1178,8 @@
   {
     "id": "0824",
     "question": {
-      "text": "Editing your personal info’s a snap, boss! Open the app, tap the profile icon bottom-right, hit profile settings—update your email, phone number, whatever you need there. Just keep it spot-on to avoid any transaction hiccups!",
-      "variations": [
-        "Edit maklumat peribadi senang je, boss! Buka app, tekan ikon profil kat bawah kanan, masuk tetapan profil—kemas kini emel, nombor telefon, apa saja boss nak kat situ. Pastikan tepat je supaya tak ada masalah transaksi!",
-        "Editing your personal info’s a snap, boss! Open the app, tap the profile icon bottom-right, hit profile settings—update your email, phone number, whatever you need there. Just keep it spot-on to avoid any transaction hiccups!",
-        "要編輯您的個人資料很簡單，老板！您只需打開應用程序，點擊右下角的人頭圖標，然後選擇個人資料設置。在這裡，您可以更新您的信息，比如郵箱、手機號碼等。確保輸入的信息是準確的，以免影響未來的交易。"
-      ],
+      "text": "What's the procedure for editing personal information on my profile?",
+      "variations": [],
       "intent": "account_management",
       "languages": {
         "en": "What's the procedure for editing personal information on my profile?",
@@ -1289,9 +1189,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Piece of cake, boss! App, profile bottom-right, settings—tweak email, phone, keep it real, smooth moves!",
-        "ms": "Senang je, boss! App, profil bawah kanan, tetapan—ubah emel, telefon, pastikan betul, gerakan lancar!",
-        "cn": "簡單得很，老板！應用，右下人頭，設置—改郵箱、號碼，保持準確，順利進行！"
+        "en": "Editing your personal info’s a snap, boss! Open the app, tap the profile icon bottom-right, hit profile settings—update your email, phone number, whatever you need there. Just keep it spot-on to avoid any transaction hiccups!",
+        "ms": "Edit maklumat peribadi senang je, boss! Buka app, tekan ikon profil kat bawah kanan, masuk tetapan profil—kemas kini emel, nombor telefon, apa saja boss nak kat situ. Pastikan tepat je supaya tak ada masalah transaksi!",
+        "cn": "要編輯您的個人資料很簡單，老板！您只需打開應用程序，點擊右下角的人頭圖標，然後選擇個人資料設置。在這裡，您可以更新您的信息，比如郵箱、手機號碼等。確保輸入的信息是準確的，以免影響未來的交易。"
       },
       "conditions": []
     },
@@ -1302,8 +1202,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1327,12 +1227,8 @@
   {
     "id": "0825",
     "question": {
-      "text": "If your funds aren’t auto-updating post-deposit, boss, it’s likely the system’s still chewing on it or hit a small snag—usually sorts out in 5-30 minutes. If it’s over 30, check your transaction log to make sure it’s right, then shoot me screenshots—I’ll blast through and fix it quick!",
-      "variations": [
-        "Kalau dana boss tak kemas kini auto lepas deposit, mungkin sistem tengah proses atau ada halangan kecil—biasanya selesai dalam 5-30 minit. Kalau lepas 30, semak log transaksi pastikan betul, lepas tu hantar screenshot—saya hapuskan cepat!",
-        "If your funds aren’t auto-updating post-deposit, boss, it’s likely the system’s still chewing on it or hit a small snag—usually sorts out in 5-30 minutes. If it’s over 30, check your transaction log to make sure it’s right, then shoot me screenshots—I’ll blast through and fix it quick!",
-        "若您的存款後資金沒有自動更新，老板，可能是由於系統正在進行處理或遇到了一些小延遲。這種情況通常會在5到30分鐘內解決。若超過30分鐘，建議您檢查交易記錄，確保存款信息正確。若還有問題，請提供截圖信息，我會全力幫您解決！"
-      ],
+      "text": "Why isn't my credit automatically updating after a deposit?",
+      "variations": [],
       "intent": "transaction_records",
       "languages": {
         "en": "Why isn't my credit automatically updating after a deposit?",
@@ -1342,9 +1238,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Yo, boss! Funds not syncing post-deposit? System’s grinding, 5-30 tops—past that, log check, pics, I’ll zip it!",
-        "ms": "Oi, boss! Dana tak sync lepas deposit? Sistem tengah kerja, 5-30 je—lewat tu, cek log, gambar, saya lajukan!",
-        "cn": "嘿，老板！存款後資金沒更新？系統在忙，5-30搞定—超時，查記錄，截圖，我速解決！"
+        "en": "If your funds aren’t auto-updating post-deposit, boss, it’s likely the system’s still chewing on it or hit a small snag—usually sorts out in 5-30 minutes. If it’s over 30, check your transaction log to make sure it’s right, then shoot me screenshots—I’ll blast through and fix it quick!",
+        "ms": "Kalau dana boss tak kemas kini auto lepas deposit, mungkin sistem tengah proses atau ada halangan kecil—biasanya selesai dalam 5-30 minit. Kalau lepas 30, semak log transaksi pastikan betul, lepas tu hantar screenshot—saya hapuskan cepat!",
+        "cn": "若您的存款後資金沒有自動更新，老板，可能是由於系統正在進行處理或遇到了一些小延遲。這種情況通常會在5到30分鐘內解決。若超過30分鐘，建議您檢查交易記錄，確保存款信息正確。若還有問題，請提供截圖信息，我會全力幫您解決！"
       },
       "conditions": []
     },
@@ -1355,8 +1251,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1380,12 +1276,8 @@
   {
     "id": "0826",
     "question": {
-      "text": "No betting limit settings on the platform yet, boss—but you can keep a lid on spending by controlling your deposits! Start small to manage the fun and keep it in check!",
-      "variations": [
-        "Belum ada tetapan had pertaruhan kat platform, boss—tapi boss boleh kawal perbelanjaan dengan urus deposit! Mula kecil untuk jaga seronok dan kekal terkawal!",
-        "No betting limit settings on the platform yet, boss—but you can keep a lid on spending by controlling your deposits! Start small to manage the fun and keep it in check!",
-        "目前我們平台上還沒有提供設置投注限額的功能，老板。不過，您可以通過控制存款金額來有效管理自己的支出，建議您從小額開始投注，這樣可以更好地掌控遊戲的樂趣。"
-      ],
+      "text": "Can I set betting limits on my account to manage my spending?",
+      "variations": [],
       "intent": "account_management",
       "languages": {
         "en": "Can I set betting limits on my account to manage my spending?",
@@ -1395,9 +1287,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Not yet, boss! No bet limits—steer spending with small deposits, keep the fun tight!",
-        "ms": "Belum ada, boss! Tak ada had pertaruhan—kawal belanja dengan deposit kecil, jaga seronok ketat!",
-        "cn": "還不行，老板！沒投注限額—用小額存款控支出，樂趣緊握哦！"
+        "en": "No betting limit settings on the platform yet, boss—but you can keep a lid on spending by controlling your deposits! Start small to manage the fun and keep it in check!",
+        "ms": "Belum ada tetapan had pertaruhan kat platform, boss—tapi boss boleh kawal perbelanjaan dengan urus deposit! Mula kecil untuk jaga seronok dan kekal terkawal!",
+        "cn": "目前我們平台上還沒有提供設置投注限額的功能，老板。不過，您可以通過控制存款金額來有效管理自己的支出，建議您從小額開始投注，這樣可以更好地掌控遊戲的樂趣。"
       },
       "conditions": []
     },
@@ -1408,8 +1300,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1433,12 +1325,8 @@
   {
     "id": "0827",
     "question": {
-      "text": "If you’re sniffing something shady on your account, boss, swap your password fast to lock it tight! Peek at your recent transactions for weird stuff—if you spot anything, hit us up with screenshots right away, and we’ll dig deeper to keep you safe!",
-      "variations": [
-        "Kalau boss syak ada benda pelik kat akaun, tukar kata laluan cepat untuk kunci ketat! Tengok transaksi terkini kalau ada benda aneh—kalau jumpa apa-apa, hantar screenshot segera, kami selami dalam untuk jaga boss selamat!",
-        "If you’re sniffing something shady on your account, boss, swap your password fast to lock it tight! Peek at your recent transactions for weird stuff—if you spot anything, hit us up with screenshots right away, and we’ll dig deeper to keep you safe!",
-        "若您懷疑您的賬戶有未經授權的活動，老板，首先請立即更改密碼以確保賬戶安全。接著，查看最近的交易記錄，檢查是否有不明操作。若發現任何可疑活動，請立即提供截圖信息，我們會進行進一步審核。"
-      ],
+      "text": "What should I do if I suspect unauthorized activity on my account?",
+      "variations": [],
       "intent": "account_security",
       "languages": {
         "en": "What should I do if I suspect unauthorized activity on my account?",
@@ -1448,9 +1336,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Heads up, boss! Weird vibes? Swap password now, scan moves—odd stuff, pics to us, we’ll lock it down!",
-        "ms": "Waspada, boss! Rasa pelik? Tukar kata laluan sekarang, cek gerakan—benda aneh, hantar gambar, kami kunci!",
-        "cn": "小心，老板！有怪感？速換密碼，查操作—異常，截圖給我們，我們鎖定安全！"
+        "en": "If you’re sniffing something shady on your account, boss, swap your password fast to lock it tight! Peek at your recent transactions for weird stuff—if you spot anything, hit us up with screenshots right away, and we’ll dig deeper to keep you safe!",
+        "ms": "Kalau boss syak ada benda pelik kat akaun, tukar kata laluan cepat untuk kunci ketat! Tengok transaksi terkini kalau ada benda aneh—kalau jumpa apa-apa, hantar screenshot segera, kami selami dalam untuk jaga boss selamat!",
+        "cn": "若您懷疑您的賬戶有未經授權的活動，老板，首先請立即更改密碼以確保賬戶安全。接著，查看最近的交易記錄，檢查是否有不明操作。若發現任何可疑活動，請立即提供截圖信息，我們會進行進一步審核。"
       },
       "conditions": []
     },
@@ -1461,8 +1349,8 @@
       "subCategory": "account_security",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1486,12 +1374,8 @@
   {
     "id": "0828",
     "question": {
-      "text": "Check the megaphone icon up top in the app, boss—that’s where all the juicy promos and exciting events are waiting for you!",
-      "variations": [
-        "Tengok ikon megafon kat atas app, boss—kat situ semua promosi sedap dan acara menarik tengah tunggu boss!",
-        "Check the megaphone icon up top in the app, boss—that’s where all the juicy promos and exciting events are waiting for you!",
-        "您可以在應用程序上方的小喇叭圖標查看最新的優惠信息，老板，裡面會有各種激動人心的獎勵和活動等著您哦！"
-      ],
+      "text": "Are there any special promotions or bonuses available today?",
+      "variations": [],
       "intent": "redemption_rules",
       "languages": {
         "en": "Are there any special promotions or bonuses available today?",
@@ -1501,9 +1385,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Peek up top, boss! Megaphone icon—hot promos and events ready to roll!",
-        "ms": "Tengok atas, boss! Ikon megafon—promosi panas dan acara sedia bergolek!",
-        "cn": "看上面，老板！小喇叭圖標—熱門優惠和活動等着開動哦！"
+        "en": "Check the megaphone icon up top in the app, boss—that’s where all the juicy promos and exciting events are waiting for you!",
+        "ms": "Tengok ikon megafon kat atas app, boss—kat situ semua promosi sedap dan acara menarik tengah tunggu boss!",
+        "cn": "您可以在應用程序上方的小喇叭圖標查看最新的優惠信息，老板，裡面會有各種激動人心的獎勵和活動等著您哦！"
       },
       "conditions": []
     },
@@ -1514,8 +1398,8 @@
       "subCategory": "redemption_rules",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1539,12 +1423,8 @@
   {
     "id": "0829",
     "question": {
-      "text": "Updating your personal info’s a breeze, boss! Open the app, tap the profile icon bottom-right, hit ‘Profile’—tweak whatever you need there. Keep it dead-on so transactions stay smooth!",
-      "variations": [
-        "Kemas kini maklumat peribadi senang je, boss! Buka app, tekan ikon profil kat bawah kanan, masuk ‘Profil’—ubah apa yang boss nak kat situ. Pastikan tepat supaya transaksi kekal lancar!",
-        "Updating your personal info’s a breeze, boss! Open the app, tap the profile icon bottom-right, hit ‘Profile’—tweak whatever you need there. Keep it dead-on so transactions stay smooth!",
-        "編輯您的個人資料很簡單，老板！您只需打開應用程序，點擊右下角的人頭圖標，然後選擇‘個人資料’，在這裡就可以輕鬆更新您的個人信息。確保您輸入的信息準確無誤，這樣在進行交易時就不會遇到麻煩。"
-      ],
+      "text": "What's the procedure for editing personal information on my profile?",
+      "variations": [],
       "intent": "account_management",
       "languages": {
         "en": "What's the procedure for editing personal information on my profile?",
@@ -1554,9 +1434,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "No sweat, boss! App, profile bottom-right, ‘Profile’—fix it up, keep it legit, easy flow!",
-        "ms": "Tak susah, boss! App, profil bawah kanan, ‘Profil’—betulkan, pastikan sah, aliran senang!",
-        "cn": "輕鬆，老板！應用，右下人頭，‘個人資料’—修一下，保真，交易順暢！"
+        "en": "Updating your personal info’s a breeze, boss! Open the app, tap the profile icon bottom-right, hit ‘Profile’—tweak whatever you need there. Keep it dead-on so transactions stay smooth!",
+        "ms": "Kemas kini maklumat peribadi senang je, boss! Buka app, tekan ikon profil kat bawah kanan, masuk ‘Profil’—ubah apa yang boss nak kat situ. Pastikan tepat supaya transaksi kekal lancar!",
+        "cn": "編輯您的個人資料很簡單，老板！您只需打開應用程序，點擊右下角的人頭圖標，然後選擇‘個人資料’，在這裡就可以輕鬆更新您的個人信息。確保您輸入的信息準確無誤，這樣在進行交易時就不會遇到麻煩。"
       },
       "conditions": []
     },
@@ -1567,8 +1447,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1592,12 +1472,8 @@
   {
     "id": "0830",
     "question": {
-      "text": "Latest times to snag today’s lottery numbers vary by type, boss—Magnum, Kuda, Toto at 7:00 PM; Singapore at 6:00 PM; CBD at 6:35 PM; GDLOTTO at 7:00 PM; 9Lotto at 7:25 PM. Get in before the cutoff to grab every shot!",
-      "variations": [
-        "Masa terakhir nak beli nombor loteri hari ni ikut jenis, boss—Magnum, Kuda, Toto pukul 7:00 malam; Singapore pukul 6:00 malam; CBD pukul 6:35 malam; GDLOTTO pukul 7:00 malam; 9Lotto pukul 7:25 malam. Masuk sebelum tamat untuk tangkap setiap peluang!",
-        "Latest times to snag today’s lottery numbers vary by type, boss—Magnum, Kuda, Toto at 7:00 PM; Singapore at 6:00 PM; CBD at 6:35 PM; GDLOTTO at 7:00 PM; 9Lotto at 7:25 PM. Get in before the cutoff to grab every shot!",
-        "今天購買彩票號碼的截止時間取決於不同的彩票類型，老板：Magnum、Kuda、Toto晚上7:00；Singapore晚上6:00；CBD晚上6:35；GDLOTTO晚上7:00；9Lotto晚上7:25。確保在截止時間前購買，抓住每一個機會哦！"
-      ],
+      "text": "What's the latest time I can purchase lottery numbers for today's draw?",
+      "variations": [],
       "intent": "betting_rules",
       "languages": {
         "en": "What's the latest time I can purchase lottery numbers for today's draw?",
@@ -1607,9 +1483,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Type matters, boss! Magnum, Kuda, Toto 7 PM; Singapore 6; CBD 6:35; GDLOTTO 7; 9Lotto 7:25—beat the clock!",
-        "ms": "Jenis penting, boss! Magnum, Kuda, Toto 7 malam; Singapore 6; CBD 6:35; GDLOTTO 7; 9Lotto 7:25—cepat sebelum jam!",
-        "cn": "看類型，老板！Magnum、Kuda、Toto 7點；Singapore 6點；CBD 6:35；GDLOTTO 7點；9Lotto 7:25—趕時間哦！"
+        "en": "Latest times to snag today’s lottery numbers vary by type, boss—Magnum, Kuda, Toto at 7:00 PM; Singapore at 6:00 PM; CBD at 6:35 PM; GDLOTTO at 7:00 PM; 9Lotto at 7:25 PM. Get in before the cutoff to grab every shot!",
+        "ms": "Masa terakhir nak beli nombor loteri hari ni ikut jenis, boss—Magnum, Kuda, Toto pukul 7:00 malam; Singapore pukul 6:00 malam; CBD pukul 6:35 malam; GDLOTTO pukul 7:00 malam; 9Lotto pukul 7:25 malam. Masuk sebelum tamat untuk tangkap setiap peluang!",
+        "cn": "今天購買彩票號碼的截止時間取決於不同的彩票類型，老板：Magnum、Kuda、Toto晚上7:00；Singapore晚上6:00；CBD晚上6:35；GDLOTTO晚上7:00；9Lotto晚上7:25。確保在截止時間前購買，抓住每一個機會哦！"
       },
       "conditions": []
     },
@@ -1620,8 +1496,8 @@
       "subCategory": "betting_rules",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1645,12 +1521,8 @@
   {
     "id": "0831",
     "question": {
-      "text": "Sorry, boss—one receipt, one top-up only! If we catch it’s been used before, it’s a no-go—keep it fresh with a new receipt each time for smooth sailing!",
-      "variations": [
-        "Maaf, boss—satu resit, satu tambah nilai je! Kalau kami nampak dah guna sebelum ni, tak boleh—pastikan baru setiap kali untuk lancar je!",
-        "Sorry, boss—one receipt, one top-up only! If we catch it’s been used before, it’s a no-go—keep it fresh with a new receipt each time for smooth sailing!",
-        "很抱歉，老板，同一張收據只能用於一次充值哦！若我們發現該收據已被使用過，就無法再次處理。為順利進行充值，請確保每次存款使用不同的收據。"
-      ],
+      "text": "Can I use the same receipt for multiple top-ups?",
+      "variations": [],
       "intent": "transaction_records",
       "languages": {
         "en": "Can I use the same receipt for multiple top-ups?",
@@ -1660,9 +1532,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "No dice, boss! One receipt, one top-up—repeats get snagged. Fresh each go!",
-        "ms": "Tak boleh, boss! Satu resit, satu tambah nilai—ulang kena tangkap. Baru setiap kali!",
-        "cn": "不行，老板！一張收據一次充值—重複被抓。每次新收據哦！"
+        "en": "Sorry, boss—one receipt, one top-up only! If we catch it’s been used before, it’s a no-go—keep it fresh with a new receipt each time for smooth sailing!",
+        "ms": "Maaf, boss—satu resit, satu tambah nilai je! Kalau kami nampak dah guna sebelum ni, tak boleh—pastikan baru setiap kali untuk lancar je!",
+        "cn": "很抱歉，老板，同一張收據只能用於一次充值哦！若我們發現該收據已被使用過，就無法再次處理。為順利進行充值，請確保每次存款使用不同的收據。"
       },
       "conditions": []
     },
@@ -1673,8 +1545,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1698,12 +1570,8 @@
   {
     "id": "0832",
     "question": {
-      "text": "You bet there is, boss! We’ve got a handy mobile app so you can hit all the games easy—download it, log in, and play anytime, anywhere!",
-      "variations": [
-        "Mesti ada, boss! Kami ada app mudah alih senang supaya boss boleh masuk semua game senang—muat turun, log masuk, main bila-bila, mana-mana!",
-        "You bet there is, boss! We’ve got a handy mobile app so you can hit all the games easy—download it, log in, and play anytime, anywhere!",
-        "絕對有的，老板！我們提供了方便的手機應用程序，您可以輕鬆訪問所有遊戲，隨時隨地享受樂趣。只需下載應用程序，登錄您的賬戶，就可以開始遊戲啦！"
-      ],
+      "text": "Is there a mobile app available for easier access to games?",
+      "variations": [],
       "intent": "app_issues",
       "languages": {
         "en": "Is there a mobile app available for easier access to games?",
@@ -1713,9 +1581,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Oh yeah, boss! Mobile app’s live—grab it, log in, game on anywhere, anytime!",
-        "ms": "Oh ya, boss! App mudah alih dah hidup—ambil, log masuk, main mana-mana, bila-bila!",
-        "cn": "當然有，老板！手機應用已備—下載，登錄，隨時隨地開玩！"
+        "en": "You bet there is, boss! We’ve got a handy mobile app so you can hit all the games easy—download it, log in, and play anytime, anywhere!",
+        "ms": "Mesti ada, boss! Kami ada app mudah alih senang supaya boss boleh masuk semua game senang—muat turun, log masuk, main bila-bila, mana-mana!",
+        "cn": "絕對有的，老板！我們提供了方便的手機應用程序，您可以輕鬆訪問所有遊戲，隨時隨地享受樂趣。只需下載應用程序，登錄您的賬戶，就可以開始遊戲啦！"
       },
       "conditions": []
     },
@@ -1726,8 +1594,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1751,12 +1619,8 @@
   {
     "id": "0833",
     "question": {
-      "text": "Updating your full name’s a cinch, boss—but it’s set at signup! If it’s wrong, drop me your real name here with: Name, Account Number, Bank Name. Keep it your legit one to dodge transaction snags—I’ll hustle to fix it fast!",
-      "variations": [
-        "Kemas kini nama penuh senang je, boss—tapi dah set masa daftar! Kalau salah, hantar nama betul boss kat sini dengan: Nama, Nombor Akaun, Nama Bank. Pastikan nama sah boss untuk elak masalah transaksi—saya cepatkan betulkan!",
-        "Updating your full name’s a cinch, boss—but it’s set at signup! If it’s wrong, drop me your real name here with: Name, Account Number, Bank Name. Keep it your legit one to dodge transaction snags—I’ll hustle to fix it fast!",
-        "要更新您的全名其實很簡單，老板！不過請注意，您的全名是在註冊時輸入的，若發現輸入有誤，您可以在這裡提供正確的全名。請確保這是您本人的全名，以避免在將來的交易中遇到問題。為確保順利更改，您可以回復我：姓名、賬戶號碼、銀行名稱。"
-      ],
+      "text": "How can I update my full name on my account?",
+      "variations": [],
       "intent": "account_management",
       "languages": {
         "en": "How can I update my full name on my account?",
@@ -1766,9 +1630,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Easy fix, boss! Name set at signup—off? Drop here: Name, Acct No., Bank, real deal—I’ll zip it!",
-        "ms": "Senang betul, boss! Nama set masa daftar—salah? Hantar sini: Nama, No. Akaun, Bank, benda betul—saya lajukan!",
-        "cn": "簡單修，老板！註冊時定名—錯了？這兒給我：姓名、賬號、銀行，真名—我快搞定！"
+        "en": "Updating your full name’s a cinch, boss—but it’s set at signup! If it’s wrong, drop me your real name here with: Name, Account Number, Bank Name. Keep it your legit one to dodge transaction snags—I’ll hustle to fix it fast!",
+        "ms": "Kemas kini nama penuh senang je, boss—tapi dah set masa daftar! Kalau salah, hantar nama betul boss kat sini dengan: Nama, Nombor Akaun, Nama Bank. Pastikan nama sah boss untuk elak masalah transaksi—saya cepatkan betulkan!",
+        "cn": "要更新您的全名其實很簡單，老板！不過請注意，您的全名是在註冊時輸入的，若發現輸入有誤，您可以在這裡提供正確的全名。請確保這是您本人的全名，以避免在將來的交易中遇到問題。為確保順利更改，您可以回復我：姓名、賬戶號碼、銀行名稱。"
       },
       "conditions": []
     },
@@ -1779,8 +1643,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1804,12 +1668,8 @@
   {
     "id": "0834",
     "question": {
-      "text": "No fees to worry about for deposits or withdrawals, boss—your cash stays yours, all the winnings hit your account clean and clear!",
-      "variations": [
-        "Tak ada yuran nak risau untuk deposit atau pengeluaran, boss—duit boss kekal milik boss, semua kemenangan masuk akaun bersih dan jelas!",
-        "No fees to worry about for deposits or withdrawals, boss—your cash stays yours, all the winnings hit your account clean and clear!",
-        "關於存款和提款的費用，您可以放心，老板，我們並沒有額外的費用哦！不論是存款還是提款，您都可以順利進行，贏得的收益將全數進入您的賬戶。"
-      ],
+      "text": "Are there any fees associated with deposits or withdrawals?",
+      "variations": [],
       "intent": "payment_issues",
       "languages": {
         "en": "Are there any fees associated with deposits or withdrawals?",
@@ -1819,9 +1679,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Fee-free, boss! Deposits, withdrawals—all yours, winnings land clean!",
-        "ms": "Bebas yuran, boss! Deposit, pengeluaran—semua milik boss, kemenangan masuk bersih!",
-        "cn": "無費用，老板！存款提款—全歸您，贏利乾淨到賬！"
+        "en": "No fees to worry about for deposits or withdrawals, boss—your cash stays yours, all the winnings hit your account clean and clear!",
+        "ms": "Tak ada yuran nak risau untuk deposit atau pengeluaran, boss—duit boss kekal milik boss, semua kemenangan masuk akaun bersih dan jelas!",
+        "cn": "關於存款和提款的費用，您可以放心，老板，我們並沒有額外的費用哦！不論是存款還是提款，您都可以順利進行，贏得的收益將全數進入您的賬戶。"
       },
       "conditions": []
     },
@@ -1832,8 +1692,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1857,12 +1717,8 @@
   {
     "id": "0835",
     "question": {
-      "text": "Tweaking your personal info’s dead easy, boss! Open the app, hit the profile icon bottom-right, pick ‘Profile’—update whatever’s there. Make sure it’s bang-on to keep transactions hassle-free!",
-      "variations": [
-        "Ubah maklumat peribadi mudah gila, boss! Buka app, tekan ikon profil kat bawah kanan, pilih ‘Profil’—kemas kini apa yang ada kat situ. Pastikan tepat untuk transaksi tak ada halangan!",
-        "Tweaking your personal info’s dead easy, boss! Open the app, hit the profile icon bottom-right, pick ‘Profile’—update whatever’s there. Make sure it’s bang-on to keep transactions hassle-free!",
-        "編輯您的個人資料其實很簡單，老板！您只需打開我們的應用程序，點擊右下角的人頭圖標，接著選擇‘個人資料’，在這裡就可以輕鬆更新您的信息。確保輸入的信息準確，這樣在未來進行交易時就不會遇到麻煩。"
-      ],
+      "text": "What's the procedure for editing personal information on my profile?",
+      "variations": [],
       "intent": "account_management",
       "languages": {
         "en": "What's the procedure for editing personal information on my profile?",
@@ -1872,9 +1728,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "No hassle, boss! App, profile bottom-right, ‘Profile’—edit up, keep it true, no snags!",
-        "ms": "Tak payah pening, boss! App, profil bawah kanan, ‘Profil’—edit je, pastikan betul, tak ada sangkut!",
-        "cn": "沒麻煩，老板！應用，右下人頭，‘個人資料’—改一改，保真，無阻礙！"
+        "en": "Tweaking your personal info’s dead easy, boss! Open the app, hit the profile icon bottom-right, pick ‘Profile’—update whatever’s there. Make sure it’s bang-on to keep transactions hassle-free!",
+        "ms": "Ubah maklumat peribadi mudah gila, boss! Buka app, tekan ikon profil kat bawah kanan, pilih ‘Profil’—kemas kini apa yang ada kat situ. Pastikan tepat untuk transaksi tak ada halangan!",
+        "cn": "編輯您的個人資料其實很簡單，老板！您只需打開我們的應用程序，點擊右下角的人頭圖標，接著選擇‘個人資料’，在這裡就可以輕鬆更新您的信息。確保輸入的信息準確，這樣在未來進行交易時就不會遇到麻煩。"
       },
       "conditions": []
     },
@@ -1885,8 +1741,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1910,12 +1766,8 @@
   {
     "id": "0836",
     "question": {
-      "text": "Tap the megaphone icon up top in the app, boss—you’ll find a stash of thrilling rewards and events waiting there! Want the jump on more deals? Keep app notifications on so you don’t miss a beat!",
-      "variations": [
-        "Tekan ikon megafon kat atas app, boss—boss akan jumpa timbunan ganjaran menarik dan acara tengah tunggu kat situ! Nak cepat tahu tawaran lagi? Kekalkan notifikasi app hidup supaya boss tak terlepas apa-apa!",
-        "Tap the megaphone icon up top in the app, boss—you’ll find a stash of thrilling rewards and events waiting there! Want the jump on more deals? Keep app notifications on so you don’t miss a beat!",
-        "您可以在應用程序上方的小喇叭圖標查看最新的優惠信息，老板，裡面會有各種激動人心的獎勵和活動等著您哦！若想第一時間掌握更多優惠，記得開啟應用的通知，確保不錯過任何精彩活動！"
-      ],
+      "text": "Are there any special promotions or events happening today?",
+      "variations": [],
       "intent": "redemption_rules",
       "languages": {
         "en": "Are there any special promotions or events happening today?",
@@ -1925,9 +1777,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Check it, boss! Megaphone up top—tons of hot rewards and events. Notifications on, catch every deal!",
-        "ms": "Semak lah, boss! Megafon atas—banyak ganjaran panas dan acara. Notifikasi hidup, tangkap setiap tawaran!",
-        "cn": "看一看，老板！上方小喇叭—超多熱獎勵和活動。通知開着，每個優惠不漏哦！"
+        "en": "Tap the megaphone icon up top in the app, boss—you’ll find a stash of thrilling rewards and events waiting there! Want the jump on more deals? Keep app notifications on so you don’t miss a beat!",
+        "ms": "Tekan ikon megafon kat atas app, boss—boss akan jumpa timbunan ganjaran menarik dan acara tengah tunggu kat situ! Nak cepat tahu tawaran lagi? Kekalkan notifikasi app hidup supaya boss tak terlepas apa-apa!",
+        "cn": "您可以在應用程序上方的小喇叭圖標查看最新的優惠信息，老板，裡面會有各種激動人心的獎勵和活動等著您哦！若想第一時間掌握更多優惠，記得開啟應用的通知，確保不錯過任何精彩活動！"
       },
       "conditions": []
     },
@@ -1938,8 +1790,8 @@
       "subCategory": "redemption_rules",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -1963,12 +1815,8 @@
   {
     "id": "0837",
     "question": {
-      "text": "Checking odds for upcoming sports is a piece of cake, boss! Open the app, tap the ‘More Games’ icon, hit the ⚽️—bam, you’ve got all the latest events and odds right in front of you!",
-      "variations": [
-        "Semak peluang acara sukan akan datang senang je, boss! Buka app, tekan ikon ‘Lebih Banyak Permainan,’ klik ⚽️—bam, semua acara terkini dan peluang ada depan mata boss!",
-        "Checking odds for upcoming sports is a piece of cake, boss! Open the app, tap the ‘More Games’ icon, hit the ⚽️—bam, you’ve got all the latest events and odds right in front of you!",
-        "要查看即將舉行的體育賽事的賠率很簡單，老板！只需打開應用程序，點擊‘更多遊戲’圖標，然後選擇⚽️圖標，在這裡您就能找到最新的賽事和相應的賠率信息。"
-      ],
+      "text": "How can I check the odds for upcoming sports events?",
+      "variations": [],
       "intent": "betting_rules",
       "languages": {
         "en": "How can I check the odds for upcoming sports events?",
@@ -1978,9 +1826,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "No sweat, boss! App, ‘More Games,’ ⚽️—upcoming odds all yours, easy peasy!",
-        "ms": "Tak susah, boss! App, ‘Lebih Banyak Permainan,’ ⚽️—peluang akan datang semua boss punya, senang je!",
-        "cn": "輕鬆，老板！應用，‘更多遊戲’，⚽️—未來賠率全歸您，簡單得很！"
+        "en": "Checking odds for upcoming sports is a piece of cake, boss! Open the app, tap the ‘More Games’ icon, hit the ⚽️—bam, you’ve got all the latest events and odds right in front of you!",
+        "ms": "Semak peluang acara sukan akan datang senang je, boss! Buka app, tekan ikon ‘Lebih Banyak Permainan,’ klik ⚽️—bam, semua acara terkini dan peluang ada depan mata boss!",
+        "cn": "要查看即將舉行的體育賽事的賠率很簡單，老板！只需打開應用程序，點擊‘更多遊戲’圖標，然後選擇⚽️圖標，在這裡您就能找到最新的賽事和相應的賠率信息。"
       },
       "conditions": []
     },
@@ -1991,8 +1839,8 @@
       "subCategory": "betting_rules",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2016,12 +1864,8 @@
   {
     "id": "0838",
     "question": {
-      "text": "You bet, boss! Swap your phone number anytime—tap the profile icon bottom-right in the app, find the phone swap option, update it there. Make sure it’s your current, valid number so notifications and codes roll in smooth!",
-      "variations": [
-        "Boleh je, boss! Tukar nombor telefon bila-bila—tekan ikon profil kat bawah kanan dalam app, cari pilihan tukar telefon, kemas kini kat situ. Pastikan nombor terkini dan sah boss supaya notifikasi dan kod masuk lancar!",
-        "You bet, boss! Swap your phone number anytime—tap the profile icon bottom-right in the app, find the phone swap option, update it there. Make sure it’s your current, valid number so notifications and codes roll in smooth!",
-        "當然可以，老板！要更改與賬戶相關的手機號碼，請點擊應用程序右下角的人頭圖標，然後找到更換手機號碼的選項進行更新。確保輸入的是您當前的有效手機號碼，這樣才能順利接收通知和驗證碼。"
-      ],
+      "text": "Is it possible to change the phone number associated with my account?",
+      "variations": [],
       "intent": "account_management",
       "languages": {
         "en": "Is it possible to change the phone number associated with my account?",
@@ -2031,9 +1875,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Sure can, boss! App, profile bottom-right, swap phone—set current, valid one, all smooth!",
-        "ms": "Boleh lah, boss! App, profil bawah kanan, tukar telefon—set yang terkini dan sah, semua lancar!",
-        "cn": "當然行，老板！應用，右下人頭，換號—設當前有效號，順利無阻！"
+        "en": "You bet, boss! Swap your phone number anytime—tap the profile icon bottom-right in the app, find the phone swap option, update it there. Make sure it’s your current, valid number so notifications and codes roll in smooth!",
+        "ms": "Boleh je, boss! Tukar nombor telefon bila-bila—tekan ikon profil kat bawah kanan dalam app, cari pilihan tukar telefon, kemas kini kat situ. Pastikan nombor terkini dan sah boss supaya notifikasi dan kod masuk lancar!",
+        "cn": "當然可以，老板！要更改與賬戶相關的手機號碼，請點擊應用程序右下角的人頭圖標，然後找到更換手機號碼的選項進行更新。確保輸入的是您當前的有效手機號碼，這樣才能順利接收通知和驗證碼。"
       },
       "conditions": []
     },
@@ -2044,8 +1888,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2069,12 +1913,8 @@
   {
     "id": "0839",
     "question": {
-      "text": "To see if your account’s locked, boss, just try logging in—if you can’t get through, the system’ll usually flash a ‘locked’ or ‘suspended’ alert. Simple as that!",
-      "variations": [
-        "Nak tengok kalau akaun boss kunci, cuba log masuk je—kalau tak boleh masuk, sistem biasanya tunjuk alert ‘dikunci’ atau ‘digantung.’ Senang je macam tu!",
-        "To see if your account’s locked, boss, just try logging in—if you can’t get through, the system’ll usually flash a ‘locked’ or ‘suspended’ alert. Simple as that!",
-        "要檢查您的賬戶是否已被鎖定，老板，您可以嘗試登錄您的賬戶。若無法成功登錄，系統通常會提示您賬戶已被鎖定或暫停。"
-      ],
+      "text": "How can I check if my account has been locked?",
+      "variations": [],
       "intent": "account_security",
       "languages": {
         "en": "How can I check if my account has been locked?",
@@ -2084,9 +1924,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Check it, boss! Try logging in—locked or suspended pops up if it’s shut. Easy!",
-        "ms": "Semak lah, boss! Cuba log masuk—dikunci atau gantung muncul kalau tutup. Senang!",
-        "cn": "查一下，老板！試登錄—若鎖定或暫停會跳出來。簡單！"
+        "en": "To see if your account’s locked, boss, just try logging in—if you can’t get through, the system’ll usually flash a ‘locked’ or ‘suspended’ alert. Simple as that!",
+        "ms": "Nak tengok kalau akaun boss kunci, cuba log masuk je—kalau tak boleh masuk, sistem biasanya tunjuk alert ‘dikunci’ atau ‘digantung.’ Senang je macam tu!",
+        "cn": "要檢查您的賬戶是否已被鎖定，老板，您可以嘗試登錄您的賬戶。若無法成功登錄，系統通常會提示您賬戶已被鎖定或暫停。"
       },
       "conditions": []
     },
@@ -2097,8 +1937,8 @@
       "subCategory": "account_security",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2122,12 +1962,8 @@
   {
     "id": "0840",
     "question": {
-      "text": "Sometimes the system takes a beat to process your Fast Payment top-up, boss—just hang tight! If it’s been a while, peek at your wallet’s transaction log. Still not there? Send me screenshots, and we’ll hunt down the issue pronto!",
-      "variations": [
-        "Kadang sistem ambil masa sikit untuk proses tambah nilai Fast Payment, boss—sabar je! Kalau dah lama, tengok log transaksi kat dompet boss. Masih tak ada? Hantar screenshot, kami cari masalah cepat!",
-        "Sometimes the system takes a beat to process your Fast Payment top-up, boss—just hang tight! If it’s been a while, peek at your wallet’s transaction log. Still not there? Send me screenshots, and we’ll hunt down the issue pronto!",
-        "有時候，系統處理快速支付充值可能需要一點時間，老板，請耐心等候。若您已經等了較長時間，可以在錢包的交易記錄中查看相關信息。若充值依然沒有顯示，請提供截圖信息，我們會立即幫您查找問題所在。"
-      ],
+      "text": "Why isn't my Fast Payment top-up showing in my account?",
+      "variations": [],
       "intent": "transaction_records",
       "languages": {
         "en": "Why isn't my Fast Payment top-up showing in my account?",
@@ -2137,9 +1973,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Hold up, boss! Fast Payment might lag—check wallet log if long. Nada? Pics, we’ll nail it fast!",
-        "ms": "Tunggu jap, boss! Fast Payment mungkin lelet—cek log dompet kalau lama. Kosong? Gambar, kami selesai cepat!",
-        "cn": "稍等，老板！快速充值或慢—久了查錢包記錄。沒顯？截圖，我們速查！"
+        "en": "Sometimes the system takes a beat to process your Fast Payment top-up, boss—just hang tight! If it’s been a while, peek at your wallet’s transaction log. Still not there? Send me screenshots, and we’ll hunt down the issue pronto!",
+        "ms": "Kadang sistem ambil masa sikit untuk proses tambah nilai Fast Payment, boss—sabar je! Kalau dah lama, tengok log transaksi kat dompet boss. Masih tak ada? Hantar screenshot, kami cari masalah cepat!",
+        "cn": "有時候，系統處理快速支付充值可能需要一點時間，老板，請耐心等候。若您已經等了較長時間，可以在錢包的交易記錄中查看相關信息。若充值依然沒有顯示，請提供截圖信息，我們會立即幫您查找問題所在。"
       },
       "conditions": []
     },
@@ -2150,8 +1986,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2175,12 +2011,8 @@
   {
     "id": "0841",
     "question": {
-      "text": "Got an urgent snag, boss? Our live support crew’s got your back—just open the app, spot the online support icon at the bottom, tap it, and you’ll be chatting with our reps in no time!",
-      "variations": [
-        "Ada masalah urgent, boss? Pasukan sokongan langsung kami ada untuk boss—buka je app, cari ikon sokongan online kat bawah, tekan, dan boss boleh sembang dengan rep kami sekejap je!",
-        "Got an urgent snag, boss? Our live support crew’s got your back—just open the app, spot the online support icon at the bottom, tap it, and you’ll be chatting with our reps in no time!",
-        "若您有緊急問題，老板，我們的實時客服團隊隨時為您服務！您只需打開我們的應用程序，在下方找到在線客服的圖標，點擊它就可以立即與我們的客服代表聯繫。"
-      ],
+      "text": "How can I contact live support if I have urgent issues?",
+      "variations": [],
       "intent": "general_inquiry",
       "languages": {
         "en": "How can I contact live support if I have urgent issues?",
@@ -2190,9 +2022,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Rush, boss? App, bottom online support icon—tap, chat with live crew fast!",
-        "ms": "Tergesa, boss? App, ikon sokongan online bawah—tekan, sembang dengan pasukan langsung cepat!",
-        "cn": "急事，老板？應用，下方在線客服圖標—點擊，速與實時團隊聊！"
+        "en": "Got an urgent snag, boss? Our live support crew’s got your back—just open the app, spot the online support icon at the bottom, tap it, and you’ll be chatting with our reps in no time!",
+        "ms": "Ada masalah urgent, boss? Pasukan sokongan langsung kami ada untuk boss—buka je app, cari ikon sokongan online kat bawah, tekan, dan boss boleh sembang dengan rep kami sekejap je!",
+        "cn": "若您有緊急問題，老板，我們的實時客服團隊隨時為您服務！您只需打開我們的應用程序，在下方找到在線客服的圖標，點擊它就可以立即與我們的客服代表聯繫。"
       },
       "conditions": []
     },
@@ -2203,8 +2035,8 @@
       "subCategory": "general_inquiry",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2228,12 +2060,8 @@
   {
     "id": "0842",
     "question": {
-      "text": "Hit a tech glitch in a game, boss? Drop me the details—when it happened, game name, and some screenshots if you’ve got ‘em. That’ll speed things up—tell me anytime, and I’ll jump in to sort it quick!",
-      "variations": [
-        "Kena masalah teknikal dalam game, boss? Hantar je butiran kat saya—bila jadi, nama game, dan screenshot kalau ada. Tu cepatkan benda—beritahu saya bila-bila, saya masuk selesai laju!",
-        "Hit a tech glitch in a game, boss? Drop me the details—when it happened, game name, and some screenshots if you’ve got ‘em. That’ll speed things up—tell me anytime, and I’ll jump in to sort it quick!",
-        "若您遇到特定遊戲的技術問題，老板，請提供一些詳細信息，包括問題發生的時間、涉及的遊戲名稱，以及相關的截圖信息。這些信息將幫助我們更快解決問題。隨時告訴我，我會立刻協助您處理！"
-      ],
+      "text": "How do I report a technical issue with a specific game?",
+      "variations": [],
       "intent": "game_issues",
       "languages": {
         "en": "How do I report a technical issue with a specific game?",
@@ -2243,9 +2071,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Game glitch, boss? Spill time, name, pics—hit me up, I’ll blitz it fast!",
-        "ms": "Game bermasalah, boss? Cerita masa, nama, gambar—panggil saya, saya hapuskan cepat!",
-        "cn": "遊戲出錯，老板？給我時間、名稱、截圖—隨時找我，我速解決！"
+        "en": "Hit a tech glitch in a game, boss? Drop me the details—when it happened, game name, and some screenshots if you’ve got ‘em. That’ll speed things up—tell me anytime, and I’ll jump in to sort it quick!",
+        "ms": "Kena masalah teknikal dalam game, boss? Hantar je butiran kat saya—bila jadi, nama game, dan screenshot kalau ada. Tu cepatkan benda—beritahu saya bila-bila, saya masuk selesai laju!",
+        "cn": "若您遇到特定遊戲的技術問題，老板，請提供一些詳細信息，包括問題發生的時間、涉及的遊戲名稱，以及相關的截圖信息。這些信息將幫助我們更快解決問題。隨時告訴我，我會立刻協助您處理！"
       },
       "conditions": []
     },
@@ -2256,8 +2084,8 @@
       "subCategory": "game_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2281,12 +2109,8 @@
   {
     "id": "0843",
     "question": {
-      "text": "Forgot your password, boss? No sweat—just spot the ‘Forgot Password’ option below the login page, tap it, and the system’ll walk you through resetting it, easy peasy!",
-      "variations": [
-        "Lupa kata laluan, boss? Tak risau—cari je pilihan ‘Lupa Kata Laluan’ kat bawah laman log masuk, tekan, dan sistem akan bawa boss reset, senang je!",
-        "Forgot your password, boss? No sweat—just spot the ‘Forgot Password’ option below the login page, tap it, and the system’ll walk you through resetting it, easy peasy!",
-        "若您忘記了密碼，老板，您可以在登錄頁面下方找到‘忘記密碼’選項，點擊後，系統會引導您完成重設密碼的步驟。"
-      ],
+      "text": "How can I reset my password if I've forgotten it?",
+      "variations": [],
       "intent": "password_management",
       "languages": {
         "en": "How can I reset my password if I've forgotten it?",
@@ -2296,9 +2120,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Lost password, boss? ‘Forgot Password’ under login—tap, follow, reset done quick!",
-        "ms": "Kata laluan hilang, boss? ‘Lupa Kata Laluan’ bawah log masuk—tekan, ikut, reset siap cepat!",
-        "cn": "忘密碼，老板？登錄頁下‘忘記密碼’—點擊，按步驟，速重設！"
+        "en": "Forgot your password, boss? No sweat—just spot the ‘Forgot Password’ option below the login page, tap it, and the system’ll walk you through resetting it, easy peasy!",
+        "ms": "Lupa kata laluan, boss? Tak risau—cari je pilihan ‘Lupa Kata Laluan’ kat bawah laman log masuk, tekan, dan sistem akan bawa boss reset, senang je!",
+        "cn": "若您忘記了密碼，老板，您可以在登錄頁面下方找到‘忘記密碼’選項，點擊後，系統會引導您完成重設密碼的步驟。"
       },
       "conditions": []
     },
@@ -2309,8 +2133,8 @@
       "subCategory": "password_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2334,12 +2158,8 @@
   {
     "id": "0844",
     "question": {
-      "text": "No demo mode right now, boss—but if you wanna get the hang of the rules, start with a small bet, minimum RM10. That way, you dive into the real fun with low stakes and max enjoyment!",
-      "variations": [
-        "Tak ada mod demo buat masa ni, boss—tapi kalau boss nak biasa dengan peraturan, mula dengan pertaruhan kecil, minimum RM10. Macam tu boss masuk seronok betul dengan taruhan rendah dan enjoy maksimum!",
-        "No demo mode right now, boss—but if you wanna get the hang of the rules, start with a small bet, minimum RM10. That way, you dive into the real fun with low stakes and max enjoyment!",
-        "目前我們不提供演示模式讓您先體驗，老板，但若您想熟悉遊戲規則，建議您可以從小額投注開始，最低只需10令吉。這樣您不僅可以了解遊戲，還能盡情享受其中的樂趣！"
-      ],
+      "text": "Can I play games in demo mode before betting real money?",
+      "variations": [],
       "intent": "game_rules",
       "languages": {
         "en": "Can I play games in demo mode before betting real money?",
@@ -2349,9 +2169,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "No demo yet, boss! Kick off with RM10 bet—learn rules, real fun, low risk!",
-        "ms": "Belum ada demo, boss! Mula dengan taruhan RM10—belajar peraturan, seronok betul, risiko rendah!",
-        "cn": "還沒演示，老板！10令吉起投—學規則，真樂趣，低風險哦！"
+        "en": "No demo mode right now, boss—but if you wanna get the hang of the rules, start with a small bet, minimum RM10. That way, you dive into the real fun with low stakes and max enjoyment!",
+        "ms": "Tak ada mod demo buat masa ni, boss—tapi kalau boss nak biasa dengan peraturan, mula dengan pertaruhan kecil, minimum RM10. Macam tu boss masuk seronok betul dengan taruhan rendah dan enjoy maksimum!",
+        "cn": "目前我們不提供演示模式讓您先體驗，老板，但若您想熟悉遊戲規則，建議您可以從小額投注開始，最低只需10令吉。這樣您不僅可以了解遊戲，還能盡情享受其中的樂趣！"
       },
       "conditions": []
     },
@@ -2362,8 +2182,8 @@
       "subCategory": "game_rules",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2387,12 +2207,8 @@
   {
     "id": "0845",
     "question": {
-      "text": "You bet there are, boss! We’ve got a killer loyalty program and VIP perks for regulars—every bet racks up points you can cash in for awesome rewards and gifts. Wanna know more? Peek at the VIP perks section in the app—it’s all there!",
-      "variations": [
-        "Mesti ada, boss! Kami ada program kesetiaan gempak dan faedah VIP untuk pemain tetap—setiap pertaruhan kumpul mata untuk boss tukar jadi ganjaran dan hadiah hebat. Nak tahu lebih? Tengok bahagian faedah VIP kat app—semua ada kat situ!",
-        "You bet there are, boss! We’ve got a killer loyalty program and VIP perks for regulars—every bet racks up points you can cash in for awesome rewards and gifts. Wanna know more? Peek at the VIP perks section in the app—it’s all there!",
-        "絕對有的，老板！我們為常規玩家準備了豐富的忠誠度計劃和VIP福利，您每次下注都能累積積分，積分可以兌換各式各樣的獎勵和禮品。想了解更多詳情嗎？您可以隨時查看應用程序中的VIP福利部分，那裡有所有您需要的信息。"
-      ],
+      "text": "Are there any loyalty programs or VIP benefits for regular players?",
+      "variations": [],
       "intent": "points_accumulation",
       "languages": {
         "en": "Are there any loyalty programs or VIP benefits for regular players?",
@@ -2402,9 +2218,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Oh yeah, boss! Loyalty and VIP perks—bet, stack points, snag cool stuff, check VIP section!",
-        "ms": "Oh ya, boss! Kesetiaan dan faedah VIP—taruh, tumpuk mata, ambik barang cool, tengok bahagian VIP!",
-        "cn": "當然有，老板！忠誠計劃和VIP福利—下注攢積分，拿超棒獎品，看VIP區哦！"
+        "en": "You bet there are, boss! We’ve got a killer loyalty program and VIP perks for regulars—every bet racks up points you can cash in for awesome rewards and gifts. Wanna know more? Peek at the VIP perks section in the app—it’s all there!",
+        "ms": "Mesti ada, boss! Kami ada program kesetiaan gempak dan faedah VIP untuk pemain tetap—setiap pertaruhan kumpul mata untuk boss tukar jadi ganjaran dan hadiah hebat. Nak tahu lebih? Tengok bahagian faedah VIP kat app—semua ada kat situ!",
+        "cn": "絕對有的，老板！我們為常規玩家準備了豐富的忠誠度計劃和VIP福利，您每次下注都能累積積分，積分可以兌換各式各樣的獎勵和禮品。想了解更多詳情嗎？您可以隨時查看應用程序中的VIP福利部分，那裡有所有您需要的信息。"
       },
       "conditions": []
     },
@@ -2415,8 +2231,8 @@
       "subCategory": "points_accumulation",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2440,12 +2256,8 @@
   {
     "id": "0846",
     "question": {
-      "text": "The system’s asking for a 5-minute breather, boss, to keep every transaction safe and spot-on—it’s a shield against too many fast repeats jamming things up and protects your cash!",
-      "variations": [
-        "Sistem minta tunggu 5 minit, boss, untuk jaga setiap transaksi selamat dan tepat—perisai daripada ulangan cepat terlalu banyak yang buat sesak dan lindung duit boss!",
-        "The system’s asking for a 5-minute breather, boss, to keep every transaction safe and spot-on—it’s a shield against too many fast repeats jamming things up and protects your cash!",
-        "系統要求您等待5分鐘進行交易，老板，主要是為了確保每筆交易的安全和準確。這是為了避免高頻率的相同交易導致系統過載，同時保護您的資金安全。"
-      ],
+      "text": "Why did the system ask me to wait 5 minutes for a transaction?",
+      "variations": [],
       "intent": "transaction_records",
       "languages": {
         "en": "Why did the system ask me to wait 5 minutes for a transaction?",
@@ -2455,9 +2267,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Hey, boss! 5-minute wait keeps deals safe—stops fast repeats from clogging, guards your cash!",
-        "ms": "Hai, boss! Tunggu 5 minit jaga transaksi selamat—cegah ulangan cepat tersumbat, lindung duit boss!",
-        "cn": "您好，老板！等5分鐘保交易安全—防頻繁重複堵塞，護您的資金哦！"
+        "en": "The system’s asking for a 5-minute breather, boss, to keep every transaction safe and spot-on—it’s a shield against too many fast repeats jamming things up and protects your cash!",
+        "ms": "Sistem minta tunggu 5 minit, boss, untuk jaga setiap transaksi selamat dan tepat—perisai daripada ulangan cepat terlalu banyak yang buat sesak dan lindung duit boss!",
+        "cn": "系統要求您等待5分鐘進行交易，老板，主要是為了確保每筆交易的安全和準確。這是為了避免高頻率的相同交易導致系統過載，同時保護您的資金安全。"
       },
       "conditions": []
     },
@@ -2468,8 +2280,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2493,12 +2305,8 @@
   {
     "id": "0847",
     "question": {
-      "text": "You betcha, boss! We’ve got a sweet loyalty program and VIP perks tailored for regulars—every bet piles up points for juicy rewards and gifts. The more you play, the more you score! Check the VIP section in the app for the full scoop!",
-      "variations": [
-        "Mesti ada lah, boss! Kami ada program kesetiaan sedap dan faedah VIP khas untuk pemain tetap—setiap pertaruhan tumpuk mata untuk ganjaran dan hadiah menarik. Lagi banyak main, lagi banyak boss dapat! Tengok bahagian VIP kat app untuk scoop penuh!",
-        "You betcha, boss! We’ve got a sweet loyalty program and VIP perks tailored for regulars—every bet piles up points for juicy rewards and gifts. The more you play, the more you score! Check the VIP section in the app for the full scoop!",
-        "當然有啦，老板！我們非常重視常規玩家，特別設立了忠誠度計劃和VIP福利，讓您在遊戲中享受更多的獎勵和特權！您每次下注都可以獲得積分，積累到一定程度後，可以兌換各種精彩的禮品和獨家優惠。若想深入了解，可查看應用中的VIP福利部分。"
-      ],
+      "text": "Are there any loyalty programs or VIP benefits for regular players?",
+      "variations": [],
       "intent": "points_accumulation",
       "languages": {
         "en": "Are there any loyalty programs or VIP benefits for regular players?",
@@ -2508,9 +2316,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Hell yeah, boss! Loyalty and VIP for regulars—bet, rack points, grab goodies, peek VIP section!",
-        "ms": "Memang ada, boss! Kesetiaan dan VIP untuk tetap—taruh, kumpul mata, ambik barang sedap, tengok bahagian VIP!",
-        "cn": "當然有啦，老板！常客忠誠計劃和VIP—下注攢積分，拿好禮，看VIP區詳情！"
+        "en": "You betcha, boss! We’ve got a sweet loyalty program and VIP perks tailored for regulars—every bet piles up points for juicy rewards and gifts. The more you play, the more you score! Check the VIP section in the app for the full scoop!",
+        "ms": "Mesti ada lah, boss! Kami ada program kesetiaan sedap dan faedah VIP khas untuk pemain tetap—setiap pertaruhan tumpuk mata untuk ganjaran dan hadiah menarik. Lagi banyak main, lagi banyak boss dapat! Tengok bahagian VIP kat app untuk scoop penuh!",
+        "cn": "當然有啦，老板！我們非常重視常規玩家，特別設立了忠誠度計劃和VIP福利，讓您在遊戲中享受更多的獎勵和特權！您每次下注都可以獲得積分，積累到一定程度後，可以兌換各種精彩的禮品和獨家優惠。若想深入了解，可查看應用中的VIP福利部分。"
       },
       "conditions": []
     },
@@ -2521,8 +2329,8 @@
       "subCategory": "points_accumulation",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2546,12 +2354,8 @@
   {
     "id": "0848",
     "question": {
-      "text": "I get you wanting that withdrawal quick, boss! Normally, it’s done in 5-30 minutes—sometimes system traffic jams it up a bit, but we’re on it to keep it snappy!",
-      "variations": [
-        "Saya faham boss nak pengeluaran cepat! Biasanya selesai dalam 5-30 minit—kadang trafik sistem buat lambat sikit, tapi kami usaha jaga laju!",
-        "I get you wanting that withdrawal quick, boss! Normally, it’s done in 5-30 minutes—sometimes system traffic jams it up a bit, but we’re on it to keep it snappy!",
-        "我明白您希望盡快收到提款，老板！通常情況下，提款會在5到30分鐘內處理完畢。不過，有時由於系統繁忙，處理速度可能會稍有延遲。"
-      ],
+      "text": "Is there a way to speed up the withdrawal process?",
+      "variations": [],
       "intent": "withdrawal_conditions",
       "languages": {
         "en": "Is there a way to speed up the withdrawal process?",
@@ -2561,9 +2365,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Feel ya, boss! Withdrawals zip in 5-30—busy system might lag, we’re pushing it fast!",
-        "ms": "Rasa boss, lah! Pengeluaran laju 5-30—sistem sibuk mungkin lelet, kami pacukan cepat!",
-        "cn": "懂您，老板！提款5-30速到—系統忙或慢，我們尽力加速哦！"
+        "en": "I get you wanting that withdrawal quick, boss! Normally, it’s done in 5-30 minutes—sometimes system traffic jams it up a bit, but we’re on it to keep it snappy!",
+        "ms": "Saya faham boss nak pengeluaran cepat! Biasanya selesai dalam 5-30 minit—kadang trafik sistem buat lambat sikit, tapi kami usaha jaga laju!",
+        "cn": "我明白您希望盡快收到提款，老板！通常情況下，提款會在5到30分鐘內處理完畢。不過，有時由於系統繁忙，處理速度可能會稍有延遲。"
       },
       "conditions": []
     },
@@ -2574,8 +2378,8 @@
       "subCategory": "withdrawal_conditions",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2599,12 +2403,8 @@
   {
     "id": "0849",
     "question": {
-      "text": "Got a tech hiccup with a game, boss? Hit me up anytime with the details—when it went wonky, game name, screenshots if you’ve got ‘em. We’ll dig in fast to fix it so you’re back gaming in no time!",
-      "variations": [
-        "Ada masalah teknikal dengan game, boss? Hubungi saya bila-bila dengan butiran—bila jadi pelik, nama game, screenshot kalau ada. Kami selami cepat untuk betulkan supaya boss balik main sekejap je!",
-        "Got a tech hiccup with a game, boss? Hit me up anytime with the details—when it went wonky, game name, screenshots if you’ve got ‘em. We’ll dig in fast to fix it so you’re back gaming in no time!",
-        "若您遇到特定遊戲的技術問題，老板，請隨時聯繫我，提供問題發生的時間、涉及的遊戲名稱，以及相關截圖信息。我們會盡快調查並解決問題，讓您能盡快回到遊戲中享受樂趣！"
-      ],
+      "text": "How do I report a technical issue with a specific game?",
+      "variations": [],
       "intent": "game_issues",
       "languages": {
         "en": "How do I report a technical issue with a specific game?",
@@ -2614,9 +2414,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Game snag, boss? Ping me—time, name, pics—we’ll zap it, back to fun quick!",
-        "ms": "Game tersangkut, boss? Panggil saya—masa, nama, gambar—kami hapuskan, balik seronok cepat!",
-        "cn": "遊戲卡，老板？找我—時間、名稱、截圖—我們速修，樂趣快回！"
+        "en": "Got a tech hiccup with a game, boss? Hit me up anytime with the details—when it went wonky, game name, screenshots if you’ve got ‘em. We’ll dig in fast to fix it so you’re back gaming in no time!",
+        "ms": "Ada masalah teknikal dengan game, boss? Hubungi saya bila-bila dengan butiran—bila jadi pelik, nama game, screenshot kalau ada. Kami selami cepat untuk betulkan supaya boss balik main sekejap je!",
+        "cn": "若您遇到特定遊戲的技術問題，老板，請隨時聯繫我，提供問題發生的時間、涉及的遊戲名稱，以及相關截圖信息。我們會盡快調查並解決問題，讓您能盡快回到遊戲中享受樂趣！"
       },
       "conditions": []
     },
@@ -2627,8 +2427,8 @@
       "subCategory": "game_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2652,12 +2452,8 @@
   {
     "id": "0850",
     "question": {
-      "text": "I get why you’re puzzled, boss! Withdrawal not approved could mean a few things—maybe the info’s incomplete or doesn’t match your account, or it’s below the minimum. Double-check your details to make sure it’s all good!",
-      "variations": [
-        "Saya faham kenapa boss bingung! Pengeluaran tak diluluskan mungkin ada sebab—mungkin info tak lengkap atau tak sama dengan akaun, atau bawah minimum. Semak dua kali butiran boss pastikan semua ok!",
-        "I get why you’re puzzled, boss! Withdrawal not approved could mean a few things—maybe the info’s incomplete or doesn’t match your account, or it’s below the minimum. Double-check your details to make sure it’s all good!",
-        "我理解您對此感到困惑，老板！提款未被批准可能是因為幾個原因，比如您提供的提款信息不完全或與賬戶不匹配，或者未達到最低要求。建議您檢查一下相關信息，確保一切正確無誤。"
-      ],
+      "text": "Why is my withdrawal not being approved?",
+      "variations": [],
       "intent": "withdrawal_conditions",
       "languages": {
         "en": "Why is my withdrawal not being approved?",
@@ -2667,9 +2463,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Gotcha, boss! Withdrawal snagged? Info off or too low—check it, make it right!",
-        "ms": "Faham, boss! Pengeluaran tersangkut? Info salah atau rendah—semak, betulkan!",
-        "cn": "明白，老板！提款卡住？信息錯或太低—查一下，弄對哦！"
+        "en": "I get why you’re puzzled, boss! Withdrawal not approved could mean a few things—maybe the info’s incomplete or doesn’t match your account, or it’s below the minimum. Double-check your details to make sure it’s all good!",
+        "ms": "Saya faham kenapa boss bingung! Pengeluaran tak diluluskan mungkin ada sebab—mungkin info tak lengkap atau tak sama dengan akaun, atau bawah minimum. Semak dua kali butiran boss pastikan semua ok!",
+        "cn": "我理解您對此感到困惑，老板！提款未被批准可能是因為幾個原因，比如您提供的提款信息不完全或與賬戶不匹配，或者未達到最低要求。建議您檢查一下相關信息，確保一切正確無誤。"
       },
       "conditions": []
     },
@@ -2680,8 +2476,8 @@
       "subCategory": "withdrawal_conditions",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2705,12 +2501,8 @@
   {
     "id": "0851",
     "question": {
-      "text": "Sure can, boss! Changing your account’s phone number is a breeze—hit the profile icon at the bottom in the app, head to profile settings, find the phone update spot, and punch in your new number. Keep it valid so we can keep you in the loop!",
-      "variations": [
-        "Boleh je, boss! Tukar nombor telefon akaun senang je—tekan ikon profil kat bawah dalam app, pergi tetapan profil, cari tempat kemas kini telefon, masukkan nombor baru boss. Pastikan sah supaya kami boleh jaga boss dalam gelung!",
-        "Sure can, boss! Changing your account’s phone number is a breeze—hit the profile icon at the bottom in the app, head to profile settings, find the phone update spot, and punch in your new number. Keep it valid so we can keep you in the loop!",
-        "當然可以，老板！更改與您賬戶相關的手機號碼很簡單。您只需在應用程序下方的人頭圖標裡，找到個人資料設置，接著選擇更新手機號碼，然後輸入新的號碼。確保您輸入的新號碼是有效的，這樣我們才能更好地為您服務！"
-      ],
+      "text": "Is it possible to change the phone number associated with my account?",
+      "variations": [],
       "intent": "account_management",
       "languages": {
         "en": "Is it possible to change the phone number associated with my account?",
@@ -2720,9 +2512,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "You bet, boss! App, bottom profile, settings—swap phone, keep it live, we’re good!",
-        "ms": "Mesti boleh, boss! App, profil bawah, tetapan—tukar telefon, pastikan hidup, kita ok!",
-        "cn": "當然行，老板！應用，下方人頭，設置—換號，保有效，我們沒問題！"
+        "en": "Sure can, boss! Changing your account’s phone number is a breeze—hit the profile icon at the bottom in the app, head to profile settings, find the phone update spot, and punch in your new number. Keep it valid so we can keep you in the loop!",
+        "ms": "Boleh je, boss! Tukar nombor telefon akaun senang je—tekan ikon profil kat bawah dalam app, pergi tetapan profil, cari tempat kemas kini telefon, masukkan nombor baru boss. Pastikan sah supaya kami boleh jaga boss dalam gelung!",
+        "cn": "當然可以，老板！更改與您賬戶相關的手機號碼很簡單。您只需在應用程序下方的人頭圖標裡，找到個人資料設置，接著選擇更新手機號碼，然後輸入新的號碼。確保您輸入的新號碼是有效的，這樣我們才能更好地為您服務！"
       },
       "conditions": []
     },
@@ -2733,8 +2525,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2758,12 +2550,8 @@
   {
     "id": "0852",
     "question": {
-      "text": "You sure can, boss! Multiple bank accounts for deposits and withdrawals are all good—just make sure they’re all yours, and you’ve got the flexibility to move cash whenever, wherever!",
-      "variations": [
-        "Boleh je, boss! Banyak akaun bank untuk deposit dan pengeluaran semua ok—pastikan semua milik boss, dan boss ada fleksibiliti gerakkan duit bila-bila, mana-mana!",
-        "You sure can, boss! Multiple bank accounts for deposits and withdrawals are all good—just make sure they’re all yours, and you’ve got the flexibility to move cash whenever, wherever!",
-        "當然可以，老板！您可以使用多個銀行賬戶進行存款和提款，只要確保這些賬戶都是您本人持有的就可以。這為您提供了更多的靈活性和便利性，隨時隨地都能進行交易！"
-      ],
+      "text": "Can I use multiple bank accounts for deposits and withdrawals?",
+      "variations": [],
       "intent": "payment_issues",
       "languages": {
         "en": "Can I use multiple bank accounts for deposits and withdrawals?",
@@ -2773,9 +2561,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "No prob, boss! Multiple banks for deposits, withdrawals—keep ‘em yours, flex it anytime!",
-        "ms": "Tak ada hal, boss! Banyak bank untuk deposit, pengeluaran—pastikan punya boss, fleksibel bila-bila!",
-        "cn": "沒問題，老板！多個銀行存提款—確保您的，隨時靈活操作！"
+        "en": "You sure can, boss! Multiple bank accounts for deposits and withdrawals are all good—just make sure they’re all yours, and you’ve got the flexibility to move cash whenever, wherever!",
+        "ms": "Boleh je, boss! Banyak akaun bank untuk deposit dan pengeluaran semua ok—pastikan semua milik boss, dan boss ada fleksibiliti gerakkan duit bila-bila, mana-mana!",
+        "cn": "當然可以，老板！您可以使用多個銀行賬戶進行存款和提款，只要確保這些賬戶都是您本人持有的就可以。這為您提供了更多的靈活性和便利性，隨時隨地都能進行交易！"
       },
       "conditions": []
     },
@@ -2786,8 +2574,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2811,12 +2599,8 @@
   {
     "id": "0853",
     "question": {
-      "text": "I feel you on the confusion, boss! Can’t hit the banking section on your mobile? Might be some move accidentally tripped our safety rules, locking it down. Check your account for funky stuff—if it’s all clear, ping me with screenshots, and we’ll dive in to fix it fast!",
-      "variations": [
-        "Saya faham boss bingung! Tak boleh masuk bahagian perbankan kat telefon? Mungkin ada gerakan tak sengaja langgar peraturan keselamatan kami, jadi kunci. Semak akaun kalau ada benda pelik—kalau semua clear, hantar screenshot, kami selami betulkan cepat!",
-        "I feel you on the confusion, boss! Can’t hit the banking section on your mobile? Might be some move accidentally tripped our safety rules, locking it down. Check your account for funky stuff—if it’s all clear, ping me with screenshots, and we’ll dive in to fix it fast!",
-        "我明白您的困惑，老板！無法在手機設備上訪問銀行部分可能是因為幾個原因，比如您在某些操作中無意間違反了相關條件，導致訪問受限。請檢查您的賬戶信息，確保沒有違規操作。若確認無誤，請提供截圖，我們會幫您調查並解決！"
-      ],
+      "text": "Why can't I access the banking section on my mobile device?",
+      "variations": [],
       "intent": "bank_issues",
       "languages": {
         "en": "Why can't I access the banking section on my mobile device?",
@@ -2826,9 +2610,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Got it, boss! Banking shut? Might’ve nudged a rule—check moves, clean? Pics, we’ll zip it!",
-        "ms": "Faham, boss! Perbankan tutup? Mungkin terlanggar peraturan—semak gerakan, bersih? Gambar, kami lajukan!",
-        "cn": "懂了，老板！銀行部分關了？或違規—查操作，無誤？截圖，我們速修！"
+        "en": "I feel you on the confusion, boss! Can’t hit the banking section on your mobile? Might be some move accidentally tripped our safety rules, locking it down. Check your account for funky stuff—if it’s all clear, ping me with screenshots, and we’ll dive in to fix it fast!",
+        "ms": "Saya faham boss bingung! Tak boleh masuk bahagian perbankan kat telefon? Mungkin ada gerakan tak sengaja langgar peraturan keselamatan kami, jadi kunci. Semak akaun kalau ada benda pelik—kalau semua clear, hantar screenshot, kami selami betulkan cepat!",
+        "cn": "我明白您的困惑，老板！無法在手機設備上訪問銀行部分可能是因為幾個原因，比如您在某些操作中無意間違反了相關條件，導致訪問受限。請檢查您的賬戶信息，確保沒有違規操作。若確認無誤，請提供截圖，我們會幫您調查並解決！"
       },
       "conditions": []
     },
@@ -2839,8 +2623,8 @@
       "subCategory": "bank_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2864,12 +2648,8 @@
   {
     "id": "0854",
     "question": {
-      "text": "Switching up the language is a piece of cake, boss! Tap the profile icon at the bottom in the app, hunt down the language option—pick what you vibe with, confirm, and boom, smoother gaming in your style!",
-      "variations": [
-        "Tukar bahasa senang je, boss! Tekan ikon profil kat bawah dalam app, cari pilihan bahasa—pilih yang boss vibe, sahkan, dan boom, game lagi lancar gaya boss!",
-        "Switching up the language is a piece of cake, boss! Tap the profile icon at the bottom in the app, hunt down the language option—pick what you vibe with, confirm, and boom, smoother gaming in your style!",
-        "更改平台的語言設置很簡單哦，老板！只需點擊應用程序下方的人頭圖標，找到語言選項，然後選擇您喜歡的語言進行確認即可。這讓您在遊戲中體驗更加順暢，真是太方便了！"
-      ],
+      "text": "How can I change the language settings on the platform?",
+      "variations": [],
       "intent": "app_issues",
       "languages": {
         "en": "How can I change the language settings on the platform?",
@@ -2879,9 +2659,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Easy, boss! App, bottom profile, language—set your groove, confirm, game flows slick!",
-        "ms": "Senang, boss! App, profil bawah, bahasa—set groove boss, sahkan, game mengalir licin!",
-        "cn": "簡單，老板！應用，下方人頭，語言—定您風格，確認，遊戲流暢極了！"
+        "en": "Switching up the language is a piece of cake, boss! Tap the profile icon at the bottom in the app, hunt down the language option—pick what you vibe with, confirm, and boom, smoother gaming in your style!",
+        "ms": "Tukar bahasa senang je, boss! Tekan ikon profil kat bawah dalam app, cari pilihan bahasa—pilih yang boss vibe, sahkan, dan boom, game lagi lancar gaya boss!",
+        "cn": "更改平台的語言設置很簡單哦，老板！只需點擊應用程序下方的人頭圖標，找到語言選項，然後選擇您喜歡的語言進行確認即可。這讓您在遊戲中體驗更加順暢，真是太方便了！"
       },
       "conditions": []
     },
@@ -2892,8 +2672,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2917,12 +2697,8 @@
   {
     "id": "0855",
     "question": {
-      "text": "You bet there are, boss! We roll out the red carpet for regulars with a top-notch loyalty program and VIP perks—every bet piles up points for killer rewards and exclusive goodies. The more you’re in, the more you win!",
-      "variations": [
-        "Mesti ada lah, boss! Kami gulung karpet merah untuk pemain tetap dengan program kesetiaan hebat dan faedah VIP—setiap pertaruhan tumpuk mata untuk ganjaran gempak dan barang eksklusif. Lagi banyak boss masuk, lagi banyak boss menang!",
-        "You bet there are, boss! We roll out the red carpet for regulars with a top-notch loyalty program and VIP perks—every bet piles up points for killer rewards and exclusive goodies. The more you’re in, the more you win!",
-        "當然有啦，老板！我們非常重視常規玩家，特別設立了忠誠度計劃和VIP福利，讓您在遊戲中享受更多獎勵和特權！您每次下注都可以獲得積分，積累到一定程度後，可以兌換精彩的禮品和獨家優惠。"
-      ],
+      "text": "Are there any loyalty programs or VIP benefits for regular players?",
+      "variations": [],
       "intent": "points_accumulation",
       "languages": {
         "en": "Are there any loyalty programs or VIP benefits for regular players?",
@@ -2932,9 +2708,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Hell yes, boss! Loyalty and VIP for regulars—bet, stack points, score big perks!",
-        "ms": "Ya betul, boss! Kesetiaan dan VIP untuk tetap—taruh, kumpul mata, dapat faedah besar!",
-        "cn": "當然有，老板！常客忠誠計劃和VIP—下注攢積分，贏大福利哦！"
+        "en": "You bet there are, boss! We roll out the red carpet for regulars with a top-notch loyalty program and VIP perks—every bet piles up points for killer rewards and exclusive goodies. The more you’re in, the more you win!",
+        "ms": "Mesti ada lah, boss! Kami gulung karpet merah untuk pemain tetap dengan program kesetiaan hebat dan faedah VIP—setiap pertaruhan tumpuk mata untuk ganjaran gempak dan barang eksklusif. Lagi banyak boss masuk, lagi banyak boss menang!",
+        "cn": "當然有啦，老板！我們非常重視常規玩家，特別設立了忠誠度計劃和VIP福利，讓您在遊戲中享受更多獎勵和特權！您每次下注都可以獲得積分，積累到一定程度後，可以兌換精彩的禮品和獨家優惠。"
       },
       "conditions": []
     },
@@ -2945,8 +2721,8 @@
       "subCategory": "points_accumulation",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -2970,12 +2746,8 @@
   {
     "id": "0856",
     "question": {
-      "text": "Hey boss, no new game updates just yet! Tap the megaphone icon up top-left in the app to stay in the loop with our latest announcements—keep an eye out! 😊",
-      "variations": [
-        "Hai boss, belum ada kemas kini game baru lagi! Tekan ikon megafon kat atas kiri dalam app untuk kekal dalam gelung dengan pengumuman terkini kami—tengok je! 😊",
-        "Hey boss, no new game updates just yet! Tap the megaphone icon up top-left in the app to stay in the loop with our latest announcements—keep an eye out! 😊",
-        "您好，老板，目前還沒有新的遊戲更新。您可以點擊應用程序左上角的喇叭圖標，關注我們最新的公告哦~😊"
-      ],
+      "text": "How often are new games added to the platform?",
+      "variations": [],
       "intent": "game_rules",
       "languages": {
         "en": "How often are new games added to the platform?",
@@ -2985,9 +2757,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Yo, boss! No new games yet—hit top-left megaphone, catch the latest buzz! 😊",
-        "ms": "Oi, boss! Belum ada game baru—tekan megafon atas kiri, dapat buzz terkini! 😊",
-        "cn": "嘿，老板！還沒新遊戲—點左上喇叭，抓最新消息哦！😊"
+        "en": "Hey boss, no new game updates just yet! Tap the megaphone icon up top-left in the app to stay in the loop with our latest announcements—keep an eye out! 😊",
+        "ms": "Hai boss, belum ada kemas kini game baru lagi! Tekan ikon megafon kat atas kiri dalam app untuk kekal dalam gelung dengan pengumuman terkini kami—tengok je! 😊",
+        "cn": "您好，老板，目前還沒有新的遊戲更新。您可以點擊應用程序左上角的喇叭圖標，關注我們最新的公告哦~😊"
       },
       "conditions": []
     },
@@ -2998,8 +2770,8 @@
       "subCategory": "game_rules",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3023,12 +2795,8 @@
   {
     "id": "0857",
     "question": {
-      "text": "No worries, boss—just make sure to pop in the right ID next time and you’re good to go! 🫡",
-      "variations": [
-        "Tak apa, boss—pastikan masukkan ID betul lain kali je, boss selamat jalan! 🫡",
-        "No worries, boss—just make sure to pop in the right ID next time and you’re good to go! 🫡",
-        "沒關係哦，老板，下次記得填寫正確的ID就好啦~🫡"
-      ],
+      "text": "What should I do if I entered the wrong ID number on my deposit receipt?",
+      "variations": [],
       "intent": "transaction_records",
       "languages": {
         "en": "What should I do if I entered the wrong ID number on my deposit receipt?",
@@ -3038,9 +2806,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "All good, boss! Next time, right ID—off you go! 🫡",
-        "ms": "Ok je, boss! Lain kali, ID betul—teruskan je! 🫡",
-        "cn": "沒事，老板！下次用對ID—走起啦！🫡"
+        "en": "No worries, boss—just make sure to pop in the right ID next time and you’re good to go! 🫡",
+        "ms": "Tak apa, boss—pastikan masukkan ID betul lain kali je, boss selamat jalan! 🫡",
+        "cn": "沒關係哦，老板，下次記得填寫正確的ID就好啦~🫡"
       },
       "conditions": []
     },
@@ -3051,8 +2819,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3076,12 +2844,8 @@
   {
     "id": "0858",
     "question": {
-      "text": "If you can’t snap a screenshot of your bank app, boss, grab the receipt from your bank transaction log, snap that instead, and upload it to the app—boom, sorted! ❤️",
-      "variations": [
-        "Kalau boss tak boleh tangkap skrin app bank, ambil resit dari log transaksi bank boss, snap tu je, dan muat naik ke app—boom, selesai! ❤️",
-        "If you can’t snap a screenshot of your bank app, boss, grab the receipt from your bank transaction log, snap that instead, and upload it to the app—boom, sorted! ❤️",
-        "若您無法截取銀行應用程序的截圖進行存款，老板，您可以從銀行交易記錄下載單據後截圖，再上傳到App哦。❤️"
-      ],
+      "text": "What should I do if I can't take a screenshot of my bank app for the deposit?",
+      "variations": [],
       "intent": "transaction_records",
       "languages": {
         "en": "What should I do if I can't take a screenshot of my bank app for the deposit?",
@@ -3091,9 +2855,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "No screenshot, boss? Snag bank log receipt, snap it, upload—done deal! ❤️",
-        "ms": "Tak ada skrin, boss? Ambil resit log bank, snap, muat naik—deal selesai! ❤️",
-        "cn": "沒截圖，老板？抓銀行記錄單據，拍下，上傳—搞定！❤️"
+        "en": "If you can’t snap a screenshot of your bank app, boss, grab the receipt from your bank transaction log, snap that instead, and upload it to the app—boom, sorted! ❤️",
+        "ms": "Kalau boss tak boleh tangkap skrin app bank, ambil resit dari log transaksi bank boss, snap tu je, dan muat naik ke app—boom, selesai! ❤️",
+        "cn": "若您無法截取銀行應用程序的截圖進行存款，老板，您可以從銀行交易記錄下載單據後截圖，再上傳到App哦。❤️"
       },
       "conditions": []
     },
@@ -3104,8 +2868,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"

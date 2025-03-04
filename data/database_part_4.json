@@ -2970,12 +2970,8 @@
   {
     "id": "0357",
     "question": {
-      "text": "You can find it on jokerplus.com/download",
-      "variations": [
-        "Anda boleh mencarinya di jokerplus.com/download",
-        "You can find it on jokerplus.com/download",
-        "您可以到 jokerplus.com/download 找到它"
-      ],
+      "text": "Where can I find the download link for the gaming app?",
+      "variations": [],
       "intent": "app_issues",
       "languages": {
         "en": "Where can I find the download link for the gaming app?",
@@ -2985,9 +2981,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Got it, boss! You can find the download link at jokerplus.com/download. Just head there, and you’re all set. If you run into any trouble, let me know—I’ll walk you through it!",
-        "ms": "Baik, boss! Pautan muat turun ada di jokerplus.com/download. Pergi je ke situ, senang je. Kalau ada masalah, bagitahu saya—saya akan tunjuk caranya!",
-        "cn": "好的，老板！下載鏈接在 jokerplus.com/download。請您到那裡下載就行。如果遇到問題，隨時告訴我，我會教您怎麼做！"
+        "en": "You can find it on jokerplus.com/download",
+        "ms": "Anda boleh mencarinya di jokerplus.com/download",
+        "cn": "您可以到 jokerplus.com/download 找到它"
       },
       "conditions": []
     },
@@ -2998,8 +2994,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3023,12 +3019,8 @@
   {
     "id": "0358",
     "question": {
-      "text": "5-10 minutes",
-      "variations": [
-        "5-10 minit",
-        "5-10 minutes",
-        "5-10分鐘"
-      ],
+      "text": "How long should I wait for a deposit before contacting support?",
+      "variations": [],
       "intent": "payment_issues",
       "languages": {
         "en": "How long should I wait for a deposit before contacting support?",
@@ -3038,9 +3030,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Got it, boss! Just wait 5-10 minutes for the deposit to go through. If it’s still not there after that, feel free to reach out—I’ll help you sort it out!",
-        "ms": "Baik, boss! Tunggu je 5-10 minit untuk deposit masuk. Kalau lama lagi tak ada, bagitahu saya—saya akan settlekan untuk boss!",
-        "cn": "好的，老板！請您等待5-10分鐘讓存款處理完成。如果超過時間還沒到賬，隨時告訴我，我會幫您解決！"
+        "en": "5-10 minutes",
+        "ms": "5-10 minit",
+        "cn": "5-10分鐘"
       },
       "conditions": []
     },
@@ -3051,8 +3043,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3076,12 +3068,8 @@
   {
     "id": "0359",
     "question": {
-      "text": "Click the icon of the head in the lower right corner of the app, then click language, select the language and press confirm",
-      "variations": [
-        "Klik ikon kepala di sudut kanan bawah aplikasi, kemudian klik bahasa, pilih bahasa dan tekan sahkan",
-        "Click the icon of the head in the lower right corner of the app, then click language, select the language and press confirm",
-        "請您點擊應用右下角人頭圖標，然後點擊語言，選擇語言後按確認"
-      ],
+      "text": "How can I change the language settings on the platform?",
+      "variations": [],
       "intent": "app_issues",
       "languages": {
         "en": "How can I change the language settings on the platform?",
@@ -3091,9 +3079,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Alright, boss! Just tap the head icon at the bottom right of the app, hit language, pick your choice, and confirm. Easy stuff! Let me know if you get stuck!",
-        "ms": "Okey, boss! Tekan je ikon kepala kat sudut kanan bawah app, klik bahasa, pilih yang boss nak, lepas tu tekan sahkan. Senang je! Kalau tak jadi, cakap dengan saya!",
-        "cn": "好的，老板！請您點擊應用右下角的人頭圖標，選語言，挑選您想要的語言後按確認。很簡單！如果有問題，隨時告訴我！"
+        "en": "Click the icon of the head in the lower right corner of the app, then click language, select the language and press confirm",
+        "ms": "Klik ikon kepala di sudut kanan bawah aplikasi, kemudian klik bahasa, pilih bahasa dan tekan sahkan",
+        "cn": "請您點擊應用右下角人頭圖標，然後點擊語言，選擇語言後按確認"
       },
       "conditions": []
     },
@@ -3104,8 +3092,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3129,12 +3117,8 @@
   {
     "id": "0360",
     "question": {
-      "text": "Click the portrait icon in the lower right corner of the app, select update phone number, enter your new number, click Send TAC, then enter the TAC and submit",
-      "variations": [
-        "Klik ikon potret di sudut kanan bawah aplikasi, pilih kemas kini nombor telefon, masukkan nombor baru, klik Hantar TAC, kemudian masukkan TAC dan hantar",
-        "Click the portrait icon in the lower right corner of the app, select update phone number, enter your new number, click Send TAC, then enter the TAC and submit",
-        "請您點擊應用右下角的人像圖標，選擇更新電話號碼，輸入您的新號碼，點擊發送TAC，收到TAC後輸入並提交"
-      ],
+      "text": "How do I update my contact information if it has changed?",
+      "variations": [],
       "intent": "account_management",
       "languages": {
         "en": "How do I update my contact information if it has changed?",
@@ -3144,9 +3128,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "I hear you, boss! Tap the portrait icon at the bottom right of the app, choose update phone number, type in your new number, hit Send TAC, then enter the code and submit. Done! If it’s tricky, just tell me!",
-        "ms": "Faham, boss! Tekan ikon potret kat sudut kanan bawah app, pilih kemas kini nombor telefon, masukkan nombor baru, tekan Hantar TAC, lepas tu masukkan kod dan hantar. Selesai! Kalau susah, bagitahu saya!",
-        "cn": "了解，老板！請您點擊應用右下角的人像圖標，選更新電話號碼，輸入您的新號碼，點擊發送TAC，收到TAC後輸入並提交。完成！如果有困難，隨時告訴我！"
+        "en": "Click the portrait icon in the lower right corner of the app, select update phone number, enter your new number, click Send TAC, then enter the TAC and submit",
+        "ms": "Klik ikon potret di sudut kanan bawah aplikasi, pilih kemas kini nombor telefon, masukkan nombor baru, klik Hantar TAC, kemudian masukkan TAC dan hantar",
+        "cn": "請您點擊應用右下角的人像圖標，選擇更新電話號碼，輸入您的新號碼，點擊發送TAC，收到TAC後輸入並提交"
       },
       "conditions": []
     },
@@ -3157,8 +3141,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3182,12 +3166,8 @@
   {
     "id": "0361",
     "question": {
-      "text": "Hello boss, these slot machines are available throughout Asia, and we’re just agents. Wins and losses are part of the game—maybe your luck hasn’t kicked in yet. Wishing you big wins soon!",
-      "variations": [
-        "Helo boss, mesin slot ni ada di seluruh Asia, kami cuma ejen. Menang atau kalah memang biasa—mungkin luck boss belum sampai lagi. Semoga boss menang besar nanti!",
-        "Hello boss, these slot machines are available throughout Asia, and we’re just agents. Wins and losses are part of the game—maybe your luck hasn’t kicked in yet. Wishing you big wins soon!",
-        "您好，老板！這些老虎機遍布亞洲，我們只是代理。玩老虎機有贏有輸，可能您的運氣還沒到。祝您很快好運連連！"
-      ],
+      "text": "Why do the slot games seem more difficult to win lately?",
+      "variations": [],
       "intent": "game_rules",
       "languages": {
         "en": "Why do the slot games seem more difficult to win lately?",
@@ -3197,9 +3177,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "I see, boss! These slot machines are all over Asia, and we’re just the agents. It’s all about wins and losses—maybe your lucky streak is just around the corner. Hang in there, big wins are coming!",
-        "ms": "Oh, macam tu, boss! Mesin slot ni ada kat seluruh Asia, kami ejen je. Menang kalah tu biasa—mungkin luck boss tengah tunggu masa. Sabar ya, menang besar tak lama lagi!",
-        "cn": "明白，老板！這些老虎機遍布亞洲，我們只是代理。贏輸都很正常，可能您的好運還在路上。堅持一下，很快會有大贏的！"
+        "en": "Hello boss, these slot machines are available throughout Asia, and we’re just agents. Wins and losses are part of the game—maybe your luck hasn’t kicked in yet. Wishing you big wins soon!",
+        "ms": "Helo boss, mesin slot ni ada di seluruh Asia, kami cuma ejen. Menang atau kalah memang biasa—mungkin luck boss belum sampai lagi. Semoga boss menang besar nanti!",
+        "cn": "您好，老板！這些老虎機遍布亞洲，我們只是代理。玩老虎機有贏有輸，可能您的運氣還沒到。祝您很快好運連連！"
       },
       "conditions": []
     },
@@ -3210,8 +3190,8 @@
       "subCategory": "game_rules",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3235,12 +3215,8 @@
   {
     "id": "0362",
     "question": {
-      "text": "Hello boss, next time please double-check and enter your correct reference number when transferring. Thanks!",
-      "variations": [
-        "Helo boss, lain kali jangan salah lagi ya, masukkan nombor rujukan yang betul masa transfer. Terima kasih!",
-        "Hello boss, next time please double-check and enter your correct reference number when transferring. Thanks!",
-        "您好，老板！下次請您確認後輸入正確的參考號進行轉賬。謝謝您！"
-      ],
+      "text": "I entered the wrong reference on my deposit receipt. How can I correct this?",
+      "variations": [],
       "intent": "payment_issues",
       "languages": {
         "en": "I entered the wrong reference on my deposit receipt. How can I correct this?",
@@ -3250,9 +3226,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Understood, boss! No worries, just make sure to pop in the right reference number next time you transfer. You’ve got this!",
-        "ms": "Faham, boss! Tak apa, lain kali pastikan masukkan nombor rujukan yang betul masa transfer. Boss boleh punya!",
-        "cn": "好的，老板！沒問題，下次請您確認後輸入正確的參考號轉賬。謝謝您配合！"
+        "en": "Hello boss, next time please double-check and enter your correct reference number when transferring. Thanks!",
+        "ms": "Helo boss, lain kali jangan salah lagi ya, masukkan nombor rujukan yang betul masa transfer. Terima kasih!",
+        "cn": "您好，老板！下次請您確認後輸入正確的參考號進行轉賬。謝謝您！"
       },
       "conditions": []
     },
@@ -3263,8 +3239,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3288,12 +3264,8 @@
   {
     "id": "0363",
     "question": {
-      "text": "Dear player, tonight’s slower processing is due to a high number of winners. It should take 5-30 minutes. Thanks for your patience!",
-      "variations": [
-        "Pemain عزیز, malam ni pemprosesan lambat sebab ramai menang. Ia akan ambil 5-30 minit. Terima kasih atas kesabaran boss!",
-        "Dear player, tonight’s slower processing is due to a high number of winners. It should take 5-30 minutes. Thanks for your patience!",
-        "親愛的玩家，今晚因許多玩家獲勝，支付處理稍慢，預計5-30分鐘完成。感謝您的耐心！"
-      ],
+      "text": "Why is the payment processing slower than usual tonight?",
+      "variations": [],
       "intent": "payment_issues",
       "languages": {
         "en": "Why is the payment processing slower than usual tonight?",
@@ -3303,9 +3275,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "I get it, boss! Tonight’s a busy one with lots of winners, so payments might take 5-30 minutes. Hang tight, and thanks for being awesome!",
-        "ms": "Saya faham, boss! Malam ni ramai menang, jadi pemprosesan mungkin ambil 5-30 minit. Sabar ya, terima kasih sebab boss sporting!",
-        "cn": "了解，老板！今晚因獲勝玩家較多，支付處理可能需要5-30分鐘。請您稍等，感謝您的配合！"
+        "en": "Dear player, tonight’s slower processing is due to a high number of winners. It should take 5-30 minutes. Thanks for your patience!",
+        "ms": "Pemain عزیز, malam ni pemprosesan lambat sebab ramai menang. Ia akan ambil 5-30 minit. Terima kasih atas kesabaran boss!",
+        "cn": "親愛的玩家，今晚因許多玩家獲勝，支付處理稍慢，預計5-30分鐘完成。感謝您的耐心！"
       },
       "conditions": []
     },
@@ -3316,8 +3288,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3341,12 +3313,8 @@
   {
     "id": "0364",
     "question": {
-      "text": "Dear player, due to many winners tonight, withdrawal processing might be slightly delayed. It’s not rejected—we’ll aim to complete it in 5-30 minutes. Thanks for your patience!",
-      "variations": [
-        "Pemain عزیز, sebab ramai menang malam ni, pemprosesan pengeluaran mungkin lambat sikit. Ia tak ditolak—kami akan cuba selesaikan dalam 5-30 minit. Terima kasih atas kesabaran boss!",
-        "Dear player, due to many winners tonight, withdrawal processing might be slightly delayed. It’s not rejected—we’ll aim to complete it in 5-30 minutes. Thanks for your patience!",
-        "親愛的玩家，今晚因許多玩家獲勝，提款處理可能稍有延遲。您的提款並未被拒絕，我們會尽力在5-30分鐘內完成。感謝您的耐心！"
-      ],
+      "text": "Why is my withdrawal not being approved?",
+      "variations": [],
       "intent": "withdrawal_conditions",
       "languages": {
         "en": "Why is my withdrawal not being approved?",
@@ -3356,9 +3324,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "I get it, boss! Tonight’s packed with winners, so withdrawals might take 5-30 minutes. Don’t worry, it’s not rejected—just hang tight!",
-        "ms": "Saya faham, boss! Malam ni ramai menang, jadi pengeluaran mungkin ambil 5-30 minit. Jangan risau, tak ditolak—sabar ya!",
-        "cn": "了解，老板！今晚因獲勝玩家多，提款處理可能需要5-30分鐘。請您放心，未被拒絕，稍等即可！"
+        "en": "Dear player, due to many winners tonight, withdrawal processing might be slightly delayed. It’s not rejected—we’ll aim to complete it in 5-30 minutes. Thanks for your patience!",
+        "ms": "Pemain عزیز, sebab ramai menang malam ni, pemprosesan pengeluaran mungkin lambat sikit. Ia tak ditolak—kami akan cuba selesaikan dalam 5-30 minit. Terima kasih atas kesabaran boss!",
+        "cn": "親愛的玩家，今晚因許多玩家獲勝，提款處理可能稍有延遲。您的提款並未被拒絕，我們會尽力在5-30分鐘內完成。感謝您的耐心！"
       },
       "conditions": []
     },
@@ -3369,8 +3337,8 @@
       "subCategory": "withdrawal_conditions",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3394,12 +3362,8 @@
   {
     "id": "0365",
     "question": {
-      "text": "Dear player, if you can’t take a screenshot, log back into your bank app, go to transaction history, find the record, and take a screenshot there.",
-      "variations": [
-        "Pemain عزیز, kalau boss tak boleh ambil tangkapan skrin, log masuk semula ke app bank, pergi ke sejarah transaksi, cari rekod tu, dan ambil tangkapan skrin di situ.",
-        "Dear player, if you can’t take a screenshot, log back into your bank app, go to transaction history, find the record, and take a screenshot there.",
-        "親愛的玩家，若您無法截圖，請您重新登錄銀行應用，進入交易歷史，找到相關記錄後截圖。"
-      ],
+      "text": "What should I do if I can't take a screenshot of my bank app for the deposit?",
+      "variations": [],
       "intent": "payment_issues",
       "languages": {
         "en": "What should I do if I can't take a screenshot of my bank app for the deposit?",
@@ -3409,9 +3373,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "No stress, boss! If you can’t screenshot, just log back into your bank app, check the transaction history, and snap it from there. Easy fix!",
-        "ms": "Tak apa, boss! Kalau tak boleh tangkap skrin, log masuk balik app bank, tengok sejarah transaksi, lepas tu tangkap dari situ. Senang je!",
-        "cn": "沒問題，老板！若您無法截圖，請您重新登錄銀行應用，查看交易歷史，然後在那裡截圖就行。很簡單！"
+        "en": "Dear player, if you can’t take a screenshot, log back into your bank app, go to transaction history, find the record, and take a screenshot there.",
+        "ms": "Pemain عزیز, kalau boss tak boleh ambil tangkapan skrin, log masuk semula ke app bank, pergi ke sejarah transaksi, cari rekod tu, dan ambil tangkapan skrin di situ.",
+        "cn": "親愛的玩家，若您無法截圖，請您重新登錄銀行應用，進入交易歷史，找到相關記錄後截圖。"
       },
       "conditions": []
     },
@@ -3422,8 +3386,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3447,12 +3411,8 @@
   {
     "id": "0366",
     "question": {
-      "text": "Dear player, click the portrait icon at the bottom right of the app, scroll to the bottom, and you’ll see the download link in the referral section.",
-      "variations": [
-        "Pemain عزیز, klik ikon potret di sudut kanan bawah app, skrol ke bawah, dan boss akan jumpa pautan muat turun di bahagian rujukan.",
-        "Dear player, click the portrait icon at the bottom right of the app, scroll to the bottom, and you’ll see the download link in the referral section.",
-        "親愛的玩家，請您點擊應用右下角的人像圖標，滑到頁面底部，在推薦區域可看到下載鏈接。"
-      ],
+      "text": "Where can I find the download link for the gaming app?",
+      "variations": [],
       "intent": "app_issues",
       "languages": {
         "en": "Where can I find the download link for the gaming app?",
@@ -3462,9 +3422,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Got it, boss! Tap the portrait icon at the bottom right, scroll down, and you’ll spot the download link in the referral section. Simple as that!",
-        "ms": "Baik, boss! Tekan ikon potret kat bawah kanan, skrol ke bawah, dan boss akan nampak pautan muat turun di bahagian rujukan. Senang je!",
-        "cn": "好的，老板！請您點擊應用右下角的人像圖標，滑到最底，在推薦區域就能找到下載鏈接。很簡單！"
+        "en": "Dear player, click the portrait icon at the bottom right of the app, scroll to the bottom, and you’ll see the download link in the referral section.",
+        "ms": "Pemain عزیز, klik ikon potret di sudut kanan bawah app, skrol ke bawah, dan boss akan jumpa pautan muat turun di bahagian rujukan.",
+        "cn": "親愛的玩家，請您點擊應用右下角的人像圖標，滑到頁面底部，在推薦區域可看到下載鏈接。"
       },
       "conditions": []
     },
@@ -3475,8 +3435,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3500,12 +3460,8 @@
   {
     "id": "0367",
     "question": {
-      "text": "Dear player, if you suspect unauthorized activity, change your password immediately and contact our customer service team with details for assistance.",
-      "variations": [
-        "Pemain عزیز, kalau boss syak ada aktiviti tak sah, tukar kata laluan segera dan hubungi pasukan sokongan pelanggan kami dengan butiran untuk bantuan.",
-        "Dear player, if you suspect unauthorized activity, change your password immediately and contact our customer service team with details for assistance.",
-        "親愛的玩家，若您懷疑賬戶有未經授權的活動，請立即更改密碼，並聯繫我們的客服團隊提供詳情以獲得協助。"
-      ],
+      "text": "What should I do if I suspect unauthorized activity on my account?",
+      "variations": [],
       "intent": "security_concerns",
       "languages": {
         "en": "What should I do if I suspect unauthorized activity on my account?",
@@ -3515,9 +3471,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "I hear you, boss! Change your password right away, then reach out to our customer service team with the details—we’ll sort it out fast!",
-        "ms": "Faham, boss! Tukar kata laluan sekarang, lepas tu hubungi pasukan sokongan pelanggan kami dengan butiran—kami akan settle cepat!",
-        "cn": "了解，老板！請您馬上更改密碼，然後聯繫我們的客服團隊提供詳情，我們會快速幫您處理！"
+        "en": "Dear player, if you suspect unauthorized activity, change your password immediately and contact our customer service team with details for assistance.",
+        "ms": "Pemain عزیز, kalau boss syak ada aktiviti tak sah, tukar kata laluan segera dan hubungi pasukan sokongan pelanggan kami dengan butiran untuk bantuan.",
+        "cn": "親愛的玩家，若您懷疑賬戶有未經授權的活動，請立即更改密碼，並聯繫我們的客服團隊提供詳情以獲得協助。"
       },
       "conditions": []
     },
@@ -3528,8 +3484,8 @@
       "subCategory": "security_concerns",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3553,12 +3509,8 @@
   {
     "id": "0368",
     "question": {
-      "text": "Dear player, account funds usually update within 5-30 minutes after a deposit. Our team reviews it, and the funds will reflect once approved.",
-      "variations": [
-        "Pemain عزیز, dana akaun biasanya dikemas kini dalam 5-30 minit selepas deposit. Pasukan kami akan semak, dan dana akan masuk bila diluluskan.",
-        "Dear player, account funds usually update within 5-30 minutes after a deposit. Our team reviews it, and the funds will reflect once approved.",
-        "親愛的玩家，存款後賬戶的錢通常在5-30分鐘內更新。我們的團隊會審核，審核通過後錢會自動顯示。"
-      ],
+      "text": "Why isn't my credit automatically updating after a deposit?",
+      "variations": [],
       "intent": "transaction_records",
       "languages": {
         "en": "Why isn't my credit automatically updating after a deposit?",
@@ -3568,9 +3520,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "I see, boss! It usually takes 5-30 minutes for your credit to update after a deposit. Our team’s checking it, and it’ll show up soon!",
-        "ms": "Oh, macam tu, boss! Biasanya ambil 5-30 minit untuk kredit boss dikemas kini selepas deposit. Pasukan kami tengah semak, nanti masuk lah!",
-        "cn": "明白，老板！存款後您的錢通常需要5-30分鐘更新。我們的團隊在審核，很快就會顯示出來！"
+        "en": "Dear player, account funds usually update within 5-30 minutes after a deposit. Our team reviews it, and the funds will reflect once approved.",
+        "ms": "Pemain عزیز, dana akaun biasanya dikemas kini dalam 5-30 minit selepas deposit. Pasukan kami akan semak, dan dana akan masuk bila diluluskan.",
+        "cn": "親愛的玩家，存款後賬戶的錢通常在5-30分鐘內更新。我們的團隊會審核，審核通過後錢會自動顯示。"
       },
       "conditions": []
     },
@@ -3581,8 +3533,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3606,12 +3558,8 @@
   {
     "id": "0369",
     "question": {
-      "text": "Dear player, yes, we offer VIP benefits! Every bet earns points you can redeem for gifts. Check them via the portrait icon under VIP benefits.",
-      "variations": [
-        "Pemain عزیز, ya, kami ada faedah VIP! Setiap pertaruhan dapat mata, boleh tukar hadiah. Semak di ikon potret bawah faedah VIP.",
-        "Dear player, yes, we offer VIP benefits! Every bet earns points you can redeem for gifts. Check them via the portrait icon under VIP benefits.",
-        "親愛的玩家，是的，我們提供VIP福利！每次下注都可累積積分，您可用積分兌換禮物。請在人像圖標下的VIP福利查看。"
-      ],
+      "text": "Are there any loyalty programs or VIP benefits for regular players?",
+      "variations": [],
       "intent": "points_accumulation",
       "languages": {
         "en": "Are there any loyalty programs or VIP benefits for regular players?",
@@ -3621,9 +3569,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Oh, that’s a good one, boss! Yup, we’ve got VIP benefits—every bet earns points for cool gifts. Check it out under the portrait icon’s VIP section!",
-        "ms": "Oh, bagus soalan ni, boss! Ya lah, kami ada faedah VIP—setiap pertaruhan dapat mata untuk tukar hadiah. Tengok kat bahagian VIP bawah ikon potret!",
-        "cn": "好的，老板！當然有，我們提供VIP福利，每次下注都能累積積分換禮物。請您在人像圖標的VIP福利區查看！"
+        "en": "Dear player, yes, we offer VIP benefits! Every bet earns points you can redeem for gifts. Check them via the portrait icon under VIP benefits.",
+        "ms": "Pemain عزیز, ya, kami ada faedah VIP! Setiap pertaruhan dapat mata, boleh tukar hadiah. Semak di ikon potret bawah faedah VIP.",
+        "cn": "親愛的玩家，是的，我們提供VIP福利！每次下注都可累積積分，您可用積分兌換禮物。請在人像圖標下的VIP福利查看。"
       },
       "conditions": []
     },
@@ -3634,8 +3582,8 @@
       "subCategory": "points_accumulation",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3659,12 +3607,8 @@
   {
     "id": "0370",
     "question": {
-      "text": "Dear player, click the portrait icon at the bottom right, select language from the menu, choose your language, and confirm.",
-      "variations": [
-        "Pemain عزیز, klik ikon potret di sudut kanan bawah, pilih bahasa dari menu, pilih bahasa boss, dan sahkan.",
-        "Dear player, click the portrait icon at the bottom right, select language from the menu, choose your language, and confirm.",
-        "親愛的玩家，請您點擊右下角人像圖標，在菜單選語言，選擇您想要的語言後按確認。"
-      ],
+      "text": "How can I change the language settings on the platform?",
+      "variations": [],
       "intent": "app_issues",
       "languages": {
         "en": "How can I change the language settings on the platform?",
@@ -3674,9 +3618,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Alright, boss! Tap the portrait icon at the bottom right, pick language from the menu, choose yours, and hit confirm. Done deal!",
-        "ms": "Okey, boss! Tekan ikon potret kat sudut kanan bawah, pilih bahasa dari menu, ambik yang boss suka, lepas tu sahkan. Settle!",
-        "cn": "好的，老板！請您點擊右下角人像圖標，從菜單選語言，挑您喜歡的語言後按確認。搞定！"
+        "en": "Dear player, click the portrait icon at the bottom right, select language from the menu, choose your language, and confirm.",
+        "ms": "Pemain عزیز, klik ikon potret di sudut kanan bawah, pilih bahasa dari menu, pilih bahasa boss, dan sahkan.",
+        "cn": "親愛的玩家，請您點擊右下角人像圖標，在菜單選語言，選擇您想要的語言後按確認。"
       },
       "conditions": []
     },
@@ -3687,8 +3631,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3712,12 +3656,8 @@
   {
     "id": "0371",
     "question": {
-      "text": "Dear player, yes, I can check it! Withdrawals usually take 5-30 minutes. Our team reviews it, and funds will update once approved.",
-      "variations": [
-        "Pemain عزیز, boleh, saya boleh semak! Pengeluaran biasanya ambil 5-30 minit. Pasukan kami semak, dan dana akan masuk bila diluluskan.",
-        "Dear player, yes, I can check it! Withdrawals usually take 5-30 minutes. Our team reviews it, and funds will update once approved.",
-        "親愛的玩家，當然可以，我會為您檢查！提款通常需5-30分鐘。我們的團隊會審核，審核通過後錢會更新。"
-      ],
+      "text": "Can you check the status of my withdrawal request?",
+      "variations": [],
       "intent": "withdrawal_conditions",
       "languages": {
         "en": "Can you check the status of my withdrawal request?",
@@ -3727,9 +3667,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Sure thing, boss! I’ll check your withdrawal—it usually takes 5-30 minutes. Our team’s on it, and it’ll update soon!",
-        "ms": "Baik lah, boss! Saya semak pengeluaran boss—biasanya ambil 5-30 minit. Pasukan kami tengah buat, nanti masuk lah!",
-        "cn": "沒問題，老板！我會為您檢查提款狀態，通常需要5-30分鐘。我們的團隊在處理，很快會更新！"
+        "en": "Dear player, yes, I can check it! Withdrawals usually take 5-30 minutes. Our team reviews it, and funds will update once approved.",
+        "ms": "Pemain عزیز, boleh, saya boleh semak! Pengeluaran biasanya ambil 5-30 minit. Pasukan kami semak, dan dana akan masuk bila diluluskan.",
+        "cn": "親愛的玩家，當然可以，我會為您檢查！提款通常需5-30分鐘。我們的團隊會審核，審核通過後錢會更新。"
       },
       "conditions": []
     },
@@ -3740,8 +3680,8 @@
       "subCategory": "withdrawal_conditions",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3765,12 +3705,8 @@
   {
     "id": "0372",
     "question": {
-      "text": "Dear player, click the portrait icon at the bottom right, scroll to the bottom, and find the download link in the referral section.",
-      "variations": [
-        "Pemain عزیز, klik ikon potret di sudut kanan bawah, skrol ke bawah, dan cari pautan muat turun di bahagian rujukan.",
-        "Dear player, click the portrait icon at the bottom right, scroll to the bottom, and find the download link in the referral section.",
-        "親愛的玩家，請您點擊右下角人像圖標，滑到頁面底部，在推薦區域找到下載鏈接。"
-      ],
+      "text": "Where can I find the download link for the gaming app?",
+      "variations": [],
       "intent": "app_issues",
       "languages": {
         "en": "Where can I find the download link for the gaming app?",
@@ -3780,9 +3716,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Got it, boss! Hit the portrait icon at the bottom right, scroll down, and the download link’s in the referral section. You’re good to go!",
-        "ms": "Baik, boss! Tekan ikon potret kat bawah kanan, skrol ke bawah, pautan muat turun ada kat bahagian rujukan. Senang je!",
-        "cn": "好的，老板！請您點擊右下角人像圖標，滑到頁底，推薦區域有下載鏈接。搞定啦！"
+        "en": "Dear player, click the portrait icon at the bottom right, scroll to the bottom, and find the download link in the referral section.",
+        "ms": "Pemain عزیز, klik ikon potret di sudut kanan bawah, skrol ke bawah, dan cari pautan muat turun di bahagian rujukan.",
+        "cn": "親愛的玩家，請您點擊右下角人像圖標，滑到頁面底部，在推薦區域找到下載鏈接。"
       },
       "conditions": []
     },
@@ -3793,8 +3729,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3818,12 +3754,8 @@
   {
     "id": "0373",
     "question": {
-      "text": "Dear player, yes, you can! Click the wallet icon and select quick payment to complete the transaction.",
-      "variations": [
-        "Pemain عزیز, boleh! Klik ikon dompet dan pilih bayaran cepat untuk selesaikan transaksi.",
-        "Dear player, yes, you can! Click the wallet icon and select quick payment to complete the transaction.",
-        "親愛的玩家，可以！請您點擊錢包圖標，選擇快速付款即可完成交易。"
-      ],
+      "text": "Can I use my e-wallet account number for transactions?",
+      "variations": [],
       "intent": "payment_issues",
       "languages": {
         "en": "Can I use my e-wallet account number for transactions?",
@@ -3833,9 +3765,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Absolutely, boss! Just tap the wallet icon, pick quick payment, and you’re set to transact. Too easy!",
-        "ms": "Boleh lah, boss! Tekan ikon dompet, pilih bayaran cepat, terus settle transaksi. Mudah je!",
-        "cn": "當然可以，老板！請您點擊錢包圖標，選快速付款就完成交易。超簡單！"
+        "en": "Dear player, yes, you can! Click the wallet icon and select quick payment to complete the transaction.",
+        "ms": "Pemain عزیز, boleh! Klik ikon dompet dan pilih bayaran cepat untuk selesaikan transaksi.",
+        "cn": "親愛的玩家，可以！請您點擊錢包圖標，選擇快速付款即可完成交易。"
       },
       "conditions": []
     },
@@ -3846,8 +3778,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3871,12 +3803,8 @@
   {
     "id": "0374",
     "question": {
-      "text": "Dear player, your account balance is usually updated immediately after a game session. If there’s a delay, contact our customer service team for a quick check.",
-      "variations": [
-        "Pemain Aziz, baki akaun biasanya dikemas kini segera selepas sesi permainan. Kalau ada kelewatan, hubungi pasukan sokongan pelanggan kami untuk semakan cepat.",
-        "Dear player, your account balance is usually updated immediately after a game session. If there’s a delay, contact our customer service team for a quick check.",
-        "親愛的玩家，遊戲結束後您的賬戶餘額通常會立即更新。若有延遲，請聯繫我們的客服團隊快速檢查。"
-      ],
+      "text": "How often are account balances updated after a game session?",
+      "variations": [],
       "intent": "account_management",
       "languages": {
         "en": "How often are account balances updated after a game session?",
@@ -3886,9 +3814,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Got it, boss! Your balance should update right after the game ends. If it’s lagging, just let our customer service team know—we’ll fix it fast!",
-        "ms": "Baik, boss! Baki akaun sepatutnya dikemas kini terus lepas game habis. Kalau lambat, bagitahu pasukan sokongan pelanggan kami—kami settle cepat!",
-        "cn": "好的，老板！遊戲結束後您的賬戶餘額應該馬上更新。若有延遲，請告訴我們的客服團隊，我們會快速處理！"
+        "en": "Dear player, your account balance is usually updated immediately after a game session. If there’s a delay, contact our customer service team for a quick check.",
+        "ms": "Pemain Aziz, baki akaun biasanya dikemas kini segera selepas sesi permainan. Kalau ada kelewatan, hubungi pasukan sokongan pelanggan kami untuk semakan cepat.",
+        "cn": "親愛的玩家，遊戲結束後您的賬戶餘額通常會立即更新。若有延遲，請聯繫我們的客服團隊快速檢查。"
       },
       "conditions": []
     },
@@ -3899,8 +3827,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3924,12 +3852,8 @@
   {
     "id": "0375",
     "question": {
-      "text": "Dear player, click the portrait icon at the bottom right, select language from the menu, choose your language, and confirm.",
-      "variations": [
-        "Pemain Aziz, klik ikon potret di sudut kanan bawah, pilih bahasa dari menu, pilih bahasa boss, dan sahkan.",
-        "Dear player, click the portrait icon at the bottom right, select language from the menu, choose your language, and confirm.",
-        "親愛的玩家，請您點擊右下角人像圖標，在菜單選語言，選擇您想要的語言後按確認。"
-      ],
+      "text": "How can I change the language settings on the platform?",
+      "variations": [],
       "intent": "app_issues",
       "languages": {
         "en": "How can I change the language settings on the platform?",
@@ -3939,9 +3863,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Alright, boss! Tap the portrait icon at the bottom right, pick language from the menu, choose yours, and hit confirm. Done deal!",
-        "ms": "Okey, boss! Tekan ikon potret kat sudut kanan bawah, pilih bahasa dari menu, ambik yang boss suka, lepas tu sahkan. Settle!",
-        "cn": "好的，老板！請您點擊右下角人像圖標，從菜單選語言，挑您喜歡的語言後按確認。搞定！"
+        "en": "Dear player, click the portrait icon at the bottom right, select language from the menu, choose your language, and confirm.",
+        "ms": "Pemain Aziz, klik ikon potret di sudut kanan bawah, pilih bahasa dari menu, pilih bahasa boss, dan sahkan.",
+        "cn": "親愛的玩家，請您點擊右下角人像圖標，在菜單選語言，選擇您想要的語言後按確認。"
       },
       "conditions": []
     },
@@ -3952,8 +3876,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3977,12 +3901,8 @@
   {
     "id": "0376",
     "question": {
-      "text": "Dear player, click the portrait icon at the bottom right, scroll to the bottom, and find the download link in the referral section.",
-      "variations": [
-        "Pemain Aziz, klik ikon potret di sudut kanan bawah, skrol ke bawah, dan cari pautan muat turun di bahagian rujukan.",
-        "Dear player, click the portrait icon at the bottom right, scroll to the bottom, and find the download link in the referral section.",
-        "親愛的玩家，請您點擊右下角人像圖標，滑到頁面底部，在推薦區域找到下載鏈接。"
-      ],
+      "text": "Where can I find the download link for the gaming app?",
+      "variations": [],
       "intent": "app_issues",
       "languages": {
         "en": "Where can I find the download link for the gaming app?",
@@ -3992,9 +3912,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Got it, boss! Hit the portrait icon at the bottom right, scroll down, and the download link’s in the referral section. You’re good to go!",
-        "ms": "Baik, boss! Tekan ikon potret kat bawah kanan, skrol ke bawah, pautan muat turun ada kat bahagian rujukan. Senang je!",
-        "cn": "好的，老板！請您點擊右下角人像圖標，滑到頁底，推薦區域有下載鏈接。搞定啦！"
+        "en": "Dear player, click the portrait icon at the bottom right, scroll to the bottom, and find the download link in the referral section.",
+        "ms": "Pemain Aziz, klik ikon potret di sudut kanan bawah, skrol ke bawah, dan cari pautan muat turun di bahagian rujukan.",
+        "cn": "親愛的玩家，請您點擊右下角人像圖標，滑到頁面底部，在推薦區域找到下載鏈接。"
       },
       "conditions": []
     },
@@ -4005,8 +3925,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4030,12 +3950,8 @@
   {
     "id": "0377",
     "question": {
-      "text": "Dear player, if your account shows 0 after a deposit, check your transaction history to confirm it went through, then restart the app to update the balance.",
-      "variations": [
-        "Pemain Aziz, kalau akaun boss tunjuk 0 lepas deposit, semak sejarah transaksi untuk pastikan ia berjaya, lepas tu mulakan semula app untuk kemas kini baki.",
-        "Dear player, if your account shows 0 after a deposit, check your transaction history to confirm it went through, then restart the app to update the balance.",
-        "親愛的玩家，若存款後您的賬戶顯示為0錢，請檢查交易記錄確認存款是否成功，然後重啟應用以更新餘額。"
-      ],
+      "text": "What should I do if my account shows 0 credits after a deposit?",
+      "variations": [],
       "intent": "transaction_records",
       "languages": {
         "en": "What should I do if my account shows 0 credits after a deposit?",
@@ -4045,9 +3961,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "No worries, boss! If your account’s at 0 after a deposit, check the transaction history to make sure it’s through, then restart the app to refresh it!",
-        "ms": "Tak apa, boss! Kalau akaun tunjuk 0 lepas deposit, tengok sejarah transaksi pastikan dah masuk, lepas tu restart app untuk refresh!",
-        "cn": "沒問題，老板！若存款後您的賬戶顯示0錢，請查看交易記錄確認已成功，然後重啟應用更新餘額！"
+        "en": "Dear player, if your account shows 0 after a deposit, check your transaction history to confirm it went through, then restart the app to update the balance.",
+        "ms": "Pemain Aziz, kalau akaun boss tunjuk 0 lepas deposit, semak sejarah transaksi untuk pastikan ia berjaya, lepas tu mulakan semula app untuk kemas kini baki.",
+        "cn": "親愛的玩家，若存款後您的賬戶顯示為0錢，請檢查交易記錄確認存款是否成功，然後重啟應用以更新餘額。"
       },
       "conditions": []
     },
@@ -4058,8 +3974,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4083,12 +3999,8 @@
   {
     "id": "0378",
     "question": {
-      "text": "Dear player, if you disconnect during a live game, reconnect your network and log back in—your progress should resume. Contact us if it persists.",
-      "variations": [
-        "Pemain Aziz, kalau terputus sambungan masa game langsung, sambung semula rangkaian dan log masuk balik—progres boss akan sambung. Hubungi kami kalau masih ada masalah.",
-        "Dear player, if you disconnect during a live game, reconnect your network and log back in—your progress should resume. Contact us if it persists.",
-        "親愛的玩家，若您在遊戲中斷線，請重新連接網絡並登錄，進度應會恢復。若問題持續，請聯繫我們。"
-      ],
+      "text": "What should I do if I experience a disconnection during a live game?",
+      "variations": [],
       "intent": "network_connection",
       "languages": {
         "en": "What should I do if I experience a disconnection during a live game?",
@@ -4098,9 +4010,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "I hear you, boss! If you disconnect mid-game, hook up your network again and log back in—it should pick up where you left off. Still stuck? Tell me!",
-        "ms": "Faham, boss! Kalau terputus tengah game, sambung balik rangkaian dan log masuk semula—progres akan sambung. Masih tak boleh? Cakap dengan saya!",
-        "cn": "了解，老板！若您在遊戲中斷線，請重新連上網絡並登錄，應該能恢復進度。若還不行，隨時告訴我！"
+        "en": "Dear player, if you disconnect during a live game, reconnect your network and log back in—your progress should resume. Contact us if it persists.",
+        "ms": "Pemain Aziz, kalau terputus sambungan masa game langsung, sambung semula rangkaian dan log masuk balik—progres boss akan sambung. Hubungi kami kalau masih ada masalah.",
+        "cn": "親愛的玩家，若您在遊戲中斷線，請重新連接網絡並登錄，進度應會恢復。若問題持續，請聯繫我們。"
       },
       "conditions": []
     },
@@ -4111,8 +4023,8 @@
       "subCategory": "network_connection",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4136,12 +4048,8 @@
   {
     "id": "0379",
     "question": {
-      "text": "Dear player, our deposit system is running fine—processing takes 5-30 minutes. Delays might be due to network hiccups. Contact us if it’s over 30 minutes.",
-      "variations": [
-        "Pemain Aziz, sistem deposit kami ok je—pemprosesan ambil 5-30 minit. Kelewatan mungkin sebab rangkaian. Hubungi kami kalau lebih 30 minit.",
-        "Dear player, our deposit system is running fine—processing takes 5-30 minutes. Delays might be due to network hiccups. Contact us if it’s over 30 minutes.",
-        "親愛的玩家，我們的存款系統正常運行，處理需5-30分鐘。延遲可能因網絡問題，若超過30分鐘請聯繫我們。"
-      ],
+      "text": "Is there an issue with the deposit system causing delays?",
+      "variations": [],
       "intent": "payment_issues",
       "languages": {
         "en": "Is there an issue with the deposit system causing delays?",
@@ -4151,9 +4059,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "I get it, boss! The deposit system’s good—takes 5-30 minutes tops. If it’s lagging past that, might be the network. Let me know if it’s still not there!",
-        "ms": "Saya faham, boss! Sistem deposit ok—ambil 5-30 minit je. Kalau lambat lagi, mungkin rangkaian. Bagitahu saya kalau tak masuk lagi!",
-        "cn": "了解，老板！存款系統沒問題，處理只要5-30分鐘。若超過時間還沒到，可能網絡原因。隨時告訴我若還未到賬！"
+        "en": "Dear player, our deposit system is running fine—processing takes 5-30 minutes. Delays might be due to network hiccups. Contact us if it’s over 30 minutes.",
+        "ms": "Pemain Aziz, sistem deposit kami ok je—pemprosesan ambil 5-30 minit. Kelewatan mungkin sebab rangkaian. Hubungi kami kalau lebih 30 minit.",
+        "cn": "親愛的玩家，我們的存款系統正常運行，處理需5-30分鐘。延遲可能因網絡問題，若超過30分鐘請聯繫我們。"
       },
       "conditions": []
     },
@@ -4164,8 +4072,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4189,12 +4097,8 @@
   {
     "id": "0380",
     "question": {
-      "text": "Dear player, cutoff times vary: MKT & GDLotto at 7:00 PM, Singapore at 6:00 PM, CBD at 6:35 PM, 9lotto at 7:25 PM. Bet early!",
-      "variations": [
-        "Pemain Aziz, masa tamat berbeza: MKT & GDLotto pukul 7:00 malam, Singapore pukul 6:00 malam, CBD pukul 6:35 malam, 9lotto pukul 7:25 malam. Beli awal!",
-        "Dear player, cutoff times vary: MKT & GDLotto at 7:00 PM, Singapore at 6:00 PM, CBD at 6:35 PM, 9lotto at 7:25 PM. Bet early!",
-        "親愛的玩家，每種彩票截止時間不同：MKT和GDLotto為晚上7:00，Singapore為晚上6:00，CBD為晚上6:35，9lotto為晚上7:25。請您提早下注！"
-      ],
+      "text": "What's the latest time I can purchase lottery numbers for today's draw?",
+      "variations": [],
       "intent": "betting_rules",
       "languages": {
         "en": "What's the latest time I can purchase lottery numbers for today's draw?",
@@ -4204,9 +4108,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Good user_input_en, boss! It depends—MKT & GDLotto stop at 7:00 PM, Singapore at 6:00 PM, CBD at 6:35 PM, 9lotto at 7:25 PM. Get in early!",
-        "ms": "Soalan bagus, boss! Bergantung—MKT & GDLotto tamat 7:00 malam, Singapore 6:00 malam, CBD 6:35 malam, 9lotto 7:25 malam. Beli cepat!",
-        "cn": "問得好，老板！看種類—MKT和GDLotto到晚上7:00，Singapore到6:00，CBD到6:35，9lotto到7:25。請您早點下注！"
+        "en": "Dear player, cutoff times vary: MKT & GDLotto at 7:00 PM, Singapore at 6:00 PM, CBD at 6:35 PM, 9lotto at 7:25 PM. Bet early!",
+        "ms": "Pemain Aziz, masa tamat berbeza: MKT & GDLotto pukul 7:00 malam, Singapore pukul 6:00 malam, CBD pukul 6:35 malam, 9lotto pukul 7:25 malam. Beli awal!",
+        "cn": "親愛的玩家，每種彩票截止時間不同：MKT和GDLotto為晚上7:00，Singapore為晚上6:00，CBD為晚上6:35，9lotto為晚上7:25。請您提早下注！"
       },
       "conditions": []
     },
@@ -4217,8 +4121,8 @@
       "subCategory": "betting_rules",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4242,12 +4146,8 @@
   {
     "id": "0381",
     "question": {
-      "text": "Deposits usually take 5-30 minutes. If it’s over 30 minutes, contact our online customer service for a quick check.",
-      "variations": [
-        "Deposit biasanya ambil 5-30 minit. Kalau lebih 30 minit, hubungi sokongan pelanggan dalam talian untuk semakan cepat.",
-        "Deposits usually take 5-30 minutes. If it’s over 30 minutes, contact our online customer service for a quick check.",
-        "存款通常需要5-30分鐘。若超過30分鐘，請聯繫我們的在線客服團隊快速檢查。"
-      ],
+      "text": "How long should I wait for a deposit before contacting support?",
+      "variations": [],
       "intent": "payment_issues",
       "languages": {
         "en": "How long should I wait for a deposit before contacting support?",
@@ -4257,9 +4157,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Got it, boss! Wait 5-30 minutes for your deposit. If it’s past 30, hit up our online customer service—they’ll check it out quick!",
-        "ms": "Baik, boss! Tunggu 5-30 minit untuk deposit masuk. Kalau lebih 30, hubungi sokongan pelanggan dalam talian—diaorang semak cepat!",
-        "cn": "好的，老板！請您等待5-30分鐘讓存款到賬。若超過30分鐘，請聯繫我們的在線客服團隊，他們會快速幫您查！"
+        "en": "Deposits usually take 5-30 minutes. If it’s over 30 minutes, contact our online customer service for a quick check.",
+        "ms": "Deposit biasanya ambil 5-30 minit. Kalau lebih 30 minit, hubungi sokongan pelanggan dalam talian untuk semakan cepat.",
+        "cn": "存款通常需要5-30分鐘。若超過30分鐘，請聯繫我們的在線客服團隊快速檢查。"
       },
       "conditions": []
     },
@@ -4270,8 +4170,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4295,12 +4195,8 @@
   {
     "id": "0382",
     "question": {
-      "text": "Dear player, contact our online customer service to fix this. Accounts must match the holder’s name—provide your account name, number, and bank name.",
-      "variations": [
-        "Pemain Aziz, hubungi sokongan pelanggan dalam talian kami untuk betulkan ni. Akaun kena ikut nama pemegang—berikan nama akaun, nombor, dan nama bank boss.",
-        "Dear player, contact our online customer service to fix this. Accounts must match the holder’s name—provide your account name, number, and bank name.",
-        "親愛的玩家，請聯繫我們的在線客服團隊修正此問題。賬戶需與持有人姓名一致，請提供您的賬戶姓名、號碼和銀行名稱。"
-      ],
+      "text": "I accidentally added my account to my spouse's profile. How can I remove it?",
+      "variations": [],
       "intent": "account_management",
       "languages": {
         "en": "I accidentally added my account to my spouse's profile. How can I remove it?",
@@ -4310,9 +4206,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Oh, no stress, boss! Hit up our online customer service—they’ll fix it. Just give your account name, number, and bank name since it’s gotta match you!",
-        "ms": "Oh, tak apa, boss! Hubungi sokongan pelanggan dalam talian—diaorang boleh betulkan. Bagi je nama akaun, nombor, dan nama bank sebab kena ikut nama boss!",
-        "cn": "沒事的老板！請聯繫我們的在線客服團隊，他們會幫您修正。只要提供您的賬戶姓名、號碼和銀行名稱，因必須與您本人匹配！"
+        "en": "Dear player, contact our online customer service to fix this. Accounts must match the holder’s name—provide your account name, number, and bank name.",
+        "ms": "Pemain Aziz, hubungi sokongan pelanggan dalam talian kami untuk betulkan ni. Akaun kena ikut nama pemegang—berikan nama akaun, nombor, dan nama bank boss.",
+        "cn": "親愛的玩家，請聯繫我們的在線客服團隊修正此問題。賬戶需與持有人姓名一致，請提供您的賬戶姓名、號碼和銀行名稱。"
       },
       "conditions": []
     },
@@ -4323,8 +4219,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4348,12 +4244,8 @@
   {
     "id": "0383",
     "question": {
-      "text": "Dear player, yes, we have daily promos! Check the latest offers by clicking the speaker icon at the top left of the app.",
-      "variations": [
-        "Pemain Aziz, ya, kami ada promosi harian! Semak tawaran terkini dengan klik ikon pembesar suara kat atas kiri app.",
-        "Dear player, yes, we have daily promos! Check the latest offers by clicking the speaker icon at the top left of the app.",
-        "親愛的玩家，有的，我們每天都有促銷！請點擊應用左上角的小喇叭圖標查看最新優惠。"
-      ],
+      "text": "Are there any special promotions or bonuses available today?",
+      "variations": [],
       "intent": "redemption_rules",
       "languages": {
         "en": "Are there any special promotions or bonuses available today?",
@@ -4363,9 +4255,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Nice one, boss! Yup, we’ve got daily promos—peek at the latest by tapping the speaker icon up top left in the app!",
-        "ms": "Bagus lah, boss! Ya, kami ada promosi hari-hari—tengok yang terkini kat ikon pembesar suara atas kiri app!",
-        "cn": "問得好，老板！是的，我們每天都有促銷，請點擊應用左上角的小喇叭圖標看看最新活動！"
+        "en": "Dear player, yes, we have daily promos! Check the latest offers by clicking the speaker icon at the top left of the app.",
+        "ms": "Pemain Aziz, ya, kami ada promosi harian! Semak tawaran terkini dengan klik ikon pembesar suara kat atas kiri app.",
+        "cn": "親愛的玩家，有的，我們每天都有促銷！請點擊應用左上角的小喇叭圖標查看最新優惠。"
       },
       "conditions": []
     },
@@ -4376,8 +4268,8 @@
       "subCategory": "redemption_rules",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4401,12 +4293,8 @@
   {
     "id": "0384",
     "question": {
-      "text": "Dear player, yes, a small transfer is a great way to verify your account is working properly.",
-      "variations": [
-        "Pemain Aziz, ya, pemindahan kecil memang cara bagus untuk sahkan akaun boss berfungsi elok.",
-        "Dear player, yes, a small transfer is a great way to verify your account is working properly.",
-        "親愛的玩家，可以，小額轉賬是驗證您賬戶正常運作的好方法。"
-      ],
+      "text": "Can I make a small transfer to verify if my account is working correctly?",
+      "variations": [],
       "intent": "transaction_records",
       "languages": {
         "en": "Can I make a small transfer to verify if my account is working correctly?",
@@ -4416,9 +4304,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Sure thing, boss! A small transfer’s perfect to check if your account’s running smooth. Go for it!",
-        "ms": "Boleh lah, boss! Pindah sikit je untuk tengok akaun boss jalan elok ke tak. Cubalah!",
-        "cn": "當然可以，老板！小額轉賬是檢查您賬戶是否正常的好方法，試試吧！"
+        "en": "Dear player, yes, a small transfer is a great way to verify your account is working properly.",
+        "ms": "Pemain Aziz, ya, pemindahan kecil memang cara bagus untuk sahkan akaun boss berfungsi elok.",
+        "cn": "親愛的玩家，可以，小額轉賬是驗證您賬戶正常運作的好方法。"
       },
       "conditions": []
     },
@@ -4429,8 +4317,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4454,12 +4342,8 @@
   {
     "id": "0385",
     "question": {
-      "text": "Dear player, if your Fast Payment top-up isn’t showing, grab a screenshot of the bank transfer record and send it to us for verification.",
-      "variations": [
-        "Pemain Aziz, kalau tambah nilai Fast Payment boss tak keluar, ambil tangkapan skrin rekod pindahan bank dan hantar pada kami untuk semakan.",
-        "Dear player, if your Fast Payment top-up isn’t showing, grab a screenshot of the bank transfer record and send it to us for verification.",
-        "親愛的玩家，若您的快速支付充值未顯示，請截取銀行轉賬記錄的圖並發送給我們驗證。"
-      ],
+      "text": "Why isn't my Fast Payment top-up showing in my account?",
+      "variations": [],
       "intent": "payment_issues",
       "languages": {
         "en": "Why isn't my Fast Payment top-up showing in my account?",
@@ -4469,9 +4353,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "I see, boss! If your Fast Payment top-up’s missing, snap a screenshot of the bank transfer and send it over—we’ll verify it quick!",
-        "ms": "Oh, macam tu, boss! Kalau tambah nilai Fast Payment tak muncul, tangkap skrin pindahan bank, hantar kat kami—kami semak cepat!",
-        "cn": "明白，老板！若您的快速支付充值沒顯示，請截圖銀行轉賬記錄發給我們，我們會快速驗證！"
+        "en": "Dear player, if your Fast Payment top-up isn’t showing, grab a screenshot of the bank transfer record and send it to us for verification.",
+        "ms": "Pemain Aziz, kalau tambah nilai Fast Payment boss tak keluar, ambil tangkapan skrin rekod pindahan bank dan hantar pada kami untuk semakan.",
+        "cn": "親愛的玩家，若您的快速支付充值未顯示，請截取銀行轉賬記錄的圖並發送給我們驗證。"
       },
       "conditions": []
     },
@@ -4482,8 +4366,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4507,12 +4391,8 @@
   {
     "id": "0386",
     "question": {
-      "text": "Dear player, log in and check your transaction records in the app for the status. If it’s still pending, contact our online customer service.",
-      "variations": [
-        "Pemain Aziz, log masuk dan semak rekod transaksi dalam app untuk status. Kalau masih belum lulus, hubungi sokongan pelanggan dalam talian kami.",
-        "Dear player, log in and check your transaction records in the app for the status. If it’s still pending, contact our online customer service.",
-        "親愛的玩家，請登錄並在應用中查看交易記錄的狀態。若仍未批准，請聯繫我們的在線客服團隊。"
-      ],
+      "text": "How can I follow up on a withdrawal request that hasn't been approved?",
+      "variations": [],
       "intent": "withdrawal_conditions",
       "languages": {
         "en": "How can I follow up on a withdrawal request that hasn't been approved?",
@@ -4522,9 +4402,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Alright, boss! Pop into the app, check your transaction records for the status. Still waiting? Hit up our online customer service!",
-        "ms": "Okey, boss! Masuk app, tengok rekod transaksi untuk status. Masih tunggu? Hubungi sokongan pelanggan dalam talian kami!",
-        "cn": "好的，老板！請您進入應用查看交易記錄狀態。若還沒批准，聯繫我們的在線客服團隊吧！"
+        "en": "Dear player, log in and check your transaction records in the app for the status. If it’s still pending, contact our online customer service.",
+        "ms": "Pemain Aziz, log masuk dan semak rekod transaksi dalam app untuk status. Kalau masih belum lulus, hubungi sokongan pelanggan dalam talian kami.",
+        "cn": "親愛的玩家，請登錄並在應用中查看交易記錄的狀態。若仍未批准，請聯繫我們的在線客服團隊。"
       },
       "conditions": []
     },
@@ -4535,8 +4415,8 @@
       "subCategory": "withdrawal_conditions",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4560,12 +4440,8 @@
   {
     "id": "0387",
     "question": {
-      "text": "Dear player, you’re already chatting with me—I’m your live customer service right here!",
-      "variations": [
-        "Pemain Aziz, boss tengah berbual dengan saya—saya lah sokongan pelanggan langsung kat sini!",
-        "Dear player, you’re already chatting with me—I’m your live customer service right here!",
-        "親愛的玩家，您正在和我對話，我就是您這兒的實時客服！"
-      ],
+      "text": "How can I contact live support if I have urgent issues?",
+      "variations": [],
       "intent": "general_inquiry",
       "languages": {
         "en": "How can I contact live support if I have urgent issues?",
@@ -4575,9 +4451,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Hey, boss! You’re in luck—I’m your live support right here in this chat. What’s the urgent issue?",
-        "ms": "Hai, boss! Nasib baik—saya sokongan langsung boss kat sini dalam chat ni. Apa isu mendesak tu?",
-        "cn": "您好，老板！您運氣好，我就是這聊天框裡的實時客服。什麼緊急問題呀？"
+        "en": "Dear player, you’re already chatting with me—I’m your live customer service right here!",
+        "ms": "Pemain Aziz, boss tengah berbual dengan saya—saya lah sokongan pelanggan langsung kat sini!",
+        "cn": "親愛的玩家，您正在和我對話，我就是您這兒的實時客服！"
       },
       "conditions": []
     },
@@ -4588,8 +4464,8 @@
       "subCategory": "general_inquiry",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4613,12 +4489,8 @@
   {
     "id": "0388",
     "question": {
-      "text": "Dear player, if you can’t access the banking section, it might be due to a rule violation limiting your account. Send us evidence if you think it’s a mistake.",
-      "variations": [
-        "Pemain Aziz, kalau boss tak boleh masuk bahagian perbankan, mungkin sebab ada pelanggaran peraturan yang hadkan akaun. Hantar bukti kalau boss rasa itu silap.",
-        "Dear player, if you can’t access the banking section, it might be due to a rule violation limiting your account. Send us evidence if you think it’s a mistake.",
-        "親愛的玩家，若您無法訪問銀行部分，可能是因違反規則限制了賬戶。若認為有誤，請發送證據給我們。"
-      ],
+      "text": "Why can't I access the banking section on my mobile device?",
+      "variations": [],
       "intent": "bank_issues",
       "languages": {
         "en": "Why can't I access the banking section on my mobile device?",
@@ -4628,9 +4500,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Oh, tough one, boss! If the banking section’s blocked, it might be a rule thing limiting your account. Got evidence it’s wrong? Send it our way!",
-        "ms": "Oh, susah sikit ni, boss! Kalau bahagian perbankan tak boleh masuk, mungkin peraturan hadkan akaun. Ada bukti salah? Hantar kat kami!",
-        "cn": "明白，老板！若您無法進入銀行部分，可能是規則限制了賬戶。若覺得有誤，請把證據發給我們！"
+        "en": "Dear player, if you can’t access the banking section, it might be due to a rule violation limiting your account. Send us evidence if you think it’s a mistake.",
+        "ms": "Pemain Aziz, kalau boss tak boleh masuk bahagian perbankan, mungkin sebab ada pelanggaran peraturan yang hadkan akaun. Hantar bukti kalau boss rasa itu silap.",
+        "cn": "親愛的玩家，若您無法訪問銀行部分，可能是因違反規則限制了賬戶。若認為有誤，請發送證據給我們。"
       },
       "conditions": []
     },
@@ -4641,8 +4513,8 @@
       "subCategory": "bank_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4666,12 +4538,8 @@
   {
     "id": "0389",
     "question": {
-      "text": "What do you mean by receipt? Could you clarify?",
-      "variations": [
-        "Apa maksud boss dengan resit? Boleh terangkan tak?",
-        "What do you mean by receipt? Could you clarify?",
-        "您說的收據是指什麼？能具體說明一下嗎？"
-      ],
+      "text": "Can I use an older receipt for a new transaction?",
+      "variations": [],
       "intent": "transaction_records",
       "languages": {
         "en": "Can I use an older receipt for a new transaction?",
@@ -4681,9 +4549,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Hey, boss! What kind of receipt are we talking about? Give me a bit more info so I can help you out!",
-        "ms": "Hai, boss! Resit macam mana yang boss maksudkan? Terang sikit, saya boleh tolong!",
-        "cn": "您好，老板！您說的收據是指什麼？請多說一點，我好幫您解決！"
+        "en": "What do you mean by receipt? Could you clarify?",
+        "ms": "Apa maksud boss dengan resit? Boleh terangkan tak?",
+        "cn": "您說的收據是指什麼？能具體說明一下嗎？"
       },
       "conditions": []
     },
@@ -4694,8 +4562,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4719,12 +4587,8 @@
   {
     "id": "0390",
     "question": {
-      "text": "Dear player, click the portrait icon at the bottom right, scroll to the bottom, and find the download link in the referral section.",
-      "variations": [
-        "Pemain Aziz, klik ikon potret di sudut kanan bawah, skrol ke bawah, dan cari pautan muat turun di bahagian rujukan.",
-        "Dear player, click the portrait icon at the bottom right, scroll to the bottom, and find the download link in the referral section.",
-        "親愛的玩家，請您點擊右下角人像圖標，滑到頁面底部，在推薦區域找到下載鏈接。"
-      ],
+      "text": "Where can I find the download link for the gaming app?",
+      "variations": [],
       "intent": "app_issues",
       "languages": {
         "en": "Where can I find the download link for the gaming app?",
@@ -4734,9 +4598,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Got it, boss! Hit the portrait icon at the bottom right, scroll down, and the download link’s in the referral section. You’re good to go!",
-        "ms": "Baik, boss! Tekan ikon potret kat bawah kanan, skrol ke bawah, pautan muat turun ada kat bahagian rujukan. Senang je!",
-        "cn": "好的，老板！請您點擊右下角人像圖標，滑到頁底，推薦區域有下載鏈接。搞定啦！"
+        "en": "Dear player, click the portrait icon at the bottom right, scroll to the bottom, and find the download link in the referral section.",
+        "ms": "Pemain Aziz, klik ikon potret di sudut kanan bawah, skrol ke bawah, dan cari pautan muat turun di bahagian rujukan.",
+        "cn": "親愛的玩家，請您點擊右下角人像圖標，滑到頁面底部，在推薦區域找到下載鏈接。"
       },
       "conditions": []
     },
@@ -4747,8 +4611,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4772,12 +4636,8 @@
   {
     "id": "0391",
     "question": {
-      "text": "We get you want withdrawals fast! For safety, our system and team need 5-30 minutes to review each one—it’s all to keep your funds secure.",
-      "variations": [
-        "Kami faham boss nak pengeluaran cepat! Untuk keselamatan, sistem dan pasukan kami ambil 5-30 minit semak setiap satu—semua untuk jaga dana boss selamat.",
-        "We get you want withdrawals fast! For safety, our system and team need 5-30 minutes to review each one—it’s all to keep your funds secure.",
-        "我們理解您希望提款快一點！為了確保安全，我們的系統和客服團隊需要5-30分鐘來審核，這是為了保護您的資金安全。"
-      ],
+      "text": "Is there a way to speed up the withdrawal process?",
+      "variations": [],
       "intent": "withdrawal_conditions",
       "languages": {
         "en": "Is there a way to speed up the withdrawal process?",
@@ -4787,9 +4647,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "I hear you, boss! We’d love to speed up withdrawals, but it takes 5-30 minutes to check everything—keeps your money safe!",
-        "ms": "Saya faham, boss! Kami pun nak cepatkan pengeluaran, tapi ambil 5-30 minit untuk semak—jaga duit boss selamat!",
-        "cn": "了解，老板！我們也想加快提款，但需要5-30分鐘審核，這樣是為了確保您的錢安全！"
+        "en": "We get you want withdrawals fast! For safety, our system and team need 5-30 minutes to review each one—it’s all to keep your funds secure.",
+        "ms": "Kami faham boss nak pengeluaran cepat! Untuk keselamatan, sistem dan pasukan kami ambil 5-30 minit semak setiap satu—semua untuk jaga dana boss selamat.",
+        "cn": "我們理解您希望提款快一點！為了確保安全，我們的系統和客服團隊需要5-30分鐘來審核，這是為了保護您的資金安全。"
       },
       "conditions": []
     },
@@ -4800,8 +4660,8 @@
       "subCategory": "withdrawal_conditions",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4825,12 +4685,8 @@
   {
     "id": "0392",
     "question": {
-      "text": "The system asked you to wait 5 minutes because you’ve made frequent or repeated transactions recently. It’s a safety check to prevent odd activity.",
-      "variations": [
-        "Sistem minta boss tunggu 5 minit sebab boss baru buat transaksi kerap atau sama berulang. Ini cek keselamatan untuk elak aktiviti pelik.",
-        "The system asked you to wait 5 minutes because you’ve made frequent or repeated transactions recently. It’s a safety check to prevent odd activity.",
-        "系統要求您等待5分鐘，是因為您近期進行了多次或重複的交易。這是為了確保賬戶安全，防止異常行為。"
-      ],
+      "text": "Why did the system ask me to wait 5 minutes for a transaction?",
+      "variations": [],
       "intent": "transaction_records",
       "languages": {
         "en": "Why did the system ask me to wait 5 minutes for a transaction?",
@@ -4840,9 +4696,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "I see, boss! The system’s making you wait 5 minutes since you’ve been doing a bunch of transactions—it’s just a quick safety thing!",
-        "ms": "Oh, macam tu, boss! Sistem suruh tunggu 5 minit sebab boss dah buat banyak transaksi—cek keselamatan je tu!",
-        "cn": "明白，老板！系統讓您等5分鐘，是因為您最近交易頻繁，這只是個簡單的安全檢查！"
+        "en": "The system asked you to wait 5 minutes because you’ve made frequent or repeated transactions recently. It’s a safety check to prevent odd activity.",
+        "ms": "Sistem minta boss tunggu 5 minit sebab boss baru buat transaksi kerap atau sama berulang. Ini cek keselamatan untuk elak aktiviti pelik.",
+        "cn": "系統要求您等待5分鐘，是因為您近期進行了多次或重複的交易。這是為了確保賬戶安全，防止異常行為。"
       },
       "conditions": []
     },
@@ -4853,8 +4709,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4878,12 +4734,8 @@
   {
     "id": "0393",
     "question": {
-      "text": "Yes, you can! Just click the portrait icon at the bottom right, select update phone number, enter the new one, click Send TAC, input the code, and submit.",
-      "variations": [
-        "Boleh! Klik ikon potret kat sudut kanan bawah, pilih kemas kini nombor telefon, masukkan nombor baru, klik Hantar TAC, masuk kod, dan hantar.",
-        "Yes, you can! Just click the portrait icon at the bottom right, select update phone number, enter the new one, click Send TAC, input the code, and submit.",
-        "當然可以！請您點擊右下角人像圖標，選擇更新電話號碼，輸入新號碼，點擊發送TAC，輸入收到的驗證碼後提交即可！"
-      ],
+      "text": "Is it possible to change the phone number associated with my account?",
+      "variations": [],
       "intent": "account_management",
       "languages": {
         "en": "Is it possible to change the phone number associated with my account?",
@@ -4893,9 +4745,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Sure thing, boss! Hit the portrait icon at the bottom right, pick update phone number, pop in the new one, send TAC, enter the code, and you’re set!",
-        "ms": "Boleh lah, boss! Tekan ikon potret kat bawah kanan, pilih kemas kini nombor telefon, masukkan nombor baru, hantar TAC, masuk kod—settle!",
-        "cn": "當然可以，老板！請您點擊右下角人像圖標，選更新電話號碼，輸入新號碼，發送TAC後輸入驗證碼就搞定啦！"
+        "en": "Yes, you can! Just click the portrait icon at the bottom right, select update phone number, enter the new one, click Send TAC, input the code, and submit.",
+        "ms": "Boleh! Klik ikon potret kat sudut kanan bawah, pilih kemas kini nombor telefon, masukkan nombor baru, klik Hantar TAC, masuk kod, dan hantar.",
+        "cn": "當然可以！請您點擊右下角人像圖標，選擇更新電話號碼，輸入新號碼，點擊發送TAC，輸入收到的驗證碼後提交即可！"
       },
       "conditions": []
     },
@@ -4906,8 +4758,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4931,12 +4783,8 @@
   {
     "id": "0394",
     "question": {
-      "text": "We accept ATM transfers, online transfers, and e-wallets (E-Wallet) for deposits.",
-      "variations": [
-        "Kami terima pindahan ATM, pindahan dalam talian, dan e-dompet (E-Wallet) untuk deposit.",
-        "We accept ATM transfers, online transfers, and e-wallets (E-Wallet) for deposits.",
-        "我們接受以下支付方式進行存款：ATM轉賬、在線轉賬、電子錢包（E-Wallet）。"
-      ],
+      "text": "What payment methods are accepted for deposits?",
+      "variations": [],
       "intent": "payment_issues",
       "languages": {
         "en": "What payment methods are accepted for deposits?",
@@ -4946,9 +4794,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Got it, boss! You can use ATM transfers, online transfers, or e-wallets for deposits—pick what works for you!",
-        "ms": "Baik, boss! Boss boleh guna pindahan ATM, pindahan dalam talian, atau e-dompet untuk deposit—pilih je yang boss suka!",
-        "cn": "好的，老板！您可以用ATM轉賬、在線轉賬或電子錢包進行存款，選您方便的方式吧！"
+        "en": "We accept ATM transfers, online transfers, and e-wallets (E-Wallet) for deposits.",
+        "ms": "Kami terima pindahan ATM, pindahan dalam talian, dan e-dompet (E-Wallet) untuk deposit.",
+        "cn": "我們接受以下支付方式進行存款：ATM轉賬、在線轉賬、電子錢包（E-Wallet）。"
       },
       "conditions": []
     },
@@ -4959,8 +4807,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4984,12 +4832,8 @@
   {
     "id": "0395",
     "question": {
-      "text": "Sorry for the trouble, boss! It might be due to an issue with the receipt or wrong deposit method. It usually takes 5-30 minutes—send us the receipt to check.",
-      "variations": [
-        "Maaf sebab susahkan, boss! Mungkin sebab resit ada masalah atau cara deposit salah. Biasanya ambil 5-30 minit—hantar resit kat kami untuk semak.",
-        "Sorry for the trouble, boss! It might be due to an issue with the receipt or wrong deposit method. It usually takes 5-30 minutes—send us the receipt to check.",
-        "很抱歉給您帶來不便！可能是收據有問題或存款方式不正確。通常處理時間為5-30分鐘，請您提供存款收據給我們核查。"
-      ],
+      "text": "Can you explain why my deposit hasn't been processed after several hours?",
+      "variations": [],
       "intent": "payment_issues",
       "languages": {
         "en": "Can you explain why my deposit hasn't been processed after several hours?",
@@ -4999,9 +4843,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Oh, sorry about that, boss! Could be a receipt glitch or wrong method—it’s usually 5-30 minutes. Send us the receipt, and I’ll sort it out quick!",
-        "ms": "Oh, maaf lah, boss! Mungkin resit bermasalah atau cara deposit salah—biasanya 5-30 minit je. Hantar resit kat kami, saya settle cepat!",
-        "cn": "抱歉讓您麻煩了，老板！可能是收據問題或存款方式錯了，通常5-30分鐘就好。請把收據發給我們，我會快點幫您解決！"
+        "en": "Sorry for the trouble, boss! It might be due to an issue with the receipt or wrong deposit method. It usually takes 5-30 minutes—send us the receipt to check.",
+        "ms": "Maaf sebab susahkan, boss! Mungkin sebab resit ada masalah atau cara deposit salah. Biasanya ambil 5-30 minit—hantar resit kat kami untuk semak.",
+        "cn": "很抱歉給您帶來不便！可能是收據有問題或存款方式不正確。通常處理時間為5-30分鐘，請您提供存款收據給我們核查。"
       },
       "conditions": []
     },
@@ -5012,8 +4856,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -5037,12 +4881,8 @@
   {
     "id": "0396",
     "question": {
-      "text": "If you entered the wrong password, try recalling it carefully. If you can’t, click ‘Forgot Password’ and follow the steps to reset it.",
-      "variations": [
-        "Kalau boss masukkan kata laluan salah, cuba ingat balik elok-elok. Kalau tak boleh, klik ‘Lupa Kata Laluan’ dan ikut langkah untuk tukar.",
-        "If you entered the wrong password, try recalling it carefully. If you can’t, click ‘Forgot Password’ and follow the steps to reset it.",
-        "若您輸入了錯誤的密碼，請先仔細回想。如果實在想不起來，請點擊‘忘記密碼’選項，按提示步驟更換。"
-      ],
+      "text": "What should I do if I entered the wrong password?",
+      "variations": [],
       "intent": "password_management",
       "languages": {
         "en": "What should I do if I entered the wrong password?",
@@ -5052,9 +4892,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "No stress, boss! If you got the password wrong, think it over. Still lost? Hit ‘Forgot Password’ and reset it—easy fix!",
-        "ms": "Tak apa, boss! Kalau kata laluan salah, cuba ingat balik. Masih tak ingat? Tekan ‘Lupa Kata Laluan’ dan tukar—senang je!",
-        "cn": "沒關係，老板！若您輸錯密碼，先想想看。若想不起來，點擊‘忘記密碼’按步驟重設，很簡單！"
+        "en": "If you entered the wrong password, try recalling it carefully. If you can’t, click ‘Forgot Password’ and follow the steps to reset it.",
+        "ms": "Kalau boss masukkan kata laluan salah, cuba ingat balik elok-elok. Kalau tak boleh, klik ‘Lupa Kata Laluan’ dan ikut langkah untuk tukar.",
+        "cn": "若您輸入了錯誤的密碼，請先仔細回想。如果實在想不起來，請點擊‘忘記密碼’選項，按提示步驟更換。"
       },
       "conditions": []
     },
@@ -5065,8 +4905,8 @@
       "subCategory": "password_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -5090,12 +4930,8 @@
   {
     "id": "0397",
     "question": {
-      "text": "We don’t usually provide tax statements for winnings and losses. If asked by a bank, just explain it as loans, repayments, or item trades—no worries!",
-      "variations": [
-        "Kami biasanya tak bagi penyata cukai untuk kemenangan dan kerugian. Kalau bank tanya, cakap je pinjaman, bayar balik, atau urusniaga barang—tak ada hal!",
-        "We don’t usually provide tax statements for winnings and losses. If asked by a bank, just explain it as loans, repayments, or item trades—no worries!",
-        "我們通常不提供獲利和損失的稅單。若銀行或其他機構問起，您可以解釋為借款、還款或物品交易，別擔心！"
-      ],
+      "text": "Can I request a tax statement for my winnings and losses?",
+      "variations": [],
       "intent": "transaction_records",
       "languages": {
         "en": "Can I request a tax statement for my winnings and losses?",
@@ -5105,9 +4941,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Oh, good one, boss! We don’t do tax statements for wins and losses, but if the bank asks, say it’s loans or trades—no problem at all!",
-        "ms": "Oh, bagus soalan ni, boss! Kami tak bagi penyata cukai untuk menang atau kalah, tapi kalau bank tanya, cakap pinjaman atau urusniaga—tak ada masalah!",
-        "cn": "問得好，老板！我們不提供獲利和損失的稅單，若銀行問，您就說是借款或交易，沒問題的！"
+        "en": "We don’t usually provide tax statements for winnings and losses. If asked by a bank, just explain it as loans, repayments, or item trades—no worries!",
+        "ms": "Kami biasanya tak bagi penyata cukai untuk kemenangan dan kerugian. Kalau bank tanya, cakap je pinjaman, bayar balik, atau urusniaga barang—tak ada hal!",
+        "cn": "我們通常不提供獲利和損失的稅單。若銀行或其他機構問起，您可以解釋為借款、還款或物品交易，別擔心！"
       },
       "conditions": []
     },
@@ -5118,8 +4954,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -5143,12 +4979,8 @@
   {
     "id": "0398",
     "question": {
-      "text": "Thanks for asking! Deposits usually take 5-30 minutes. If your 500 isn’t in after 30 minutes, contact our online customer service to check.",
-      "variations": [
-        "Terima kasih sebab tanya! Deposit biasanya ambil 5-30 minit. Kalau 500 boss tak masuk lepas 30 minit, hubungi sokongan pelanggan dalam talian untuk semak.",
-        "Thanks for asking! Deposits usually take 5-30 minutes. If your 500 isn’t in after 30 minutes, contact our online customer service to check.",
-        "感謝您的詢問！存款通常需要5-30分鐘。若您的500存款30分鐘後仍未入賬，請聯繫我們的在線客服團隊核查。"
-      ],
+      "text": "Why hasn't my deposit of 500 been credited to my account yet?",
+      "variations": [],
       "intent": "payment_issues",
       "languages": {
         "en": "Why hasn't my deposit of 500 been credited to my account yet?",
@@ -5158,9 +4990,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Thanks for checking, boss! Your 500 should hit in 5-30 minutes. If it’s past 30, ping our online customer service—I’ll get it sorted!",
-        "ms": "Terima kasih tanya, boss! 500 boss sepatutnya masuk dalam 5-30 minit. Kalau lebih 30, hubungi sokongan pelanggan dalam talian—saya settlekan!",
-        "cn": "感謝您問，老板！您的500存款應該在5-30分鐘內入賬。若超過30分鐘，請聯繫我們的在線客服團隊，我會幫您處理！"
+        "en": "Thanks for asking! Deposits usually take 5-30 minutes. If your 500 isn’t in after 30 minutes, contact our online customer service to check.",
+        "ms": "Terima kasih sebab tanya! Deposit biasanya ambil 5-30 minit. Kalau 500 boss tak masuk lepas 30 minit, hubungi sokongan pelanggan dalam talian untuk semak.",
+        "cn": "感謝您的詢問！存款通常需要5-30分鐘。若您的500存款30分鐘後仍未入賬，請聯繫我們的在線客服團隊核查。"
       },
       "conditions": []
     },
@@ -5171,8 +5003,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -5196,12 +5028,8 @@
   {
     "id": "0399",
     "question": {
-      "text": "Our app already has two-factor authentication for safety. When you log in, it’ll ask for your password and a TAC code—double protection!",
-      "variations": [
-        "App kami dah ada pengesahan dua faktor untuk keselamatan. Bila boss log masuk, ia minta kata laluan dan kod TAC—perlindungan berganda!",
-        "Our app already has two-factor authentication for safety. When you log in, it’ll ask for your password and a TAC code—double protection!",
-        "我們的應用已提供雙重身份驗證確保安全。登錄時會要求您輸入密碼和TAC驗證碼，這雙重保護讓您的賬戶更安全！"
-      ],
+      "text": "How can I enable two-factor authentication for added security?",
+      "variations": [],
       "intent": "two-factor_authentication",
       "languages": {
         "en": "How can I enable two-factor authentication for added security?",
@@ -5211,9 +5039,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "Good call, boss! Two-factor’s already on—when you log in, it’ll need your password and TAC code. Keeps things super safe!",
-        "ms": "Pilihan bijak, boss! Dua faktor dah aktif—bila log masuk, kena kata laluan dan kod TAC. Jaga akaun selamat gila!",
-        "cn": "聰明的老板！雙重驗證已啟用，登錄時需要您的密碼和TAC碼，這樣賬戶超安全！"
+        "en": "Our app already has two-factor authentication for safety. When you log in, it’ll ask for your password and a TAC code—double protection!",
+        "ms": "App kami dah ada pengesahan dua faktor untuk keselamatan. Bila boss log masuk, ia minta kata laluan dan kod TAC—perlindungan berganda!",
+        "cn": "我們的應用已提供雙重身份驗證確保安全。登錄時會要求您輸入密碼和TAC驗證碼，這雙重保護讓您的賬戶更安全！"
       },
       "conditions": []
     },
@@ -5224,8 +5052,8 @@
       "subCategory": "two-factor_authentication",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T08:29:49Z",
-      "lastUpdated": "2025-03-03T08:29:49Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"
