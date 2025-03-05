@@ -2599,36 +2599,32 @@
   {
     "id": "0150",
     "question": {
-      "text": "Boss, I was looking at mythology earlier",
-      "variations": [
-        "Bos, saya tengok mitologi tadi",
-        "Boss, I was looking at mythology earlier",
-        "老闆，我剛才看神話"
-      ],
-      "intent": "general_inquiry",
+      "text": "What should I do if I can't take a screenshot of my bank app for the deposit?",
+      "variations": [],
+      "intent": "transaction_records",
       "languages": {
-        "en": "\"Who is Glauco?\"",
-        "ms": "\"Who is glauco?\"",
-        "cn": "\"Glauco是誰？\""
+        "en": "What should I do if I can't take a screenshot of my bank app for the deposit?",
+        "ms": "Apa yang perlu saya lakukan jika saya tidak boleh mengambil tangkapan skrin aplikasi bank saya untuk deposit?",
+        "cn": "如果我無法截取銀行應用程序的屏幕截圖進行存款，我該怎麼辦？"
       }
     },
     "answer": {
       "detailed": {
-        "en": "\"Glauco is not a Brazilian mythology god, he is an Australian god.\"",
-        "ms": "\"Glauco is not Mythology Brazilian God, He is a Australian god.\"",
-        "cn": "\"Glauco不是巴西神話中的神，他是澳洲的神。\""
+        "en": "If you can’t snap a screenshot of your bank app, boss, grab the receipt from your bank transaction log, snap that instead, and upload it to the app—boom, sorted! ❤️",
+        "ms": "Kalau boss tak boleh tangkap skrin app bank, ambil resit dari log transaksi bank boss, snap tu je, dan muat naik ke app—boom, selesai! ❤️",
+        "cn": "若您無法截取銀行應用程序的截圖進行存款，老板，您可以從銀行交易記錄下載單據後截圖，再上傳到App哦。❤️"
       },
       "conditions": []
     },
     "metadata": {
       "category": [
-        "general"
+        "finance"
       ],
-      "subCategory": "general_inquiry",
+      "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-03T03:24:31Z",
-      "lastUpdated": "2025-03-03T03:24:31Z",
+      "dateCreated": "2025-03-04T01:15:35Z",
+      "lastUpdated": "2025-03-04T01:15:35Z",
       "version": "1.0",
       "source": "",
       "status": "active"

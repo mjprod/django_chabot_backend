@@ -32,6 +32,7 @@ from ai_config.ai_prompts import (
 from api.chatbot import (
     confidence_grader,
     format_docs,
+    store,
     retriever,
     retrieval_grader,
     rag_chain,
@@ -172,6 +173,25 @@ def prompt_conversation(self, user_prompt, store ,language_code=LANGUAGE_DEFAULT
         if db is not None:
             self.close_db()
 
+
+
+def i_need_this_knowledge(db,conversation_id, user_prompt,ai_response, confidence_score):
+    document = {
+        "conversation_id": conversation_id,
+        "user_prompt": user_prompt,
+        "generation": ai_response,
+        "confidence_score": confidence_score,
+    }
+    try:
+        db.low_confidence_responses.update_one(
+            {"session_id": conversation_id},
+            {"$set": document},
+            upsert=True
+        )
+    except Exception as me:
+        logger.warning(f"MongoDB error: {str(me)}")
+        raise  
+
 def prompt_conversation_admin(
     self,
     user_prompt,
@@ -218,21 +238,17 @@ def prompt_conversation_admin(
 
         # Vector store retrieval
         vector_start = time.time()
+        docs_retrieve = []
         try:
             #TODO: I tried to send as prop but it didn't work
-            COHERE_MODEL = "embed-multilingual-v3.0"
-            embedding_model = CohereEmbeddings(model=COHERE_MODEL, user_agent="glaucomp")
+           # COHERE_MODEL = "embed-multilingual-v3.0"
+           # embedding_model = CohereEmbeddings(model=COHERE_MODEL, user_agent="glaucomp")
 
-            store = Chroma(
-                persist_directory="./chroma_db",
-                embedding_function=embedding_model,
-                collection_name="RAG"
-            )
-
-        
-            # docs_retrieve = store.similarity_search(
-              #  user_prompt, k=3  # Limit to top 3 results for performance
-            # )
+           # store = Chroma(
+            #    persist_directory="./chroma_db",
+            #    embedding_function=embedding_model,
+            #    collection_name="RAG"
+          #  )
 
             # Exception handling for user prompt
             if user_prompt.lower().strip() == "ok":
@@ -242,9 +258,9 @@ def prompt_conversation_admin(
             
             for i, doc in enumerate(docs_retrieve, start=1):
                 print(f"📌 Result {i}:")
-                print(f"@@content: {doc}\n")
-                print(f"metadata: {doc.metadata}\n")
-                print("="*50)
+                print(f"Content: {doc.page_content}\n")
+                print(f"Metadata: {doc.metadata}\n")
+                print("=" * 50)
 
             logger.debug(
                 f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
@@ -275,7 +291,7 @@ def prompt_conversation_admin(
                 max_tokens=MAX_TOKENS,
                 timeout=OPENAI_TIMEOUT,
             )
-            logging.info(messages_history)
+            #logging.info(messages_history)
             ai_response = response.choices[0].message.content
             logger.debug(
                 f"AI response generated in {time.time() - generation_start:.2f}s"
@@ -328,6 +344,9 @@ def prompt_conversation_admin(
                     raise
                 logger.warning(f"MongoDB retry {attempt + 1}/{max_retries}: {str(me)}")
                 time.sleep(0.5)
+
+        if confidence_result and confidence_result.confidence_score < 0.65:
+            i_need_this_knowledge(db,conversation_id,user_prompt, ai_response, confidence_result.confidence_score)
 
         total_time = time.time() - start_time
         logger.info(f"Request completed in {total_time:.2f}s")
