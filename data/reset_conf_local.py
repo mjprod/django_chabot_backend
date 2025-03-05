@@ -76,8 +76,7 @@ def reset_all_confidence_scores(target_score=0.5):
         base_dir = os.path.join(Path(__file__).parent.parent, "data")
         database_files = [
             "database_part_1.json",
-            "database_part_2.json",
-            "database_part_3.json",
+            
         ]
 
         total_updates = 0

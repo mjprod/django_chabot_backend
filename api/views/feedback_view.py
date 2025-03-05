@@ -6,20 +6,22 @@ from datetime import datetime
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from ..mixins.mongodb_mixin import MongoDBMixin
+
 from ..serializers import CaptureFeedbackSerializer, CaptureFeedbackSimpleSerializer, CaptureFeedbackCompareSerializer
 
-from ..chatbot import (
-    generate_translations,
+from api.translation import (
+  generate_translations,
 )
 
 from ai_config.ai_constants import LANGUAGE_DEFAULT
+
+from api.app.mongo import MongoDB
 
 # Initialize logger
 logger = logging.getLogger(__name__)
 
 
-class CaptureFeedbackView(MongoDBMixin, APIView):
+class CaptureFeedbackView(APIView):
     def post(self, request):
         start_time = time.time()
         logger.info("Starting feedback POST request")
@@ -60,7 +62,7 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
 
             # MongoDB operations
             try:
-                db = self.get_db()
+                db = MongoDB.get_db()
                 logger.info("Creating text index for feedback search")
                 # db.feedback_data.create_index([("user_input", "text")])
                 db_start = time.time()
@@ -88,9 +90,6 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
                     {"error": f"Database operation failed: {str(db_error)}"},
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 )
-            finally:
-                if db is not None:
-                    self.close_db()
 
             total_time = time.time() - start_time
             logger.info(f"Total request processing time: {total_time:.2f}s")
@@ -117,7 +116,7 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
             # MongoDB operations
             db_start = time.time()
             logger.info("Starting MongoDB Read Operations")
-            db = self.get_db()
+            db = MongoDB.get_db()
             total_count = db.feedback_data.count_documents({})
 
             cursor = (
@@ -157,7 +156,7 @@ class CaptureFeedbackView(MongoDBMixin, APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
-class CaptureFeedbackCompareView(MongoDBMixin, APIView):
+class CaptureFeedbackCompareView(APIView):
     def post(self, request):
         start_time = time.time()
         logger.info("Starting feedback Compare POST request")
@@ -192,7 +191,7 @@ class CaptureFeedbackCompareView(MongoDBMixin, APIView):
             db = None
             # MongoDB operations
             try:
-                db = self.get_db()
+                db = MongoDB.get_db()
                 # logger.info("Creating text index for feedback search")
                 # db.feedback_data.create_index([("user_input", "text")])
                 db_start = time.time()
@@ -220,9 +219,6 @@ class CaptureFeedbackCompareView(MongoDBMixin, APIView):
                     {"error": f"Database operation failed: {str(db_error)}"},
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 )
-            finally:
-                if db is not None:
-                    self.close_db()
 
             total_time = time.time() - start_time
             logger.info(f"Total request processing time: {total_time:.2f}s")
@@ -249,7 +245,7 @@ class CaptureFeedbackCompareView(MongoDBMixin, APIView):
             # MongoDB operations
             db_start = time.time()
             logger.info("Starting MongoDB Read Operations")
-            db = self.get_db()
+            db = MongoDB.get_db()
             total_count = db.feedback_data.count_documents({})
 
             cursor = (
@@ -289,7 +285,7 @@ class CaptureFeedbackCompareView(MongoDBMixin, APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
-class CaptureFeedbackMultiView(MongoDBMixin, APIView):
+class CaptureFeedbackMultiView(APIView):
     def post(self, request):
         start_time = time.time()
         logger.info("Starting feedback POST request")
@@ -347,7 +343,7 @@ class CaptureFeedbackMultiView(MongoDBMixin, APIView):
 
             # MongoDB operations
             try:
-                db = self.get_db()
+                db = MongoDB.get_db()
                 logger.info("Creating text index for feedback search")
                 # db.feedback_data.create_index([("user_input", "text")])
 
@@ -376,9 +372,6 @@ class CaptureFeedbackMultiView(MongoDBMixin, APIView):
                     {"error": f"Database operation failed: {str(db_error)}"},
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 )
-            finally:
-                if db is not None:
-                    self.close_db()
 
             total_time = time.time() - start_time
             logger.info(f"Total request processing time: {total_time:.2f}s")
@@ -405,7 +398,7 @@ class CaptureFeedbackMultiView(MongoDBMixin, APIView):
             # MongoDB operations
             db_start = time.time()
             logger.info("Starting MongoDB Read Operations")
-            db = self.get_db()
+            db = MongoDB.get_db()
             total_count = db.feedback_data.count_documents({})
 
             cursor = (

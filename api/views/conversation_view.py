@@ -4,17 +4,21 @@ from rest_framework import status
 
 import logging
 from datetime import datetime
-from ..mixins.mongodb_mixin import MongoDBMixin
 import time
 
 from rapidfuzz import fuzz
 
-from ..chatbot import (
-    prompt_conversation,
-    prompt_conversation_admin,
+from api.chatbot import (
     check_answer_mongo_and_openai,
     extrair_knowledge_items,
+    get_store,
 )
+
+from api.app.conversation import (
+    prompt_conversation,
+    prompt_conversation_admin,
+ )
+
 from ..serializers import (
     PromptConversationSerializer,
     PromptConversationAdminSerializer,
@@ -24,16 +28,18 @@ from ai_config.ai_constants import (
     LANGUAGE_DEFAULT,
 )
 
-from api.brain_view import (
+from api.views.brain_file_reader import (
     get_document_count,
 )
+
+from api.app.mongo import MongoDB
 
 logger = logging.getLogger(__name__)
 
 def fuzzy_match_with_dynamic_context(
     self, query, collection_name, threshold, language="en"
 ):
-    db = self.get_db()
+    db = MongoDB.get_db()
     collection = db[collection_name]
 
     # Check if a text index exists and create it if not
@@ -123,7 +129,7 @@ def fuzzy_match_with_dynamic_context(
     else:
         print("No matches found.")
 
-class PromptConversationAdminView(MongoDBMixin, APIView):
+class PromptConversationAdminView(APIView):
     def post(self, request):
         logger.info("Starting prompt_conversation_admin request")
 
@@ -218,7 +224,7 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
                 )
 
             # Connect to MongoDB and get conversation history
-            db = self.get_db()
+            db = MongoDB.get_db()
             conversation = db.conversations.find_one({"session_id": conversation_id})
 
             if not conversation:
@@ -244,13 +250,11 @@ class PromptConversationAdminView(MongoDBMixin, APIView):
                 {"error": f"Failed to retrieve conversation history: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-        finally:
-            if db is not None:
-                self.close_db()
+        
 
-class PromptConversationView(MongoDBMixin, APIView):
+class PromptConversationView(APIView):
     def post(self, request):
-        logger.info("Starting prompt_conversation_admin request")
+        logger.info("Starting prompt_conversation request")
 
         try:
             # Get the header value as a string
@@ -307,12 +311,9 @@ class PromptConversationView(MongoDBMixin, APIView):
             response = prompt_conversation(
                 self,
                 user_prompt=validated_data["prompt"],
+                store=get_store,
                 language_code=language_code,
             )
-
-            # generation_time = time.time() - generation_start
-            # if generation_time < 3:
-            # time.sleep(6)
 
             return Response(response, status=status.HTTP_200_OK)
 
@@ -337,7 +338,7 @@ class PromptConversationView(MongoDBMixin, APIView):
                 )
 
             # Connect to MongoDB and get conversation history
-            db = self.get_db()
+            db = MongoDB.get_db()
             conversation = db.conversations.find_one({"session_id": conversation_id})
 
             if not conversation:
@@ -363,16 +364,14 @@ class PromptConversationView(MongoDBMixin, APIView):
                 {"error": f"Failed to retrieve conversation history: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-        finally:
-            if db is not None:
-                self.close_db()
+        
 
-class ConversationDetailView(MongoDBMixin, APIView):
+class ConversationDetailView(APIView):
     def get(self, request, conversation_id):
         db = None
         start_time = time.time()
         try:
-            db = self.get_db()
+            db = MongoDB.get_db()
             
             conversation = db.conversations.find_one({"session_id": conversation_id})            
             if not conversation:
@@ -390,16 +389,13 @@ class ConversationDetailView(MongoDBMixin, APIView):
                 {"error": f"Error retrieving conversation: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-        finally:
-            if db is not None:
-                self.close_db()
+        
 
-class AllConversationsIdsView(MongoDBMixin, APIView):
+class AllConversationsIdsView(APIView):
     def get(self, request):
         db = None
         try:
-            db = self.get_db()
-            # Retorna apenas o campo "session_id" de todas as conversas
+            db = MongoDB.get_db()
             sessions = list(db.conversations.find({}, {"session_id": 1, "_id": 0}))
             return Response(sessions, status=status.HTTP_200_OK)
         except Exception as e:
@@ -407,12 +403,10 @@ class AllConversationsIdsView(MongoDBMixin, APIView):
                 {"error": f"Error retrieving session ids: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-        finally:
-            if db is not None:
-                self.close_db()
+        
 
 
-class UpdateKnowledgeView(MongoDBMixin, APIView):
+class UpdateKnowledgeView(APIView):
     def post(self, request):
         db = None
         try:
@@ -423,7 +417,7 @@ class UpdateKnowledgeView(MongoDBMixin, APIView):
                     status=status.HTTP_400_BAD_REQUEST
                 )
             
-            db = self.get_db()
+            db = MongoDB.get_db()
             # Busca a conversa usando o session_id
             conversation = db.conversations.find_one({"session_id": conversation_id})
             if not conversation:
@@ -447,11 +441,9 @@ class UpdateKnowledgeView(MongoDBMixin, APIView):
                 {"error": f"Error extracting candidate knowledge: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-        finally:
-            if db is not None:
-                self.close_db()
+        
 
-class DeleteConversationView(MongoDBMixin, APIView):
+class DeleteConversationView(APIView):
     def delete(self, request, *args, **kwargs):
         # Obtém o conversation_id dos kwargs (já que está na URL)
         conversation_id = kwargs.get("conversation_id")
@@ -462,7 +454,7 @@ class DeleteConversationView(MongoDBMixin, APIView):
             )
         db = None
         try:
-            db = self.get_db()
+            db = MongoDB.get_db()
             result = db.conversations.delete_one({"session_id": conversation_id})
             if result.deleted_count == 0:
                 return Response(
@@ -478,11 +470,9 @@ class DeleteConversationView(MongoDBMixin, APIView):
                 {"error": f"Error deleting conversation: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-        finally:
-            if db is not None:
-                self.close_db()
+        
 
-class FinaliseConversationView(MongoDBMixin, APIView):
+class FinaliseConversationView(APIView):
     def post(self, request, *args, **kwargs):
         # Get the conversation_id from the URL kwargs
         conversation_id = kwargs.get("conversation_id")
@@ -493,7 +483,7 @@ class FinaliseConversationView(MongoDBMixin, APIView):
             )
         db = None
         try:
-            db = self.get_db()
+            db = MongoDB.get_db()
             # Update the conversation document by setting 'status' to 'done'
             result = db.conversations.update_one(
                 {"session_id": conversation_id},
@@ -513,18 +503,16 @@ class FinaliseConversationView(MongoDBMixin, APIView):
                 {"error": f"Error finalizing conversation: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-        finally:
-            if db is not None:
-                self.close_db()
+        
                 
-class FinaliseAllConversationsView(MongoDBMixin, APIView):
+class FinaliseAllConversationsView(APIView):
     """
     This view finalizes all conversations by setting their status to "done".
     """
     def post(self, request, *args, **kwargs):
         db = None
         try:
-            db = self.get_db()
+            db = MongoDB.get_db()
             # Update all documents in the "conversations" collection,
             # setting the "status" field to "done"
             result = db.conversations.update_many(
@@ -543,9 +531,7 @@ class FinaliseAllConversationsView(MongoDBMixin, APIView):
                 {"error": f"Error finalizing all conversations: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-        finally:
-            if db is not None:
-                self.close_db()
+        
 
 def categorize_conversation_resolution(conversation: dict, db) -> dict:
     """
@@ -572,7 +558,7 @@ def categorize_conversation_resolution(conversation: dict, db) -> dict:
         candidate_item = candidate_items[0]
         answer = candidate_item.get("answer", {})
         # Retrieve and standardize the short answer text
-        short_text = answer.get("short", {}).get("en", "").strip().lower()
+        short_text = answer.get("detailed", {}).get("en", "").strip().lower()
         
         # If the short answer explicitly indicates no relevant resolution
         if short_text == "there is no relevant resolution in this conversation.":
@@ -602,7 +588,7 @@ def categorize_conversation_resolution(conversation: dict, db) -> dict:
         db.conversations.delete_one({"session_id": conversation["session_id"]})
         return {}
 
-class SeparateConversationsView(MongoDBMixin, APIView):
+class SeparateConversationsView(APIView):
     """
     This view retrieves all conversation session IDs from the "conversations" collection.
     For each conversation with status "done", it processes the conversation using the
@@ -613,7 +599,7 @@ class SeparateConversationsView(MongoDBMixin, APIView):
         db = None
         results = []
         try:
-            db = self.get_db()
+            db = MongoDB.get_db()
             # Retrieve only the "session_id" field from all conversations
             sessions = list(db.conversations.find({}, {"session_id": 1, "_id": 0}))
             logger.debug(f"Retrieved session IDs: {sessions}")
@@ -662,11 +648,9 @@ class SeparateConversationsView(MongoDBMixin, APIView):
             return Response({
                 "error": f"Error processing conversations: {str(e)}"
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        finally:
-            if db is not None:
-                self.close_db()
+        
 
-class DashboardCountsView(MongoDBMixin, APIView):
+class DashboardCountsView(APIView):
     """
     This endpoint returns the counts for:
       - Total conversations
@@ -678,7 +662,7 @@ class DashboardCountsView(MongoDBMixin, APIView):
     def get(self, request):
         db = None
         try:
-            db = self.get_db()
+            db = MongoDB.get_db()
             conversations_count = db.conversations.count_documents({})
             useless_count = db.read_conversation_useless.count_documents({})
             no_brain_count = db.read_conversation_no_brain.count_documents({})
@@ -698,6 +682,4 @@ class DashboardCountsView(MongoDBMixin, APIView):
                 {"error": f"Error retrieving dashboard counts: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-        finally:
-            if db is not None:
-                self.close_db()
+               
