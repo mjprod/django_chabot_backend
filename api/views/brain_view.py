@@ -3,7 +3,6 @@ from rest_framework.response import Response
 from rest_framework import status
 
 import logging
-from ..mixins.mongodb_mixin import MongoDBMixin
 
 from ..serializers import (
     UpdateAnswerBrain,
@@ -13,13 +12,15 @@ from api.chatbot import (
     update_document_by_custom_id,
 )
 
+from api.app.mongo import MongoDB
+
 logger = logging.getLogger(__name__)
 
-class ListReviewAndUpdateBrainView(MongoDBMixin, APIView):
+class ListReviewAndUpdateBrainView(APIView):
     def get(self, request, *args, **kwargs):
         db = None
         try:
-            db = self.get_db()
+            db = MongoDB.get_db()
             query = {
                 "$expr": {
                     "$lt": [
@@ -42,11 +43,9 @@ class ListReviewAndUpdateBrainView(MongoDBMixin, APIView):
                 {"error": f"Error retrieving session ids: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
-        finally:
-            if db is not None:
-                self.close_db()
+        
 
-class UpdateReviewStatusView(MongoDBMixin, APIView):
+class UpdateReviewStatusView(APIView):
     def post(self, request, *args, **kwargs):
         """
         Update the review_status field of a document.
@@ -68,7 +67,7 @@ class UpdateReviewStatusView(MongoDBMixin, APIView):
         db = None
         try:
 
-            db = self.get_db()
+            db = MongoDB.get_db()
             # Build the field path for the answer text, e.g., "answer.detailed.en"
             field_path = f"answer.detailed.{review_status}"
             
@@ -99,9 +98,7 @@ class UpdateReviewStatusView(MongoDBMixin, APIView):
                 {"error": f"Error updating review_status: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-        finally:
-            if db is not None:
-                self.close_db()
+        
 
 class UpdateBrainView(APIView):
     def get(self, request):
