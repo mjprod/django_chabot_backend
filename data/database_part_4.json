@@ -2971,7 +2971,11 @@
     "id": "0357",
     "question": {
       "text": "Where can I find the download link for the gaming app?",
-      "variations": [],
+      "variations": [
+        "Where can I find the download link for the gaming app?",
+        "Di manakah saya boleh mencari pautan muat turun untuk aplikasi permainan?",
+        "我可以在哪裡找到遊戲應用程序的下載鏈接？"
+      ],
       "intent": "app_issues",
       "languages": {
         "en": "Where can I find the download link for the gaming app?",
@@ -2994,8 +2998,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3020,7 +3024,11 @@
     "id": "0358",
     "question": {
       "text": "How long should I wait for a deposit before contacting support?",
-      "variations": [],
+      "variations": [
+        "How long should I wait for a deposit before contacting support?",
+        "Berapa lama saya harus menunggu untuk deposit sebelum menghubungi sokongan?",
+        "在聯繫客服團隊之前，我應該等待存款多久？"
+      ],
       "intent": "payment_issues",
       "languages": {
         "en": "How long should I wait for a deposit before contacting support?",
@@ -3043,8 +3051,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3069,7 +3077,11 @@
     "id": "0359",
     "question": {
       "text": "How can I change the language settings on the platform?",
-      "variations": [],
+      "variations": [
+        "How can I change the language settings on the platform?",
+        "Bagaimana saya boleh menukar tetapan bahasa di platform?",
+        "如何更改平台的語言設置？"
+      ],
       "intent": "app_issues",
       "languages": {
         "en": "How can I change the language settings on the platform?",
@@ -3092,8 +3104,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3118,7 +3130,11 @@
     "id": "0360",
     "question": {
       "text": "How do I update my contact information if it has changed?",
-      "variations": [],
+      "variations": [
+        "How do I update my contact information if it has changed?",
+        "Bagaimana saya boleh mengemas kini maklumat hubungan saya jika ia telah berubah?",
+        "如果我的聯繫信息發生更改，我如何更新？"
+      ],
       "intent": "account_management",
       "languages": {
         "en": "How do I update my contact information if it has changed?",
@@ -3141,8 +3157,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3167,7 +3183,11 @@
     "id": "0361",
     "question": {
       "text": "Why do the slot games seem more difficult to win lately?",
-      "variations": [],
+      "variations": [
+        "Why do the slot games seem more difficult to win lately?",
+        "Kenapa permainan slot kelihatan lebih sukar untuk menang sejak kebelakangan ini?",
+        "為什麼最近的老虎機遊戲變得更難贏了？"
+      ],
       "intent": "game_rules",
       "languages": {
         "en": "Why do the slot games seem more difficult to win lately?",
@@ -3190,8 +3210,8 @@
       "subCategory": "game_rules",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3216,7 +3236,11 @@
     "id": "0362",
     "question": {
       "text": "I entered the wrong reference on my deposit receipt. How can I correct this?",
-      "variations": [],
+      "variations": [
+        "I entered the wrong reference on my deposit receipt. How can I correct this?",
+        "Saya memasukkan rujukan yang salah pada resit deposit saya. Bagaimana saya boleh membetulkannya?",
+        "我在存款收據上輸入了錯誤的參考號。我如何更正？"
+      ],
       "intent": "payment_issues",
       "languages": {
         "en": "I entered the wrong reference on my deposit receipt. How can I correct this?",
@@ -3239,8 +3263,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3265,7 +3289,11 @@
     "id": "0363",
     "question": {
       "text": "Why is the payment processing slower than usual tonight?",
-      "variations": [],
+      "variations": [
+        "Why is the payment processing slower than usual tonight?",
+        "Kenapa pemprosesan pembayaran lebih lambat dari biasa malam ini?",
+        "為什麼今晚支付處理比平時慢？"
+      ],
       "intent": "payment_issues",
       "languages": {
         "en": "Why is the payment processing slower than usual tonight?",
@@ -3288,8 +3316,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3314,7 +3342,11 @@
     "id": "0364",
     "question": {
       "text": "Why is my withdrawal not being approved?",
-      "variations": [],
+      "variations": [
+        "Why is my withdrawal not being approved?",
+        "Kenapa pengeluaran saya tidak diluluskan?",
+        "為什麼我的提款沒有被批准？"
+      ],
       "intent": "withdrawal_conditions",
       "languages": {
         "en": "Why is my withdrawal not being approved?",
@@ -3337,8 +3369,8 @@
       "subCategory": "withdrawal_conditions",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3363,7 +3395,11 @@
     "id": "0365",
     "question": {
       "text": "What should I do if I can't take a screenshot of my bank app for the deposit?",
-      "variations": [],
+      "variations": [
+        "What should I do if I can't take a screenshot of my bank app for the deposit?",
+        "Apa yang perlu saya lakukan jika saya tidak boleh mengambil tangkapan skrin aplikasi bank saya untuk deposit?",
+        "如果我無法截取銀行應用程序的屏幕截圖進行存款，我該怎麼辦？"
+      ],
       "intent": "payment_issues",
       "languages": {
         "en": "What should I do if I can't take a screenshot of my bank app for the deposit?",
@@ -3386,8 +3422,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3412,7 +3448,11 @@
     "id": "0366",
     "question": {
       "text": "Where can I find the download link for the gaming app?",
-      "variations": [],
+      "variations": [
+        "Where can I find the download link for the gaming app?",
+        "Di manakah saya boleh mencari pautan muat turun untuk aplikasi permainan?",
+        "我可以在哪裡找到遊戲應用程序的下載鏈接？"
+      ],
       "intent": "app_issues",
       "languages": {
         "en": "Where can I find the download link for the gaming app?",
@@ -3435,8 +3475,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3461,7 +3501,11 @@
     "id": "0367",
     "question": {
       "text": "What should I do if I suspect unauthorized activity on my account?",
-      "variations": [],
+      "variations": [
+        "What should I do if I suspect unauthorized activity on my account?",
+        "Apa yang perlu saya lakukan jika saya mengesyaki aktiviti tidak sah pada akaun saya?",
+        "如果我懷疑我的賬戶有未經授權的活動，我該怎麼辦？"
+      ],
       "intent": "security_concerns",
       "languages": {
         "en": "What should I do if I suspect unauthorized activity on my account?",
@@ -3484,8 +3528,8 @@
       "subCategory": "security_concerns",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3510,7 +3554,11 @@
     "id": "0368",
     "question": {
       "text": "Why isn't my credit automatically updating after a deposit?",
-      "variations": [],
+      "variations": [
+        "Why isn't my credit automatically updating after a deposit?",
+        "Kenapa kredit saya tidak dikemas kini secara automatik selepas deposit?",
+        "為什麼我的存款後錢沒有自動更新？"
+      ],
       "intent": "transaction_records",
       "languages": {
         "en": "Why isn't my credit automatically updating after a deposit?",
@@ -3533,8 +3581,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3559,7 +3607,11 @@
     "id": "0369",
     "question": {
       "text": "Are there any loyalty programs or VIP benefits for regular players?",
-      "variations": [],
+      "variations": [
+        "Are there any loyalty programs or VIP benefits for regular players?",
+        "Adakah terdapat program kesetiaan atau faedah VIP untuk pemain tetap?",
+        "是否有針對常規玩家的忠誠度計劃或VIP福利？"
+      ],
       "intent": "points_accumulation",
       "languages": {
         "en": "Are there any loyalty programs or VIP benefits for regular players?",
@@ -3582,8 +3634,8 @@
       "subCategory": "points_accumulation",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3608,7 +3660,11 @@
     "id": "0370",
     "question": {
       "text": "How can I change the language settings on the platform?",
-      "variations": [],
+      "variations": [
+        "How can I change the language settings on the platform?",
+        "Bagaimana saya boleh menukar tetapan bahasa di platform?",
+        "如何更改平台的語言設置？"
+      ],
       "intent": "app_issues",
       "languages": {
         "en": "How can I change the language settings on the platform?",
@@ -3631,8 +3687,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3657,7 +3713,11 @@
     "id": "0371",
     "question": {
       "text": "Can you check the status of my withdrawal request?",
-      "variations": [],
+      "variations": [
+        "Can you check the status of my withdrawal request?",
+        "Bolehkah anda periksa status permintaan pengeluaran saya?",
+        "您能檢查我的提款請求的狀態嗎？"
+      ],
       "intent": "withdrawal_conditions",
       "languages": {
         "en": "Can you check the status of my withdrawal request?",
@@ -3680,8 +3740,8 @@
       "subCategory": "withdrawal_conditions",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3706,7 +3766,11 @@
     "id": "0372",
     "question": {
       "text": "Where can I find the download link for the gaming app?",
-      "variations": [],
+      "variations": [
+        "Where can I find the download link for the gaming app?",
+        "Di manakah saya boleh mencari pautan muat turun untuk aplikasi permainan?",
+        "我可以在哪裡找到遊戲應用程序的下載鏈接？"
+      ],
       "intent": "app_issues",
       "languages": {
         "en": "Where can I find the download link for the gaming app?",
@@ -3729,8 +3793,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3755,7 +3819,11 @@
     "id": "0373",
     "question": {
       "text": "Can I use my e-wallet account number for transactions?",
-      "variations": [],
+      "variations": [
+        "Can I use my e-wallet account number for transactions?",
+        "Bolehkah saya menggunakan nombor akaun e-dompet saya untuk transaksi?",
+        "我可以使用我的電子錢包賬號進行交易嗎？"
+      ],
       "intent": "payment_issues",
       "languages": {
         "en": "Can I use my e-wallet account number for transactions?",
@@ -3778,8 +3846,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3804,7 +3872,11 @@
     "id": "0374",
     "question": {
       "text": "How often are account balances updated after a game session?",
-      "variations": [],
+      "variations": [
+        "How often are account balances updated after a game session?",
+        "Berapa kerap baki akaun dikemas kini selepas sesi permainan?",
+        "遊戲結束後，賬戶餘額多久更新一次？"
+      ],
       "intent": "account_management",
       "languages": {
         "en": "How often are account balances updated after a game session?",
@@ -3827,8 +3899,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3853,7 +3925,11 @@
     "id": "0375",
     "question": {
       "text": "How can I change the language settings on the platform?",
-      "variations": [],
+      "variations": [
+        "How can I change the language settings on the platform?",
+        "Bagaimana saya boleh menukar tetapan bahasa di platform?",
+        "如何更改平台的語言設置？"
+      ],
       "intent": "app_issues",
       "languages": {
         "en": "How can I change the language settings on the platform?",
@@ -3876,8 +3952,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3902,7 +3978,11 @@
     "id": "0376",
     "question": {
       "text": "Where can I find the download link for the gaming app?",
-      "variations": [],
+      "variations": [
+        "Where can I find the download link for the gaming app?",
+        "Di manakah saya boleh mencari pautan muat turun untuk aplikasi permainan?",
+        "我可以在哪裡找到遊戲應用程序的下載鏈接？"
+      ],
       "intent": "app_issues",
       "languages": {
         "en": "Where can I find the download link for the gaming app?",
@@ -3925,8 +4005,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -3951,7 +4031,11 @@
     "id": "0377",
     "question": {
       "text": "What should I do if my account shows 0 credits after a deposit?",
-      "variations": [],
+      "variations": [
+        "What should I do if my account shows 0 credits after a deposit?",
+        "Apa yang harus saya lakukan jika akaun saya menunjukkan 0 kredit selepas deposit?",
+        "如果存款後我的賬戶顯示為0錢，我應該怎麼做？"
+      ],
       "intent": "transaction_records",
       "languages": {
         "en": "What should I do if my account shows 0 credits after a deposit?",
@@ -3974,8 +4058,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4000,7 +4084,11 @@
     "id": "0378",
     "question": {
       "text": "What should I do if I experience a disconnection during a live game?",
-      "variations": [],
+      "variations": [
+        "What should I do if I experience a disconnection during a live game?",
+        "Apa yang perlu saya lakukan jika saya mengalami terputus sambungan semasa permainan langsung?",
+        "如果我在遊戲過程中斷線，應該怎麼做？"
+      ],
       "intent": "network_connection",
       "languages": {
         "en": "What should I do if I experience a disconnection during a live game?",
@@ -4023,8 +4111,8 @@
       "subCategory": "network_connection",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4049,7 +4137,11 @@
     "id": "0379",
     "question": {
       "text": "Is there an issue with the deposit system causing delays?",
-      "variations": [],
+      "variations": [
+        "Is there an issue with the deposit system causing delays?",
+        "Adakah terdapat masalah dengan sistem deposit yang menyebabkan kelewatan?",
+        "存款系統是否有問題導致延遲？"
+      ],
       "intent": "payment_issues",
       "languages": {
         "en": "Is there an issue with the deposit system causing delays?",
@@ -4072,8 +4164,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4098,7 +4190,11 @@
     "id": "0380",
     "question": {
       "text": "What's the latest time I can purchase lottery numbers for today's draw?",
-      "variations": [],
+      "variations": [
+        "What's the latest time I can purchase lottery numbers for today's draw?",
+        "Apakah masa terakhir untuk membeli nombor loteri untuk cabutan hari ini?",
+        "我今天可以購買彩票號碼的最晚時間是什麼時候？"
+      ],
       "intent": "betting_rules",
       "languages": {
         "en": "What's the latest time I can purchase lottery numbers for today's draw?",
@@ -4121,8 +4217,8 @@
       "subCategory": "betting_rules",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4147,7 +4243,11 @@
     "id": "0381",
     "question": {
       "text": "How long should I wait for a deposit before contacting support?",
-      "variations": [],
+      "variations": [
+        "How long should I wait for a deposit before contacting support?",
+        "Berapa lama saya harus menunggu untuk deposit sebelum menghubungi sokongan?",
+        "在聯繫客服團隊之前，我應該等待存款多久？"
+      ],
       "intent": "payment_issues",
       "languages": {
         "en": "How long should I wait for a deposit before contacting support?",
@@ -4170,8 +4270,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4196,7 +4296,11 @@
     "id": "0382",
     "question": {
       "text": "I accidentally added my account to my spouse's profile. How can I remove it?",
-      "variations": [],
+      "variations": [
+        "I accidentally added my account to my spouse's profile. How can I remove it?",
+        "Saya secara tidak sengaja menambah akaun saya ke profil pasangan saya. Bagaimana saya boleh membuangnya?",
+        "我不小心將我的賬戶添加到我配偶的資料中。如何刪除？"
+      ],
       "intent": "account_management",
       "languages": {
         "en": "I accidentally added my account to my spouse's profile. How can I remove it?",
@@ -4219,8 +4323,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4245,7 +4349,11 @@
     "id": "0383",
     "question": {
       "text": "Are there any special promotions or bonuses available today?",
-      "variations": [],
+      "variations": [
+        "Are there any special promotions or bonuses available today?",
+        "Adakah terdapat promosi atau bonus istimewa pada hari ini?",
+        "今天有沒有特別的促銷或獎金活動？"
+      ],
       "intent": "redemption_rules",
       "languages": {
         "en": "Are there any special promotions or bonuses available today?",
@@ -4268,8 +4376,8 @@
       "subCategory": "redemption_rules",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4294,7 +4402,11 @@
     "id": "0384",
     "question": {
       "text": "Can I make a small transfer to verify if my account is working correctly?",
-      "variations": [],
+      "variations": [
+        "Can I make a small transfer to verify if my account is working correctly?",
+        "Bolehkah saya membuat pemindahan kecil untuk mengesahkan jika akaun saya berfungsi dengan betul?",
+        "我可以進行小額轉賬以驗證我的賬戶是否正常運作嗎？"
+      ],
       "intent": "transaction_records",
       "languages": {
         "en": "Can I make a small transfer to verify if my account is working correctly?",
@@ -4317,8 +4429,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4343,7 +4455,11 @@
     "id": "0385",
     "question": {
       "text": "Why isn't my Fast Payment top-up showing in my account?",
-      "variations": [],
+      "variations": [
+        "Why isn't my Fast Payment top-up showing in my account?",
+        "Kenapa tambah nilai Fast Payment saya tidak dipaparkan dalam akaun saya?",
+        "為什麼我的快速支付充值沒有顯示在賬戶中？"
+      ],
       "intent": "payment_issues",
       "languages": {
         "en": "Why isn't my Fast Payment top-up showing in my account?",
@@ -4366,8 +4482,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4392,7 +4508,11 @@
     "id": "0386",
     "question": {
       "text": "How can I follow up on a withdrawal request that hasn't been approved?",
-      "variations": [],
+      "variations": [
+        "How can I follow up on a withdrawal request that hasn't been approved?",
+        "Bagaimana saya boleh membuat susulan pada permintaan pengeluaran yang belum diluluskan?",
+        "如何跟進尚未批准的提款請求？"
+      ],
       "intent": "withdrawal_conditions",
       "languages": {
         "en": "How can I follow up on a withdrawal request that hasn't been approved?",
@@ -4415,8 +4535,8 @@
       "subCategory": "withdrawal_conditions",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4441,7 +4561,11 @@
     "id": "0387",
     "question": {
       "text": "How can I contact live support if I have urgent issues?",
-      "variations": [],
+      "variations": [
+        "How can I contact live support if I have urgent issues?",
+        "Bagaimana saya boleh menghubungi sokongan langsung jika saya mempunyai isu yang mendesak?",
+        "如果我有緊急問題，我如何聯繫實時客服團隊？"
+      ],
       "intent": "general_inquiry",
       "languages": {
         "en": "How can I contact live support if I have urgent issues?",
@@ -4464,8 +4588,8 @@
       "subCategory": "general_inquiry",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4490,7 +4614,11 @@
     "id": "0388",
     "question": {
       "text": "Why can't I access the banking section on my mobile device?",
-      "variations": [],
+      "variations": [
+        "Why can't I access the banking section on my mobile device?",
+        "Kenapa saya tidak boleh mengakses bahagian perbankan di peranti mudah alih saya?",
+        "為什麼我無法在我的手機設備上訪問銀行部分？"
+      ],
       "intent": "bank_issues",
       "languages": {
         "en": "Why can't I access the banking section on my mobile device?",
@@ -4513,8 +4641,8 @@
       "subCategory": "bank_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4539,7 +4667,11 @@
     "id": "0389",
     "question": {
       "text": "Can I use an older receipt for a new transaction?",
-      "variations": [],
+      "variations": [
+        "Can I use an older receipt for a new transaction?",
+        "Bolehkah saya menggunakan resit lama untuk transaksi baru?",
+        "我可以用舊的收據進行新的交易嗎？"
+      ],
       "intent": "transaction_records",
       "languages": {
         "en": "Can I use an older receipt for a new transaction?",
@@ -4562,8 +4694,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4588,7 +4720,11 @@
     "id": "0390",
     "question": {
       "text": "Where can I find the download link for the gaming app?",
-      "variations": [],
+      "variations": [
+        "Where can I find the download link for the gaming app?",
+        "Di manakah saya boleh mencari pautan muat turun untuk aplikasi permainan?",
+        "我可以在哪裡找到遊戲應用程序的下載鏈接？"
+      ],
       "intent": "app_issues",
       "languages": {
         "en": "Where can I find the download link for the gaming app?",
@@ -4611,8 +4747,8 @@
       "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4637,7 +4773,11 @@
     "id": "0391",
     "question": {
       "text": "Is there a way to speed up the withdrawal process?",
-      "variations": [],
+      "variations": [
+        "Is there a way to speed up the withdrawal process?",
+        "Adakah terdapat cara untuk mempercepatkan proses pengeluaran?",
+        "有辦法加快提款過程嗎？"
+      ],
       "intent": "withdrawal_conditions",
       "languages": {
         "en": "Is there a way to speed up the withdrawal process?",
@@ -4660,8 +4800,8 @@
       "subCategory": "withdrawal_conditions",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4686,7 +4826,11 @@
     "id": "0392",
     "question": {
       "text": "Why did the system ask me to wait 5 minutes for a transaction?",
-      "variations": [],
+      "variations": [
+        "Why did the system ask me to wait 5 minutes for a transaction?",
+        "Kenapa sistem meminta saya menunggu 5 minit untuk transaksi?",
+        "為什麼系統要求我等待5分鐘進行交易？"
+      ],
       "intent": "transaction_records",
       "languages": {
         "en": "Why did the system ask me to wait 5 minutes for a transaction?",
@@ -4709,8 +4853,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4735,7 +4879,11 @@
     "id": "0393",
     "question": {
       "text": "Is it possible to change the phone number associated with my account?",
-      "variations": [],
+      "variations": [
+        "Is it possible to change the phone number associated with my account?",
+        "Adakah mungkin untuk menukar nombor telefon yang dikaitkan dengan akaun saya?",
+        "我可以更改與我賬戶相關的手機號碼嗎？"
+      ],
       "intent": "account_management",
       "languages": {
         "en": "Is it possible to change the phone number associated with my account?",
@@ -4758,8 +4906,8 @@
       "subCategory": "account_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4784,7 +4932,11 @@
     "id": "0394",
     "question": {
       "text": "What payment methods are accepted for deposits?",
-      "variations": [],
+      "variations": [
+        "What payment methods are accepted for deposits?",
+        "Apakah kaedah pembayaran yang diterima untuk deposit?",
+        "接受哪些支付方式進行存款？"
+      ],
       "intent": "payment_issues",
       "languages": {
         "en": "What payment methods are accepted for deposits?",
@@ -4807,8 +4959,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4833,7 +4985,11 @@
     "id": "0395",
     "question": {
       "text": "Can you explain why my deposit hasn't been processed after several hours?",
-      "variations": [],
+      "variations": [
+        "Can you explain why my deposit hasn't been processed after several hours?",
+        "Bolehkah anda jelaskan kenapa deposit saya belum diproses selepas beberapa jam?",
+        "你能解釋為什麼我的存款在幾個小時後還沒有處理嗎？"
+      ],
       "intent": "payment_issues",
       "languages": {
         "en": "Can you explain why my deposit hasn't been processed after several hours?",
@@ -4856,8 +5012,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4882,7 +5038,11 @@
     "id": "0396",
     "question": {
       "text": "What should I do if I entered the wrong password?",
-      "variations": [],
+      "variations": [
+        "What should I do if I entered the wrong password?",
+        "Apa yang harus saya lakukan jika saya memasukkan kata laluan yang salah?",
+        "如果輸入了錯誤的密碼，我應該怎麼做？"
+      ],
       "intent": "password_management",
       "languages": {
         "en": "What should I do if I entered the wrong password?",
@@ -4905,8 +5065,8 @@
       "subCategory": "password_management",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4931,7 +5091,11 @@
     "id": "0397",
     "question": {
       "text": "Can I request a tax statement for my winnings and losses?",
-      "variations": [],
+      "variations": [
+        "Can I request a tax statement for my winnings and losses?",
+        "Bolehkah saya meminta penyata cukai untuk kemenangan dan kerugian saya?",
+        "我可以要求提供我的獲利和損失的稅單嗎？"
+      ],
       "intent": "transaction_records",
       "languages": {
         "en": "Can I request a tax statement for my winnings and losses?",
@@ -4954,8 +5118,8 @@
       "subCategory": "transaction_records",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -4980,7 +5144,11 @@
     "id": "0398",
     "question": {
       "text": "Why hasn't my deposit of 500 been credited to my account yet?",
-      "variations": [],
+      "variations": [
+        "Why hasn't my deposit of 500 been credited to my account yet?",
+        "Kenapa deposit 500 saya belum dikreditkan ke akaun saya lagi?",
+        "為什麼我的500存款還沒有入賬？"
+      ],
       "intent": "payment_issues",
       "languages": {
         "en": "Why hasn't my deposit of 500 been credited to my account yet?",
@@ -5003,8 +5171,8 @@
       "subCategory": "payment_issues",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"
@@ -5029,7 +5197,11 @@
     "id": "0399",
     "question": {
       "text": "How can I enable two-factor authentication for added security?",
-      "variations": [],
+      "variations": [
+        "How can I enable two-factor authentication for added security?",
+        "Bagaimana saya boleh mengaktifkan pengesahan dua faktor untuk keselamatan tambahan?",
+        "如何啟用雙重身份驗證以增強安全性？"
+      ],
       "intent": "two-factor_authentication",
       "languages": {
         "en": "How can I enable two-factor authentication for added security?",
@@ -5052,8 +5224,8 @@
       "subCategory": "two-factor_authentication",
       "difficulty": 2,
       "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
+      "dateCreated": "2025-03-05T13:02:26Z",
+      "lastUpdated": "2025-03-05T13:02:26Z",
       "version": "1.0",
       "source": "",
       "status": "active"

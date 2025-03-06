@@ -12,11 +12,12 @@ for i, record in enumerate(data, start=357):
     new_record["id"] = f"{i:04d}" 
 
     text = record.get("user_input_en", "")
-    variations = []
-    # for key in ["", "", ""]:
-     #   value = record.get(key, "")
-      #  if value:
-       #     variations.append(value)
+    variations = [
+        record.get("user_input_en", ""),
+        record.get("user_input_ms", ""),
+        record.get("user_input_cn", "")
+    ]
+
     
     languages = {
         "en": record.get("user_input_en", ""),
