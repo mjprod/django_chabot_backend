@@ -325,7 +325,7 @@ def prompt_conversation_admin(
                 logger.warning(f"MongoDB retry {attempt + 1}/{max_retries}: {str(me)}")
                 time.sleep(0.5)
 
-        if confidence_result and confidence_result.confidence_score < 0.65 and len(user_prompt) > 10:
+        if confidence_result and 0.1 < confidence_result.confidence_score < 0.65 and len(user_prompt) > 10:
             i_need_this_knowledge(db,conversation_id,user_prompt, ai_response, confidence_result.confidence_score)
 
         total_time = time.time() - start_time
