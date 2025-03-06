@@ -1,8 +1,8 @@
 from enum import Enum
 
 # AI Models
-# OPENAI_MODEL = "gpt-4o-mini"
-OPENAI_MODEL = "gpt-3.5-turbo"
+OPENAI_MODEL = "gpt-4o-mini"
+#OPENAI_MODEL = "gpt-3.5-turbo"
 # OPENAI_MODEL = "text-embedding-ada-002"
 OPENAI_MODEL_EN_TO_CN = "gpt-4o-mini"
 
