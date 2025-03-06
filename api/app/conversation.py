@@ -163,11 +163,22 @@ def prompt_conversation(self, user_prompt, store ,language_code=LANGUAGE_DEFAULT
         raise
 
 
+
 def i_need_this_knowledge(db,conversation_id, user_prompt,ai_response, confidence_score):
+
+    # TODO: I will just put relevant imports here for the ease of refactring process later. 
+    # As this entire python file needs to be refactored
+    from ...api.services.chatbot_service.chatbot import ChatBot
+    # access the singleton chatbot instance
+    chatbot=ChatBot()
+    generation_old_conversation= chatbot.query(user_prompt)
+    logger.info(f"{generation_old_conversation}")
+
     document = {
         "conversation_id": conversation_id,
         "user_prompt": user_prompt,
         "generation": ai_response,
+        "generation_old_conversation":generation_old_conversation,
         "confidence_score": confidence_score,
     }
     try:
