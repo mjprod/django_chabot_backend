@@ -10,7 +10,8 @@ from .config import (
     COLLECTION_NAME,
     CHROMA_DIR,
     DATE_THRESHOLD,
-    MESSAGE_KEY
+    MESSAGE_KEY,
+    MONOGODB_QUERY_COLLECTION
 )
 
 from dotenv import load_dotenv
@@ -74,14 +75,14 @@ class Brain:
             try:
                 mongodb_client = MongoDBClient()
 
-                # query = {
-                #     "updated_at": {
-                #         "$gt": DATE_THRESHOLD.strftime("%Y-%m-%dT%H:%M:%SZ")  # Convert datetime to string format
-                #     }
-                # }
+                query = {
+                    "updated_at": {
+                        "$gt": DATE_THRESHOLD.strftime("%Y-%m-%dT%H:%M:%SZ")  # Convert datetime to string format
+                    }
+                }
 
                 logger.info(f"Fetching old conversations from Mongodb")
-                results, count = mongodb_client.query(collection="old_conversation",query=None)
+                results, count = mongodb_client.query(collection=MONOGODB_QUERY_COLLECTION,query=query)
             
                 logger.info(f"Preprocessing {count} documents")
                 processed_conversations = self._preprocessing_conversation(results)

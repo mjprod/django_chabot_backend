@@ -58,10 +58,11 @@ class ChatBot:
             self.initialised = True
 
     def _build_graph(self):
+        # TODO: need to redefine the state scheme, if it is used for question and answer pair only
         workflow = StateGraph(state_schema=MessagesState)
         workflow.add_node("chatbot", self.chatbot_node)
         workflow.add_edge(START, "chatbot")
-        return workflow.compile(checkpointer=self.memory)
+        return workflow.compile()
 
     # chatbot node
     def chatbot_node(self, state: MessagesState):
@@ -71,8 +72,8 @@ class ChatBot:
 
         docs = self.vector_store.similarity_search_with_relevance_scores(last_query, k=4)
 
-        for doc, score in docs:
-            logger.info(f"Document: {doc.page_content}, Score: {score:.4f}")
+        # for doc, score in docs:
+        #     logger.info(f"Document: {doc.page_content}, Score: {score:.4f}")
 
         context = "\n\n".join([doc.page_content for doc, score in docs])
 
@@ -97,4 +98,3 @@ class ChatBot:
         input_messages = [HumanMessage(content=message)]
         response = self.graph.invoke({"messages": input_messages})
         return response["messages"][-1].content
-
