@@ -20,7 +20,8 @@ from .views.feedback_view import (
     CaptureFeedbackMultiView,
 )
 from .views.brain_view import (
-    ListReviewAndUpdateBrainView,
+    ReviewKnowledge,
+    ReviewKnowledgeDashboard,
     UpdateReviewStatusView,
     UpdateBrainView,
 )
@@ -36,8 +37,12 @@ urlpatterns = [
     path("capture_feedback/", CaptureFeedbackView.as_view(), name="capture_feedback"),
     path("capture_feedback_compare/", CaptureFeedbackCompareView.as_view(), name="capture_feedback_compare"),
     path("capture_feedback_multi/",CaptureFeedbackMultiView.as_view(),name="capture_feedback_multi",),
+    
     # Brain
-    path("list_review_update_brain/", ListReviewAndUpdateBrainView.as_view(), name="review_update_brain"),
+    path("review_knowledge/", ReviewKnowledge.as_view(), name="list_review_knowledge"),
+    path('review_knowledge/<str:id>/', ReviewKnowledge.as_view(), name='retrieve_review_knowledge'),  # Retrieve
+    path("review_knowledge_dashboard/", ReviewKnowledgeDashboard.as_view(), name="review_knowledge_dashboard"),
+
     path("update_review_status/", UpdateReviewStatusView.as_view(), name="update_review_status"),
     path("update_brain/", UpdateBrainView.as_view(), name="update_brain"),
 

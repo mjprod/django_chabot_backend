@@ -1,6 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.exceptions import NotFound
+
+from ..utils.utils import CustomPagination
 
 import logging
 
@@ -13,37 +16,161 @@ from api.chatbot import (
 )
 
 from api.app.mongo import MongoDB
+from bson import ObjectId
+
 
 logger = logging.getLogger(__name__)
 
-class ListReviewAndUpdateBrainView(APIView):
+REVIEW_COLLECTION_NAME="review_and_update_brain"
+
+class ReviewKnowledge(APIView):
+    pagination_class = CustomPagination
+    lookup_field = 'id'
+
     def get(self, request, *args, **kwargs):
-        db = None
+        id = kwargs.get('id', None)        
+        if id:
+            return self.retrieve(id)
+        
+        # proceed with the list logic when id is not provided
+        return self.list(request)
+    
+    def retrieve(self, document_id):
+        """
+            retrive single document by '_id'
+            Endpoint: registered as review_knowledge/<str:id>/
+        """
         try:
-            db = MongoDB.get_db()
-            query = {
+            # Retrieve the document with the specified review ID
+            query = {"_id": ObjectId(document_id)}
+            result = MongoDB.query_collection(collection_name=REVIEW_COLLECTION_NAME, query=query)
+
+            if result:
+                logger.info(f"{result}")
+                # Convert _id to string and return the document
+                result = result[0]
+                result["_id"] = str(result["_id"])
+                return Response(result, status=status.HTTP_200_OK)
+            else:
+                return Response({"error": "Review not found."}, status=status.HTTP_404_NOT_FOUND)
+
+
+        except Exception as e:
+            logger.exception(f"Error retrieving review with id {document_id}")
+            return Response(
+                {"error": f"Error retrieving review: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+    def list(self, request, *args, **kwargs):
+        """
+            List view for retrieving a paginated list of items based on provided query parameters.
+
+            Query Parameters:
+            - page (int): The page number to retrieve.
+            - page_size (int): The number of items per page.
+            - category (str): Filter items by category.
+            - language (str): Filter items by language.
+
+            Returns:
+            - Response: A paginated list of items matching the applied filters.
+        """
+
+        # get filters
+        category = request.query_params.get('category', None)
+        language=request.query_params.get('language', None)
+        comebined_query = {"$and":[]}
+        try:
+            # query 1:  retrieve documents do not have complete review status
+            await_to_be_reviewed_query = {
                 "$expr": {
                     "$lt": [
                         {"$size": {"$ifNull": ["$review_status", []]}},
                         3
                     ]
-                }
-            }
-            results = list(db.review_and_update_brain.find(query))
-        
+                }}
+            
+            comebined_query["$and"].append(await_to_be_reviewed_query)
+
+            # apply filters
+            if category:
+                comebined_query["$and"].append({"metadata.category": {"$in": [category]}})
+            if language:
+                question_language_filter ={f"question.languages.{language}": {"$exists": "true"}}
+                answer_language_filter ={f"answer.detailed.{language}": {"$exists": "true"}}
+                comebined_query["$and"].extend([question_language_filter, answer_language_filter])
+
+            results = MongoDB.query_collection(collection_name=REVIEW_COLLECTION_NAME,
+                                               query=comebined_query)
+            
             for doc in results:
                 if "_id" in doc:
                     doc["_id"] = str(doc["_id"])
+
+            paginator = self.pagination_class()
+            paginated_results = paginator.paginate_queryset(results, request)
+            
+            return Response({
+                "count": paginator.page.paginator.count,
+                "total_pages": paginator.page.paginator.num_pages,
+                "previous": paginator.get_previous_link(),
+                "next": paginator.get_next_link(),
+                "results": paginated_results,
+            }, status=status.HTTP_200_OK)
         
-            return Response(results, status=status.HTTP_200_OK)
+            # return Response(results, status=status.HTTP_200_OK)
     
         except Exception as e:
                 logger.exception("Error retrieving session ids")
                 return Response(
-                {"error": f"Error retrieving session ids: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                    {"error": f"Error retrieving session ids: {str(e)}"},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
+
+class ReviewKnowledgeDashboard(APIView):
+    def get(self, request, *args, **kwargs):
+        aggregation=[
+            { 
+                "$unwind": "$metadata.category" 
+            },
+            { 
+                "$group": {
+                    "_id": "$metadata.category", 
+                    "count": { "$sum": 1 }
+                }
+            },
+            { 
+                "$sort": { "count": -1 }
+            }
+        ]
+
+        try:
+            # Assuming `query_collection` is your method to query MongoDB
+            results = MongoDB.aggregate_collection(
+                collection_name=REVIEW_COLLECTION_NAME,
+                aggregation=aggregation
+            )
+            
+            # If no results found, raise a NotFound exception
+            if not results:
+                raise NotFound("No categories found in the collection.")
+            
+            # Return the results as a JSON response
+            return Response(
+                {"categories_count": results},
+                status=status.HTTP_200_OK
+            )
         
+
+
+        except Exception as e:
+            # Handle other errors
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+
 
 class UpdateReviewStatusView(APIView):
     def post(self, request, *args, **kwargs):
