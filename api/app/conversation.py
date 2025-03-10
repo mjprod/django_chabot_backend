@@ -282,14 +282,14 @@ def prompt_conversation_admin(
 
        # is_last_message = is_finalizing_phrase(ai_response)
         is_last_message = False
-        try:
-            confidence_result = confidence_grader.invoke({
-                "documents": format_docs(docs_retrieve),
-                "generation": ai_response,
-            })
-        except Exception as ce:
-            logger.error(f"Error obtaining confidence: {str(ce)}")
-            confidence_result = None
+        #try:
+            #confidence_result = confidence_grader.invoke({
+             #   "documents": format_docs(docs_retrieve),
+              #  "generation": ai_response,
+            #})
+        #except Exception as ce:
+            #logger.error(f"Error obtaining confidence: {str(ce)}")
+            #confidence_result = None
 
         # Update conversation
         messages.append(
@@ -325,8 +325,8 @@ def prompt_conversation_admin(
                 logger.warning(f"MongoDB retry {attempt + 1}/{max_retries}: {str(me)}")
                 time.sleep(0.5)
 
-        if confidence_result and 0.1 < confidence_result.confidence_score < 0.65 and len(user_prompt) > 10:
-            i_need_this_knowledge(db,conversation_id,user_prompt, ai_response, confidence_result.confidence_score)
+        # if confidence_result and 0.1 < confidence_result.confidence_score < 0.65 and len(user_prompt) > 10:
+         #  i_need_this_knowledge(db,conversation_id,user_prompt, ai_response, confidence_result.confidence_score)
 
         total_time = time.time() - start_time
         logger.info(f"Request completed in {total_time:.2f}s")
@@ -336,7 +336,7 @@ def prompt_conversation_admin(
             "conversation_id": conversation_id,
             "language": language_code,
             "is_last_message": is_last_message,
-            "confidence_score": confidence_result.confidence_score if confidence_result else None,
+            "confidence_score": 0.0,
         }
 
     except Exception as e:
