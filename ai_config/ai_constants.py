@@ -4,7 +4,7 @@ import random
 # AI Models
 OPENAI_MODEL_GPT_4 = "gpt-4o-mini"
 OPENAI_MODEL_GPT_3_5 = "gpt-3.5-turbo"
-
+#TODO - should be smarter, if we have a model ilimited, we should avoid using it here
 def getModelRandom():
     return random.choice([OPENAI_MODEL_GPT_4, OPENAI_MODEL_GPT_3_5])
 
