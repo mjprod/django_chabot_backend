@@ -36,7 +36,7 @@ from .mongo import MongoDB
 
 logger = logging.getLogger(__name__)
 
-
+'''
 def is_finalizing_phrase(phrase):
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
@@ -77,7 +77,7 @@ def is_finalizing_phrase(phrase):
     except Exception as e:
         print(f"Error during OpenAI API call: {e}")
         return False
-    
+'''
 def prompt_conversation(self, user_prompt, store ,language_code=LANGUAGE_DEFAULT):
     start_time = time.time()
     logger.info(f"Starting prompt_conversation request - Language: {language_code}")
@@ -280,8 +280,8 @@ def prompt_conversation_admin(
             logger.error(f"OpenAI error: {str(oe)}")
             raise
 
-        is_last_message = is_finalizing_phrase(ai_response)
-
+       # is_last_message = is_finalizing_phrase(ai_response)
+        is_last_message = False
         try:
             confidence_result = confidence_grader.invoke({
                 "documents": format_docs(docs_retrieve),
