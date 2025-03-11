@@ -64,13 +64,4 @@ urlpatterns = [
     path("finalise_all_conversation/", FinaliseAllConversationsView.as_view(), name="finalise_all_conversation"),
     # Dashboard
     path("dashboard_counts/", DashboardCountsView.as_view(), name="dashboard_counts"),
-
-    # Review knowledge
-    path("review-knowledge/", ReviewKnowledge.as_view(), name="review_knowledge"),
-    path('review-knowledge/<str:id>/', ReviewKnowledge.as_view(), name='retrieve_review_knowledge'),  # Retrieve
-    path("review-knowledge-dashboard/", ReviewKnowledgeDashboard.as_view(), name="review_knowledge_dashboard"),
 ]
-
-
-router = DefaultRouter()
-router.register(r'knowledge', KnowledgeViewSet)

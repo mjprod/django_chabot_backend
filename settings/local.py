@@ -1,10 +1,12 @@
 from .base import *  # noqa: F403
 
 DEBUG = True
+
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
 ]
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
@@ -19,31 +21,11 @@ CSRF_COOKIE_SECURE = False
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_HSTS_PRELOAD = True
 
-# MongoDB settings
-MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
-MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
-MONGODB_CLUSTER = os.getenv("MONGODB_CLUSTER")
-MONGODB_DATABASE = os.getenv("MONGODB_DATABASE", "chatbotdb")
-
 # Construct MongoDB URI
 MONGODB_URI = (
     f"mongodb://{MONGODB_USERNAME}:{MONGODB_PASSWORD}"
     f"@{MONGODB_CLUSTER}/{MONGODB_DATABASE}?retryWrites=true&w=majority"
 )
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "djongo",
-#         "NAME": MONGODB_DATABASE,
-#         "CLIENT": {
-#             "host": MONGODB_URI,
-#             "maxPoolSize": 50,
-#             "minPoolSize": 10,
-#             "maxIdleTimeMS": 45000,
-#         },
-#     },
-# }
-
 
 DATABASES = {
     'default': {
