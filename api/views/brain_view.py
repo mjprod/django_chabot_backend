@@ -285,6 +285,34 @@ class ReviewKnowledgeDashboard(APIView):
         return category_mapping.get(category_id, CategoryColorEnum.OTHER)
 
 
+class ListReviewAndUpdateBrainView(APIView):
+    def get(self, request, *args, **kwargs):
+        db = None
+        try:
+            db = MongoDB.get_db()
+            query = {
+                "$expr": {
+                    "$lt": [
+                        {"$size": {"$ifNull": ["$review_status", []]}},
+                        3
+                    ]
+                }
+            }
+            results = list(db.review_and_update_brain.find(query))
+        
+            for doc in results:
+                if "_id" in doc:
+                    doc["_id"] = str(doc["_id"])
+        
+            return Response(results, status=status.HTTP_200_OK)
+    
+        except Exception as e:
+                logger.exception("Error retrieving session ids")
+                return Response(
+                {"error": f"Error retrieving session ids: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+
 
 class UpdateReviewStatusView(APIView):
     def post(self, request, *args, **kwargs):
@@ -370,3 +398,5 @@ class UpdateBrainView(APIView):
                 {"error": f"Error retrieving dashboard counts: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )    
+        
+
