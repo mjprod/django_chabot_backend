@@ -5,7 +5,7 @@ import time
 from openai import OpenAI
 from datetime import datetime
 
-from ai_config.ai_constants import (
+from api.constants.ai_constants import (
     OPENAI_MODEL,
     OPENAI_TIMEOUT,
     MAX_TOKENS,
@@ -13,7 +13,7 @@ from ai_config.ai_constants import (
     LANGUAGE_DEFAULT,
 )
 
-from ai_config.ai_constants import (
+from api.constants.ai_constants import (
     OPENAI_MODEL,
     OPENAI_TIMEOUT,
     MAX_TOKENS,
@@ -21,7 +21,7 @@ from ai_config.ai_constants import (
     LANGUAGE_DEFAULT,
 )
 
-from ai_config.ai_prompts import (
+from api.constants.ai_prompts import (
     FIRST_MESSAGE_PROMPT,
 )
 
@@ -84,8 +84,6 @@ def prompt_conversation(self, user_prompt, store ,language_code=LANGUAGE_DEFAULT
     db = None
 
     try:
-        # Database connection with timeout
-        # db = MongoDB.get_db()
         db = MongoDB.get_db()
         logger.debug(
             f"MongoDB connection established in {time.time() - start_time:.2f}s"
@@ -181,7 +179,6 @@ def i_need_this_knowledge(db,conversation_id, user_prompt,ai_response, confidenc
         raise  
 
 def prompt_conversation_admin(
-    self,
     user_prompt,
     conversation_id,
     admin_id,
@@ -197,8 +194,6 @@ def prompt_conversation_admin(
     db = None
 
     try:
-        # Database connection with timeout
-        # db = MongoDB.get_db()
         db = MongoDB.get_db()
         logger.debug(
             f"MongoDB connection established in {time.time() - start_time:.2f}s"

@@ -3,7 +3,6 @@ import json
 import logging
 import os
 import time
-import tracemalloc
 import re
 
 from typing import List
@@ -25,14 +24,13 @@ from openai import OpenAI
 from pymongo import MongoClient
 
 # constants
-from ai_config.ai_constants import (
+from api.constants.ai_constants import (
     OPENAI_MODEL,
-    OPENAI_TIMEOUT,
     COHERE_MODEL,
     MAX_TEMPERATURE,
 )
 
-from ai_config.ai_prompts import (
+from api.constants.ai_prompts import (
     FIRST_MESSAGE_PROMPT,
     FOLLOW_UP_PROMPT,
     DOCUMENT_RELEVANCE_PROMPT,
@@ -43,7 +41,6 @@ from ai_config.ai_prompts import (
 
 from api.views.brain_file_reader import (
     get_document_by_id,
-    get_document_by_question_text,
     update_answer_detailed
 )
 
@@ -57,21 +54,6 @@ from .ai_services import (
   GradeDocuments,
   GradeConfidenceLevel,
  )
-
-def monitor_memory():
-    """Start memory monitoring and return initial snapshot"""
-    tracemalloc.start()
-    snapshot1 = tracemalloc.take_snapshot()
-    return snapshot1
-
-def compare_memory(snapshot1):
-    """Compare memory usage against initial snapshot"""
-    snapshot2 = tracemalloc.take_snapshot()
-    top_stats = snapshot2.compare_to(snapshot1, "lineno")
-    print("[ Top 10 memory differences ]")
-    for stat in top_stats[:10]:
-        print(stat)
-    gc.collect()  # Force garbage collection after comparison
 
 # create our gloabl variables
 logger = logging.getLogger(__name__)
@@ -139,7 +121,6 @@ def load_and_process_json_file() -> List[dict]:
                                 ),
                             },
                             "answer": {
-                                # "short": item.get("answer", {}).get("short", {}),
                                 "detailed": item.get("answer", {}).get("detailed", {}),
                                 "conditions": item.get("answer", {}).get(
                                     "conditions", []
@@ -244,9 +225,7 @@ try:
 except Exception as e: 
     logger.error(f"Failed to create vector store: {str(e)}")
 
-
 retriever = MultiRetriever(vectorstores)
-
 
 def get_rag_prompt_template(is_first_message):
 
@@ -258,7 +237,6 @@ def get_rag_prompt_template(is_first_message):
             ("human", "Context: {context}\nQuestion: {prompt}"),
         ]
     )
-
 
 # Initialize LLM for Grading
 llm_grader = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
@@ -277,7 +255,6 @@ document_grade_prompt = ChatPromptTemplate.from_messages(
 
 # Runnable Chain for Document Grader
 retrieval_grader = document_grade_prompt | structured_llm_grader
-
 
 # Initialize LLM for Hallucination Grading
 llm_confidence = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
@@ -312,7 +289,6 @@ rag_prompt_template = ChatPromptTemplate.from_messages(
 
 # Initialize LLM for RAG Chain
 rag_llm = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
-
 
 # Define Formatting Function
 def format_docs(docs):
@@ -363,7 +339,7 @@ def update_local_confidence(generation, confidence_diff):
             "database_part_6.json",
             "database_part_7.json",
             "database_part_8.json",
-        "database_part_9.json",
+            "database_part_9.json",
         ]
 
         updated = False
@@ -418,11 +394,11 @@ def update_database_confidence(comparison_result, docs_to_use):
             "database_part_2.json",
             "database_part_3.json",
             "database_part_4.json",
-                  "database_part_5.json",
-        "database_part_6.json",
-        "database_part_7.json",
-        "database_part_8.json",
-        "database_part_9.json",
+            "database_part_5.json",
+            "database_part_6.json",
+            "database_part_7.json",
+            "database_part_8.json",
+            "database_part_9.json",
         ]
 
         for database_file in database_files:
@@ -464,104 +440,6 @@ def update_database_confidence(comparison_result, docs_to_use):
     except Exception as e:
         logger.error(f"Error updating database confidence: {str(e)}")
 
-def process_feedback_translation(feedback_data):
-    try:
-        logger.info("Processing feedback translation")
-
-        # Translate user input if not in English
-        user_input = translate_and_clean(feedback_data["user_input"])
-        logger.info("User input translation completed")
-
-        # Translate correct answer if provided and not in English
-        if feedback_data.get("correct_answer"):
-            correct_answer = translate_and_clean(feedback_data["correct_answer"])
-            logger.info("Correct answer translation completed")
-        else:
-            correct_answer = ""
-
-        return {
-            **feedback_data,
-            "user_input": user_input,
-            "correct_answer": correct_answer,
-        }
-    except Exception as e:
-        logger.error(f"Error processing feedback translation: {str(e)}")
-        return feedback_data
-
-def ensure_feedback_index(db):
-    if "feedback_index" not in db.feedback_data.index_information():
-        db.feedback_data.create_index([("user_input", "text")], name="feedback_index")
-        logger.info("Created text index for feedback search")
-
-def get_relevant_feedback_data(cleaned_prompt, db):
-    logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
-    try:
-        ensure_feedback_index(db)
-
-        similar_answers = (
-            db.feedback_data.find(
-                {
-                    "$text": {"$search": cleaned_prompt},
-                    "correct_answer": {"$exists": True, "$ne": ""},
-                }
-            )
-            .sort([("score", {"$meta": "textScore"}), ("timestamp", -1)])
-            .limit(3)
-        )
-
-        feedback_list = list(similar_answers)
-        if not feedback_list:
-            logger.warning(f"No feedback matches found for prompt: {cleaned_prompt}")
-            return []
-
-        logger.info(f"Found {len(feedback_list)} potential feedback matches")
-        return feedback_list
-    except Exception as e:
-        logger.error(f"Error retrieving feedback answers: {str(e)}")
-        return []
-
-def compare_answers(generation, feedback_answers, docs_to_use):
-    logger.info("Starting answer comparison process")
-    try:
-        # Score generated answer
-        generated_score = confidence_grader.invoke(
-            {"documents": format_docs(docs_to_use), "generation": generation}
-        )
-        generated_score = 0.90
-        logger.info(f"Generated answer confidence score: {generated_score}")
-
-        # Find best feedback answer
-        best_match = None
-        highest_score = 0
-
-        for feedback in feedback_answers:
-            # For demo added in fixed feedback always wins to show the client
-            feedback_score = 0.95  # remove when move to the next stage
-            logger.info(
-                f"Feedback answer score: {feedback_score} for ID: {feedback['conversation_id']}"
-            )
-
-            if feedback_score > highest_score:
-                highest_score = feedback_score
-                best_match = feedback
-
-        # Always return feedback as better for demos
-        comparison_result = {
-            "better_answer": "feedback",  # always choose feedback as better answer
-            "confidence_diff": 0.1,  # mall confidence change to simulate learning
-            "generated_score": generated_score,
-            "feedback_score": highest_score,
-            "best_feedback": best_match,
-        }
-
-        logger.info(
-            f"Comparison result: {comparison_result['better_answer']} answer is better"
-        )
-        return comparison_result
-    except Exception as e:
-        logger.error(f"Error comparing answers: {str(e)}")
-        return None
-
 def check_answer_mongo_and_openai(user_question, matches):
     if not matches:
         return None
@@ -602,156 +480,6 @@ def check_answer_mongo_and_openai(user_question, matches):
         return None
 
     return final_response
-
-logger = logging.getLogger()
-
-def extrair_knowledge_items(conversation):
-    """
-    Analisa a conversa, extrai os pontos de resolução e cria um resumo conciso desses pontos.
-    Retorna um item de conhecimento multilíngue com um resumo desses trechos.
-    """
-    # Concatene todas as mensagens da conversa (ou selecione apenas as que podem conter resolução)
-    full_text = "\n".join(
-        msg.get("content", "") for msg in conversation.get("messages", []) if msg.get("content")
-    )
-    
-    extraction_prompt = (
-        "Analyze the conversation below and extract the parts where the user's problem was solved "
-        "or the issue was resolved. Provide a concise summary in English, capturing the resolutions or "
-        "key decisions made. Do not include any extraneous details. Provide the full resolution details first, "
-        "followed by a concise, reduced summary. "
-        "If the conversation does not contain a resolution regarding a real problem, please state in English that "
-        "there is no relevant resolution in this conversation.\n\nConversation:\n" + full_text
-    )   
-    
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        raise Exception("OPENAI_API_KEY is missing")
-    
-    client = OpenAI(api_key=api_key)
-    try:
-        response = client.chat.completions.create(
-            model=OPENAI_MODEL,
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant that extracts and summarizes resolution points from a conversation."},
-                {"role": "user", "content": extraction_prompt},
-            ],
-            temperature=0.2,
-            max_tokens=130,
-            timeout=OPENAI_TIMEOUT,
-        )
-    except Exception as e:
-        logger.error(f"Error during resolution extraction and summary generation: {str(e)}")
-        return []
-
-    extracted_text = response.choices[0].message.content.strip()
-    
-    if not extracted_text or extracted_text.lower() == "none":
-        return []
-
-    if "Summary:" in extracted_text:
-        full_resolution, reduced_summary = extracted_text.split("Summary:", 1)
-        reduced_summary = reduced_summary.strip()
-    else:
-        full_resolution = extracted_text
-        reduced_summary = full_resolution
-   
-    full_resolution = full_resolution.replace("Resolution:", "").strip()
-    
-    candidate_item = {
-        "id": conversation["session_id"] + "_resolucao",
-        "question": {
-            "text": "What are the resolution points of the conversation?", 
-            "variations": [],
-            "intent": "extracted_resolution_points",
-            "languages": {
-                "en": "Resolution points of the conversation",
-            }
-        },
-        "answer": {
-           # "short": {
-            #    "en": reduced_summary,
-            # },
-            "detailed": {
-                "en": full_resolution,
-            },
-            "conditions": ["Derived from conversation resolution"]
-        },
-        "metadata": {
-            "category": ["extracted"],
-            "subCategory": "conversation_resolution",
-            "confidence": 0.7,
-            "status": "active"
-        },
-        "context": {
-            "relatedTopics": [],
-            "followUpQuestions": {}
-        }
-    }
-    
-    try:
-        docs_retrieve = retriever.get_relevant_documents(extracted_text)
-        logger.debug(f"Retrieved {len(docs_retrieve)} documents.")
-        
-        docs_to_use = []
-        reasoning = []
-        seen_ids = set()
-        
-        doc_ids = []
-        for doc in docs_retrieve:
-            doc_id = doc.metadata.get('id', 'no_id')
-            relevance_score = retrieval_grader.invoke({
-                "prompt": extracted_text, 
-                "document": doc.page_content
-            })
-            if relevance_score.confidence_score >= 0.7:
-                doc_id = doc.metadata.get('id', 'no_id')
-                if doc_id == "no_id":
-                    question_part = doc.page_content.split("Answer:")[0]
-                    question_only = question_part.replace("Question:", "").strip()
-                    doc_id=get_document_by_question_text(question_only)
-                    
-                if doc_id not in seen_ids:
-                    doc_ids.append(doc_id)
-                    seen_ids.add(doc_id)
-                    docs_to_use.append(doc)
-                    reasoning.append({
-                        "id": doc_id,
-                        "document": doc.page_content,
-                        "score": relevance_score.confidence_score,
-                        "rationale": f"Document (ID: {doc_id}) is relevant with score {relevance_score.confidence_score}."
-                    })
-
-        context = format_docs(docs_to_use)
-
-        response = rag_chain.invoke({
-            "context": context,
-            "prompt": extracted_text,
-            "reasoning": reasoning
-        })
-
-        logger.debug("Response generated using the following documents:")
-        responseRaw = []
-        for r in reasoning:
-            logger.debug(f"Rationale: {r['rationale']}\nDocument Content: {r['document'][:200]}...")
-
-        valid_doc_ids = [doc_id for doc_id in doc_ids if doc_id != "no_id"]
-
-        if valid_doc_ids:
-            for ID in valid_doc_ids:
-                doc = get_document_by_id(ID) 
-            if doc:
-                responseRaw.append(json.dumps(doc, indent=4, ensure_ascii=False))
-            
-        candidate_item["answer"]["rag_response"] = response
-        candidate_item["answer"]["reasoning"] = reasoning
-        candidate_item["answer"]["raw"] = (responseRaw)
-
-        return [candidate_item]
-
-    except Exception as ve:
-        logger.error(f"Error during vector store retrieval: {str(ve)}")
-        return []
     
 def update_chroma_document(doc_id, new_data):
     """
