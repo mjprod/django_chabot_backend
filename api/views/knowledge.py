@@ -1,13 +1,16 @@
+import logging
+import uuid
+
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework import status, viewsets
-
-import rest_framework.exceptions as DRFException
-import django.core.exceptions as CoreException
-
 from rest_framework.decorators import action
+import rest_framework.exceptions as DRFException
 
-from django_filters.rest_framework import DjangoFilterBackend
+import django.core.exceptions as CoreException
 from django.shortcuts import get_object_or_404
+from django_filters.rest_framework import DjangoFilterBackend
+from django.db.models import Exists, OuterRef, Count
 
 from ..models import (
     Category, 
@@ -27,11 +30,6 @@ from ..utils.utils import CustomPagination
 from ..utils.filters import KnowledgeFilter, SubCategoryFilter
 from ..utils.enum import KnowledgeStatus
 
-import logging
-import uuid
-
-from rest_framework import filters
-
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +37,7 @@ logger = logging.getLogger(__name__)
 class KnowledgeContentViewSet(viewsets.ModelViewSet):
     pagination_class = CustomPagination
     filter_backends = (DjangoFilterBackend,)
-    queryset = KnowledgeContent.objects.filter(in_brain=False)
+    queryset = KnowledgeContent.objects.all()
     serializer_class = KnowledgeContentSerializer
 
     # override create()
@@ -74,13 +72,16 @@ class KnowledgeContentViewSet(viewsets.ModelViewSet):
             data['knowledge'] = knowledge.id
 
             serializer = self.get_serializer(data=data)
-            serializer.is_valid(raise_exception=True) 
+            serializer.is_valid(raise_exception=True)
+
+            # TODO: generate other knowledge content for two languages
+
             serializer.save() 
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
         except (Knowledge.DoesNotExist, SubCategory.DoesNotExist, Category.DoesNotExist):
-            return Response({"error": "Knowledge resources do not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "Knowledge, category or subcategory do not exist."}, status=status.HTTP_400_BAD_REQUEST)
         except CoreException.ValidationError as e:
             return Response({"error": e}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -149,16 +150,43 @@ class KnowledgeContentViewSet(viewsets.ModelViewSet):
 
 
 class KnowledgeViewSet(viewsets.ModelViewSet):
-    queryset = Knowledge.objects.all()
+    queryset = Knowledge.objects.all()  # This allows DRF to infer the `basename`
     serializer_class = KnowledgeSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = KnowledgeFilter
+
+    # def get_queryset(self):
+    #     return Knowledge.objects.annotate(
+    #         has_content_in_brain=Exists(
+    #             KnowledgeContent.objects.filter(knowledge=OuterRef('pk'), in_brain=False)
+    #         )
+    #     ).filter(has_content_in_brain=True)
 
     def create(self, request, *args, **kwargs):
         raise DRFException.PermissionDenied("Create is disabled for this resource.")
     
     def update(self, request, *args, **kwargs):
         raise DRFException.PermissionDenied("Update is disabled for this resource.")
+
+
+class KnowledgeSummaryAPIView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        # Aggregate knowledge count per category
+        knowledge_summary = Category.objects.annotate(knowledge_count=Count('knowledge_category')).values('id', 'name', 'knowledge_count')
+
+        return Response({"categories": list(knowledge_summary)})
+
+
+class KnowledgeContentSummaryAPIView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        # Aggregate knowledge content count per category
+        category_summary = Category.objects.annotate(
+            knowledge_content_count=Count('knowledge_category__knowledge_content')
+        ).values('id', 'name', 'knowledge_content_count')
+
+        return Response({"categories": list(category_summary)})
 
 
 class CategoryViewSet(viewsets.ModelViewSet):

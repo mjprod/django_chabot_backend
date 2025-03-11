@@ -87,14 +87,14 @@ def load_and_process_json_file() -> List[dict]:
     base_dir = os.path.join(os.path.dirname(__file__), "../data")
     database_files = [
         "database_part_1.json",
-        "database_part_2.json",
-        "database_part_3.json",
-        "database_part_4.json",
-        "database_part_5.json",
-        "database_part_6.json",
-        "database_part_7.json",
-        "database_part_8.json",
-        "database_part_9.json",
+        # "database_part_2.json",
+        # "database_part_3.json",
+        # "database_part_4.json",
+        # "database_part_5.json",
+        # "database_part_6.json",
+        # "database_part_7.json",
+        # "database_part_8.json",
+        # "database_part_9.json",
     ]
 
     all_documents = []

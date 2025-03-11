@@ -21,16 +21,19 @@ from .views.feedback_view import (
     CaptureFeedbackMultiView,
 )
 from .views.brain_view import (
-    ReviewKnowledge,
-    ReviewKnowledgeDashboard,
     UpdateReviewStatusView,
     UpdateBrainView,
 )
 
-
-
 from rest_framework.routers import DefaultRouter
-from .views.knowledge import CategoryViewSet, SubCategoryViewSet, KnowledgeViewSet,KnowledgeContentViewSet
+from .views.knowledge import (
+    CategoryViewSet, 
+    SubCategoryViewSet, 
+    KnowledgeViewSet,
+    KnowledgeContentViewSet, 
+    KnowledgeSummaryAPIView,
+    KnowledgeContentSummaryAPIView
+)
 
 router = DefaultRouter()
 router.register(r'categories', CategoryViewSet)
@@ -43,6 +46,12 @@ router.register(r'knowledge-content', KnowledgeContentViewSet)
 # Define URL patterns
 urlpatterns = [
     path('', include(router.urls)),
+
+    path('knowledge-summary/', KnowledgeSummaryAPIView.as_view(), name='knowledge-summary'),
+    path('knowledge-content-summary/', KnowledgeContentSummaryAPIView.as_view(), name='knowledge-content-summary'),
+
+
+
     # Prompt Conversation
     path("prompt_conversation/",PromptConversationView.as_view(),name="prompt_conversation"),
     path("prompt_conversation_admin/",PromptConversationAdminView.as_view(),name="prompt_conversation_admin",),
