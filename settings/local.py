@@ -23,31 +23,35 @@ SECURE_HSTS_PRELOAD = True
 MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
 MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
 MONGODB_CLUSTER = os.getenv("MONGODB_CLUSTER")
-MONGODB_DATABASE = os.getenv("MONGODB_DATABASE", "ChatbotDB")
+MONGODB_DATABASE = os.getenv("MONGODB_DATABASE", "chatbotdb")
 
 # Construct MongoDB URI
 MONGODB_URI = (
-    f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}"
+    f"mongodb://{MONGODB_USERNAME}:{MONGODB_PASSWORD}"
     f"@{MONGODB_CLUSTER}/{MONGODB_DATABASE}?retryWrites=true&w=majority"
 )
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "djongo",
+#         "NAME": MONGODB_DATABASE,
+#         "CLIENT": {
+#             "host": MONGODB_URI,
+#             "maxPoolSize": 50,
+#             "minPoolSize": 10,
+#             "maxIdleTimeMS": 45000,
+#         },
+#     },
+# }
+
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",  # noqa: F405
-        "CONN_MAX_AGE": 60,
-        "OPTIONS": {
-            "timeout": 20,
-        },
-    },
-    "mongodb": {
-        "ENGINE": "djongo",
-        "NAME": MONGODB_DATABASE,
-        "CLIENT": {
-            "host": MONGODB_URI,
-            "maxPoolSize": 50,
-            "minPoolSize": 10,
-            "maxIdleTimeMS": 45000,
-        },
-    },
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv("POSTGRE_DATABASE_NAME"),
+        'USER': os.getenv("POSTGRE_DATABASE_USER"),
+        'PASSWORD': os.getenv("POSTGRE_DATABASE_PASSWORD"),
+        'HOST': os.getenv("POSTGRE_DATABASE_HOST"), 
+        'PORT': os.getenv("POSTGRE_DATABASE_PORT"),
+    }
 }

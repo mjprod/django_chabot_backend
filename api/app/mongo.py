@@ -58,3 +58,32 @@ class MongoDB:
             return collection.aggregate(aggregation)
         except Exception as e:
             logger.error(f"Error aggregating collection '{collection_name}': {str(e)}", exc_info=True)
+
+    @classmethod 
+    def update_one_document(cls, collection_name, query, update):
+        db = cls.get_db()
+        collection = db[collection_name]
+        try:
+            return collection.update_one(query, update)
+        except Exception as e:
+            logger.error(f"Error updating collection '{collection_name}': {str(e)}", exc_info=True)
+
+
+    @classmethod 
+    def delete_one(cls, collection_name, delete):
+        db = cls.get_db()
+        collection = db[collection_name]
+        try:
+            return collection.delete_one(delete)
+        except Exception as e:
+            logger.error(f"Error deleting a document in collection '{collection_name}': {str(e)}", exc_info=True)
+
+    @classmethod 
+    def delete_many(cls, collection_name, delete):
+        db = cls.get_db()
+        collection = db[collection_name]
+        try:
+            return collection.delete_many(delete)
+        except Exception as e:
+            logger.error(f"Error deleting a document in collection '{collection_name}': {str(e)}", exc_info=True)
+

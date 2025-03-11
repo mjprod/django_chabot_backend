@@ -1,5 +1,6 @@
-from django.urls import path
+from django.urls import path, include
 from django.views.decorators.cache import cache_page
+
 
 from .views.conversation_view import (
     PromptConversationView,
@@ -26,8 +27,22 @@ from .views.brain_view import (
     UpdateBrainView,
 )
 
+
+
+from rest_framework.routers import DefaultRouter
+from .views.knowledge import CategoryViewSet, SubCategoryViewSet, KnowledgeViewSet,KnowledgeContentViewSet
+
+router = DefaultRouter()
+router.register(r'categories', CategoryViewSet)
+router.register(r'subcategories', SubCategoryViewSet)
+router.register(r'knowledge', KnowledgeViewSet)
+router.register(r'knowledge-content', KnowledgeContentViewSet)
+
+
+
 # Define URL patterns
 urlpatterns = [
+    path('', include(router.urls)),
     # Prompt Conversation
     path("prompt_conversation/",PromptConversationView.as_view(),name="prompt_conversation"),
     path("prompt_conversation_admin/",PromptConversationAdminView.as_view(),name="prompt_conversation_admin",),
@@ -37,11 +52,6 @@ urlpatterns = [
     path("capture_feedback/", CaptureFeedbackView.as_view(), name="capture_feedback"),
     path("capture_feedback_compare/", CaptureFeedbackCompareView.as_view(), name="capture_feedback_compare"),
     path("capture_feedback_multi/",CaptureFeedbackMultiView.as_view(),name="capture_feedback_multi",),
-    
-    # Brain
-    path("review_knowledge/", ReviewKnowledge.as_view(), name="list_review_knowledge"),
-    path('review_knowledge/<str:id>/', ReviewKnowledge.as_view(), name='retrieve_review_knowledge'),  # Retrieve
-    path("review_knowledge_dashboard/", ReviewKnowledgeDashboard.as_view(), name="review_knowledge_dashboard"),
 
     path("update_review_status/", UpdateReviewStatusView.as_view(), name="update_review_status"),
     path("update_brain/", UpdateBrainView.as_view(), name="update_brain"),
@@ -54,4 +64,13 @@ urlpatterns = [
     path("finalise_all_conversation/", FinaliseAllConversationsView.as_view(), name="finalise_all_conversation"),
     # Dashboard
     path("dashboard_counts/", DashboardCountsView.as_view(), name="dashboard_counts"),
+
+    # Review knowledge
+    path("review-knowledge/", ReviewKnowledge.as_view(), name="review_knowledge"),
+    path('review-knowledge/<str:id>/', ReviewKnowledge.as_view(), name='retrieve_review_knowledge'),  # Retrieve
+    path("review-knowledge-dashboard/", ReviewKnowledgeDashboard.as_view(), name="review_knowledge_dashboard"),
 ]
+
+
+router = DefaultRouter()
+router.register(r'knowledge', KnowledgeViewSet)

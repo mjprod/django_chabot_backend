@@ -1,0 +1,114 @@
+[
+  {
+    "model": "api.category",
+    "pk": 1,
+    "fields": {
+      "name": "3rd_party",
+      "description": "All things related to third-party services."
+    }
+  },
+  {
+    "model": "api.category",
+    "pk": 2,
+    "fields": {
+      "name": "4d_lotto",
+      "description": "All discussions about 4D Lotto."
+    }
+  },
+  {
+    "model": "api.category",
+    "pk": 3,
+    "fields": {
+      "name": "account",
+      "description": "Account-related information and settings."
+    }
+  },
+  {
+    "model": "api.category",
+    "pk": 4,
+    "fields": {
+      "name": "feedback",
+      "description": "User feedback and suggestions."
+    }
+  },
+  {
+    "model": "api.category",
+    "pk": 5,
+    "fields": {
+      "name": "finance",
+      "description": "Financial services and transactions."
+    }
+  },
+  {
+    "model": "api.category",
+    "pk": 6,
+    "fields": {
+      "name": "points_shop",
+      "description": "Shopping and rewards using points."
+    }
+  },
+  {
+    "model": "api.category",
+    "pk": 7,
+    "fields": {
+      "name": "referral",
+      "description": "Referral programs and bonuses."
+    }
+  },
+  {
+    "model": "api.category",
+    "pk": 8,
+    "fields": {
+      "name": "security",
+      "description": "Security and account protection topics."
+    }
+  },
+  {
+    "model": "api.category",
+    "pk": 9,
+    "fields": {
+      "name": "technical",
+      "description": "Technical support and troubleshooting."
+    }
+  },
+  {
+    "model": "api.category",
+    "pk": 10,
+    "fields": {
+      "name": "customer_support",
+      "description": "Customer service and support inquiries."
+    }
+  },
+  {
+    "model": "api.category",
+    "pk": 11,
+    "fields": {
+      "name": "game_inquiry",
+      "description": "Questions and discussions about games."
+    }
+  },
+  {
+    "model": "api.category",
+    "pk": 12,
+    "fields": {
+      "name": "policy_explanation",
+      "description": "Clarifications about policies and rules."
+    }
+  },
+  {
+    "model": "api.category",
+    "pk": 13,
+    "fields": {
+      "name": "encouragement",
+      "description": "Motivation and encouragement topics."
+    }
+  },
+  {
+    "model": "api.category",
+    "pk": 14,
+    "fields": {
+      "name": "sports_betting",
+      "description": "Sports betting discussions and information."
+    }
+  }
+]

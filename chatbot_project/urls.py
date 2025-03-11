@@ -23,9 +23,9 @@ from rest_framework.schemas import get_schema_view
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("api.urls")),
-    path(
-        "api/schema/",
-        cache_page(60 * 60)(get_schema_view(title="API Schema")),
-        name="api_schema",
-    ),
+    # path(
+    #     "api/schema/",
+    #     cache_page(60 * 60)(get_schema_view(title="API Schema")),
+    #     name="api_schema",
+    # ),
 ]

@@ -1,7 +1,15 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import action
 from rest_framework.exceptions import NotFound
+from rest_framework import serializers
+from ..api_serializers.review_knowledge import (
+    ReviewKnowledgeSerializer,
+    BulkDeleteSerializer
+)
+
+from ..utils.enum import CategoryColorEnum
 
 from ..utils.utils import CustomPagination
 
@@ -62,7 +70,7 @@ class ReviewKnowledge(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
-    def list(self, request, *args, **kwargs):
+    def list(self, request):
         """
             List view for retrieving a paginated list of items based on provided query parameters.
 
@@ -127,16 +135,103 @@ class ReviewKnowledge(APIView):
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
 
+    def delete(self, request):
+        """
+        Handles deletion of multiple review knowledge based on a list of IDs.
+        """
+        try:
+            serializer = BulkDeleteSerializer(data=request.data)
+
+            if not serializer.is_valid():
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            validated_ids = serializer.validated_data["ids"]
+            object_ids = [ObjectId(_id) for _id in validated_ids]
+
+            # Bulk delete from MongoDB
+            result = MongoDB.delete_many(REVIEW_COLLECTION_NAME,{"_id": {"$in": object_ids}})
+
+            if result.deleted_count > 0:
+                return Response({"message": f"{result.deleted_count} reviews deleted successfully."}, status=status.HTTP_200_OK)
+            else:
+                return Response({"error": "No matching reviews found."}, status=status.HTTP_404_NOT_FOUND)
+
+        except Exception as e:
+            logger.exception("Error in bulk deleting reviews")
+            return Response(
+                {"error": f"Error in bulk deleting reviews: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            ) 
+
+    # create a new knowledge to review
+    def post(self, request, *args, **kwargs):
+        pass
+
+    # update knowledge/status in the review list 
+    def patch(self, request, *args, **kwargs):
+
+        """
+        Update the document in the review list.
+        
+        Expected JSON payload:
+        - id (str): The ID of the document to update.
+        - language (str): The language of the review.
+        - question (str): Updated question details.
+        - answer (str): Updated answer details.
+        - status (int): The new review status (e.g., '1: need approve', '2: pre-approved', '3: approved', '4: reject').
+        
+        Returns:
+        - Response: Updated document or error message.
+        """
+
+        try:
+            serializer = ReviewKnowledgeSerializer(data=request.data)
+            if not serializer.is_valid():
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
+            data = serializer.validated_data
+
+            query = {"_id": ObjectId(data.get("id"))}
+            update_fields = {}
+            
+            update_fields = {key: value for key, value in data.items() if key != "id"}
+
+            # need to write a param and database key mapping function
+            
+            update_query = {"$set": update_fields}
+            updated_document = MongoDB.update_one_document(collection_name=REVIEW_COLLECTION_NAME,
+                                                           query=query, 
+                                                           update=update_query)
+            
+            if updated_document:
+                return Response({"message": "Review updated successfully."}, status=status.HTTP_200_OK)
+            else:
+                return Response({"error": "Review not found or update failed."}, status=status.HTTP_404_NOT_FOUND)
+        
+        except Exception as e:
+            logger.exception("Error updating review status")
+            return Response(
+                {"error": f"Error updating review: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
 class ReviewKnowledgeDashboard(APIView):
     def get(self, request, *args, **kwargs):
-        aggregation=[
+        aggregation = [
             { 
-                "$unwind": "$metadata.category" 
+                "$unwind": "$metadata.category"
             },
             { 
                 "$group": {
-                    "_id": "$metadata.category", 
+                    "_id": "$metadata.category",
                     "count": { "$sum": 1 }
+                }
+            },
+            {
+                "$project": {
+                    "category": "$_id",  # Rename _id to category
+                    "count": 1,  # Keep the count field
+                    "_id": 0  # Remove the _id field
                 }
             },
             { 
@@ -145,7 +240,6 @@ class ReviewKnowledgeDashboard(APIView):
         ]
 
         try:
-            # Assuming `query_collection` is your method to query MongoDB
             results = MongoDB.aggregate_collection(
                 collection_name=REVIEW_COLLECTION_NAME,
                 aggregation=aggregation
@@ -154,14 +248,19 @@ class ReviewKnowledgeDashboard(APIView):
             # If no results found, raise a NotFound exception
             if not results:
                 raise NotFound("No categories found in the collection.")
+
+            categories = []
+            for category in results:
+                category_name = category["category"]
+                # Add color to the category
+                category["color"] = self._get_category_color(category_name).value
+                categories.append(category)
             
             # Return the results as a JSON response
             return Response(
-                {"categories_count": results},
+                {"categories_count": categories},
                 status=status.HTTP_200_OK
             )
-        
-
 
         except Exception as e:
             # Handle other errors
@@ -169,6 +268,21 @@ class ReviewKnowledgeDashboard(APIView):
                 {"error": str(e)},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+        
+    def _get_category_color(self,category_id):
+        category_mapping = {
+            "finance": CategoryColorEnum.FINANCE,
+            "technical": CategoryColorEnum.TECHNOLOGY,
+            "account_management": CategoryColorEnum.ACCOUNT,
+            "game": CategoryColorEnum.FOURDLOTTO,
+            "sports_betting": CategoryColorEnum.FOURDLOTTO,
+            "policy_explanation": CategoryColorEnum.SECURITY,
+            "encouragement": CategoryColorEnum.FEEDBACK,
+            "points_shop": CategoryColorEnum.POINTSSHOP,
+            "other":CategoryColorEnum.OTHER
+        }
+        
+        return category_mapping.get(category_id, CategoryColorEnum.OTHER)
 
 
 
