@@ -30,7 +30,7 @@ SECRET_KEY = "django-insecure-z$!=*9prhkq7xd2^2!!g39v$spw1f=yaxbc4qhle9yp1n!-b%-
 DEBUG = False  # Default to False
 ALLOWED_HOSTS = []
 
-
+# TODO: Temporary for development
 FIXED_API_TOKEN = "4d4a50524f4432303232"
 
 # MongoDB settings
