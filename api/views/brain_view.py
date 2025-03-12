@@ -97,9 +97,6 @@ class UpdateReviewStatusView(APIView):
                 {"error": f"Error updating review_status: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-'''
-
-"""
 class UpdateBrainView(APIView):
     def get(self, request):
         try:
@@ -129,10 +126,7 @@ class UpdateBrainView(APIView):
                 {"error": f"Error retrieving dashboard counts: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )    
-"""
 
-
-'''
     def update_chroma_document(doc_id, new_data):
     """
     Update an existing document in the ChromaDB collection.
