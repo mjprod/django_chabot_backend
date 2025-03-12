@@ -9,7 +9,7 @@ import rest_framework.exceptions as DRFException
 
 import django.core.exceptions as CoreException
 from django_filters.rest_framework import DjangoFilterBackend
-from django.db.models import Count
+from django.db.models import Count, Q
 
 from ..models import (
     Category, 
@@ -190,23 +190,58 @@ class KnowledgeViewSet(viewsets.ModelViewSet):
 
 
 class KnowledgeSummaryAPIView(APIView):
-
     def get(self, request, *args, **kwargs):
-        # Aggregate knowledge count per category
-        knowledge_summary = Category.objects.annotate(knowledge_count=Count('knowledge_category')).values('id', 'name', 'knowledge_count')
+        # Get 'in_brain' filter from query parameters (defaults to False if not provided)
+        in_brain_value = request.query_params.get('in_brain', 'false').lower() == 'true'
+
+        knowledge_summary = Category.objects.annotate(
+            knowledge_count=Count(
+                'knowledge_category',
+                filter=Q(knowledge_category__knowledge_content__in_brain=in_brain_value),
+                distinct=True
+            )
+        ).values('id','name', 'knowledge_count').order_by('-knowledge_count') 
 
         return Response({"categories": list(knowledge_summary)})
 
 
+    
 class KnowledgeContentSummaryAPIView(APIView):
-
     def get(self, request, *args, **kwargs):
-        # Aggregate knowledge content count per category
-        category_summary = Category.objects.annotate(
-            knowledge_content_count=Count('knowledge_category__knowledge_content')
-        ).values('id', 'name', 'knowledge_content_count')
+        # Get 'in_brain' filter from query parameters (defaults to False if not provided)
+        in_brain_value = request.query_params.get('in_brain', 'false').lower() == 'true'
 
-        return Response({"categories": list(category_summary)})
+        # Aggregate knowledge count per category where related KnowledgeContent has in_brain=False
+        knowledge_summary = Category.objects.annotate(
+            knowledge_count=Count(
+                'knowledge_category', 
+                filter=Q(knowledge_category__knowledge_content__in_brain=in_brain_value)
+            )
+        ).values('id', 'name', 'knowledge_count')
+
+        formatted_summary = [
+            {
+                "id": item["id"],
+                "name": item["name"],
+                "knowledge_content_count": item["knowledge_count"]
+            }
+            for item in knowledge_summary
+        ]
+
+        return Response({"categories": list(formatted_summary)})
+
+
+
+
+# class KnowledgeContentSummaryAPIView(APIView):
+
+#     def get(self, request, *args, **kwargs):
+#         # Aggregate knowledge content count per category
+#         category_summary = Category.objects.annotate(
+#             knowledge_content_count=Count('knowledge_category__knowledge_content')
+#         ).values('id', 'name', 'knowledge_content_count')
+
+#         return Response({"categories": list(category_summary)})
 
 
 # class KnowledgeViewSet(viewsets.ModelViewSet):
