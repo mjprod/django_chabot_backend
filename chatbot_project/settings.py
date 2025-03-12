@@ -192,6 +192,11 @@ LOGGING = {
             "class": "logging.StreamHandler",
             "formatter": "verbose",
         },
+        'rich_console': {
+            'class': 'rich.logging.RichHandler',
+            'rich_tracebacks': True,
+            'markup': True,
+        },
         "file": {
             "class": "logging.handlers.RotatingFileHandler",
             "filename": "django.log",
@@ -224,6 +229,11 @@ LOGGING = {
             "handlers": ["console"],
             "level": "INFO",
             "propagate": False,
+        },
+        'brain': {
+            'handlers': ['file', 'rich_console'],
+            'level': 'INFO',
+            'propagate': True,
         },
     },
 }
