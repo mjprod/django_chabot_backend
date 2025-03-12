@@ -23,7 +23,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-# TODO: This viewset needs to be at Admin Level
+# TODO: This viewset needs to be set at Admin Level
 class BrainViewSet(viewsets.ModelViewSet):
     queryset = Brain.objects.all()
     serializer_class = BrainSerializer
@@ -88,8 +88,39 @@ class BrainViewSet(viewsets.ModelViewSet):
 
         return Response(response_data, status=status.HTTP_201_CREATED)  # All successful
 
-    # override destroy
+
+    # override
     def destroy(self, request, *args, **kwargs):
+        """
+        Handles deletion of a single Brain entry.
+        - Removes the corresponding KnowledgeContent from Brain table.
+        - Updates `in_brain` to False.
+        - Resets `status` to NEEDS_REVIEW in KnowledgeContent.
+        """
+        # Get the Brain instance to delete
+        brain_instance = self.get_object()  # This gets the object based on the URL parameter
+        
+        # Retrieve the KnowledgeContent associated with the Brain instance
+        knowledge_content = brain_instance.knowledge_content
+        
+        with transaction.atomic():
+            # TODO: Remove from chromadb
+
+            # Delete the Brain entry
+            brain_instance.delete()
+
+            # Update the KnowledgeContent associated with this Brain instance
+            KnowledgeContent.objects.filter(id=knowledge_content.id).update(
+                in_brain=False,
+                status=KnowledgeContentStatus.NEEDS_REVIEW.value
+            )
+
+        return Response(
+            status=status.HTTP_204_NO_CONTENT
+        )
+
+    @action(detail=False, methods=['post'], url_path='bulk-remove-from-brain')
+    def bulk_remove_from_brain(self, request, *args, **kwargs):
         """
         Handles bulk deletion of knowledge_content_ids entries.
         - Removes them from chromadb. (TODO)
@@ -129,7 +160,7 @@ class BrainViewSet(viewsets.ModelViewSet):
                 "failed": list(non_existent_ids),
             }
 
-            return Response(response_data, status=status.HTTP_207_MULTI_STATUS if non_existent_ids else status.HTTP_204_NO_CONTENT)
+            return Response(response_data, status=status.HTTP_207_MULTI_STATUS if non_existent_ids else status.HTTP_200_OK)
 
     # override update
     def update(self, request, *args, **kwargs):
