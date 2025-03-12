@@ -8,9 +8,9 @@ from langchain_cohere import CohereEmbeddings
 from langchain_community.vectorstores import Chroma
 
 from .ai_services import (
-  CustomDocument,
-  CustomTextSplitter,
- )
+    CustomDocument,
+    CustomTextSplitter,
+)
 
 from api.constants.ai_constants import (
     COHERE_MODEL,
@@ -20,8 +20,10 @@ logger = logging.getLogger(__name__)
 
 store = None
 
+
 def get_store():
     return store
+
 
 def load_and_process_json_file() -> List[dict]:
     base_dir = os.path.join(os.path.dirname(__file__), "../data")
@@ -104,6 +106,7 @@ def load_and_process_json_file() -> List[dict]:
 
     return all_documents
 
+
 documents = load_and_process_json_file()
 
 # Create Document Objects
@@ -128,17 +131,18 @@ doc_objects = [
     for doc in documents
 ]
 
+
 # Process documents in batches
 def create_vector_store():
-    try:    
+    try:
         global store  # Store the store in a global variable
 
         if store is not None:
-          logger.info("Store already exists")
-          return store
-      
+            logger.info("Store already exists")
+            return store
+
         embedding_model = CohereEmbeddings(model=COHERE_MODEL, user_agent="glaucomp")
-        
+
         logger.info("Starting document splitting process")
         split_start = time.time()
 
@@ -170,12 +174,12 @@ def create_vector_store():
         )
 
         all_docs = store.get()
-        print("BRAIN docs IDs:", all_docs["ids"]) 
+        print("BRAIN docs IDs:", all_docs["ids"])
 
         return store
     except Exception as e:
         logger.error(f"Vector store creation failed: {str(e)}")
         raise
     finally:
-        if 'split_data' in locals():
+        if "split_data" in locals():
             del split_data

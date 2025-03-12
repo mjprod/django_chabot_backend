@@ -59,10 +59,12 @@ class UserInputSerializer(serializers.Serializer):
         max_length=100, required=False, allow_null=True, allow_blank=True
     )
 
+
 class PromptConversationSerializer(serializers.Serializer):
     prompt = serializers.CharField(max_length=1000, required=True)
     conversation_id = serializers.CharField(max_length=100, required=False)
     user_id = serializers.CharField(max_length=100, required=False)
+
 
 class MessageDataSerializer(serializers.Serializer):
     text = serializers.JSONField(allow_null=True)  # For array or string

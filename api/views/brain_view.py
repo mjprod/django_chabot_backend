@@ -14,7 +14,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-'''
+"""
 class ListReviewAndUpdateBrainView(APIView):
     def get(self, request, *args, **kwargs):
         db = None
@@ -42,7 +42,7 @@ class ListReviewAndUpdateBrainView(APIView):
                 {"error": f"Error retrieving session ids: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
-'''   
+"""
 '''
 class UpdateReviewStatusView(APIView):
     def post(self, request, *args, **kwargs):
@@ -98,8 +98,8 @@ class UpdateReviewStatusView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 '''
-        
-'''
+
+"""
 class UpdateBrainView(APIView):
     def get(self, request):
         try:
@@ -129,7 +129,7 @@ class UpdateBrainView(APIView):
                 {"error": f"Error retrieving dashboard counts: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )    
-'''
+"""
 
 
 '''

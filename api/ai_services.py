@@ -37,9 +37,10 @@ class CustomDocument:
     def __str__(self):
         # Mostra o id e os primeiros 100 caracteres do conteúdo para não poluir o log
         return f"CustomDocument(id={self.id}, page_content={self.page_content[:100]}..., metadata={self.metadata})"
-    
 
     # Text Splitter Class
+
+
 class CustomTextSplitter(RecursiveCharacterTextSplitter):
     def __init__(
         self,
@@ -56,16 +57,21 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
             return []
 
         chunks = []
-       
+
         for doc in documents:
             try:
-                metadata = {**(doc.metadata if isinstance(doc.metadata, dict) else {}), "id": getattr(doc, "id", "no_id")}
+                metadata = {
+                    **(doc.metadata if isinstance(doc.metadata, dict) else {}),
+                    "id": getattr(doc, "id", "no_id"),
+                }
                 text = doc.page_content
                 id_doc = getattr(doc, "id", "no_id")
-        
+
                 # Handle short documents
                 if self.length_function(text) <= self.chunk_size:
-                    chunks.append(CustomDocument(id=id_doc,page_content=text, metadata=metadata))
+                    chunks.append(
+                        CustomDocument(id=id_doc, page_content=text, metadata=metadata)
+                    )
                     continue
 
                 # Split into sentences
@@ -144,22 +150,25 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                         CustomDocument(
                             id=id_doc,
                             page_content="".join(current_chunk),
-                            metadata=metadata
+                            metadata=metadata,
                         )
                     )
             except Exception as e:
                 logger.error(f"Error splitting document: {str(e)}")
                 continue
         return chunks
-    
+
     # Define grading of docs
+
+
 class GradeDocuments(BaseModel):
     confidence_score: float = Field(
         description="Confidence score between 0.0 and 1.0 indicating document relevance",
         ge=0.0,
         le=1.0,
     )
-    
+
+
 # Define GradeHallucinations Model
 class GradeConfidenceLevel(BaseModel):
     confidence_score: float = Field(

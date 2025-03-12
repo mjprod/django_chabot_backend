@@ -22,16 +22,17 @@ from api.constants.ai_prompts import (
 )
 
 from api.chatbot import (
-  store,
+    store,
 )
 
 from .mongo import MongoDB
 
 from api.ai_services import (
-  GradeConfidenceLevel,
- )
+    GradeConfidenceLevel,
+)
 
 logger = logging.getLogger(__name__)
+
 
 def is_finalizing_phrase(phrase):
     api_key = os.getenv("OPENAI_API_KEY")
@@ -73,8 +74,9 @@ def is_finalizing_phrase(phrase):
     except Exception as e:
         print(f"Error during OpenAI API call: {e}")
         return False
-    
-def prompt_conversation(user_prompt ,language_code=LANGUAGE_DEFAULT):
+
+
+def prompt_conversation(user_prompt, language_code=LANGUAGE_DEFAULT):
     start_time = time.time()
     logger.info(f"Starting prompt_conversation request - Language: {language_code}")
     db = None
@@ -156,9 +158,11 @@ def prompt_conversation(user_prompt ,language_code=LANGUAGE_DEFAULT):
         logger.error(f"Error in prompt_conversation: {str(e)}", exc_info=True)
         raise
 
+
 # Define Formatting Function
 def format_docs(docs):
     return "\n".join(doc.page_content for doc in docs)
+
 
 def prompt_conversation_admin(
     user_prompt,
@@ -212,7 +216,7 @@ def prompt_conversation_admin(
                 docs_retrieve = store.similarity_search(user_prompt, k=1)
             else:
                 docs_retrieve = store.similarity_search(user_prompt, k=3)
-            
+
             for i, doc in enumerate(docs_retrieve, start=1):
                 print(f"📌 Result {i}:")
                 print(f"Content: {doc.page_content}\n")
@@ -230,7 +234,7 @@ def prompt_conversation_admin(
         # OpenAI response generation
         generation_start = time.time()
         try:
-            
+
             client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), timeout=OPENAI_TIMEOUT)
 
             # the history of messages is the context
@@ -248,7 +252,7 @@ def prompt_conversation_admin(
                 max_tokens=MAX_TOKENS,
                 timeout=OPENAI_TIMEOUT,
             )
-            #logging.info(messages_history)
+            # logging.info(messages_history)
             ai_response = response.choices[0].message.content
             logger.debug(
                 f"AI response generated in {time.time() - generation_start:.2f}s"
@@ -258,9 +262,9 @@ def prompt_conversation_admin(
             raise
 
         is_last_message = is_finalizing_phrase(ai_response)
-      
+
         try:
-             # Initialize LLM for Hallucination Grading
+            # Initialize LLM for Hallucination Grading
             llm_confidence = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
             structured_confidence_grader = llm_confidence.with_structured_output(
                 GradeConfidenceLevel
@@ -272,17 +276,22 @@ def prompt_conversation_admin(
             confidence_prompt = ChatPromptTemplate.from_messages(
                 [
                     ("system", confidence_system_message),
-                    ("human", "Source facts: \n\n {documents} \n\n AI response: {generation}"),
+                    (
+                        "human",
+                        "Source facts: \n\n {documents} \n\n AI response: {generation}",
+                    ),
                 ]
             )
 
             # Runnable Chain for Confidence Grader
             confidence_grader = confidence_prompt | structured_confidence_grader
 
-            confidence_result = confidence_grader.invoke({
-                "documents": format_docs(docs_retrieve),
-                "generation": ai_response,
-            })
+            confidence_result = confidence_grader.invoke(
+                {
+                    "documents": format_docs(docs_retrieve),
+                    "generation": ai_response,
+                }
+            )
         except Exception as ce:
             logger.error(f"Error obtaining confidence: {str(ce)}")
             confidence_result = None
@@ -329,7 +338,9 @@ def prompt_conversation_admin(
             "conversation_id": conversation_id,
             "language": language_code,
             "is_last_message": is_last_message,
-            "confidence_score": confidence_result.confidence_score if confidence_result else None,
+            "confidence_score": (
+                confidence_result.confidence_score if confidence_result else None
+            ),
         }
 
     except Exception as e:

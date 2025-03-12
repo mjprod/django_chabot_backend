@@ -18,7 +18,7 @@ try:
     store = create_vector_store()
     logger.info("Vector store creation completed successfully")
 
-except Exception as e: 
+except Exception as e:
     logger.error(f"Failed to create vector store: {str(e)}")
     raise
 

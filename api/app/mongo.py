@@ -4,10 +4,12 @@ from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
+
 class MongoDB:
     """
     Singleton class to manage MongoDB connections efficiently.
     """
+
     _client = None
     _db = None
 

@@ -2,6 +2,7 @@ from pathlib import Path
 
 import boto3
 
+
 def load_parameters():
     try:
         # Initialize SSM client

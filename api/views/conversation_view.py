@@ -7,7 +7,7 @@ import logging
 from api.app.conversation import (
     prompt_conversation,
     prompt_conversation_admin,
- )
+)
 
 from ..serializers import (
     PromptConversationSerializer,
@@ -21,6 +21,7 @@ from api.constants.ai_constants import (
 from api.app.mongo import MongoDB
 
 logger = logging.getLogger(__name__)
+
 
 class PromptConversationAdminView(APIView):
     def post(self, request):
@@ -107,7 +108,8 @@ class PromptConversationAdminView(APIView):
                 {"error": f"Failed to retrieve conversation history: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-        
+
+
 class PromptConversationView(APIView):
     def post(self, request):
         logger.info("Starting prompt_conversation request")
@@ -128,7 +130,7 @@ class PromptConversationView(APIView):
                 return Response(
                     {"error": "Invalid input data", "details": input_serializer.errors},
                     status=status.HTTP_400_BAD_REQUEST,
-                )         
+                )
 
             # Extract validated data
             validated_data = input_serializer.validated_data
