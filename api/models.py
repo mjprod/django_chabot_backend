@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from .utils.enum import KnowledgeType, KnowledgeContentStatus, KnowledgeContentLanguage
 
 import uuid
 
@@ -17,15 +18,15 @@ class SubCategory(models.Model):
 class Knowledge(models.Model):
 
     TYPE_CHOICES = [
-        ('FAQ', 'FAQ'),
-        ('Conversation', 'Conversation'),
-        ('Document', 'Document'),
+        (KnowledgeType.FAQ.value, 'FAQ'),
+        (KnowledgeType.CONVERSATION.value, 'Conversation'),
+        (KnowledgeType.DOCUMENT.value, 'Document'),
     ]
 
-    knowledge_uuid = models.UUIDField(editable=False, null=True, blank=True)
+    knowledge_uuid = models.UUIDField(editable=False, unique=True)
     category = models.ForeignKey(Category, related_name='knowledge_category', on_delete=models.SET_NULL, null=True, blank=True)
     subcategory = models.ForeignKey(SubCategory, related_name='knowledge_subcategory', on_delete=models.SET_NULL, null=True, blank=True)
-    type = models.CharField(max_length=20, choices=TYPE_CHOICES, default='FAQ')
+    type = models.IntegerField(choices=TYPE_CHOICES, default=KnowledgeType.FAQ.value)
 
     def clean(self):
         if self.subcategory and self.category:
@@ -44,23 +45,24 @@ class Knowledge(models.Model):
 class KnowledgeContent(models.Model):
 
     STATUS_CHOICES = [
-        ('needs_review', 'Needs Review'),
-        ('pre_approved', 'Pre-Approved'),
-        ('approved', 'Approved'),
-        ('reject', 'Reject')
+        (KnowledgeContentStatus.NEEDS_REVIEW.value, 'Needs Review'),
+        (KnowledgeContentStatus.PRE_APPROVED.value, 'Pre-Approved'),
+        (KnowledgeContentStatus.APPROVED.value, 'Approved'),
+        (KnowledgeContentStatus.REJECT.value, 'Reject')
     ]
 
     LANGUAGE_CHOICES = [
-        ('en', 'English'),
-        ('ms', 'Malaysian'),
-        ('cn', 'Chinese'),
+        (KnowledgeContentLanguage.ENGLISH.value, 'English'),
+        (KnowledgeContentLanguage.MALAYSIAN.value, 'Malaysian'),
+        (KnowledgeContentLanguage.CHINESE.value, 'Chinese'),
     ]
 
-    knowledge = models.ForeignKey(Knowledge, related_name='knowledge_content', on_delete=models.CASCADE, null=True, blank=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='needs_review')
+
+    knowledge = models.ForeignKey(Knowledge, related_name='knowledge_content', on_delete=models.CASCADE)
+    status = models.IntegerField(choices=STATUS_CHOICES, default=KnowledgeContentStatus.NEEDS_REVIEW.value)
     is_edited = models.BooleanField(default=False)
     in_brain = models.BooleanField(default=False)
-    language = models.CharField(max_length=10, choices=LANGUAGE_CHOICES)
+    language = models.IntegerField(choices=LANGUAGE_CHOICES)
     date_created = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
     question = models.TextField(blank=True, null=True)
@@ -71,3 +73,15 @@ class KnowledgeContent(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['knowledge', 'language'], name='unique_knowledge_language')
         ]
+    
+    def save(self, *args, **kwargs):
+        # Check if there is a related Brain instance
+        if Brain.objects.filter(knowledge_content=self).exists():
+            self.in_brain = True
+        else:
+            self.in_brain = False
+        super().save(*args, **kwargs)
+
+class Brain(models.Model):
+    knowledge_content = models.ForeignKey(KnowledgeContent, related_name='knowledge_content', on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True)

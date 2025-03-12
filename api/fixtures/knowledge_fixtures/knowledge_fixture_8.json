@@ -1,0 +1,1002 @@
+[
+    {
+        "model": "api.knowledge",
+        "pk": 700,
+        "fields": {
+            "knowledge_uuid": "f20b42c7-668b-4d1b-a570-8a6ac7e93e6e",
+            "category": 8,
+            "subcategory": 47,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 701,
+        "fields": {
+            "knowledge_uuid": "eea44e37-b0a8-470e-8386-6f9031cc9b4e",
+            "category": 3,
+            "subcategory": 24,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 702,
+        "fields": {
+            "knowledge_uuid": "0a40e932-4e0e-4324-b5b9-652ee369a5ac",
+            "category": 9,
+            "subcategory": 51,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 703,
+        "fields": {
+            "knowledge_uuid": "92826c27-19d9-471e-b8aa-d46991c7df7d",
+            "category": 6,
+            "subcategory": 41,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 704,
+        "fields": {
+            "knowledge_uuid": "bc0b615f-2c11-491b-85dd-a93a068f504d",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 705,
+        "fields": {
+            "knowledge_uuid": "d2b3cdd6-8e6f-41c2-9c9c-1ab576dc2455",
+            "category": 4,
+            "subcategory": 30,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 706,
+        "fields": {
+            "knowledge_uuid": "81ac87a7-ff8a-4a54-96e2-a800b9647bce",
+            "category": 5,
+            "subcategory": 35,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 707,
+        "fields": {
+            "knowledge_uuid": "a15c9c4e-41ed-46ed-a71f-f2427fa9402d",
+            "category": 5,
+            "subcategory": 37,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 708,
+        "fields": {
+            "knowledge_uuid": "b1dbb6d3-4bb8-462f-86a9-55d5f7aa858e",
+            "category": 7,
+            "subcategory": 43,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 709,
+        "fields": {
+            "knowledge_uuid": "6abfca72-c4e8-4b38-9153-16c129bcdb1d",
+            "category": 3,
+            "subcategory": 25,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 710,
+        "fields": {
+            "knowledge_uuid": "1420b744-4ae6-4dfd-8f55-b8f4c5bcf230",
+            "category": 9,
+            "subcategory": 52,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 711,
+        "fields": {
+            "knowledge_uuid": "6827ee9c-f3f5-403e-98c0-8f8ca099e816",
+            "category": 5,
+            "subcategory": 39,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 712,
+        "fields": {
+            "knowledge_uuid": "d220fd81-39cc-4442-b70d-4470b9587f24",
+            "category": 5,
+            "subcategory": 37,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 713,
+        "fields": {
+            "knowledge_uuid": "a7332713-f490-44d4-9533-48b88644451b",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 714,
+        "fields": {
+            "knowledge_uuid": "9a3626ec-8fa9-4b87-9845-cfcaa990bda4",
+            "category": 5,
+            "subcategory": 39,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 715,
+        "fields": {
+            "knowledge_uuid": "b269f225-fec1-4e81-9cb1-ebafe1dadc82",
+            "category": 6,
+            "subcategory": 40,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 716,
+        "fields": {
+            "knowledge_uuid": "cda8ce63-4093-480e-bb5f-312642a95d71",
+            "category": 14,
+            "subcategory": 67,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 717,
+        "fields": {
+            "knowledge_uuid": "fcc48d65-a0c4-4347-aa57-7fdd811b11e9",
+            "category": 3,
+            "subcategory": 25,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 718,
+        "fields": {
+            "knowledge_uuid": "404fb45e-c06d-4676-ab6d-f662b320d3a8",
+            "category": 14,
+            "subcategory": 65,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 719,
+        "fields": {
+            "knowledge_uuid": "44b38a71-4bd2-4128-acc4-1fd72233444e",
+            "category": 5,
+            "subcategory": 39,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 720,
+        "fields": {
+            "knowledge_uuid": "92f0ba99-f322-4f3d-929a-40addede793f",
+            "category": 3,
+            "subcategory": 28,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 721,
+        "fields": {
+            "knowledge_uuid": "a391ad84-ee36-49ac-b030-ffd02d58d4f9",
+            "category": 3,
+            "subcategory": 25,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 722,
+        "fields": {
+            "knowledge_uuid": "48c52afc-14fd-4ce7-89fa-caa37dafb854",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 723,
+        "fields": {
+            "knowledge_uuid": "59da9925-9b8b-4a39-8fa0-bfe5362c9a0c",
+            "category": 5,
+            "subcategory": 34,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 724,
+        "fields": {
+            "knowledge_uuid": "320f9cf0-314d-47a4-851b-cc53da70c9b3",
+            "category": 9,
+            "subcategory": 52,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 725,
+        "fields": {
+            "knowledge_uuid": "7f78ca5a-b0f0-4700-90cf-cf8590e93880",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 726,
+        "fields": {
+            "knowledge_uuid": "f1010bec-b30c-4590-b27c-c46a7b665825",
+            "category": 5,
+            "subcategory": 39,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 727,
+        "fields": {
+            "knowledge_uuid": "54012192-9514-41f7-b785-0643e3e980e8",
+            "category": 3,
+            "subcategory": 24,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 728,
+        "fields": {
+            "knowledge_uuid": "198e12dd-d87e-48d2-9f71-4a5977238658",
+            "category": 5,
+            "subcategory": 37,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 729,
+        "fields": {
+            "knowledge_uuid": "42148bea-76b6-4635-aa92-66b2b17a5ab7",
+            "category": 14,
+            "subcategory": 66,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 730,
+        "fields": {
+            "knowledge_uuid": "180826e5-b67b-41bc-9ef9-c6c092c628af",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 731,
+        "fields": {
+            "knowledge_uuid": "b323587b-d121-4d24-908d-cca09392890e",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 732,
+        "fields": {
+            "knowledge_uuid": "138146f1-c490-4eaf-b880-969302f30894",
+            "category": 9,
+            "subcategory": 50,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 733,
+        "fields": {
+            "knowledge_uuid": "8dba3c6a-9dc5-4750-bf8c-35a9edebbec3",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 734,
+        "fields": {
+            "knowledge_uuid": "18450d65-de51-4c81-ada2-5ca5ef302915",
+            "category": 3,
+            "subcategory": 25,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 735,
+        "fields": {
+            "knowledge_uuid": "d7ee43eb-29d6-4133-a02a-8d116a9ffab4",
+            "category": 12,
+            "subcategory": 61,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 736,
+        "fields": {
+            "knowledge_uuid": "4a514acb-cc58-4ed6-bafa-fb96c143b4d3",
+            "category": 7,
+            "subcategory": 45,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 737,
+        "fields": {
+            "knowledge_uuid": "c34f1c93-e57b-4329-b091-d33fe6498218",
+            "category": 8,
+            "subcategory": 47,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 738,
+        "fields": {
+            "knowledge_uuid": "f9452daf-c3cd-48d6-aad7-b7fc49a41999",
+            "category": 5,
+            "subcategory": 39,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 739,
+        "fields": {
+            "knowledge_uuid": "e3ca8367-9405-47e1-9b39-6605f3384544",
+            "category": 14,
+            "subcategory": 66,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 740,
+        "fields": {
+            "knowledge_uuid": "7a6c40ae-7e16-4fb6-b1db-d424f51d80aa",
+            "category": 9,
+            "subcategory": 53,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 741,
+        "fields": {
+            "knowledge_uuid": "3d664641-b741-471c-97a0-84daed93e286",
+            "category": 5,
+            "subcategory": 34,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 742,
+        "fields": {
+            "knowledge_uuid": "70f827a0-29ca-4786-9ebb-f5f8d8cc834c",
+            "category": 7,
+            "subcategory": 43,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 743,
+        "fields": {
+            "knowledge_uuid": "f10cdce6-d0b4-4e36-9690-16afc9608cb6",
+            "category": 14,
+            "subcategory": 65,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 744,
+        "fields": {
+            "knowledge_uuid": "77cbaa02-f1fb-4adf-a411-e3364c140258",
+            "category": 5,
+            "subcategory": 39,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 745,
+        "fields": {
+            "knowledge_uuid": "5f985336-8ab2-45b5-be28-7941605de55b",
+            "category": 5,
+            "subcategory": 36,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 746,
+        "fields": {
+            "knowledge_uuid": "99834dac-5379-4750-b7f7-3cb8d49ea11e",
+            "category": 9,
+            "subcategory": 52,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 747,
+        "fields": {
+            "knowledge_uuid": "e95270d6-a349-462c-b142-af74a813801f",
+            "category": 5,
+            "subcategory": 35,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 748,
+        "fields": {
+            "knowledge_uuid": "a04c8bc6-ede1-4fa6-b9e6-5caf88111922",
+            "category": 5,
+            "subcategory": 35,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 749,
+        "fields": {
+            "knowledge_uuid": "7b6aa310-7df2-472f-a7c2-66c2b9f602e3",
+            "category": 1,
+            "subcategory": 3,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 750,
+        "fields": {
+            "knowledge_uuid": "3294b221-c614-4da5-bc96-624b624eb76a",
+            "category": 5,
+            "subcategory": 34,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 751,
+        "fields": {
+            "knowledge_uuid": "f322ade4-1a2d-43fc-b0f4-0bc52426cd1c",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 752,
+        "fields": {
+            "knowledge_uuid": "503abbd3-7341-4d30-96f5-61f8b9644dee",
+            "category": 5,
+            "subcategory": 37,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 753,
+        "fields": {
+            "knowledge_uuid": "14a909f7-892b-4952-8846-8a78f267a42a",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 754,
+        "fields": {
+            "knowledge_uuid": "89bcb4fa-052b-4817-8995-209d368af386",
+            "category": 9,
+            "subcategory": 53,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 755,
+        "fields": {
+            "knowledge_uuid": "8dd36994-836f-4c80-b243-e114d7fd8451",
+            "category": 5,
+            "subcategory": 34,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 756,
+        "fields": {
+            "knowledge_uuid": "edeb6bfa-11c4-48b5-97bd-a54c126243fb",
+            "category": 3,
+            "subcategory": 25,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 757,
+        "fields": {
+            "knowledge_uuid": "747043ff-df66-4152-8a44-b525ab3ac3ee",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 758,
+        "fields": {
+            "knowledge_uuid": "619dcd26-2859-466b-b414-7b0df1276e5f",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 759,
+        "fields": {
+            "knowledge_uuid": "b6a873dc-7940-4108-a052-5434cca2be68",
+            "category": 5,
+            "subcategory": 39,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 760,
+        "fields": {
+            "knowledge_uuid": "944122d0-2754-413d-bbdc-e6747f42560a",
+            "category": 1,
+            "subcategory": 3,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 761,
+        "fields": {
+            "knowledge_uuid": "f4042c2d-4898-4221-9c0c-aac621c66ba4",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 762,
+        "fields": {
+            "knowledge_uuid": "f46392c6-6596-40cb-bb9f-318d6a0a77b3",
+            "category": 8,
+            "subcategory": 47,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 763,
+        "fields": {
+            "knowledge_uuid": "31ca4c52-3fe0-4837-b1d1-abc4d1b63859",
+            "category": 14,
+            "subcategory": 65,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 764,
+        "fields": {
+            "knowledge_uuid": "d78b38a3-e32f-4b33-9997-342a01de94e4",
+            "category": 14,
+            "subcategory": 65,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 765,
+        "fields": {
+            "knowledge_uuid": "365b8fe6-eba2-4a81-bbdb-dbe01e4353b6",
+            "category": 12,
+            "subcategory": 61,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 766,
+        "fields": {
+            "knowledge_uuid": "d2f58c1b-ef46-4e58-9b6d-cfd8bfd9bfde",
+            "category": 14,
+            "subcategory": 65,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 767,
+        "fields": {
+            "knowledge_uuid": "538a2bb7-460c-4458-a10e-a46e39e404a4",
+            "category": 1,
+            "subcategory": 3,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 768,
+        "fields": {
+            "knowledge_uuid": "9b14dbfc-268f-4e6d-8c62-117cd03d59c2",
+            "category": 12,
+            "subcategory": 61,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 769,
+        "fields": {
+            "knowledge_uuid": "851a6499-ae41-4e61-badf-d1c06c32e09f",
+            "category": 9,
+            "subcategory": 52,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 770,
+        "fields": {
+            "knowledge_uuid": "add35c10-7d03-48ee-ad93-a60a36bf8a1b",
+            "category": 1,
+            "subcategory": 2,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 771,
+        "fields": {
+            "knowledge_uuid": "b4db20b7-c21f-4dc3-9aa1-2c8d9ebe67ae",
+            "category": 8,
+            "subcategory": 49,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 772,
+        "fields": {
+            "knowledge_uuid": "3bbe782a-8282-4d9d-a9f0-d813ce062f25",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 773,
+        "fields": {
+            "knowledge_uuid": "89ef2977-308f-45f8-af1d-9d7a67d834b4",
+            "category": 5,
+            "subcategory": 36,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 774,
+        "fields": {
+            "knowledge_uuid": "021a8bf8-ef78-4ef5-ba57-108b13edce18",
+            "category": 1,
+            "subcategory": 3,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 775,
+        "fields": {
+            "knowledge_uuid": "13f54d2a-5388-491a-9794-27d0768822b9",
+            "category": 3,
+            "subcategory": 25,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 776,
+        "fields": {
+            "knowledge_uuid": "c7dc5665-c6cf-4708-938a-1f481aa11296",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 777,
+        "fields": {
+            "knowledge_uuid": "f3f66f0a-b81b-4c9e-820e-07c521f291db",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 778,
+        "fields": {
+            "knowledge_uuid": "66c20a76-4362-4846-81ac-c9e05b374c26",
+            "category": 12,
+            "subcategory": 61,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 779,
+        "fields": {
+            "knowledge_uuid": "93b45034-2c08-4fe0-9219-0446d6e322a7",
+            "category": 5,
+            "subcategory": 36,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 780,
+        "fields": {
+            "knowledge_uuid": "96c42834-82af-49bd-9358-e85f5f61a9d8",
+            "category": 5,
+            "subcategory": 35,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 781,
+        "fields": {
+            "knowledge_uuid": "8c98b49b-25b8-4dec-9516-28eb43c89c52",
+            "category": 9,
+            "subcategory": 50,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 782,
+        "fields": {
+            "knowledge_uuid": "1f6ad1df-e193-4f60-8a02-af45d98188c7",
+            "category": 5,
+            "subcategory": 34,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 783,
+        "fields": {
+            "knowledge_uuid": "b924cac1-94aa-49b0-8d20-e27eed77c42f",
+            "category": 9,
+            "subcategory": 52,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 784,
+        "fields": {
+            "knowledge_uuid": "e71c53ce-ce0e-4a90-9520-45696a8a313e",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 785,
+        "fields": {
+            "knowledge_uuid": "0f084015-57ea-4ed9-9809-21f713e4bf6b",
+            "category": 5,
+            "subcategory": 35,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 786,
+        "fields": {
+            "knowledge_uuid": "709a28ba-54f3-4c6f-95ca-411d47c0d9c3",
+            "category": 5,
+            "subcategory": 37,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 787,
+        "fields": {
+            "knowledge_uuid": "f85f3a9e-b52e-4809-bc77-6b2f9192bb99",
+            "category": 12,
+            "subcategory": 61,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 788,
+        "fields": {
+            "knowledge_uuid": "ec4d581e-1d43-4a11-9a1e-10c067470bff",
+            "category": 12,
+            "subcategory": 61,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 789,
+        "fields": {
+            "knowledge_uuid": "ad73a95d-198f-483c-a7ca-528b48b72d7e",
+            "category": 1,
+            "subcategory": 3,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 790,
+        "fields": {
+            "knowledge_uuid": "289004d2-ac0b-4155-a858-5e601b12c68f",
+            "category": 11,
+            "subcategory": 57,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 791,
+        "fields": {
+            "knowledge_uuid": "3d22b792-8568-43a2-a6f1-9f9156808ce2",
+            "category": 6,
+            "subcategory": 41,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 792,
+        "fields": {
+            "knowledge_uuid": "d3007f57-005a-4bf7-9c3a-cf0ac128cc58",
+            "category": 8,
+            "subcategory": 48,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 793,
+        "fields": {
+            "knowledge_uuid": "24522ae2-28a2-4270-bbbb-c4a30c473466",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 794,
+        "fields": {
+            "knowledge_uuid": "b4d19f3a-6368-487c-a5ce-cb03b5d4332b",
+            "category": 5,
+            "subcategory": 38,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 795,
+        "fields": {
+            "knowledge_uuid": "abd6f237-c962-4f9b-828e-065e11d6faf4",
+            "category": 3,
+            "subcategory": 23,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 796,
+        "fields": {
+            "knowledge_uuid": "3d3a5a18-572c-4c7c-9700-3645cf4d198f",
+            "category": 3,
+            "subcategory": 27,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 797,
+        "fields": {
+            "knowledge_uuid": "e031ab2e-2060-4388-95d1-cc3537b0694e",
+            "category": 4,
+            "subcategory": 30,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 798,
+        "fields": {
+            "knowledge_uuid": "57cd8946-a912-4bed-9f90-77a1fd654376",
+            "category": 9,
+            "subcategory": 52,
+            "type": 1
+        }
+    },
+    {
+        "model": "api.knowledge",
+        "pk": 799,
+        "fields": {
+            "knowledge_uuid": "c121913a-cd2b-44dd-948c-89c70acfe62e",
+            "category": 8,
+            "subcategory": 47,
+            "type": 1
+        }
+    }
+]

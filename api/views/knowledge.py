@@ -8,9 +8,8 @@ from rest_framework.decorators import action
 import rest_framework.exceptions as DRFException
 
 import django.core.exceptions as CoreException
-from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from django.db.models import Exists, OuterRef, Count
+from django.db.models import Count
 
 from ..models import (
     Category, 
@@ -22,13 +21,11 @@ from ..models import (
 from ..api_serializers.knowledge import (
     KnowledgeSerializer,
     KnowledgeContentSerializer,
-    CategorySerializer, 
-    SubCategorySerializer
 )
 
 from ..utils.utils import CustomPagination
-from ..utils.filters import KnowledgeFilter, SubCategoryFilter
-from ..utils.enum import KnowledgeStatus
+from ..utils.filters import KnowledgeFilter
+from ..utils.enum import KnowledgeContentStatus, KnowledgeType
 
 
 logger = logging.getLogger(__name__)
@@ -53,7 +50,7 @@ class KnowledgeContentViewSet(viewsets.ModelViewSet):
             else:
                 category_id = data.pop('category', None)
                 subcategory_id = data.pop('subcategory', None)
-                type = data.pop('type', 'FAQ')
+                type = data.pop('type', KnowledgeType.FAQ.value)
                 category = Category.objects.get(id=category_id) if category_id else None
                 subcategory = SubCategory.objects.get(id=subcategory_id) if subcategory_id else None
 
@@ -90,9 +87,10 @@ class KnowledgeContentViewSet(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         knowledge_content_instance = self.get_object()
 
-        if knowledge_content_instance.status != KnowledgeStatus.REJECT.value:
-            raise DRFException.ValidationError("This knowledge cannot be deleted because it is not in 'reject' status.")
-
+        if knowledge_content_instance.status != KnowledgeContentStatus.REJECT.value or knowledge_content_instance.in_brain == True:
+            raise DRFException.ValidationError(
+                "This knowledge cannot be deleted because it is either not in 'reject' status or it is already in the brain."
+            )
         knowledge_content_instance.delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -105,10 +103,14 @@ class KnowledgeContentViewSet(viewsets.ModelViewSet):
         if not ids:
             raise DRFException.ValidationError("The 'ids' field is required.")
 
-        # Validate that all IDs are valid Knowledge IDs
-        knowledge_content_objects = self.get_queryset().filter(id__in=ids, status=KnowledgeStatus.REJECT.value)
-        if knowledge_content_objects.count() != len(ids):
-            raise DRFException.ValidationError("One or more of the provided IDs do not exist, or cannot be deleted because they are not in 'reject' status.")
+        # Validate that all IDs are valid Knowledge IDs and can be deleted
+        knowledge_content_objects = self.get_queryset().filter(id__in=ids, status=KnowledgeContentStatus.REJECT.value)
+        invalid_entries = self.get_queryset().filter(id__in=ids, in_brain=True)
+        
+        if knowledge_content_objects.count() != len(ids) or invalid_entries.exists():
+            raise DRFException.ValidationError(
+                "One or more of the provided IDs do not exist, are not in 'reject' status, or cannot be deleted because they are already in the brain."
+            )
 
         knowledge_content_objects.delete()
 
@@ -127,10 +129,13 @@ class KnowledgeContentViewSet(viewsets.ModelViewSet):
             raise DRFException.ValidationError(f"Cannot update the following fields: {', '.join(invalid_fields)}")
         
         # ignore other fields if the status is set to "reject"
-        if data.get("status") == KnowledgeStatus.REJECT.value:
-            data = {"status": KnowledgeStatus.REJECT.value}
+        if data.get("status") == KnowledgeContentStatus.REJECT.value:
+            data = {"status": KnowledgeContentStatus.REJECT.value}
         else:
             # If the status is not 'reject', check if other fields have been edited
+            # it will ignore other statuses being passed in this PATCH api (can only updated with PRE_APPROVED/ REJECT)
+            data["status"] = KnowledgeContentStatus.PRE_APPROVED.value
+
             is_edited = False
             if not getattr(instance, "is_edited"):
                 for field in data.keys():
@@ -154,13 +159,28 @@ class KnowledgeViewSet(viewsets.ModelViewSet):
     serializer_class = KnowledgeSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = KnowledgeFilter
+    pagination_class = CustomPagination
 
-    # def get_queryset(self):
-    #     return Knowledge.objects.annotate(
-    #         has_content_in_brain=Exists(
-    #             KnowledgeContent.objects.filter(knowledge=OuterRef('pk'), in_brain=False)
-    #         )
-    #     ).filter(has_content_in_brain=True)
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        
+        # Get multiple filter parameters from the request
+        status = self.request.query_params.get('status', None)
+        language = self.request.query_params.get('language', None)
+        is_edited = self.request.query_params.get('is_edited', None)
+        
+        # Add the filters to the context if provided
+        if status:
+            context['status'] = status
+        if language:
+            context['language'] = language
+        if is_edited is not None:  # Check if it's provided (True/False)
+            context['is_edited'] = is_edited
+        
+        return context
+    
+    def get_queryset(self):
+        return Knowledge.objects.filter(knowledge_content__in_brain=False).distinct()
 
     def create(self, request, *args, **kwargs):
         raise DRFException.PermissionDenied("Create is disabled for this resource.")
@@ -187,19 +207,6 @@ class KnowledgeContentSummaryAPIView(APIView):
         ).values('id', 'name', 'knowledge_content_count')
 
         return Response({"categories": list(category_summary)})
-
-
-class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-
-
-
-class SubCategoryViewSet(viewsets.ModelViewSet):
-    queryset = SubCategory.objects.all()
-    serializer_class = SubCategorySerializer
-    filter_backends = (DjangoFilterBackend,)
-    filterset_class = SubCategoryFilter
 
 
 # class KnowledgeViewSet(viewsets.ModelViewSet):

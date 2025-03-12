@@ -9,8 +9,6 @@ from ..api_serializers.review_knowledge import (
     BulkDeleteSerializer
 )
 
-from ..utils.enum import CategoryColorEnum
-
 from ..utils.utils import CustomPagination
 
 import logging
@@ -253,7 +251,7 @@ class ReviewKnowledgeDashboard(APIView):
             for category in results:
                 category_name = category["category"]
                 # Add color to the category
-                category["color"] = self._get_category_color(category_name).value
+                # category["color"] = self._get_category_color(category_name).value
                 categories.append(category)
             
             # Return the results as a JSON response
@@ -269,20 +267,20 @@ class ReviewKnowledgeDashboard(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
         
-    def _get_category_color(self,category_id):
-        category_mapping = {
-            "finance": CategoryColorEnum.FINANCE,
-            "technical": CategoryColorEnum.TECHNOLOGY,
-            "account_management": CategoryColorEnum.ACCOUNT,
-            "game": CategoryColorEnum.FOURDLOTTO,
-            "sports_betting": CategoryColorEnum.FOURDLOTTO,
-            "policy_explanation": CategoryColorEnum.SECURITY,
-            "encouragement": CategoryColorEnum.FEEDBACK,
-            "points_shop": CategoryColorEnum.POINTSSHOP,
-            "other":CategoryColorEnum.OTHER
-        }
+    # def _get_category_color(self,category_id):
+    #     category_mapping = {
+    #         "finance": CategoryColorEnum.FINANCE,
+    #         "technical": CategoryColorEnum.TECHNOLOGY,
+    #         "account_management": CategoryColorEnum.ACCOUNT,
+    #         "game": CategoryColorEnum.FOURDLOTTO,
+    #         "sports_betting": CategoryColorEnum.FOURDLOTTO,
+    #         "policy_explanation": CategoryColorEnum.SECURITY,
+    #         "encouragement": CategoryColorEnum.FEEDBACK,
+    #         "points_shop": CategoryColorEnum.POINTSSHOP,
+    #         "other":CategoryColorEnum.OTHER
+    #     }
         
-        return category_mapping.get(category_id, CategoryColorEnum.OTHER)
+    #     return category_mapping.get(category_id, CategoryColorEnum.OTHER)
 
 
 class ListReviewAndUpdateBrainView(APIView):

@@ -1,4 +1,3 @@
-from django.urls import path, include
 from django.views.decorators.cache import cache_page
 
 
@@ -25,30 +24,44 @@ from .views.brain_view import (
     UpdateBrainView,
 )
 
+
+
+from django.urls import path, include
+
 from rest_framework.routers import DefaultRouter
 from .views.knowledge import (
-    CategoryViewSet, 
-    SubCategoryViewSet, 
     KnowledgeViewSet,
     KnowledgeContentViewSet, 
     KnowledgeSummaryAPIView,
     KnowledgeContentSummaryAPIView
 )
 
+from .views.category import (
+    CategoryViewSet, 
+    SubCategoryViewSet, 
+)
+
+from .views.brain import BrainViewSet
+
+
 router = DefaultRouter()
 router.register(r'categories', CategoryViewSet)
 router.register(r'subcategories', SubCategoryViewSet)
 router.register(r'knowledge', KnowledgeViewSet)
 router.register(r'knowledge-content', KnowledgeContentViewSet)
+router.register(r'brain', BrainViewSet)
 
 
 
 # Define URL patterns
 urlpatterns = [
     path('', include(router.urls)),
-
     path('knowledge-summary/', KnowledgeSummaryAPIView.as_view(), name='knowledge-summary'),
     path('knowledge-content-summary/', KnowledgeContentSummaryAPIView.as_view(), name='knowledge-content-summary'),
+
+
+
+
 
 
 

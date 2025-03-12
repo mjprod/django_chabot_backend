@@ -1,0 +1,2786 @@
+[
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2398,
+        "fields": {
+            "knowledge": 800,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How long does it typically take for funds to be credited after a deposit?",
+            "answer": "Funds usually land in 5-30 minutes after a deposit, boss—most times it’s quick, but a system check or peak rush might stretch it a bit. If it’s over 30 and still missing, hit me up—I’ll sort it out and get your cash safe! Thanks for hanging in—here’s to more fun and wins!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2399,
+        "fields": {
+            "knowledge": 800,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Berapa lama biasanya masa yang diambil untuk dana dikreditkan selepas deposit?",
+            "answer": "Duit biasanya masuk 5-30 minit lepas deposit, boss—kebanyakan masa cepat, tapi semak sistem atau waktu sibuk mungkin lambat sikit. Kalau lepas 30 masih tak ada, hubungi saya—saya uruskan pastikan duit boss selamat! Terima kasih sabar—semoga lebih seronok dan menang!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2400,
+        "fields": {
+            "knowledge": 800,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "存款後資金通常需要多長時間入賬？",
+            "answer": "存款後，資金通常會在5到30分鐘內到賬，老板。雖然大多數情況下會很快處理，但有時由於系統審核或高峰期，可能會稍有延遲。若超過30分鐘仍未到賬，請聯繫我，我會幫您查看狀態，確保資金順利到位！感謝您的耐心，祝您遊戲愉快，多多勝利！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2401,
+        "fields": {
+            "knowledge": 801,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Can I make a small transfer to verify if my account is working correctly?",
+            "answer": "Sure can, boss! A small transfer’s a smart move to test if your account’s humming—start with the minimum deposit amount to make sure it’s all ticking, then go big when you’re ready!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2402,
+        "fields": {
+            "knowledge": 801,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bolehkah saya membuat pemindahan kecil untuk mengesahkan jika akaun saya berfungsi dengan betul?",
+            "answer": "Boleh lah, boss! Pindahan kecil langkah bijak nak test akaun boss berjalan elok—mula dengan jumlah deposit minimum untuk pastikan semua ok, lepas tu boleh masuk besar bila sedia!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2403,
+        "fields": {
+            "knowledge": 801,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "我可以進行小額轉賬以驗證我的賬戶是否正常運作嗎？",
+            "answer": "當然可以，老板！進行小額轉賬是驗證您賬戶是否正常運作的一個好方式。您可以選擇最低存款金額開始，確保一切正常後再進行更大額度的操作。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2404,
+        "fields": {
+            "knowledge": 802,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How can I change the language settings on the platform?",
+            "answer": "Switching up the language is a breeze, boss! Open the app, tap the profile icon bottom-right, hit the language option—pick your flavor, confirm, and enjoy your custom vibe!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2405,
+        "fields": {
+            "knowledge": 802,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bagaimana saya boleh menukar tetapan bahasa di platform?",
+            "answer": "Tukar bahasa senang je, boss! Buka app, tekan ikon profil kat bawah kanan, pilih pilihan bahasa—ambil rasa boss, sahkan, enjoy vibe custom boss!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2406,
+        "fields": {
+            "knowledge": 802,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "如何更改平台的語言設置？",
+            "answer": "更改平台的語言設置其實很簡單，老板！只需打開應用程序，點擊右下角的人頭圖標，接著選擇語言選項，然後挑選您喜歡的語言，確認後就能享受個性化的體驗啦！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2407,
+        "fields": {
+            "knowledge": 803,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Can you explain why my withdrawal of 20 hasn't been received yet?",
+            "answer": "About that 20 RM withdrawal not landing yet, boss—it could be a few things! Usually, the system processes it in 5-30 minutes, but peak times or a review might stretch it a bit. If it’s past 30 minutes, hit me with screenshots—I’ll zip in and make sure your funds get there safe!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2408,
+        "fields": {
+            "knowledge": 803,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bolehkah anda jelaskan kenapa pengeluaran saya sebanyak 20 belum diterima?",
+            "answer": "Pasal pengeluaran 20 RM boss belum sampai lagi, mungkin ada beberapa sebab! Biasanya sistem proses dalam 5-30 minit, tapi masa puncak atau semakan boleh lambat sikit. Kalau lepas 30 minit, hantar screenshot—saya masuk laju pastikan duit boss sampai selamat!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2409,
+        "fields": {
+            "knowledge": 803,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "你能解釋為什麼我20元的提款還沒收到嗎？",
+            "answer": "關於您的20元提款未到賬，老板，可能有幾個原因。通常系統在處理提款請求時需要一些時間，大多數情況下資金會在5到30分鐘內到賬，但在高峰期或審核中可能會稍有延遲。若超過30分鐘仍未到賬，請提供截圖信息，我會幫您快速查明情況，確保資金順利到位！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2410,
+        "fields": {
+            "knowledge": 804,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "What's the minimum age requirement for creating an account?",
+            "answer": "No minimum age to join the party, boss! Got a smartphone and a connection? You’re all set to sign up and start your gaming journey—newbie or pro, welcome to the crew!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2411,
+        "fields": {
+            "knowledge": 804,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Berapakah umur minimum yang diperlukan untuk membuat akaun?",
+            "answer": "Tak ada umur minimum nak join parti ni, boss! Ada telefon pintar dan sambungan? Boss dah boleh daftar dan mulakan journey game—baru atau pro, selamat datang ke geng kami!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2412,
+        "fields": {
+            "knowledge": 804,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "創建賬戶的最低年齡要求是什麼？",
+            "answer": "關於創建賬戶的最低年齡要求，老板，其實我們沒有具體的限制哦！只要您擁有智能手機和網絡，就可以輕鬆註冊賬戶，開始您的遊戲旅程。無論您是新手還是老玩家，歡迎您加入我們的大家庭！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2413,
+        "fields": {
+            "knowledge": 805,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How can I change the language settings on the platform?",
+            "answer": "Switching language settings is a cinch, boss! Open the app, tap the profile icon bottom-right, find the language option—pick what suits you, hit confirm, and enjoy your custom groove!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2414,
+        "fields": {
+            "knowledge": 805,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bagaimana saya boleh menukar tetapan bahasa di platform?",
+            "answer": "Tukar tetapan bahasa senang je, boss! Buka app, tekan ikon profil kat bawah kanan, cari pilihan bahasa—pilih yang sesuai dengan boss, tekan sahkan, enjoy groove custom boss!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2415,
+        "fields": {
+            "knowledge": 805,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "如何更改平台的語言設置？",
+            "answer": "更改平台的語言設置其實很簡單，老板！只需打開應用程序，點擊右下角的人頭圖標，接著找到語言選項，然後選擇您想要的語言，確認即可。這樣您就能享受更個性化的體驗啦！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2416,
+        "fields": {
+            "knowledge": 806,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How can I follow up on a withdrawal request that hasn't been approved?",
+            "answer": "To track a withdrawal that’s still waiting approval, boss, pop open the app, hit the wallet icon, check ‘Transaction Records’—you’ll see if it’s ‘pending’ or ‘approved’ right there. No sweat if it’s still pending—just chill, it usually clears in 30 minutes tops!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2417,
+        "fields": {
+            "knowledge": 806,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bagaimana saya boleh membuat susulan pada permintaan pengeluaran yang belum diluluskan?",
+            "answer": "Nak ikut permintaan pengeluaran yang belum lulus, boss, buka app, tekan ikon dompet, tengok ‘Rekod Transaksi’—boss akan nampak kalau ‘tertunda’ atau ‘diluluskan’ kat situ. Tak risau kalau masih tertunda—relax je, biasanya selesai dalam 30 minit je!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2418,
+        "fields": {
+            "knowledge": 806,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "如何跟進尚未批准的提款請求？",
+            "answer": "要跟進尚未批准的提款請求，老板，您可以打開應用程序，點擊錢包圖標，然後查看您的‘交易記錄’。這裡會顯示您的提款狀態，比如‘待處理’或‘已批准’。若仍顯示待處理，別擔心，請耐心等待，通常會在30分鐘內完成處理。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2419,
+        "fields": {
+            "knowledge": 807,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How can I change the language settings on the platform?",
+            "answer": "Changing the language settings is a snap, boss! Open the app, tap the profile icon bottom-right, spot the language option—pick your fave, confirm, and you’re set for a fresh vibe!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2420,
+        "fields": {
+            "knowledge": 807,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bagaimana saya boleh menukar tetapan bahasa di platform?",
+            "answer": "Tukar tetapan bahasa senang je, boss! Buka app, tekan ikon profil kat bawah kanan, cari pilihan bahasa—pilih yang boss suka, sahkan, boss dah siap untuk vibe baru!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2421,
+        "fields": {
+            "knowledge": 807,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "如何更改平台的語言設置？",
+            "answer": "更改平台的語言設置其實很簡單哦，老板！只需打開應用程序，點擊右下角的人頭圖標，接著找到語言選項。在這裡，您可以選擇自己喜歡的語言，確認後即可享受全新的體驗！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2422,
+        "fields": {
+            "knowledge": 808,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Is there a maintenance issue with Maybank transactions?",
+            "answer": "Can’t say for sure if Maybank’s got maintenance glitches, boss—usually, if transfers are hiccuping, it’s their system getting a tune-up. Peek at Maybank’s official site for the latest scoop and alerts!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2423,
+        "fields": {
+            "knowledge": 808,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Adakah terdapat masalah penyelenggaraan dengan transaksi Maybank?",
+            "answer": "Tak boleh pastikan kalau Maybank ada masalah penyelenggaraan, boss—biasanya kalau pindahan terganggu, sistem dia tengah dapat tune-up. Tengok laman rasmi Maybank untuk scoop dan alert terkini!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2424,
+        "fields": {
+            "knowledge": 808,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "Maybank交易是否存在維護問題？",
+            "answer": "關於Maybank交易是否存在維護問題，老板，我們不確定，但若您在使用Maybank轉賬時遇到問題，很可能是銀行正在進行系統維護。建議您查看Maybank的官方網站，以獲取最新的維護信息和通知。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2425,
+        "fields": {
+            "knowledge": 809,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Is there a delay in processing payments today?",
+            "answer": "Yeah, boss, there might be a bit of a hold-up today—peak hours with heaps of folks transacting can slow it down. No worries, though—we’ll get payments through in 5-30 minutes tops!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2426,
+        "fields": {
+            "knowledge": 809,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Adakah terdapat kelewatan dalam pemprosesan pembayaran hari ini?",
+            "answer": "Ya, boss, mungkin ada sikit lambat hari ni—jam puncak dengan ramai orang buat transaksi boleh perlahan. Tak risau lah, kami selesaikan pembayaran dalam 5-30 minit je!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2427,
+        "fields": {
+            "knowledge": 809,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "今天處理付款有延遲嗎？",
+            "answer": "今天的老板，的確可能會有些延遲，尤其是在高峰時段，很多顧客同時進行交易。不過請放心，我們會盡快處理所有請求，通常付款會在5到30分鐘內完成。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2428,
+        "fields": {
+            "knowledge": 810,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Can you explain why my withdrawal of 20 hasn't been received yet?",
+            "answer": "That 20 RM withdrawal not hitting yet, boss, might be taking a bit longer—system usually wraps it in 5-30 minutes, but peak times can stretch it. If it’s over 30 minutes, send me screenshots—I’ll dive in quick to check it and get your funds safe! Thanks for hanging in—more fun awaits!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2429,
+        "fields": {
+            "knowledge": 810,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bolehkah anda jelaskan kenapa pengeluaran saya sebanyak 20 belum diterima?",
+            "answer": "Pengeluaran 20 RM boss belum sampai lagi mungkin lambat sikit—sistem biasanya selesai dalam 5-30 minit, tapi masa puncak boleh panjang. Kalau lepas 30 minit, hantar screenshot—saya masuk cepat semak dan pastikan duit boss selamat! Terima kasih sabar—lagi seronok menanti!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2430,
+        "fields": {
+            "knowledge": 810,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "你能解釋為什麼我20元的提款還沒收到嗎？",
+            "answer": "關於您20元的提款尚未到賬，老板，可能是處理時間較長所致。我們通常會在5到30分鐘內完成提款請求，但在高峰期可能會稍有延遲。若超過30分鐘仍未到賬，請提供截圖信息，我會立即幫您核實，確保資金順利到位！感謝您的耐心，期待您繼續享受更多樂趣！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2431,
+        "fields": {
+            "knowledge": 811,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How can I update my full name on my account?",
+            "answer": "To update your full name, boss, it starts with getting it right at signup—if it’s off, just drop me your real full name here: Name, Account Number, Bank Name. Make sure it’s your legit name to dodge future hiccups—we’ll sort it quick!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2432,
+        "fields": {
+            "knowledge": 811,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bagaimana saya boleh mengemas kini nama penuh saya pada akaun saya?",
+            "answer": "Nak kemas kini nama penuh, boss, mula dengan betul masa daftar—kalau salah, hantar je nama penuh betul boss kat sini: Nama, Nombor Akaun, Nama Bank. Pastikan nama sah boss untuk elak masalah nanti—kami urus cepat!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2433,
+        "fields": {
+            "knowledge": 811,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "我如何在我的賬戶上更新我的全名？",
+            "answer": "要更新您賬戶上的全名，老板，您需要在首次註冊時輸入正確的名字。若發現名字輸入錯誤，可以直接在這裡告訴我您的全名，包括：姓名、賬戶號碼、銀行名稱。請確保提供的是您本人真實的全名，以免在將來的交易中遇到問題。我們會幫您盡快處理的！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2434,
+        "fields": {
+            "knowledge": 812,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How often are account balances updated after a game session?",
+            "answer": "Your account balance usually refreshes right after a game session ends, boss—so you can see your winnings or bets instantly! If it’s not updating on time, might be a tiny system hiccup—give it a sec!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2435,
+        "fields": {
+            "knowledge": 812,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Berapa kerap baki akaun dikemas kini selepas sesi permainan?",
+            "answer": "Baki akaun boss biasanya segarkan sebaik sesi game habis—jadi boss boleh tengok kemenangan atau pertaruhan terus! Kalau tak kemas kini tepat masa, mungkin sistem tersangkut sikit—tunggu jap!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2436,
+        "fields": {
+            "knowledge": 812,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "遊戲結束後，賬戶餘額多久更新一次？",
+            "answer": "遊戲結束後，您的賬戶餘額通常會立即更新，老板，這樣您可以第一時間看到您的贏利或投注結果。若未及時更新，可能是系統稍有延遲。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2437,
+        "fields": {
+            "knowledge": 813,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How can I follow up on a withdrawal request that hasn't been approved?",
+            "answer": "To keep tabs on an unapproved withdrawal, boss, just fire up the app, tap the wallet icon, hit ‘Transaction Records’—you’ll spot its status, ‘pending’ or ‘approved.’ If it’s still pending, no panic—chill a bit, it usually clears in 30 minutes. Over that? Ping me, I’ll chase it down and get your funds safe!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2438,
+        "fields": {
+            "knowledge": 813,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bagaimana saya boleh membuat susulan pada permintaan pengeluaran yang belum diluluskan?",
+            "answer": "Nak ikut permintaan pengeluaran belum lulus, boss, buka je app, tekan ikon dompet, masuk ‘Rekod Transaksi’—boss akan nampak status, ‘tertunda’ atau ‘diluluskan.’ Kalau masih tertunda, tak payah panik—relax sikit, biasanya selesai dalam 30 minit. Lewat tu? Hubungi saya, saya kejar pastikan duit boss selamat!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2439,
+        "fields": {
+            "knowledge": 813,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "如何跟進尚未批准的提款請求？",
+            "answer": "要跟進尚未批准的提款請求，老板，您只需打開應用程序，點擊錢包圖標，然後查看您的‘交易記錄’。在那裡，您可以看到提款狀態，比如‘待處理’還是‘已批准’。若仍顯示待處理，別擔心，請耐心等待，通常會在30分鐘內完成處理。若超過這個時間還沒變化，請聯繫我，我會幫您查詢，確保資金順利到位！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2440,
+        "fields": {
+            "knowledge": 814,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Is there an iOS version of the Mega888 app available?",
+            "answer": "You bet, boss! Mega888’s got an iOS version ready—just head to ‘More Games’ in the app, scroll down, spot the Mega888 icon, tap download, and you’re rolling!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2441,
+        "fields": {
+            "knowledge": 814,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Adakah terdapat versi iOS untuk aplikasi Mega888?",
+            "answer": "Mesti ada, boss! Mega888 ada versi iOS siap—pergi je ke ‘Lebih Banyak Permainan’ kat app, skrol bawah, nampak ikon Mega888, tekan muat turun, boss dah boleh main!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2442,
+        "fields": {
+            "knowledge": 814,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "Mega888有iOS版本的應用程序嗎？",
+            "answer": "當然有，老板！Mega888確實提供iOS版本的應用程序。您只需在應用程序的‘更多遊戲’選項中找到Mega888的圖標，向下滾動，您會看到下載的選項，點擊一下就可以開始下載了。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2443,
+        "fields": {
+            "knowledge": 815,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "What's the latest time I can purchase lottery numbers for today's draw?",
+            "answer": "Latest times to grab lottery numbers for today’s draw depend on the type, boss—Magnum, Kuda, Toto at 7:00 PM; Singapore at 6:00 PM; CBD at 6:35 PM; GDLOTTO at 7:00 PM; 9Lotto at 7:25 PM. Lock in before the cutoff so you don’t miss the action!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2444,
+        "fields": {
+            "knowledge": 815,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Apakah masa terakhir untuk membeli nombor loteri untuk cabutan hari ini?",
+            "answer": "Masa terakhir nak beli nombor loteri untuk cabutan hari ni ikut jenis, boss—Magnum, Kuda, Toto pukul 7:00 malam; Singapore pukul 6:00 malam; CBD pukul 6:35 malam; GDLOTTO pukul 7:00 malam; 9Lotto pukul 7:25 malam. Kunci sebelum tamat supaya tak terlepas aksi!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2445,
+        "fields": {
+            "knowledge": 815,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "我今天可以購買彩票號碼的最晚時間是什麼時候？",
+            "answer": "購買彩票號碼的截止時間取決於不同的彩票類型，老板。今天是：Magnum、Kuda、Toto晚上7:00；Singapore晚上6:00；CBD晚上6:35；GDLOTTO晚上7:00；9Lotto晚上7:25。請在截止時間前購買，以免錯過機會！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2446,
+        "fields": {
+            "knowledge": 816,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Can I set up notifications for my favorite games or sports events?",
+            "answer": "Not yet on custom notifications for fave games or sports events, boss—but no stress! Keep app notifications on, and we’ll blast you the latest deals and updates so you won’t miss any hot moments!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2447,
+        "fields": {
+            "knowledge": 816,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bolehkah saya menyediakan pemberitahuan untuk permainan atau acara sukan kegemaran saya?",
+            "answer": "Belum ada notifikasi khusus untuk game atau acara sukan kegemaran, boss—tapi tak stress! Kekalkan notifikasi app hidup, kami hantar tawaran dan kemas kini terkini supaya boss tak terlepas moment panas!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2448,
+        "fields": {
+            "knowledge": 816,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "我可以為我喜歡的遊戲或體育賽事設置通知嗎？",
+            "answer": "目前，我們平台尚未提供為特定遊戲或體育賽事設置通知的功能，老板。不過，您可以打開應用程序，確保開啟了通知功能，我們會定期推送最新的優惠活動和重要更新，確保您不會錯過任何精彩內容。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2449,
+        "fields": {
+            "knowledge": 817,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Why can't I access the banking section on my mobile device?",
+            "answer": "If the banking section’s locked on your mobile, boss, it might be some move tripped our safety rules, putting a hold on it. Check your recent transactions for anything odd—if you reckon it’s a mix-up, send me screenshots, and I’ll gladly help review and get you back in quick!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2450,
+        "fields": {
+            "knowledge": 817,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Kenapa saya tidak boleh mengakses bahagian perbankan di peranti mudah alih saya?",
+            "answer": "Kalau bahagian perbankan kunci kat telefon boss, mungkin ada gerakan langgar peraturan keselamatan kami, jadi kena tahan. Semak transaksi terkini kalau ada benda pelik—kalau boss rasa silap, hantar screenshot, saya tolong semak dan pulihkan cepat!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2451,
+        "fields": {
+            "knowledge": 817,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "為什麼我無法在我的手機設備上訪問銀行部分？",
+            "answer": "若您無法在手機設備上訪問銀行部分，老板，這可能是因為一些操作違反了我們的安全政策，導致該功能被限制。建議您仔細檢查最近的交易記錄，確保沒有異常活動。若您認為這是個誤會，請提供相關的信息截圖，我會樂意協助您進行審核，以便盡快恢復您的訪問權限！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2452,
+        "fields": {
+            "knowledge": 818,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How do I claim a welcome bonus for new players?",
+            "answer": "Snagging your welcome bonus as a new player is a breeze, boss! Once you sign up, the system auto-drops 20 VIP points your way—head to the VIP perks zone to cash ‘em in for cool gifts and game vibes. Plus, keep an eye out for more hot deals on the platform!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2453,
+        "fields": {
+            "knowledge": 818,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bagaimana saya boleh menuntut bonus selamat datang untuk pemain baru?",
+            "answer": "Ambil bonus selamat datang untuk pemain baru senang je, boss! Lepas daftar, sistem auto bagi 20 mata VIP—pergi zon faedah VIP untuk tukar jadi hadiah cool dan vibe game. Lagi, tengok tawaran panas kat platform!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2454,
+        "fields": {
+            "knowledge": 818,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "如何領取新玩家的歡迎獎金？",
+            "answer": "領取新玩家的歡迎獎金其實很簡單，老板！您在註冊後，系統會自動為您提供20個VIP積分，您可以在VIP福利區兌換各種精彩禮物和遊戲體驗。此外，別忘了定期關注我們平台上的其他優惠活動，時刻都有新的驚喜等著您！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2455,
+        "fields": {
+            "knowledge": 819,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Is it possible to change the phone number associated with my account?",
+            "answer": "You bet you can swap your phone number anytime, boss! Open the app, tap the profile icon bottom-right, hit account settings—there’s your spot to update the number. Keep it your own to dodge any transaction snags down the road!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2456,
+        "fields": {
+            "knowledge": 819,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Adakah mungkin untuk menukar nombor telefon yang dikaitkan dengan akaun saya?",
+            "answer": "Boleh je tukar nombor telefon bila-bila, boss! Buka app, tekan ikon profil kat bawah kanan, masuk tetapan akaun—kat situ boss boleh kemas kini nombor. Pastikan nombor boss sendiri untuk elak masalah transaksi nanti!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2457,
+        "fields": {
+            "knowledge": 819,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "我可以更改與我賬戶相關的手機號碼嗎？",
+            "answer": "當然可以，老板！您可以隨時更改與您賬戶相關的手機號碼。只需打開應用程序，點擊右下角的人頭圖標，然後選擇賬戶設置，在這裡您可以找到更換手機號碼的選項。請確保輸入的新號碼是您本人使用的，以免在將來進行交易時出現問題。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2458,
+        "fields": {
+            "knowledge": 820,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Can I set up notifications for my favorite games or sports events?",
+            "answer": "Glad you’re pumped about the platform, boss! No custom notifications for specific games or sports yet—just keep app notifications on, and we’ll ping you with the latest deals and updates to keep you in the hot seat!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2459,
+        "fields": {
+            "knowledge": 820,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bolehkah saya menyediakan pemberitahuan untuk permainan atau acara sukan kegemaran saya?",
+            "answer": "Gembira boss excited pasal platform ni! Belum ada notifikasi khusus untuk game atau sukan tertentu—hidupkan je notifikasi app, kami hantar tawaran terkini dan kemas kini supaya boss kekal dalam kerusi panas!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2460,
+        "fields": {
+            "knowledge": 820,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "我可以為我喜歡的遊戲或體育賽事設置通知嗎？",
+            "answer": "很高興您對我們的平台感興趣，老板！目前，我們還沒有提供為特定遊戲或體育賽事設置通知的功能。不過，您可以打開應用程序，確保開啟了通知功能，這樣我們會定期推送最新的優惠和更新，確保您不會錯過任何精彩內容。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2461,
+        "fields": {
+            "knowledge": 821,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "What's the minimum deposit amount required to start playing?",
+            "answer": "Minimum deposit to kick off playing is just RM10, boss—lets you jump into all the hot games on the platform without breaking the bank!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2462,
+        "fields": {
+            "knowledge": 821,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Berapakah jumlah deposit minimum yang diperlukan untuk mula bermain?",
+            "answer": "Deposit minimum nak mula main cuma RM10, boss—bagi boss lompat masuk semua game panas kat platform tanpa pecah bank!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2463,
+        "fields": {
+            "knowledge": 821,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "開始玩遊戲所需的最低存款金額是多少？",
+            "answer": "開始玩遊戲的最低存款金額是10令吉，老板。這讓您可以輕鬆體驗我們平台上的各種精彩遊戲，而不需要大額投入。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2464,
+        "fields": {
+            "knowledge": 822,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "What should I do if I entered the wrong ID number on my deposit receipt?",
+            "answer": "No biggie if you slipped up with the wrong ID on your deposit receipt, boss—it might slow things down a tad, but just make sure to nail the right info next time and you’re golden!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2465,
+        "fields": {
+            "knowledge": 822,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Apa yang perlu saya lakukan jika saya memasukkan nombor ID yang salah pada resit deposit saya?",
+            "answer": "Tak apa kalau boss tersilap masukkan nombor ID salah kat resit deposit—mungkin lambat sikit, tapi pastikan betul je info lain kali, boss selamat!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2466,
+        "fields": {
+            "knowledge": 822,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "如果我在存款收據上輸入了錯誤的ID號碼，我應該怎麼做？",
+            "answer": "若您在存款收據上輸入了錯誤的ID號碼，不用太擔心，老板！雖然這可能會影響處理速度，但下次存款時確保輸入正確的信息即可。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2467,
+        "fields": {
+            "knowledge": 823,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Is there a maximum limit for daily withdrawals?",
+            "answer": "No upper limit on daily withdrawals, boss! You can yank out whatever you want, however much you win—it’s super flexible and all in your hands!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2468,
+        "fields": {
+            "knowledge": 823,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Adakah terdapat had maksimum untuk pengeluaran harian?",
+            "answer": "Tak ada had atas untuk pengeluaran harian, boss! Boss boleh tarik apa yang boss nak, berapa banyak boss menang—sangat fleksibel dan semua dalam tangan boss!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2469,
+        "fields": {
+            "knowledge": 823,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "每日提款有最高限額嗎？",
+            "answer": "關於每日提款的最高限額，我們實際上是沒有設定的上限，老板！您可以根據自己的需要提取任何金額，贏多少就提多少，真是很靈活哦！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2470,
+        "fields": {
+            "knowledge": 824,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "What's the procedure for editing personal information on my profile?",
+            "answer": "Editing your personal info’s a snap, boss! Open the app, tap the profile icon bottom-right, hit profile settings—update your email, phone number, whatever you need there. Just keep it spot-on to avoid any transaction hiccups!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2471,
+        "fields": {
+            "knowledge": 824,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Apakah prosedur untuk mengedit maklumat peribadi pada profil saya?",
+            "answer": "Edit maklumat peribadi senang je, boss! Buka app, tekan ikon profil kat bawah kanan, masuk tetapan profil—kemas kini emel, nombor telefon, apa saja boss nak kat situ. Pastikan tepat je supaya tak ada masalah transaksi!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2472,
+        "fields": {
+            "knowledge": 824,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "編輯我個人資料的個人信息的程序是什麼？",
+            "answer": "要編輯您的個人資料很簡單，老板！您只需打開應用程序，點擊右下角的人頭圖標，然後選擇個人資料設置。在這裡，您可以更新您的信息，比如郵箱、手機號碼等。確保輸入的信息是準確的，以免影響未來的交易。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2473,
+        "fields": {
+            "knowledge": 825,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Why isn't my credit automatically updating after a deposit?",
+            "answer": "If your funds aren’t auto-updating post-deposit, boss, it’s likely the system’s still chewing on it or hit a small snag—usually sorts out in 5-30 minutes. If it’s over 30, check your transaction log to make sure it’s right, then shoot me screenshots—I’ll blast through and fix it quick!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2474,
+        "fields": {
+            "knowledge": 825,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Kenapa kredit saya tidak dikemas kini secara automatik selepas deposit?",
+            "answer": "Kalau dana boss tak kemas kini auto lepas deposit, mungkin sistem tengah proses atau ada halangan kecil—biasanya selesai dalam 5-30 minit. Kalau lepas 30, semak log transaksi pastikan betul, lepas tu hantar screenshot—saya hapuskan cepat!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2475,
+        "fields": {
+            "knowledge": 825,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "為什麼我的存款後資金沒有自動更新？",
+            "answer": "若您的存款後資金沒有自動更新，老板，可能是由於系統正在進行處理或遇到了一些小延遲。這種情況通常會在5到30分鐘內解決。若超過30分鐘，建議您檢查交易記錄，確保存款信息正確。若還有問題，請提供截圖信息，我會全力幫您解決！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2476,
+        "fields": {
+            "knowledge": 826,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Can I set betting limits on my account to manage my spending?",
+            "answer": "No betting limit settings on the platform yet, boss—but you can keep a lid on spending by controlling your deposits! Start small to manage the fun and keep it in check!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2477,
+        "fields": {
+            "knowledge": 826,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bolehkah saya menetapkan had pertaruhan pada akaun saya untuk menguruskan perbelanjaan saya?",
+            "answer": "Belum ada tetapan had pertaruhan kat platform, boss—tapi boss boleh kawal perbelanjaan dengan urus deposit! Mula kecil untuk jaga seronok dan kekal terkawal!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2478,
+        "fields": {
+            "knowledge": 826,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "我可以在我的賬戶上設置投注限額來管理我的支出嗎？",
+            "answer": "目前我們平台上還沒有提供設置投注限額的功能，老板。不過，您可以通過控制存款金額來有效管理自己的支出，建議您從小額開始投注，這樣可以更好地掌控遊戲的樂趣。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2479,
+        "fields": {
+            "knowledge": 827,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "What should I do if I suspect unauthorized activity on my account?",
+            "answer": "If you’re sniffing something shady on your account, boss, swap your password fast to lock it tight! Peek at your recent transactions for weird stuff—if you spot anything, hit us up with screenshots right away, and we’ll dig deeper to keep you safe!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2480,
+        "fields": {
+            "knowledge": 827,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Apa yang perlu saya lakukan jika saya mengesyaki aktiviti tidak sah pada akaun saya?",
+            "answer": "Kalau boss syak ada benda pelik kat akaun, tukar kata laluan cepat untuk kunci ketat! Tengok transaksi terkini kalau ada benda aneh—kalau jumpa apa-apa, hantar screenshot segera, kami selami dalam untuk jaga boss selamat!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2481,
+        "fields": {
+            "knowledge": 827,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "如果我懷疑我的賬戶有未經授權的活動，我該怎麼辦？",
+            "answer": "若您懷疑您的賬戶有未經授權的活動，老板，首先請立即更改密碼以確保賬戶安全。接著，查看最近的交易記錄，檢查是否有不明操作。若發現任何可疑活動，請立即提供截圖信息，我們會進行進一步審核。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2482,
+        "fields": {
+            "knowledge": 828,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Are there any special promotions or bonuses available today?",
+            "answer": "Check the megaphone icon up top in the app, boss—that’s where all the juicy promos and exciting events are waiting for you!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2483,
+        "fields": {
+            "knowledge": 828,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Adakah terdapat promosi atau bonus istimewa pada hari ini?",
+            "answer": "Tengok ikon megafon kat atas app, boss—kat situ semua promosi sedap dan acara menarik tengah tunggu boss!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2484,
+        "fields": {
+            "knowledge": 828,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "今天有沒有特別的促銷或獎金活動？",
+            "answer": "您可以在應用程序上方的小喇叭圖標查看最新的優惠信息，老板，裡面會有各種激動人心的獎勵和活動等著您哦！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2485,
+        "fields": {
+            "knowledge": 829,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "What's the procedure for editing personal information on my profile?",
+            "answer": "Updating your personal info’s a breeze, boss! Open the app, tap the profile icon bottom-right, hit ‘Profile’—tweak whatever you need there. Keep it dead-on so transactions stay smooth!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2486,
+        "fields": {
+            "knowledge": 829,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Apakah prosedur untuk mengedit maklumat peribadi pada profil saya?",
+            "answer": "Kemas kini maklumat peribadi senang je, boss! Buka app, tekan ikon profil kat bawah kanan, masuk ‘Profil’—ubah apa yang boss nak kat situ. Pastikan tepat supaya transaksi kekal lancar!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2487,
+        "fields": {
+            "knowledge": 829,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "編輯我個人資料的個人信息的程序是什麼？",
+            "answer": "編輯您的個人資料很簡單，老板！您只需打開應用程序，點擊右下角的人頭圖標，然後選擇‘個人資料’，在這裡就可以輕鬆更新您的個人信息。確保您輸入的信息準確無誤，這樣在進行交易時就不會遇到麻煩。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2488,
+        "fields": {
+            "knowledge": 830,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "What's the latest time I can purchase lottery numbers for today's draw?",
+            "answer": "Latest times to snag today’s lottery numbers vary by type, boss—Magnum, Kuda, Toto at 7:00 PM; Singapore at 6:00 PM; CBD at 6:35 PM; GDLOTTO at 7:00 PM; 9Lotto at 7:25 PM. Get in before the cutoff to grab every shot!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2489,
+        "fields": {
+            "knowledge": 830,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Apakah masa terakhir untuk membeli nombor loteri untuk cabutan hari ini?",
+            "answer": "Masa terakhir nak beli nombor loteri hari ni ikut jenis, boss—Magnum, Kuda, Toto pukul 7:00 malam; Singapore pukul 6:00 malam; CBD pukul 6:35 malam; GDLOTTO pukul 7:00 malam; 9Lotto pukul 7:25 malam. Masuk sebelum tamat untuk tangkap setiap peluang!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2490,
+        "fields": {
+            "knowledge": 830,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "我今天可以購買彩票號碼的最晚時間是什麼時候？",
+            "answer": "今天購買彩票號碼的截止時間取決於不同的彩票類型，老板：Magnum、Kuda、Toto晚上7:00；Singapore晚上6:00；CBD晚上6:35；GDLOTTO晚上7:00；9Lotto晚上7:25。確保在截止時間前購買，抓住每一個機會哦！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2491,
+        "fields": {
+            "knowledge": 831,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Can I use the same receipt for multiple top-ups?",
+            "answer": "Sorry, boss—one receipt, one top-up only! If we catch it’s been used before, it’s a no-go—keep it fresh with a new receipt each time for smooth sailing!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2492,
+        "fields": {
+            "knowledge": 831,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bolehkah saya menggunakan resit yang sama untuk beberapa tambah nilai?",
+            "answer": "Maaf, boss—satu resit, satu tambah nilai je! Kalau kami nampak dah guna sebelum ni, tak boleh—pastikan baru setiap kali untuk lancar je!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2493,
+        "fields": {
+            "knowledge": 831,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "我可以使用同一張收據進行多次充值嗎？",
+            "answer": "很抱歉，老板，同一張收據只能用於一次充值哦！若我們發現該收據已被使用過，就無法再次處理。為順利進行充值，請確保每次存款使用不同的收據。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2494,
+        "fields": {
+            "knowledge": 832,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Is there a mobile app available for easier access to games?",
+            "answer": "You bet there is, boss! We’ve got a handy mobile app so you can hit all the games easy—download it, log in, and play anytime, anywhere!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2495,
+        "fields": {
+            "knowledge": 832,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Adakah terdapat aplikasi mudah alih yang tersedia untuk akses permainan yang lebih mudah?",
+            "answer": "Mesti ada, boss! Kami ada app mudah alih senang supaya boss boleh masuk semua game senang—muat turun, log masuk, main bila-bila, mana-mana!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2496,
+        "fields": {
+            "knowledge": 832,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "是否有可用的手機應用程序以便更輕鬆地訪問遊戲？",
+            "answer": "絕對有的，老板！我們提供了方便的手機應用程序，您可以輕鬆訪問所有遊戲，隨時隨地享受樂趣。只需下載應用程序，登錄您的賬戶，就可以開始遊戲啦！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2497,
+        "fields": {
+            "knowledge": 833,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How can I update my full name on my account?",
+            "answer": "Updating your full name’s a cinch, boss—but it’s set at signup! If it’s wrong, drop me your real name here with: Name, Account Number, Bank Name. Keep it your legit one to dodge transaction snags—I’ll hustle to fix it fast!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2498,
+        "fields": {
+            "knowledge": 833,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bagaimana saya boleh mengemas kini nama penuh saya pada akaun saya?",
+            "answer": "Kemas kini nama penuh senang je, boss—tapi dah set masa daftar! Kalau salah, hantar nama betul boss kat sini dengan: Nama, Nombor Akaun, Nama Bank. Pastikan nama sah boss untuk elak masalah transaksi—saya cepatkan betulkan!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2499,
+        "fields": {
+            "knowledge": 833,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "我如何在我的賬戶上更新我的全名？",
+            "answer": "要更新您的全名其實很簡單，老板！不過請注意，您的全名是在註冊時輸入的，若發現輸入有誤，您可以在這裡提供正確的全名。請確保這是您本人的全名，以避免在將來的交易中遇到問題。為確保順利更改，您可以回復我：姓名、賬戶號碼、銀行名稱。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2500,
+        "fields": {
+            "knowledge": 834,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Are there any fees associated with deposits or withdrawals?",
+            "answer": "No fees to worry about for deposits or withdrawals, boss—your cash stays yours, all the winnings hit your account clean and clear!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2501,
+        "fields": {
+            "knowledge": 834,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Adakah terdapat yuran yang dikenakan untuk deposit atau pengeluaran?",
+            "answer": "Tak ada yuran nak risau untuk deposit atau pengeluaran, boss—duit boss kekal milik boss, semua kemenangan masuk akaun bersih dan jelas!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2502,
+        "fields": {
+            "knowledge": 834,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "存款或提款是否有相關費用？",
+            "answer": "關於存款和提款的費用，您可以放心，老板，我們並沒有額外的費用哦！不論是存款還是提款，您都可以順利進行，贏得的收益將全數進入您的賬戶。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2503,
+        "fields": {
+            "knowledge": 835,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "What's the procedure for editing personal information on my profile?",
+            "answer": "Tweaking your personal info’s dead easy, boss! Open the app, hit the profile icon bottom-right, pick ‘Profile’—update whatever’s there. Make sure it’s bang-on to keep transactions hassle-free!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2504,
+        "fields": {
+            "knowledge": 835,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Apakah prosedur untuk mengedit maklumat peribadi pada profil saya?",
+            "answer": "Ubah maklumat peribadi mudah gila, boss! Buka app, tekan ikon profil kat bawah kanan, pilih ‘Profil’—kemas kini apa yang ada kat situ. Pastikan tepat untuk transaksi tak ada halangan!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2505,
+        "fields": {
+            "knowledge": 835,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "編輯我個人資料的個人信息的程序是什麼？",
+            "answer": "編輯您的個人資料其實很簡單，老板！您只需打開我們的應用程序，點擊右下角的人頭圖標，接著選擇‘個人資料’，在這裡就可以輕鬆更新您的信息。確保輸入的信息準確，這樣在未來進行交易時就不會遇到麻煩。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2506,
+        "fields": {
+            "knowledge": 836,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Are there any special promotions or events happening today?",
+            "answer": "Tap the megaphone icon up top in the app, boss—you’ll find a stash of thrilling rewards and events waiting there! Want the jump on more deals? Keep app notifications on so you don’t miss a beat!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2507,
+        "fields": {
+            "knowledge": 836,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Adakah terdapat promosi atau acara istimewa yang sedang berlangsung hari ini?",
+            "answer": "Tekan ikon megafon kat atas app, boss—boss akan jumpa timbunan ganjaran menarik dan acara tengah tunggu kat situ! Nak cepat tahu tawaran lagi? Kekalkan notifikasi app hidup supaya boss tak terlepas apa-apa!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2508,
+        "fields": {
+            "knowledge": 836,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "今天有任何特別的促銷或活動嗎？",
+            "answer": "您可以在應用程序上方的小喇叭圖標查看最新的優惠信息，老板，裡面會有各種激動人心的獎勵和活動等著您哦！若想第一時間掌握更多優惠，記得開啟應用的通知，確保不錯過任何精彩活動！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2509,
+        "fields": {
+            "knowledge": 837,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How can I check the odds for upcoming sports events?",
+            "answer": "Checking odds for upcoming sports is a piece of cake, boss! Open the app, tap the ‘More Games’ icon, hit the ⚽️—bam, you’ve got all the latest events and odds right in front of you!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2510,
+        "fields": {
+            "knowledge": 837,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bagaimana saya boleh memeriksa peluang untuk acara sukan yang akan datang?",
+            "answer": "Semak peluang acara sukan akan datang senang je, boss! Buka app, tekan ikon ‘Lebih Banyak Permainan,’ klik ⚽️—bam, semua acara terkini dan peluang ada depan mata boss!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2511,
+        "fields": {
+            "knowledge": 837,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "如何查看即將舉行的體育賽事的賠率？",
+            "answer": "要查看即將舉行的體育賽事的賠率很簡單，老板！只需打開應用程序，點擊‘更多遊戲’圖標，然後選擇⚽️圖標，在這裡您就能找到最新的賽事和相應的賠率信息。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2512,
+        "fields": {
+            "knowledge": 838,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Is it possible to change the phone number associated with my account?",
+            "answer": "You bet, boss! Swap your phone number anytime—tap the profile icon bottom-right in the app, find the phone swap option, update it there. Make sure it’s your current, valid number so notifications and codes roll in smooth!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2513,
+        "fields": {
+            "knowledge": 838,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Adakah mungkin untuk menukar nombor telefon yang dikaitkan dengan akaun saya?",
+            "answer": "Boleh je, boss! Tukar nombor telefon bila-bila—tekan ikon profil kat bawah kanan dalam app, cari pilihan tukar telefon, kemas kini kat situ. Pastikan nombor terkini dan sah boss supaya notifikasi dan kod masuk lancar!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2514,
+        "fields": {
+            "knowledge": 838,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "我可以更改與我賬戶相關的手機號碼嗎？",
+            "answer": "當然可以，老板！要更改與賬戶相關的手機號碼，請點擊應用程序右下角的人頭圖標，然後找到更換手機號碼的選項進行更新。確保輸入的是您當前的有效手機號碼，這樣才能順利接收通知和驗證碼。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2515,
+        "fields": {
+            "knowledge": 839,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How can I check if my account has been locked?",
+            "answer": "To see if your account’s locked, boss, just try logging in—if you can’t get through, the system’ll usually flash a ‘locked’ or ‘suspended’ alert. Simple as that!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2516,
+        "fields": {
+            "knowledge": 839,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bagaimana saya boleh periksa jika akaun saya telah dikunci?",
+            "answer": "Nak tengok kalau akaun boss kunci, cuba log masuk je—kalau tak boleh masuk, sistem biasanya tunjuk alert ‘dikunci’ atau ‘digantung.’ Senang je macam tu!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2517,
+        "fields": {
+            "knowledge": 839,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "我怎麼檢查我的賬戶是否已被鎖定？",
+            "answer": "要檢查您的賬戶是否已被鎖定，老板，您可以嘗試登錄您的賬戶。若無法成功登錄，系統通常會提示您賬戶已被鎖定或暫停。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2518,
+        "fields": {
+            "knowledge": 840,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Why isn't my Fast Payment top-up showing in my account?",
+            "answer": "Sometimes the system takes a beat to process your Fast Payment top-up, boss—just hang tight! If it’s been a while, peek at your wallet’s transaction log. Still not there? Send me screenshots, and we’ll hunt down the issue pronto!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2519,
+        "fields": {
+            "knowledge": 840,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Kenapa tambah nilai Fast Payment saya tidak dipaparkan dalam akaun saya?",
+            "answer": "Kadang sistem ambil masa sikit untuk proses tambah nilai Fast Payment, boss—sabar je! Kalau dah lama, tengok log transaksi kat dompet boss. Masih tak ada? Hantar screenshot, kami cari masalah cepat!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2520,
+        "fields": {
+            "knowledge": 840,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "為什麼我的快速支付充值沒有顯示在賬戶中？",
+            "answer": "有時候，系統處理快速支付充值可能需要一點時間，老板，請耐心等候。若您已經等了較長時間，可以在錢包的交易記錄中查看相關信息。若充值依然沒有顯示，請提供截圖信息，我們會立即幫您查找問題所在。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2521,
+        "fields": {
+            "knowledge": 841,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How can I contact live support if I have urgent issues?",
+            "answer": "Got an urgent snag, boss? Our live support crew’s got your back—just open the app, spot the online support icon at the bottom, tap it, and you’ll be chatting with our reps in no time!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2522,
+        "fields": {
+            "knowledge": 841,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bagaimana saya boleh menghubungi sokongan langsung jika saya mempunyai isu yang mendesak?",
+            "answer": "Ada masalah urgent, boss? Pasukan sokongan langsung kami ada untuk boss—buka je app, cari ikon sokongan online kat bawah, tekan, dan boss boleh sembang dengan rep kami sekejap je!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2523,
+        "fields": {
+            "knowledge": 841,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "如果我有緊急問題，我如何聯繫實時支持？",
+            "answer": "若您有緊急問題，老板，我們的實時客服團隊隨時為您服務！您只需打開我們的應用程序，在下方找到在線客服的圖標，點擊它就可以立即與我們的客服代表聯繫。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2524,
+        "fields": {
+            "knowledge": 842,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How do I report a technical issue with a specific game?",
+            "answer": "Hit a tech glitch in a game, boss? Drop me the details—when it happened, game name, and some screenshots if you’ve got ‘em. That’ll speed things up—tell me anytime, and I’ll jump in to sort it quick!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2525,
+        "fields": {
+            "knowledge": 842,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bagaimana saya boleh melaporkan masalah teknikal dengan permainan tertentu?",
+            "answer": "Kena masalah teknikal dalam game, boss? Hantar je butiran kat saya—bila jadi, nama game, dan screenshot kalau ada. Tu cepatkan benda—beritahu saya bila-bila, saya masuk selesai laju!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2526,
+        "fields": {
+            "knowledge": 842,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "如何報告特定遊戲的技術問題？",
+            "answer": "若您遇到特定遊戲的技術問題，老板，請提供一些詳細信息，包括問題發生的時間、涉及的遊戲名稱，以及相關的截圖信息。這些信息將幫助我們更快解決問題。隨時告訴我，我會立刻協助您處理！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2527,
+        "fields": {
+            "knowledge": 843,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How can I reset my password if I've forgotten it?",
+            "answer": "Forgot your password, boss? No sweat—just spot the ‘Forgot Password’ option below the login page, tap it, and the system’ll walk you through resetting it, easy peasy!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2528,
+        "fields": {
+            "knowledge": 843,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bagaimana saya boleh menetapkan semula kata laluan saya jika saya terlupa?",
+            "answer": "Lupa kata laluan, boss? Tak risau—cari je pilihan ‘Lupa Kata Laluan’ kat bawah laman log masuk, tekan, dan sistem akan bawa boss reset, senang je!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2529,
+        "fields": {
+            "knowledge": 843,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "如果我忘記了密碼，我該如何重設密碼？",
+            "answer": "若您忘記了密碼，老板，您可以在登錄頁面下方找到‘忘記密碼’選項，點擊後，系統會引導您完成重設密碼的步驟。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2530,
+        "fields": {
+            "knowledge": 844,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Can I play games in demo mode before betting real money?",
+            "answer": "No demo mode right now, boss—but if you wanna get the hang of the rules, start with a small bet, minimum RM10. That way, you dive into the real fun with low stakes and max enjoyment!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2531,
+        "fields": {
+            "knowledge": 844,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bolehkah saya bermain permainan dalam mod demo sebelum bertaruh dengan wang sebenar?",
+            "answer": "Tak ada mod demo buat masa ni, boss—tapi kalau boss nak biasa dengan peraturan, mula dengan pertaruhan kecil, minimum RM10. Macam tu boss masuk seronok betul dengan taruhan rendah dan enjoy maksimum!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2532,
+        "fields": {
+            "knowledge": 844,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "在使用真錢投注之前，我可以先在演示模式中玩遊戲嗎？",
+            "answer": "目前我們不提供演示模式讓您先體驗，老板，但若您想熟悉遊戲規則，建議您可以從小額投注開始，最低只需10令吉。這樣您不僅可以了解遊戲，還能盡情享受其中的樂趣！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2533,
+        "fields": {
+            "knowledge": 845,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Are there any loyalty programs or VIP benefits for regular players?",
+            "answer": "You bet there are, boss! We’ve got a killer loyalty program and VIP perks for regulars—every bet racks up points you can cash in for awesome rewards and gifts. Wanna know more? Peek at the VIP perks section in the app—it’s all there!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2534,
+        "fields": {
+            "knowledge": 845,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Adakah terdapat program kesetiaan atau faedah VIP untuk pemain tetap?",
+            "answer": "Mesti ada, boss! Kami ada program kesetiaan gempak dan faedah VIP untuk pemain tetap—setiap pertaruhan kumpul mata untuk boss tukar jadi ganjaran dan hadiah hebat. Nak tahu lebih? Tengok bahagian faedah VIP kat app—semua ada kat situ!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2535,
+        "fields": {
+            "knowledge": 845,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "是否有針對常規玩家的忠誠度計劃或VIP福利？",
+            "answer": "絕對有的，老板！我們為常規玩家準備了豐富的忠誠度計劃和VIP福利，您每次下注都能累積積分，積分可以兌換各式各樣的獎勵和禮品。想了解更多詳情嗎？您可以隨時查看應用程序中的VIP福利部分，那裡有所有您需要的信息。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2536,
+        "fields": {
+            "knowledge": 846,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Why did the system ask me to wait 5 minutes for a transaction?",
+            "answer": "The system’s asking for a 5-minute breather, boss, to keep every transaction safe and spot-on—it’s a shield against too many fast repeats jamming things up and protects your cash!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2537,
+        "fields": {
+            "knowledge": 846,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Kenapa sistem meminta saya menunggu 5 minit untuk transaksi?",
+            "answer": "Sistem minta tunggu 5 minit, boss, untuk jaga setiap transaksi selamat dan tepat—perisai daripada ulangan cepat terlalu banyak yang buat sesak dan lindung duit boss!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2538,
+        "fields": {
+            "knowledge": 846,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "為什麼系統要求我等待5分鐘進行交易？",
+            "answer": "系統要求您等待5分鐘進行交易，老板，主要是為了確保每筆交易的安全和準確。這是為了避免高頻率的相同交易導致系統過載，同時保護您的資金安全。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2539,
+        "fields": {
+            "knowledge": 847,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Are there any loyalty programs or VIP benefits for regular players?",
+            "answer": "You betcha, boss! We’ve got a sweet loyalty program and VIP perks tailored for regulars—every bet piles up points for juicy rewards and gifts. The more you play, the more you score! Check the VIP section in the app for the full scoop!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2540,
+        "fields": {
+            "knowledge": 847,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Adakah terdapat program kesetiaan atau faedah VIP untuk pemain tetap?",
+            "answer": "Mesti ada lah, boss! Kami ada program kesetiaan sedap dan faedah VIP khas untuk pemain tetap—setiap pertaruhan tumpuk mata untuk ganjaran dan hadiah menarik. Lagi banyak main, lagi banyak boss dapat! Tengok bahagian VIP kat app untuk scoop penuh!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2541,
+        "fields": {
+            "knowledge": 847,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "是否有針對常規玩家的忠誠度計劃或VIP福利？",
+            "answer": "當然有啦，老板！我們非常重視常規玩家，特別設立了忠誠度計劃和VIP福利，讓您在遊戲中享受更多的獎勵和特權！您每次下注都可以獲得積分，積累到一定程度後，可以兌換各種精彩的禮品和獨家優惠。若想深入了解，可查看應用中的VIP福利部分。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2542,
+        "fields": {
+            "knowledge": 848,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Is there a way to speed up the withdrawal process?",
+            "answer": "I get you wanting that withdrawal quick, boss! Normally, it’s done in 5-30 minutes—sometimes system traffic jams it up a bit, but we’re on it to keep it snappy!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2543,
+        "fields": {
+            "knowledge": 848,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Adakah terdapat cara untuk mempercepatkan proses pengeluaran?",
+            "answer": "Saya faham boss nak pengeluaran cepat! Biasanya selesai dalam 5-30 minit—kadang trafik sistem buat lambat sikit, tapi kami usaha jaga laju!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2544,
+        "fields": {
+            "knowledge": 848,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "有辦法加快提款過程嗎？",
+            "answer": "我明白您希望盡快收到提款，老板！通常情況下，提款會在5到30分鐘內處理完畢。不過，有時由於系統繁忙，處理速度可能會稍有延遲。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2545,
+        "fields": {
+            "knowledge": 849,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How do I report a technical issue with a specific game?",
+            "answer": "Got a tech hiccup with a game, boss? Hit me up anytime with the details—when it went wonky, game name, screenshots if you’ve got ‘em. We’ll dig in fast to fix it so you’re back gaming in no time!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2546,
+        "fields": {
+            "knowledge": 849,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bagaimana saya boleh melaporkan masalah teknikal dengan permainan tertentu?",
+            "answer": "Ada masalah teknikal dengan game, boss? Hubungi saya bila-bila dengan butiran—bila jadi pelik, nama game, screenshot kalau ada. Kami selami cepat untuk betulkan supaya boss balik main sekejap je!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2547,
+        "fields": {
+            "knowledge": 849,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "如何報告特定遊戲的技術問題？",
+            "answer": "若您遇到特定遊戲的技術問題，老板，請隨時聯繫我，提供問題發生的時間、涉及的遊戲名稱，以及相關截圖信息。我們會盡快調查並解決問題，讓您能盡快回到遊戲中享受樂趣！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2548,
+        "fields": {
+            "knowledge": 850,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Why is my withdrawal not being approved?",
+            "answer": "I get why you’re puzzled, boss! Withdrawal not approved could mean a few things—maybe the info’s incomplete or doesn’t match your account, or it’s below the minimum. Double-check your details to make sure it’s all good!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2549,
+        "fields": {
+            "knowledge": 850,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Kenapa pengeluaran saya tidak diluluskan?",
+            "answer": "Saya faham kenapa boss bingung! Pengeluaran tak diluluskan mungkin ada sebab—mungkin info tak lengkap atau tak sama dengan akaun, atau bawah minimum. Semak dua kali butiran boss pastikan semua ok!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2550,
+        "fields": {
+            "knowledge": 850,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "為什麼我的提款沒有被批准？",
+            "answer": "我理解您對此感到困惑，老板！提款未被批准可能是因為幾個原因，比如您提供的提款信息不完全或與賬戶不匹配，或者未達到最低要求。建議您檢查一下相關信息，確保一切正確無誤。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2551,
+        "fields": {
+            "knowledge": 851,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Is it possible to change the phone number associated with my account?",
+            "answer": "Sure can, boss! Changing your account’s phone number is a breeze—hit the profile icon at the bottom in the app, head to profile settings, find the phone update spot, and punch in your new number. Keep it valid so we can keep you in the loop!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2552,
+        "fields": {
+            "knowledge": 851,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Adakah mungkin untuk menukar nombor telefon yang dikaitkan dengan akaun saya?",
+            "answer": "Boleh je, boss! Tukar nombor telefon akaun senang je—tekan ikon profil kat bawah dalam app, pergi tetapan profil, cari tempat kemas kini telefon, masukkan nombor baru boss. Pastikan sah supaya kami boleh jaga boss dalam gelung!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2553,
+        "fields": {
+            "knowledge": 851,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "我可以更改與我賬戶相關的手機號碼嗎？",
+            "answer": "當然可以，老板！更改與您賬戶相關的手機號碼很簡單。您只需在應用程序下方的人頭圖標裡，找到個人資料設置，接著選擇更新手機號碼，然後輸入新的號碼。確保您輸入的新號碼是有效的，這樣我們才能更好地為您服務！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2554,
+        "fields": {
+            "knowledge": 852,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Can I use multiple bank accounts for deposits and withdrawals?",
+            "answer": "You sure can, boss! Multiple bank accounts for deposits and withdrawals are all good—just make sure they’re all yours, and you’ve got the flexibility to move cash whenever, wherever!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2555,
+        "fields": {
+            "knowledge": 852,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bolehkah saya menggunakan beberapa akaun bank untuk deposit dan pengeluaran?",
+            "answer": "Boleh je, boss! Banyak akaun bank untuk deposit dan pengeluaran semua ok—pastikan semua milik boss, dan boss ada fleksibiliti gerakkan duit bila-bila, mana-mana!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2556,
+        "fields": {
+            "knowledge": 852,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "我可以使用多個銀行賬戶進行存款和提款嗎？",
+            "answer": "當然可以，老板！您可以使用多個銀行賬戶進行存款和提款，只要確保這些賬戶都是您本人持有的就可以。這為您提供了更多的靈活性和便利性，隨時隨地都能進行交易！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2557,
+        "fields": {
+            "knowledge": 853,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Why can't I access the banking section on my mobile device?",
+            "answer": "I feel you on the confusion, boss! Can’t hit the banking section on your mobile? Might be some move accidentally tripped our safety rules, locking it down. Check your account for funky stuff—if it’s all clear, ping me with screenshots, and we’ll dive in to fix it fast!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2558,
+        "fields": {
+            "knowledge": 853,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Kenapa saya tidak boleh mengakses bahagian perbankan di peranti mudah alih saya?",
+            "answer": "Saya faham boss bingung! Tak boleh masuk bahagian perbankan kat telefon? Mungkin ada gerakan tak sengaja langgar peraturan keselamatan kami, jadi kunci. Semak akaun kalau ada benda pelik—kalau semua clear, hantar screenshot, kami selami betulkan cepat!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2559,
+        "fields": {
+            "knowledge": 853,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "為什麼我無法在我的手機設備上訪問銀行部分？",
+            "answer": "我明白您的困惑，老板！無法在手機設備上訪問銀行部分可能是因為幾個原因，比如您在某些操作中無意間違反了相關條件，導致訪問受限。請檢查您的賬戶信息，確保沒有違規操作。若確認無誤，請提供截圖，我們會幫您調查並解決！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2560,
+        "fields": {
+            "knowledge": 854,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How can I change the language settings on the platform?",
+            "answer": "Switching up the language is a piece of cake, boss! Tap the profile icon at the bottom in the app, hunt down the language option—pick what you vibe with, confirm, and boom, smoother gaming in your style!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2561,
+        "fields": {
+            "knowledge": 854,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Bagaimana saya boleh menukar tetapan bahasa di platform?",
+            "answer": "Tukar bahasa senang je, boss! Tekan ikon profil kat bawah dalam app, cari pilihan bahasa—pilih yang boss vibe, sahkan, dan boom, game lagi lancar gaya boss!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2562,
+        "fields": {
+            "knowledge": 854,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "如何更改平台的語言設置？",
+            "answer": "更改平台的語言設置很簡單哦，老板！只需點擊應用程序下方的人頭圖標，找到語言選項，然後選擇您喜歡的語言進行確認即可。這讓您在遊戲中體驗更加順暢，真是太方便了！",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2563,
+        "fields": {
+            "knowledge": 855,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "Are there any loyalty programs or VIP benefits for regular players?",
+            "answer": "You bet there are, boss! We roll out the red carpet for regulars with a top-notch loyalty program and VIP perks—every bet piles up points for killer rewards and exclusive goodies. The more you’re in, the more you win!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2564,
+        "fields": {
+            "knowledge": 855,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Adakah terdapat program kesetiaan atau faedah VIP untuk pemain tetap?",
+            "answer": "Mesti ada lah, boss! Kami gulung karpet merah untuk pemain tetap dengan program kesetiaan hebat dan faedah VIP—setiap pertaruhan tumpuk mata untuk ganjaran gempak dan barang eksklusif. Lagi banyak boss masuk, lagi banyak boss menang!",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2565,
+        "fields": {
+            "knowledge": 855,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "是否有針對常規玩家的忠誠度計劃或VIP福利？",
+            "answer": "當然有啦，老板！我們非常重視常規玩家，特別設立了忠誠度計劃和VIP福利，讓您在遊戲中享受更多獎勵和特權！您每次下注都可以獲得積分，積累到一定程度後，可以兌換精彩的禮品和獨家優惠。",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2566,
+        "fields": {
+            "knowledge": 856,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "How often are new games added to the platform?",
+            "answer": "Hey boss, no new game updates just yet! Tap the megaphone icon up top-left in the app to stay in the loop with our latest announcements—keep an eye out! 😊",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2567,
+        "fields": {
+            "knowledge": 856,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Berapa kerap permainan baru ditambah ke platform?",
+            "answer": "Hai boss, belum ada kemas kini game baru lagi! Tekan ikon megafon kat atas kiri dalam app untuk kekal dalam gelung dengan pengumuman terkini kami—tengok je! 😊",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2568,
+        "fields": {
+            "knowledge": 856,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "新遊戲多久會添加到平台上？",
+            "answer": "您好，老板，目前還沒有新的遊戲更新。您可以點擊應用程序左上角的喇叭圖標，關注我們最新的公告哦~😊",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2569,
+        "fields": {
+            "knowledge": 857,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 1,
+            "question": "What should I do if I entered the wrong ID number on my deposit receipt?",
+            "answer": "No worries, boss—just make sure to pop in the right ID next time and you’re good to go! 🫡",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2570,
+        "fields": {
+            "knowledge": 857,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 2,
+            "question": "Apa yang perlu saya lakukan jika saya memasukkan nombor ID yang salah pada resit deposit saya?",
+            "answer": "Tak apa, boss—pastikan masukkan ID betul lain kali je, boss selamat jalan! 🫡",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    },
+    {
+        "model": "api.knowledgecontent",
+        "pk": 2571,
+        "fields": {
+            "knowledge": 857,
+            "status": 3,
+            "is_edited": false,
+            "in_brain": true,
+            "language": 3,
+            "question": "如果我在存款收據上輸入了錯誤的ID號碼，我應該怎麼做？",
+            "answer": "沒關係哦，老板，下次記得填寫正確的ID就好啦~🫡",
+            "content": null,
+            "date_created": "2025-03-04T01:15:35Z",
+            "last_updated": "2025-03-04T01:15:35Z"
+        }
+    }
+]
