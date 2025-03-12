@@ -1,8 +1,9 @@
 from rest_framework.response import Response
 from rest_framework import status, viewsets
 import rest_framework.exceptions as DRFException
-from django.db import transaction
+from rest_framework.decorators import action
 
+from django.db import transaction
 from django_filters.rest_framework import DjangoFilterBackend
 
 from ..models import ( 
@@ -140,5 +141,32 @@ class BrainViewSet(viewsets.ModelViewSet):
     def partial_update(self, request, *args, **kwargs):
         raise DRFException.PermissionDenied(
             "Direct updates to knowledge in the Brain are not permitted. Please delete the existing knowledge first, and add new knowledge through the admin panel for review."
+        )
+    
+
+    # this api will delete entire chromadb! can be a dangerious operation!
+    @action(detail=False, methods=['post'], url_path='sync-brain-knowledge')
+    def sync_brain_knowledge(self, request):
+        """
+        Reloads the Brain database:
+        - Clears existing Brain entries.
+        - Inserts all KnowledgeContent where in_brain=True.
+        - TODO: Re-add to ChromaDB.
+        """
+        with transaction.atomic():
+            # Delete all existing Brain records
+            Brain.objects.all().delete()
+
+            # Fetch KnowledgeContent where in_brain=True
+            knowledge_content_qs = KnowledgeContent.objects.filter(in_brain=True)
+
+            brain_instances = [Brain(knowledge_content=kc) for kc in knowledge_content_qs]
+            Brain.objects.bulk_create(brain_instances)
+
+            # TODO: Re-add knowledge content to ChromaDB here
+
+        return Response(
+            {"message": "Brain database synced successfully", "inserted_count": len(brain_instances)},
+            status=status.HTTP_201_CREATED
         )
     
