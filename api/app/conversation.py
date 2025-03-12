@@ -3,15 +3,10 @@ import logging
 import time
 
 from openai import OpenAI
-from datetime import datetime
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
 
-from api.constants.ai_constants import (
-    OPENAI_MODEL,
-    OPENAI_TIMEOUT,
-    MAX_TOKENS,
-    MAX_TEMPERATURE,
-    LANGUAGE_DEFAULT,
-)
+from datetime import datetime
 
 from api.constants.ai_constants import (
     OPENAI_MODEL,
@@ -23,19 +18,20 @@ from api.constants.ai_constants import (
 
 from api.constants.ai_prompts import (
     FIRST_MESSAGE_PROMPT,
+    CONFIDENCE_GRADER_PROMPT,
 )
 
 from api.chatbot import (
-    confidence_grader,
-    format_docs,
-    store,
+  store,
 )
 
 from .mongo import MongoDB
 
+from api.ai_services import (
+  GradeConfidenceLevel,
+ )
 
 logger = logging.getLogger(__name__)
-
 
 def is_finalizing_phrase(phrase):
     api_key = os.getenv("OPENAI_API_KEY")
@@ -78,7 +74,7 @@ def is_finalizing_phrase(phrase):
         print(f"Error during OpenAI API call: {e}")
         return False
     
-def prompt_conversation(self, user_prompt, store ,language_code=LANGUAGE_DEFAULT):
+def prompt_conversation(user_prompt ,language_code=LANGUAGE_DEFAULT):
     start_time = time.time()
     logger.info(f"Starting prompt_conversation request - Language: {language_code}")
     db = None
@@ -160,23 +156,9 @@ def prompt_conversation(self, user_prompt, store ,language_code=LANGUAGE_DEFAULT
         logger.error(f"Error in prompt_conversation: {str(e)}", exc_info=True)
         raise
 
-
-def i_need_this_knowledge(db,conversation_id, user_prompt,ai_response, confidence_score):
-    document = {
-        "conversation_id": conversation_id,
-        "user_prompt": user_prompt,
-        "generation": ai_response,
-        "confidence_score": confidence_score,
-    }
-    try:
-        db.low_confidence_responses.update_one(
-            {"session_id": conversation_id},
-            {"$set": document},
-            upsert=True
-        )
-    except Exception as me:
-        logger.warning(f"MongoDB error: {str(me)}")
-        raise  
+# Define Formatting Function
+def format_docs(docs):
+    return "\n".join(doc.page_content for doc in docs)
 
 def prompt_conversation_admin(
     user_prompt,
@@ -278,6 +260,25 @@ def prompt_conversation_admin(
         is_last_message = is_finalizing_phrase(ai_response)
       
         try:
+             # Initialize LLM for Hallucination Grading
+            llm_confidence = ChatOpenAI(model=OPENAI_MODEL, temperature=MAX_TEMPERATURE)
+            structured_confidence_grader = llm_confidence.with_structured_output(
+                GradeConfidenceLevel
+            )
+
+            # System Message for confidence Grader
+            confidence_system_message = CONFIDENCE_GRADER_PROMPT
+            # Create Confidence Grading Prompt
+            confidence_prompt = ChatPromptTemplate.from_messages(
+                [
+                    ("system", confidence_system_message),
+                    ("human", "Source facts: \n\n {documents} \n\n AI response: {generation}"),
+                ]
+            )
+
+            # Runnable Chain for Confidence Grader
+            confidence_grader = confidence_prompt | structured_confidence_grader
+
             confidence_result = confidence_grader.invoke({
                 "documents": format_docs(docs_retrieve),
                 "generation": ai_response,
@@ -320,10 +321,6 @@ def prompt_conversation_admin(
                 logger.warning(f"MongoDB retry {attempt + 1}/{max_retries}: {str(me)}")
                 time.sleep(0.5)
 
-        # if confidence_result and 0.1 < confidence_result.confidence_score < 0.65 and len(user_prompt) > 10:
-         #  i_need_this_knowledge(db,conversation_id,user_prompt, ai_response, confidence_result.confidence_score)
-
-
         total_time = time.time() - start_time
         logger.info(f"Request completed in {total_time:.2f}s")
 
@@ -332,9 +329,7 @@ def prompt_conversation_admin(
             "conversation_id": conversation_id,
             "language": language_code,
             "is_last_message": is_last_message,
-            #"confidence_score": 0.0,
             "confidence_score": confidence_result.confidence_score if confidence_result else None,
-
         }
 
     except Exception as e:
