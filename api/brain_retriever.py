@@ -1,12 +1,9 @@
-import os
-import time
 import gc
 import logging
 
 from langchain_community.vectorstores import Chroma
 
 logger = logging.getLogger(__name__)
-
 
 class MultiRetriever:
     def __init__(self, store: Chroma):
