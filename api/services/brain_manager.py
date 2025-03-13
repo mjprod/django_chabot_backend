@@ -61,14 +61,15 @@ class BrainManager:
             logger.error(f"Error adding documents: {e}")
     
 
-    def delete_document(self, collection_name, document_id):
+    def delete_documents(self, collection_name, ids):
         """Delete a document from the vector store."""
         try:
+            ids = [str(id) for id in ids]
             vector_store = self.get_vector_store(collection_name)
-            vector_store.delete(document_id)
-            logger.info(f"Deleted document {document_id} from '{collection_name}'.")
+            vector_store.delete(ids)
+            logger.info(f"Deleted document {len(ids)} from '{collection_name}'.")
         except Exception as e:
-            logger.error(f"Error deleting document: {e}")
+            logger.error(f"Error deleting documents: {e}")
 
 
     def query(self, collection_name, query: str, k: int = 3):
@@ -110,6 +111,10 @@ class BrainManager:
             logger.error(f"Error loading knowledge content: {e}")
 
 
+    def delete_collection(self, collection_name):
+        vector_store = self.get_vector_store(collection_name)
+        vector_store.delete_collection()
+
 
     def _parse_knowledge_content(self, kc):
         """Parse knowledge content into vector store format."""
@@ -128,6 +133,8 @@ class BrainManager:
                 "type": kc.knowledge.get_type_display(),
             },
         )
+
+        logger.info(f"{id} - {document} ")
 
         return id, document
     

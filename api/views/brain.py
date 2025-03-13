@@ -28,12 +28,14 @@ logger = logging.getLogger(__name__)
 
 # TODO: This viewset needs to be set at Admin Level
 class BrainViewSet(viewsets.ModelViewSet):
+    brain_manager = BrainManager()
     queryset = Brain.objects.all()
     serializer_class = BrainSerializer
     filter_backends = (DjangoFilterBackend,)
     pagination_class = CustomPagination
 
-    def create(self, request, *args, **kwargs):
+    @action(detail=False, methods=["post"], url_path="bulk-add-to-brain")
+    def bulk_add_to_brain(self, request, *args, **kwargs):
         """
         Bulk create Brain entries.
         - Only allows KnowledgeContent with APPROVED status.
@@ -73,8 +75,7 @@ class BrainViewSet(viewsets.ModelViewSet):
             Brain.objects.bulk_create(brain_instances)  # Bulk create for efficiency
 
             # Add to Chroma DB
-            brain_manager = BrainManager()
-            brain_manager.add_documents(CHROMA_BRAIN_COLLECTION, valid_for_brain)
+            self.brain_manager.add_documents(CHROMA_BRAIN_COLLECTION, valid_for_brain)
 
             # Update 'in_brain' flag in KnowledgeContent
             KnowledgeContent.objects.filter(id__in=valid_ids).update(in_brain=True)
@@ -93,36 +94,6 @@ class BrainViewSet(viewsets.ModelViewSet):
 
         return Response(response_data, status=status.HTTP_201_CREATED)  # All successful
 
-
-    # override
-    def destroy(self, request, *args, **kwargs):
-        """
-        Handles deletion of a single Brain entry.
-        - Removes the corresponding KnowledgeContent from Brain table.
-        - Updates `in_brain` to False.
-        - Resets `status` to NEEDS_REVIEW in KnowledgeContent.
-        """
-        # Get the Brain instance to delete
-        brain_instance = self.get_object()  # This gets the object based on the URL parameter
-        
-        # Retrieve the KnowledgeContent associated with the Brain instance
-        knowledge_content = brain_instance.knowledge_content
-        
-        with transaction.atomic():
-            # TODO: Remove from chromadb
-
-            # Delete the Brain entry
-            brain_instance.delete()
-
-            # Update the KnowledgeContent associated with this Brain instance
-            KnowledgeContent.objects.filter(id=knowledge_content.id).update(
-                in_brain=False,
-                status=KnowledgeContentStatus.NEEDS_REVIEW.value
-            )
-
-        return Response(
-            status=status.HTTP_204_NO_CONTENT
-        )
 
     @action(detail=False, methods=['post'], url_path='bulk-remove-from-brain')
     def bulk_remove_from_brain(self, request, *args, **kwargs):
@@ -151,9 +122,10 @@ class BrainViewSet(viewsets.ModelViewSet):
                 )
 
             with transaction.atomic():
-                # TODO: Remove from chromadb
 
+                # Remove from brain db and chromadb vector store
                 brain_instances.delete()
+                self.brain_manager.delete_documents(CHROMA_BRAIN_COLLECTION, existing_knowledge_content_ids)
 
                 KnowledgeContent.objects.filter(id__in=existing_knowledge_content_ids).update(
                     in_brain=False,
@@ -166,6 +138,49 @@ class BrainViewSet(viewsets.ModelViewSet):
             }
 
             return Response(response_data, status=status.HTTP_207_MULTI_STATUS if non_existent_ids else status.HTTP_200_OK)
+
+
+    # this api will delete entire chromadb collection! can be a dangerious operation!
+    @action(detail=False, methods=['post'], url_path='sync-brain-knowledge')
+    def sync_brain_knowledge(self, request):
+        """
+        Reloads the Brain database:
+        - Clears existing Brain entries.
+        - Inserts all KnowledgeContent where in_brain=True.
+        - Re-add to ChromaDB.
+        """
+        with transaction.atomic():
+            # Delete all existing Brain records
+            Brain.objects.all().delete()
+    
+            # Fetch KnowledgeContent where in_brain=True
+            knowledge_content_qs = KnowledgeContent.objects.filter(in_brain=True)
+
+            brain_instances = [Brain(knowledge_content=kc) for kc in knowledge_content_qs]
+            Brain.objects.bulk_create(brain_instances)
+
+            # Re-add knowledge content to ChromaDB
+            self.brain_manager.delete_collection(CHROMA_BRAIN_COLLECTION)
+            self.brain_manager.load_knowledge_content_to_collection(CHROMA_BRAIN_COLLECTION)
+            
+        return Response(
+            {"message": "Brain database synced successfully", "inserted_count": len(brain_instances)},
+            status=status.HTTP_200_OK
+        )
+    
+
+    @action(detail=False, methods=['post'], url_path='get-brain-docs')
+    def get_brain_doc_by_ids(self, request):
+
+        serializer = KnowledgeContentIDListSerializer(data=request.data)
+        
+        # Validate the input data
+        if serializer.is_valid(raise_exception=True):
+            knowledge_content_ids = serializer.validated_data.get("knowledge_content_ids")
+            result = self.brain_manager.get_by_ids(CHROMA_BRAIN_COLLECTION, knowledge_content_ids)
+
+        return Response({"message": result}, status=status.HTTP_200_OK)
+    
 
     # override update
     def update(self, request, *args, **kwargs):
@@ -180,44 +195,9 @@ class BrainViewSet(viewsets.ModelViewSet):
         )
     
 
-    # this api will delete entire chromadb! can be a dangerious operation!
-    @action(detail=False, methods=['post'], url_path='sync-brain-knowledge')
-    def sync_brain_knowledge(self, request):
-        """
-        Reloads the Brain database:
-        - Clears existing Brain entries.
-        - Inserts all KnowledgeContent where in_brain=True.
-        - TODO: Re-add to ChromaDB.
-        """
-        with transaction.atomic():
-            # Delete all existing Brain records
-            Brain.objects.all().delete()
+    def create(self, request, *args, **kwargs):
+        raise DRFException.PermissionDenied("Use bulk create instead of single create.")
 
-            # Fetch KnowledgeContent where in_brain=True
-            knowledge_content_qs = KnowledgeContent.objects.filter(in_brain=True)
-
-            brain_instances = [Brain(knowledge_content=kc) for kc in knowledge_content_qs]
-            Brain.objects.bulk_create(brain_instances)
-
-            # TODO: Re-add knowledge content to ChromaDB here
-
-        return Response(
-            {"message": "Brain database synced successfully", "inserted_count": len(brain_instances)},
-            status=status.HTTP_201_CREATED
-        )
-    
-    @action(detail=False, methods=['post'], url_path='get-brain-docs')
-    def get_brain_docs(self, request):
-
-        serializer = KnowledgeContentIDListSerializer(data=request.data)
-        
-        # Validate the input data
-        if serializer.is_valid(raise_exception=True):
-            knowledge_content_ids = serializer.validated_data.get("knowledge_content_ids")
-            brain_manager = BrainManager()
-            result = brain_manager.get_by_ids(CHROMA_BRAIN_COLLECTION, knowledge_content_ids)
-
-        return Response(
-            {"message": result, "inserted_count": len(result)},
-            status=status.HTTP_201_CREATED
-        )
+        # override
+    def destroy(self, request, *args, **kwargs):
+        raise DRFException.PermissionDenied("Use bulk delete instead of single delete.")
