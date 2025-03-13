@@ -1,5 +1,8 @@
 from rest_framework import serializers
+import logging
 from ..models import Category, SubCategory, Knowledge, KnowledgeContent
+
+logger = logging.getLogger(__name__)
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,6 +22,12 @@ class KnowledgeContentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class KnowledgeListSerializer(serializers.ListSerializer):
+    def to_representation(self, data):
+        data = super().to_representation(data)
+        return [item for item in data if item is not None] 
+
+
 class KnowledgeSerializer(serializers.ModelSerializer):
     knowledge_content = serializers.SerializerMethodField()
     category = CategorySerializer(read_only=True)
@@ -27,6 +36,7 @@ class KnowledgeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Knowledge
         fields = ['id', 'knowledge_uuid', 'category', 'subcategory', 'type', 'knowledge_content']
+        list_serializer_class = KnowledgeListSerializer
 
     # def get_knowledge_content(self, obj):
     #     # Filter KnowledgeContent with in_brain=False
@@ -60,10 +70,14 @@ class KnowledgeSerializer(serializers.ModelSerializer):
     
     def to_representation(self, instance):
         data = super().to_representation(instance)
+        logger.info(f"Final representation before filtering: {data}")
+
         if not data.get("knowledge_content"):  # If knowledge_content is empty after filtering
+            logger.info((f"Removing knowledge object {instance.id}") )
             return None  # Exclude this Knowledge object from response
         return data
     
+
 
 class KnowledgeContentIDListSerializer(serializers.Serializer):
     knowledge_content_ids = serializers.ListField(
