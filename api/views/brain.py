@@ -40,7 +40,7 @@ class BrainViewSet(viewsets.ModelViewSet):
         Bulk create Brain entries.
         - Only allows KnowledgeContent with APPROVED status.
         - Prevents duplicates if already in Brain Table.
-        - Adds to chromadb (TODO).
+        - Adds to chromadb.
         - Updates 'in_brain' field in KnowledgeContent.
         """
         serializer = KnowledgeContentIDListSerializer(data=request.data)

@@ -7,8 +7,8 @@ logger = logging.getLogger(__name__)
 # Process docs
 try:
     chatbot = ChatBot()
-    logger.info("Chatbot created successfully")
+    logger.info("Chatbot is ready")
 
 except Exception as e:
-    logger.error(f"Failed to create vector store: {str(e)}")
+    logger.error(f"Error preparing chatbot: {str(e)}")
     raise

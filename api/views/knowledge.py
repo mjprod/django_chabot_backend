@@ -127,15 +127,23 @@ class KnowledgeContentViewSet(viewsets.ModelViewSet):
         invalid_fields = [field for field in data.keys() if field not in allowed_fields]
         if invalid_fields:
             raise DRFException.ValidationError(f"Cannot update the following fields: {', '.join(invalid_fields)}")
+    
+        allowed_statuses = {
+            KnowledgeContentStatus.REJECT.value,
+            KnowledgeContentStatus.PRE_APPROVED.value,
+            KnowledgeContentStatus.NEEDS_REVIEW.value,
+        }
+        
+        # it will raise error if other statuses being passed in this PATCH api (can only updated with NEEDS_APPROVAL/ PRE_APPROVED/ REJECT)
+        if "status" in data and data["status"] not in allowed_statuses:
+            allowed_names = [status.name for status in KnowledgeContentStatus if status.value in allowed_statuses]
+            raise DRFException.ValidationError(f"Invalid status. Allowed values: {', '.join(allowed_names)}")
         
         # ignore other fields if the status is set to "reject"
         if data.get("status") == KnowledgeContentStatus.REJECT.value:
             data = {"status": KnowledgeContentStatus.REJECT.value}
         else:
             # If the status is not 'reject', check if other fields have been edited
-            # it will ignore other statuses being passed in this PATCH api (can only updated with PRE_APPROVED/ REJECT)
-            data["status"] = KnowledgeContentStatus.PRE_APPROVED.value
-
             is_edited = False
             if not getattr(instance, "is_edited"):
                 for field in data.keys():

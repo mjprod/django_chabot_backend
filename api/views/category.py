@@ -16,8 +16,6 @@ from ..api_serializers.knowledge import (
 )
 
 from ..utils.filters import SubCategoryFilter
-from ..utils.enum import CategoryColor
-
 
 logger = logging.getLogger(__name__)
 
