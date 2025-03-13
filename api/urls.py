@@ -1,11 +1,9 @@
-from django.urls import path
+from django.urls import path, include
 
 from .views.conversation_view import (
     PromptConversationView,
     PromptConversationAdminView,
 )
-
-from django.urls import path, include
 
 from rest_framework.routers import DefaultRouter
 from .views.knowledge import (
@@ -29,7 +27,6 @@ router.register(r'subcategories', SubCategoryViewSet)
 router.register(r'knowledge', KnowledgeViewSet)
 router.register(r'knowledge-content', KnowledgeContentViewSet)
 router.register(r'brain', BrainViewSet)
-
 
 
 # Define URL patterns

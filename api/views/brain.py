@@ -17,6 +17,9 @@ from ..api_serializers.knowledge import KnowledgeContentIDListSerializer
 from ..utils.utils import CustomPagination
 from ..utils.enum import KnowledgeContentStatus
 
+from api.services.brain_manager import BrainManager
+from api.services.config import CHROMA_BRAIN_COLLECTION
+
 
 import logging
 
@@ -69,7 +72,9 @@ class BrainViewSet(viewsets.ModelViewSet):
             ]
             Brain.objects.bulk_create(brain_instances)  # Bulk create for efficiency
 
-            # TODO: Add the knowledge content to chromadb here
+            # Add to Chroma DB
+            brain_manager = BrainManager()
+            brain_manager.add_documents(CHROMA_BRAIN_COLLECTION, valid_for_brain)
 
             # Update 'in_brain' flag in KnowledgeContent
             KnowledgeContent.objects.filter(id__in=valid_ids).update(in_brain=True)
@@ -201,3 +206,18 @@ class BrainViewSet(viewsets.ModelViewSet):
             status=status.HTTP_201_CREATED
         )
     
+    @action(detail=False, methods=['post'], url_path='get-brain-docs')
+    def get_brain_docs(self, request):
+
+        serializer = KnowledgeContentIDListSerializer(data=request.data)
+        
+        # Validate the input data
+        if serializer.is_valid(raise_exception=True):
+            knowledge_content_ids = serializer.validated_data.get("knowledge_content_ids")
+            brain_manager = BrainManager()
+            result = brain_manager.get_by_ids(CHROMA_BRAIN_COLLECTION, knowledge_content_ids)
+
+        return Response(
+            {"message": result, "inserted_count": len(result)},
+            status=status.HTTP_201_CREATED
+        )

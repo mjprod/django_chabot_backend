@@ -2,10 +2,9 @@ import datetime
 
 # vector store constants
 EMBEDDING_MODEL="sentence-transformers/all-mpnet-base-v2"
-COLLECTION_NAME="knowledge_base"
-CHROMA_DIR="./chroma_brain_db"
-MESSAGE_KEY="historyMsgs"
-MONOGODB_COLLECTION="brain"
+CHROMA_BRAIN_COLLECTION="brain"
+CHROMA_CONVERSATION_COLLECTION="conversation"
+CHROMA_DIR="./chroma"
 
 # chat model constants
 CHAT_MODEL="gpt-4o"

@@ -3,12 +3,13 @@ import os
 from typing import Annotated, List
 from typing_extensions import TypedDict
 
-from .brain import Brain
+from .brain_manager import BrainManager
 from .config import (
     # chat model constants
     CHAT_MODEL,
     CHAT_MODEL_PROVIDER,
-    CHATBOT_PROMPT
+    CHATBOT_PROMPT,
+    CHROMA_BRAIN_COLLECTION
 )
 
 from dotenv import load_dotenv
@@ -34,8 +35,7 @@ TOKENIZERS_PARALLELISM=os.getenv("TOKENIZERS_PARALLELISM", False)
 
 
 class ChatBot:
-    # store the singleton instance
-    _instance = None
+    _instance = None  # Singleton instance
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
@@ -43,19 +43,24 @@ class ChatBot:
         return cls._instance
 
     def __init__(self):
-         # access the singleton instance
-        if not hasattr(self, 'initialised'):
-            self.brain = Brain()
-            self.vector_store = self.brain.vector_store
+        if not hasattr(self, 'initialized'):
+            self.vector_store = None
             self.llm = init_chat_model(
                 CHAT_MODEL, 
                 model_provider=CHAT_MODEL_PROVIDER, 
-                api_key=OPENAI_API_KEY)
-            
+                api_key=OPENAI_API_KEY
+            )
             self.prompt = hub.pull("rlm/rag-prompt")
-            # self.memory = MemorySaver()
-            # self.graph = self._build_graph()
-            self.initialised = True
+            self._initialize_brain()
+            self.initialized = True
+            
+
+    def _initialize_brain(self):
+        """Initialize the Brain instance and load knowledge content."""
+        self.brain = BrainManager()
+        self.brain.load_knowledge_content_to_collection(CHROMA_BRAIN_COLLECTION)
+        self.vector_store = self.brain.get_vector_store(CHROMA_BRAIN_COLLECTION)
+
 
     # def _build_graph(self):
         # TODO: need to redefine the state scheme, if it is used for question and answer pair only

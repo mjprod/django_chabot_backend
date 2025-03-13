@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
+import logging
 from pathlib import Path
 from dotenv import load_dotenv
 from corsheaders.defaults import default_headers
+from rich.logging import RichHandler
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -172,6 +174,11 @@ LOGGING = {
             "class": "logging.StreamHandler",
             "formatter": "verbose",
         },
+        'rich_console': {
+            'level': 'INFO',  # Set the level to DEBUG for rich logs
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
         "file": {
             "class": "logging.handlers.RotatingFileHandler",
             "filename": "django.log",
@@ -204,6 +211,11 @@ LOGGING = {
             "handlers": ["console"],
             "level": "INFO",
             "propagate": False,
+        },
+        'brain_manager': {
+            'handlers': ['rich_console', 'file'],  # Use the rich_console handler for logging
+            'level': 'INFO',  # Change to INFO or ERROR depending on verbosity
+            'propagate': False,
         },
     },
 }
