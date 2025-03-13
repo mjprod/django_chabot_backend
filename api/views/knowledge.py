@@ -154,6 +154,43 @@ class KnowledgeContentViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
+
+    # Customise post bulk change any status to a new status 
+    # input: knowledege content ids, change tostatus
+    @action(detail=False, methods=['post'], url_path="bulk-update-status")
+    def bulk_update_status(self, request):
+        """
+        Custom endpoint to bulk update the status of multiple KnowledgeContent records.
+        Input: List of knowledge content IDs and the new status.
+        """
+
+        # TODO: write a serialiser for the input!
+        knowledge_content_ids = request.data.get('knowledge_content_ids')
+        new_status = request.data.get('new_status')
+
+        if not knowledge_content_ids or new_status is None:
+            return Response(
+                {"error": "Both 'knowledge_content_ids' and 'new_status' are required."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Validate if the new status is a valid choice
+        valid_statuses = [choice[0] for choice in KnowledgeContent.STATUS_CHOICES]
+        if new_status not in valid_statuses:
+            return Response(
+                {"error": f"Invalid status. Valid choices are: {valid_statuses}"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Update KnowledgeContent records
+        updated_count = KnowledgeContent.objects.filter(id__in=knowledge_content_ids).update(status=new_status)
+
+        return Response(
+            {"message": f"Successfully updated {updated_count} records."},
+            status=status.HTTP_200_OK
+        )
+
+
 class KnowledgeViewSet(viewsets.ModelViewSet):
     queryset = Knowledge.objects.all()  # This allows DRF to infer the `basename`
     serializer_class = KnowledgeSerializer

@@ -2,6 +2,9 @@ import django_filters
 from ..models import Knowledge,SubCategory,KnowledgeContent,Category
 from django.db.models import Q
 
+class NumberInFilter(django_filters.BaseInFilter, django_filters.NumberFilter):
+    pass
+
 class KnowledgeFilter(django_filters.FilterSet):
     knowledge_uuid = django_filters.UUIDFilter(field_name="knowledge_uuid", lookup_expr="exact", label="Knowledge UUID")
     type = django_filters.ChoiceFilter(field_name="type", choices=Knowledge.TYPE_CHOICES, lookup_expr="iexact", label="Type")
@@ -9,7 +12,7 @@ class KnowledgeFilter(django_filters.FilterSet):
     last_updated = django_filters.DateTimeFromToRangeFilter(label="Last Updated")
 
     # Filters from category and subcategory
-    category = django_filters.NumberFilter(field_name="category__id", lookup_expr="exact", label="Category ID")
+    category = NumberInFilter(field_name="category__id", lookup_expr="in", label="Category IDs")
     subcategory = django_filters.NumberFilter(field_name="subcategory__id", lookup_expr="exact", label="Subcategory ID")
 
     # Filters from KnowledgeContent
