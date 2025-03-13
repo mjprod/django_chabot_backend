@@ -13,9 +13,9 @@ from ..utils.utils import CustomPagination
 
 import logging
 
-from ..serializers import (
-    UpdateAnswerBrain,
-)
+# from ..serializers import (
+#    UpdateAnswerBrain,
+# )
 
 from api.chatbot import (
     update_document_by_custom_id,
@@ -24,6 +24,9 @@ from api.chatbot import (
 from api.app.mongo import MongoDB
 from bson import ObjectId
 
+# from api.chatbot import (
+#   update_document_by_custom_id,
+# )
 
 logger = logging.getLogger(__name__)
 
@@ -283,6 +286,263 @@ class ReviewKnowledgeDashboard(APIView):
     #     return category_mapping.get(category_id, CategoryColorEnum.OTHER)
 
 
+REVIEW_COLLECTION_NAME="review_and_update_brain"
+
+class ReviewKnowledge(APIView):
+    pagination_class = CustomPagination
+    lookup_field = 'id'
+
+    def get(self, request, *args, **kwargs):
+        id = kwargs.get('id', None)        
+        if id:
+            return self.retrieve(id)
+        
+        # proceed with the list logic when id is not provided
+        return self.list(request)
+    
+    def retrieve(self, document_id):
+        """
+            retrive single document by '_id'
+            Endpoint: registered as review_knowledge/<str:id>/
+        """
+        try:
+            # Retrieve the document with the specified review ID
+            query = {"_id": ObjectId(document_id)}
+            result = MongoDB.query_collection(collection_name=REVIEW_COLLECTION_NAME, query=query)
+
+            if result:
+                logger.info(f"{result}")
+                # Convert _id to string and return the document
+                result = result[0]
+                result["_id"] = str(result["_id"])
+                return Response(result, status=status.HTTP_200_OK)
+            else:
+                return Response({"error": "Review not found."}, status=status.HTTP_404_NOT_FOUND)
+
+
+        except Exception as e:
+            logger.exception(f"Error retrieving review with id {document_id}")
+            return Response(
+                {"error": f"Error retrieving review: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+    def list(self, request):
+        """
+            List view for retrieving a paginated list of items based on provided query parameters.
+
+            Query Parameters:
+            - page (int): The page number to retrieve.
+            - page_size (int): The number of items per page.
+            - category (str): Filter items by category.
+            - language (str): Filter items by language.
+
+            Returns:
+            - Response: A paginated list of items matching the applied filters.
+        """
+
+        # get filters
+        category = request.query_params.get('category', None)
+        language=request.query_params.get('language', None)
+        comebined_query = {"$and":[]}
+        try:
+            # query 1:  retrieve documents do not have complete review status
+            await_to_be_reviewed_query = {
+                "$expr": {
+                    "$lt": [
+                        {"$size": {"$ifNull": ["$review_status", []]}},
+                        3
+                    ]
+                }}
+            
+            comebined_query["$and"].append(await_to_be_reviewed_query)
+
+            # apply filters
+            if category:
+                comebined_query["$and"].append({"metadata.category": {"$in": [category]}})
+            if language:
+                question_language_filter ={f"question.languages.{language}": {"$exists": "true"}}
+                answer_language_filter ={f"answer.detailed.{language}": {"$exists": "true"}}
+                comebined_query["$and"].extend([question_language_filter, answer_language_filter])
+
+            results = MongoDB.query_collection(collection_name=REVIEW_COLLECTION_NAME,
+                                               query=comebined_query)
+            
+            for doc in results:
+                if "_id" in doc:
+                    doc["_id"] = str(doc["_id"])
+
+            paginator = self.pagination_class()
+            paginated_results = paginator.paginate_queryset(results, request)
+            
+            return Response({
+                "count": paginator.page.paginator.count,
+                "total_pages": paginator.page.paginator.num_pages,
+                "previous": paginator.get_previous_link(),
+                "next": paginator.get_next_link(),
+                "results": paginated_results,
+            }, status=status.HTTP_200_OK)
+        
+            # return Response(results, status=status.HTTP_200_OK)
+    
+        except Exception as e:
+                logger.exception("Error retrieving session ids")
+                return Response(
+                    {"error": f"Error retrieving session ids: {str(e)}"},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+
+    def delete(self, request):
+        """
+        Handles deletion of multiple review knowledge based on a list of IDs.
+        """
+        try:
+            serializer = BulkDeleteSerializer(data=request.data)
+
+            if not serializer.is_valid():
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            validated_ids = serializer.validated_data["ids"]
+            object_ids = [ObjectId(_id) for _id in validated_ids]
+
+            # Bulk delete from MongoDB
+            result = MongoDB.delete_many(REVIEW_COLLECTION_NAME,{"_id": {"$in": object_ids}})
+
+            if result.deleted_count > 0:
+                return Response({"message": f"{result.deleted_count} reviews deleted successfully."}, status=status.HTTP_200_OK)
+            else:
+                return Response({"error": "No matching reviews found."}, status=status.HTTP_404_NOT_FOUND)
+
+        except Exception as e:
+            logger.exception("Error in bulk deleting reviews")
+            return Response(
+                {"error": f"Error in bulk deleting reviews: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            ) 
+
+    # create a new knowledge to review
+    def post(self, request, *args, **kwargs):
+        pass
+
+    # update knowledge/status in the review list 
+    def patch(self, request, *args, **kwargs):
+
+        """
+        Update the document in the review list.
+        
+        Expected JSON payload:
+        - id (str): The ID of the document to update.
+        - language (str): The language of the review.
+        - question (str): Updated question details.
+        - answer (str): Updated answer details.
+        - status (int): The new review status (e.g., '1: need approve', '2: pre-approved', '3: approved', '4: reject').
+        
+        Returns:
+        - Response: Updated document or error message.
+        """
+
+        try:
+            serializer = ReviewKnowledgeSerializer(data=request.data)
+            if not serializer.is_valid():
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
+            data = serializer.validated_data
+
+            query = {"_id": ObjectId(data.get("id"))}
+            update_fields = {}
+            
+            update_fields = {key: value for key, value in data.items() if key != "id"}
+
+            # need to write a param and database key mapping function
+            
+            update_query = {"$set": update_fields}
+            updated_document = MongoDB.update_one_document(collection_name=REVIEW_COLLECTION_NAME,
+                                                           query=query, 
+                                                           update=update_query)
+            
+            if updated_document:
+                return Response({"message": "Review updated successfully."}, status=status.HTTP_200_OK)
+            else:
+                return Response({"error": "Review not found or update failed."}, status=status.HTTP_404_NOT_FOUND)
+        
+        except Exception as e:
+            logger.exception("Error updating review status")
+            return Response(
+                {"error": f"Error updating review: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+class ReviewKnowledgeDashboard(APIView):
+    def get(self, request, *args, **kwargs):
+        aggregation = [
+            { 
+                "$unwind": "$metadata.category"
+            },
+            { 
+                "$group": {
+                    "_id": "$metadata.category",
+                    "count": { "$sum": 1 }
+                }
+            },
+            {
+                "$project": {
+                    "category": "$_id",  # Rename _id to category
+                    "count": 1,  # Keep the count field
+                    "_id": 0  # Remove the _id field
+                }
+            },
+            { 
+                "$sort": { "count": -1 }
+            }
+        ]
+
+        try:
+            results = MongoDB.aggregate_collection(
+                collection_name=REVIEW_COLLECTION_NAME,
+                aggregation=aggregation
+            )
+            
+            # If no results found, raise a NotFound exception
+            if not results:
+                raise NotFound("No categories found in the collection.")
+
+            categories = []
+            for category in results:
+                category_name = category["category"]
+                # Add color to the category
+                # category["color"] = self._get_category_color(category_name).value
+                categories.append(category)
+            
+            # Return the results as a JSON response
+            return Response(
+                {"categories_count": categories},
+                status=status.HTTP_200_OK
+            )
+
+        except Exception as e:
+            # Handle other errors
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+        
+    # def _get_category_color(self,category_id):
+    #     category_mapping = {
+    #         "finance": CategoryColorEnum.FINANCE,
+    #         "technical": CategoryColorEnum.TECHNOLOGY,
+    #         "account_management": CategoryColorEnum.ACCOUNT,
+    #         "game": CategoryColorEnum.FOURDLOTTO,
+    #         "sports_betting": CategoryColorEnum.FOURDLOTTO,
+    #         "policy_explanation": CategoryColorEnum.SECURITY,
+    #         "encouragement": CategoryColorEnum.FEEDBACK,
+    #         "points_shop": CategoryColorEnum.POINTSSHOP,
+    #         "other":CategoryColorEnum.OTHER
+    #     }
+        
+    #     return category_mapping.get(category_id, CategoryColorEnum.OTHER)
+
+
+"""
 class ListReviewAndUpdateBrainView(APIView):
     def get(self, request, *args, **kwargs):
         db = None
@@ -310,8 +570,8 @@ class ListReviewAndUpdateBrainView(APIView):
                 {"error": f"Error retrieving session ids: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
-
-
+"""
+'''
 class UpdateReviewStatusView(APIView):
     def post(self, request, *args, **kwargs):
         """
@@ -365,8 +625,6 @@ class UpdateReviewStatusView(APIView):
                 {"error": f"Error updating review_status: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-        
-
 class UpdateBrainView(APIView):
     def get(self, request):
         try:
@@ -396,5 +654,104 @@ class UpdateBrainView(APIView):
                 {"error": f"Error retrieving dashboard counts: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )    
-        
 
+    def update_chroma_document(doc_id, new_data):
+    """
+    Update an existing document in the ChromaDB collection.
+    :param store: The ChromaDB collection object
+    :param doc_id: The unique ID of the document to update
+    :param new_data: Dictionary containing updated data fields
+    """
+    try:
+
+        if store:  # Only search if store was successfully created
+            search_results = search_by_id(store, "0068")  # Replace "0001" with your ID
+            print("Search Results:", search_results)
+        else:
+            print("Vector store creation failed, cannot perform search.")
+
+        return True
+        all_docs = store.get()
+
+        for key, value in all_docs.items():
+                print(f"{key}: {value}")
+
+        existing_docs = store.get(ids=[doc_id], include=["documents", "metadatas"])
+        
+        if not existing_docs["documents"]:
+            print(f"Document with ID {doc_id} not found.")
+            return False
+
+        # Retrieve the existing document
+        existing_doc = json.loads(existing_docs["documents"][0])  # Convert back to dictionary if stored as JSON string
+
+        # Merge the existing document with new data
+        updated_doc = {**existing_doc, **new_data}
+
+        # Remove the old document before re-adding
+        store.delete(ids=[doc_id])
+
+        # Reinsert the updated document
+        store.add(
+            documents=[json.dumps(updated_doc)],  # Store as JSON string
+            ids=[doc_id],
+            metadatas=[updated_doc.get("metadata", {})]
+        )
+
+        print(f"Document with ID {doc_id} updated successfully.")
+        return True
+
+    except Exception as e:
+        print(f"Error updating document: {e}")
+        return False
+    
+def search_by_id(store: Chroma, custom_id: str):
+    results = store.get(
+        where={"id": custom_id},
+        include=["documents", "metadatas"]
+    )
+    return results
+
+def update_document_by_custom_id(custom_id: str, answer_en: str, answer_ms: str, answer_cn: str):
+    try:
+        search_results = store.get(
+            where={"id": custom_id},
+            include=["metadatas","documents"]
+        )
+
+        if not search_results['ids']:
+            print(f"Document ID '{custom_id}' not found.")
+            return
+
+        document_id = search_results['ids'][0]
+        doc = get_document_by_id(document_id) 
+        
+        if doc:
+            update_answer_detailed(doc, answer_en, answer_ms, answer_cn)
+
+        existing_metadata = search_results['metadatas'][0]
+        document = search_results['documents'][0]
+        question_text = document.split("\n")[0].replace("Question: ", "").strip()
+
+        new_document = BrainDocument(
+            id=custom_id,
+            page_content=(
+                f"Question: {question_text}\n"
+                f"Answer: {answer_en}"
+            ),
+            metadata={
+                "category": ",".join(existing_metadata.get("category", [])),
+                "subCategory": existing_metadata.get("subCategory", ""),
+                "difficulty": existing_metadata.get("difficulty", 0),
+                "confidence": existing_metadata.get("confidence", 0.0),
+                "intent": doc["question"].get("intent", ""),
+                "variations": ", ".join(doc["question"].get("variations", [])),
+                "conditions": ", ".join(doc["answer"].get("conditions", [])),
+            },
+        )
+
+        store.add_documents(documents=[new_document])
+        return (f"ID '{custom_id}' updated ")
+    except Exception as e:
+        print(f"Error to update document: {str(e)}")
+'''

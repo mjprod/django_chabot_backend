@@ -5,10 +5,12 @@ from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
+
 class MongoDB:
     """
     Singleton class to manage MongoDB connections efficiently.
     """
+
     _client = None
     _db = None
     _lock = threading.Lock()  # add lock
@@ -86,4 +88,5 @@ class MongoDB:
             return collection.delete_many(delete)
         except Exception as e:
             logger.error(f"Error deleting a document in collection '{collection_name}': {str(e)}", exc_info=True)
+
 

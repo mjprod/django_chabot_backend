@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = False  # Default to False
 ALLOWED_HOSTS = []
 
-
+# TODO: Temporary for development
 FIXED_API_TOKEN = "4d4a50524f4432303232"
 
 # MongoDB settings
@@ -80,7 +80,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "api.apps.ApiConfig",
+    "api.config.apps.ApiConfig",
     "corsheaders",
     "django_filters"
 ]
@@ -226,7 +226,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -237,7 +236,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
@@ -250,7 +248,6 @@ STATICFILES_DIRS = [
 # Media Files
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MAX_UPLOAD_SIZE = 5242880  # 5MB
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

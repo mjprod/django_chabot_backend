@@ -48,7 +48,9 @@ def rebuild_vector_store(documents):
                 "conditions": ", ".join(doc["answer"].get("conditions", [])),
             }
             doc_objects.append(
-                LangchainDocument(id='KAKO_ID',page_content=page_content, metadata=metadata)
+                LangchainDocument(
+                    id="KAKO_ID", page_content=page_content, metadata=metadata
+                )
             )
 
         # Create store
@@ -76,7 +78,6 @@ def reset_all_confidence_scores(target_score=0.5):
         base_dir = os.path.join(Path(__file__).parent.parent, "data")
         database_files = [
             "database_part_1.json",
-            
         ]
 
         total_updates = 0

@@ -6,7 +6,7 @@ from bson import ObjectId
 
 from pydantic import BaseModel, Field
 
-from ai_config.ai_constants import (
+from api.constants.ai_constants import (
     EMBEDDING_CHUNK_SIZE,
     EMBEDDING_OVERLAP,
 )
@@ -28,7 +28,7 @@ class ConversationMetaData:
         self.is_first_message = True
 
 
-class CustomDocument:
+class BrainDocument:
     def __init__(self, page_content, metadata, id="0"):
         self.id = id
         self.page_content = page_content
@@ -36,10 +36,11 @@ class CustomDocument:
 
     def __str__(self):
         # Mostra o id e os primeiros 100 caracteres do conteúdo para não poluir o log
-        return f"CustomDocument(id={self.id}, page_content={self.page_content[:100]}..., metadata={self.metadata})"
-    
+        return f"BrainDocument(id={self.id}, page_content={self.page_content[:100]}..., metadata={self.metadata})"
 
     # Text Splitter Class
+
+
 class CustomTextSplitter(RecursiveCharacterTextSplitter):
     def __init__(
         self,
@@ -56,16 +57,21 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
             return []
 
         chunks = []
-       
+
         for doc in documents:
             try:
-                metadata = {**(doc.metadata if isinstance(doc.metadata, dict) else {}), "id": getattr(doc, "id", "no_id")}
+                metadata = {
+                    **(doc.metadata if isinstance(doc.metadata, dict) else {}),
+                    "id": getattr(doc, "id", "no_id"),
+                }
                 text = doc.page_content
                 id_doc = getattr(doc, "id", "no_id")
-        
+
                 # Handle short documents
                 if self.length_function(text) <= self.chunk_size:
-                    chunks.append(CustomDocument(id=id_doc,page_content=text, metadata=metadata))
+                    chunks.append(
+                        BrainDocument(id=id_doc, page_content=text, metadata=metadata)
+                    )
                     continue
 
                 # Split into sentences
@@ -80,7 +86,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                     if sentence_length > self.chunk_size:
                         if current_chunk:
                             chunks.append(
-                                CustomDocument(
+                                BrainDocument(
                                     id=id_doc,
                                     page_content="".join(current_chunk),
                                     metadata=metadata,
@@ -98,7 +104,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                             word_length = self.length_function(word + " ")
                             if current_word_length + word_length > self.chunk_size:
                                 chunks.append(
-                                    CustomDocument(
+                                    BrainDocument(
                                         id=id_doc,
                                         page_content=" ".join(current_words),
                                         metadata=metadata,
@@ -119,7 +125,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                     if current_length + sentence_length > self.chunk_size:
                         if current_chunk:
                             chunks.append(
-                                CustomDocument(
+                                BrainDocument(
                                     id=id_doc,
                                     page_content="".join(current_chunk),
                                     metadata=metadata,
@@ -141,25 +147,28 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                 # Add remaining text
                 if current_chunk:
                     chunks.append(
-                        CustomDocument(
+                        BrainDocument(
                             id=id_doc,
                             page_content="".join(current_chunk),
-                            metadata=metadata
+                            metadata=metadata,
                         )
                     )
             except Exception as e:
                 logger.error(f"Error splitting document: {str(e)}")
                 continue
         return chunks
-    
+
     # Define grading of docs
+
+
 class GradeDocuments(BaseModel):
     confidence_score: float = Field(
         description="Confidence score between 0.0 and 1.0 indicating document relevance",
         ge=0.0,
         le=1.0,
     )
-    
+
+
 # Define GradeHallucinations Model
 class GradeConfidenceLevel(BaseModel):
     confidence_score: float = Field(
@@ -168,63 +177,3 @@ class GradeConfidenceLevel(BaseModel):
         ge=0.0,
         le=1.0,
     )
-
-# TODO: DEPRECATED
-''''
-# created message class to keep track of messages that build up a Conversation
-class Message:
-    def __init__(self, role, content, timestamp=None):
-        self.role = role
-        self.content = content
-        self.timestamp = timestamp or datetime.now().isoformat()
-    def add_message(self, role, content):
-        message = Message(role, content)
-        self.messages.append(message)
-
-        # translation layer
-        if role == "assistant":
-            malay_translation = translate_en_to_ms(content)
-            chinese_translation = content
-
-            self.translations.append(
-                {
-                    "message_id": len(self.messages) - 1,
-                    "translations": [
-                        {"language": "en", "text": content},
-                        {
-                            "language": "ms_MY",
-                            "text": malay_translation.get("text", ""),
-                        },
-                        {
-                            "language": "zh_CN",
-                            "text": chinese_translation.get("text", ""),
-                        },
-                        {
-                            "language": "zh_TW",
-                            "text": chinese_translation.get("text", ""),
-                        },
-                    ],
-                }
-            )
-            return message
-    def get_conversation_history(self):
-        return [
-            {"role": msg.role, "content": msg.content, "timestamp": msg.timestamp}
-            for msg in self.messages
-        ]
-    # save the output to a dict for using API
-    def to_dict(self):
-        return {
-            "_id": self._id,
-            "session_id": self.session_id,
-            "admin_id": self.admin_id,
-            "user_id": self.user_id,
-            "bot_id": self.bot_id,
-            "timestamp": self.timestamp,
-            "messages": [
-                {"role": msg.role, "content": msg.content, "timestamp": msg.timestamp}
-                for msg in self.messages
-            ],
-            "translations": self.translations,
-        }
-'''

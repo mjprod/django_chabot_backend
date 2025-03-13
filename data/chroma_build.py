@@ -103,7 +103,7 @@ def build_language_vector_store(lang_code: str, documents: List[dict]) -> Chroma
         logger.info(
             f"@@@@@@@ build_language_vector_store @@ {LANGUAGE_CONFIG[lang_code]['name']}"
         )
-         
+
         logger.info(
             f"Starting vector store build for {LANGUAGE_CONFIG[lang_code]['name']}"
         )
@@ -127,7 +127,7 @@ def build_language_vector_store(lang_code: str, documents: List[dict]) -> Chroma
             id_doc = doc["id"]
 
             page_content = f"Question: {question}\nAnswer: {answer}\nID: {id_doc}"
-            
+
             metadata = {
                 "id": doc.get("id", "no_id"),
                 "category": ",".join(doc["metadata"].get("category", [])),
