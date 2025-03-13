@@ -4,18 +4,17 @@ from rest_framework import status
 
 import logging
 
-from ..serializers import (
-    UpdateAnswerBrain,
-)
+# from ..serializers import (
+#    UpdateAnswerBrain,
+# )
 
-from api.chatbot import (
-    update_document_by_custom_id,
-)
-
-from api.app.mongo import MongoDB
+# from api.chatbot import (
+#   update_document_by_custom_id,
+# )
 
 logger = logging.getLogger(__name__)
 
+"""
 class ListReviewAndUpdateBrainView(APIView):
     def get(self, request, *args, **kwargs):
         db = None
@@ -43,8 +42,8 @@ class ListReviewAndUpdateBrainView(APIView):
                 {"error": f"Error retrieving session ids: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
-        
-
+"""
+'''
 class UpdateReviewStatusView(APIView):
     def post(self, request, *args, **kwargs):
         """
@@ -98,8 +97,6 @@ class UpdateReviewStatusView(APIView):
                 {"error": f"Error updating review_status: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-        
-
 class UpdateBrainView(APIView):
     def get(self, request):
         try:
@@ -129,3 +126,104 @@ class UpdateBrainView(APIView):
                 {"error": f"Error retrieving dashboard counts: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )    
+
+    def update_chroma_document(doc_id, new_data):
+    """
+    Update an existing document in the ChromaDB collection.
+    :param store: The ChromaDB collection object
+    :param doc_id: The unique ID of the document to update
+    :param new_data: Dictionary containing updated data fields
+    """
+    try:
+
+        if store:  # Only search if store was successfully created
+            search_results = search_by_id(store, "0068")  # Replace "0001" with your ID
+            print("Search Results:", search_results)
+        else:
+            print("Vector store creation failed, cannot perform search.")
+
+        return True
+        all_docs = store.get()
+
+        for key, value in all_docs.items():
+                print(f"{key}: {value}")
+
+        existing_docs = store.get(ids=[doc_id], include=["documents", "metadatas"])
+        
+        if not existing_docs["documents"]:
+            print(f"Document with ID {doc_id} not found.")
+            return False
+
+        # Retrieve the existing document
+        existing_doc = json.loads(existing_docs["documents"][0])  # Convert back to dictionary if stored as JSON string
+
+        # Merge the existing document with new data
+        updated_doc = {**existing_doc, **new_data}
+
+        # Remove the old document before re-adding
+        store.delete(ids=[doc_id])
+
+        # Reinsert the updated document
+        store.add(
+            documents=[json.dumps(updated_doc)],  # Store as JSON string
+            ids=[doc_id],
+            metadatas=[updated_doc.get("metadata", {})]
+        )
+
+        print(f"Document with ID {doc_id} updated successfully.")
+        return True
+
+    except Exception as e:
+        print(f"Error updating document: {e}")
+        return False
+    
+def search_by_id(store: Chroma, custom_id: str):
+    results = store.get(
+        where={"id": custom_id},
+        include=["documents", "metadatas"]
+    )
+    return results
+
+def update_document_by_custom_id(custom_id: str, answer_en: str, answer_ms: str, answer_cn: str):
+    try:
+        search_results = store.get(
+            where={"id": custom_id},
+            include=["metadatas","documents"]
+        )
+
+        if not search_results['ids']:
+            print(f"Document ID '{custom_id}' not found.")
+            return
+
+        document_id = search_results['ids'][0]
+        doc = get_document_by_id(document_id) 
+        
+        if doc:
+            update_answer_detailed(doc, answer_en, answer_ms, answer_cn)
+
+        existing_metadata = search_results['metadatas'][0]
+        document = search_results['documents'][0]
+        question_text = document.split("\n")[0].replace("Question: ", "").strip()
+
+        new_document = BrainDocument(
+            id=custom_id,
+            page_content=(
+                f"Question: {question_text}\n"
+                f"Answer: {answer_en}"
+            ),
+            metadata={
+                "category": ",".join(existing_metadata.get("category", [])),
+                "subCategory": existing_metadata.get("subCategory", ""),
+                "difficulty": existing_metadata.get("difficulty", 0),
+                "confidence": existing_metadata.get("confidence", 0.0),
+                "intent": doc["question"].get("intent", ""),
+                "variations": ", ".join(doc["question"].get("variations", [])),
+                "conditions": ", ".join(doc["answer"].get("conditions", [])),
+            },
+        )
+
+        store.add_documents(documents=[new_document])
+        return (f"ID '{custom_id}' updated ")
+    except Exception as e:
+        print(f"Error to update document: {str(e)}")
+'''

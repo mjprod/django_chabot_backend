@@ -66,13 +66,6 @@ class PromptConversationSerializer(serializers.Serializer):
     user_id = serializers.CharField(max_length=100, required=False)
 
 
-class PromptConversationHistorySerializer(serializers.Serializer):
-    prompt = serializers.CharField(max_length=1000, required=True)
-    conversation_id = serializers.CharField(max_length=100, required=True)
-    user_id = serializers.CharField(max_length=100, required=True)
-    use_mongo = serializers.BooleanField(default=True, required=False)
-
-
 class MessageDataSerializer(serializers.Serializer):
     text = serializers.JSONField(allow_null=True)  # For array or string
     sender = serializers.CharField(max_length=100)
@@ -105,48 +98,6 @@ class MessageDataSerializer(serializers.Serializer):
         return super().to_internal_value(data)
 
 
-class CompleteConversationsSerializer(serializers.Serializer):
-    conversation_id = serializers.CharField(max_length=100, required=True)
-    messages = MessageDataSerializer(many=True, required=True)
-
-    def validate_messages(self, value):
-        if len(value) > 100:
-            raise serializers.ValidationError("Too many messages in this conversation")
-        return value
-
-
-class CaptureFeedbackSimpleSerializer(serializers.Serializer):
-    user_input = serializers.CharField(max_length=1000)
-    language = serializers.CharField(max_length=10, required=False, allow_blank=True)
-    correct_answer = serializers.CharField(
-        max_length=2000, required=False, allow_blank=True
-    )
-
-class CaptureFeedbackCompareSerializer(serializers.Serializer):
-    user_input = serializers.CharField(max_length=1000)
-    language = serializers.CharField(max_length=10, required=False, allow_blank=True)
-    original_answer = serializers.CharField(
-        max_length=2000, required=False, allow_blank=True
-    )
-    correct_answer = serializers.CharField(
-        max_length=2000, required=False, allow_blank=True
-    )
-
-class CaptureFeedbackSerializer(serializers.Serializer):
-    conversation_id = serializers.CharField(max_length=100)
-    user_input = serializers.CharField(max_length=1000)
-    ai_response = serializers.CharField(
-        max_length=2000, required=False, allow_blank=True
-    )
-    correct_bool = serializers.BooleanField()
-    chat_rating = serializers.IntegerField(min_value=0, max_value=6)
-    language = serializers.CharField(max_length=10, required=False, allow_blank=True)
-    correct_answer = serializers.CharField(
-        max_length=2000, required=False, allow_blank=True
-    )
-    metadata = serializers.DictField(required=False)
-
-
 class PromptConversationAdminSerializer(serializers.Serializer):
     prompt = serializers.CharField(required=True)
     conversation_id = serializers.CharField(required=True)
@@ -158,7 +109,6 @@ class PromptConversationAdminSerializer(serializers.Serializer):
         required=False,
         default="en",
     )
-
 
     def validate_language(self, value):
         """Validate the language code is supported"""
