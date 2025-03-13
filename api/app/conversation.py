@@ -22,9 +22,9 @@ from api.constants.ai_prompts import (
 )
 
 from api.chatbot import (
-    store,
+     chatbot,
 )
-
+# store = None
 from .mongo import MongoDB
 
 from api.ai_services import (
@@ -111,9 +111,12 @@ def prompt_conversation(user_prompt, language_code=LANGUAGE_DEFAULT):
         # Vector store retrieval
         vector_start = time.time()
         try:
-            docs_retrieve = store.similarity_search(
-                user_prompt, k=3  # Limit to top 3 results for performance
-            )
+            
+            docs_retrieve = chatbot.brain.query(user_prompt)
+            
+            #store.similarity_search(
+                #user_prompt, k=3  # Limit to top 3 results for performance
+            #)
             logger.debug(
                 f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
             )
@@ -213,9 +216,9 @@ def prompt_conversation_admin(
 
             # Exception handling for user prompt
             if user_prompt.lower().strip() == "ok":
-                docs_retrieve = store.similarity_search(user_prompt, k=1)
+                docs_retrieve =chatbot.brain.query(user_prompt, k=1)
             else:
-                docs_retrieve = store.similarity_search(user_prompt, k=3)
+                docs_retrieve = chatbot.brain.query(user_prompt)
 
             for i, doc in enumerate(docs_retrieve, start=1):
                 print(f"📌 Result {i}:")

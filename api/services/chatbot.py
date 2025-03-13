@@ -45,8 +45,8 @@ class ChatBot:
     def __init__(self):
          # access the singleton instance
         if not hasattr(self, 'initialised'):
-            brain = Brain()
-            self.vector_store = brain.vector_store
+            self.brain = Brain()
+            self.vector_store = self.brain.vector_store
             self.llm = init_chat_model(
                 CHAT_MODEL, 
                 model_provider=CHAT_MODEL_PROVIDER, 

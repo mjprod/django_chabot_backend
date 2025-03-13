@@ -2,9 +2,7 @@ import logging
 
 from dotenv import load_dotenv
 
-from .brain_db import (
-    create_vector_store,
-)
+from .services.chatbot import ChatBot
 
 # create our gloabl variables
 logger = logging.getLogger(__name__)
@@ -15,12 +13,12 @@ load_dotenv()
 
 # Process docs
 try:
-    store = create_vector_store()
     logger.info("Vector store creation completed successfully")
+
+    chatbot = ChatBot()
+    logger.info("Chatbot created successfully")
+    store = chatbot.vector_store    
 
 except Exception as e:
     logger.error(f"Failed to create vector store: {str(e)}")
     raise
-
-if store is None:
-    store = create_vector_store()

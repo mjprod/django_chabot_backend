@@ -205,7 +205,7 @@ def update_document_by_custom_id(custom_id: str, answer_en: str, answer_ms: str,
         document = search_results['documents'][0]
         question_text = document.split("\n")[0].replace("Question: ", "").strip()
 
-        new_document = CustomDocument(
+        new_document = BrainDocument(
             id=custom_id,
             page_content=(
                 f"Question: {question_text}\n"

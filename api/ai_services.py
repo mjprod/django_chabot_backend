@@ -28,7 +28,7 @@ class ConversationMetaData:
         self.is_first_message = True
 
 
-class CustomDocument:
+class BrainDocument:
     def __init__(self, page_content, metadata, id="0"):
         self.id = id
         self.page_content = page_content
@@ -36,7 +36,7 @@ class CustomDocument:
 
     def __str__(self):
         # Mostra o id e os primeiros 100 caracteres do conteúdo para não poluir o log
-        return f"CustomDocument(id={self.id}, page_content={self.page_content[:100]}..., metadata={self.metadata})"
+        return f"BrainDocument(id={self.id}, page_content={self.page_content[:100]}..., metadata={self.metadata})"
 
     # Text Splitter Class
 
@@ -70,7 +70,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                 # Handle short documents
                 if self.length_function(text) <= self.chunk_size:
                     chunks.append(
-                        CustomDocument(id=id_doc, page_content=text, metadata=metadata)
+                        BrainDocument(id=id_doc, page_content=text, metadata=metadata)
                     )
                     continue
 
@@ -86,7 +86,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                     if sentence_length > self.chunk_size:
                         if current_chunk:
                             chunks.append(
-                                CustomDocument(
+                                BrainDocument(
                                     id=id_doc,
                                     page_content="".join(current_chunk),
                                     metadata=metadata,
@@ -104,7 +104,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                             word_length = self.length_function(word + " ")
                             if current_word_length + word_length > self.chunk_size:
                                 chunks.append(
-                                    CustomDocument(
+                                    BrainDocument(
                                         id=id_doc,
                                         page_content=" ".join(current_words),
                                         metadata=metadata,
@@ -125,7 +125,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                     if current_length + sentence_length > self.chunk_size:
                         if current_chunk:
                             chunks.append(
-                                CustomDocument(
+                                BrainDocument(
                                     id=id_doc,
                                     page_content="".join(current_chunk),
                                     metadata=metadata,
@@ -147,7 +147,7 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
                 # Add remaining text
                 if current_chunk:
                     chunks.append(
-                        CustomDocument(
+                        BrainDocument(
                             id=id_doc,
                             page_content="".join(current_chunk),
                             metadata=metadata,

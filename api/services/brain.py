@@ -20,7 +20,7 @@ from .config import (
 from ..app.mongo import MongoDB
 
 from api.ai_services import (
-    CustomDocument,
+    BrainDocument,
 )
 
 load_dotenv()
@@ -119,14 +119,9 @@ class Brain:
 
     def _parse_conversations(self, conversations, count):
         logger.info(f"Conversations received: {len(conversations)}")
-        if conversations:
-            logger.info(f"Sample conversation: {conversations[0]}")
-        else:
-            logger.warning("No conversations provided!")
-
         # Create Document Objects using list comprehension
         doc_objects = [
-            CustomDocument(
+            BrainDocument(
                 id=doc.get("id", "no_id"),
                 page_content=(
                     f"Question: {doc['question']['text']}\n"
@@ -145,6 +140,11 @@ class Brain:
             )
             for doc in conversations
         ]
+        # Get the IDs of the documents
+        doc_ids = [doc.get("id", "no_id") for doc in conversations]
+
+        # Add the documents to the vector store
+        self.vector_store.add_documents(documents=doc_objects, ids=doc_ids)
 
         # Update the progress bar (if count is correct, this should advance by count)
         with get_progress_bar() as progress:
@@ -154,8 +154,6 @@ class Brain:
         logger.info(f"@@@@ Processed {len(doc_objects)} documents")
         return doc_objects
             
-  
-
     def _check_collection_count(self):
         client = chromadb.PersistentClient(path=self.chroma_dir)
         collection = client.get_collection(name=self.collection_name)
