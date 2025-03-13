@@ -1,13 +1,20 @@
 from rest_framework import serializers
 import logging
 from ..models import Category, SubCategory, Knowledge, KnowledgeContent
+from api.utils.enum import CategoryColor
+
 
 logger = logging.getLogger(__name__)
 
 class CategorySerializer(serializers.ModelSerializer):
+    color = serializers.SerializerMethodField()
+    
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = ['id', 'name', 'description', 'color']
+    
+    def get_color(self, obj):
+        return CategoryColor.get_color_by_id(obj.id)
 
 
 class SubCategorySerializer(serializers.ModelSerializer):

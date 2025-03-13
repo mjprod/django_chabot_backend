@@ -26,17 +26,6 @@ class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
-    def list(self, request, *args, **kwargs):
-        """Override list to add color mapping."""
-        queryset = self.filter_queryset(self.get_queryset())  # Apply any filters
-        serialized_data = CategorySerializer(queryset, many=True).data
-
-        # Inject color based on category ID
-        for category in serialized_data:
-            category["color"] = CategoryColor.get_color_by_id(category["id"])
-
-        return Response(serialized_data, status=status.HTTP_200_OK)
-
 
 class SubCategoryViewSet(viewsets.ModelViewSet):
     queryset = SubCategory.objects.all()
