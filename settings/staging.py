@@ -7,7 +7,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "api-staging.mjproapps.com",
     "https://staging.mjproapps.com",
-    "54.206.216.180",
+    "13.236.193.147",
 ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
