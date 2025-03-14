@@ -24,11 +24,10 @@ load_dotenv()
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-z$!=*9prhkq7xd2^2!!g39v$spw1f=yaxbc4qhle9yp1n!-b%-"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = [
@@ -36,7 +35,7 @@ ALLOWED_HOSTS = [
     "api-staging.mjproapps.com",
     "api.mjproapps.com",
     "3.107.8.190",
-    "54.206.216.180",
+    "13.236.193.147",
     "13.238.144.45",
     "localhost",
     "127.0.0.1",
