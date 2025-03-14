@@ -34,7 +34,7 @@ logger = logging.getLogger(__name__)
 class KnowledgeContentViewSet(viewsets.ModelViewSet):
     pagination_class = CustomPagination
     filter_backends = (DjangoFilterBackend,)
-    queryset = KnowledgeContent.objects.all()
+    queryset = KnowledgeContent.objects.filter(in_brain=False)
     serializer_class = KnowledgeContentSerializer
 
     # override create()
