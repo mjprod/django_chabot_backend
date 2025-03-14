@@ -21,6 +21,10 @@ from api.constants.ai_prompts import (
     CONFIDENCE_GRADER_PROMPT,
 )
 
+from api.services.config import (
+    CHROMA_BRAIN_COLLECTION
+)
+
 from api.chatbot import (
      chatbot,
 )
@@ -112,7 +116,7 @@ def prompt_conversation(user_prompt, language_code=LANGUAGE_DEFAULT):
         vector_start = time.time()
         try:
             
-            docs_retrieve = chatbot.brain.query(user_prompt)
+            docs_retrieve = chatbot.brain.query(CHROMA_BRAIN_COLLECTION,user_prompt)
             
             #store.similarity_search(
                 #user_prompt, k=3  # Limit to top 3 results for performance
@@ -216,9 +220,9 @@ def prompt_conversation_admin(
 
             # Exception handling for user prompt
             if user_prompt.lower().strip() == "ok":
-                docs_retrieve =chatbot.brain.query(user_prompt, k=1)
+                docs_retrieve =chatbot.brain.query(CHROMA_BRAIN_COLLECTION, user_prompt, k=1)
             else:
-                docs_retrieve = chatbot.brain.query(user_prompt)
+                docs_retrieve = chatbot.brain.query(CHROMA_BRAIN_COLLECTION, user_prompt)
 
             for i, doc in enumerate(docs_retrieve, start=1):
                 print(f"📌 Result {i}:")

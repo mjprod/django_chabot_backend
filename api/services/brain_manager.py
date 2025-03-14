@@ -134,8 +134,6 @@ class BrainManager:
             },
         )
 
-        logger.info(f"{id} - {document} ")
-
         return id, document
     
 

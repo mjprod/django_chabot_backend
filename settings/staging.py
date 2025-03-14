@@ -37,22 +37,12 @@ MONGODB_URI = (
 )
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",  # noqa: F405
-        "CONN_MAX_AGE": 60,
-        "OPTIONS": {
-            "timeout": 20,
-        },
-    },
-    "mongodb": {
-        "ENGINE": "djongo",
-        "NAME": MONGODB_DATABASE,
-        "CLIENT": {
-            "host": MONGODB_URI,
-            "maxPoolSize": 50,
-            "minPoolSize": 10,
-            "maxIdleTimeMS": 45000,
-        },
-    },
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv("POSTGRE_DATABASE_NAME"),
+        'USER': os.getenv("POSTGRE_DATABASE_USER"),
+        'PASSWORD': os.getenv("POSTGRE_DATABASE_PASSWORD"),
+        'HOST': os.getenv("POSTGRE_DATABASE_HOST"), 
+        'PORT': os.getenv("POSTGRE_DATABASE_PORT"),
+    }
 }
