@@ -231,7 +231,7 @@ def prompt_conversation_admin(
         try:
 
             # Exception handling for user prompt
-            if user_prompt.lower().strip() == "ok":
+            if user_prompt.lower().strip() in ["ok", "like", "boss"]:
                 docs_retrieve = store.similarity_search(user_prompt, k=1)
             else:
                 docs_retrieve = store.similarity_search(user_prompt, k=3)

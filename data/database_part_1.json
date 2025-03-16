@@ -5204,9 +5204,9 @@
       ],
       "intent": "app_download_inquiry",
       "languages": {
-        "en": "\"Boss… my member changed their phone, same number but can’t download the Joker app… member’s phone number 017 3120591\"",
-        "ms": "\"bos..member dah tukar hp no yg sama tp x boleh download app joker..no hp member 017 3120591\"",
-        "cn": "\"老闆…我的會員換了手機，號碼一樣但無法下載Joker應用程式…會員電話號碼017 3120591\""
+        "en": "\"Boss… my member changed their phone, same number but can’t download the Joker app…\"",
+        "ms": "\"bos..member dah tukar hp no yg sama tp x boleh download app joker..\"",
+        "cn": "\"老闆…我的會員換了手機，號碼一樣但無法下載Joker應用程式…"
       }
     },
     "answer": {
@@ -5257,9 +5257,9 @@
       ],
       "intent": "app_download_inquiry",
       "languages": {
-        "en": "\"Boss… my member changed their phone, same number but can’t download the Joker app… member’s phone number 017 3120591\"",
-        "ms": "\"bos..member dah tukar hp no yg sama tp x boleh download app joker..no hp member 017 3120591\"",
-        "cn": "\"老闆…我的會員換了手機，號碼一樣但無法下載Joker應用程式…會員電話號碼017 3120591\""
+        "en": "\"Boss… my member changed their phone, same number but can’t download the Joker app…\"",
+        "ms": "\"bos..member dah tukar hp no yg sama tp x boleh download app joker..\"",
+        "cn": "\"老闆…我的會員換了手機，號碼一樣但無法下載Joker應用程式…\""
       }
     },
     "answer": {
