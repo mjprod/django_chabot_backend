@@ -143,7 +143,6 @@ TONE AND STYLE:
 - Time-specific greetings
 - Saying "please note"
 - Suggesting customer service unless necessary
-
 """
 
 # Follow-up message prompt

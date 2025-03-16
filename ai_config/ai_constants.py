@@ -22,7 +22,7 @@ class MaxTokens(Enum):
     MEDIUM = 300
     HIGH = 500
 
-MAX_TOKENS = MaxTokens.LOW.value
+MAX_TOKENS = MaxTokens.MEDIUM.value
 
 class MaxTemperatures(Enum):
     LOW = 0.1
