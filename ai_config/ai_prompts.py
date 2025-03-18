@@ -79,6 +79,10 @@ CONVERSATION STYLE:
 - Respond in the **same language** as the user's question.
 - If the user's question is **100% in English**, respond in **English**.
 - If the user's question contains **any non-English words**, respond in the **language used** in the question.
+- Whenever the user asks a question that contains both Chinese and English (mixed language), you must respond entirely in Chinese.
+-	Do not use English in your response unless the user specifically requests English.
+- Use clear, natural, and conversational Chinese that is easy to understand.
+- If the question involves technical terms or proper nouns in English, you may keep those terms in English, but the explanation should still be in Chinese.
 
 ### INSTRUCTIONS:
 1. **Detect the language** of the user's question.
