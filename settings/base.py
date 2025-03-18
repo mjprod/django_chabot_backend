@@ -11,11 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
-import logging
 from pathlib import Path
 from dotenv import load_dotenv
 from corsheaders.defaults import default_headers
-from rich.logging import RichHandler
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,9 +30,6 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = False  # Default to False
 ALLOWED_HOSTS = []
-
-# TODO: Temporary for development
-FIXED_API_TOKEN = "4d4a50524f4432303232"
 
 # MongoDB settings
 MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
@@ -73,6 +69,9 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend'
+]
 # Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -82,11 +81,31 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    # "api.config.apps.ApiConfig",
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     "corsheaders",
     "django_filters",
     "api"
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',  # Default: Requires authentication for all views
+    ),
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": True,  # Enable refresh token rotation
+    "BLACKLIST_AFTER_ROTATION": True,  # Blacklist old refresh tokens
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+    "TOKEN_BLACKLIST": "rest_framework_simplejwt.token_blacklist",
+}
+
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -94,7 +113,7 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    "api.middleware.FixedTokenAuthMiddleware",
+    # "api.middleware.FixedTokenAuthMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
