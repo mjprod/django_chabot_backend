@@ -3,11 +3,15 @@
 import os
 import sys
 
+from dotenv import load_dotenv
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.base")
-    # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "chatbot_project.settings")
+    load_dotenv()
+
+    environment = os.getenv("DJANGO_ENV", "local")
+    # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.base")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"chatbot_project.settings.{environment}")
 
     try:
         from django.core.management import execute_from_command_line

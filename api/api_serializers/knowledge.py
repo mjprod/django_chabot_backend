@@ -1,6 +1,6 @@
 from rest_framework import serializers
 import logging
-from ..models import Category, SubCategory, Knowledge, KnowledgeContent
+from ..models import Category, SubCategory, Knowledge, KnowledgeContent, Context
 from api.utils.enum import CategoryColor
 
 
@@ -29,6 +29,12 @@ class KnowledgeContentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ContextSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Context
+        fields = '__all__'
+
+
 class KnowledgeListSerializer(serializers.ListSerializer):
     def to_representation(self, data):
         data = super().to_representation(data)
@@ -39,10 +45,11 @@ class KnowledgeSerializer(serializers.ModelSerializer):
     knowledge_content = serializers.SerializerMethodField()
     category = CategorySerializer(read_only=True)
     subcategory = SubCategorySerializer(read_only=True)
+    context = ContextSerializer(read_only=True)
 
     class Meta:
         model = Knowledge
-        fields = ['id', 'knowledge_uuid', 'category', 'subcategory', 'type', 'knowledge_content']
+        fields = ['id', 'knowledge_uuid', 'category', 'subcategory', 'type', 'context', 'knowledge_content']
         list_serializer_class = KnowledgeListSerializer
 
     # def get_knowledge_content(self, obj):

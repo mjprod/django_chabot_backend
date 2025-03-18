@@ -26,14 +26,3 @@ MONGODB_URI = (
     f"mongodb://{MONGODB_USERNAME}:{MONGODB_PASSWORD}"
     f"@{MONGODB_CLUSTER}/{MONGODB_DATABASE}?retryWrites=true&w=majority"
 )
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("POSTGRE_DATABASE_NAME"),
-        'USER': os.getenv("POSTGRE_DATABASE_USER"),
-        'PASSWORD': os.getenv("POSTGRE_DATABASE_PASSWORD"),
-        'HOST': os.getenv("POSTGRE_DATABASE_HOST"), 
-        'PORT': os.getenv("POSTGRE_DATABASE_PORT"),
-    }
-}

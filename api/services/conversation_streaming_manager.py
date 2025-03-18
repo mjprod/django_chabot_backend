@@ -1,207 +1,194 @@
-import os
-import time
-import json
+from datetime import datetime
 from openai import OpenAI
+import uuid
+import json
+import re
+
+
 import logging
 from .config import (
     OPENAI_API_KEY,
-    OPENAI_TIMEOUT,
     CHAT_MODEL,
-    MAX_TEMPERATURE,
-    MAX_TOKENS,
-    CONVERSATION_STREAMING_PROMPT
+    CONVERSATION_STREAMING_PROMPT,
 )
+
+from django.db import transaction
+from django.core.exceptions import ObjectDoesNotExist
+
+from api.models import Knowledge, KnowledgeContent, Context, Category
+from api.utils.enum import KnowledgeType, KnowledgeContentStatus, KnowledgeContentLanguage
+from api.app.mongo import MongoDB
+
+STREAMING_COLLECTION="ck_old_conversations"
+
+logger = logging.getLogger(__name__)
+
+
+"""
+TODO: 
+1. configuration values are very messy. Refactoring needed
+2. Hardcoded a lot!!
+3. AI response can be so out of control
+4. Need to use transaction atomic operation for data saving!
+"""
+
 
 
 class ConversationStreamingManager:
     _instance = None
-    
-    def __new__(cls):
+
+    def __new__(cls, api_key: str = OPENAI_API_KEY):
         if cls._instance is None:
+            if api_key is None:
+                raise ValueError("API key must be provided during the first initialization.")
             cls._instance = super(ConversationStreamingManager, cls).__new__(cls)
-            cls._instance._initialize()
+            cls._instance.client = OpenAI(
+                api_key=api_key,
+            )
         return cls._instance
     
-    def _initialize(self):
-        self.client = OpenAI(
-            api_key=OPENAI_API_KEY, 
-            timeout=OPENAI_TIMEOUT
+
+    def streaming_conversations_from_db(self, date):
+      query = {"dateFr": date}  
+      MongoDB.get_db()
+      documents = MongoDB.query_collection(collection_name=STREAMING_COLLECTION, query=query)
+
+      if not documents:
+          logger.info(f"streamed conversations for date ({date}) is not ready yet")
+          return
+
+      document = documents[0]  
+      for data in document.get("ResponseData", []):
+          for conversation in data.get("ConversationsList", []):
+              conversation_data = conversation.get("Conversations")
+
+              if conversation_data:
+                  extracted_data = self._extract_admin_responses(conversation_data)
+                  
+                  if extracted_data:
+                    user_messages, admin_messages, conversation_context = extracted_data
+                    ai_response_list = self._categorize_and_detect_language(admin_messages)
+                    self._store_knowledge_context(user_messages, admin_messages, ai_response_list, conversation_context)
+
+
+    def _categorize_and_detect_language(self, admin_messages: list):
+        if not isinstance(admin_messages, list):
+            raise ValueError("Expected a list of Admin responses.")
+        
+        admin_messages_text = "\n".join(admin_messages)
+        full_prompt = f"{CONVERSATION_STREAMING_PROMPT}\n\nInput Admin Reply:\n{admin_messages_text}"
+
+        completion = self.client.chat.completions.create(
+            model=CHAT_MODEL,
+            messages=[
+                {
+                    "role": "user",
+                    "content": full_prompt
+                }
+            ]
         )
-        self.model = CHAT_MODEL
-        self.temperature = MAX_TEMPERATURE
-        self.max_tokens = MAX_TOKENS
-        self.prompt = CONVERSATION_STREAMING_PROMPT
+
+        response_content = completion.choices[0].message.content
+
+        try:
+            response_dict = json.loads(response_content)
+            return response_dict
+        except json.JSONDecodeError as e:
+            logger.error(f"Model response is not valid JSON: {str(e)}")
+            return None
+        
+
+    def _extract_admin_responses(self, conversation):
+
+      admin_messages = []
+      user_messages = []
+
+      found_flag = False
+      
+      for i, message in enumerate(conversation):
+        if (message.get("IsService",False) 
+            and message.get("AdminAction",2)< 2  
+            and message.get("AdminReply",None) 
+            and self._has_more_than_num_words(message.get("AdminReply"), 3)
+            ):
+            found_flag = True
+            
+            # get cooresponding user message
+            user_message = ""
+            if i-1>=0 and conversation[i-1].get("IsService")==False:
+                user_message=conversation[i-1].get("UserMsg")
+            admin_message = message.get("AdminReply")
+
+            user_message = user_message.replace("\r\n", " ").strip()
+            admin_message = admin_message.replace("\r\n", " ").strip()
+
+            admin_messages.append(admin_message)
+            user_messages.append(user_message)
+
+      if found_flag:
+            return user_messages, admin_messages, conversation
+
+      return None
     
-    def generate_response(self, conversations_str):
-        
-        conversations = [{
-            "role": "system", 
-            "content": conversations_str
-        }]
 
-        conversations.append({
-            "role": "system", 
-            "content": CONVERSATION_STREAMING_PROMPT
-        })
-
-        # check conversation if it has 0,1 admin_action
-        
-        response = self.client.chat.completions.create(
-            model=self.model,
-            messages=conversations,
-            temperature=self.temperature,
-            max_tokens=self.max_tokens,
-        )
-       
-        ai_response = response.choices[0].message.content   
-        print(ai_response)
-        return
-
-        ai_response = json.loads(ai_response)
-        return ai_response
-    
-    def store_knowledge_content(self, ai_response):
-        
-        print(ai_response)
-        
-        for item in ai_response:
-          question = item.get("question", None)
-          answer = item.get("answer", None)
-          category = item.get("category", None)
-          subcategory = item.get("subcategory", None)
-          language = item.get("language", 2)
+    def _has_more_than_num_words(self, text, num):
+        words = re.findall(r'\b\w+\b', text)  # Extracts real words
+        return len(words) > num
 
 
+    def _store_knowledge_context(self, user_messages, admin_messages, ai_responses, conversation_context):
+
+        # Step 1: Create a Context entry using conversation_context
+        context_instance = Context(context=conversation_context)
+        context_instance.save()
+
+        # Step 2: Iterate through knowledge_content_list and create Knowledge and KnowledgeContent entries
+        for question, answer in zip(user_messages, admin_messages):            
+            category = None
+            language = KnowledgeContentLanguage.MALAYSIAN.value
+
+            # dealing with stupid AI response
+            try:
+                if len(ai_responses) == len(admin_messages):
+                    ai_response = ai_responses[admin_messages.index(answer)]
+                    category_id = ai_response.get('category', None)
+                    category = Category.objects.get(id=int(category_id))
+                    language = int(ai_response.get('language', language))
+            except (IndexError, Exception, TypeError, ObjectDoesNotExist, Exception):
+                category = None
+                language = KnowledgeContentLanguage.MALAYSIAN.value
+                logger.error(f"Invalid or missing category or language from AI response for context: {context_instance.id}")
 
 
+            # Create a new Knowledge entry
+            knowledge_instance = Knowledge(
+                knowledge_uuid=uuid.uuid4(),
+                category=category,
+                subcategory=None,
+                context=context_instance,
+                type=KnowledgeType.FAQ.value
+            )
+
+            knowledge_instance.save()
+            
+            # Create a new KnowledgeContent entry
+            KnowledgeContent.objects.create(
+                knowledge=knowledge_instance,
+                status=KnowledgeContentStatus.NEEDS_REVIEW.value,
+                is_edited=False,
+                in_brain=False,
+                question=question,
+                answer=answer,
+                language=int(language),
+            )
 
 
-
-
-
+                      
 
 def main():
-    # Example conversation data (replace with actual conversation data)
-    conversations_str = """
-    [
-            {
-              "ChatId": 10950634,
-              "UserMsg": "boss bagi link download pusyy",
-              "RobotMsg": "Hi boss, you want the 4D JOKER download link, right? 😊 \n\n📥 Here it is for you: [Download 4D JOKER](https://4djokers.club/chat/download/joker)\n\nHope you have a great time with it! Good luck! 🍀🚀🔥",
-              "AdminReply": "",
-              "ReplyChatId": 0,
-              "ImgUrl": "",
-              "CreateDate": "2025-03-13 23:20:25",
-              "ConversationId": "JS5DwlUlpSSU/CIF5Tpakg==",
-              "IsService": false,
-              "AdminAction": 0
-            },
-            {
-              "ChatId": 10950644,
-              "UserMsg": "",
-              "RobotMsg": "",
-              "AdminReply": "hntr semula resit tadi ke top-up , LAST CLAIM\r\nminta boss semak senarai akaun bank dlm apps dulu sebelum transfer ya\r\nTerima Kasih banyak2 bosss❤",
-              "ReplyChatId": 0,
-              "ImgUrl": "",
-              "CreateDate": "2025-03-13 23:21:01",
-              "ConversationId": "JS5DwlUlpSSU/CIF5Tpakg==",
-              "IsService": true,
-              "AdminAction": 3
-            },
-            {
-              "ChatId": 10950651,
-              "UserMsg": "ok",
-              "RobotMsg": "Hehe good boss! 😆👍 Next time don’t forget to add the reference ya, it helps the system confirm faster. Hope you get big ONG and strong HUAT today! 🍀🔥💰",
-              "AdminReply": "",
-              "ReplyChatId": 0,
-              "ImgUrl": "",
-              "CreateDate": "2025-03-13 23:21:15",
-              "ConversationId": "JS5DwlUlpSSU/CIF5Tpakg==",
-              "IsService": false,
-              "AdminAction": 0
-            },
-            {
-              "ChatId": 10950655,
-              "UserMsg": "bagi link  download pusyy boss",
-              "RobotMsg": "Hi boss, if you want to download Kiss918, use these links below:\n\n📥 Kiss918 Download:\n🔗 [https://m-918kiss.com](https://m-918kiss.com)\n🔗 [http://b1.918kiss.com](http://b1.918kiss.com)\n\n📌 After downloading, log in using the ID & Password from the Joker App.\n📌 Make sure to transfer credit into the game before starting.\n\nIf there’s an issue with downloading or logging in, just let me know! 😊🙏",
-              "AdminReply": "",
-              "ReplyChatId": 0,
-              "ImgUrl": "",
-              "CreateDate": "2025-03-13 23:21:25",
-              "ConversationId": "JS5DwlUlpSSU/CIF5Tpakg==",
-              "IsService": false,
-              "AdminAction": 0
-            },
-            {
-              "ChatId": 10950671,
-              "UserMsg": "",
-              "RobotMsg": "",
-              "AdminReply": "Link Mega\r\n\r\nhttps://m.cfbz888.com\r\nhttp://m.mega266.com\r\nhttps://m2.mega166.com\r\n\r\nLink Pussy888\r\n\r\nhttp://ytl.pussy888.com\r\n\r\nLink Kiss918\r\n\r\nhttps://m-918kiss.com\r\nhttp://b1.918kiss.com\r\n\r\nLINK XE\r\n\r\nhttps://m-xe88.com",
-              "ReplyChatId": 0,
-              "ImgUrl": "",
-              "CreateDate": "2025-03-13 23:22:22",
-              "ConversationId": "JS5DwlUlpSSU/CIF5Tpakg==",
-              "IsService": true,
-              "AdminAction": 3
-            },
-            {
-              "ChatId": 10950701,
-              "UserMsg": "tak boleh bukak boss",
-              "RobotMsg": "Hi boss, if the game won’t open, let’s try a few steps to fix it:\n\n📌 How to fix the game not opening:\n1️⃣ Close & reopen the game app.\n2️⃣ Log out & log back into the Joker App, then try again.\n3️⃣ Switch your internet connection (try WiFi or mobile data).\n4️⃣ Check if the game is under maintenance – if so, just wait until it’s done.\n5️⃣ If all else fails, try reinstalling the game using the correct link.\n\nIf it still doesn’t work, send a screenshot of any error you see, and we’ll help you out! 😊🙏",
-              "AdminReply": "",
-              "ReplyChatId": 0,
-              "ImgUrl": "",
-              "CreateDate": "2025-03-13 23:24:25",
-              "ConversationId": "JS5DwlUlpSSU/CIF5Tpakg==",
-              "IsService": false,
-              "AdminAction": 0
-            },
-            {
-              "ChatId": 10950714,
-              "UserMsg": "",
-              "RobotMsg": "",
-              "AdminReply": "screenshot mari bos",
-              "ReplyChatId": 0,
-              "ImgUrl": "",
-              "CreateDate": "2025-03-13 23:25:35",
-              "ConversationId": "JS5DwlUlpSSU/CIF5Tpakg==",
-              "IsService": true,
-              "AdminAction": 3
-            },
-            {
-              "ChatId": 10950718,
-              "UserMsg": "",
-              "RobotMsg": "",
-              "AdminReply": "",
-              "ReplyChatId": 0,
-              "ImgUrl": "https://joker2api728.com/cdnimg/joker2020/chatService/member/20250313/8a30948f-9037-46a9-9303-6c6b2f904397.jpg",
-              "CreateDate": "2025-03-13 23:26:06",
-              "ConversationId": "JS5DwlUlpSSU/CIF5Tpakg==",
-              "IsService": false,
-              "AdminAction": 0
-            },
-            {
-              "ChatId": 10950729,
-              "UserMsg": "",
-              "RobotMsg": "",
-              "AdminReply": "Hi boss, kalau login loading lama, boleh cuba cara ini:\r\n\r\n📌 Cara Atasi Login Loading Lama:\r\n✅ Tutup & buka semula app game.\r\n✅ Logout & login semula ke Joker App, kemudian salin semula ID & Password.\r\n✅ Tukar rangkaian internet (cuba WiFi atau data mobile).\r\n✅ Semak jika game tengah maintenance – kalau maintenance, tunggu sehingga selesai.\r\n✅ Cuba guna VPN jika masih tidak boleh buka:\r\n\r\n📥 Download VPN Malaysia:\r\n🔗 https://play.google.com/store/apps/details?id=malaysia.vpn_tap2free&hl=en&gl=US\r\n1️⃣ Pasang VPN & buka aplikasi.\r\n2️⃣ Tekan \"Connect to Malaysia\" dan tunggu sehingga berjaya disambungkan.\r\n3️⃣ Selepas connect, cuba login semula ke game.\r\n\r\n📌 Kalau masih ada masalah, boleh hantar screenshot ke live chat untuk semakan segera. 😊🙏",
-              "ReplyChatId": 0,
-              "ImgUrl": "",
-              "CreateDate": "2025-03-13 23:26:57",
-              "ConversationId": "JS5DwlUlpSSU/CIF5Tpakg==",
-              "IsService": true,
-              "AdminAction": 3
-            }
-          ]
-"""
 
-    manager = ConversationStreamingManager()
-    ai_response = manager.generate_response(conversations_str)
-    print(ai_response)
-    
-    # Output the AI response
-    for item in ai_response:
-      print(item)
+    manager = ConversationStreamingManager(api_key=OPENAI_API_KEY)
+    manager.streaming_conversations_from_db("2025-03-13")
 
 
 if __name__ == "__main__":
