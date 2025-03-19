@@ -32,7 +32,15 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 
 DEBUG = False  # Default to False
-ALLOWED_HOSTS = []
+
+#STAGING ONLY 
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "api-staging.mjproapps.com",
+    "staging.mjproapps.com",
+    "13.236.102.255",
+]
 
 # MongoDB settings
 MONGODB_USERNAME = os.getenv(f"{app_env}_MONGODB_USERNAME")
