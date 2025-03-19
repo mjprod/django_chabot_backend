@@ -2,7 +2,7 @@ import os
 import chromadb
 from dotenv import load_dotenv
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_chroma import Chroma
+from langchain_community.vectorstores import Chroma
 from langchain_core.documents import Document
 from api.utils.logger import logger, get_progress_bar
 from django.db.models import Q
