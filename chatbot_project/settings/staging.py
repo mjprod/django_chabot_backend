@@ -6,7 +6,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "api-staging.mjproapps.com",
-    "https://staging.mjproapps.com",
+    "staging.mjproapps.com",
     "13.236.102.255",
     
 ]
