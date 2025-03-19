@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "name": "3rd_party",
-      "description": "All things related to third-party services."
+      "description": "All things related to 3rd party."
     }
   },
   {
@@ -12,79 +12,79 @@
     "pk": 2,
     "fields": {
       "name": "4d_lotto",
-      "description": "All discussions about 4D Lotto."
+      "description": "All things related to 4d lotto."
     }
   },
   {
     "model": "api.category",
     "pk": 3,
     "fields": {
-      "name": "account",
-      "description": "Account-related information and settings."
+      "name": "soccer",
+      "description": "All things related to soccer."
     }
   },
   {
     "model": "api.category",
     "pk": 4,
     "fields": {
-      "name": "feedback",
-      "description": "User feedback and suggestions."
+      "name": "account",
+      "description": "All things related to account."
     }
   },
   {
     "model": "api.category",
     "pk": 5,
     "fields": {
-      "name": "finance",
-      "description": "Financial services and transactions."
+      "name": "feedback",
+      "description": "All things related to feedback."
     }
   },
   {
     "model": "api.category",
     "pk": 6,
     "fields": {
-      "name": "points_shop",
-      "description": "Shopping and rewards using points."
+      "name": "finance",
+      "description": "All things related to finance."
     }
   },
   {
     "model": "api.category",
     "pk": 7,
     "fields": {
-      "name": "referral",
-      "description": "Referral programs and bonuses."
+      "name": "rewards_points_and_promotion",
+      "description": "All things related to rewards points and promotion."
     }
   },
   {
     "model": "api.category",
     "pk": 8,
     "fields": {
-      "name": "security",
-      "description": "Security and account protection topics."
+      "name": "referral",
+      "description": "All things related to referral."
     }
   },
   {
     "model": "api.category",
     "pk": 9,
     "fields": {
-      "name": "technical",
-      "description": "Technical support and troubleshooting."
+      "name": "security",
+      "description": "All things related to security."
     }
   },
   {
     "model": "api.category",
     "pk": 10,
     "fields": {
-      "name": "customer_support",
-      "description": "Customer service and support inquiries."
+      "name": "technical",
+      "description": "All things related to technical."
     }
   },
   {
     "model": "api.category",
     "pk": 11,
     "fields": {
-      "name": "game_inquiry",
-      "description": "Questions and discussions about games."
+      "name": "customer_support",
+      "description": "All things related to customer support."
     }
   },
   {
@@ -92,7 +92,7 @@
     "pk": 12,
     "fields": {
       "name": "policy_explanation",
-      "description": "Clarifications about policies and rules."
+      "description": "All things related to policy explanation."
     }
   },
   {
@@ -100,15 +100,7 @@
     "pk": 13,
     "fields": {
       "name": "encouragement",
-      "description": "Motivation and encouragement topics."
-    }
-  },
-  {
-    "model": "api.category",
-    "pk": 14,
-    "fields": {
-      "name": "sports_betting",
-      "description": "Sports betting discussions and information."
+      "description": "All things related to encouragement."
     }
   }
 ]

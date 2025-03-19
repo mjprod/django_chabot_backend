@@ -6,6 +6,7 @@ endif
 
 # command: make load-all-fixtures
 load-all-fixtures:
+	$(PYTHON) manage.py loaddata user_fixture.json
 	$(PYTHON) manage.py loaddata categories_fixture.json
 	$(PYTHON) manage.py loaddata subcategories_fixture.json
 	for i in $$(seq 1 9); do \

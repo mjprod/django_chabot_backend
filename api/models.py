@@ -2,7 +2,6 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from .utils.enum import KnowledgeType, KnowledgeContentStatus, KnowledgeContentLanguage
 
-import uuid
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -13,6 +12,10 @@ class SubCategory(models.Model):
     category = models.ForeignKey(Category, related_name='subcategory_category', on_delete=models.CASCADE)  # Linking to Category
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(blank=True, null=True)
+
+
+class Context(models.Model):
+    context = models.TextField()
     
 
 class Knowledge(models.Model):
@@ -26,6 +29,7 @@ class Knowledge(models.Model):
     knowledge_uuid = models.UUIDField(editable=False, unique=True)
     category = models.ForeignKey(Category, related_name='knowledge_category', on_delete=models.SET_NULL, null=True, blank=True)
     subcategory = models.ForeignKey(SubCategory, related_name='knowledge_subcategory', on_delete=models.SET_NULL, null=True, blank=True)
+    context = models.ForeignKey(Context, related_name='knowledge_context', on_delete=models.SET_NULL, null=True, blank=True)
     type = models.IntegerField(choices=TYPE_CHOICES, default=KnowledgeType.FAQ.value)
 
     def clean(self):
@@ -73,14 +77,7 @@ class KnowledgeContent(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['knowledge', 'language'], name='unique_knowledge_language')
         ]
-    
-    def save(self, *args, **kwargs):
-        # Check if there is a related Brain instance
-        if Brain.objects.filter(knowledge_content=self).exists():
-            self.in_brain = True
-        else:
-            self.in_brain = False
-        super().save(*args, **kwargs)
+        
 
 class Brain(models.Model):
     knowledge_content = models.ForeignKey(KnowledgeContent, related_name='knowledge_content', on_delete=models.CASCADE)

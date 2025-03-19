@@ -5,7 +5,7 @@
     "fields": {
       "category": 1,
       "name": "live_casino",
-      "description": "Live casino games and services."
+      "description": "Live Casino related topics and services."
     }
   },
   {
@@ -14,7 +14,7 @@
     "fields": {
       "category": 1,
       "name": "slot_game",
-      "description": "Slot games and related discussions."
+      "description": "Slot Game related topics and services."
     }
   },
   {
@@ -22,17 +22,17 @@
     "pk": 3,
     "fields": {
       "category": 1,
-      "name": "game_inquiry",
-      "description": "Questions related to third-party games."
+      "name": "new_game_inquiry",
+      "description": "New game inquiry related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 4,
     "fields": {
-      "category": 1,
-      "name": "third_party_issues",
-      "description": "Issues related to third-party services."
+      "category": 2,
+      "name": "4d_bet",
+      "description": "4D Bet related topics and services."
     }
   },
   {
@@ -40,8 +40,8 @@
     "pk": 5,
     "fields": {
       "category": 2,
-      "name": "grand_tiger",
-      "description": "Grand Tiger 4D Lotto."
+      "name": "4d_lotto_rules",
+      "description": "4D Lotto Rules related topics and services."
     }
   },
   {
@@ -49,8 +49,8 @@
     "pk": 6,
     "fields": {
       "category": 2,
-      "name": "jaguar_2",
-      "description": "Jaguar 2 4D Lotto."
+      "name": "4d_draw_results",
+      "description": "4D Draw Results related topics and services."
     }
   },
   {
@@ -58,8 +58,8 @@
     "pk": 7,
     "fields": {
       "category": 2,
-      "name": "super_j3",
-      "description": "Super J3 4D Lotto."
+      "name": "magic_box",
+      "description": "Magic Box related topics and services."
     }
   },
   {
@@ -67,287 +67,287 @@
     "pk": 8,
     "fields": {
       "category": 2,
-      "name": "lucky_hari",
-      "description": "Lucky Hari 4D Lotto."
+      "name": "4d_lotto_history",
+      "description": "4D Lotto History related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 9,
     "fields": {
-      "category": 2,
-      "name": "perdana",
-      "description": "Perdana 4D Lotto."
+      "category": 3,
+      "name": "match_results",
+      "description": "Match Results related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 10,
     "fields": {
-      "category": 2,
-      "name": "nine_lotto",
-      "description": "Nine Lotto 4D Lotto."
+      "category": 3,
+      "name": "betting_rules",
+      "description": "Betting Rules related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 11,
     "fields": {
-      "category": 2,
-      "name": "gd_lotto",
-      "description": "GD Lotto 4D Lotto."
+      "category": 3,
+      "name": "bet_status",
+      "description": "Bet Status related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 12,
     "fields": {
-      "category": 2,
-      "name": "magnum",
-      "description": "Magnum 4D Lotto."
+      "category": 3,
+      "name": "game_issues",
+      "description": "Game Issues related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 13,
     "fields": {
-      "category": 2,
-      "name": "da_ma_cai",
-      "description": "Da Ma Cai 4D Lotto."
+      "category": 3,
+      "name": "soccer_betting_history",
+      "description": "Soccer betting history related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 14,
     "fields": {
-      "category": 2,
-      "name": "toto",
-      "description": "Toto 4D Lotto."
+      "category": 4,
+      "name": "user_id",
+      "description": "User ID related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 15,
     "fields": {
-      "category": 2,
-      "name": "sarawak",
-      "description": "Sarawak 4D Lotto."
+      "category": 4,
+      "name": "personal_information",
+      "description": "Personal Information related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 16,
     "fields": {
-      "category": 2,
-      "name": "sabah",
-      "description": "Sabah 4D Lotto."
+      "category": 4,
+      "name": "account_management",
+      "description": "Account Management related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 17,
     "fields": {
-      "category": 2,
-      "name": "sandakan",
-      "description": "Sandakan 4D Lotto."
+      "category": 4,
+      "name": "policy_explanation",
+      "description": "Policy Explanation related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 18,
     "fields": {
-      "category": 2,
-      "name": "singapore",
-      "description": "Singapore 4D Lotto."
+      "category": 4,
+      "name": "registration",
+      "description": "Registration related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 19,
     "fields": {
-      "category": 2,
-      "name": "4d_lotto_rules",
-      "description": "Rules for playing 4D Lotto."
+      "category": 4,
+      "name": "id_verification",
+      "description": "ID Verification related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 20,
     "fields": {
-      "category": 2,
-      "name": "draw_results",
-      "description": "Results of 4D Lotto draws."
+      "category": 5,
+      "name": "customer_feedback",
+      "description": "Customer Feedback related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 21,
     "fields": {
-      "category": 2,
-      "name": "4D_betting_rules",
-      "description": "Betting rules for 4D Lotto."
+      "category": 5,
+      "name": "customer_support_inquiry",
+      "description": "Customer Support Inquiry related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 22,
     "fields": {
-      "category": 2,
-      "name": "magic_box",
-      "description": "Magic Box in 4D Lotto."
+      "category": 5,
+      "name": "encouragement_messages",
+      "description": "Encouragement Messages related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 23,
     "fields": {
-      "category": 3,
-      "name": "wallet",
-      "description": "Wallet management and transactions."
+      "category": 5,
+      "name": "complaint_handling",
+      "description": "Complaint Handling related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 24,
     "fields": {
-      "category": 3,
-      "name": "personal_information",
-      "description": "User personal information settings."
+      "category": 5,
+      "name": "satisfaction_survey",
+      "description": "Satisfaction Survey related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 25,
     "fields": {
-      "category": 3,
-      "name": "account_management",
-      "description": "Managing user accounts and access."
+      "category": 6,
+      "name": "wallet_setup",
+      "description": "Wallet setup related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 26,
     "fields": {
-      "category": 3,
-      "name": "policy_explanation",
-      "description": "Explanations of account policies."
+      "category": 6,
+      "name": "wallet_issue_and_errors",
+      "description": "Wallet issue and errors related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 27,
     "fields": {
-      "category": 3,
-      "name": "registration",
-      "description": "New user registration and setup."
+      "category": 6,
+      "name": "wallet_transaction",
+      "description": "Wallet Transaction related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 28,
     "fields": {
-      "category": 3,
-      "name": "id_verification",
-      "description": "ID verification process for users."
+      "category": 6,
+      "name": "topup",
+      "description": "TOPUP related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 29,
     "fields": {
-      "category": 4,
-      "name": "customer_feedback",
-      "description": "Feedback from customers."
+      "category": 6,
+      "name": "withdraw",
+      "description": "WITHDRAW related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 30,
     "fields": {
-      "category": 4,
-      "name": "customer_support_inquiry",
-      "description": "Customer support-related inquiries."
+      "category": 6,
+      "name": "pay_delay",
+      "description": "PAY DELAY related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 31,
     "fields": {
-      "category": 4,
-      "name": "encouragement_messages",
-      "description": "Messages to encourage and support users."
+      "category": 6,
+      "name": "payment_issues",
+      "description": "Payment Issues related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 32,
     "fields": {
-      "category": 4,
-      "name": "complaint_handling",
-      "description": "Handling and resolving customer complaints."
+      "category": 6,
+      "name": "credit_transfer_issue",
+      "description": "Credit transfer issue related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 33,
     "fields": {
-      "category": 4,
-      "name": "satisfaction_survey",
-      "description": "Surveys to measure customer satisfaction."
+      "category": 6,
+      "name": "transaction_records",
+      "description": "Transaction Records related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 34,
     "fields": {
-      "category": 5,
-      "name": "topup",
-      "description": "Process for topping up funds."
+      "category": 6,
+      "name": "transaction_issues",
+      "description": "Transaction issues related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 35,
     "fields": {
-      "category": 5,
-      "name": "withdraw",
-      "description": "Withdrawal process and policies."
+      "category": 6,
+      "name": "bank_issues",
+      "description": "Bank Issues related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 36,
     "fields": {
-      "category": 5,
-      "name": "pay_delay",
-      "description": "Delays in payment processing."
+      "category": 6,
+      "name": "winning_credit_delay",
+      "description": "Winning Credit Delay related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 37,
     "fields": {
-      "category": 5,
-      "name": "payment_issues",
-      "description": "Issues related to payments."
+      "category": 6,
+      "name": "winning_update_inquiry",
+      "description": "Winning Update Inquiry related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 38,
     "fields": {
-      "category": 5,
-      "name": "transaction_records",
-      "description": "Records of user transactions."
+      "category": 6,
+      "name": "finance_withdrawal_conditions",
+      "description": "Withdrawal Conditions related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 39,
     "fields": {
-      "category": 5,
-      "name": "bank_issues",
-      "description": "Problems related to bank transactions."
+      "category": 6,
+      "name": "top_up_conditions",
+      "description": "Top UP Conditions related topics and services."
     }
   },
   {
@@ -355,26 +355,26 @@
     "pk": 40,
     "fields": {
       "category": 6,
-      "name": "points_shop_redemption",
-      "description": "Rules and process for redeeming points."
+      "name": "bank_inquiry",
+      "description": "Bank Inquiry related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 41,
     "fields": {
-      "category": 6,
-      "name": "points_accumulation",
-      "description": "How points are accumulated."
+      "category": 7,
+      "name": "lucky_spin",
+      "description": "Lucky Spin related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 42,
     "fields": {
-      "category": 6,
-      "name": "redemption_rules",
-      "description": "Guidelines for redeeming points."
+      "category": 7,
+      "name": "points_shop_redemption",
+      "description": "Points Shop Redemption related topics and services."
     }
   },
   {
@@ -382,8 +382,8 @@
     "pk": 43,
     "fields": {
       "category": 7,
-      "name": "referral_reward_policy",
-      "description": "Policies for referral rewards."
+      "name": "points_accumulation",
+      "description": "Points Accumulation related topics and services."
     }
   },
   {
@@ -391,8 +391,8 @@
     "pk": 44,
     "fields": {
       "category": 7,
-      "name": "referral_code_usage",
-      "description": "How to use referral codes."
+      "name": "redemption_rules",
+      "description": "Redemption Rules related topics and services."
     }
   },
   {
@@ -400,8 +400,8 @@
     "pk": 45,
     "fields": {
       "category": 7,
-      "name": "reward_distribution",
-      "description": "Distribution of referral rewards."
+      "name": "promo_event",
+      "description": "Promo Event related topics and services."
     }
   },
   {
@@ -409,8 +409,8 @@
     "pk": 46,
     "fields": {
       "category": 8,
-      "name": "password_management",
-      "description": "Managing user passwords."
+      "name": "referral_program",
+      "description": "Referral Program related topics and services."
     }
   },
   {
@@ -418,8 +418,8 @@
     "pk": 47,
     "fields": {
       "category": 8,
-      "name": "password_reset",
-      "description": "Process for resetting passwords."
+      "name": "referral_policy",
+      "description": "Referral Policy related topics and services."
     }
   },
   {
@@ -427,8 +427,8 @@
     "pk": 48,
     "fields": {
       "category": 8,
-      "name": "two_factor_authentication",
-      "description": "Two-factor authentication security."
+      "name": "referral_code_usage",
+      "description": "Referral Code Usage related topics and services."
     }
   },
   {
@@ -436,8 +436,8 @@
     "pk": 49,
     "fields": {
       "category": 8,
-      "name": "security_concerns",
-      "description": "Addressing user security concerns."
+      "name": "commission_inquiry",
+      "description": "Commission inquiry related topics and services."
     }
   },
   {
@@ -445,8 +445,8 @@
     "pk": 50,
     "fields": {
       "category": 9,
-      "name": "technical_issues",
-      "description": "General technical problems and fixes."
+      "name": "password_management",
+      "description": "Password Management related topics and services."
     }
   },
   {
@@ -454,8 +454,8 @@
     "pk": 51,
     "fields": {
       "category": 9,
-      "name": "vpn",
-      "description": "VPN-related connectivity issues."
+      "name": "password_reset",
+      "description": "Password Reset related topics and services."
     }
   },
   {
@@ -463,8 +463,8 @@
     "pk": 52,
     "fields": {
       "category": 9,
-      "name": "app_issues",
-      "description": "Problems with the application."
+      "name": "two-factor_authentication",
+      "description": "Two-Factor Authentication related topics and services."
     }
   },
   {
@@ -472,8 +472,8 @@
     "pk": 53,
     "fields": {
       "category": 9,
-      "name": "network_connection",
-      "description": "Network and connectivity issues."
+      "name": "security_concerns",
+      "description": "Security Concerns related topics and services."
     }
   },
   {
@@ -481,8 +481,8 @@
     "pk": 54,
     "fields": {
       "category": 10,
-      "name": "general_inquiry",
-      "description": "General questions and inquiries."
+      "name": "system_error",
+      "description": "System error related topics and services."
     }
   },
   {
@@ -490,8 +490,8 @@
     "pk": 55,
     "fields": {
       "category": 10,
-      "name": "complaint",
-      "description": "Filing a complaint."
+      "name": "vpn",
+      "description": "VPN related topics and services."
     }
   },
   {
@@ -499,107 +499,125 @@
     "pk": 56,
     "fields": {
       "category": 10,
-      "name": "suggestion",
-      "description": "User suggestions and feedback."
+      "name": "app_issues",
+      "description": "App Issues related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 57,
     "fields": {
-      "category": 11,
-      "name": "game_rules",
-      "description": "Rules for various games."
+      "category": 10,
+      "name": "network_connection",
+      "description": "Network Connection related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 58,
     "fields": {
-      "category": 11,
-      "name": "luck",
-      "description": "Discussions on luck and probability in games."
+      "category": 10,
+      "name": "app_download_inquiry",
+      "description": "App Download Inquiry related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 59,
     "fields": {
-      "category": 11,
-      "name": "advice",
-      "description": "Game-related advice and tips."
+      "category": 10,
+      "name": "app_usage_inquiry",
+      "description": "App Usage Inquiry related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 60,
     "fields": {
-      "category": 12,
-      "name": "fund_usage",
-      "description": "How funds can be used within the system."
+      "category": 10,
+      "name": "app_availability_inquiry",
+      "description": "App Availability Inquiry related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 61,
     "fields": {
-      "category": 12,
-      "name": "withdrawal_conditions",
-      "description": "Conditions required for withdrawal."
+      "category": 10,
+      "name": "registration_inquiry",
+      "description": "Registration Inquiry related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 62,
     "fields": {
-      "category": 13,
-      "name": "consolation",
-      "description": "Messages for consolation and support."
+      "category": 10,
+      "name": "game_error",
+      "description": "Game Error related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 63,
     "fields": {
-      "category": 13,
-      "name": "motivation",
-      "description": "Encouraging and motivational messages."
+      "category": 11,
+      "name": "general_inquiry",
+      "description": "General Inquiry related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 64,
     "fields": {
-      "category": 14,
-      "name": "match_results",
-      "description": "Results of sports matches."
+      "category": 11,
+      "name": "complaint",
+      "description": "Complaint related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 65,
     "fields": {
-      "category": 14,
-      "name": "sports_betting_rules",
-      "description": "Rules for sports betting."
+      "category": 11,
+      "name": "suggestion",
+      "description": "Suggestion related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 66,
     "fields": {
-      "category": 14,
-      "name": "bet_status",
-      "description": "Status of placed bets."
+      "category": 12,
+      "name": "fund_usage",
+      "description": "Fund Usage related topics and services."
     }
   },
   {
     "model": "api.subcategory",
     "pk": 67,
     "fields": {
-      "category": 14,
-      "name": "game_issues",
-      "description": "Issues related to sports betting games."
+      "category": 12,
+      "name": "policy_explanation_withdrawal_conditions",
+      "description": "Withdrawal Conditions related topics and services."
+    }
+  },
+  {
+    "model": "api.subcategory",
+    "pk": 68,
+    "fields": {
+      "category": 13,
+      "name": "consolation",
+      "description": "Consolation related topics and services."
+    }
+  },
+  {
+    "model": "api.subcategory",
+    "pk": 69,
+    "fields": {
+      "category": 13,
+      "name": "motivation",
+      "description": "Motivation related topics and services."
     }
   }
 ]

@@ -96,7 +96,7 @@ class BrainManager:
         """Load knowledge content into the collection if empty."""
         knowledge_contents_num = self._check_chroma_collection_count(collection_name)
         if knowledge_contents_num > 0:
-            logger.info(f"'{collection_name}' already has {knowledge_contents_num} knowledge contents. Loading '{collection_name} instead...'")
+            logger.info(f"'{collection_name}' already has {knowledge_contents_num} knowledge contents. Loading '{collection_name}' instead...")
             return
        
        # add knowledge content from Brain table in DB

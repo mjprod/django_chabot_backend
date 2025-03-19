@@ -11,15 +11,17 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
-import logging
 from pathlib import Path
 from dotenv import load_dotenv
 from corsheaders.defaults import default_headers
-from rich.logging import RichHandler
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 load_dotenv()
+app_env = os.getenv("DJANGO_ENV", "local").upper()
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -32,47 +34,34 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = False  # Default to False
 ALLOWED_HOSTS = []
 
-# TODO: Temporary for development
-FIXED_API_TOKEN = "4d4a50524f4432303232"
-
 # MongoDB settings
-MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
-MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
-MONGODB_CLUSTER = os.getenv("MONGODB_CLUSTER")
-MONGODB_DATABASE = os.getenv("MONGODB_DATABASE", "chatbotdb")
+MONGODB_USERNAME = os.getenv(f"{app_env}_MONGODB_USERNAME")
+MONGODB_PASSWORD = os.getenv(f"{app_env}_MONGODB_PASSWORD")
+MONGODB_CLUSTER = os.getenv(f"{app_env}_MONGODB_CLUSTER")
+MONGODB_DATABASE = os.getenv(f"{app_env}_MONGODB_DATABASE", "chatbotdb")
 
-
-# Construct MongoDB URI
-MONGODB_URI = (
-    f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}"
-    f"@{MONGODB_CLUSTER}/{MONGODB_DATABASE}?retryWrites=true&w=majority"
-)
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "djongo",
-#         "NAME": MONGODB_DATABASE,
-#         "CLIENT": {
-#             "host": MONGODB_URI,
-#             "maxPoolSize": 50,
-#             "minPoolSize": 10,
-#             "maxIdleTimeMS": 45000,
-#         },
-#     },
-# }
+# Postgresql settings
+POSTGRE_DATABASE_NAME = os.getenv(f"{app_env}_POSTGRE_DATABASE_NAME")
+POSTGRE_DATABASE_USER = os.getenv(f"{app_env}_POSTGRE_DATABASE_USER")
+POSTGRE_DATABASE_PASSWORD = os.getenv(f"{app_env}_POSTGRE_DATABASE_PASSWORD")
+POSTGRE_DATABASE_HOST = os.getenv(f"{app_env}_POSTGRE_DATABASE_HOST")
+POSTGRE_DATABASE_PORT = os.getenv(f"{app_env}_POSTGRE_DATABASE_PORT")
 
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("POSTGRE_DATABASE_NAME"),
-        'USER': os.getenv("POSTGRE_DATABASE_USER"),
-        'PASSWORD': os.getenv("POSTGRE_DATABASE_PASSWORD"),
-        'HOST': os.getenv("POSTGRE_DATABASE_HOST"), 
-        'PORT': os.getenv("POSTGRE_DATABASE_PORT"),
+        'NAME': POSTGRE_DATABASE_NAME,
+        'USER': POSTGRE_DATABASE_USER,
+        'PASSWORD': POSTGRE_DATABASE_PASSWORD,
+        'HOST': POSTGRE_DATABASE_HOST, 
+        'PORT': POSTGRE_DATABASE_PORT,
     }
 }
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend'
+]
 # Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -82,11 +71,33 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    # "api.config.apps.ApiConfig",
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     "corsheaders",
     "django_filters",
+    'django_celery_results',
+    'django_celery_beat',
     "api"
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',  # Default: Requires authentication for all views
+    ),
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": True,  # Enable refresh token rotation
+    "BLACKLIST_AFTER_ROTATION": True,  # Blacklist old refresh tokens
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+    "TOKEN_BLACKLIST": "rest_framework_simplejwt.token_blacklist",
+}
+
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -94,7 +105,7 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    "api.middleware.FixedTokenAuthMiddleware",
+    # "api.middleware.FixedTokenAuthMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -160,6 +171,12 @@ PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
 ]
 
+
+LOG_DIR = "logs/"
+if not os.path.exists(LOG_DIR):
+    os.makedirs(LOG_DIR)
+
+
 # added logging
 LOGGING = {
     "version": 1,
@@ -171,6 +188,19 @@ LOGGING = {
         },
     },
     "handlers": {
+        # TODO: to be confirmed
+         "file": {
+            "level": "INFO",
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "filename": os.path.join(LOG_DIR,"django.log"),
+            "when": "midnight",  # Rotate at midnight
+            "interval": 1,
+            "backupCount": 30,  # Keep one month's worth of log files
+            "formatter": "verbose",
+            "encoding": "utf8",
+        },
+
+        # comfirmed handelers
         "console": {
             "class": "logging.StreamHandler",
             "formatter": "verbose",
@@ -180,12 +210,65 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
-        "file": {
-            "class": "logging.handlers.RotatingFileHandler",
-            "filename": "django.log",
-            "maxBytes": 5242880,  # 5MB
-            "backupCount": 3,
+        "api_file": {
+            "level": "DEBUG",
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "filename": os.path.join(LOG_DIR, "api.log"),
+            "when": "midnight",  # Rotate at midnight
+            "interval": 1,
+            "backupCount": 30,  # Keep one month's worth of log files
             "formatter": "verbose",
+            "encoding": "utf8",
+        },
+        "celery_tasks": {
+            "level": "DEBUG",
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "filename": os.path.join(LOG_DIR, "celery_tasks.log"),
+            "when": "midnight",  # Rotate at midnight
+            "interval": 1,
+            "backupCount": 30,  # Keep one month's worth of log files
+            "formatter": "verbose",
+            "encoding": "utf8",
+        },
+        "celery_worker": {
+            "level": "INFO",
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "filename": os.path.join(LOG_DIR, "celery_worker.log"),
+            "when": "midnight",  # Rotate at midnight
+            "interval": 1,
+            "backupCount": 30,  # Keep one month's worth of log files
+            "formatter": "verbose",
+            "encoding": "utf8",
+        },
+        "celery_beat": {
+            "level": "INFO",
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "filename": os.path.join(LOG_DIR, "celery_beat.log"),
+            "when": "midnight",  # Rotate at midnight
+            "interval": 1,
+            "backupCount": 30,  # Keep one month's worth of log files
+            "formatter": "verbose",
+            "encoding": "utf8",
+        },
+        "celery_tasks": {
+            "level": "INFO",
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "filename": os.path.join(LOG_DIR, "celery_tasks.log"),
+            "when": "midnight",  # Rotate at midnight
+            "interval": 1,
+            "backupCount": 30,  # Keep one month's worth of log files
+            "formatter": "verbose",
+            "encoding": "utf8",
+        },
+        "rabbitmq_file": {
+            "level": "DEBUG",
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "filename": os.path.join(LOG_DIR, "rabbitmq.log"),
+            "when": "midnight",  # Rotate at midnight
+            "interval": 1,
+            "backupCount": 7,  # Keep seven-day's worth of log files
+            "formatter": "verbose",
+            "encoding": "utf8",
         },
     },
     "root": {
@@ -193,11 +276,7 @@ LOGGING = {
         "level": "INFO",
     },
     "loggers": {
-        "api": {
-            "handlers": ["console", "file"],
-            "level": "INFO",
-            "propagate": False,
-        },
+        # TODO: loggers to be confirm
         "django": {
             "handlers": ["console", "file"],
             "level": "INFO",
@@ -213,10 +292,36 @@ LOGGING = {
             "level": "INFO",
             "propagate": False,
         },
+        # Comfirmed loggers
+        "api": {
+            "handlers": ["console", "api_file"],
+            "level": "INFO",
+            "propagate": False,
+        },
         'brain_manager': {
             'handlers': ['rich_console', 'file'],  # Use the rich_console handler for logging
             'level': 'INFO',  # Change to INFO or ERROR depending on verbosity
             'propagate': False,
+        },
+        "celery.worker": {
+            "handlers": ["console","celery_worker"],
+            "level": "INFO",
+            "propagate": True,
+        },
+        "celery.beat": {
+            "handlers": ["console","celery_beat"],
+            "level": "INFO",
+            "propagate": True,
+        },
+        "celery.tasks": {
+            "handlers": ["console","celery_tasks"],
+            "level": "INFO",
+            "propagate": True,
+        },
+        "rabbitmq": {
+            "handlers": ["console", "rabbitmq_file"],
+            "level": "DEBUG",
+            "propagate": True,
         },
     },
 }
@@ -266,3 +371,14 @@ MAX_UPLOAD_SIZE = 5242880  # 5MB
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+
+#  Celery settings
+CELERY_BROKER_URL = os.getenv(f"{app_env}_CELERY_BROKER_URL")
+CELERY_TIMEZONE = "UTC"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_RESULT_BACKEND = "django-db"
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+CELERY_STORE_REALTIME_DATA_EVERY_INTERVAL = 1

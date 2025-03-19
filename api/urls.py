@@ -1,4 +1,5 @@
 from django.urls import path, include
+from rest_framework_simplejwt.views import TokenRefreshView
 
 from .views.conversation_view import (
     PromptConversationView,
@@ -19,7 +20,7 @@ from .views.category import (
 )
 
 from .views.brain import BrainViewSet
-
+from .views.user import UserLoginView
 
 router = DefaultRouter()
 router.register(r'categories', CategoryViewSet)
@@ -38,4 +39,7 @@ urlpatterns = [
     # Prompt Conversation
     path("prompt_conversation/", PromptConversationView.as_view(), name="prompt_conversation"),
     path("prompt_conversation_admin/", PromptConversationAdminView.as_view(), name="prompt_conversation_admin"),
+
+    path("login/", UserLoginView.as_view(), name="login"),
+    path("refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]

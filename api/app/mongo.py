@@ -1,7 +1,7 @@
 import logging
 import threading
 from pymongo import MongoClient
-from django.conf import settings
+from api.utils.config import MONGODB_URI, MONGODB_DATABASE
 
 logger = logging.getLogger(__name__)
 
@@ -22,9 +22,10 @@ class MongoDB:
             with cls._lock:  
                 if cls._client is None: 
                     try:
-                        cls._client = MongoClient(settings.MONGODB_URI)
-                        cls._db = cls._client[settings.MONGODB_DATABASE]
+                        cls._client = MongoClient(MONGODB_URI)
+                        cls._db = cls._client.get_database(MONGODB_DATABASE)
                         logger.info("MongoDB connection established successfully.")
+                        print("MongoDB connection established successfully.")
                     except Exception as e:
                         logger.error(f"MongoDB connection error: {str(e)}", exc_info=True)
                         raise
@@ -43,6 +44,7 @@ class MongoDB:
     @classmethod
     def query_collection(cls, collection_name, query=None, projection=None, limit=0):
         db = cls.get_db()
+        print(db)
         collection = db[collection_name]
 
         try:
