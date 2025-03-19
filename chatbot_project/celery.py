@@ -27,7 +27,7 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'streaming-daily-conversations': {
         'task': 'api.tasks.streaming_conversations_to_sap',
-        'schedule': crontab(minute=0, hour=2),  # Runs at 2 AM UTC
+        'schedule': crontab(minute=0, hour=2),  # Runs at 2AM UTC Daily
     },
 }
 
