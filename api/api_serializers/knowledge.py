@@ -62,9 +62,10 @@ class KnowledgeSerializer(serializers.ModelSerializer):
         status_filter = self.context.get('status', None)
         language_filter = self.context.get('language', None)
         is_edited_filter = self.context.get('is_edited', None)
+        in_brain_filter = self.context.get('in_brain', False)
 
         # Filter KnowledgeContent based on in_brain=False only!
-        init_knowledge_content_qs = obj.knowledge_content.filter(in_brain=False)
+        init_knowledge_content_qs = obj.knowledge_content.filter(in_brain=in_brain_filter)
         knowledge_content_qs = init_knowledge_content_qs  # Initialize with in_brain=False filter
 
 

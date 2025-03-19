@@ -34,7 +34,7 @@ logger = logging.getLogger(__name__)
 class KnowledgeContentViewSet(viewsets.ModelViewSet):
     pagination_class = CustomPagination
     filter_backends = (DjangoFilterBackend,)
-    queryset = KnowledgeContent.objects.filter(in_brain=False)
+    queryset = KnowledgeContent.objects.filter()
     serializer_class = KnowledgeContentSerializer
 
     # override create()
@@ -213,19 +213,23 @@ class KnowledgeViewSet(viewsets.ModelViewSet):
         status = self.request.query_params.get('status', None)
         language = self.request.query_params.get('language', None)
         is_edited = self.request.query_params.get('is_edited', None)
+        in_brain = self.request.query_params.get('in_brain', False)
         
         # Add the filters to the context if provided
         if status:
             context['status'] = status
         if language:
             context['language'] = language
-        if is_edited is not None:  # Check if it's provided (True/False)
+        if is_edited is not None: 
             context['is_edited'] = is_edited
+        if in_brain is not None:
+            context['in_brain'] = in_brain
         
         return context
     
     def get_queryset(self):
-        return Knowledge.objects.filter(knowledge_content__in_brain=False).distinct()
+        return Knowledge.objects.filter().distinct()
+        # return Knowledge.objects.filter(knowledge_content__in_brain=False).distinct()
 
     def create(self, request, *args, **kwargs):
         raise DRFException.PermissionDenied("Create is disabled for this resource.")
