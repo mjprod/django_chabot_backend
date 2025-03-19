@@ -84,8 +84,6 @@ class KnowledgeSerializer(serializers.ModelSerializer):
     
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        logger.info(f"Final representation before filtering: {data}")
-
         if not data.get("knowledge_content"):  # If knowledge_content is empty after filtering
             logger.info((f"Removing knowledge object {instance.id}") )
             return None  # Exclude this Knowledge object from response
