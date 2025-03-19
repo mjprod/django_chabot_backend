@@ -26,6 +26,7 @@ wheels/
 
 # Django stuff:
 *.log
+*.log.*
 *.pot
 *.pyc
 *.pyo

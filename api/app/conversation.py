@@ -83,26 +83,30 @@ def is_finalizing_phrase(phrase):
 def prompt_conversation(user_prompt, language_code=LANGUAGE_DEFAULT):
     start_time = time.time()
     logger.info(f"Starting prompt_conversation request - Language: {language_code}")
-    db = None
+    #db = None
 
     try:
-        db = MongoDB.get_db()
-        logger.debug(
-            f"MongoDB connection established in {time.time() - start_time:.2f}s"
-        )
+       # db = MongoDB.get_db()
+       # logger.debug(
+       #     f"MongoDB connection established in {time.time() - start_time:.2f}s"
+        #)
 
         # Conversation retrieval
-        existing_conversation = db.conversations.find_one(
-            {"session_id": ""},
-            {"messages": 1, "_id": 0},
-        )
+        #existing_conversation = db.conversations.find_one(
+         #   {"session_id": ""},
+         #   {"messages": 1, "_id": 0},
+       # )
 
+      #  messages = (
+           # existing_conversation.get("messages", [])
+          #  if existing_conversation
+          #  else [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
+        #)
         messages = (
-            existing_conversation.get("messages", [])
-            if existing_conversation
-            else [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
+           # existing_conversation.get("messages", [])
+          #  if existing_conversation
+          [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
         )
-
         # Add user message
         messages.append(
             {
@@ -184,26 +188,31 @@ def prompt_conversation_admin(
     logger.info(
         f"Starting prompt_conversation_admin request - Language: {language_code}"
     )
-    db = None
+    # db = None
 
     try:
-        db = MongoDB.get_db()
-        logger.debug(
-            f"MongoDB connection established in {time.time() - start_time:.2f}s"
-        )
+       # db = MongoDB.get_db()
+       # logger.debug(
+       #     f"MongoDB connection established in {time.time() - start_time:.2f}s"
+       # )
 
         # Conversation retrieval
-        existing_conversation = db.conversations.find_one(
-            {"session_id": conversation_id},
-            {"messages": 1, "_id": 0},
-        )
+        #existing_conversation = db.conversations.find_one(
+         #   {"session_id": conversation_id},
+        #    {"messages": 1, "_id": 0},
+       # )
 
+       # messages = (
+            #existing_conversation.get("messages", [])
+           # if existing_conversation
+           # else [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
+       # )
+        # TODO: GET THE CONVERSATION FROM THE DATABASE
         messages = (
-            existing_conversation.get("messages", [])
-            if existing_conversation
-            else [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
-        )
-
+            #existing_conversation.get("messages", [])
+           # if existing_conversation
+            [{"role": "system", "content": FIRST_MESSAGE_PROMPT}]
+       )
         # Add user message
         messages.append(
             {
@@ -327,9 +336,9 @@ def prompt_conversation_admin(
         max_retries = 3
         for attempt in range(max_retries):
             try:
-                db.conversations.update_one(
-                    {"session_id": conversation_id}, {"$set": conversation}, upsert=True
-                )
+                # db.conversations.update_one(
+                  #  {"session_id": conversation_id}, {"$set": conversation}, upsert=True
+                #)
                 break
             except Exception as me:
                 if attempt == max_retries - 1:

@@ -6,12 +6,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+STREAMING_COLLECTION="ck_old_conversations"
 
 # vector store constants
 EMBEDDING_MODEL="sentence-transformers/all-mpnet-base-v2"
 CHROMA_BRAIN_COLLECTION="brain"
 CHROMA_CONVERSATION_COLLECTION="conversation"
 CHROMA_DIR="./chroma"
+
 
 # chat model constants
 CHAT_MODEL="gpt-4o-mini"

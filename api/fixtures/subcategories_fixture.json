@@ -580,7 +580,7 @@
     "pk": 65,
     "fields": {
       "category": 14,
-      "name": "sports_betting_rules",
+      "name": "betting_rules",
       "description": "Rules for sports betting."
     }
   },

@@ -10,6 +10,7 @@ from .config import (
     OPENAI_API_KEY,
     CHAT_MODEL,
     CONVERSATION_STREAMING_PROMPT,
+    STREAMING_COLLECTION
 )
 
 from django.db import transaction
@@ -19,19 +20,17 @@ from api.models import Knowledge, KnowledgeContent, Context, Category
 from api.utils.enum import KnowledgeType, KnowledgeContentStatus, KnowledgeContentLanguage
 from api.app.mongo import MongoDB
 
-STREAMING_COLLECTION="ck_old_conversations"
 
 logger = logging.getLogger(__name__)
 
 
 """
 TODO: 
-1. configuration values are very messy. Refactoring needed
+1. configuration values/files are very messy. Refactoring needed
 2. Hardcoded a lot!!
 3. AI response can be so out of control
 4. Need to use transaction atomic operation for data saving!
 """
-
 
 
 class ConversationStreamingManager:
