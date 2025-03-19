@@ -82,11 +82,11 @@ class PromptConversationAdminView(APIView):
                 )
 
             # Connect to MongoDB and get conversation history
-            db = MongoDB.get_db()
-            conversation = db.conversations.find_one({"session_id": conversation_id})
+           # db = MongoDB.get_db()
+            #conversation = db.conversations.find_one({"session_id": conversation_id})
 
-            if not conversation:
-                return Response(
+            #if not conversation:
+            return Response(
                     {"error": "Conversation not found"},
                     status=status.HTTP_404_NOT_FOUND,
                 )
@@ -166,11 +166,11 @@ class PromptConversationView(APIView):
                 )
 
             # Connect to MongoDB and get conversation history
-            db = MongoDB.get_db()
-            conversation = db.conversations.find_one({"session_id": conversation_id})
+            # db = MongoDB.get_db()
+            # conversation = db.conversations.find_one({"session_id": conversation_id})
 
-            if not conversation:
-                return Response(
+            # if not conversation:
+            return Response(
                     {"error": "Conversation not found"},
                     status=status.HTTP_404_NOT_FOUND,
                 )
