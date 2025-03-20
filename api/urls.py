@@ -19,6 +19,8 @@ from .views.category import (
     SubCategoryViewSet, 
 )
 
+from .views.stream_conversations import StreamConversationsAPIView
+
 from .views.brain import BrainViewSet
 from .views.user import UserLoginView
 
@@ -35,6 +37,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('knowledge-summary/', KnowledgeSummaryAPIView.as_view(), name='knowledge-summary'),
     path('knowledge-content-summary/', KnowledgeContentSummaryAPIView.as_view(), name='knowledge-content-summary'),
+    path('streaming-conversations/', StreamConversationsAPIView.as_view(), name='streaming-conversations'),
 
     # Prompt Conversation
     path("prompt_conversation/", PromptConversationView.as_view(), name="prompt_conversation"),
