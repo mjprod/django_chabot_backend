@@ -167,6 +167,9 @@ class KnowledgeContentViewSet(viewsets.ModelViewSet):
         knowledge_content_ids = request.data.get('knowledge_content_ids')
         new_status = request.data.get('new_status')
 
+        total_requested = len(knowledge_content_ids)
+
+
         if not knowledge_content_ids or new_status is None:
             return Response(
                 {"error": "Both 'knowledge_content_ids' and 'new_status' are required."},
@@ -186,10 +189,21 @@ class KnowledgeContentViewSet(viewsets.ModelViewSet):
             id__in=knowledge_content_ids, in_brain=False
         ).update(status=new_status)
 
-        return Response(
-            {"message": f"Successfully updated {updated_count} records."},
-            status=status.HTTP_200_OK
-        )
+        if updated_count == 0:
+            return Response(
+                {"error": "No records were updated. Either they do not exist or they are already in the brain."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        elif updated_count < total_requested:
+            return Response(
+                {"message": f"Partially updated {updated_count} out of {total_requested} records."},
+                status=status.HTTP_207_MULTI_STATUS
+            )
+        else:
+            return Response(
+                {"message": f"Successfully updated {updated_count} records."},
+                status=status.HTTP_200_OK
+            )
 
 
 class KnowledgeViewSet(viewsets.ModelViewSet):
