@@ -123,37 +123,28 @@ class KnowledgeContentViewSet(viewsets.ModelViewSet):
         data = request.data.copy()
 
         # allowed fields for partial update
-        allowed_fields = ['question', 'answer', 'content', 'status', 'language']
+        allowed_fields = ['question', 'answer', 'content', 'language']
         invalid_fields = [field for field in data.keys() if field not in allowed_fields]
         if invalid_fields:
             raise DRFException.ValidationError(f"Cannot update the following fields: {', '.join(invalid_fields)}")
-    
-        allowed_statuses = {
-            KnowledgeContentStatus.REJECT.value,
-            KnowledgeContentStatus.PRE_APPROVED.value,
-            KnowledgeContentStatus.NEEDS_REVIEW.value,
-        }
         
-        # it will raise error if other statuses being passed in this PATCH api (can only updated with NEEDS_APPROVAL/ PRE_APPROVED/ REJECT)
-        if "status" in data and data["status"] not in allowed_statuses:
-            allowed_names = [status.name for status in KnowledgeContentStatus if status.value in allowed_statuses]
-            raise DRFException.ValidationError(f"Invalid status. Allowed values: {', '.join(allowed_names)}")
-        
-        # ignore other fields if the status is set to "reject"
-        if data.get("status") == KnowledgeContentStatus.REJECT.value:
-            data = {"status": KnowledgeContentStatus.REJECT.value}
-        else:
-            # If the status is not 'reject', check if other fields have been edited
-            is_edited = False
-            if not getattr(instance, "is_edited"):
-                for field in data.keys():
-                    instance_value = getattr(instance, field)
-                    data_value = data.get(field)
-                    if instance_value != data_value:
-                        is_edited = True
+        instance = self.get_object()
 
-            if is_edited:
-                data['is_edited'] = is_edited
+        if instance.in_brain == True:
+            raise DRFException.ValidationError(
+                "This knowledge content cannot be updated directly through SAP, because it is already in the brain. Please remove from the brain first"
+            )
+        
+        is_edited = False
+        if not getattr(instance, "is_edited"):
+            for field in data.keys():
+                instance_value = getattr(instance, field)
+                data_value = data.get(field)
+                if instance_value != data_value:
+                    is_edited = True
+
+        if is_edited:
+            data['is_edited'] = is_edited
 
         serializer = self.get_serializer(instance, data=data, partial=True)
         serializer.is_valid(raise_exception=True)
@@ -190,8 +181,10 @@ class KnowledgeContentViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # Update KnowledgeContent records
-        updated_count = KnowledgeContent.objects.filter(id__in=knowledge_content_ids).update(status=new_status)
+        # Update KnowledgeContent records if in_brain = false
+        updated_count = KnowledgeContent.objects.filter(
+            id__in=knowledge_content_ids, in_brain=False
+        ).update(status=new_status)
 
         return Response(
             {"message": f"Successfully updated {updated_count} records."},
