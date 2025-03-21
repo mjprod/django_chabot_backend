@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 import rest_framework.exceptions as DRFException
+from django.db import IntegrityError
 
 import django.core.exceptions as CoreException
 from django_filters.rest_framework import DjangoFilterBackend
@@ -15,7 +16,8 @@ from ..models import (
     Category, 
     SubCategory, 
     Knowledge,
-    KnowledgeContent
+    KnowledgeContent,
+    Context
 )
 
 from ..api_serializers.knowledge import (
@@ -43,35 +45,47 @@ class KnowledgeContentViewSet(viewsets.ModelViewSet):
         knowledge_uuid = data.pop('knowledge_uuid', None)
 
         try:
-            knowledge={}
+            knowledge_instance={}
 
             if knowledge_uuid:
-                knowledge = Knowledge.objects.get(knowledge_uuid=knowledge_uuid)
+                knowledge_instance = Knowledge.objects.get(knowledge_uuid=knowledge_uuid)
             else:
                 category_id = data.pop('category', None)
                 subcategory_id = data.pop('subcategory', None)
+                context = data.pop('context', None)
                 type = data.pop('type', KnowledgeType.FAQ.value)
+
                 category = Category.objects.get(id=category_id) if category_id else None
                 subcategory = SubCategory.objects.get(id=subcategory_id) if subcategory_id else None
 
-                knowledge = Knowledge.objects.create(
+                context_instance = None
+
+                if context:
+                    context_instance = Context(context=context)
+                    context_instance.save()
+
+                # Create a new Knowledge entry
+                knowledge_instance = Knowledge(
                     knowledge_uuid=uuid.uuid4(),
-                    type=type,
                     category=category,
-                    subcategory=subcategory
+                    subcategory=subcategory,
+                    context=context_instance,
+                    type=type
                 )
 
+                knowledge_instance.save()
+            
             restricted_fields = ['status', 'is_edited', 'in_brain', 'date_created', 'last_updated']
 
             for field in restricted_fields:
                 data.pop(field, None)
 
-            data['knowledge'] = knowledge.id
+            data['knowledge'] = knowledge_instance.id
 
             serializer = self.get_serializer(data=data)
             serializer.is_valid(raise_exception=True)
 
-            # TODO: generate other knowledge content for two languages
+            # TODO: generate knowledge contents for other two languages
 
             serializer.save() 
 
@@ -79,8 +93,10 @@ class KnowledgeContentViewSet(viewsets.ModelViewSet):
         
         except (Knowledge.DoesNotExist, SubCategory.DoesNotExist, Category.DoesNotExist):
             return Response({"error": "Knowledge, category or subcategory do not exist."}, status=status.HTTP_400_BAD_REQUEST)
-        except CoreException.ValidationError as e:
-            return Response({"error": e}, status=status.HTTP_400_BAD_REQUEST)
+        except (CoreException.ValidationError, DRFException.ValidationError, IntegrityError) as e:
+            return Response({"error": f"{e}"}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response({"error": f"{e}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
     # override destroy func
