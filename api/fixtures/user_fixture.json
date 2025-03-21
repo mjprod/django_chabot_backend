@@ -1,46 +1,46 @@
 [
-    {
-      "model": "auth.user",
-      "pk": 1,
-      "fields": {
-        "username": "super_admin",
-        "password": "pbkdf2_sha256$870000$2C7cAinEDhoprREluPjIwI$8jLiDhoLRvaiS5jCNQ614xyIrGIPFdUZA4bddDTH188=",  
-        "email": "admin@example.com",
-        "is_staff": true,
-        "is_superuser": true
-      }
-    },
-    {
-      "model": "auth.user",
-      "pk": 2,
-      "fields": {
-        "username": "user1",
-        "password": "pbkdf2_sha256$870000$yk237T2DISgLZgSJccDULf$lKuN/QiiW+NrvCvZv4yQdsdca4xnfkZgTGdr8gqaysU=", 
-        "email": "user1@example.com",
-        "is_staff": false,
-        "is_superuser": false
-      }
-    },
-    {
-      "model": "auth.user",
-      "pk": 3,
-      "fields": {
-        "username": "user2",
-        "password": "pbkdf2_sha256$870000$crkcGljb4X9vaToO1UZVUA$f4hqd7R/Awjgs2o/LSBmzewYrDGZ7bxhQPDPT+xIN8o=", 
-        "email": "user2@example.com",
-        "is_staff": false,
-        "is_superuser": false
-      }
-    },
-    {
-        "model": "auth.user",
-        "pk": 4,
-        "fields": {
-          "username": "user3",
-          "password": "pbkdf2_sha256$870000$iJqoF6byZL6FTbWo8ULkiD$SDjkF1t5VpSLPbE3XsCdG5bupFjm770tVRwtJMOG1ZQ=", 
-          "email": "user3@example.com",
-          "is_staff": false,
-          "is_superuser": false
-        }
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "username": "super_admin",
+      "password": "pbkdf2_sha256$870000$NetNKFJswpFo7gVqixX8Le$ayKsTh/RUn1lRrKZxBGVbfxbrtQWPlG3GFRHWllCmZU=",  
+      "email": "admin@example.com",
+      "is_staff": true,
+      "is_superuser": true
     }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "username": "user1",
+      "password": "pbkdf2_sha256$870000$2f5BzlIJJcmovKxw50bzxm$XP2mVz8YTf9NLMYO5GHUZPcpyQOOB/b2+WEM0A55a34=", 
+      "email": "user1@example.com",
+      "is_staff": false,
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "username": "user2",
+      "password": "pbkdf2_sha256$870000$33ezrPo0diJh9gzmnOYI7Y$d8XPPUxZ/pquSSz+HQXe5gX/hPCB7OgD8RGfCo3AFMc=", 
+      "email": "user2@example.com",
+      "is_staff": false,
+      "is_superuser": false
+    }
+  },
+  {
+      "model": "auth.user",
+      "pk": 4,
+      "fields": {
+        "username": "user3",
+        "password": "pbkdf2_sha256$870000$6ofVk2UD9DLUFgzbDZGa4F$5yChoRdsMfPgUCdOFBEeRswFQ1PSFTUilkpmFbOeKvc=", 
+        "email": "user3@example.com",
+        "is_staff": false,
+        "is_superuser": false
+      }
+  }
 ]
