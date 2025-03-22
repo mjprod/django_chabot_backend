@@ -133,7 +133,7 @@ class UpdateBrainView(APIView):
             )    
         
 class InsertBrainView(APIView):
-    def get(self, request):
+    def post(self, request):
         try:
             # Validate input data
             input_serializer = InsertAnswerBrain(data=request.data)
@@ -149,7 +149,7 @@ class InsertBrainView(APIView):
             answer_ms = input_serializer.validated_data["answer_ms"]
             answer_cn = input_serializer.validated_data["answer_cn"]
 
-            conversations = insert_document(
+            insert_document(
                 question_text, answer_en, answer_ms, answer_cn)
             
             data = {
@@ -161,3 +161,18 @@ class InsertBrainView(APIView):
                 {"error": f"Error retrieving dashboard counts: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )    
+        
+class PreBrainView(APIView):
+     def get(self, request):
+        db = None
+        try:
+            db = MongoDB.get_db()
+            lists = list(db.band_aid_send_super_admin.find({}))
+            for item in lists:
+                item["_id"] = str(item["_id"]) 
+            return Response(lists, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(
+                {"error": f"Error retrieving lists: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
