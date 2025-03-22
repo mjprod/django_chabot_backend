@@ -404,8 +404,6 @@ class AllConversationsIdsView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
         
-
-
 class UpdateKnowledgeView(APIView):
     def post(self, request):
         db = None
@@ -445,7 +443,6 @@ class UpdateKnowledgeView(APIView):
 
 class DeleteConversationView(APIView):
     def delete(self, request, *args, **kwargs):
-        # Obtém o conversation_id dos kwargs (já que está na URL)
         conversation_id = kwargs.get("conversation_id")
         if not conversation_id:
             return Response(
@@ -471,7 +468,6 @@ class DeleteConversationView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
         
-
 class FinaliseConversationView(APIView):
     def post(self, request, *args, **kwargs):
         # Get the conversation_id from the URL kwargs

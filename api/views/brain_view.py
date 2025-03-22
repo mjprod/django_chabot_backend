@@ -6,10 +6,12 @@ import logging
 
 from ..serializers import (
     UpdateAnswerBrain,
+    InsertAnswerBrain
 )
 
 from api.chatbot import (
     update_document_by_custom_id,
+    insert_document
 )
 
 from api.app.mongo import MongoDB
@@ -122,6 +124,36 @@ class UpdateBrainView(APIView):
             
             data = {
                 "conversations": conversations,
+            }
+            return Response(data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(
+                {"error": f"Error retrieving dashboard counts: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )    
+        
+class InsertBrainView(APIView):
+    def get(self, request):
+        try:
+            # Validate input data
+            input_serializer = InsertAnswerBrain(data=request.data)
+            if not input_serializer.is_valid():
+                logger.error(f"Validation failed: {input_serializer.errors}")
+                return Response(
+                    {"error": "Invalid input data", "details": input_serializer.errors},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            question_text = input_serializer.validated_data["question"]
+            answer_en = input_serializer.validated_data["answer_en"]
+            answer_ms = input_serializer.validated_data["answer_ms"]
+            answer_cn = input_serializer.validated_data["answer_cn"]
+
+            conversations = insert_document(
+                question_text, answer_en, answer_ms, answer_cn)
+            
+            data = {
+                "conversations": question_text,
             }
             return Response(data, status=status.HTTP_200_OK)
         except Exception as e:

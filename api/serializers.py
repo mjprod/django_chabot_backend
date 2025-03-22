@@ -175,3 +175,9 @@ class UpdateAnswerBrain(serializers.Serializer):
     answer_en = serializers.CharField(required=True)
     answer_ms = serializers.CharField(required=True)
     answer_cn = serializers.CharField(required=True)
+
+class InsertAnswerBrain(serializers.Serializer):
+    question = serializers.CharField(required=True)
+    answer_en = serializers.CharField(required=True)
+    answer_ms = serializers.CharField(required=True)
+    answer_cn = serializers.CharField(required=True)

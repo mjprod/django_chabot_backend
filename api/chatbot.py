@@ -44,7 +44,9 @@ from ai_config.ai_prompts import (
 from api.views.brain_file_reader import (
     get_document_by_id,
     get_document_by_question_text,
-    update_answer_detailed
+    update_answer_detailed,
+    insert_new_document,
+    get_next_id_from_json
 )
 
 from api.brain_retriever import (
@@ -78,6 +80,8 @@ logger = logging.getLogger(__name__)
 logger.info("Initializing vector database...")
 docs_to_use = []
 prompt = ""
+
+
 
 # Load environment variables
 load_dotenv()
@@ -166,9 +170,13 @@ def load_and_process_json_file() -> List[dict]:
 
     return all_documents
 
-embedding_model = CohereEmbeddings(model=COHERE_MODEL, user_agent="glaucomp")
+embedding_model = CohereEmbeddings(model=COHERE_MODEL, user_agent="mjpro")
 vectorstores = []
 documents = load_and_process_json_file()
+
+collection_name="RAG",
+embedding=embedding_model,
+persist_directory="./chroma_db",
 
 # Create Document Objects
 doc_objects = [
@@ -236,10 +244,25 @@ def create_vector_store(documents, batch_size=500):
     finally:
         del split_data
 
+def is_vector_store_created(collection_name="RAG", persist_directory="./chroma_db"):
+    collection_path = os.path.join(persist_directory, f"chromadb/{collection_name}")
+    return os.path.exists(collection_path)
+
 # Process docs
 try:
     logger.info("Starting vector store creation with filtered documents")
-    store = create_vector_store(doc_objects)
+    if is_vector_store_created(collection_name="RAG", persist_directory="./chroma_db"):
+        print("✅ Banco já existe!")
+        store = Chroma(
+            collection_name=collection_name,
+            persist_directory=persist_directory,
+            embedding_function=embedding_model
+        )
+        store.add_documents(doc_objects)
+        store.persist()
+    else:
+        store = create_vector_store(doc_objects)
+
     logger.info("Vector store creation completed successfully")
 except Exception as e: 
     logger.error(f"Failed to create vector store: {str(e)}")
@@ -753,55 +776,6 @@ def extrair_knowledge_items(conversation):
         logger.error(f"Error during vector store retrieval: {str(ve)}")
         return []
     
-def update_chroma_document(doc_id, new_data):
-    """
-    Update an existing document in the ChromaDB collection.
-    :param store: The ChromaDB collection object
-    :param doc_id: The unique ID of the document to update
-    :param new_data: Dictionary containing updated data fields
-    """
-    try:
-
-        if store:  # Only search if store was successfully created
-            search_results = search_by_id(store, "0068")  # Replace "0001" with your ID
-            print("Search Results:", search_results)
-        else:
-            print("Vector store creation failed, cannot perform search.")
-
-        return True
-        all_docs = store.get()
-
-        for key, value in all_docs.items():
-                print(f"{key}: {value}")
-
-        existing_docs = store.get(ids=[doc_id], include=["documents", "metadatas"])
-        
-        if not existing_docs["documents"]:
-            print(f"Document with ID {doc_id} not found.")
-            return False
-
-        # Retrieve the existing document
-        existing_doc = json.loads(existing_docs["documents"][0])  # Convert back to dictionary if stored as JSON string
-
-        # Merge the existing document with new data
-        updated_doc = {**existing_doc, **new_data}
-
-        # Remove the old document before re-adding
-        store.delete(ids=[doc_id])
-
-        # Reinsert the updated document
-        store.add(
-            documents=[json.dumps(updated_doc)],  # Store as JSON string
-            ids=[doc_id],
-            metadatas=[updated_doc.get("metadata", {})]
-        )
-
-        print(f"Document with ID {doc_id} updated successfully.")
-        return True
-
-    except Exception as e:
-        print(f"Error updating document: {e}")
-        return False
     
 def search_by_id(store: Chroma, custom_id: str):
     results = store.get(
@@ -838,6 +812,7 @@ def update_document_by_custom_id(custom_id: str, answer_en: str, answer_ms: str,
                 f"Answer: {answer_en}"
             ),
             metadata={
+                "id": doc.get("id", ""),
                 "category": ",".join(existing_metadata.get("category", [])),
                 "subCategory": existing_metadata.get("subCategory", ""),
                 "difficulty": existing_metadata.get("difficulty", 0),
@@ -848,8 +823,113 @@ def update_document_by_custom_id(custom_id: str, answer_en: str, answer_ms: str,
             },
         )
 
-        store.add_documents(documents=[new_document])
+        store.add(documents=[new_document])
         return (f"ID '{custom_id}' updated ")
+    except Exception as e:
+        print(f"Error to update document: {str(e)}")
+
+def reload_vector_store(collection_name="RAG", persist_directory="./chroma_db", embedding_model=None):
+    return Chroma(
+        collection_name=collection_name,
+        persist_directory=persist_directory,
+        embedding_function=embedding_model
+    )
+         
+def insert_document(question_text, answer_en: str, answer_ms: str, answer_cn: str):
+    try:
+        
+        new_id = get_next_id_from_json()
+        if not new_id:
+            return "Error obtaining the next ID."
+    
+        new_document = {
+            "id": new_id,
+            "question": {
+            "text": question_text,
+            "variations": [],
+            "intent": "general_inquiry",
+            "languages": {
+                "en": "",
+                "ms": "",
+                "cn": ""
+            }
+        },
+        "answer": {
+            "detailed": {
+                "en": answer_en,
+                "ms": answer_ms,
+                "cn": answer_cn
+            },
+            "conditions": []
+        },
+        "metadata": {
+            "category": ["general"],
+            "subCategory": "general_inquiry",
+            "difficulty": 0,
+            "confidence": 0.5,
+            "dateCreated": "",
+            "lastUpdated": "",
+            "version": "1.0",
+            "source": "",
+            "status": "active"
+        },
+        "context": {
+            "relatedTopics": [],
+            "prerequisites": [],
+            "followUpQuestions": {
+                "en": [],
+                "ms": [],
+                "cn": []
+            }
+        },
+        "usage": {
+            "searchFrequency": 0,
+            "successRate": 0,
+            "lastQueried": None
+        },
+        "review_status": []
+        }
+
+        insert_new_document(new_document)
+
+        new_document = CustomDocument(
+            id=new_id,
+            page_content=(
+                f"Question: {question_text}\n"
+                f"Answer: {answer_en}"
+            ),
+            metadata={
+                "id": new_id,
+                "category": ",".join(["general"]),
+                "subCategory": "general_inquiry",
+                "difficulty":  0,
+                "confidence": 0.5,
+                "intent": "general_inquiry",
+                "variations": ",".join(["general"]),
+                "conditions": ",".join(["general"])
+            },
+        )
+
+        store.add_documents(documents=[new_document])
+        store.persist()
+        return (f"ID '{new_id}' updated ")
+    
+
+        #store.add(documents=[new_document])
+        #store.add_documents(documents=[new_document])
+       # 
+
+        #collection_name="RAG",
+        #embedding=embedding_model,
+        #persist_directory="./chroma_db",
+        
+        #store = Chroma(
+         #   collection_name=collection_name,
+          #  persist_directory=persist_directory,
+           # embedding_function=embedding
+        #)
+
+        #return (f"ID '{new_id}' updated ")
     except Exception as e:
         print(f"Error to update document: {str(e)}")
 
