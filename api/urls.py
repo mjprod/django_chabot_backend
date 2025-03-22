@@ -7,6 +7,7 @@ from .views.conversation_view import (
     UpdateKnowledgeView,
     AllConversationsIdsView,
     DeleteConversationView,
+    DeletePreBrainView,
     FinaliseConversationView,
     FinaliseAllConversationsView,
     SeparateConversationsView,
@@ -23,6 +24,8 @@ from .views.brain_view import (
     ListReviewAndUpdateBrainView,
     UpdateReviewStatusView,
     UpdateBrainView,
+    InsertBrainView,
+    PreBrainView
 )
 
 # Define URL patterns
@@ -40,6 +43,9 @@ urlpatterns = [
     path("list_review_update_brain/", ListReviewAndUpdateBrainView.as_view(), name="review_update_brain"),
     path("update_review_status/", UpdateReviewStatusView.as_view(), name="update_review_status"),
     path("update_brain/", UpdateBrainView.as_view(), name="update_brain"),
+    path("insert_brain/", InsertBrainView.as_view(), name="insert_brain"),
+    path("get_pre_brain/", PreBrainView.as_view(), name="get_pre_brain"),
+    path("delete_pre_brain/<_id>/", DeletePreBrainView.as_view(), name="delete_pre_brain"),
 
     # TODO: Wrong place -> move to brain_view
     path('update_knowledge/', UpdateKnowledgeView.as_view(), name='update_knowledge'),

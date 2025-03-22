@@ -404,8 +404,6 @@ class AllConversationsIdsView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
         
-
-
 class UpdateKnowledgeView(APIView):
     def post(self, request):
         db = None
@@ -445,7 +443,6 @@ class UpdateKnowledgeView(APIView):
 
 class DeleteConversationView(APIView):
     def delete(self, request, *args, **kwargs):
-        # Obtém o conversation_id dos kwargs (já que está na URL)
         conversation_id = kwargs.get("conversation_id")
         if not conversation_id:
             return Response(
@@ -471,7 +468,33 @@ class DeleteConversationView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
         
-
+class DeletePreBrainView(APIView):
+    def delete(self, request, *args, **kwargs):
+        _id = kwargs.get("_id")
+        if not _id:
+            return Response(
+                {"error": "_id is required"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        db = None
+        try:
+            db = MongoDB.get_db()
+            result = db.band_aid_send_super_admin.delete_one({"_id": _id})
+            if result.deleted_count == 0:
+                return Response(
+                    {"error": "Question not found"},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+            return Response(
+                {"message": "Question deleted successfully"},
+                status=status.HTTP_200_OK
+            )
+        except Exception as e:
+            return Response(
+                {"error": f"Error deleting question: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+        
 class FinaliseConversationView(APIView):
     def post(self, request, *args, **kwargs):
         # Get the conversation_id from the URL kwargs

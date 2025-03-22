@@ -87,7 +87,7 @@ def update_answer_detailed(document: Dict, answer_en: str, answer_ms: str, answe
         "database_part_2.json",
         "database_part_3.json",
         "database_part_4.json",
-              "database_part_5.json",
+        "database_part_5.json",
         "database_part_6.json",
         "database_part_7.json",
         "database_part_8.json",
@@ -130,3 +130,45 @@ def update_answer_detailed(document: Dict, answer_en: str, answer_ms: str, answe
     
     if not found:
          logger.debug(f"Document {document.get('id')} not found in any file.")
+
+def get_next_id_from_json():
+    base_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "data")
+    file_path = os.path.join(base_dir, "database_part_9.json")
+
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        ids = [
+            int(doc["id"]) for doc in data
+            if isinstance(doc, dict) and str(doc.get("id", "")).isdigit()
+        ]
+
+        next_id = max(ids) + 1 if ids else 1
+        return f"{next_id:04d}"
+
+    except Exception as e:
+        print(f"Erro ao gerar próximo ID: {str(e)}")
+        return None
+    
+def insert_new_document(new_document):
+    base_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "data")
+    file_name = "database_part_9.json"
+    file_path = os.path.join(base_dir, file_name)
+
+    try:
+        with open(file_path, "r+", encoding="utf-8") as f:
+            data = json.load(f)
+
+            if not isinstance(data, list):
+                raise ValueError("O arquivo JSON não contém uma lista.")
+
+            data.append(new_document)
+
+            f.seek(0)
+            json.dump(data, f, indent=4, ensure_ascii=False)
+            f.truncate()
+
+        logger.info(f"Novo documento inserido com sucesso em {file_name}.")
+    except Exception as e:
+        logger.info(f"Erro ao inserir no arquivo {file_path}: {str(e)}")
