@@ -234,7 +234,7 @@ def prompt_conversation_admin(
             if user_prompt.lower().strip() in ["ok", "like", "boss", "yes", "no","tq","thanks"]:
                  docs_retrieve = []
             else:
-                docs_retrieve = store.similarity_search(user_prompt, k=3)
+                docs_retrieve = store.similarity_search(user_prompt, k=5)
             
             for i, doc in enumerate(docs_retrieve, start=1):
                 print(f"📌 Result {i}:")
