@@ -11,8 +11,10 @@ from typing import List
 from django.conf import settings
 from dotenv import load_dotenv
 
-from langchain.embeddings import CohereEmbeddings
-from langchain.vectorstores import Chroma
+# from langchain.embeddings import CohereEmbeddings
+from langchain_cohere import CohereEmbeddings
+# from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate

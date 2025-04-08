@@ -57,7 +57,7 @@
         "Boss, do I need to set a PIN right after registering successfully?",
         "老闆，註冊成功後，需要馬上設定PIN嗎？"
       ],
-      "intent": "account_setup_inquiry",
+      "intent": "account_setup",
       "languages": {
         "en": "Is it necessary to set a PIN immediately after registration?",
         "ms": "Perlukah saya tetapkan PIN sebaik sahaja pendaftaran berjaya?",
@@ -76,7 +76,7 @@
       "category": [
         "account"
       ],
-      "subCategory": "registration",
+      "subCategory": "account_setup",
       "difficulty": 2,
       "confidence": 1.0,
       "dateCreated": "2025-04-01T00:00:00Z",
@@ -106,7 +106,7 @@
     "question": {
       "text": "Can I share my account with friends?",
       "variations": [],
-      "intent": "account_security",
+      "intent": "account_protection",
       "languages": {
         "en": "Can I share my account with friends?",
         "ms": "Bolehkah saya berkongsi akaun saya dengan kawan-kawan?",
@@ -125,7 +125,7 @@
       "category": [
         "account"
       ],
-      "subCategory": "account_security",
+      "subCategory": "account_protection",
       "difficulty": 2,
       "confidence": 1.0,
       "dateCreated": "2025-04-01T00:00:00Z",
@@ -155,7 +155,7 @@
     "question": {
       "text": "Can I lend my account to a friend?",
       "variations": [],
-      "intent": "account_security",
+      "intent": "account_protection",
       "languages": {
         "en": "Can I lend my account to a friend?",
         "ms": "Bolehkah saya pinjamkan akaun saya kepada seorang kawan?",
@@ -174,7 +174,7 @@
       "category": [
         "account"
       ],
-      "subCategory": "account_security",
+      "subCategory": "account_protection",
       "difficulty": 2,
       "confidence": 1.0,
       "dateCreated": "2025-04-01T00:00:00Z",
@@ -204,7 +204,7 @@
     "question": {
       "text": "Under what circumstances will my account be frozen?",
       "variations": [],
-      "intent": "account_security",
+      "intent": "account_protection",
       "languages": {
         "en": "Under what circumstances will my account be frozen?",
         "ms": "Dalam keadaan apa akaun saya akan dibekukan?",
@@ -223,7 +223,7 @@
       "category": [
         "account"
       ],
-      "subCategory": "account_security",
+      "subCategory": "account_protection",
       "difficulty": 2,
       "confidence": 1.0,
       "dateCreated": "2025-04-01T00:00:00Z",
@@ -253,7 +253,7 @@
     "question": {
       "text": "Who is responsible for losses caused by personal mistakes?",
       "variations": [],
-      "intent": "account_security",
+      "intent": "account_protection",
       "languages": {
         "en": "Who is responsible for losses caused by personal mistakes?",
         "ms": "Siapakah yang bertanggungjawab jika berlaku kerugian disebabkan kesilapan peribadi?",
@@ -272,7 +272,7 @@
       "category": [
         "account"
       ],
-      "subCategory": "account_security",
+      "subCategory": "account_protection",
       "difficulty": 2,
       "confidence": 1.0,
       "dateCreated": "2025-04-01T00:00:00Z",
@@ -604,7 +604,7 @@
     "question": {
       "text": "Must withdrawals be made to my personal account?",
       "variations": [],
-      "intent": "withdrawal_conditions",
+      "intent": "withdrawal_issue",
       "languages": {
         "en": "Must withdrawals be made to my personal account?",
         "ms": "Adakah pengeluaran mesti dibuat ke akaun peribadi saya?",
@@ -623,7 +623,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "withdrawal_conditions",
+      "subCategory": "withdrawal_issue",
       "difficulty": 2,
       "confidence": 1.0,
       "dateCreated": "2025-04-01T00:00:00Z",
@@ -657,7 +657,7 @@
         "Boss, if the money I previously topped up into my wallet hasn’t been used for betting, can I withdraw it?",
         "老闆，如果之前充值到錢包裡的錢還沒有用來投注，能不能提現？"
       ],
-      "intent": "withdrawal_conditions",
+      "intent": "withdrawal_issue",
       "languages": {
         "en": "Can I withdraw deposited funds if I haven’t placed any bets?",
         "ms": "Bolehkah saya mengeluarkan dana deposit jika saya belum membuat pertaruhan?",
@@ -676,7 +676,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "withdrawal_conditions",
+      "subCategory": "withdrawal_issue",
       "difficulty": 2,
       "confidence": 1.0,
       "dateCreated": "2025-04-01T00:00:00Z",
@@ -706,7 +706,7 @@
     "question": {
       "text": "How long does it take for a withdrawal to be processed?",
       "variations": [],
-      "intent": "withdrawal_conditions",
+      "intent": "withdrawal_issue",
       "languages": {
         "en": "How long does it take for a withdrawal to be processed?",
         "ms": "Berapa lamakah masa yang diperlukan untuk memproses pengeluaran?",
@@ -725,7 +725,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "withdrawal_conditions",
+      "subCategory": "withdrawal_issue",
       "difficulty": 2,
       "confidence": 1.0,
       "dateCreated": "2025-04-01T00:00:00Z",
@@ -755,7 +755,7 @@
     "question": {
       "text": "What is the minimum withdrawal amount?",
       "variations": [],
-      "intent": "withdrawal_conditions",
+      "intent": "withdrawal_issue",
       "languages": {
         "en": "What is the minimum withdrawal amount?",
         "ms": "Berapakah jumlah pengeluaran minimum?",
@@ -774,7 +774,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "withdrawal_conditions",
+      "subCategory": "withdrawal_issue",
       "difficulty": 2,
       "confidence": 1.0,
       "dateCreated": "2025-04-01T00:00:00Z",
@@ -1690,7 +1690,7 @@
         "Boss, how do I change my password?",
         "老闆，要怎麼更改密碼？"
       ],
-      "intent": "account_setup_inquiry",
+      "intent": "account_setup",
       "languages": {
         "en": "How can I change my password?",
         "ms": "Macam mana saya boleh tukar kata laluan saya?",
@@ -1705,6 +1705,8 @@
       },
       "conditions": []
     },
-    "metadata": {}
+    "metadata": {
+      "subCategory": "account_setup"
+    }
   }
 ]

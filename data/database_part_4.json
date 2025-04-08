@@ -8,7 +8,7 @@
         "Boss, I tried opening 918Kiss",
         "老闆，我試著打開918Kiss"
       ],
-      "intent": "app_access_issue_inquiry",
+      "intent": "app_issues",
       "languages": {
         "en": "\"918 can’t be opened\"",
         "ms": "\"918 x dapat buka\"",
@@ -27,7 +27,7 @@
       "category": [
         "technical"
       ],
-      "subCategory": "app_access_issue_inquiry",
+      "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-03T03:24:31Z",
@@ -114,7 +114,7 @@
         "Boss, my friend wants to join Joker",
         "老闆，我朋友想加入Joker"
       ],
-      "intent": "app_download_inquiry",
+      "intent": "app_issues",
       "languages": {
         "en": "\"Is there a link for the Joker app? My friend wants to download\"",
         "ms": "\"ada link untuk aplikasi joker? kawan ada mahu download\"",
@@ -133,7 +133,7 @@
       "category": [
         "technical"
       ],
-      "subCategory": "app_download_inquiry",
+      "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-03T03:24:31Z",
@@ -379,7 +379,7 @@
         "Boss, I want to play 4D",
         "老闆，我想玩4D"
       ],
-      "intent": "app_download_inquiry",
+      "intent": "app_issues",
       "languages": {
         "en": "\"Want 4D2\"",
         "ms": "\"Nk 4d2\"",
@@ -398,7 +398,7 @@
       "category": [
         "technical"
       ],
-      "subCategory": "app_download_inquiry",
+      "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-03T03:24:31Z",
@@ -1545,11 +1545,11 @@
         "Boss, I want to play slots",
         "老闆，我想玩老虎機"
       ],
-      "intent": "app_download_inquiry",
+      "intent": "app_issues",
       "languages": {
-        "en": "\"Want links for Mega888 and Pussy games\"",
-        "ms": "\"Nak link game mega888 n pussy\"",
-        "cn": "\"想要Mega888和Pussy遊戲的鏈接\""
+        "en": "\"Want links for Mega888 and Pussy888 games\"",
+        "ms": "\"Nak link game mega888 n pussy888\"",
+        "cn": "\"想要Mega888和Pussy888遊戲的鏈接\""
       }
     },
     "answer": {
@@ -1564,7 +1564,7 @@
       "category": [
         "technical"
       ],
-      "subCategory": "app_download_inquiry",
+      "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-03T03:24:31Z",
@@ -2130,8 +2130,8 @@
       ],
       "intent": "game_experience_complaint",
       "languages": {
-        "en": "\"Really can’t help, Mega now even winning a little is hard\"",
-        "ms": "\"memang tidak dapat tlg mega sekarang menang sikit pun payah\"",
+        "en": "\"Really can’t help, Mega888 now even winning a little is hard\"",
+        "ms": "\"memang tidak dapat tlg Mega888 sekarang menang sikit pun payah\"",
         "cn": "\"真的幫不了，Mega現在連贏一點都難\""
       }
     },
@@ -2552,7 +2552,7 @@
         "Boss, I want to download the app",
         "老闆，我想下載應用程式"
       ],
-      "intent": "app_download_inquiry",
+      "intent": "app_issues",
       "languages": {
         "en": "\"Give me the app\"",
         "ms": "\"bgi aplikasi\"",
@@ -2571,7 +2571,7 @@
       "category": [
         "technical"
       ],
-      "subCategory": "app_download_inquiry",
+      "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-03T03:24:31Z",
@@ -2605,7 +2605,7 @@
         "Boss, I want Kiss918",
         "老闆，我想玩Kiss918"
       ],
-      "intent": "app_download_inquiry",
+      "intent": "app_issues",
       "languages": {
         "en": "\"Kiss\"",
         "ms": "\"kiss\"",
@@ -2624,7 +2624,7 @@
       "category": [
         "technical"
       ],
-      "subCategory": "app_download_inquiry",
+      "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-03T03:24:31Z",
@@ -2658,7 +2658,7 @@
         "Boss, I want Kiss918",
         "老闆，我想玩Kiss918"
       ],
-      "intent": "app_download_inquiry",
+      "intent": "app_issues",
       "languages": {
         "en": "\"Boss, give me the Kiss918 link\"",
         "ms": "\"bos bg link kiss918\"",
@@ -2677,7 +2677,7 @@
       "category": [
         "technical"
       ],
-      "subCategory": "app_download_inquiry",
+      "subCategory": "app_issues",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-03T03:24:31Z",
@@ -3347,7 +3347,7 @@
         "Kenapa pengeluaran saya tidak diluluskan?",
         "為什麼我的提款沒有被批准？"
       ],
-      "intent": "withdrawal_conditions",
+      "intent": "withdrawal_issue",
       "languages": {
         "en": "Why is my withdrawal not being approved?",
         "ms": "Kenapa pengeluaran saya tidak diluluskan?",
@@ -3366,7 +3366,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "withdrawal_conditions",
+      "subCategory": "withdrawal_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-05T13:02:26Z",
@@ -3559,7 +3559,7 @@
         "Kenapa kredit saya tidak dikemas kini secara automatik selepas deposit?",
         "為什麼我的存款後錢沒有自動更新？"
       ],
-      "intent": "transaction_records",
+      "intent": "transaction_issue",
       "languages": {
         "en": "Why isn't my credit automatically updating after a deposit?",
         "ms": "Kenapa kredit saya tidak dikemas kini secara automatik selepas deposit?",
@@ -3578,7 +3578,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "transaction_records",
+      "subCategory": "transaction_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-05T13:02:26Z",
@@ -3718,7 +3718,7 @@
         "Bolehkah anda periksa status permintaan pengeluaran saya?",
         "您能檢查我的提款請求的狀態嗎？"
       ],
-      "intent": "withdrawal_conditions",
+      "intent": "withdrawal_issue",
       "languages": {
         "en": "Can you check the status of my withdrawal request?",
         "ms": "Bolehkah anda periksa status permintaan pengeluaran saya?",
@@ -3737,7 +3737,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "withdrawal_conditions",
+      "subCategory": "withdrawal_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-05T13:02:26Z",
@@ -4036,7 +4036,7 @@
         "Apa yang harus saya lakukan jika akaun saya menunjukkan 0 kredit selepas deposit?",
         "如果存款後我的賬戶顯示為0錢，我應該怎麼做？"
       ],
-      "intent": "transaction_records",
+      "intent": "transaction_issue",
       "languages": {
         "en": "What should I do if my account shows 0 credits after a deposit?",
         "ms": "Apa yang harus saya lakukan jika akaun saya menunjukkan 0 kredit selepas deposit?",
@@ -4055,7 +4055,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "transaction_records",
+      "subCategory": "transaction_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-05T13:02:26Z",
@@ -4407,7 +4407,7 @@
         "Bolehkah saya membuat pemindahan kecil untuk mengesahkan jika akaun saya berfungsi dengan betul?",
         "我可以進行小額轉賬以驗證我的賬戶是否正常運作嗎？"
       ],
-      "intent": "transaction_records",
+      "intent": "transaction_issue",
       "languages": {
         "en": "Can I make a small transfer to verify if my account is working correctly?",
         "ms": "Bolehkah saya membuat pemindahan kecil untuk mengesahkan jika akaun saya berfungsi dengan betul?",
@@ -4426,7 +4426,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "transaction_records",
+      "subCategory": "transaction_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-05T13:02:26Z",
@@ -4513,7 +4513,7 @@
         "Bagaimana saya boleh membuat susulan pada permintaan pengeluaran yang belum diluluskan?",
         "如何跟進尚未批准的提款請求？"
       ],
-      "intent": "withdrawal_conditions",
+      "intent": "withdrawal_issue",
       "languages": {
         "en": "How can I follow up on a withdrawal request that hasn't been approved?",
         "ms": "Bagaimana saya boleh membuat susulan pada permintaan pengeluaran yang belum diluluskan?",
@@ -4532,7 +4532,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "withdrawal_conditions",
+      "subCategory": "withdrawal_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-05T13:02:26Z",
@@ -4672,7 +4672,7 @@
         "Bolehkah saya menggunakan resit lama untuk transaksi baru?",
         "我可以用舊的收據進行新的交易嗎？"
       ],
-      "intent": "transaction_records",
+      "intent": "transaction_issue",
       "languages": {
         "en": "Can I use an older receipt for a new transaction?",
         "ms": "Bolehkah saya menggunakan resit lama untuk transaksi baru?",
@@ -4691,7 +4691,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "transaction_records",
+      "subCategory": "transaction_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-05T13:02:26Z",
@@ -4778,7 +4778,7 @@
         "Adakah terdapat cara untuk mempercepatkan proses pengeluaran?",
         "有辦法加快提款過程嗎？"
       ],
-      "intent": "withdrawal_conditions",
+      "intent": "withdrawal_issue",
       "languages": {
         "en": "Is there a way to speed up the withdrawal process?",
         "ms": "Adakah terdapat cara untuk mempercepatkan proses pengeluaran?",
@@ -4797,7 +4797,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "withdrawal_conditions",
+      "subCategory": "withdrawal_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-05T13:02:26Z",
@@ -4831,7 +4831,7 @@
         "Kenapa sistem meminta saya menunggu 5 minit untuk transaksi?",
         "為什麼系統要求我等待5分鐘進行交易？"
       ],
-      "intent": "transaction_records",
+      "intent": "transaction_issue",
       "languages": {
         "en": "Why did the system ask me to wait 5 minutes for a transaction?",
         "ms": "Kenapa sistem meminta saya menunggu 5 minit untuk transaksi?",
@@ -4850,7 +4850,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "transaction_records",
+      "subCategory": "transaction_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-05T13:02:26Z",
@@ -5096,7 +5096,7 @@
         "Bolehkah saya meminta penyata cukai untuk kemenangan dan kerugian saya?",
         "我可以要求提供我的獲利和損失的稅單嗎？"
       ],
-      "intent": "transaction_records",
+      "intent": "transaction_issue",
       "languages": {
         "en": "Can I request a tax statement for my winnings and losses?",
         "ms": "Bolehkah saya meminta penyata cukai untuk kemenangan dan kerugian saya?",
@@ -5115,7 +5115,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "transaction_records",
+      "subCategory": "transaction_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-05T13:02:26Z",

@@ -53,7 +53,7 @@
     "question": {
       "text": "Can I make a small transfer to verify if my account is working correctly?",
       "variations": [],
-      "intent": "transaction_records",
+      "intent": "transaction_issue",
       "languages": {
         "en": "Can I make a small transfer to verify if my account is working correctly?",
         "ms": "Bolehkah saya membuat pemindahan kecil untuk mengesahkan jika akaun saya berfungsi dengan betul?",
@@ -72,7 +72,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "transaction_records",
+      "subCategory": "transaction_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-04T01:15:35Z",
@@ -151,7 +151,7 @@
     "question": {
       "text": "Can you explain why my withdrawal of 20 hasn't been received yet?",
       "variations": [],
-      "intent": "withdrawal_conditions",
+      "intent": "withdrawal_issue",
       "languages": {
         "en": "Can you explain why my withdrawal of 20 hasn't been received yet?",
         "ms": "Bolehkah anda jelaskan kenapa pengeluaran saya sebanyak 20 belum diterima?",
@@ -170,7 +170,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "withdrawal_conditions",
+      "subCategory": "withdrawal_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-04T01:15:35Z",
@@ -298,7 +298,7 @@
     "question": {
       "text": "How can I follow up on a withdrawal request that hasn't been approved?",
       "variations": [],
-      "intent": "withdrawal_conditions",
+      "intent": "withdrawal_issue",
       "languages": {
         "en": "How can I follow up on a withdrawal request that hasn't been approved?",
         "ms": "Bagaimana saya boleh membuat susulan pada permintaan pengeluaran yang belum diluluskan?",
@@ -317,7 +317,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "withdrawal_conditions",
+      "subCategory": "withdrawal_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-04T01:15:35Z",
@@ -494,7 +494,7 @@
     "question": {
       "text": "Can you explain why my withdrawal of 20 hasn't been received yet?",
       "variations": [],
-      "intent": "withdrawal_conditions",
+      "intent": "withdrawal_issue",
       "languages": {
         "en": "Can you explain why my withdrawal of 20 hasn't been received yet?",
         "ms": "Bolehkah anda jelaskan kenapa pengeluaran saya sebanyak 20 belum diterima?",
@@ -513,7 +513,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "withdrawal_conditions",
+      "subCategory": "withdrawal_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-04T01:15:35Z",
@@ -641,7 +641,7 @@
     "question": {
       "text": "How can I follow up on a withdrawal request that hasn't been approved?",
       "variations": [],
-      "intent": "withdrawal_conditions",
+      "intent": "withdrawal_issue",
       "languages": {
         "en": "How can I follow up on a withdrawal request that hasn't been approved?",
         "ms": "Bagaimana saya boleh membuat susulan pada permintaan pengeluaran yang belum diluluskan?",
@@ -660,7 +660,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "withdrawal_conditions",
+      "subCategory": "withdrawal_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-04T01:15:35Z",
@@ -1082,7 +1082,7 @@
     "question": {
       "text": "What should I do if I entered the wrong ID number on my deposit receipt?",
       "variations": [],
-      "intent": "transaction_records",
+      "intent": "transaction_issue",
       "languages": {
         "en": "What should I do if I entered the wrong ID number on my deposit receipt?",
         "ms": "Apa yang perlu saya lakukan jika saya memasukkan nombor ID yang salah pada resit deposit saya?",
@@ -1101,7 +1101,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "transaction_records",
+      "subCategory": "transaction_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-04T01:15:35Z",
@@ -1131,7 +1131,7 @@
     "question": {
       "text": "Is there a maximum limit for daily withdrawals?",
       "variations": [],
-      "intent": "withdrawal_conditions",
+      "intent": "withdrawal_issue",
       "languages": {
         "en": "Is there a maximum limit for daily withdrawals?",
         "ms": "Adakah terdapat had maksimum untuk pengeluaran harian?",
@@ -1150,7 +1150,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "withdrawal_conditions",
+      "subCategory": "withdrawal_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-04T01:15:35Z",
@@ -1229,7 +1229,7 @@
     "question": {
       "text": "Why isn't my credit automatically updating after a deposit?",
       "variations": [],
-      "intent": "transaction_records",
+      "intent": "transaction_issue",
       "languages": {
         "en": "Why isn't my credit automatically updating after a deposit?",
         "ms": "Kenapa kredit saya tidak dikemas kini secara automatik selepas deposit?",
@@ -1248,7 +1248,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "transaction_records",
+      "subCategory": "transaction_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-04T01:15:35Z",
@@ -1327,7 +1327,7 @@
     "question": {
       "text": "What should I do if I suspect unauthorized activity on my account?",
       "variations": [],
-      "intent": "account_security",
+      "intent": "account_protection",
       "languages": {
         "en": "What should I do if I suspect unauthorized activity on my account?",
         "ms": "Apa yang perlu saya lakukan jika saya mengesyaki aktiviti tidak sah pada akaun saya?",
@@ -1346,7 +1346,7 @@
       "category": [
         "security"
       ],
-      "subCategory": "account_security",
+      "subCategory": "account_protection",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-04T01:15:35Z",
@@ -1523,7 +1523,7 @@
     "question": {
       "text": "Can I use the same receipt for multiple top-ups?",
       "variations": [],
-      "intent": "transaction_records",
+      "intent": "transaction_issue",
       "languages": {
         "en": "Can I use the same receipt for multiple top-ups?",
         "ms": "Bolehkah saya menggunakan resit yang sama untuk beberapa tambah nilai?",
@@ -1542,7 +1542,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "transaction_records",
+      "subCategory": "transaction_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-04T01:15:35Z",
@@ -1915,7 +1915,7 @@
     "question": {
       "text": "How can I check if my account has been locked?",
       "variations": [],
-      "intent": "account_security",
+      "intent": "account_protection",
       "languages": {
         "en": "How can I check if my account has been locked?",
         "ms": "Bagaimana saya boleh periksa jika akaun saya telah dikunci?",
@@ -1934,7 +1934,7 @@
       "category": [
         "account"
       ],
-      "subCategory": "account_security",
+      "subCategory": "account_protection",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-04T01:15:35Z",
@@ -1964,7 +1964,7 @@
     "question": {
       "text": "Why isn't my Fast Payment top-up showing in my account?",
       "variations": [],
-      "intent": "transaction_records",
+      "intent": "transaction_issue",
       "languages": {
         "en": "Why isn't my Fast Payment top-up showing in my account?",
         "ms": "Kenapa tambah nilai Fast Payment saya tidak dipaparkan dalam akaun saya?",
@@ -1983,7 +1983,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "transaction_records",
+      "subCategory": "transaction_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-04T01:15:35Z",
@@ -2258,7 +2258,7 @@
     "question": {
       "text": "Why did the system ask me to wait 5 minutes for a transaction?",
       "variations": [],
-      "intent": "transaction_records",
+      "intent": "transaction_issue",
       "languages": {
         "en": "Why did the system ask me to wait 5 minutes for a transaction?",
         "ms": "Kenapa sistem meminta saya menunggu 5 minit untuk transaksi?",
@@ -2277,7 +2277,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "transaction_records",
+      "subCategory": "transaction_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-04T01:15:35Z",
@@ -2356,7 +2356,7 @@
     "question": {
       "text": "Is there a way to speed up the withdrawal process?",
       "variations": [],
-      "intent": "withdrawal_conditions",
+      "intent": "withdrawal_issue",
       "languages": {
         "en": "Is there a way to speed up the withdrawal process?",
         "ms": "Adakah terdapat cara untuk mempercepatkan proses pengeluaran?",
@@ -2375,7 +2375,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "withdrawal_conditions",
+      "subCategory": "withdrawal_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-04T01:15:35Z",
@@ -2454,7 +2454,7 @@
     "question": {
       "text": "Why is my withdrawal not being approved?",
       "variations": [],
-      "intent": "withdrawal_conditions",
+      "intent": "withdrawal_issue",
       "languages": {
         "en": "Why is my withdrawal not being approved?",
         "ms": "Kenapa pengeluaran saya tidak diluluskan?",
@@ -2473,7 +2473,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "withdrawal_conditions",
+      "subCategory": "withdrawal_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-04T01:15:35Z",
@@ -2797,7 +2797,7 @@
     "question": {
       "text": "What should I do if I entered the wrong ID number on my deposit receipt?",
       "variations": [],
-      "intent": "transaction_records",
+      "intent": "transaction_issue",
       "languages": {
         "en": "What should I do if I entered the wrong ID number on my deposit receipt?",
         "ms": "Apa yang perlu saya lakukan jika saya memasukkan nombor ID yang salah pada resit deposit saya?",
@@ -2816,7 +2816,7 @@
       "category": [
         "finance"
       ],
-      "subCategory": "transaction_records",
+      "subCategory": "transaction_issue",
       "difficulty": 2,
       "confidence": 0.5,
       "dateCreated": "2025-03-04T01:15:35Z",

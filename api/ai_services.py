@@ -3,6 +3,7 @@ import logging
 from datetime import datetime
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from bson import ObjectId
+from transformers import AutoTokenizer
 
 from pydantic import BaseModel, Field
 
@@ -13,6 +14,10 @@ from ai_config.ai_constants import (
 
 logger = logging.getLogger(__name__)
 
+tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")  # ou outro tokenizer
+
+def token_length_function(text):
+    return len(tokenizer.encode(text, truncation=False))
 
 # added Conversation class here that created our session specific information
 class ConversationMetaData:
@@ -27,7 +32,6 @@ class ConversationMetaData:
         self._id = ObjectId()
         self.is_first_message = True
 
-
 class CustomDocument:
     def __init__(self, page_content, metadata, id="0"):
         self.id = id
@@ -38,14 +42,13 @@ class CustomDocument:
         # Mostra o id e os primeiros 100 caracteres do conteúdo para não poluir o log
         return f"CustomDocument(id={self.id}, page_content={self.page_content[:100]}..., metadata={self.metadata})"
     
-
     # Text Splitter Class
 class CustomTextSplitter(RecursiveCharacterTextSplitter):
     def __init__(
         self,
         chunk_size=EMBEDDING_CHUNK_SIZE,
         chunk_overlap=EMBEDDING_OVERLAP,
-        length_function=len,
+        length_function=token_length_function,
     ):
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
@@ -61,6 +64,9 @@ class CustomTextSplitter(RecursiveCharacterTextSplitter):
             try:
                 metadata = {**(doc.metadata if isinstance(doc.metadata, dict) else {}), "id": getattr(doc, "id", "no_id")}
                 text = doc.page_content
+                intent = metadata.get("intent", "")
+                
+                text = f"[intent: {intent}]\n{text}" 
                 id_doc = getattr(doc, "id", "no_id")
         
                 # Handle short documents
@@ -168,63 +174,3 @@ class GradeConfidenceLevel(BaseModel):
         ge=0.0,
         le=1.0,
     )
-
-# TODO: DEPRECATED
-''''
-# created message class to keep track of messages that build up a Conversation
-class Message:
-    def __init__(self, role, content, timestamp=None):
-        self.role = role
-        self.content = content
-        self.timestamp = timestamp or datetime.now().isoformat()
-    def add_message(self, role, content):
-        message = Message(role, content)
-        self.messages.append(message)
-
-        # translation layer
-        if role == "assistant":
-            malay_translation = translate_en_to_ms(content)
-            chinese_translation = content
-
-            self.translations.append(
-                {
-                    "message_id": len(self.messages) - 1,
-                    "translations": [
-                        {"language": "en", "text": content},
-                        {
-                            "language": "ms_MY",
-                            "text": malay_translation.get("text", ""),
-                        },
-                        {
-                            "language": "zh_CN",
-                            "text": chinese_translation.get("text", ""),
-                        },
-                        {
-                            "language": "zh_TW",
-                            "text": chinese_translation.get("text", ""),
-                        },
-                    ],
-                }
-            )
-            return message
-    def get_conversation_history(self):
-        return [
-            {"role": msg.role, "content": msg.content, "timestamp": msg.timestamp}
-            for msg in self.messages
-        ]
-    # save the output to a dict for using API
-    def to_dict(self):
-        return {
-            "_id": self._id,
-            "session_id": self.session_id,
-            "admin_id": self.admin_id,
-            "user_id": self.user_id,
-            "bot_id": self.bot_id,
-            "timestamp": self.timestamp,
-            "messages": [
-                {"role": msg.role, "content": msg.content, "timestamp": msg.timestamp}
-                for msg in self.messages
-            ],
-            "translations": self.translations,
-        }
-'''
