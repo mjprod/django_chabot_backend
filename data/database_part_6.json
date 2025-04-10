@@ -1,6 +1,6 @@
 [
   {
-    "id": "0900",
+    "id": "1900",
     "question": {
       "text": "How do I set an initial password?",
       "variations": [],
@@ -49,7 +49,7 @@
     "review_status": []
   },
   {
-    "id": "0901",
+    "id": "1901",
     "question": {
       "text": "Boss, do I need to set a PIN right after registering successfully?",
       "variations": [
@@ -102,7 +102,7 @@
     "review_status": []
   },
   {
-    "id": "0902",
+    "id": "1902",
     "question": {
       "text": "Can I share my account with friends?",
       "variations": [],
@@ -151,7 +151,7 @@
     "review_status": []
   },
   {
-    "id": "0903",
+    "id": "1903",
     "question": {
       "text": "Can I lend my account to a friend?",
       "variations": [],
@@ -200,7 +200,7 @@
     "review_status": []
   },
   {
-    "id": "0904",
+    "id": "1904",
     "question": {
       "text": "Under what circumstances will my account be frozen?",
       "variations": [],
@@ -249,7 +249,7 @@
     "review_status": []
   },
   {
-    "id": "0905",
+    "id": "1905",
     "question": {
       "text": "Who is responsible for losses caused by personal mistakes?",
       "variations": [],
@@ -298,7 +298,7 @@
     "review_status": []
   },
   {
-    "id": "0906",
+    "id": "1906",
     "question": {
       "text": "What should I check before making a deposit?",
       "variations": [],
@@ -347,7 +347,7 @@
     "review_status": []
   },
   {
-    "id": "0907",
+    "id": "1907",
     "question": {
       "text": "Will the company change its bank account?",
       "variations": [],
@@ -396,7 +396,7 @@
     "review_status": []
   },
   {
-    "id": "0908",
+    "id": "1908",
     "question": {
       "text": "Boss, does the transfer accept IBG (Interbank GIRO)?",
       "variations": [
@@ -449,7 +449,7 @@
     "review_status": []
   },
   {
-    "id": "0909",
+    "id": "1909",
     "question": {
       "text": "Can I use interbank transfer for deposits?",
       "variations": [],
@@ -498,7 +498,7 @@
     "review_status": []
   },
   {
-    "id": "0910",
+    "id": "1910",
     "question": {
       "text": "Boss, what conditions does the top-up receipt need to meet?",
       "variations": [
@@ -551,7 +551,7 @@
     "review_status": []
   },
   {
-    "id": "0911",
+    "id": "1911",
     "question": {
       "text": "What is the minimum deposit amount?",
       "variations": [],
@@ -600,7 +600,7 @@
     "review_status": []
   },
   {
-    "id": "0912",
+    "id": "1912",
     "question": {
       "text": "Must withdrawals be made to my personal account?",
       "variations": [],
@@ -649,7 +649,7 @@
     "review_status": []
   },
   {
-    "id": "0913",
+    "id": "1913",
     "question": {
       "text": "Boss, if the money I previously topped up into my wallet hasn’t been used for betting, can I withdraw it?",
       "variations": [
@@ -702,7 +702,7 @@
     "review_status": []
   },
   {
-    "id": "0914",
+    "id": "1914",
     "question": {
       "text": "How long does it take for a withdrawal to be processed?",
       "variations": [],
@@ -751,7 +751,7 @@
     "review_status": []
   },
   {
-    "id": "0915",
+    "id": "1915",
     "question": {
       "text": "What is the minimum withdrawal amount?",
       "variations": [],
@@ -800,7 +800,7 @@
     "review_status": []
   },
   {
-    "id": "0916",
+    "id": "1916",
     "question": {
       "text": "How can I confirm if my bet was placed successfully?",
       "variations": [],
@@ -849,7 +849,7 @@
     "review_status": []
   },
   {
-    "id": "0917",
+    "id": "1917",
     "question": {
       "text": "How are bets placed after 10:00 PM recorded?",
       "variations": [],
@@ -898,7 +898,7 @@
     "review_status": []
   },
   {
-    "id": "0918",
+    "id": "1918",
     "question": {
       "text": "How are winnings determined?",
       "variations": [],
@@ -947,7 +947,7 @@
     "review_status": []
   },
   {
-    "id": "0919",
+    "id": "1919",
     "question": {
       "text": "How does the company review abnormal betting activities?",
       "variations": [],
@@ -996,7 +996,7 @@
     "review_status": []
   },
   {
-    "id": "0920",
+    "id": "1920",
     "question": {
       "text": "What are the cut-off times for lottery betting?",
       "variations": [],
@@ -1045,7 +1045,7 @@
     "review_status": []
   },
   {
-    "id": "0921",
+    "id": "1921",
     "question": {
       "text": "What do special markings on betting receipts mean?",
       "variations": [],
@@ -1094,7 +1094,7 @@
     "review_status": []
   },
   {
-    "id": "0922",
+    "id": "1922",
     "question": {
       "text": "What types of bets are available?",
       "variations": [],
@@ -1143,7 +1143,7 @@
     "review_status": []
   },
   {
-    "id": "0923",
+    "id": "1923",
     "question": {
       "text": "What is IBOX (Full Coverage)?",
       "variations": [],
@@ -1192,7 +1192,7 @@
     "review_status": []
   },
   {
-    "id": "0924",
+    "id": "1924",
     "question": {
       "text": "What is a Big (大) bet?",
       "variations": [],
@@ -1241,7 +1241,7 @@
     "review_status": []
   },
   {
-    "id": "0925",
+    "id": "1925",
     "question": {
       "text": "What is a Small (小) bet?",
       "variations": [],
@@ -1290,7 +1290,7 @@
     "review_status": []
   },
   {
-    "id": "0926",
+    "id": "1926",
     "question": {
       "text": "What is a 4A bet?",
       "variations": [],
@@ -1339,7 +1339,7 @@
     "review_status": []
   },
   {
-    "id": "0927",
+    "id": "1927",
     "question": {
       "text": "Provide a comparison of Big, Small, and 4A bets.",
       "variations": [],
@@ -1388,7 +1388,7 @@
     "review_status": []
   },
   {
-    "id": "0928",
+    "id": "1928",
     "question": {
       "text": "How do I choose between Big, Small, and 4A bets?",
       "variations": [],
@@ -1437,7 +1437,7 @@
     "review_status": []
   },
   {
-    "id": "0929",
+    "id": "1929",
     "question": {
       "text": "What is BOX (All Reverse)?",
       "variations": [],
@@ -1486,7 +1486,7 @@
     "review_status": []
   },
   {
-    "id": "0930",
+    "id": "1930",
     "question": {
       "text": "Which lotteries qualify for MAGIC BOX?",
       "variations": [],
@@ -1535,7 +1535,7 @@
     "review_status": []
   },
   {
-    "id": "0931",
+    "id": "1931",
     "question": {
       "text": "How can I receive MAGIC LETTER rewards?",
       "variations": [],
@@ -1584,7 +1584,7 @@
     "review_status": []
   },
   {
-    "id": "0932",
+    "id": "1932",
     "question": {
       "text": "How can I check MAGIC BOX odds and rules?",
       "variations": [],
@@ -1633,7 +1633,7 @@
     "review_status": []
   },
   {
-    "id": "0933",
+    "id": "1933",
     "question": {
       "text": "Can I cancel a bet after placing it?",
       "variations": [],
@@ -1682,7 +1682,7 @@
     "review_status": []
   },
   {
-    "id": "0934",
+    "id": "1934",
     "question": {
       "text": "Boss, how do I change my password?",
       "variations": [

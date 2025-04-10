@@ -4157,5 +4157,3451 @@
       "lastQueried": null
     },
     "review_status": []
+  },
+  {
+    "id": "0883",
+    "question": {
+      "text": "Kenapa resit yang saya upload tidak lengkap dan maklumat tidak nampak jelas?",
+      "variations": [
+        "Kenapa resit saya tidak lengkap?",
+        "Maklumat pada resit tak kelihatan dengan jelas, apa masalahnya?",
+        "Resit yang dimuat naik tidak menunjukkan jumlah, masa/tarikh atau penerima?"
+      ],
+      "intent": "receipt_upload_issue",
+      "languages": {
+        "en": "\"Why is my uploaded receipt incomplete and unclear?\"",
+        "ms": "\"Kenapa resit yang saya muat naik tidak lengkap dan tidak jelas?\"",
+        "cn": "\"为什么我上传的收据不完整且不清晰？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, please ensure that the receipt image you upload is clear and shows all the necessary details: Successful status, Amount, Date/Time, and Recipient. If the image is not full page or some details are missing, kindly resubmit a complete receipt. For further assistance, please contact our live chat support.\"",
+        "ms": "\"Hi boss, sila pastikan gambar resit yang dimuat naik adalah jelas dan memaparkan semua maklumat yang diperlukan: Status transaksi berjaya, Jumlah, Masa/Tarikh, dan Penerima. Jika gambar tidak full page atau maklumat kurang, sila muat naik semula resit yang lengkap. Untuk bantuan lanjut, sila hubungi sokongan live chat kami.\"",
+        "cn": "\"嗨，老板，请确保您上传的收据图片清晰，并显示所有必要的信息：交易成功状态、金额、时间/日期和收款人。如果图片不是全页或信息缺失，请重新上传完整的收据。如需进一步帮助，请联系在线客服。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "receipt_upload_issue",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T20:00:00Z",
+      "lastUpdated": "2025-04-08T20:00:00Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0884",
+    "question": {
+      "text": "Kenapa dana saya belum dikredit walaupun saya telah submit semula resit, sehingga saya tidak dapat membeli nombor untuk draw 9pm?",
+      "variations": [
+        "Mengapa resit yang saya hantar tidak menghasilkan kredit segera?",
+        "Dana belum masuk meskipun saya telah submit semula, bagaimana saya boleh beli nombor draw 9pm?",
+        "Apa sebab dana tidak dikredit selepas submit semula, sehingga saya terlepas peluang beli nombor draw 9pm?"
+      ],
+      "intent": "top_up_credit_issue",
+      "languages": {
+        "en": "\"Why haven't my funds been credited after re-submitting my receipt, preventing me from buying numbers for the 9pm draw?\"",
+        "ms": "\"Kenapa dana saya belum dikredit walaupun saya telah submit semula resit, sehingga saya tidak dapat membeli nombor untuk draw 9pm?\"",
+        "cn": "\"为什么我重新提交收据后资金仍未到账，导致我无法购买9点抽奖号码？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, your re-submitted receipt is currently under review. Please wait 3-10 minutes for the system to credit your account. If the funds are still not credited after 10 minutes, kindly contact live chat for immediate assistance. Meanwhile, please note that you will be able to purchase the numbers for the 9pm draw once your account is credited.\"",
+        "ms": "\"Hi boss, resit yang boss submit semula sedang dalam semakan. Sila tunggu dalam 3-10 minit untuk sistem mengkredit akaun boss. Jika dana masih belum masuk selepas 10 minit, sila hubungi live chat untuk bantuan segera. Sementara itu, boss boleh beli nombor draw 9pm sebaik sahaja kredit masuk.\"",
+        "cn": "\"嗨，老板，您重新提交的收据目前正在审核中。请等待3-10分钟以便系统将资金入账。如果10分钟后仍未到账，请联系在线客服以获得即时帮助。同时，请注意，资金到账后您就可以购买9点抽奖号码。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "top_up_credit_issue",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T20:00:00Z",
+      "lastUpdated": "2025-04-08T20:00:00Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0885",
+    "question": {
+      "text": "Saya tersalah transfer ke akaun bank saya sendiri, bukan ke akaun syarikat. Bagaimana untuk menguruskan top-up saya?",
+      "variations": [
+        "Transfer saya salah, saya pindahkan wang ke bank sendiri. Apa langkah seterusnya?",
+        "Saya buat kesilapan transfer ke akaun saya sendiri. Bagaimana saya nak top-up dengan betul?",
+        "Apa yang perlu saya lakukan jika saya tersalah transfer ke akaun bank sendiri dan tidak ke akaun syarikat?"
+      ],
+      "intent": "incorrect_transfer",
+      "languages": {
+        "en": "\"I mistakenly transferred funds to my own bank account instead of the company’s. What should I do for the top-up?\"",
+        "ms": "\"Saya tersalah transfer ke akaun bank saya sendiri, bukan ke akaun syarikat. Apa langkah yang perlu saya ambil untuk top-up?\"",
+        "cn": "\"我错误地将款项转到了我自己的银行账户，而不是公司的。接下来我该怎么做？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if you mistakenly transferred funds to your own bank account, the money cannot be refunded. However, you can still use the credited amount for gaming. Please ensure to top up correctly by uploading your bank-in slip via (WALLET → TOPUP). After submission, wait 3-10 minutes for the system to process the transaction. If the credit does not arrive within 10 minutes, kindly contact live chat for further assistance.\"",
+        "ms": "\"Hi boss, jika boss tersalah transfer ke akaun bank sendiri, wang tersebut tidak boleh dikembalikan. Namun, boss masih boleh menggunakan kredit tersebut untuk bermain. Sila pastikan untuk top-up dengan betul dengan memuat naik slip bank-in melalui (WALLET → TOPUP). Selepas penghantaran, tunggu selama 3-10 minit untuk sistem memproses transaksi. Jika kredit masih belum masuk selepas 10 minit, sila hubungi live chat untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，如果您错误地将款项转到了您自己的银行账户，款项将无法退还。不过，您仍可以使用这笔信用额度进行游戏。请确保通过（WALLET → TOPUP）上传正确的存款单进行充值。提交后，请等待3-10分钟以便系统处理交易。如果10分钟后仍未到账，请联系在线客服获取进一步帮助。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "incorrect_transfer",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-07T23:50:00Z",
+      "lastUpdated": "2025-04-07T23:50:00Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0886",
+    "question": {
+      "text": "Kenapa saya tidak menerima kredit dari Magic Box walaupun saya menang?",
+      "variations": [
+        "Magic Box menang tapi duit tidak dikredit, kenapa?",
+        "Saya menang Magic Box tetapi kredit tidak muncul, apa masalahnya?",
+        "Kenapa kemenangan Magic Box saya tidak ditambahkan ke wallet?"
+      ],
+      "intent": "magic_box_credit_issue",
+      "languages": {
+        "en": "\"Why haven't my Magic Box winnings been credited even though I won?\"",
+        "ms": "\"Kenapa saya tidak menerima kredit dari Magic Box walaupun saya menang?\"",
+        "cn": "\"为什么我赢得Magic Box后奖金没有到账？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if you win in Magic Box, your winnings and any extra bonus are supposed to be credited automatically based on the payout rate. However, if the credit is not showing up, please take a screenshot of the result from the Joker app and send it to us for verification. Also, check your ticket details for specific letter codes (like G or H) that indicate your win. If you need further assistance, kindly contact live chat for immediate support.\"",
+        "ms": "\"Hi boss, jika boss menang dalam Magic Box, kemenangan dan bonus tambahan akan dikreditkan secara automatik mengikut kadar pembayaran yang ditetapkan. Namun, jika kredit tidak muncul, sila ambil screenshot keputusan dari aplikasi Joker dan hantar kepada kami untuk semakan. Sila juga semak butiran tiket untuk kod huruf (contohnya G atau H) yang menunjukkan kemenangan boss. Jika perlukan bantuan lanjut, sila hubungi live chat.\"",
+        "cn": "\"嗨，老板，如果您在Magic Box中获胜，奖金及额外奖励会依据支付标准自动入账。但是，如果奖金没有显示，请截图您在Joker应用中的结果并发送给我们以便核实。同时，请检查您的票据，看是否有显示特定字母代码（如G或H），以确认中奖。如需进一步帮助，请联系在线客服。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "magic_box_credit_issue",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-07T21:00:00Z",
+      "lastUpdated": "2025-04-07T21:00:00Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0887",
+    "question": {
+      "text": "Kenapa saya perlu tunggu selepas upload resit topup dan tidak perlu menghantar resit yang sama berkali-kali?",
+      "variations": [
+        "Mengapa saya hanya perlu upload resit sekali sahaja?",
+        "Kenapa resit topup yang sama tidak perlu dihantar berulang kali?",
+        "Apa sebabnya saya perlu tunggu proses sistem selepas upload resit?"
+      ],
+      "intent": "duplicate_receipt_upload_issue",
+      "languages": {
+        "en": "\"Why do I need to wait after uploading my top-up receipt and avoid submitting the same receipt multiple times?\"",
+        "ms": "\"Kenapa saya perlu tunggu selepas upload resit topup dan jangan hantar resit yang sama berulang kali?\"",
+        "cn": "\"为什么我上传充值单后需要等待，并且不应该重复上传同一张收据？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, your receipt has been successfully uploaded. Please wait for 3-5 minutes for the system to process your top-up. Uploading the same receipt multiple times may slow down the system, so kindly refrain from resubmitting the same receipt.\"",
+        "ms": "\"Hi boss, resit telah berjaya diupload. Sila tunggu selama 3-5 minit untuk sistem memproses topup anda. Jangan hantar resit yang sama berkali-kali kerana ia boleh melambatkan sistem. Terima kasih atas kerjasama boss!\"",
+        "cn": "\"嗨，老板，您的收据已成功上传。请等待3-5分钟以便系统处理您的充值。重复上传相同的收据可能会使系统变慢，请不要重复提交。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "duplicate_receipt_upload_issue",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-07T17:55:00Z",
+      "lastUpdated": "2025-04-07T17:55:00Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0888",
+    "question": {
+      "text": "Apa yang perlu saya lakukan jika terlupa memasukkan ID JOKER semasa top-up dan ID yang dimasukkan tidak sah?",
+      "variations": [
+        "Lupa letak ID JOKER semasa transfer, apa langkah yang perlu diambil?",
+        "ID yang saya masukkan salah, bagaimana untuk memperbaiki top-up saya?",
+        "Bagaimana untuk menangani kesilapan jika tidak memasukkan ID JOKER yang betul semasa transaksi?"
+      ],
+      "intent": "missing_or_invalid_joker_id",
+      "languages": {
+        "en": "\"What should I do if I forget to enter my JOKER ID during top-up and the ID I provided is invalid?\"",
+        "ms": "\"Apa yang perlu saya lakukan jika terlupa memasukkan ID JOKER semasa top-up dan ID yang saya masukkan tidak sah?\"",
+        "cn": "\"如果我在充值时忘记输入JOKER ID且输入的ID无效，我该怎么办？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if you forgot to key in your JOKER ID and entered an incorrect ID during your transfer, please re-upload your transaction receipt via the top-up page. Ensure that your receipt is complete and clearly shows the transaction details. For future transactions, please enter your correct JOKER ID in the 'Recipient Reference' field to help the system process your top-up promptly. If you need further assistance, please contact our live chat support.\"",
+        "ms": "\"Hi boss, kalau boss terlupa masukkan ID JOKER dan ID yang dimasukkan tidak sah, sila muat naik semula resit transaksi melalui halaman top-up. Pastikan resit anda lengkap dan jelas menunjukkan maklumat transaksi. Untuk transaksi akan datang, pastikan boss masukkan ID JOKER yang betul di ruangan 'Recipient Reference' supaya sistem dapat memproses top-up dengan lancar. Jika perlu bantuan lanjut, sila hubungi live chat kami.\"",
+        "cn": "\"嗨，老板，如果您忘记输入JOKER ID且输入的ID无效，请通过充值页面重新上传交易收据。请确保您的收据完整且清晰显示交易详情。为了以后的交易，请在‘收款参考’字段中输入正确的JOKER ID，以便系统能及时处理您的充值。如果需要进一步帮助，请联系在线客服。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "missing_or_invalid_joker_id",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-07T21:38:00Z",
+      "lastUpdated": "2025-04-07T21:38:00Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0889",
+    "question": {
+      "text": "Kenapa deposit RM15 saya belum dikredit ke wallet?",
+      "variations": [
+        "RM15 saya belum masuk, apakah ada masalah pada deposit saya?",
+        "Mengapa deposit RM15 saya tidak muncul di wallet?",
+        "Bagaimana jika deposit RM15 tidak dikreditkan?"
+      ],
+      "intent": "deposit_not_credited",
+      "languages": {
+        "en": "\"Why hasn't my RM15 deposit been credited to my wallet?\"",
+        "ms": "\"Kenapa deposit RM15 saya belum masuk ke dalam wallet?\"",
+        "cn": "\"为什么我的15令吉存款还没有到账？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if your RM15 deposit has not been credited, please first check your wallet and review the transaction receipt that was previously uploaded. Sometimes deposits may be delayed due to specific terms or conditions. If you have already verified and still face the issue, kindly contact our customer support for further assistance.\"",
+        "ms": "\"Hi boss, kalau deposit RM15 boss belum dikreditkan, sila periksa wallet dan semak resit transaksi yang telah dimuat naik sebelum ini. Kadang-kadang deposit mungkin tertunda kerana syarat tertentu. Jika boss sudah semak dan masalah masih berlarutan, sila hubungi sokongan pelanggan kami untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，如果您的15令吉存款还没有到账，请先检查您的钱包并核对之前上传的交易收据。有时存款可能会因某些条件而延迟。如果您已确认但问题仍存在，请联系客户支持以获得进一步帮助。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "deposit_not_credited",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T20:31:00Z",
+      "lastUpdated": "2025-04-08T20:31:00Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0890",
+    "question": {
+      "text": "Kenapa kemenangan saya lambat masuk ke wallet?",
+      "variations": [
+        "Ada kemenangan tapi duit belum masuk, apakah sebabnya?",
+        "Mengapa hasil win saya belum dikreditkan?",
+        "Kemenangan masuk lambat, apa yang harus saya lakukan?"
+      ],
+      "intent": "win_delay_issue",
+      "languages": {
+        "en": "\"Why are my winnings taking longer to be credited to my wallet?\"",
+        "ms": "\"Kenapa kemenangan saya lambat masuk ke dalam wallet?\"",
+        "cn": "\"为什么我的中奖金额到账很慢？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, sometimes system processing for winnings can be slower than usual. If your win has not been credited within the standard 1-10 minutes, please be patient as the system is processing your transaction. Should it take longer than expected, feel free to contact our live chat support for further clarification.\"",
+        "ms": "\"Hi boss, kadang-kadang proses sistem untuk kemenangan boleh menjadi lebih lambat. Jika kemenangan boss belum dikreditkan dalam 1-10 minit seperti biasa, sila bersabar kerana sistem sedang memproses transaksi tersebut. Jika ia mengambil masa lebih lama dari jangkaan, boss boleh hubungi live chat untuk penjelasan lanjut.\"",
+        "cn": "\"嗨，老板，有时系统处理中奖金额可能会比较慢。如果您的中奖金额在通常1-10分钟内还未到账，请耐心等待系统处理。如果超过预期时间，请联系在线客服以获取进一步说明。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "win_delay_issue",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T22:20:00Z",
+      "lastUpdated": "2025-04-08T22:20:00Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0891",
+    "question": {
+      "text": "Bagaimana mengatasi masalah sambungan internet lambat ketika mengupload resit top-up?",
+      "variations": [
+        "Apa yang perlu saya lakukan jika sambungan internet saya lambat semasa upload resit?",
+        "Bagaimana cara mengatasi masalah network yang perlahan ketika upload resit top-up?",
+        "Kenapa resit saya upload jadi tertunda disebabkan sambungan internet yang lemah?"
+      ],
+      "intent": "network_issue_during_receipt_upload",
+      "languages": {
+        "en": "\"How can I overcome slow internet connection issues when uploading my top-up receipt?\"",
+        "ms": "\"Bagaimana untuk mengatasi masalah sambungan internet lambat semasa upload resit top-up?\"",
+        "cn": "\"在上传充值单时，如何解决网络连接缓慢的问题？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if you are experiencing a slow internet connection that affects your receipt upload, try restarting your device or checking with your service provider for any network issues. This may help improve the upload speed. If the issue persists, please contact our live chat support for further assistance.\"",
+        "ms": "\"Hi boss, kalau sambungan internet boss lambat dan mengganggu proses upload resit top-up, cuba restart peranti atau semak dengan penyedia perkhidmatan tentang masalah rangkaian. Ini mungkin dapat memperbaiki kelajuan upload. Jika masalah berlanjut, sila hubungi sokongan live chat untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，如果您的网络连接缓慢影响上传充值单，请尝试重启设备或联系服务提供商检查网络问题。如果问题持续，请联系在线客服以获得进一步帮助。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "network_issue_during_receipt_upload",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-07T18:35:00Z",
+      "lastUpdated": "2025-04-07T18:35:00Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0892",
+    "question": {
+      "text": "Bagaimana untuk mempercepatkan proses kredit top-up saya?",
+      "variations": [
+        "Apa yang boleh dilakukan supaya top-up saya masuk dengan cepat?",
+        "Kenapa kredit top-up saya tidak masuk dengan segera?",
+        "Bagaimana cara memastikan dana top-up dikreditkan lebih cepat?"
+      ],
+      "intent": "topup_credit_delay",
+      "languages": {
+        "en": "\"How can I expedite the crediting process for my top-up?\"",
+        "ms": "\"Bagaimana untuk mempercepatkan proses kredit top-up saya?\"",
+        "cn": "\"如何加快充值资金到账的过程？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, once your receipt is uploaded successfully, please allow the system 3-10 minutes to process your top-up. If the credit does not appear within this time frame, kindly check your wallet and, if necessary, contact our live chat support for assistance.\"",
+        "ms": "\"Hi boss, sebaik sahaja resit diupload dengan jayanya, sila tunggu selama 3-10 minit untuk sistem memproses top-up. Jika kredit tidak masuk dalam tempoh tersebut, sila semak wallet anda dan, jika perlu, hubungi sokongan live chat untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，一旦收据成功上传，请等待3-10分钟让系统处理充值。如果在此时间内资金仍未到账，请检查您的钱包，如有需要，请联系在线客服。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "topup_credit_delay",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T18:50:00Z",
+      "lastUpdated": "2025-04-08T18:50:00Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0893",
+    "question": {
+      "text": "Bagaimana cara bermain Magic Box dalam pertaruhan 4D?",
+      "variations": [
+        "Apa itu Magic Box dan bagaimana cara memainkannya?",
+        "Boleh terangkan cara bermain Magic Box dalam 4D?",
+        "Bagaimana mekanisme bonus Magic Box dalam 4D?"
+      ],
+      "intent": "magic_box_game_instructions",
+      "languages": {
+        "en": "\"How do I play Magic Box in 4D betting?\"",
+        "ms": "\"Bagaimana cara bermain Magic Box dalam pertaruhan 4D?\"",
+        "cn": "\"如何在4D投注中玩Magic Box？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, Magic Box is a bonus feature in 4D betting that adds extra rewards to your win. To play Magic Box, you need to place a minimum bet (e.g., RM1) on BIG. After your bet, a random Magic Box letter (from A to W) will be assigned and printed on your receipt. If the winning number's associated letter in the result matches your Magic Box letter, you win an additional bonus. For example, if the result shows 1234 with letter 'A' and your receipt shows 'A', you win the Magic Box jackpot. For more details, please refer to our video guide.\"",
+        "ms": "\"Hi boss, Magic Box adalah ciri bonus dalam pertaruhan 4D yang menambah ganjaran kepada kemenangan boss. Untuk bermain Magic Box, boss perlu membuat pertaruhan minimum (contohnya RM1) di BIG. Selepas pertaruhan, boss akan diberi huruf Magic Box secara rawak (A-W) yang dicetak pada resit. Jika nombor kemenangan disertai huruf yang sepadan dengan huruf Magic Box dalam resit, boss akan menang bonus tambahan. Contohnya, jika resit menunjukkan nombor 1234 dengan huruf 'A' dan keputusan juga 'A', boss menang jackpot Magic Box. Sila rujuk video panduan untuk maklumat lanjut.\"",
+        "cn": "\"嗨，老板，Magic Box是4D投注中的一个额外奖励功能，可为您的中奖增加额外奖金。要参与Magic Box，您需要在BIG上进行最低投注（例如RM1）。投注后，系统会随机分配一个Magic Box字母（A至W），并打印在您的收据上。如果中奖号码的字母与您收据上的字母相符，您将获得额外奖金。例如，如果收据上显示号码1234并带有字母'A'，而开奖结果也为'A'，您就赢得Magic Box奖金。详细信息请参考我们的指导视频。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "magic_box_game_instructions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-07T16:42:00Z",
+      "lastUpdated": "2025-04-07T16:42:00Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "bonus features",
+        "4D betting"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0894",
+    "question": {
+      "text": "Kenapa kemenangan 4D saya belum dikreditkan secara automatik ke wallet?",
+      "variations": [
+        "Mengapa duit kemenangan saya masih belum masuk ke wallet?",
+        "Kemenangan 4D saya belum masuk, apakah sistem sedang bermasalah?",
+        "Bagaimana jika kemenangan 4D tidak dikreditkan dengan segera?"
+      ],
+      "intent": "win_credit_delay",
+      "languages": {
+        "en": "\"Why haven't my 4D winnings been automatically credited to my wallet?\"",
+        "ms": "\"Kenapa kemenangan 4D saya belum dikreditkan secara automatik ke dalam wallet?\"",
+        "cn": "\"为什么我的4D奖金还没有自动转入钱包？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, 4D winnings are usually credited to your wallet automatically within 1-10 minutes. However, on occasion the processing may be delayed due to system load. If your winnings do not appear after the standard time, please be patient or contact our live chat support for further clarification.\"",
+        "ms": "\"Hi boss, kemenangan 4D biasanya akan dikreditkan ke dalam wallet secara automatik dalam masa 1-10 minit. Namun, kadangkala proses tersebut boleh terlewat disebabkan beban sistem. Jika kemenangan belum masuk selepas tempoh tersebut, sila bersabar atau hubungi live chat untuk penjelasan lanjut.\"",
+        "cn": "\"嗨，老板，4D奖金通常会在1-10分钟内自动转入您的钱包。但有时由于系统负载可能会出现延迟。如果奖金在规定时间内未到账，请耐心等待或联系在线客服以获得进一步说明。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "win_credit_delay",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T22:05:00Z",
+      "lastUpdated": "2025-04-08T22:05:00Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "system processing",
+        "wallet credit"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0895",
+    "question": {
+      "text": "Bagaimana cara untuk mendapatkan link dan bermain Mega888?",
+      "variations": [
+        "Boleh saya dapatkan link untuk Mega888 dan panduan bermainnya?",
+        "Apa langkah-langkah untuk main Mega888 dan di mana saya boleh download aplikasinya?",
+        "Bagaimana cara akses dan bermain Mega888 melalui link yang disediakan?"
+      ],
+      "intent": "mega888_game_instructions",
+      "languages": {
+        "en": "\"How can I obtain the link and instructions to play Mega888?\"",
+        "ms": "\"Bagaimana cara untuk mendapatkan link dan bermain Mega888?\"",
+        "cn": "\"如何获取链接并了解如何玩Mega888？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, to play Mega888, please follow these steps: First, click on 'More Game' at the bottom-right of the screen and select the slot game icon to view the list. Then, choose Mega888, copy the ID & Password from the Joker App, download the Mega888 app using one of the provided links (https://m.cfbz888.com, http://m.mega266.com, or https://m2.mega166.com), and log in with the copied credentials. Finally, transfer credit from your Joker App wallet to Mega888 before playing. If you encounter any issues, please contact our live chat support.\"",
+        "ms": "\"Hi boss, untuk main Mega888, sila ikut langkah berikut: Klik 'More Game' di bahagian kanan bawah skrin dan tekan ikon mesin slot untuk melihat senarai permainan. Kemudian, pilih Mega888, copy ID & Password dari Joker App, download aplikasi Mega888 menggunakan salah satu link yang disediakan (https://m.cfbz888.com, http://m.mega266.com, atau https://m2.mega166.com), dan log masuk dengan ID & Password tersebut. Akhir sekali, transfer kredit dari wallet Joker App ke Mega888 sebelum bermain. Jika terdapat masalah, sila hubungi live chat kami.\"",
+        "cn": "\"嗨，老板，要玩Mega888，请按照以下步骤操作：首先点击屏幕右下角的‘More Game’，然后点击老虎机图标查看游戏列表。接着，从列表中选择Mega888，从Joker App中复制ID和密码，使用提供的链接（https://m.cfbz888.com、http://m.mega266.com 或 https://m2.mega166.com）下载Mega888应用，并用复制的凭证登录。最后，将Joker App钱包中的资金转移至Mega888后开始游戏。如遇问题，请联系在线客服。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "mega888_game_instructions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-07T23:54:00Z",
+      "lastUpdated": "2025-04-07T23:54:00Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "game download",
+        "login process",
+        "credit transfer"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0896",
+    "question": {
+      "text": "Apa maksud RV, BH, BT, dan IBOX dalam pertaruhan 4D?",
+      "variations": [
+        "RV apa maksudnya dalam 4D?",
+        "Boleh terangkan tentang BH Box HEAD?",
+        "Apa perbezaan antara IBOX dan BOX, serta maksud RV dan BT dalam 4D?"
+      ],
+      "intent": "4d_betting_abbreviations",
+      "languages": {
+        "en": "\"What do RV, BH, BT, and IBOX mean in 4D betting?\"",
+        "ms": "\"Apa maksud RV, BH, BT, dan IBOX dalam pertaruhan 4D?\"",
+        "cn": "\"4D投注中的RV、BH、BT和IBOX是什么意思？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, here is the explanation for the abbreviations in 4D betting:\\n\\n• IBOX – Similar to BOX but with a fixed price of RM1, and the payout is divided according to the number of combinations.\\n• BOX – A bet covering all possible combinations (the order of the digits can change).\\n\\nAdditional bet combinations include:\\n• RV (Round Return – Reverse Balik): The number is completely reversed (e.g., 1234 becomes 4321).\\n• BH (Pao Kepala – First Digit Fixed): The first digit remains the same while the others can change (e.g., 1223 can become 1232 or 1322).\\n• BT (Pao Ekor – Last Digit Fixed): The last digit remains unchanged while the others can rearrange (e.g., 1223 can become 2123 or 2213).\"",
+        "ms": "\"Hi boss, berikut adalah penjelasan mengenai singkatan dalam pertaruhan 4D:\\n\\n• IBOX – Sama seperti BOX tetapi dengan harga tetap RM1, dan payout dibahagikan mengikut jumlah kombinasi.\\n• BOX – Pertaruhan yang meliputi semua kombinasi yang mungkin (susunan nombor boleh berubah).\\n\\nJenis kombinasi tambahan:\\n• RV (Round Return – Reverse Balik): Nombor dibalikkan sepenuhnya (contoh: 1234 jadi 4321).\\n• BH (Pao Kepala): Nombor pertama kekal manakala nombor selebihnya boleh ditukar susunan (contoh: 1223 boleh jadi 1232 atau 1322).\\n• BT (Pao Ekor): Nombor terakhir tidak berubah, sementara nombor yang lain boleh disusun semula (contoh: 1223 boleh jadi 2123 atau 2213).\"",
+        "cn": "\"嗨，老板，以下是4D投注中各缩写的解释：\\n\\n• IBOX – 类似于BOX，但价格固定为RM1，奖金按组合数分配。\\n• BOX – 涵盖所有可能数字组合的投注（数字顺序可以改变）。\\n\\n额外投注组合包括：\\n• RV (Round Return – Reverse Balik)：数字完全颠倒（例如1234变为4321）。\\n• BH (Pao Kepala)：第一个数字固定，其余数字可变（例如1223可变为1232或1322）。\\n• BT (Pao Ekor)：最后一个数字固定，其余数字可以重新排列（例如1223可变为2123或2213）。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "4d_betting_abbreviations",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-07T21:17:40Z",
+      "lastUpdated": "2025-04-07T21:17:40Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "4D rules",
+        "betting combinations"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0897",
+    "question": {
+      "text": "Jika menang nombor 100k, apakah pilihan yang tersedia untuk pengeluaran?",
+      "variations": [
+        "Apa yang boleh saya lakukan jika menang nombor 100k?",
+        "Boleh terus transfer jika menang nombor 100k?",
+        "Bagaimana jika saya menang RM100k, adakah saya boleh terus withdraw?"
+      ],
+      "intent": "high_value_win_options",
+      "languages": {
+        "en": "\"If I win RM100k, what options do I have for withdrawing the funds?\"",
+        "ms": "\"Jika menang nombor 100k, apakah pilihan yang tersedia untuk pengeluaran?\"",
+        "cn": "\"如果我赢得100k，有哪些取款选择？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if you win with a 100k number, you have several options: \\n\\n1. Direct Transfer: You can withdraw the full amount directly (processing usually takes 5-30 minutes). \\n2. Partial Withdrawals: You can split the withdrawal into smaller amounts for more flexibility. \\n3. Use Account Company: For wins above 100k, you may opt to use the company account to 'wash' the funds, which simplifies processing for large sums.\"",
+        "ms": "\"Hi boss, kalau boss menang nombor 100k, boss ada beberapa pilihan: \\n\\n1. Transfer Terus: Boss boleh terus membuat pengeluaran jumlah penuh (proses biasanya mengambil masa 5-30 minit). \\n2. Pecahan Pengeluaran: Boss boleh pecahkan kepada beberapa kali pengeluaran untuk fleksibiliti. \\n3. Guna Account Company: Untuk jumlah melebihi 100k, boss boleh guna Account Company untuk cuci, supaya proses menjadi lebih mudah.\"",
+        "cn": "\"嗨，老板，如果您赢得100k，您有几种选择：\\n\\n1. 直接转账：您可以直接提取全部金额（处理时间通常为5-30分钟）。\\n2. 分批取款：您可以将取款金额拆分成较小的部分以获得更多灵活性。\\n3. 使用公司账户：对于超过100k的奖金，您可以选择使用公司账户来处理资金，这样大额处理会更简单。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "high_value_win_options",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-07T21:06:45Z",
+      "lastUpdated": "2025-04-07T21:06:45Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0898",
+    "question": {
+      "text": "Berapa jumlah minimum untuk withdrawal dan apakah panduan kategori pertaruhan 4D, 3D, dan 2D?",
+      "variations": [
+        "Berapa minimum jumlah yang diperlukan untuk withdraw dan bagaimana kategori 4D, 3D, 2D ditentukan?",
+        "Apa syarat minimum untuk withdrawal dan panduan untuk pertaruhan 4D, 3D, 2D?",
+        "Berapakah jumlah minimum withdraw dan bagaimana cara menentukan 3D dan 2D daripada 4D?"
+      ],
+      "intent": "withdrawal_minimum_and_betting_guidelines",
+      "languages": {
+        "en": "\"What is the minimum amount required for withdrawal and what are the betting guidelines for 4D, 3D, and 2D?\"",
+        "ms": "\"Berapa jumlah minimum untuk withdrawal dan apakah panduan kategori pertaruhan 4D, 3D, dan 2D?\"",
+        "cn": "\"取款的最低金额是多少，以及4D、3D和2D的投注指南是什么？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, the current minimum withdrawal amount is RM30. Additionally, here are the guidelines for the betting categories:\\n\\n• 4D (Tegak Sahaja): Includes prizes 4A (1st), 4B (2nd), 4C (3rd), 4D (Special), and 4E (Consolation).\\n\\n• 3D: Based on the last three digits of the 4D number, with categories such as 3A (1st), 3B (2nd), 3C (3rd), 3D (Special, multiplied by 10), 3E (Consolation, multiplied by 10), and 3N covering all prizes.\\n\\n• 2D: Based on the last two digits of the 4D number, with categories 2A (1st), 2B (2nd), 2C (3rd), 2D (Special, multiplied by 10), 2E (Consolation, multiplied by 10), and 2N covering all prizes.\\n\\nFor 3D and 2D, only the ending digits of the 4D number are used (e.g., if 4D = 1234, then 3D = 234 and 2D = 34).\"",
+        "ms": "\"Hi boss, jumlah minimum untuk withdrawal adalah RM30. Berikut juga panduan untuk kategori pertaruhan:\\n\\n• 4D (Tegak Sahaja): Termasuk hadiah 4A (1st), 4B (2nd), 4C (3rd), 4D (Special) dan 4E (Consolation).\\n\\n• 3D: Berdasarkan tiga digit terakhir nombor 4D, dengan kategori seperti 3A (1st), 3B (2nd), 3C (3rd), 3D (Special, X10), 3E (Consolation, X10) dan 3N merangkumi semua hadiah.\\n\\n• 2D: Berdasarkan dua digit terakhir nombor 4D, dengan kategori 2A (1st), 2B (2nd), 2C (3rd), 2D (Special, X10), 2E (Consolation, X10) dan 2N merangkumi semua hadiah.\\n\\nUntuk 3D dan 2D, hanya digit terakhir nombor 4D yang digunakan (contoh: jika 4D = 1234, maka 3D = 234 dan 2D = 34).\"",
+        "cn": "\"嗨，老板，当前的最低取款金额是RM30。以下是4D、3D和2D投注的指南：\\n\\n• 4D（竖式）：包括4A（一等奖）、4B（二等奖）、4C（三等奖）、4D（特别奖）和4E（安慰奖）。\\n\\n• 3D：基于4D号码的后三位，分类包括3A（一等）、3B（二等）、3C（三等）、3D（特别奖，X10）、3E（安慰奖，X10）以及涵盖所有奖项的3N。\\n\\n• 2D：基于4D号码的后两位，分类包括2A（一等）、2B（二等）、2C（三等）、2D（特别奖，X10）、2E（安慰奖，X10）以及涵盖所有奖项的2N。\\n\\n对于3D和2D，只取4D号码的末尾数字（例如：如果4D = 1234，则3D = 234，2D = 34）。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_minimum_and_betting_guidelines",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-07T21:00:30Z",
+      "lastUpdated": "2025-04-07T21:00:30Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "withdrawal process",
+        "4D, 3D, 2D rules"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0899",
+    "question": {
+      "text": "Kenapa top-up ibox saya belum dikreditkan dan bagaimana proses kredit kemenangan dari J9pm?",
+      "variations": [
+        "Mengapa kredit top-up ibox saya tidak muncul dengan segera?",
+        "Bagaimana proses kredit untuk top-up ibox dan kemenangan J9pm?",
+        "Apa sebabnya dana top-up ibox saya tertunda dan bagaimana cara cek kemenangan J9pm?"
+      ],
+      "intent": "topup_and_win_processing_delay",
+      "languages": {
+        "en": "\"Why hasn't my iBox top-up been credited and how are J9pm winnings processed?\"",
+        "ms": "\"Kenapa top-up ibox saya belum dikreditkan dan bagaimana proses kredit kemenangan dari J9pm?\"",
+        "cn": "\"为什么我的ibox充值还未到账，J9pm的奖金如何处理？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, once you complete a top-up via iBox, please allow 3-10 minutes for the system to process the transaction. If your credit does not appear within that time, please check your wallet or send a screenshot of your receipt via live chat. Regarding J9pm, if you win, the winnings are automatically credited – you can check the 'Report' section between 10:00 PM and 10:30 PM for the update.\"",
+        "ms": "\"Hi boss, selepas top-up ibox dilakukan, sila tunggu selama 3-10 minit untuk sistem memproses transaksi tersebut. Jika kredit belum masuk, semak wallet anda atau hantarkan screenshot resit ke live chat untuk semakan lanjut. Bagi J9pm, jika boss menang, kemenangan akan dikreditkan secara automatik – boss boleh semak di bahagian 'Report' antara 10:00 PM hingga 10:30 PM.\"",
+        "cn": "\"嗨，老板，一旦通过ibox充值，请等待3-10分钟让系统处理交易。如果资金未到账，请检查您的钱包或通过在线客服发送收据截图进行核查。关于J9pm，如果中奖，奖金会自动转入，您可在晚上10:00至10:30之间在‘报告’中查看更新。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "topup_and_win_processing_delay",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T22:28:48Z",
+      "lastUpdated": "2025-04-08T22:28:48Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "top-up process",
+        "win credit processing"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0900",
+    "question": {
+      "text": "Kenapa kemenangan saya lambat masuk ke wallet?",
+      "variations": [
+        "Mengapa win saya tidak segera dikreditkan?",
+        "Kenapa duit kemenangan saya tertunda?",
+        "Apa sebabnya proses kredit kemenangan saya mengambil masa lama?"
+      ],
+      "intent": "win_credit_delay",
+      "languages": {
+        "en": "\"Why are my winnings taking so long to be credited to my wallet?\"",
+        "ms": "\"Kenapa kemenangan saya lambat masuk ke dalam wallet?\"",
+        "cn": "\"为什么我的奖金到账很慢？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, winnings are usually credited automatically within 5 to 30 minutes due to high transaction volumes. If your win does not appear within the standard time, please be patient or contact our live chat support for further assistance.\"",
+        "ms": "\"Hi boss, kemenangan biasanya dikreditkan secara automatik dalam masa 5 hingga 30 minit disebabkan oleh banyaknya transaksi. Jika kemenangan belum masuk dalam tempoh tersebut, sila bersabar atau hubungi live chat untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，奖金通常会在5至30分钟内自动到账，这可能是因为交易量较大。如果您的奖金在规定时间内未到账，请耐心等待或联系在线客服获得进一步帮助。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "win_credit_delay",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T22:18:43Z",
+      "lastUpdated": "2025-04-08T22:18:43Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "system processing",
+        "wallet credit"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0901",
+    "question": {
+      "text": "Apa pilihan pertaruhan 4D yang tersedia untuk saya?",
+      "variations": [
+        "Boleh terangkan pilihan 4D yang ada?",
+        "Apa jenis pertaruhan 4D yang boleh saya pilih?",
+        "Senaraikan pilihan permainan 4D yang tersedia."
+      ],
+      "intent": "available_4d_options",
+      "languages": {
+        "en": "\"What 4D betting options are available?\"",
+        "ms": "\"Apa pilihan pertaruhan 4D yang tersedia untuk saya?\"",
+        "cn": "\"有哪些4D投注选项？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, for 4D betting there are several options available, including: Magnum, Kuda, Toto, Singapore, Sarawak, Sabah, Sandakan, GD Lotto, and 9 Lotto. Note that GD Lotto and 9 Lotto have draws every day. If you have further questions, feel free to ask!\"",
+        "ms": "\"Hi boss, untuk pertaruhan 4D, terdapat beberapa pilihan seperti: Magnum, Kuda, Toto, Singapore, Sarawak, Sabah, Sandakan, GD Lotto, dan 9 Lotto. Perlu diingat bahawa GD Lotto dan 9 Lotto ada cabutan setiap hari. Jika ada pertanyaan lanjut, sila tanya!\"",
+        "cn": "\"嗨，老板，4D投注有多个选项，包括Magnum、Kuda、Toto、Singapore、Sarawak、Sabah、Sandakan、GD Lotto和9 Lotto。其中GD Lotto和9 Lotto每天开奖。如果您有更多问题，请随时咨询！\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "available_4d_options",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T22:19:39Z",
+      "lastUpdated": "2025-04-08T22:19:39Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "4D betting",
+        "game options"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0902",
+    "question": {
+      "text": "Bagaimana cara menentukan kemenangan untuk pertaruhan Small dalam 4D dan adakah small bet menyertakan consolation?",
+      "variations": [
+        "Apa syarat kemenangan bagi pertaruhan Small dalam 4D?",
+        "Small Bet hanya menang untuk hadiah mana dalam 4D?",
+        "Boleh terangkan perbezaan antara BIG dan SMALL dalam pertaruhan 4D?"
+      ],
+      "intent": "small_bet_winnings",
+      "languages": {
+        "en": "\"How do I determine the winning criteria for a Small Bet in 4D and does it include consolation prize?\"",
+        "ms": "\"Bagaimana cara menentukan kemenangan untuk pertaruhan Small dalam 4D dan adakah Small Bet menyertakan consolation?\"",
+        "cn": "\"如何判断4D中的Small Bet获胜标准，并且Small Bet是否包括安慰奖？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, for a Small Bet in 4D, the bet only wins if your number matches the 1st, 2nd, or 3rd prize. There is no payout for Special or Consolation prizes. Also note that for determining 3D and 2D bets, only the last three or two digits of your 4D number are used (for example, if 4D = 1234 then 3D = 234 and 2D = 34).\"",
+        "ms": "\"Hi boss, untuk Small Bet dalam 4D, kemenangan hanya diperoleh jika nombor yang dipertaruhkan sepadan dengan Hadiah Pertama, Kedua, atau Ketiga. Small Bet tidak akan dibayar jika nombor yang keluar adalah untuk Hadiah Istimewa atau Consolation. Juga, untuk pertaruhan 3D dan 2D, hanya digit terakhir dari nombor 4D yang digunakan (contoh: jika 4D = 1234, maka 3D = 234 dan 2D = 34).\"",
+        "cn": "\"嗨，老板，对于4D中的Small Bet，仅当您的号码与第一、第二或第三奖相符时才算获胜。Small Bet不支付特别奖或安慰奖。同时，对于3D和2D投注，只取4D号码的后三位或后两位（例如：如果4D = 1234，则3D = 234，2D = 34）。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "small_bet_winnings",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T20:47:57Z",
+      "lastUpdated": "2025-04-08T20:47:57Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "4D betting",
+        "BIG vs SMALL",
+        "3D and 2D rules"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0903",
+    "question": {
+      "text": "Mengapa top-up saya lambat masuk dan apa langkah yang perlu saya ambil?",
+      "variations": [
+        "Top-up belum masuk, apakah yang perlu saya periksa?",
+        "Bagaimana cara mengatasi masalah top-up yang tertunda?",
+        "Kenapa dana top-up saya belum dikreditkan?"
+      ],
+      "intent": "topup_delay_issue",
+      "languages": {
+        "en": "\"Why is my top-up taking longer to be credited and what should I do?\"",
+        "ms": "\"Mengapa top-up saya lambat masuk dan apa langkah yang perlu saya ambil?\"",
+        "cn": "\"为什么我的充值到账很慢，我该怎么办？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, after you upload your receipt, please allow the system 3-10 minutes to process the top-up. If the credit does not appear within that time frame, check whether you used ATM/Transfer (DuitNow) or Fast Payment (FPX). For FPX, if it takes more than 10 minutes, please send a screenshot of your transaction via live chat for further verification.\"",
+        "ms": "\"Hi boss, selepas upload resit, sila tunggu selama 3-10 minit untuk sistem memproses top-up. Jika kredit masih belum masuk, periksa sama ada anda menggunakan ATM/Transfer (DuitNow) atau Fast Payment (FPX). Bagi FPX, jika lebih 10 minit masih belum masuk, sila hantarkan screenshot transaksi melalui live chat untuk semakan lanjut.\"",
+        "cn": "\"嗨，老板，上传收据后请等待3-10分钟让系统处理充值。如果资金在此期间未到账，请检查您是使用ATM/Transfer (DuitNow)还是Fast Payment (FPX)。对于FPX，如果超过10分钟仍未到账，请通过在线客服发送交易截图进行核查。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "topup_delay_issue",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T23:50:00Z",
+      "lastUpdated": "2025-04-08T23:50:00Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "top-up process",
+        "payment methods"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0904",
+    "question": {
+      "text": "Bolehkah saya membatalkan pertaruhan real win jika saya salah pilih?",
+      "variations": [
+        "Adakah saya boleh cancel pertaruhan jika salah pilih?",
+        "Bagaimana prosedur pembatalan pertaruhan real win?",
+        "Boleh batalkan pertaruhan real win yang telah disahkan?"
+      ],
+      "intent": "bet_cancellation_policy",
+      "languages": {
+        "en": "\"Can I cancel a Real Win bet if I made a wrong selection?\"",
+        "ms": "\"Bolehkah saya membatalkan pertaruhan real win jika saya salah pilih?\"",
+        "cn": "\"如果我选错了，能取消Real Win投注吗？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if you have mistakenly placed a Real Win bet, unfortunately once it has been confirmed, cancellation is not possible. Bets can only be canceled within 30 minutes if they are not yet confirmed. Please ensure your selections are correct before the bet is finalized.\"",
+        "ms": "\"Hi boss, jika boss tersalah pilih untuk pertaruhan Real Win, sayangnya setelah pertaruhan disahkan, ia tidak boleh dibatalkan. Pembatalan hanya dibenarkan dalam masa 30 minit sebelum pertaruhan disahkan. Pastikan pilihan anda betul sebelum pertaruhan dimuktamadkan.\"",
+        "cn": "\"嗨，老板，如果您错误下注了Real Win投注，一旦确认后就无法取消。只有在投注确认前30分钟内才允许取消。请在投注最终确定前确认您的选择是否正确。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "bet_cancellation_policy",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T22:26:12Z",
+      "lastUpdated": "2025-04-08T22:26:12Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "bet cancellation",
+        "transaction confirmation"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0905",
+    "question": {
+      "text": "Mengapa jumlah deposit saya tidak sepadan dengan resit, contohnya ‘kurang satu nombor’?",
+      "variations": [
+        "Jumlah bayaran saya tidak betul seperti resit, apa yang perlu saya lakukan?",
+        "Kenapa resit saya menunjukkan jumlah yang berbeza dengan transaksi?",
+        "Terdapat ketidaksesuaian jumlah pada resit, bagaimanakah hendaknya?"
+      ],
+      "intent": "deposit_amount_mismatch",
+      "languages": {
+        "en": "\"Why does my deposit amount not match the receipt, for example, missing one digit?\"",
+        "ms": "\"Mengapa jumlah deposit saya tidak sepadan dengan resit, contohnya ‘kurang satu nombor’?\"",
+        "cn": "\"为什么我的存款金额与收据不符，比如缺少一位数字？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, please ensure that the deposit amount entered matches exactly what is shown on your receipt. If you notice a discrepancy (for example, if your deposit amount is missing a digit), please double-check the transaction details in your banking app. If the problem persists, contact customer support with your transaction screenshot for further investigation.\"",
+        "ms": "\"Hi boss, sila pastikan jumlah deposit yang dimasukkan adalah tepat seperti yang tertera pada resit. Jika terdapat perbezaan (contohnya, jumlah deposit kurang satu nombor), sila semak semula butiran transaksi dalam aplikasi bank anda. Jika masalah berterusan, hubungi sokongan pelanggan dengan hantaran screenshot untuk semakan lanjut.\"",
+        "cn": "\"嗨，老板，请确保您输入的存款金额与收据上显示的完全一致。如果发现金额不符（例如，缺少一位数字），请再次核对银行应用中的交易详情。如果问题依旧，请联系客户支持，并提供交易截图以便进一步核查。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "deposit_amount_mismatch",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T22:03:34Z",
+      "lastUpdated": "2025-04-08T22:03:34Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "deposit verification",
+        "transaction discrepancies"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0906",
+    "question": {
+      "text": "Bagaimana cara menyelesaikan masalah top-up yang belum masuk dan masalah login apabila telefon bermasalah?",
+      "variations": [
+        "Top-up belum masuk dan saya tidak dapat screenshot transaksi, apa yang perlu dilakukan?",
+        "Jika telefon saya bermasalah sehingga tidak dapat screenshot resit dan top-up tidak masuk, bagaimanakah caranya?",
+        "Apa langkah yang harus saya ambil jika top-up tidak masuk dan saya tidak dapat mengakses aplikasi bank dengan baik?"
+      ],
+      "intent": "topup_not_credited_and_login_issue",
+      "languages": {
+        "en": "\"How can I resolve issues if my top-up isn't credited and I have login problems due to phone issues?\"",
+        "ms": "\"Bagaimana cara menyelesaikan masalah top-up yang belum masuk dan masalah login apabila telefon bermasalah?\"",
+        "cn": "\"如果我的充值未到账且由于手机问题无法登录，该怎么办？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if your top-up hasn't been credited, please ensure that you have uploaded your receipt only once and wait 1-10 minutes for system processing. If you face issues taking a screenshot (for example, due to phone problems), try logging into your bank’s app again and check your transaction history to retrieve the necessary details. If after 10 minutes the credit still doesn’t appear, please send the transaction details to our live chat for further assistance.\"",
+        "ms": "\"Hi boss, kalau top-up belum masuk, pastikan boss hanya upload resit sekali dan tunggu 1-10 minit untuk proses sistem. Jika terdapat masalah untuk mengambil screenshot (contohnya disebabkan masalah telefon), cuba log masuk semula ke aplikasi bank dan semak sejarah transaksi untuk mendapatkan maklumat yang diperlukan. Jika selepas 10 minit kredit masih belum masuk, sila hantarkan butiran transaksi ke live chat untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，如果充值未到账，请确保您仅上传一次收据，并等待1-10分钟让系统处理。如果因手机问题无法截图，请重新登录银行应用并查看交易记录以获取所需信息。如果10分钟后资金仍未到账，请将交易详情发送至在线客服以便进一步帮助。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "topup_not_credited_and_login_issue",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T22:48:52Z",
+      "lastUpdated": "2025-04-08T22:48:52Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "top-up process",
+        "login troubleshooting",
+        "receipt upload"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0907",
+    "question": {
+      "text": "Bagaimana cara memindahkan 4D JOKER ke telefon baru?",
+      "variations": [
+        "Apa langkah untuk memindahkan aplikasi ke telefon baru?",
+        "Bagaimana saya dapat mengakses 4D JOKER pada telefon baru?",
+        "Cara download semula 4D JOKER di telefon baru?"
+      ],
+      "intent": "app_migration_instructions",
+      "languages": {
+        "en": "\"How can I transfer or reinstall the 4D JOKER app on a new phone?\"",
+        "ms": "\"Bagaimana cara memindahkan 4D JOKER ke telefon baru?\"",
+        "cn": "\"如何将4D JOKER应用转移到新手机上？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, to transfer your 4D JOKER app to a new phone, please download the app again using the provided download link. Then, log in using your registered phone number. This will ensure you have access to all your account details and transaction history. If you encounter any issues during the process, please contact live chat support.\"",
+        "ms": "\"Hi boss, untuk memindahkan aplikasi 4D JOKER ke telefon baru, sila muat turun semula aplikasi tersebut menggunakan pautan download yang disediakan. Kemudian, log masuk menggunakan nombor telefon yang didaftarkan. Dengan itu, anda akan mendapat semula akses kepada semua butiran akaun dan sejarah transaksi. Jika terdapat sebarang masalah, sila hubungi live chat untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，要将4D JOKER应用转移到新手机上，请使用提供的下载链接重新下载安装该应用，然后使用注册的手机号码登录。这样您就可以恢复对所有账户信息和交易记录的访问。如遇问题，请联系在线客服。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "app_migration_instructions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-07T21:05:00Z",
+      "lastUpdated": "2025-04-07T21:05:00Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "app transfer",
+        "account recovery"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0908",
+    "question": {
+      "text": "Bagaimana cara memuat turun dan memasang Mega888 jika pautan tidak boleh diklik?",
+      "variations": [
+        "Apa yang perlu saya lakukan jika link Mega888 tidak berfungsi?",
+        "Bagaimana saya boleh download Mega888 apabila link tidak responsif?",
+        "Cara alternatif untuk memuat turun Mega888 jika link tidak klik-able?"
+      ],
+      "intent": "mega888_download_instructions",
+      "languages": {
+        "en": "\"How can I download and install Mega888 if the provided link is not clickable?\"",
+        "ms": "\"Bagaimana cara memuat turun dan memasang Mega888 jika pautan tidak boleh diklik?\"",
+        "cn": "\"如果提供的链接无法点击，我该如何下载并安装Mega888？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if the Mega888 download link is not clickable, please copy the link and paste it into your web browser's address bar, then press 'Enter' to initiate the download. You may also try using a different browser or checking your browser settings. If you still experience issues, feel free to contact our live chat support for further assistance.\"",
+        "ms": "\"Hi boss, jika pautan muat turun Mega888 tidak boleh diklik, sila salin pautan tersebut dan tampal ke dalam address bar pelayar web anda, kemudian tekan 'Enter' untuk memulakan muat turun. Anda juga boleh cuba menggunakan pelayar yang berbeza atau periksa tetapan pelayar anda. Jika masih ada masalah, sila hubungi live chat untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，如果Mega888的下载链接无法点击，请复制该链接并粘贴到浏览器地址栏中，然后按‘Enter’启动下载。您也可以尝试使用其他浏览器或检查浏览器设置。如果问题依旧，请联系在线客服以获得进一步帮助。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "mega888_download_instructions",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-07T21:17:55Z",
+      "lastUpdated": "2025-04-07T21:17:55Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "app download",
+        "browser troubleshooting"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0909",
+    "question": {
+      "text": "Mengapa pengeluaran saya gagal dan apa yang perlu saya lakukan?",
+      "variations": [
+        "Kenapa dana pengeluaran saya tidak masuk?",
+        "Apa sebab pengeluaran tidak berjaya dan bagaimana saya harus bertindak?",
+        "Mengapa bank saya tidak dapat memproses pengeluaran dan apa solusinya?"
+      ],
+      "intent": "withdrawal_bank_maintenance",
+      "languages": {
+        "en": "\"Why did my withdrawal fail and what should I do?\"",
+        "ms": "\"Mengapa pengeluaran saya gagal dan apa yang perlu saya lakukan?\"",
+        "cn": "\"为什么我的取款失败了，我该怎么办？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, the bank you are using for withdrawal is currently under maintenance. Please try using another bank for your withdrawal or try again later. If you continue to experience issues, kindly contact our live chat support for further assistance.\"",
+        "ms": "\"Hi boss, bank yang anda gunakan untuk pengeluaran sedang dalam penyelenggaraan. Sila gunakan bank lain untuk pengeluaran atau cuba lagi nanti. Jika masalah masih berlarutan, sila hubungi live chat untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，您使用的取款银行目前正在维护中。请使用其他银行进行取款或稍后再试。如果问题持续存在，请联系在线客服以获得进一步帮助。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_bank_maintenance",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-07T23:18:54Z",
+      "lastUpdated": "2025-04-07T23:22:12Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "withdrawal process",
+        "bank maintenance",
+        "customer support"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0910",
+    "question": {
+      "text": "Kenapa kemenangan bet Jaguar 9pm saya belum dikreditkan?",
+      "variations": [
+        "Mengapa dana kemenangan bet Jaguar 9pm saya tidak muncul?",
+        "Apa sebabnya kredit kemenangan bet Jaguar 9pm belum masuk ke wallet?",
+        "Bagaimana cara semak kemenangan bet Jaguar 9pm yang belum dikreditkan?"
+      ],
+      "intent": "jaguar9pm_winnings_delay",
+      "languages": {
+        "en": "\"Why haven't my Jaguar 9pm bet winnings been credited to my wallet?\"",
+        "ms": "\"Kenapa kemenangan bet Jaguar 9pm saya belum dikreditkan ke dalam wallet?\"",
+        "cn": "\"为什么我在Jaguar 9pm投注中的奖金还没有到账？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, winnings for J2 and J3 bets (seperti pada Jaguar 9pm) are credited automatically to your wallet. Please check the 'Report' section between 10:00 PM and 10:30 PM for your credit. Also note that if you used IBOX, which covers all permutation possibilities, the processing may sometimes take a little longer. If after the waiting period your winnings still haven't been credited, please contact live chat with a screenshot of your transaction for further verification.\"",
+        "ms": "\"Hi boss, kemenangan untuk pertaruhan J2 dan J3 (seperti Jaguar 9pm) akan dikreditkan secara automatik ke dalam wallet. Sila semak bahagian 'Report' antara 10:00 PM hingga 10:30 PM untuk melihat kredit tersebut. Perlu diingat juga, jika boss menggunakan IBOX yang meliputi semua kombinasi, prosesnya kadang-kadang boleh mengambil masa yang sedikit lebih lama. Jika selepas tempoh tunggu kemenangan masih belum dikreditkan, sila hubungi live chat bersama screenshot transaksi untuk semakan lanjut.\"",
+        "cn": "\"嗨，老板，4D投注中J2和J3（例如Jaguar 9pm）的奖金会自动转入您的钱包。请在晚上10:00至10:30之间查看‘报告’以确认到账情况。请注意，如果您使用的是覆盖所有排列组合的IBOX，处理时间有时可能会稍长。如果等待后奖金仍未到账，请联系在线客服，并附上交易截图以便进一步核查。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "jaguar9pm_winnings_delay",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T22:16:40Z",
+      "lastUpdated": "2025-04-08T22:22:23Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "4D betting",
+        "winnings processing",
+        "IBOX"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0911",
+    "question": {
+      "text": "Mengapa saya menghadapi masalah log masuk atau akses semasa bermain?",
+      "variations": [
+        "Apa yang menyebabkan saya tidak dapat log masuk dengan lancar?",
+        "Bagaimana cara mengatasi masalah akses ketika bermain?",
+        "Kenapa saya tidak dapat mengakses akaun dengan betul?"
+      ],
+      "intent": "login_issue",
+      "languages": {
+        "en": "\"Why am I experiencing login or access issues while playing?\"",
+        "ms": "\"Mengapa saya menghadapi masalah log masuk atau akses semasa bermain?\"",
+        "cn": "\"为什么我在游戏时遇到登录或访问问题？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if you are having trouble logging in or accessing the app, please first ensure that your login credentials are correct. Try restarting your device and logging in again. If the issue persists, please check your internet connection and consider clearing your app cache or using a different browser. Should the problem continue, kindly contact our live chat support for further assistance.\"",
+        "ms": "\"Hi boss, jika boss menghadapi masalah log masuk atau akses semasa bermain, pastikan maklumat log masuk anda adalah betul. Cuba restart peranti dan log masuk semula. Jika masalah masih berlanjut, sila semak sambungan internet anda, kosongkan cache aplikasi atau cuba gunakan pelayar lain. Jika isu masih tidak selesai, hubungi live chat untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，如果您在登录或访问应用时遇到问题，请首先确保您的登录凭据正确。尝试重启设备后重新登录。如果问题仍然存在，请检查您的网络连接，清除应用缓存或尝试使用其他浏览器。如果问题持续，请联系在线客服以获得进一步帮助。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "login_issue",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T22:26:57Z",
+      "lastUpdated": "2025-04-08T22:27:09Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "login troubleshooting",
+        "access issues",
+        "network connection"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0912",
+    "question": {
+      "text": "Apa yang perlu saya lakukan jika mesin ATM tidak menghasilkan resit setelah deposit?",
+      "variations": [
+        "Bagaimana saya mengesahkan deposit jika mesin ATM tidak mencetak resit?",
+        "Apa langkah seterusnya jika resit tidak keluar dari ATM?",
+        "Jika mesin ATM kehabisan kertas dan tidak ada resit, apa yang harus saya lakukan?"
+      ],
+      "intent": "atm_receipt_issue",
+      "languages": {
+        "en": "\"What should I do if the ATM doesn't print a receipt after my deposit?\"",
+        "ms": "\"Apa yang perlu saya lakukan jika mesin ATM tidak menghasilkan resit selepas deposit?\"",
+        "cn": "\"如果ATM在存款后没有打印收据，我该怎么办？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if the ATM fails to print a receipt due to lack of paper or any other issue, please provide the following transaction details: the transfer method (ATM Card/Cash Deposit/Online), time of transfer, bank name, deposited amount, and sender name. This information will help us verify your transaction. You may then contact live chat support for further assistance.\"",
+        "ms": "\"Hi boss, jika mesin ATM tidak menghasilkan resit disebabkan ketiadaan kertas atau masalah lain, sila berikan butiran transaksi berikut: kaedah transfer (ATM Card/Cash Deposit/Online), masa transfer, nama bank, jumlah deposit, dan nama pengirim. Maklumat ini akan membantu kami menyemak transaksi anda. Seterusnya, hubungi live chat untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，如果ATM由于缺纸或其他问题未能打印收据，请提供以下交易详情：转账方式（ATM卡/现金存款/在线），转账时间，银行名称，存款金额和付款人姓名。该信息将帮助我们核查您的交易。随后，请联系在线客服以获得进一步帮助。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "atm_receipt_issue",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T21:52:43Z",
+      "lastUpdated": "2025-04-08T21:56:23Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "ATM issues",
+        "deposit verification"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0913",
+    "question": {
+      "text": "Apa yang perlu saya lakukan jika mesin ATM tidak menghasilkan resit setelah deposit?",
+      "variations": [
+        "Bagaimana saya mengesahkan deposit jika mesin ATM tidak mencetak resit?",
+        "Apa langkah seterusnya jika resit tidak keluar dari ATM?",
+        "Jika mesin ATM kehabisan kertas dan tidak ada resit, apa yang harus saya lakukan?"
+      ],
+      "intent": "atm_receipt_issue",
+      "languages": {
+        "en": "\"What should I do if the ATM doesn't print a receipt after my deposit?\"",
+        "ms": "\"Apa yang perlu saya lakukan jika mesin ATM tidak menghasilkan resit selepas deposit?\"",
+        "cn": "\"如果ATM在存款后没有打印收据，我该怎么办？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if the ATM fails to print a receipt due to lack of paper or any other issue, please provide the following transaction details: the transfer method (ATM Card/Cash Deposit/Online), time of transfer, bank name, deposited amount, and sender name. This information will help us verify your transaction. You may then contact live chat support for further assistance.\"",
+        "ms": "\"Hi boss, jika mesin ATM tidak menghasilkan resit disebabkan ketiadaan kertas atau masalah lain, sila berikan butiran transaksi berikut: kaedah transfer (ATM Card/Cash Deposit/Online), masa transfer, nama bank, jumlah deposit, dan nama pengirim. Maklumat ini akan membantu kami menyemak transaksi anda. Seterusnya, hubungi live chat untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，如果ATM由于缺纸或其他问题未能打印收据，请提供以下交易详情：转账方式（ATM卡/现金存款/在线），转账时间，银行名称，存款金额和付款人姓名。该信息将帮助我们核查您的交易。随后，请联系在线客服以获得进一步帮助。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "atm_receipt_issue",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T21:52:43Z",
+      "lastUpdated": "2025-04-08T21:56:23Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "ATM issues",
+        "deposit verification"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0914",
+    "question": {
+      "text": "Bagaimana saya boleh mendapatkan lebih banyak ONG?",
+      "variations": [
+        "Apa tips untuk mendapat banyak ONG?",
+        "Bagaimana caranya supaya dapat banyak ONG?",
+        "Apa rahsia untuk menang banyak ONG?"
+      ],
+      "intent": "increase_ong",
+      "languages": {
+        "en": "\"How can I increase my chances of winning more ONG?\"",
+        "ms": "\"Bagaimana saya boleh mendapatkan lebih banyak ONG?\"",
+        "cn": "\"我如何才能赢得更多的奖金？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, winning ONG is largely based on chance and strategy. Keep playing consistently, and remember to follow our game tips and promotions. Good luck and may you win big!\"",
+        "ms": "\"Hi boss, mendapatkan banyak ONG bergantung kepada nasib dan strategi. Teruslah bermain secara konsisten, dan pastikan untuk mengikuti tips permainan dan promosi kami. Semoga bertuah dan menang besar!\"",
+        "cn": "\"嗨，老板，赢得更多奖金主要取决于运气和策略。请持续参与游戏，并遵循我们的游戏提示和促销信息。祝您好运，赢得大笔奖金！\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "increase_ong",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T20:21:40Z",
+      "lastUpdated": "2025-04-08T20:22:01Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "winning tips",
+        "game strategy"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0915",
+    "question": {
+      "text": "Bagaimana cara mengesahkan deposit saya jika saya sudah bank in?",
+      "variations": [
+        "Apa yang perlu saya lakukan selepas bank in untuk mengesahkan deposit?",
+        "Bagaimana saya tahu deposit saya telah berjaya?",
+        "Apa langkah seterusnya selepas deposit masuk?"
+      ],
+      "intent": "deposit_confirmation",
+      "languages": {
+        "en": "\"How can I confirm my deposit after I've banked in?\"",
+        "ms": "\"Bagaimana cara mengesahkan deposit saya jika saya sudah bank in?\"",
+        "cn": "\"我存款后如何确认？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if you have banked in (for example, RM33), please check your wallet to confirm that the deposit has been credited. If it has not, please contact our live chat support with your transaction details for further assistance.\"",
+        "ms": "\"Hi boss, jika boss sudah bank in (contohnya, RM33), sila semak wallet anda untuk mengesahkan bahawa deposit telah dikreditkan. Jika tidak, sila hubungi live chat dengan butiran transaksi untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，如果您已存入（例如RM33），请检查您的钱包以确认存款是否到账。如果没有，请联系在线客服并提供交易详情以获得进一步帮助。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "deposit_confirmation",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T21:26:09Z",
+      "lastUpdated": "2025-04-08T21:26:23Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "deposit verification",
+        "wallet check"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0916",
+    "question": {
+      "text": "Mengapa deposit saya tidak kelihatan di wallet?",
+      "variations": [
+        "Bagaimana saya semak deposit saya jika tidak kelihatan?",
+        "Kenapa wallet saya tidak menunjukkan deposit?",
+        "Apa yang perlu saya lakukan jika deposit saya tidak muncul?"
+      ],
+      "intent": "deposit_not_visible",
+      "languages": {
+        "en": "\"Why doesn't my deposit show up in my wallet?\"",
+        "ms": "\"Mengapa deposit saya tidak kelihatan di dalam wallet?\"",
+        "cn": "\"为什么我的存款在钱包中没有显示？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if your deposit does not show up in your wallet, please verify the transaction status in your app. It may still be processing. If the deposit remains invisible after the processing time, please contact our live chat support with your transaction details.\"",
+        "ms": "\"Hi boss, jika deposit anda tidak kelihatan dalam wallet, sila semak status transaksi dalam aplikasi. Mungkin masih dalam proses. Jika deposit masih tidak muncul selepas tempoh proses, sila hubungi live chat dengan butiran transaksi untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，如果您的存款在钱包中没有显示，请检查应用中的交易状态。可能仍在处理中。如果处理时间过后仍未显示，请联系在线客服并提供交易详情。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "deposit_not_visible",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T20:25:05Z",
+      "lastUpdated": "2025-04-08T20:26:03Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "wallet display",
+        "transaction processing"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0917",
+    "question": {
+      "text": "Bagaimana cara menukar akaun bank dalam aplikasi?",
+      "variations": [
+        "Apa langkah untuk menukar akaun bank?",
+        "Bagaimana saya boleh mengubah butiran akaun bank saya?",
+        "Apa yang perlu dilakukan untuk tukar akaun bank di aplikasi?"
+      ],
+      "intent": "change_bank_account",
+      "languages": {
+        "en": "\"How can I change my bank account details in the app?\"",
+        "ms": "\"Bagaimana cara menukar akaun bank dalam aplikasi?\"",
+        "cn": "\"如何在应用中更改我的银行账户详情？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, to change your bank account details, please go to the 'Wallet' section in the app, select 'Withdraw', and then choose 'Add Account' to enter your new bank details. Make sure that the account name matches your registered profile. If you encounter any issues, please contact our live chat support.\"",
+        "ms": "\"Hi boss, untuk menukar butiran akaun bank, sila pergi ke bahagian 'Wallet' dalam aplikasi, pilih 'Withdraw', dan kemudian tekan 'Add Account' untuk memasukkan butiran akaun bank baru anda. Pastikan nama dalam akaun sepadan dengan profil yang didaftarkan. Jika terdapat sebarang masalah, sila hubungi live chat kami.\"",
+        "cn": "\"嗨，老板，要更改您的银行账户详情，请前往应用中的‘钱包’部分，选择‘取款’，然后点击‘添加账户’以输入新的银行账户信息。请确保账户名称与注册信息一致。如果遇到任何问题，请联系在线客服。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "change_bank_account",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T16:47:55Z",
+      "lastUpdated": "2025-04-08T16:52:44Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "bank account update",
+        "withdrawal process"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0918",
+    "question": {
+      "text": "Apa maksud 'remark nak isi ke' dalam transaksi?",
+      "variations": [
+        "Apa yang dimaksudkan dengan 'remark nak isi ke'?",
+        "Bolehkah anda terangkan apa maksud 'remark nak isi ke'?",
+        "Adakah 'remark nak isi ke' perlu diisi dalam transaksi?"
+      ],
+      "intent": "transaction_remark_clarification",
+      "languages": {
+        "en": "\"What does 'remark nak isi ke' mean in the transaction?\"",
+        "ms": "\"Apa maksud 'remark nak isi ke' dalam transaksi?\"",
+        "cn": "\"交易中‘remark nak isi ke’是什么意思？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, the phrase 'remark nak isi ke' appears to refer to a note or comment field in the transaction. In some cases, it may indicate that you need to provide additional remarks or simply leave it blank if not applicable. If you're unsure, please contact live chat support for clarification.\"",
+        "ms": "\"Hi boss, frasa 'remark nak isi ke' merujuk kepada ruangan catatan dalam transaksi. Ada kalanya ia meminta anda untuk mengisi maklumat tambahan, atau jika tidak perlu, boleh dibiarkan kosong. Jika tidak pasti, sila hubungi live chat untuk penjelasan lanjut.\"",
+        "cn": "\"嗨，老板，‘remark nak isi ke’这句话指的是交易中的备注栏。有时可能需要您填写额外信息，如果不适用可以留空。如果不确定，请联系在线客服以获得解释。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transaction_remark_clarification",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-07T22:56:15Z",
+      "lastUpdated": "2025-04-07T22:56:35Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "transaction remarks",
+        "additional information"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0919",
+    "question": {
+      "text": "Bagaimana cara menyemak status top-up iBox saya?",
+      "variations": [
+        "Apa yang perlu saya lakukan untuk semak status iBox?",
+        "Bagaimana saya mengetahui jika top-up iBox saya telah berjaya?",
+        "Status top-up iBox saya tidak muncul, apa yang perlu saya lakukan?"
+      ],
+      "intent": "ibox_topup_status",
+      "languages": {
+        "en": "\"How can I check the status of my iBox top-up?\"",
+        "ms": "\"Bagaimana cara menyemak status top-up iBox saya?\"",
+        "cn": "\"我如何查看我的iBox充值状态？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, to check your iBox top-up status, please wait for 3-10 minutes after uploading your receipt. You can then review your transaction history or the 'Report' section in the app. If the status remains pending, please contact live chat support with your transaction details.\"",
+        "ms": "\"Hi boss, untuk menyemak status top-up iBox, sila tunggu selama 3-10 minit selepas upload resit. Kemudian, semak sejarah transaksi atau bahagian 'Report' dalam aplikasi. Jika status masih pending, sila hubungi live chat dengan butiran transaksi untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，要查看您的iBox充值状态，请在上传收据后等待3-10分钟，然后查看应用中的交易记录或报告部分。如果状态仍然显示待处理，请联系在线客服并提供交易详情。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "ibox_topup_status",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T22:34:48Z",
+      "lastUpdated": "2025-04-08T22:35:58Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "iBox top-up",
+        "transaction status"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0920",
+    "question": {
+      "text": "Apa yang perlu saya lakukan jika bank untuk pengeluaran sedang dalam penyelenggaraan?",
+      "variations": [
+        "Bagaimana saya mengatasi masalah pengeluaran jika bank saya sedang diselenggara?",
+        "Apa langkah yang perlu saya ambil jika bank pengeluaran tidak berfungsi?",
+        "Bagaimana cara untuk mengeluarkan dana jika bank dalam penyelenggaraan?"
+      ],
+      "intent": "withdrawal_bank_maintenance",
+      "languages": {
+        "en": "\"What should I do if the bank used for withdrawals is under maintenance?\"",
+        "ms": "\"Apa yang perlu saya lakukan jika bank untuk pengeluaran sedang dalam penyelenggaraan?\"",
+        "cn": "\"如果取款银行正在维护，我该怎么办？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if the bank used for withdrawals is undergoing maintenance, please try using another bank for your withdrawal or wait until maintenance is completed. You may also contact our live chat support for further assistance.\"",
+        "ms": "\"Hi boss, jika bank yang digunakan untuk pengeluaran sedang dalam penyelenggaraan, sila gunakan bank lain untuk pengeluaran atau tunggu sehingga penyelenggaraan selesai. Jika perlu, hubungi live chat untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，如果您使用的取款银行正在维护，请尝试使用其他银行进行取款或等待维护结束。如果需要，请联系在线客服以获得进一步帮助。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "withdrawal_bank_maintenance",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-07T23:18:54Z",
+      "lastUpdated": "2025-04-07T23:22:12Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "withdrawal process",
+        "bank maintenance",
+        "customer support"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0921",
+    "question": {
+      "text": "Bagaimana proses IBG transfer untuk top-up berfungsi, dan apa yang perlu saya lakukan jika dana belum dikreditkan?",
+      "variations": [
+        "Apa langkah yang perlu saya ambil jika dana top-up melalui IBG transfer belum masuk?",
+        "Kenapa IBG transfer memerlukan 1-3 hari untuk diproses dan apa yang harus saya lakukan jika dana belum dikreditkan?",
+        "Bagaimana saya menyimpan resit IBG transfer dan langkah selanjutnya jika dana tidak masuk?"
+      ],
+      "intent": "ibg_transfer_delay",
+      "languages": {
+        "en": "\"How does IBG transfer for top-up work, and what should I do if the funds are not credited?\"",
+        "ms": "\"Bagaimana proses IBG transfer untuk top-up berfungsi, dan apa yang perlu saya lakukan jika dana belum dikreditkan?\"",
+        "cn": "\"IBG充值转账是如何运作的，如果资金未到账，我该怎么办？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if you use an IBG transfer (even via eWallet), please note that the processing time is 1-3 working days. Make sure to save the IBG receipt and note the transfer name. If the funds have not been credited after 1-3 days, please contact our live chat support with your transaction details for further verification.\"",
+        "ms": "\"Hi boss, jika anda menggunakan IBG transfer (termasuk melalui eWallet), perlu diingatkan bahawa prosesnya mengambil masa 1-3 hari bekerja. Sila simpan resit IBG dan catat nama transfer tersebut. Jika dana masih belum dikreditkan selepas 1-3 hari, sila hubungi live chat kami dengan butiran transaksi untuk semakan lanjut.\"",
+        "cn": "\"嗨，老板，如果您使用IBG转账（包括通过电子钱包），请注意处理时间为1-3个工作日。请保存IBG收据并记录转账名称。如果1-3天后资金仍未到账，请联系在线客服，并提供交易详情以便进一步核查。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "ibg_transfer_delay",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-07T23:41:58Z",
+      "lastUpdated": "2025-04-07T23:45:14Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "IBG transfer",
+        "receipt verification",
+        "transaction delay"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0922",
+    "question": {
+      "text": "Bagaimana cara mengatasi masalah aplikasi yang tidak support atau link tidak berfungsi?",
+      "variations": [
+        "Apa yang harus saya lakukan jika aplikasi tidak support atau link download gagal?",
+        "Bagaimana solusi ketika aplikasi tidak dapat diakses dengan betul?",
+        "Kenapa link yang saya klik tidak berfungsi dan bagaimana mengatasinya?"
+      ],
+      "intent": "app_download_issue",
+      "languages": {
+        "en": "\"How can I resolve issues when the app is not supported or the download link fails?\"",
+        "ms": "\"Bagaimana cara mengatasi masalah jika aplikasi tidak support atau link download tidak berfungsi?\"",
+        "cn": "\"当应用不支持或下载链接无法使用时，我该如何解决问题？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, please ensure your device meets the minimum OS requirements (Android 7.0+ or the latest iOS version). If the app is still not supported, try downloading the latest version from the official link or use a VPN if needed. For further assistance, please contact live chat support.\"",
+        "ms": "\"Hi boss, pastikan peranti anda memenuhi keperluan minimum (Android 7.0 ke atas atau iOS versi terkini). Jika aplikasi masih tidak disokong, cuba download versi terbaru dari pautan rasmi atau gunakan VPN. Jika masih ada masalah, sila hubungi live chat.\"",
+        "cn": "\"嗨，老板，请确保您的设备满足最低要求（Android 7.0以上或最新iOS版本）。如果应用仍不支持，请尝试从官方链接下载最新版本或使用VPN。如果问题仍然存在，请联系在线客服。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "app"
+      ],
+      "subCategory": "app_download_issue",
+      "difficulty": 2,
+      "confidence": 0.8,
+      "dateCreated": "2025-04-07T22:57:23Z",
+      "lastUpdated": "2025-04-07T22:58:28Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "app compatibility",
+        "download issues"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 3,
+      "successRate": 0.9,
+      "lastQueried": "2025-04-07T23:00:00Z"
+    },
+    "review_status": []
+  },
+  {
+    "id": "0923",
+    "question": {
+      "text": "Bagaimana proses pengkreditan kemenangan 4D dilakukan?",
+      "variations": [
+        "Kapan kemenangan 4D saya akan dikreditkan?",
+        "Bagaimana cara kerja pengkreditan kemenangan 4D?",
+        "Apa yang terjadi setelah kemenangan 4D diumumkan?"
+      ],
+      "intent": "4d_winnings_credit",
+      "languages": {
+        "en": "\"How are 4D winnings credited to my wallet?\"",
+        "ms": "\"Bagaimana proses pengkreditan kemenangan 4D dilakukan?\"",
+        "cn": "\"我的4D奖金如何到账？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, 4D winnings are automatically credited to your wallet once the results are finalized. Please check the 'Report' section between the designated time (e.g., 10:00 PM - 10:30 PM) for confirmation. If the winnings still do not appear, kindly contact our live chat support.\"",
+        "ms": "\"Hi boss, kemenangan 4D akan dikreditkan secara automatik ke dalam wallet anda setelah keputusan diumumkan. Sila semak bahagian 'Report' antara waktu yang ditetapkan (contohnya, 10:00 PM - 10:30 PM) untuk pengesahan. Jika masih belum masuk, sila hubungi live chat.\"",
+        "cn": "\"嗨，老板，4D奖金一旦公布后会自动转入您的钱包。请在指定时间（例如晚上10:00至10:30）查看‘报告’以确认。如果奖金仍未到账，请联系在线客服。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "4d_winnings_credit",
+      "difficulty": 2,
+      "confidence": 0.9,
+      "dateCreated": "2025-04-08T22:14:33Z",
+      "lastUpdated": "2025-04-08T22:18:13Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "winnings processing",
+        "4D results",
+        "wallet credit"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 3,
+      "successRate": 0.92,
+      "lastQueried": "2025-04-08T22:20:00Z"
+    },
+    "review_status": []
+  },
+  {
+    "id": "0924",
+    "question": {
+      "text": "Bagaimana cara mendapatkan link download untuk Kiss918?",
+      "variations": [
+        "Di mana saya bisa mendapatkan link untuk mengunduh Kiss918?",
+        "Bagaimana saya bisa mendapatkan link download Kiss918?",
+        "Apa link resmi untuk download aplikasi Kiss918?"
+      ],
+      "intent": "kiss918_download_link",
+      "languages": {
+        "en": "\"How can I obtain the download link for Kiss918?\"",
+        "ms": "\"Bagaimana cara mendapatkan link download untuk Kiss918?\"",
+        "cn": "\"如何获取Kiss918的下载链接？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, to download Kiss918, please use the following link: https://m-918kiss.com or http://b1.918kiss.com. Follow the instructions provided to install and log in to the app. If you encounter any issues, please contact our live chat support.\"",
+        "ms": "\"Hi boss, untuk memuat turun Kiss918, sila gunakan pautan berikut: https://m-918kiss.com atau http://b1.918kiss.com. Ikuti arahan untuk install dan log masuk ke aplikasi. Jika ada masalah, sila hubungi live chat.\"",
+        "cn": "\"嗨，老板，要下载Kiss918，请使用以下链接：https://m-918kiss.com 或 http://b1.918kiss.com。按照说明安装并登录应用。如有问题，请联系在线客服。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "kiss918_download_link",
+      "difficulty": 2,
+      "confidence": 0.9,
+      "dateCreated": "2025-04-07T23:13:51Z",
+      "lastUpdated": "2025-04-07T23:14:19Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "app download",
+        "link retrieval"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 4,
+      "successRate": 0.95,
+      "lastQueried": "2025-04-07T23:20:00Z"
+    },
+    "review_status": []
+  },
+  {
+    "id": "0925",
+    "question": {
+      "text": "Apa yang harus saya lakukan jika terlupa memasukkan ID JOKER saat transfer?",
+      "variations": [
+        "Bagaimana cara memperbaiki kesalahan transfer jika saya lupa memasukkan ID JOKER?",
+        "Apa yang harus dilakukan jika ID JOKER tidak dimasukkan saat transfer?",
+        "Bagaimana mengatasi masalah lupa masukkan ID JOKER dalam transaksi?"
+      ],
+      "intent": "missing_joker_id",
+      "languages": {
+        "en": "\"What should I do if I forget to enter my JOKER ID during the transfer?\"",
+        "ms": "\"Apa yang harus saya lakukan jika terlupa memasukkan ID JOKER saat transfer?\"",
+        "cn": "\"如果我在转账时忘记输入JOKER ID，我该怎么办？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if you forget to include your JOKER ID during the transfer, please upload your receipt as usual and ensure that for future transactions you fill in your JOKER ID in the 'Recipient Reference' field. This will help speed up the verification process. If you have any issues, contact our live chat support.\"",
+        "ms": "\"Hi boss, jika boss terlupa memasukkan ID JOKER semasa transfer, sila upload resit seperti biasa dan pastikan untuk menulis ID JOKER di ruangan 'Recipient Reference' pada transaksi akan datang. Ini membantu mempercepat proses pengesahan. Jika ada masalah, sila hubungi live chat.\"",
+        "cn": "\"嗨，老板，如果您在转账时忘记输入JOKER ID，请照常上传收据，并确保以后在‘收款参考’栏中填写正确的JOKER ID以加快验证过程。如果有问题，请联系在线客服。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "missing_joker_id",
+      "difficulty": 2,
+      "confidence": 0.9,
+      "dateCreated": "2025-04-07T22:58:08Z",
+      "lastUpdated": "2025-04-07T22:58:46Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "transaction verification",
+        "joker id",
+        "receipt upload"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 5,
+      "successRate": 0.94,
+      "lastQueried": "2025-04-07T23:59:00Z"
+    },
+    "review_status": []
+  },
+  {
+    "id": "0926",
+    "question": {
+      "text": "Mengapa top-up saya belum masuk dan saya harus membuat report jika terjadi kesalahan?",
+      "variations": [
+        "Apa yang harus saya lakukan jika top-up tidak masuk dan terjadi kesalahan?",
+        "Bagaimana menyelesaikan masalah top-up yang salah masuk?",
+        "Apa langkah selanjutnya jika top-up tidak sesuai?"
+      ],
+      "intent": "topup_amount_issue",
+      "languages": {
+        "en": "\"Why hasn't my top-up been credited and what should I do if I mistakenly transfer to the wrong account?\"",
+        "ms": "\"Mengapa top-up saya belum masuk dan apa yang perlu saya lakukan jika terjadi kesalahan dalam transfer?\"",
+        "cn": "\"为什么我的充值没有到账，如果我转错了账户，我该怎么办？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if your top-up is not credited and you suspect that the wrong amount or account was used, please check your transaction details. If there is a discrepancy, you should report the issue immediately via live chat with the full transaction receipt. Note that if you mistakenly transfer funds to the wrong account, the funds may not be recoverable.\"",
+        "ms": "\"Hi boss, jika top-up belum masuk dan anda menduga terjadi kesalahan transfer, sila semak butiran transaksi anda. Jika terdapat perbezaan, laporkan masalah tersebut melalui live chat dengan resit transaksi penuh. Perlu diingat, jika anda tersilap transfer, dana mungkin tidak dapat dipulihkan.\"",
+        "cn": "\"嗨，老板，如果您的充值未到账且怀疑转账错误，请检查您的交易详情。如果有差异，请立即通过在线客服报告问题，并提供完整的交易收据。请注意，如果您转错了账户，资金可能无法追回。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "topup_amount_issue",
+      "difficulty": 2,
+      "confidence": 0.9,
+      "dateCreated": "2025-04-07T23:40:46Z",
+      "lastUpdated": "2025-04-07T23:52:06Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "top-up process",
+        "wrong account transfer",
+        "report issue"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 4,
+      "successRate": 0.88,
+      "lastQueried": "2025-04-07T23:53:00Z"
+    },
+    "review_status": []
+  },
+  {
+    "id": "0927",
+    "question": {
+      "text": "Bagaimana cara memindahkan kredit top-up ke ID Mega888?",
+      "variations": [
+        "Apa langkah untuk transfer kredit ke Mega888?",
+        "Bagaimana proses pindah kredit ke aplikasi Mega888?",
+        "Bagaimana cara mengalihkan kredit top-up ke Mega888?"
+      ],
+      "intent": "transfer_credit_to_mega888",
+      "languages": {
+        "en": "\"How can I transfer my top-up credit to my Mega888 ID?\"",
+        "ms": "\"Bagaimana cara memindahkan kredit top-up ke ID Mega888?\"",
+        "cn": "\"我如何将充值信用转移到Mega888账户？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, to transfer your top-up credit to your Mega888 ID, please follow these steps: log in to the Joker App, go to 'More Game', select the slot game icon, choose Mega888, copy the provided ID and password, then use the 'Transfer' option in your wallet to move the credit. If you need further assistance, please contact live chat support.\"",
+        "ms": "\"Hi boss, untuk memindahkan kredit top-up ke ID Mega888, sila log masuk ke Aplikasi Joker, pergi ke 'More Game', pilih ikon mesin slot, pilih Mega888, copy ID dan kata laluan yang dipaparkan, kemudian gunakan pilihan 'Transfer' di dalam wallet untuk memindahkan kredit. Jika perlukan bantuan lanjut, sila hubungi live chat.\"",
+        "cn": "\"嗨，老板，要将充值信用转移到Mega888账户，请登录Joker应用，进入‘More Game’，选择老虎机图标，选取Mega888，复制显示的ID和密码，然后在钱包中使用‘转账’功能转移信用。如需进一步帮助，请联系在线客服。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "transfer_credit_to_mega888",
+      "difficulty": 2,
+      "confidence": 0.9,
+      "dateCreated": "2025-04-07T20:55:22Z",
+      "lastUpdated": "2025-04-07T20:56:20Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "credit transfer",
+        "Mega888",
+        "redeem process"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 3,
+      "successRate": 0.93,
+      "lastQueried": "2025-04-07T21:00:00Z"
+    },
+    "review_status": []
+  },
+  {
+    "id": "0928",
+    "question": {
+      "text": "Apakah status perhitungan kemenangan 4D saya?",
+      "variations": [
+        "Kapan kemenangan 4D saya akan dikreditkan?",
+        "Bagaimana proses pengkreditan kemenangan 4D?",
+        "Apa yang harus saya tunggu setelah upload resit kemenangan 4D?"
+      ],
+      "intent": "4d_winnings_credit",
+      "languages": {
+        "en": "\"What is the process for crediting my 4D winnings?\"",
+        "ms": "\"Apakah status perhitungan kemenangan 4D saya?\"",
+        "cn": "\"我的4D奖金如何处理？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, 4D winnings are automatically credited to your wallet once the system processes the result, which usually takes 1-10 minutes. Please check your 'Report' section for confirmation. If the winnings are not credited, contact live chat support.\"",
+        "ms": "\"Hi boss, kemenangan 4D akan dikreditkan secara automatik ke dalam wallet anda setelah sistem memproses keputusan, biasanya dalam masa 1-10 minit. Sila semak bahagian 'Report' untuk pengesahan. Jika tidak dikreditkan, sila hubungi live chat.\"",
+        "cn": "\"嗨，老板，4D奖金将在系统处理后自动转入您的钱包，通常需要1-10分钟。请查看‘报告’部分以确认。如果奖金未到账，请联系在线客服。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "4d_winnings_credit",
+      "difficulty": 2,
+      "confidence": 0.9,
+      "dateCreated": "2025-04-07T23:18:54Z",
+      "lastUpdated": "2025-04-07T23:22:12Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "winnings processing",
+        "4D results",
+        "wallet credit"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 3,
+      "successRate": 0.92,
+      "lastQueried": "2025-04-08T22:20:00Z"
+    },
+    "review_status": []
+  },
+  {
+    "id": "0929",
+    "question": {
+      "text": "Berapa jumlah minimum top-up dan apa langkah yang harus saya lakukan jika jumlah tidak mencukupi?",
+      "variations": [
+        "Apa syarat minimum untuk top-up?",
+        "Bagaimana jika jumlah top-up saya kurang dari RM10?",
+        "Berapa minimum top-up dan apa yang harus dilakukan jika deposit kurang?"
+      ],
+      "intent": "minimum_topup_requirement",
+      "languages": {
+        "en": "\"What is the minimum top-up amount and what should I do if my deposit is insufficient?\"",
+        "ms": "\"Berapa jumlah minimum top-up dan apa yang perlu saya lakukan jika jumlah tidak mencukupi?\"",
+        "cn": "\"最低充值金额是多少，如果我的充值不足，我该怎么办？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, the minimum top-up amount is RM10. If you deposit an amount less than RM10, it will not be processed. Please add the additional amount required and then upload both receipts to live chat so that we can combine the amounts and process your top-up.\"",
+        "ms": "\"Hi boss, jumlah minimum untuk top-up adalah RM10. Jika jumlah yang dimasukkan kurang daripada RM10, ia tidak akan diproses. Sila tambah jumlah yang diperlukan dan kemudian hantar kedua-dua resit ke live chat supaya kami boleh menggabungkan jumlah tersebut dan memproses top-up anda.\"",
+        "cn": "\"嗨，老板，最低充值金额为RM10。如果您充值的金额不足RM10，将无法处理。请补足所需金额，然后将两份收据一起上传到在线客服，以便我们合并处理。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "minimum_topup_requirement",
+      "difficulty": 2,
+      "confidence": 0.9,
+      "dateCreated": "2025-04-07T21:33:35Z",
+      "lastUpdated": "2025-04-07T21:35:47Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "minimum deposit",
+        "top-up requirements"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 6,
+      "successRate": 0.92,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0930",
+    "question": {
+      "text": "Bagaimana cara mengecek baki dan status transaksi saya?",
+      "variations": [
+        "Bagaimana saya dapat mengetahui baki dan status transaksi saya?",
+        "Apa langkah untuk mengecek saldo dan status top-up?",
+        "Bagaimana cara melihat laporan transaksi di wallet?"
+      ],
+      "intent": "check_balance_status",
+      "languages": {
+        "en": "\"How can I check my balance and transaction status?\"",
+        "ms": "\"Bagaimana cara mengecek baki dan status transaksi saya?\"",
+        "cn": "\"我如何查看我的余额和交易状态？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, to check your balance and transaction status, please review your wallet and the 'Report' section in the app. If you need further assistance, provide additional details via live chat.\"",
+        "ms": "\"Hi boss, untuk mengecek baki dan status transaksi, sila semak wallet anda dan bahagian 'Report' dalam aplikasi. Jika perlu bantuan lanjut, sila hubungi live chat.\"",
+        "cn": "\"嗨，老板，要查看余额和交易状态，请检查应用中的钱包和‘报告’部分。如需进一步帮助，请联系在线客服并提供详细信息。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "check_balance_status",
+      "difficulty": 2,
+      "confidence": 0.88,
+      "dateCreated": "2025-04-08T20:26:24Z",
+      "lastUpdated": "2025-04-08T20:28:27Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "wallet balance",
+        "transaction report"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 4,
+      "successRate": 0.9,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0931",
+    "question": {
+      "text": "Bagaimana saya dapat bantuan jika saya merasa situasi saya tidak adil?",
+      "variations": [
+        "Apa yang harus saya lakukan jika saya merasa keadaan tidak menyebelahi saya?",
+        "Bagaimana cara mendapatkan bantuan jika saya merasa terpinggir?",
+        "Apa langkah yang harus saya ambil jika situasi saya membuat saya merasa terabaikan?"
+      ],
+      "intent": "request_additional_support",
+      "languages": {
+        "en": "\"How can I get assistance if I feel that my situation is unfair?\"",
+        "ms": "\"Bagaimana saya dapat bantuan jika saya merasa situasi saya tidak adil?\"",
+        "cn": "\"如果我觉得情况不公平，我该如何获得帮助？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if you feel that your situation is not being handled fairly, please do not hesitate to contact our live chat support. We are here to listen to your concerns and help resolve any issues.\"",
+        "ms": "\"Hi boss, jika anda rasa situasi anda tidak adil, jangan ragu untuk menghubungi live chat kami. Kami sedia mendengar dan membantu menyelesaikan masalah anda.\"",
+        "cn": "\"嗨，老板，如果您觉得情况不公平，请立即联系在线客服。我们会倾听您的诉求并帮助解决问题。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "support"
+      ],
+      "subCategory": "request_additional_support",
+      "difficulty": 2,
+      "confidence": 0.87,
+      "dateCreated": "2025-04-08T16:54:15Z",
+      "lastUpdated": "2025-04-08T16:56:30Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "customer support",
+        "live chat assistance"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 3,
+      "successRate": 0.85,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0932",
+    "question": {
+      "text": "Kapan kemenangan bet bola saya akan dikreditkan?",
+      "variations": [
+        "Berapa lama waktu proses kemenangan bet bola?",
+        "Kapan saya bisa melihat dana kemenangan bet bola masuk ke wallet?",
+        "Bagaimana proses kredit kemenangan bet bola berlangsung?"
+      ],
+      "intent": "football_bet_winnings",
+      "languages": {
+        "en": "\"When will my football bet winnings be credited?\"",
+        "ms": "\"Kapan kemenangan bet bola saya akan dikreditkan?\"",
+        "cn": "\"我的足球投注奖金什么时候会到账？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, football bet winnings are credited automatically within 24 hours on the same day. Please check your wallet after that period for an update.\"",
+        "ms": "\"Hi boss, kemenangan bet bola akan dikreditkan secara automatik ke dalam wallet anda dalam masa 24 jam pada hari yang sama. Sila semak wallet anda selepas itu untuk pengesahan.\"",
+        "cn": "\"嗨，老板，足球投注奖金将在同一天内自动转入您的钱包，最多24小时后请查看更新。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "football_bet_winnings",
+      "difficulty": 2,
+      "confidence": 0.9,
+      "dateCreated": "2025-04-08T22:02:20Z",
+      "lastUpdated": "2025-04-08T22:05:15Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "football betting",
+        "winnings processing"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 2,
+      "successRate": 0.92,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0933",
+    "question": {
+      "text": "Mengapa top‐up saya belum masuk?",
+      "variations": [
+        "Apa yang harus saya lakukan jika dana top‐up belum masuk?",
+        "Kenapa transaksi top‐up saya tidak dikreditkan?",
+        "Bagaimana saya tahu top‐up saya belum diproses?"
+      ],
+      "intent": "topup_not_credited",
+      "languages": {
+        "en": "\"Why hasn't my top-up been credited?\"",
+        "ms": "\"Mengapa top‐up saya belum masuk?\"",
+        "cn": "\"为什么我的充值还未到账？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, please wait 3-10 minutes after uploading your receipt for the system to process your top-up. If the funds still do not appear, kindly contact live chat support with your complete receipt.\"",
+        "ms": "\"Hi boss, sila tunggu 3-10 minit selepas upload resit untuk sistem memproses top‐up anda. Jika dana masih belum masuk, sila hubungi live chat dengan resit lengkap anda.\"",
+        "cn": "\"嗨，老板，请在上传收据后等待3-10分钟让系统处理充值。如果资金仍未到账，请联系在线客服并提供完整收据。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "topup_not_credited",
+      "difficulty": 2,
+      "confidence": 0.88,
+      "dateCreated": "2025-04-07T23:44:02Z",
+      "lastUpdated": "2025-04-07T23:45:14Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "top-up delay",
+        "transaction status"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 4,
+      "successRate": 0.9,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0934",
+    "question": {
+      "text": "Bagaimana jika saya mengalami kekalahan terus?",
+      "variations": [
+        "Apa yang harus saya lakukan jika nasib tidak memihak?",
+        "Bagaimana mengatasi rasa kecewa apabila terus kalah?",
+        "Apa nasihat untuk bila nasib tidak baik?"
+      ],
+      "intent": "encouragement_after_loss",
+      "languages": {
+        "en": "\"What should I do if I keep losing?\"",
+        "ms": "\"Bagaimana jika saya terus kalah?\"",
+        "cn": "\"如果我一直输，我该怎么办？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, sometimes luck has its ups and downs. Please continue playing with patience and try not to get discouraged. Your fortunes may change in the next round.\"",
+        "ms": "\"Hi boss, kadang-kadang nasib ada pasang surut. Teruskan bermain dengan sabar dan jangan putus asa, kerana nasib mungkin berubah dalam pusingan seterusnya.\"",
+        "cn": "\"嗨，老板，有时运气起伏不定。请耐心继续游戏，不要灰心，下次可能会有好运到来。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "support"
+      ],
+      "subCategory": "encouragement_after_loss",
+      "difficulty": 1,
+      "confidence": 0.85,
+      "dateCreated": "2025-04-08T22:14:41Z",
+      "lastUpdated": "2025-04-08T22:18:18Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "game psychology",
+        "customer encouragement"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 3,
+      "successRate": 0.85,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0935",
+    "question": {
+      "text": "Bagaimana jika saya mengalami kekalahan terus?",
+      "variations": [
+        "Apa yang harus saya lakukan jika nasib tidak memihak?",
+        "Bagaimana mengatasi rasa kecewa apabila terus kalah?",
+        "Apa nasihat untuk bila nasib tidak baik?"
+      ],
+      "intent": "encouragement_after_loss",
+      "languages": {
+        "en": "\"What should I do if I keep losing?\"",
+        "ms": "\"Bagaimana jika saya terus kalah?\"",
+        "cn": "\"如果我一直输，我该怎么办？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, sometimes luck has its ups and downs. Please continue playing with patience and try not to get discouraged. Your fortunes may change in the next round.\"",
+        "ms": "\"Hi boss, kadang-kadang nasib ada pasang surut. Teruskan bermain dengan sabar dan jangan putus asa, kerana nasib mungkin berubah dalam pusingan seterusnya.\"",
+        "cn": "\"嗨，老板，有时运气起伏不定。请耐心继续游戏，不要灰心，下次可能会有好运到来。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "support"
+      ],
+      "subCategory": "encouragement_after_loss",
+      "difficulty": 1,
+      "confidence": 0.85,
+      "dateCreated": "2025-04-08T22:14:41Z",
+      "lastUpdated": "2025-04-08T22:18:18Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "game psychology",
+        "customer encouragement"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 3,
+      "successRate": 0.85,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0936",
+    "question": {
+      "text": "Bagaimana jika saya mengalami kekalahan terus?",
+      "variations": [
+        "Apa yang harus saya lakukan jika nasib tidak memihak?",
+        "Bagaimana mengatasi rasa kecewa apabila terus kalah?",
+        "Apa nasihat untuk bila nasib tidak baik?"
+      ],
+      "intent": "encouragement_after_loss",
+      "languages": {
+        "en": "\"What should I do if I keep losing?\"",
+        "ms": "\"Bagaimana jika saya terus kalah?\"",
+        "cn": "\"如果我一直输，我该怎么办？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, sometimes luck has its ups and downs. Please continue playing with patience and try not to get discouraged. Your fortunes may change in the next round.\"",
+        "ms": "\"Hi boss, kadang-kadang nasib ada pasang surut. Teruskan bermain dengan sabar dan jangan putus asa, kerana nasib mungkin berubah dalam pusingan seterusnya.\"",
+        "cn": "\"嗨，老板，有时运气起伏不定。请耐心继续游戏，不要灰心，下次可能会有好运到来。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "support"
+      ],
+      "subCategory": "encouragement_after_loss",
+      "difficulty": 1,
+      "confidence": 0.85,
+      "dateCreated": "2025-04-08T22:14:41Z",
+      "lastUpdated": "2025-04-08T22:18:18Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "game psychology",
+        "customer encouragement"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 3,
+      "successRate": 0.85,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0937",
+    "question": {
+      "text": "Mengapa saya tidak mendapatkan kemenangan dalam sebulan?",
+      "variations": [
+        "Kenapa selama sebulan saya tak menang?",
+        "Apa yang harus saya lakukan jika tak dapat kemenangan?",
+        "Mengapa game saya tidak menghasilkan kemenangan?"
+      ],
+      "intent": "no_winnings_experience",
+      "languages": {
+        "en": "\"Why haven't I won anything in a month?\"",
+        "ms": "\"Mengapa saya tidak mendapat kemenangan dalam sebulan?\"",
+        "cn": "\"为什么我一个月都没有赢过？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if you haven't received any winnings for a long period, it might be due to a combination of factors. Consider reviewing your betting strategy or contacting our support for advice. Remember, games have ups and downs.\"",
+        "ms": "\"Hi boss, jika anda tidak mendapat kemenangan untuk tempoh yang panjang, ia mungkin disebabkan oleh beberapa faktor. Cuba semak strategi pertaruhan anda atau hubungi support untuk nasihat. Permainan ada pasang surutnya.\"",
+        "cn": "\"嗨，老板，如果您长时间没有赢，可能是多种因素所致。建议您检查一下投注策略，或联系在线客服寻求建议。游戏总有起伏。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "support"
+      ],
+      "subCategory": "no_winnings_experience",
+      "difficulty": 2,
+      "confidence": 0.87,
+      "dateCreated": "2025-04-08T18:34:25Z",
+      "lastUpdated": "2025-04-08T18:41:33Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "game performance",
+        "betting strategy"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 2,
+      "successRate": 0.85,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0938",
+    "question": {
+      "text": "Bagaimana jika permainan saya tidak berjalan dengan baik?",
+      "variations": [
+        "Apa yang perlu saya lakukan jika game tidak memberi hasil?",
+        "Mengapa saya tidak mendapat hasil dalam permainan?",
+        "Apa nasihat untuk situasi permainan yang tidak menguntungkan?"
+      ],
+      "intent": "game_performance_issue",
+      "languages": {
+        "en": "\"What should I do if my game is not performing well?\"",
+        "ms": "\"Bagaimana jika permainan saya tidak berjalan dengan baik?\"",
+        "cn": "\"如果我的游戏表现不佳，我该怎么办？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if your game performance seems unsatisfactory, please try to refresh the app or check for any technical issues. You may also contact live chat for further assistance.\"",
+        "ms": "\"Hi boss, jika permainan anda tidak berjalan dengan baik, cuba restart app atau periksa jika ada isu teknikal. Jika perlu, hubungi live chat untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，如果您的游戏表现不佳，请尝试重启应用或检查是否存在技术问题。如有需要，请联系在线客服寻求帮助。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "support"
+      ],
+      "subCategory": "game_performance_issue",
+      "difficulty": 2,
+      "confidence": 0.87,
+      "dateCreated": "2025-04-08T18:41:33Z",
+      "lastUpdated": "2025-04-08T18:44:24Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "game issues",
+        "technical support"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 2,
+      "successRate": 0.85,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0939",
+    "question": {
+      "text": "Bagaimana cara mendapatkan link untuk Mega888 di iPhone?",
+      "variations": [
+        "Di mana saya dapat menemukan pautan download Mega888 untuk iPhone?",
+        "Bagaimana cara download Mega888 di iOS?",
+        "Apa link untuk Mega888 pada iPhone?"
+      ],
+      "intent": "mega888_download",
+      "languages": {
+        "en": "\"How can I get the Mega888 download link for iPhone?\"",
+        "ms": "\"Bagaimana cara mendapatkan pautan Mega888 untuk iPhone?\"",
+        "cn": "\"我如何获取iPhone版Mega888的下载链接？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, to download Mega888 on your iPhone, please copy the provided link and paste it into Safari. If you experience any issues, kindly contact live chat support for further assistance.\"",
+        "ms": "\"Hi boss, untuk download Mega888 di iPhone, salin pautan yang disediakan dan tampal ke Safari. Jika ada masalah, sila hubungi live chat untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老板，若要在iPhone上下载Mega888，请复制提供的链接并粘贴到Safari中。如果遇到任何问题，请联系在线客服以获取进一步帮助。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "games"
+      ],
+      "subCategory": "mega888_download",
+      "difficulty": 2,
+      "confidence": 0.88,
+      "dateCreated": "2025-04-07T23:11:41Z",
+      "lastUpdated": "2025-04-07T23:14:16Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "game download",
+        "iOS app"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 5,
+      "successRate": 0.9,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0940",
+    "question": {
+      "text": "Mengapa kemenangan J3 saya belum masuk?",
+      "variations": [
+        "Apa sebabnya kemenangan J3 belum dikreditkan?",
+        "Bagaimana jika dana kemenangan J3 tidak muncul?",
+        "Kenapa kredit J3 belum masuk?"
+      ],
+      "intent": "winning_not_credited",
+      "languages": {
+        "en": "\"Why haven't my J3 winnings been credited?\"",
+        "ms": "\"Mengapa kemenangan J3 saya belum masuk?\"",
+        "cn": "\"为什么我的J3奖金还未到账？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if your J3 winnings have not been credited, please wait 10 minutes for the system to process. If they still do not appear, kindly contact live chat with your transaction details.\"",
+        "ms": "\"Hi boss, jika kemenangan J3 anda belum masuk, tunggu 10 minit untuk sistem memproses. Jika masih tidak masuk, hubungi live chat dengan maklumat transaksi anda.\"",
+        "cn": "\"嗨，老板，如果您的J3奖金未到账，请等待10分钟让系统处理。如果仍未到账，请联系在线客服并提供交易详情。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "winning_not_credited",
+      "difficulty": 2,
+      "confidence": 0.88,
+      "dateCreated": "2025-04-08T22:15:54Z",
+      "lastUpdated": "2025-04-08T22:23:31Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "J3 winnings",
+        "automated credit"
+      ],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 3,
+      "successRate": 0.87,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0941",
+    "question": {
+      "text": "Bagaimana saya harus memberikan detail transfer untuk redeem?",
+      "variations": [
+        "Apa informasi yang diperlukan untuk proses redeem?",
+        "Bagaimana cara mengisi data redeem dengan betul?",
+        "Apa yang harus saya sertakan dalam detail transfer redeem?"
+      ],
+      "intent": "redeem_details_submission",
+      "languages": {
+        "en": "\"How do I provide my transfer details for redemption?\"",
+        "ms": "\"Bagaimana cara saya memberikan butiran transfer untuk redeem?\"",
+        "cn": "\"我该如何提供转账详情以进行兑换？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, please provide your full name, telephone number, and address as requested. This information will be used to process your redemption and arrange for delivery within 2-3 weeks.\"",
+        "ms": "\"Hi boss, sila berikan nama penuh, nombor telefon dan alamat seperti yang diminta untuk proses redeem. Barang anda akan dihantar dalam 2-3 minggu.\"",
+        "cn": "\"嗨，老板，请按要求提供您的全名、电话号码和地址。我们将使用这些信息处理您的兑换，并在2-3周内安排配送。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "redeem"
+      ],
+      "subCategory": "redeem_details_submission",
+      "difficulty": 1,
+      "confidence": 0.85,
+      "dateCreated": "2025-04-07T20:55:30Z",
+      "lastUpdated": "2025-04-07T20:57:55Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [
+        "redeem process",
+        "transfer details"
+      ],
+      "prerequisites": [
+        "provide personal details"
+      ],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 3,
+      "successRate": 0.87,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0942",
+    "question": {
+      "text": "Saya kecewa dengan cara Joker beroperasi. Setiap hari, saya perasan ramai pemain meninggalkan platform ini dan itu membuat saya tidak berpuas hati. Kenapa hal ini berlaku?",
+      "variations": [
+        "Mengapa pemain meninggalkan Joker setiap hari?",
+        "Apakah punca kadar perputaran pemain yang tinggi di Joker?",
+        "Mengapa setiap hari begitu ramai pemain meninggalkan Joker?"
+      ],
+      "intent": "complaint_frustration",
+      "languages": {
+        "en": "\"I'm frustrated with how Joker operates. Players keep leaving every day. Why is this happening?\"",
+        "ms": "\"Saya kecewa dengan cara Joker beroperasi. Setiap hari, ada pemain yang meninggalkan platform. Kenapa begitu?\"",
+        "cn": "\"我对Joker的运作感到失望，每天都有玩家离开。这是为什么？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"We understand your frustration. Sometimes, various factors such as game dynamics and external issues can cause a drop in player retention. Our team is continuously working to improve the gaming experience and your feedback is invaluable. Please rest assured that we are committed to providing a fair and enjoyable platform. If you have further concerns, please contact our support for further discussion.\"",
+        "ms": "\"Kami faham kekecewaan boss. Kadang-kadang, dinamik permainan dan faktor luaran boleh menyebabkan penurunan dalam kekalnya pemain. Pasukan kami sentiasa berusaha untuk meningkatkan pengalaman permainan, dan maklum balas anda sangat bernilai. Sila yakin bahawa kami komited untuk menyediakan platform yang adil dan menyeronokkan. Jika ada kebimbangan lanjut, sila hubungi sokongan pelanggan kami untuk perbincangan lebih lanjut.\"",
+        "cn": "\"我们理解您的沮丧。有时，游戏动态和外部问题会导致玩家留存率下降。我们的团队一直在努力改善游戏体验，您的反馈非常宝贵。请放心，我们致力于提供一个公平愉快的平台。如果您有进一步的疑虑，请联系客户支持进行更详细的讨论。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "complaint"
+      ],
+      "subCategory": "frustration",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T03:24:31Z",
+      "lastUpdated": "2025-03-03T03:24:31Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "pt": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0943",
+    "question": {
+      "text": "Bagaimanakah untuk melengkapkan top‐up melalui pemindahan bank?",
+      "variations": [
+        "Apakah langkah-langkah untuk menyelesaikan pemindahan bank?",
+        "Bagaimanakah saya perlu bertindak untuk memuat naik resit top‐up saya?",
+        "How do I complete my bank transfer top‐up?"
+      ],
+      "intent": "top_up_inquiry",
+      "languages": {
+        "en": "\"How do I complete my bank transfer top-up?\"",
+        "ms": "\"Macam mana nak lengkapkan top-up melalui pindahan bank?\"",
+        "cn": "\"如何完成银行转账充值？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, to complete your bank transfer top-up, please follow these steps: Close the red notification by tapping the (x) button, then select the bank you used for the transfer (for example, Maybank or CIMB). Next, enter the transferred amount and upload a clear receipt on the top-up page. After submitting, wait 1-10 minutes for the system to process your transaction. If the credit still does not appear, please contact live chat with a screenshot of your receipt for further assistance.\"",
+        "ms": "\"Hi boss, untuk melengkapkan top-up melalui pindahan bank, sila ikut langkah berikut: Tutup notis merah dengan menekan butang (x), kemudian pilih bank yang anda gunakan (contohnya, Maybank atau CIMB). Seterusnya, masukkan amaun yang telah dipindahkan dan muat naik resit yang jelas ke halaman top-up. Lepas hantar, tunggu 1-10 minit untuk sistem memproses transaksi anda. Jika kredit masih belum muncul, sila hubungi live chat dengan screenshot resit untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老闆，要完成银行转账充值，请按照以下步骤操作：先点击 (x) 按钮关闭红色通知，然后选择您使用的银行（例如 Maybank 或 CIMB）。接着，输入转账金额并在充值页面上传清晰的收据。提交后，等待1-10分钟让系统处理交易。如果金额仍未显示，请通过在线聊天发送收据截图以获得进一步帮助。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "top_up_inquiry",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T03:24:31Z",
+      "lastUpdated": "2025-03-03T03:24:31Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0944",
+    "question": {
+      "text": "Bagaimana saya boleh betulkan top‐up jika amaun yang dimasukkan salah?",
+      "variations": [
+        "Apa yang perlu saya lakukan jika saya salah memasukkan amaun untuk top‐up?",
+        "Macam mana nak perbetulkan top‐up bila amaun yang dihantar tidak betul?",
+        "How can I correct my top‐up if I entered the wrong amount?"
+      ],
+      "intent": "top_up_error_correction",
+      "languages": {
+        "en": "\"How can I correct my top‐up if I entered the wrong amount?\"",
+        "ms": "\"Macam mana nak betulkan top‐up kalau amaun yang dimasukkan salah?\"",
+        "cn": "\"如果我输入错误的金额，如何纠正充值？\""
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "\"Hi boss, if you have entered the wrong amount in your top-up (for example, RM70 instead of RM100), please resubmit the transaction by uploading the correct receipt with the right amount. The system will process your updated top-up within 3-10 minutes. If the credit still does not appear, please contact live chat with a clear screenshot of your receipt for further assistance.\"",
+        "ms": "\"Hi boss, jika anda telah memasukkan amaun yang salah dalam top‐up (contohnya, RM70 bukannya RM100), sila serahkan semula transaksi dengan memuat naik resit yang betul dengan amaun yang tepat. Sistem akan memproses top‐up yang dikemaskini dalam masa 3-10 minit. Jika kredit masih belum muncul, sila hubungi live chat dengan screenshot resit yang jelas untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老闆，如果您在充值时输入了错误的金额（例如，RM70 而不是 RM100），请重新提交交易，并上传正确金额的收据。系统将在 3-10 分钟内处理更新的充值。如果金额仍未显示，请通过在线聊天发送清晰的收据截图以获得进一步帮助。\""
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "top_up_error_correction",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-03-03T03:24:31Z",
+      "lastUpdated": "2025-03-03T03:24:31Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
   }
 ]
