@@ -236,6 +236,7 @@ Output: What is the best way to optimize my query?
 Input: Hey, uh, how do I fix my database? It is, like, broken.
 Output: How do I fix my broken database?
 """
+
 '''
 TRANSLATION_AND_CLEAN_PROMPT = """
 You are a query optimization expert. Your task is to:
@@ -343,21 +344,3 @@ Assistant: "Please go to the wallet section and select 'Add Payment Method'.
 Follow the verification steps to link your e-wallet.
 If you encounter any issues during setup, our support team is ready to assist you."
 """
-
-
-PROMPT_TEMPLATE_MONGO_AND_OPENAI = """
-            Given the above answers, please generate the **best possible response** for the user's question: '{user_question}'.
-            Ensure the response is clear, concise, and well-structured. If no answer fully matches,
-            synthesize the best information available.
-
-            Generate a **direct and concise answer** to the user's question: '{user_question}'.
-
-            You must determine the best possible response to the user's question:
-            - If at least one answer contains relevant information, **return the best-matching answer exactly as found**.
-            - Do **not** modify, rephrase, or summarize the answer. **Return it word-for-word**.
-            - If multiple answers match, **prioritize the most recent one (use timestamps)**.
-            - If no relevant answer exists, respond with **only**: `"NO"`
-            - Do **not** include: "The information provided does not specify details about..." or "I need more context."
-            - Do **not** say "Yes, I have information about..." Just return the relevant answer.
-            - Do **not** generate "A1:", "A2:", "A3:", "A4:", or any additional responses.
-            """

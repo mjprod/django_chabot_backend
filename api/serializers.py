@@ -115,38 +115,6 @@ class CompleteConversationsSerializer(serializers.Serializer):
         return value
 
 
-class CaptureFeedbackSimpleSerializer(serializers.Serializer):
-    user_input = serializers.CharField(max_length=1000)
-    language = serializers.CharField(max_length=10, required=False, allow_blank=True)
-    correct_answer = serializers.CharField(
-        max_length=2000, required=False, allow_blank=True
-    )
-
-class CaptureFeedbackCompareSerializer(serializers.Serializer):
-    user_input = serializers.CharField(max_length=1000)
-    language = serializers.CharField(max_length=10, required=False, allow_blank=True)
-    original_answer = serializers.CharField(
-        max_length=2000, required=False, allow_blank=True
-    )
-    correct_answer = serializers.CharField(
-        max_length=2000, required=False, allow_blank=True
-    )
-
-class CaptureFeedbackSerializer(serializers.Serializer):
-    conversation_id = serializers.CharField(max_length=100)
-    user_input = serializers.CharField(max_length=1000)
-    ai_response = serializers.CharField(
-        max_length=2000, required=False, allow_blank=True
-    )
-    correct_bool = serializers.BooleanField()
-    chat_rating = serializers.IntegerField(min_value=0, max_value=6)
-    language = serializers.CharField(max_length=10, required=False, allow_blank=True)
-    correct_answer = serializers.CharField(
-        max_length=2000, required=False, allow_blank=True
-    )
-    metadata = serializers.DictField(required=False)
-
-
 class PromptConversationAdminSerializer(serializers.Serializer):
     prompt = serializers.CharField(required=True)
     conversation_id = serializers.CharField(required=True)
@@ -158,7 +126,9 @@ class PromptConversationAdminSerializer(serializers.Serializer):
         required=False,
         default="en",
     )
-
+class PromptConversationAgentAiSerializer(serializers.Serializer):
+    prompt = serializers.CharField(required=True)
+    
 
     def validate_language(self, value):
         """Validate the language code is supported"""

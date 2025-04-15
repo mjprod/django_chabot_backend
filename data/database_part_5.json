@@ -394,20 +394,20 @@
   {
     "id": "0808",
     "question": {
-      "text": "Is there a maintenance issue with Maybank transactions?",
+      "text": "Is there a maintenance issue with {BANK NAME} transactions?",
       "variations": [],
       "intent": "bank_issues",
       "languages": {
-        "en": "Is there a maintenance issue with Maybank transactions?",
-        "ms": "Adakah terdapat masalah penyelenggaraan dengan transaksi Maybank?",
-        "cn": "Maybank交易是否存在維護問題？"
+        "en": "Is there a maintenance issue with {BANK NAME} transactions?",
+        "ms": "Adakah terdapat masalah penyelenggaraan dengan transaksi {BANK NAME}?",
+        "cn": "{BANK NAME}交易是否存在維護問題？"
       }
     },
     "answer": {
       "detailed": {
-        "en": "Can’t say for sure if Maybank’s got maintenance glitches, boss—usually, if transfers are hiccuping, it’s their system getting a tune-up. Peek at Maybank’s official site for the latest scoop and alerts!",
-        "ms": "Tak boleh pastikan kalau Maybank ada masalah penyelenggaraan, boss—biasanya kalau pindahan terganggu, sistem dia tengah dapat tune-up. Tengok laman rasmi Maybank untuk scoop dan alert terkini!",
-        "cn": "關於Maybank交易是否存在維護問題，老板，我們不確定，但若您在使用Maybank轉賬時遇到問題，很可能是銀行正在進行系統維護。建議您查看Maybank的官方網站，以獲取最新的維護信息和通知。"
+        "en": "Can’t say for sure if {BANK NAME}’s got maintenance glitches, boss—usually, if transfers are hiccuping, it’s their system getting a tune-up. Peek at {BANK NAME}’s official site for the latest scoop and alerts!",
+        "ms": "Tak boleh pastikan kalau {BANK NAME} ada masalah penyelenggaraan, boss—biasanya kalau pindahan terganggu, sistem dia tengah dapat tune-up. Tengok laman rasmi {BANK NAME} untuk scoop dan alert terkini!",
+        "cn": "關於{BANK NAME}交易是否存在維護問題，老板，我們不確定，但若您在使用{BANK NAME}轉賬時遇到問題，很可能是銀行正在進行系統維護。建議您查看{BANK NAME}的官方網站，以獲取最新的維護信息和通知。"
       },
       "conditions": []
     },
@@ -6092,62 +6092,6 @@
     "review_status": []
   },
   {
-    "id": "0918",
-    "question": {
-      "text": "Apa maksud 'remark nak isi ke' dalam transaksi?",
-      "variations": [
-        "Apa yang dimaksudkan dengan 'remark nak isi ke'?",
-        "Bolehkah anda terangkan apa maksud 'remark nak isi ke'?",
-        "Adakah 'remark nak isi ke' perlu diisi dalam transaksi?"
-      ],
-      "intent": "transaction_remark_clarification",
-      "languages": {
-        "en": "\"What does 'remark nak isi ke' mean in the transaction?\"",
-        "ms": "\"Apa maksud 'remark nak isi ke' dalam transaksi?\"",
-        "cn": "\"交易中‘remark nak isi ke’是什么意思？\""
-      }
-    },
-    "answer": {
-      "detailed": {
-        "en": "\"Hi boss, the phrase 'remark nak isi ke' appears to refer to a note or comment field in the transaction. In some cases, it may indicate that you need to provide additional remarks or simply leave it blank if not applicable. If you're unsure, please contact live chat support for clarification.\"",
-        "ms": "\"Hi boss, frasa 'remark nak isi ke' merujuk kepada ruangan catatan dalam transaksi. Ada kalanya ia meminta anda untuk mengisi maklumat tambahan, atau jika tidak perlu, boleh dibiarkan kosong. Jika tidak pasti, sila hubungi live chat untuk penjelasan lanjut.\"",
-        "cn": "\"嗨，老板，‘remark nak isi ke’这句话指的是交易中的备注栏。有时可能需要您填写额外信息，如果不适用可以留空。如果不确定，请联系在线客服以获得解释。\""
-      },
-      "conditions": []
-    },
-    "metadata": {
-      "category": [
-        "finance"
-      ],
-      "subCategory": "transaction_remark_clarification",
-      "difficulty": 2,
-      "confidence": 0.5,
-      "dateCreated": "2025-04-07T22:56:15Z",
-      "lastUpdated": "2025-04-07T22:56:35Z",
-      "version": "1.0",
-      "source": "",
-      "status": "active"
-    },
-    "context": {
-      "relatedTopics": [
-        "transaction remarks",
-        "additional information"
-      ],
-      "prerequisites": [],
-      "followUpQuestions": {
-        "en": [],
-        "ms": [],
-        "cn": []
-      }
-    },
-    "usage": {
-      "searchFrequency": 0,
-      "successRate": 0,
-      "lastQueried": null
-    },
-    "review_status": []
-  },
-  {
     "id": "0919",
     "question": {
       "text": "Bagaimana cara menyemak status top-up iBox saya?",
@@ -7516,9 +7460,9 @@
     },
     "answer": {
       "detailed": {
-        "en": "\"Hi boss, to complete your bank transfer top-up, please follow these steps: Close the red notification by tapping the (x) button, then select the bank you used for the transfer (for example, Maybank or CIMB). Next, enter the transferred amount and upload a clear receipt on the top-up page. After submitting, wait 1-10 minutes for the system to process your transaction. If the credit still does not appear, please contact live chat with a screenshot of your receipt for further assistance.\"",
-        "ms": "\"Hi boss, untuk melengkapkan top-up melalui pindahan bank, sila ikut langkah berikut: Tutup notis merah dengan menekan butang (x), kemudian pilih bank yang anda gunakan (contohnya, Maybank atau CIMB). Seterusnya, masukkan amaun yang telah dipindahkan dan muat naik resit yang jelas ke halaman top-up. Lepas hantar, tunggu 1-10 minit untuk sistem memproses transaksi anda. Jika kredit masih belum muncul, sila hubungi live chat dengan screenshot resit untuk bantuan lanjut.\"",
-        "cn": "\"嗨，老闆，要完成银行转账充值，请按照以下步骤操作：先点击 (x) 按钮关闭红色通知，然后选择您使用的银行（例如 Maybank 或 CIMB）。接着，输入转账金额并在充值页面上传清晰的收据。提交后，等待1-10分钟让系统处理交易。如果金额仍未显示，请通过在线聊天发送收据截图以获得进一步帮助。\""
+        "en": "\"Hi boss, to complete your bank transfer top-up, please follow these steps: Close the red notification by tapping the (x) button, then select the bank you used for the transfer (for example, {BANK NAME} or CIMB). Next, enter the transferred amount and upload a clear receipt on the top-up page. After submitting, wait 1-10 minutes for the system to process your transaction. If the credit still does not appear, please contact live chat with a screenshot of your receipt for further assistance.\"",
+        "ms": "\"Hi boss, untuk melengkapkan top-up melalui pindahan bank, sila ikut langkah berikut: Tutup notis merah dengan menekan butang (x), kemudian pilih bank yang anda gunakan (contohnya, {BANK NAME} atau CIMB). Seterusnya, masukkan amaun yang telah dipindahkan dan muat naik resit yang jelas ke halaman top-up. Lepas hantar, tunggu 1-10 minit untuk sistem memproses transaksi anda. Jika kredit masih belum muncul, sila hubungi live chat dengan screenshot resit untuk bantuan lanjut.\"",
+        "cn": "\"嗨，老闆，要完成银行转账充值，请按照以下步骤操作：先点击 (x) 按钮关闭红色通知，然后选择您使用的银行（例如 {BANK NAME} 或 CIMB）。接着，输入转账金额并在充值页面上传清晰的收据。提交后，等待1-10分钟让系统处理交易。如果金额仍未显示，请通过在线聊天发送收据截图以获得进一步帮助。\""
       },
       "conditions": []
     },
@@ -7760,6 +7704,58 @@
       "followUpQuestions": {
         "ms": [],
         "en": [],
+        "cn": []
+      }
+    },
+    "usage": {
+      "searchFrequency": 0,
+      "successRate": 0,
+      "lastQueried": null
+    },
+    "review_status": []
+  },
+  {
+    "id": "0948",
+    "question": {
+      "text": "How to upload a receipt that is visible?",
+      "variations": [
+        "How to submit a receipt that can be seen?",
+        "Upload clear receipt image instructions"
+      ],
+      "intent": "upload_receipt_visible",
+      "languages": {
+        "en": "How to upload a receipt that is visible?",
+        "ms": "Bagaimana untuk muat naik resit yang boleh dilihat?",
+        "cn": "如何上传可以看到的收据？"
+      }
+    },
+    "answer": {
+      "detailed": {
+        "en": "To upload a visible receipt, ensure the image shows: 1. Successful transaction status, 2. Amount of transaction, 3. Exact date and time of transaction, 4. Recipient's name. If the previous submission was incomplete, kindly resubmit with a complete image. Thank you!",
+        "ms": "Untuk muat naik resit yang boleh dilihat, pastikan gambar menunjukkan: 1. Status transaksi berjaya, 2. Jumlah transaksi, 3. Masa dan tarikh transaksi yang tepat, 4. Nama penerima. Jika penghantaran sebelum ini tidak lengkap, sila muat naik semula dengan gambar yang lengkap. Terima kasih!",
+        "cn": "要上传可见的收据，请确保图像显示：1. 成功的交易状态，2. 交易金额，3. 精确的交易日期和时间，4. 收款人的姓名。如果之前的提交不完整，请重新提交完整的图像。谢谢！"
+      },
+      "conditions": []
+    },
+    "metadata": {
+      "category": [
+        "finance"
+      ],
+      "subCategory": "",
+      "difficulty": 2,
+      "confidence": 0.5,
+      "dateCreated": "2025-04-08T20:58:14Z",
+      "lastUpdated": "2025-04-08T20:58:14Z",
+      "version": "1.0",
+      "source": "",
+      "status": "active"
+    },
+    "context": {
+      "relatedTopics": [],
+      "prerequisites": [],
+      "followUpQuestions": {
+        "en": [],
+        "ms": [],
         "cn": []
       }
     },
