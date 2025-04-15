@@ -492,20 +492,20 @@
   {
     "id": "0610",
     "question": {
-      "text": "Is there a maintenance issue with Maybank transactions?",
+      "text": "Is there a maintenance issue with {BANK NAME} transactions?",
       "variations": [],
       "intent": "bank_issues",
       "languages": {
-        "en": "Is there a maintenance issue with Maybank transactions?",
-        "ms": "Adakah terdapat masalah penyelenggaraan dengan transaksi Maybank?",
-        "cn": "Maybank交易是否存在維護問題？"
+        "en": "Is there a maintenance issue with {BANK NAME} transactions?",
+        "ms": "Adakah terdapat masalah penyelenggaraan dengan transaksi {BANK NAME}?",
+        "cn": "{BANK NAME}交易是否存在維護問題？"
       }
     },
     "answer": {
       "detailed": {
-        "en": "We’re not sure if Maybank’s got maintenance issues, boss—if your transfer’s failing, it’s likely that’s the culprit. Check Maybank’s site for the scoop!",
-        "ms": "Kami tak pasti kalau Maybank ada masalah penyelenggaraan, boss—kalau pindahan tak jadi, mungkin tu sebabnya. Semak laman web Maybank untuk info!",
-        "cn": "關於Maybank交易是否有維護問題，我們不太確定，老板。若您使用Maybank轉賬不成功，大概率是正在維護中。您可查看Maybank官網獲取更詳細信息。"
+        "en": "We’re not sure if {BANK NAME} got maintenance issues, boss—if your transfer’s failing, it’s likely that’s the culprit. Check {BANK NAME}’s site for the scoop!",
+        "ms": "Kami tak pasti kalau {BANK NAME} ada masalah penyelenggaraan, boss—kalau pindahan tak jadi, mungkin tu sebabnya. Semak laman web {BANK NAME} untuk info!",
+        "cn": "關於{BANK NAME}交易是否有維護問題，我們不太確定，老板。若您使用{BANK NAME}轉賬不成功，大概率是正在維護中。您可查看{BANK NAME}官網獲取更詳細信息。"
       },
       "conditions": []
     },
@@ -1129,20 +1129,20 @@
   {
     "id": "0623",
     "question": {
-      "text": "Is there a maintenance issue with Maybank transactions?",
+      "text": "Is there a maintenance issue with {BANK NAME} transactions?",
       "variations": [],
       "intent": "bank_issues",
       "languages": {
-        "en": "Is there a maintenance issue with Maybank transactions?",
-        "ms": "Adakah terdapat masalah penyelenggaraan dengan transaksi Maybank?",
-        "cn": "Maybank交易是否存在維護問題？"
+        "en": "Is there a maintenance issue with {BANK NAME} transactions?",
+        "ms": "Adakah terdapat masalah penyelenggaraan dengan transaksi {BANK NAME}?",
+        "cn": "{BANK NAME}交易是否存在維護問題？"
       }
     },
     "answer": {
       "detailed": {
-        "en": "We can’t pin down if Maybank’s got maintenance issues, boss—if your transfer’s not working, it’s usually that. Peek at Maybank’s site for the full scoop!",
-        "ms": "Kami tak pasti kalau Maybank ada masalah penyelenggaraan, boss—kalau pindahan tak jadi, biasanya tu sebabnya. Tengok laman web Maybank untuk info penuh!",
-        "cn": "關於Maybank交易是否有維護問題，我們無法確定具體情況，老板。若您的Maybank轉賬不成功，通常是因為系統在維護。您可查看Maybank官網以獲取更詳細信息。"
+        "en": "We can’t pin down if {BANK NAME}’s got maintenance issues, boss—if your transfer’s not working, it’s usually that. Peek at {BANK NAME}’s site for the full scoop!",
+        "ms": "Kami tak pasti kalau {BANK NAME} ada masalah penyelenggaraan, boss—kalau pindahan tak jadi, biasanya tu sebabnya. Tengok laman web {BANK NAME} untuk info penuh!",
+        "cn": "關於{BANK NAME}交易是否有維護問題，我們無法確定具體情況，老板。若您的{BANK NAME}轉賬不成功，通常是因為系統在維護。您可查看{BANK NAME}官網以獲取更詳細信息。"
       },
       "conditions": []
     },
@@ -3481,20 +3481,20 @@
   {
     "id": "0671",
     "question": {
-      "text": "Is there a maintenance issue with Maybank transactions?",
+      "text": "Is there a maintenance issue with {BANK NAME} transactions?",
       "variations": [],
       "intent": "bank_issues",
       "languages": {
-        "en": "Is there a maintenance issue with Maybank transactions?",
-        "ms": "Adakah terdapat masalah penyelenggaraan dengan transaksi Maybank?",
-        "cn": "Maybank交易是否存在維護問題？"
+        "en": "Is there a maintenance issue with {BANK NAME} transactions?",
+        "ms": "Adakah terdapat masalah penyelenggaraan dengan transaksi {BANK NAME}?",
+        "cn": "{BANK NAME}交易是否存在維護問題？"
       }
     },
     "answer": {
       "detailed": {
-        "en": "We can’t say for sure if Maybank’s got maintenance going, boss—if your transfer’s bombing, it’s usually that or an update. Check Maybank’s official site for the latest dirt!",
-        "ms": "Kami tak pasti kalau Maybank tengah ada penyelenggaraan, boss—kalau pindahan boss gagal, biasanya tu atau update. Semak laman rasmi Maybank untuk info terkini!",
-        "cn": "關於Maybank交易是否有維護問題，我們無法確定具體情況，老板。若您發現Maybank轉賬不成功，通常是因為系統正在維護或更新。我建議您查看Maybank的官方網站，了解最新的維護信息。"
+        "en": "We can’t say for sure if {BANK NAME}’s got maintenance going, boss—if your transfer’s bombing, it’s usually that or an update. Check {BANK NAME}’s official site for the latest dirt!",
+        "ms": "Kami tak pasti kalau {BANK NAME} tengah ada penyelenggaraan, boss—kalau pindahan boss gagal, biasanya tu atau update. Semak laman rasmi {BANK NAME} untuk info terkini!",
+        "cn": "關於{BANK NAME}交易是否有維護問題，我們無法確定具體情況，老板。若您發現{BANK NAME}轉賬不成功，通常是因為系統正在維護或更新。我建議您查看{BANK NAME}的官方網站，了解最新的維護信息。"
       },
       "conditions": []
     },
@@ -5588,20 +5588,20 @@
   {
     "id": "0714",
     "question": {
-      "text": "Is there a maintenance issue with Maybank transactions?",
+      "text": "Is there a maintenance issue with {BANK NAME} transactions?",
       "variations": [],
       "intent": "bank_issues",
       "languages": {
-        "en": "Is there a maintenance issue with Maybank transactions?",
-        "ms": "Adakah terdapat masalah penyelenggaraan dengan transaksi Maybank?",
-        "cn": "Maybank交易是否存在維護問題？"
+        "en": "Is there a maintenance issue with {BANK NAME} transactions?",
+        "ms": "Adakah terdapat masalah penyelenggaraan dengan transaksi {BANK NAME}?",
+        "cn": "{BANK NAME}交易是否存在維護問題？"
       }
     },
     "answer": {
       "detailed": {
-        "en": "We can’t pin down if Maybank’s got maintenance issues, boss—if your transfer’s flopping, it’s usually maintenance or an update. Check Maybank’s official site for the latest scoop!",
-        "ms": "Kami tak boleh pastikan kalau Maybank ada masalah penyelenggaraan, boss—kalau pindahan boss tak jadi, biasanya tengah selenggara atau update. Tengok laman rasmi Maybank untuk info terkini!",
-        "cn": "關於Maybank交易是否存在維護問題，我們無法確定具體情況，老板。若您發現Maybank轉賬不成功，通常是因為系統正在進行維護或更新。我建議您查看Maybank的官方網站，了解最新的維護信息。"
+        "en": "We can’t pin down if {BANK NAME}’s got maintenance issues, boss—if your transfer’s flopping, it’s usually maintenance or an update. Check {BANK NAME}’s official site for the latest scoop!",
+        "ms": "Kami tak boleh pastikan kalau {BANK NAME} ada masalah penyelenggaraan, boss—kalau pindahan boss tak jadi, biasanya tengah selenggara atau update. Tengok laman rasmi {BANK NAME} untuk info terkini!",
+        "cn": "關於{BANK NAME}交易是否存在維護問題，我們無法確定具體情況，老板。若您發現{BANK NAME}轉賬不成功，通常是因為系統正在進行維護或更新。我建議您查看{BANK NAME}的官方網站，了解最新的維護信息。"
       },
       "conditions": []
     },
@@ -5833,20 +5833,20 @@
   {
     "id": "0719",
     "question": {
-      "text": "Is there a maintenance issue with Maybank transactions?",
+      "text": "Is there a maintenance issue with {BANK NAME} transactions?",
       "variations": [],
       "intent": "bank_issues",
       "languages": {
-        "en": "Is there a maintenance issue with Maybank transactions?",
-        "ms": "Adakah terdapat masalah penyelenggaraan dengan transaksi Maybank?",
-        "cn": "Maybank交易是否存在維護問題？"
+        "en": "Is there a maintenance issue with {BANK NAME} transactions?",
+        "ms": "Adakah terdapat masalah penyelenggaraan dengan transaksi {BANK NAME}?",
+        "cn": "{BANK NAME}交易是否存在維護問題？"
       }
     },
     "answer": {
       "detailed": {
-        "en": "We can’t say for sure if Maybank’s got maintenance woes, boss—if your transfer’s tanking, it’s usually that or an update tweak. Scope out Maybank’s official site for the freshest intel!",
-        "ms": "Kami tak pasti kalau Maybank ada masalah penyelenggaraan, boss—kalau pindahan boss tak jadi, biasanya tu atau ada tweak update. Cek laman rasmi Maybank untuk info paling baru!",
-        "cn": "關於Maybank交易是否存在維護問題，我們無法確認具體情況，老板。若您在使用Maybank進行轉賬時遇到困難，通常是因為系統正在維護或更新。我建議您查看Maybank的官方網站，以獲取最新的維護信息。"
+        "en": "We can’t say for sure if {BANK NAME}’s got maintenance woes, boss—if your transfer’s tanking, it’s usually that or an update tweak. Scope out {BANK NAME}’s official site for the freshest intel!",
+        "ms": "Kami tak pasti kalau {BANK NAME} ada masalah penyelenggaraan, boss—kalau pindahan boss tak jadi, biasanya tu atau ada tweak update. Cek laman rasmi {BANK NAME} untuk info paling baru!",
+        "cn": "關於{BANK NAME}交易是否存在維護問題，我們無法確認具體情況，老板。若您在使用{BANK NAME}進行轉賬時遇到困難，通常是因為系統正在維護或更新。我建議您查看{BANK NAME}的官方網站，以獲取最新的維護信息。"
       },
       "conditions": []
     },

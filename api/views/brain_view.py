@@ -46,62 +46,6 @@ class ListReviewAndUpdateBrainView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
         
-
-class UpdateReviewStatusView(APIView):
-    def post(self, request, *args, **kwargs):
-        """
-        Update the review_status field of a document.
-        Expects a JSON payload with:
-            - doc_id: your custom document id (e.g. "0072")
-            - review_status: a list of language codes (e.g. ["en", "ms"])
-        """
-        data = request.data
-        doc_id = data.get("doc_id")
-        review_status = data.get("review_status")
-        review_text = data.get("review_text")
-
-        if not doc_id or not review_status:
-            return Response(
-                {"error": "doc_id and review_status are required."},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        
-        db = None
-        try:
-
-            db = MongoDB.get_db()
-            # Build the field path for the answer text, e.g., "answer.detailed.en"
-            field_path = f"answer.detailed.{review_status}"
-            
-            # Update operation:
-            #  - $set to update the specific language answer text
-            #  - $addToSet to add the language code to review_status if not already present
-            result = db.review_and_update_brain.update_one(
-                {"id": doc_id},
-                {
-                    "$set": {field_path: review_text},
-                    "$addToSet": {"review_status": review_status}
-                }
-            )
-            
-            if result.modified_count > 0:
-                return Response(
-                    {"message": f"Document {doc_id} updated successfully."},
-                    status=status.HTTP_200_OK
-                )
-            else:
-                return Response(
-                    {"error": f"Document {doc_id} not found or not updated."},
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-        except Exception as e:
-            logger.exception("Error updating review_status")
-            return Response(
-                {"error": f"Error updating review_status: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
-        
-
 class UpdateBrainView(APIView):
     def get(self, request):
         try:
@@ -161,18 +105,4 @@ class InsertBrainView(APIView):
                 {"error": f"Error retrieving dashboard counts: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )    
-        
-class PreBrainView(APIView):
-     def get(self, request):
-        db = None
-        try:
-            db = MongoDB.get_db()
-            lists = list(db.band_aid_send_super_admin.find({}))
-            for item in lists:
-                item["_id"] = str(item["_id"]) 
-            return Response(lists, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response(
-                {"error": f"Error retrieving lists: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
+  

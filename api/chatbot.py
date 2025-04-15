@@ -4,16 +4,13 @@ import logging
 import os
 import time
 import tracemalloc
-import re
 
 from typing import List
 
 from django.conf import settings
 from dotenv import load_dotenv
 
-# from langchain.embeddings import CohereEmbeddings
 from langchain_cohere import CohereEmbeddings
-# from langchain.vectorstores import Chroma
 from langchain_community.vectorstores import Chroma
 
 from langchain_core.output_parsers import StrOutputParser
@@ -40,7 +37,6 @@ from ai_config.ai_prompts import (
     DOCUMENT_RELEVANCE_PROMPT,
     CONFIDENCE_GRADER_PROMPT,
     RAG_PROMPT_TEMPLATE,
-    PROMPT_TEMPLATE_MONGO_AND_OPENAI,
 )
 
 from api.views.brain_file_reader import (
@@ -84,6 +80,7 @@ docs_to_use = []
 prompt = ""
 
 
+logger = logging.getLogger()
 
 # Load environment variables
 load_dotenv()
@@ -98,6 +95,9 @@ def load_and_process_json_file() -> List[dict]:
         "database_part_4.json",
         "database_part_5.json",
         "database_part_6.json",
+        "old_conv_04_08_25.json",
+        "old_conv_04_09_25.json",
+        "old_conv_04_10_25.json",
     ]
 
     all_documents = []
@@ -251,7 +251,7 @@ def is_vector_store_created(collection_name="RAG", persist_directory="./chroma_d
 try:
     logger.info("Starting vector store creation with filtered documents")
     if is_vector_store_created(collection_name="RAG", persist_directory="./chroma_db"):
-        print("✅ Banco já existe!")
+        print("Database already exists, loading existing vector store")
         store = Chroma(
             collection_name=collection_name,
             persist_directory=persist_directory,
@@ -370,256 +370,7 @@ def handle_mongodb_operation(operation):
         print(f"MongoDB operation failed: {str(e)}")
         return None
 
-def update_local_confidence(generation, confidence_diff):
-    try:
-        logger.info(
-            "Starting update of local confidence scores across all database files"
-        )
-        base_dir = os.path.join(os.path.dirname(__file__), "../data")
-        database_files = [
-            "database_part_1.json",
-            "database_part_2.json",
-            "database_part_3.json",
-            "database_part_4.json",
-            "database_part_5.json",
-            "database_part_6.json",
-        ]
 
-        updated = False
-        for database_file in database_files:
-            file_path = os.path.join(base_dir, database_file)
-            try:
-                with open(file_path, "r+") as f:
-                    data = json.load(f)
-                    for item in data:
-                        # Correctly access nested dictionary structure
-                        if (
-                            isinstance(item, dict)
-                            and "answer" in item
-                            and "detailed" in item["answer"]
-                            and "en" in item["answer"]["detailed"]
-                            and item["answer"]["detailed"]["en"] == generation
-                        ):
-                            current_confidence = item["metadata"]["confidence"]
-                            item["metadata"]["confidence"] = min(
-                                1.0, current_confidence + (confidence_diff * 0.1)
-                            )
-                            updated = True
-                            logger.info(
-                                f"Updated confidence in {database_file} "
-                                f"from {current_confidence} to {item['metadata']['confidence']}"
-                            )
-
-                            # Write back to file
-                            f.seek(0)
-                            json.dump(data, f, indent=4)
-                            f.truncate()
-                            logger.info(f"Successfully updated {database_file}")
-                            break
-
-            except FileNotFoundError:
-                logger.error(f"Database file not found: {database_file}")
-            except json.JSONDecodeError:
-                logger.error(f"Invalid JSON format in file: {database_file}")
-            except Exception as e:
-                logger.error(f"Error processing file {database_file}: {str(e)}")
-        if not updated:
-            logger.warning("No matching answer found in any database files")
-    except Exception as e:
-        logger.error(f"Error updating local confidence: {str(e)}")
-
-def update_database_confidence(comparison_result, docs_to_use):
-    try:
-        logger.info("Starting database confidence update")
-        base_dir = os.path.join(os.path.dirname(__file__), "../data")
-        database_files = [
-            "database_part_1.json",
-            "database_part_2.json",
-            "database_part_3.json",
-            "database_part_4.json",
-            "database_part_5.json",
-            "database_part_6.json",
-        ]
-
-        for database_file in database_files:
-            file_path = os.path.join(base_dir, database_file)
-            try:
-                with open(file_path, "r+") as f:
-                    data = json.load(f)
-                    for i, item in enumerate(data):
-                        # Check if the answer matches using proper dictionary access
-                        if (
-                            isinstance(item, dict)
-                            and "answer" in item
-                            and "detailed" in item["answer"]
-                            and "en" in item["answer"]["detailed"]
-                            and item["answer"]["detailed"]["en"]
-                            == comparison_result["best_feedback"]["correct_answer"]
-                        ):
-
-                            current_confidence = item["metadata"]["confidence"]
-                            data[i]["metadata"]["confidence"] = min(
-                                1.0, current_confidence + 0.1
-                            )
-
-                            logger.info(
-                                f"Updated confidence in {database_file} "
-                                f"from {current_confidence} to {data[i]['metadata']['confidence']}"
-                            )
-
-                            # Write back to file
-                            f.seek(0)
-                            json.dump(data, f, indent=4)
-                            f.truncate()
-                            logger.info(f"Successfully updated {database_file}")
-                            break
-
-            except Exception as e:
-                logger.error(f"Error processing file {database_file}: {str(e)}")
-
-    except Exception as e:
-        logger.error(f"Error updating database confidence: {str(e)}")
-
-def process_feedback_translation(feedback_data):
-    try:
-        logger.info("Processing feedback translation")
-
-        # Translate user input if not in English
-        user_input = translate_and_clean(feedback_data["user_input"])
-        logger.info("User input translation completed")
-
-        # Translate correct answer if provided and not in English
-        if feedback_data.get("correct_answer"):
-            correct_answer = translate_and_clean(feedback_data["correct_answer"])
-            logger.info("Correct answer translation completed")
-        else:
-            correct_answer = ""
-
-        return {
-            **feedback_data,
-            "user_input": user_input,
-            "correct_answer": correct_answer,
-        }
-    except Exception as e:
-        logger.error(f"Error processing feedback translation: {str(e)}")
-        return feedback_data
-
-def ensure_feedback_index(db):
-    if "feedback_index" not in db.feedback_data.index_information():
-        db.feedback_data.create_index([("user_input", "text")], name="feedback_index")
-        logger.info("Created text index for feedback search")
-
-def get_relevant_feedback_data(cleaned_prompt, db):
-    logger.info(f"Starting Feedback retrieval for prompt: {cleaned_prompt}")
-    try:
-        ensure_feedback_index(db)
-
-        similar_answers = (
-            db.feedback_data.find(
-                {
-                    "$text": {"$search": cleaned_prompt},
-                    "correct_answer": {"$exists": True, "$ne": ""},
-                }
-            )
-            .sort([("score", {"$meta": "textScore"}), ("timestamp", -1)])
-            .limit(3)
-        )
-
-        feedback_list = list(similar_answers)
-        if not feedback_list:
-            logger.warning(f"No feedback matches found for prompt: {cleaned_prompt}")
-            return []
-
-        logger.info(f"Found {len(feedback_list)} potential feedback matches")
-        return feedback_list
-    except Exception as e:
-        logger.error(f"Error retrieving feedback answers: {str(e)}")
-        return []
-
-def compare_answers(generation, feedback_answers, docs_to_use):
-    logger.info("Starting answer comparison process")
-    try:
-        # Score generated answer
-        generated_score = confidence_grader.invoke(
-            {"documents": format_docs(docs_to_use), "generation": generation}
-        )
-        generated_score = 0.90
-        logger.info(f"Generated answer confidence score: {generated_score}")
-
-        # Find best feedback answer
-        best_match = None
-        highest_score = 0
-
-        for feedback in feedback_answers:
-            # For demo added in fixed feedback always wins to show the client
-            feedback_score = 0.95  # remove when move to the next stage
-            logger.info(
-                f"Feedback answer score: {feedback_score} for ID: {feedback['conversation_id']}"
-            )
-
-            if feedback_score > highest_score:
-                highest_score = feedback_score
-                best_match = feedback
-
-        # Always return feedback as better for demos
-        comparison_result = {
-            "better_answer": "feedback",  # always choose feedback as better answer
-            "confidence_diff": 0.1,  # mall confidence change to simulate learning
-            "generated_score": generated_score,
-            "feedback_score": highest_score,
-            "best_feedback": best_match,
-        }
-
-        logger.info(
-            f"Comparison result: {comparison_result['better_answer']} answer is better"
-        )
-        return comparison_result
-    except Exception as e:
-        logger.error(f"Error comparing answers: {str(e)}")
-        return None
-
-def check_answer_mongo_and_openai(user_question, matches):
-    if not matches:
-        return None
-
-    prompt = f"User question: {user_question}\n\n"
-    prompt += "Here are some possible answers found in the database:\n"
-
-    for idx, match in enumerate(matches):
-        question = match.get("user_input", "N/A")
-        answer = match.get("correct_answer", "N/A")
-        prompt += f"\nQ{idx + 1}: {question}\nA{idx + 1}: {answer}\n"
-
-    prompt += PROMPT_TEMPLATE_MONGO_AND_OPENAI.format(user_question=user_question)
-
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        logger.error("Missing OPENAI_API_KEY environment variable.")
-        return "false"
-
-    client = OpenAI(api_key=api_key)
-
-    response = client.chat.completions.create(
-        model=OPENAI_MODEL,
-        messages=[
-            {
-                "role": "system",
-                "content": "You are an AI assistant evaluating answers to user questions.",
-            },
-            {"role": "user", "content": prompt},
-        ],
-        temperature=0.1,
-    )
-
-    final_response = response.choices[0].message.content.strip()
-    final_response = re.sub(r'^["\']|["\']$', "", final_response)
-
-    if "no" in final_response.lower() and len(final_response) < 5:
-        return None
-
-    return final_response
-
-logger = logging.getLogger()
 
 def extrair_knowledge_items(conversation):
     """
