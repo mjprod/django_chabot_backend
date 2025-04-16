@@ -9,42 +9,13 @@ from ..serializers import (
     InsertAnswerBrain
 )
 
-from api.chatbot import (
+from api.app.brain import (
     update_document_by_custom_id,
     insert_document
 )
 
-from api.app.mongo import MongoDB
 
 logger = logging.getLogger(__name__)
-
-class ListReviewAndUpdateBrainView(APIView):
-    def get(self, request, *args, **kwargs):
-        db = None
-        try:
-            db = MongoDB.get_db()
-            query = {
-                "$expr": {
-                    "$lt": [
-                        {"$size": {"$ifNull": ["$review_status", []]}},
-                        3
-                    ]
-                }
-            }
-            results = list(db.review_and_update_brain.find(query))
-        
-            for doc in results:
-                if "_id" in doc:
-                    doc["_id"] = str(doc["_id"])
-        
-            return Response(results, status=status.HTTP_200_OK)
-    
-        except Exception as e:
-                logger.exception("Error retrieving session ids")
-                return Response(
-                {"error": f"Error retrieving session ids: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-                )
         
 class UpdateBrainView(APIView):
     def get(self, request):

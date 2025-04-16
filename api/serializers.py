@@ -34,23 +34,6 @@ class MessageSerializer(serializers.Serializer):
         return value
 
 
-class ConversationMetadataSerializer(BaseSerializer):
-    session_id = serializers.CharField(max_length=100)
-    user_id = serializers.CharField(max_length=100)
-    bot_id = serializers.CharField(max_length=100)
-    admin_id = serializers.CharField(max_length=100)
-    timestamp = serializers.DateTimeField(default=datetime.now)
-    messages = MessageSerializer(many=True)
-    translations = TranslationSerializer(many=True)
-
-    def validate_conversation_data(self, data):
-        if (
-            len(data.get("messages", [])) > 100
-        ):  # this will limit the message history to prevent leaks in memory
-            raise serializers.ValidationError("Too many messages")
-        if len(data.get("translations", [])) > 100:  # this is a limit for translations
-            raise serializers.ValidationError("Too many translations")
-        return data
 
 
 class UserInputSerializer(serializers.Serializer):

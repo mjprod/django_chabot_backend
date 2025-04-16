@@ -9,7 +9,6 @@ import time
 from rapidfuzz import fuzz
 
 from api.chatbot import (
-    extrair_knowledge_items,
     get_store,
 )
 
@@ -352,66 +351,4 @@ class AllConversationsIdsView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
         
-class UpdateKnowledgeView(APIView):
-    def post(self, request):
-        db = None
-        try:
-            conversation_id = request.data.get("conversation_id")
-            if not conversation_id:
-                return Response(
-                    {"error": "conversation_id is required"},
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-            
-            db = MongoDB.get_db()
-            # Busca a conversa usando o session_id
-            conversation = db.conversations.find_one({"session_id": conversation_id})
-            if not conversation:
-                return Response(
-                    {"error": "Conversation not found"},
-                    status=status.HTTP_404_NOT_FOUND
-                )
-            
-            knowledge_items = extrair_knowledge_items(conversation)
-            
-            
-            # Retorna os itens extraídos (candidatos) sem verificar no brain
-            return Response({
-                "message": "Candidate knowledge items extracted.",
-                "candidate_items": knowledge_items,
-                "count": len(knowledge_items)
-            }, status=status.HTTP_200_OK)
-            
-        except Exception as e:
-            return Response(
-                {"error": f"Error extracting candidate knowledge: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
-        
-class DeleteConversationView(APIView):
-    def delete(self, request, *args, **kwargs):
-        conversation_id = kwargs.get("conversation_id")
-        if not conversation_id:
-            return Response(
-                {"error": "conversation_id is required"},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        db = None
-        try:
-            db = MongoDB.get_db()
-            result = db.conversations.delete_one({"session_id": conversation_id})
-            if result.deleted_count == 0:
-                return Response(
-                    {"error": "Conversation not found"},
-                    status=status.HTTP_404_NOT_FOUND
-                )
-            return Response(
-                {"message": "Conversation deleted successfully"},
-                status=status.HTTP_200_OK
-            )
-        except Exception as e:
-            return Response(
-                {"error": f"Error deleting conversation: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
     

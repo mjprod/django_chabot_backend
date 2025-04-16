@@ -350,13 +350,8 @@ def prompt_conversation_agent_ai(
     user_prompt,
    ):
 
-    db = None
-
     try:
-        # Database connection with timeout
-        # db = MongoDB.get_db()
-        db = MongoDB.get_db()
-
+     
         # Vector store retrieval
         vector_start = time.time()
         docs_retrieve = []
@@ -383,98 +378,6 @@ def prompt_conversation_agent_ai(
             logger.error(f"Vector store error: {str(ve)}")
             docs_retrieve = []
             print(docs_retrieve)
-
-        # OpenAI response generation
-        generation_start = time.time()
-        try:
-            
-            client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), timeout=OPENAI_TIMEOUT)
-
-            # the history of messages is the context
-            messages_history = messages.copy()
-            if docs_retrieve:
-                context_text = " ".join([doc.page_content for doc in docs_retrieve])
-                messages_history.append(
-                    {"role": "system", "content": f"Relevant context: {context_text}"}
-                )
-
-            response = client.chat.completions.create(
-                model=OPENAI_MODEL,
-                messages=messages_history,
-                temperature=MAX_TEMPERATURE,
-                max_tokens=MAX_TOKENS,
-                timeout=OPENAI_TIMEOUT,
-            )
-            #logging.info(messages_history)
-            ai_response = response.choices[0].message.content
-            logger.debug(
-                f"AI response generated in {time.time() - generation_start:.2f}s"
-            )
-        except Exception as oe:
-            logger.error(f"OpenAI error: {str(oe)}")
-            raise
-
-        is_last_message = is_finalizing_phrase(ai_response)
-      
-        try:
-            confidence_result = confidence_grader.invoke({
-                "documents": format_docs(docs_retrieve),
-                "generation": ai_response,
-            })
-        except Exception as ce:
-            logger.error(f"Error obtaining confidence: {str(ce)}")
-            confidence_result = None
-
-        # Update conversation
-        messages.append(
-            {
-                "role": "assistant",
-                "content": ai_response,
-                "timestamp": datetime.now().isoformat(),
-            }
-        )
-
-        # Prepare and save conversation
-        conversation = {
-            "session_id": conversation_id,
-            "admin_id": admin_id,
-            "bot_id": bot_id,
-            "user_id": user_id,
-            "language": language_code,
-            "messages": messages,
-            "updated_at": datetime.now().isoformat(),
-        }
-
-        # Upsert with retry logic
-        max_retries = 3
-        for attempt in range(max_retries):
-            try:
-                db.conversations.update_one(
-                    {"session_id": conversation_id}, {"$set": conversation}, upsert=True
-                )
-                break
-            except Exception as me:
-                if attempt == max_retries - 1:
-                    raise
-                logger.warning(f"MongoDB retry {attempt + 1}/{max_retries}: {str(me)}")
-                time.sleep(0.5)
-
-        # if confidence_result and 0.1 < confidence_result.confidence_score < 0.65 and len(user_prompt) > 10:
-         #  i_need_this_knowledge(db,conversation_id,user_prompt, ai_response, confidence_result.confidence_score)
-
-
-        total_time = time.time() - start_time
-        logger.info(f"Request completed in {total_time:.2f}s")
-
-        return {
-            "generation": ai_response,
-            "conversation_id": conversation_id,
-            "language": language_code,
-            "is_last_message": is_last_message,
-            #"confidence_score": 0.0,
-            "confidence_score": confidence_result.confidence_score if confidence_result else None,
-
-        }
 
     except Exception as e:
         logger.error(f"Error in prompt_conversation_admin: {str(e)}", exc_info=True)
