@@ -1,7 +1,7 @@
 from langchain_community.vectorstores import Chroma
 
 from api.chatbot import (
-    store,
+    chatbot,
 )
 
 from api.views.brain_file_reader import (
@@ -20,7 +20,7 @@ def search_by_id(store: Chroma, custom_id: str):
 
 def update_document_by_custom_id(custom_id: str, answer_en: str, answer_ms: str, answer_cn: str):
     try:
-        search_results = store.get(
+        search_results = chatbot.brain.get(
             where={"id": custom_id},
             include=["metadatas","documents"]
         )
@@ -39,7 +39,7 @@ def update_document_by_custom_id(custom_id: str, answer_en: str, answer_ms: str,
         document = search_results['documents'][0]
         question_text = document.split("\n")[0].replace("Question: ", "").strip()
 
-        new_document = CustomDocument(
+        new_document = BrainDocument(
             id=custom_id,
             page_content=(
                 f"Question: {question_text}\n"
@@ -126,7 +126,7 @@ def insert_document(question_text, answer_en: str, answer_ms: str, answer_cn: st
 
         insert_new_document(new_document)
 
-        new_document = CustomDocument(
+        new_document = BrainDocument(
             id=new_id,
             page_content=(
                 f"Question: {question_text}\n"

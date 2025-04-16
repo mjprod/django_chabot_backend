@@ -3,13 +3,11 @@ from rest_framework.response import Response
 from rest_framework import status
 
 import logging
-from datetime import datetime
 import time
 
-from rapidfuzz import fuzz
 
 from api.chatbot import (
-    get_store,
+    chatbot,    
 )
 
 from api.app.conversation import (
@@ -260,7 +258,7 @@ class PromptConversationView(APIView):
             response = prompt_conversation(
                 self,
                 user_prompt=validated_data["prompt"],
-                store=get_store,
+                store=chatbot.vector_store,
                 language_code=language_code,
             )
 

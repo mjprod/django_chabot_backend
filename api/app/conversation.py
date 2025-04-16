@@ -26,9 +26,7 @@ from ai_config.ai_prompts import (
 )
 
 from api.chatbot import (
-    confidence_grader,
-    format_docs,
-    store,
+    chatbot,
 )
 
 from .mongo import MongoDB
@@ -115,9 +113,8 @@ def prompt_conversation(self, user_prompt, store ,language_code=LANGUAGE_DEFAULT
         # Vector store retrieval
         vector_start = time.time()
         try:
-            docs_retrieve = store.similarity_search(
-                user_prompt, k=3  # Limit to top 3 results for performance
-            )
+
+            docs_retrieve = chatbot.brain.query(user_prompt)
             logger.debug(
                 f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
             )
@@ -180,6 +177,10 @@ def i_need_this_knowledge(db,conversation_id, user_prompt,ai_response, confidenc
         logger.warning(f"MongoDB error: {str(me)}")
         raise  
 
+    # Define Formatting Function
+def format_docs(docs):
+    return "\n".join(doc.page_content for doc in docs)
+
 def prompt_conversation_admin(
     self,
     user_prompt,
@@ -234,7 +235,8 @@ def prompt_conversation_admin(
             if user_prompt.lower().strip() in ["ok", "like", "boss", "yes", "no","tq","thanks"]:
                  docs_retrieve = []
             else:
-                docs_retrieve = store.similarity_search(user_prompt, k=5)
+                docs_retrieve = chatbot.brain.query(user_prompt)
+
             
             for i, doc in enumerate(docs_retrieve, start=1):
                 print(f"📌 Result {i}:")
@@ -282,15 +284,6 @@ def prompt_conversation_admin(
 
         is_last_message = is_finalizing_phrase(ai_response)
       
-        try:
-            confidence_result = confidence_grader.invoke({
-                "documents": format_docs(docs_retrieve),
-                "generation": ai_response,
-            })
-        except Exception as ce:
-            logger.error(f"Error obtaining confidence: {str(ce)}")
-            confidence_result = None
-
         # Update conversation
         messages.append(
             {
@@ -325,9 +318,6 @@ def prompt_conversation_admin(
                 logger.warning(f"MongoDB retry {attempt + 1}/{max_retries}: {str(me)}")
                 time.sleep(0.5)
 
-        # if confidence_result and 0.1 < confidence_result.confidence_score < 0.65 and len(user_prompt) > 10:
-         #  i_need_this_knowledge(db,conversation_id,user_prompt, ai_response, confidence_result.confidence_score)
-
 
         total_time = time.time() - start_time
         logger.info(f"Request completed in {total_time:.2f}s")
@@ -337,9 +327,6 @@ def prompt_conversation_admin(
             "conversation_id": conversation_id,
             "language": language_code,
             "is_last_message": is_last_message,
-            #"confidence_score": 0.0,
-            "confidence_score": confidence_result.confidence_score if confidence_result else None,
-
         }
 
     except Exception as e:
@@ -361,7 +348,8 @@ def prompt_conversation_agent_ai(
             if user_prompt.lower().strip() in ["ok", "like", "boss", "yes", "no","tq","thanks"]:
                  docs_retrieve = []
             else:
-                docs_retrieve = store.similarity_search(user_prompt, k=5)
+                docs_retrieve = chatbot.brain.query(user_prompt)
+
             
             for i, doc in enumerate(docs_retrieve, start=1):
                 print(f"📌 Result {i}:")
