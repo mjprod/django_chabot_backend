@@ -98,6 +98,9 @@ def load_and_process_json_file() -> List[dict]:
         "old_conv_04_08_25.json",
         "old_conv_04_09_25.json",
         "old_conv_04_10_25.json",
+        "old_conv_04_11_25.json",
+        "old_conv_04_12_25.json",
+        "old_conv_04_13_25.json"
     ]
 
     all_documents = []
