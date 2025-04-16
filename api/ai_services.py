@@ -2,9 +2,7 @@ import logging
 
 from datetime import datetime
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from bson import ObjectId
 from transformers import AutoTokenizer
-
 from pydantic import BaseModel, Field
 
 from ai_config.ai_constants import (
@@ -32,7 +30,7 @@ class BrainDocument:
         return f"BrainDocument(id={self.id}, page_content={self.page_content[:100]}..., metadata={self.metadata})"
     
     # Text Splitter Class
-class CustomTextSplitter(RecursiveCharacterTextSplitter):
+class BrainTextSplitter(RecursiveCharacterTextSplitter):
     def __init__(
         self,
         chunk_size=EMBEDDING_CHUNK_SIZE,

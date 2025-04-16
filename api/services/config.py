@@ -13,7 +13,6 @@ CHROMA_BRAIN_COLLECTION="brain"
 CHROMA_CONVERSATION_COLLECTION="conversation"
 CHROMA_DIR="./chroma_db"
 
-
 # chat model constants
 CHAT_MODEL="gpt-4o-mini"
 CHAT_MODEL_PROVIDER="openai"

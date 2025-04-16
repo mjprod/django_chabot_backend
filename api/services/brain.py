@@ -4,6 +4,8 @@ import chromadb
 import json
 from typing import List
 
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module="langchain")
 
 from dotenv import load_dotenv
 
@@ -23,7 +25,6 @@ from ..app.mongo import MongoDB
 
 from api.ai_services import (
     BrainDocument,
-    CustomTextSplitter,
 )
 
 # constants
@@ -54,6 +55,7 @@ def load_and_process_json_file() -> List[dict]:
         "old_conv_04_09_25.json",
         "old_conv_04_10_25.json",
         "old_conv_04_11_25.json",
+        "old_conv_04_12_25.json",
     ]
 
     all_documents = []
@@ -82,7 +84,6 @@ def load_and_process_json_file() -> List[dict]:
                             "lastUpdated": metadata.get("lastUpdated", ""),
                             "version": metadata.get("version", "1.0"),
                             "status": metadata.get("status", "active"),
-                            "id": item.get("id", "")
                         }
 
                         # Create structured document
@@ -125,46 +126,6 @@ def load_and_process_json_file() -> List[dict]:
 
     return all_documents
 
-# Process documents in batches
-def create_vector_store(documents, batch_size=500):
-    try:    
-        logger.info("Starting document splitting process")
-
-        # Initialize Text Splitter inside the function
-        text_splitter = CustomTextSplitter(
-            chunk_size=1000,
-            chunk_overlap=100,
-            length_function=len,
-        )
-
-        # Split documents
-        split_data = text_splitter.split_documents(documents)
-        logger.info("Initializing Chroma vector store")
-
-        # Create store specifically for the old JSON files
-        store = Chroma.from_documents(
-            ids=[doc.id for doc in documents],
-            documents=split_data,
-            collection_name="RAG",
-            embedding=embedding_model,
-            persist_directory="./chroma_db",
-            collection_metadata={
-                "hnsw:space": "cosine",
-                "hnsw:construction_ef": 100,
-                "hnsw:search_ef": 50,
-            },
-        )
-      
-
-        all_docs = store.get()
-        print("All docs IDs:", all_docs["ids"]) 
-
-        return store
-    except Exception as e:
-        logger.error(f"Vector store creation failed: {str(e)}")
-        raise
-    finally:
-        del split_data
 
 class Brain:
     # store the singleton instance
@@ -221,7 +182,6 @@ class Brain:
             )
             for doc in documents
         ]
-
 
         self.vector_store.add_documents(doc_objects)
 
@@ -324,8 +284,7 @@ class Brain:
         # Add the documents to the vector store
         self.vector_store.add_documents(documents=doc_objects, ids=doc_ids)
 
-       
-
+    
         logger.info(f"@@@@ Processed {len(doc_objects)} documents")
         return doc_objects
             

@@ -11,7 +11,6 @@ from .config import (
     CHROMA_BRAIN_COLLECTION
 )
 
-
 load_dotenv()
 logger = logging.getLogger(__name__)
 

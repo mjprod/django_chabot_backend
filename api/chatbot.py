@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 try:
     chatbot = ChatBot()
     logger.info("Chatbot is ready")
-
 except Exception as e:
-    logger.error(f"Error preparing chatbot: {str(e)}")
-    raise
+    logger.error(f"Chatbot initialization failed: {str(e)}")
+    raise SystemExit(e)
+ 

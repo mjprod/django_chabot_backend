@@ -1,26 +1,21 @@
 import logging
 import os
 
-
 from .brain import Brain
 from .config import (
     # chat model constants
     CHAT_MODEL,
     CHAT_MODEL_PROVIDER,
-
 )
 
 from dotenv import load_dotenv
-
 from langchain import hub
 from langchain.chat_models import init_chat_model
-
 
 load_dotenv()
 logger = logging.getLogger("chatbot")
 
 OPENAI_API_KEY= os.getenv("OPENAI_API_KEY",None)
-
 
 class ChatBot:
     # store the singleton instance
@@ -33,7 +28,7 @@ class ChatBot:
 
     def __init__(self):
          # access the singleton instance
-        if not hasattr(self, 'initialised'):
+        if not hasattr(self, 'initialized'):
             self.brain = Brain()
             self.vector_store = self.brain.vector_store
             self.llm = init_chat_model(
@@ -42,6 +37,6 @@ class ChatBot:
                 api_key=OPENAI_API_KEY)
             
             self.prompt = hub.pull("rlm/rag-prompt")
-            self.initialised = True
+            self.initialized = True
 
     
