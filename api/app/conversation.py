@@ -26,9 +26,7 @@ from ai_config.ai_prompts import (
 )
 
 from api.chatbot import (
-    confidence_grader,
-    format_docs,
-    store,
+    chatbot,
 )
 
 from .mongo import MongoDB
@@ -115,9 +113,8 @@ def prompt_conversation(self, user_prompt, store ,language_code=LANGUAGE_DEFAULT
         # Vector store retrieval
         vector_start = time.time()
         try:
-            docs_retrieve = store.similarity_search(
-                user_prompt, k=3  # Limit to top 3 results for performance
-            )
+
+            docs_retrieve = chatbot.brain.query(user_prompt)
             logger.debug(
                 f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
             )
@@ -180,8 +177,11 @@ def i_need_this_knowledge(db,conversation_id, user_prompt,ai_response, confidenc
         logger.warning(f"MongoDB error: {str(me)}")
         raise  
 
+    # Define Formatting Function
+def format_docs(docs):
+    return "\n".join(doc.page_content for doc in docs)
+
 def prompt_conversation_admin(
-    self,
     user_prompt,
     conversation_id,
     admin_id,
@@ -194,17 +194,14 @@ def prompt_conversation_admin(
     logger.info(
         f"Starting prompt_conversation_admin request - Language: {language_code}"
     )
-    db = None
 
     try:
-        # Database connection with timeout
-        # db = MongoDB.get_db()
+        
         db = MongoDB.get_db()
         logger.debug(
             f"MongoDB connection established in {time.time() - start_time:.2f}s"
         )
 
-        # Conversation retrieval
         existing_conversation = db.conversations.find_one(
             {"session_id": conversation_id},
             {"messages": 1, "_id": 0},
@@ -230,12 +227,11 @@ def prompt_conversation_admin(
         docs_retrieve = []
         try:
 
-            # Exception handling for user prompt
-            if user_prompt.lower().strip() in ["ok", "like", "boss", "yes", "no","tq","thanks"]:
-                 docs_retrieve = []
+            if user_prompt.lower().strip() in ["ok", "like", "boss", "yes", "no", "tq", "thanks"]:
+                docs_retrieve = []
             else:
-                docs_retrieve = store.similarity_search(user_prompt, k=5)
-            
+                docs_retrieve = chatbot.brain.query(user_prompt)
+
             for i, doc in enumerate(docs_retrieve, start=1):
                 print(f"📌 Result {i}:")
                 print(f"Content: {doc.page_content}\n")
@@ -245,52 +241,52 @@ def prompt_conversation_admin(
             logger.debug(
                 f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
             )
+
         except Exception as ve:
             logger.error(f"Vector store error: {str(ve)}")
             docs_retrieve = []
-            print(docs_retrieve)
 
         # OpenAI response generation
         generation_start = time.time()
         try:
-            
-            client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), timeout=OPENAI_TIMEOUT)
-
-            # the history of messages is the context
+            # Clone conversation history
             messages_history = messages.copy()
-            if docs_retrieve:
-                context_text = " ".join([doc.page_content for doc in docs_retrieve])
-                messages_history.append(
-                    {"role": "system", "content": f"Relevant context: {context_text}"}
+
+            static_chunks = chatbot.brain.vector_store.similarity_search(
+                query=user_prompt,
+                k=3,
+                filter={"category": "static_rules"}
+            )
+
+            docs_retrieve += static_chunks
+
+            all_docs = docs_retrieve
+
+            combined_context = ""
+            if all_docs:
+                combined_context += (
+                    "Boss, here’s what we found in the official 4D Joker knowledge base that may help:\n\n"
+                    + "\n\n---\n\n".join([doc.page_content for doc in all_docs])
                 )
 
-            response = client.chat.completions.create(
-                model=OPENAI_MODEL,
-                messages=messages_history,
-                temperature=MAX_TEMPERATURE,
-                max_tokens=MAX_TOKENS,
-                timeout=OPENAI_TIMEOUT,
-            )
-            #logging.info(messages_history)
-            ai_response = response.choices[0].message.content
+            # Inject into system prompt
+            if combined_context:
+                messages_history.insert(0, {
+                    "role": "system",
+                    "content": combined_context
+                })
+
+            ai_response = chatbot.generate_response(messages_history)
             logger.debug(
                 f"AI response generated in {time.time() - generation_start:.2f}s"
             )
+
         except Exception as oe:
             logger.error(f"OpenAI error: {str(oe)}")
             raise
 
         is_last_message = is_finalizing_phrase(ai_response)
       
-        try:
-            confidence_result = confidence_grader.invoke({
-                "documents": format_docs(docs_retrieve),
-                "generation": ai_response,
-            })
-        except Exception as ce:
-            logger.error(f"Error obtaining confidence: {str(ce)}")
-            confidence_result = None
-
         # Update conversation
         messages.append(
             {
@@ -325,9 +321,6 @@ def prompt_conversation_admin(
                 logger.warning(f"MongoDB retry {attempt + 1}/{max_retries}: {str(me)}")
                 time.sleep(0.5)
 
-        # if confidence_result and 0.1 < confidence_result.confidence_score < 0.65 and len(user_prompt) > 10:
-         #  i_need_this_knowledge(db,conversation_id,user_prompt, ai_response, confidence_result.confidence_score)
-
 
         total_time = time.time() - start_time
         logger.info(f"Request completed in {total_time:.2f}s")
@@ -337,9 +330,6 @@ def prompt_conversation_admin(
             "conversation_id": conversation_id,
             "language": language_code,
             "is_last_message": is_last_message,
-            #"confidence_score": 0.0,
-            "confidence_score": confidence_result.confidence_score if confidence_result else None,
-
         }
 
     except Exception as e:
@@ -350,13 +340,7 @@ def prompt_conversation_agent_ai(
     user_prompt,
    ):
 
-    db = None
-
     try:
-        # Database connection with timeout
-        # db = MongoDB.get_db()
-        db = MongoDB.get_db()
-
         # Vector store retrieval
         vector_start = time.time()
         docs_retrieve = []
@@ -366,8 +350,8 @@ def prompt_conversation_agent_ai(
             if user_prompt.lower().strip() in ["ok", "like", "boss", "yes", "no","tq","thanks"]:
                  docs_retrieve = []
             else:
-                docs_retrieve = store.similarity_search(user_prompt, k=5)
-            
+                docs_retrieve = chatbot.brain.query(user_prompt)
+
             for i, doc in enumerate(docs_retrieve, start=1):
                 print(f"📌 Result {i}:")
                 print(f"Content: {doc.page_content}\n")
@@ -383,98 +367,6 @@ def prompt_conversation_agent_ai(
             logger.error(f"Vector store error: {str(ve)}")
             docs_retrieve = []
             print(docs_retrieve)
-
-        # OpenAI response generation
-        generation_start = time.time()
-        try:
-            
-            client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), timeout=OPENAI_TIMEOUT)
-
-            # the history of messages is the context
-            messages_history = messages.copy()
-            if docs_retrieve:
-                context_text = " ".join([doc.page_content for doc in docs_retrieve])
-                messages_history.append(
-                    {"role": "system", "content": f"Relevant context: {context_text}"}
-                )
-
-            response = client.chat.completions.create(
-                model=OPENAI_MODEL,
-                messages=messages_history,
-                temperature=MAX_TEMPERATURE,
-                max_tokens=MAX_TOKENS,
-                timeout=OPENAI_TIMEOUT,
-            )
-            #logging.info(messages_history)
-            ai_response = response.choices[0].message.content
-            logger.debug(
-                f"AI response generated in {time.time() - generation_start:.2f}s"
-            )
-        except Exception as oe:
-            logger.error(f"OpenAI error: {str(oe)}")
-            raise
-
-        is_last_message = is_finalizing_phrase(ai_response)
-      
-        try:
-            confidence_result = confidence_grader.invoke({
-                "documents": format_docs(docs_retrieve),
-                "generation": ai_response,
-            })
-        except Exception as ce:
-            logger.error(f"Error obtaining confidence: {str(ce)}")
-            confidence_result = None
-
-        # Update conversation
-        messages.append(
-            {
-                "role": "assistant",
-                "content": ai_response,
-                "timestamp": datetime.now().isoformat(),
-            }
-        )
-
-        # Prepare and save conversation
-        conversation = {
-            "session_id": conversation_id,
-            "admin_id": admin_id,
-            "bot_id": bot_id,
-            "user_id": user_id,
-            "language": language_code,
-            "messages": messages,
-            "updated_at": datetime.now().isoformat(),
-        }
-
-        # Upsert with retry logic
-        max_retries = 3
-        for attempt in range(max_retries):
-            try:
-                db.conversations.update_one(
-                    {"session_id": conversation_id}, {"$set": conversation}, upsert=True
-                )
-                break
-            except Exception as me:
-                if attempt == max_retries - 1:
-                    raise
-                logger.warning(f"MongoDB retry {attempt + 1}/{max_retries}: {str(me)}")
-                time.sleep(0.5)
-
-        # if confidence_result and 0.1 < confidence_result.confidence_score < 0.65 and len(user_prompt) > 10:
-         #  i_need_this_knowledge(db,conversation_id,user_prompt, ai_response, confidence_result.confidence_score)
-
-
-        total_time = time.time() - start_time
-        logger.info(f"Request completed in {total_time:.2f}s")
-
-        return {
-            "generation": ai_response,
-            "conversation_id": conversation_id,
-            "language": language_code,
-            "is_last_message": is_last_message,
-            #"confidence_score": 0.0,
-            "confidence_score": confidence_result.confidence_score if confidence_result else None,
-
-        }
 
     except Exception as e:
         logger.error(f"Error in prompt_conversation_admin: {str(e)}", exc_info=True)
