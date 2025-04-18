@@ -249,25 +249,19 @@ def prompt_conversation_admin(
         # OpenAI response generation
         generation_start = time.time()
         try:
-            client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), timeout=OPENAI_TIMEOUT)
-
             # Clone conversation history
             messages_history = messages.copy()
 
-            # 🧠 Load static rules document (always include it)
             static_chunks = chatbot.brain.vector_store.similarity_search(
                 query=user_prompt,
                 k=3,
                 filter={"category": "static_rules"}
             )
 
-            # adiciona esses chunks ao docs_retrieve geral
             docs_retrieve += static_chunks
 
-            # 🧠 Combine dynamic + static chunks em uma única lista
             all_docs = docs_retrieve
 
-            # 🧠 Cria o contexto a ser injetado no prompt
             combined_context = ""
             if all_docs:
                 combined_context += (
@@ -282,19 +276,11 @@ def prompt_conversation_admin(
                     "content": combined_context
                 })
 
-            # 🔥 Make the OpenAI call
-            response = client.chat.completions.create(
-                model=OPENAI_MODEL,
-                messages=messages_history,
-                temperature=MAX_TEMPERATURE,
-                max_tokens=MAX_TOKENS,
-                timeout=OPENAI_TIMEOUT,
-            )
-            #logging.info(messages_history)
-            ai_response = response.choices[0].message.content
+            ai_response = chatbot.generate_response(messages_history)
             logger.debug(
                 f"AI response generated in {time.time() - generation_start:.2f}s"
             )
+
         except Exception as oe:
             logger.error(f"OpenAI error: {str(oe)}")
             raise

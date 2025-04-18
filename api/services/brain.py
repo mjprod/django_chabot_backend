@@ -2,6 +2,147 @@ import os
 import logging
 import chromadb
 import json
+import re
+import tiktoken
+import warnings
+
+from typing import List
+from dotenv import load_dotenv
+from langchain_cohere import CohereEmbeddings
+from langchain_community.vectorstores import Chroma
+from api.ai_services import BrainDocument
+
+warnings.filterwarnings("ignore", category=UserWarning, module="langchain")
+
+from .config import EMBEDDING_MODEL, COLLECTION_NAME, CHROMA_DIR
+from ai_config.ai_constants import COHERE_MODEL
+
+logger = logging.getLogger(__name__)
+load_dotenv()
+
+
+class Brain:
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(Brain, cls).__new__(cls, *args, **kwargs)
+        return cls._instance
+
+    def __init__(self, collection_name=COLLECTION_NAME, chroma_dir=CHROMA_DIR):
+        if hasattr(self, 'initialized'):
+            return
+
+        self.collection_name = collection_name
+        self.chroma_dir = chroma_dir
+        self.embedding_model = CohereEmbeddings(model=COHERE_MODEL, user_agent="mjpro")
+        self.vector_store = Chroma(
+            collection_name=self.collection_name,
+            embedding_function=self.embedding_model,
+            persist_directory=self.chroma_dir,
+        )
+        self.initialized = True
+        self.ensure_documents_loaded()
+
+    def ensure_documents_loaded(self):
+        if self._check_collection_count() == 0:
+            documents = self.load_and_process_json_file()
+            rules_chunks = self._load_and_chunk_rules()
+            all_docs = self.prepare_brain_documents(documents + rules_chunks)
+            self.vector_store.add_documents(all_docs)
+            logger.info(f"{len(all_docs)} documents loaded to ChromaDB.")
+        else:
+            logger.info("ChromaDB already initialized with documents.")
+
+    def load_and_process_json_file(self) -> List[dict]:
+        base_dir = os.path.join(os.path.dirname(__file__), "../../data")
+        database_files = ["database_part_1.json", "database_part_2.json", "database_part_3.json"]
+        all_documents = []
+
+        for file_name in database_files:
+            file_path = os.path.join(base_dir, file_name)
+            try:
+                with open(file_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    for item in data:
+                        detailed_answer = item.get("answer", {}).get("detailed", {}).get("en", "")
+                        if item.get("question", {}).get("text") and detailed_answer:
+                            all_documents.append({
+                                "id": item.get("id", "no_id"),
+                                "content": f"Question: {item['question']['text']}\nAnswer: {detailed_answer}",
+                                "metadata": {
+                                    "category": ",".join(item.get("metadata", {}).get("category", [])),
+                                    "subCategory": item.get("metadata", {}).get("subCategory", ""),
+                                },
+                            })
+            except Exception as e:
+                logger.error(f"Error loading {file_name}: {e}")
+        return all_documents
+
+    def _load_and_chunk_rules(self, file_name="4DJokerRulesDocument.markdown", max_tokens=400):
+        base_dir = os.path.join(os.path.dirname(__file__), "../../data")
+        file_path = os.path.join(base_dir, file_name)
+
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                rules_content = f.read()
+
+            sections = re.split(r'(## .+)', rules_content)
+            encoding = tiktoken.encoding_for_model("gpt-4")
+            chunks, current_chunk, current_tokens = [], "", 0
+
+            for section in sections:
+                if not section.strip():
+                    continue
+                section_tokens = len(encoding.encode(section))
+                if current_tokens + section_tokens > max_tokens:
+                    chunks.append(current_chunk.strip())
+                    current_chunk, current_tokens = section, section_tokens
+                else:
+                    current_chunk += "\n" + section
+                    current_tokens += section_tokens
+
+            if current_chunk:
+                chunks.append(current_chunk.strip())
+
+            return [{
+                "id": f"joker_rules_en_{i}",
+                "content": chunk,
+                "metadata": {"category": "static_rules"}
+            } for i, chunk in enumerate(chunks)]
+
+        except Exception as e:
+            logger.error(f"Error chunking rules file: {e}")
+        return []
+
+    def prepare_brain_documents(self, raw_docs):
+        return [
+            BrainDocument(id=doc["id"], page_content=doc["content"], metadata=doc["metadata"])
+            for doc in raw_docs
+        ]
+
+    def _check_collection_count(self):
+        client = chromadb.PersistentClient(path=self.chroma_dir)
+        collection = client.get_or_create_collection(name=self.collection_name)
+        return collection.count()
+
+    def query(self, query: str, k: int = 6):
+        return self.vector_store.similarity_search(query, k=k)
+
+
+
+
+
+
+
+
+
+'''
+
+import os
+import logging
+import chromadb
+import json
 from typing import List, Optional
 import re
 import tiktoken
@@ -356,3 +497,4 @@ class Brain:
 
     def query(self, query:str, k:int=6):
         return self.vector_store.similarity_search(query, k=k)
+        '''

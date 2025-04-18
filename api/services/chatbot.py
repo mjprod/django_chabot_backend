@@ -1,13 +1,10 @@
-import logging
 import os
-from typing import Optional
-
+import logging
 from dotenv import load_dotenv
 from langchain import hub
-from langchain.chat_models import init_chat_model
-
+from langchain_openai import ChatOpenAI
 from .brain import Brain
-from .config import CHAT_MODEL, CHAT_MODEL_PROVIDER
+from .config import CHAT_MODEL
 
 load_dotenv()
 logger = logging.getLogger("chatbot")
@@ -17,12 +14,12 @@ if not OPENAI_API_KEY:
     raise ValueError("OPENAI_API_KEY environment variable not set.")
 
 class ChatBot:
-    _instance: Optional["ChatBot"] = None
+    _instance = None
 
-    def __new__(cls, *args, **kwargs) -> "ChatBot":
+    def __new__(cls):
         if cls._instance is None:
-            cls._instance = super(ChatBot, cls).__new__(cls)
-            logger.info("Creating new ChatBot singleton instance.")
+            cls._instance = super().__new__(cls)
+            logger.info("Creating ChatBot singleton instance.")
         return cls._instance
 
     def __init__(self):
@@ -32,28 +29,15 @@ class ChatBot:
         logger.info("Initializing ChatBot...")
         try:
             self.brain = Brain()
-            logger.debug("Brain initialized.")
-
             self.vector_store = self.brain.vector_store
-            logger.debug("Vector store initialized.")
-
-            self.llm = init_chat_model(
-                CHAT_MODEL,
-                model_provider=CHAT_MODEL_PROVIDER,
-                api_key=OPENAI_API_KEY
-            )
-            logger.debug("LLM initialized.")
-
+            self.llm = ChatOpenAI(model=CHAT_MODEL, api_key=OPENAI_API_KEY)
             self.prompt = hub.pull("rlm/rag-prompt")
-            logger.debug("Prompt retrieved successfully.")
-
             self.initialized = True
-            logger.info("ChatBot initialization complete.")
-
+            logger.info("ChatBot initialized successfully.")
         except Exception as e:
-            logger.exception(f"ChatBot initialization failed: {e}")
-            raise RuntimeError("ChatBot could not be initialized.") from e
-        
+            logger.exception(f"Initialization failed: {e}")
+            raise RuntimeError("ChatBot initialization failed.") from e
+
     def generate_response(self, messages_history):
         response = self.llm.invoke(messages_history)
         return response.content
