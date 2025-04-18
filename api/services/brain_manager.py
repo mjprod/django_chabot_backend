@@ -69,7 +69,7 @@ class BrainManager:
             logger.error(f"Error deleting documents: {e}")
 
 
-    def query(self, collection_name, query: str, k: int = 3):
+    def query(self, collection_name, query: str, k: int = 6):
         """Query the vector store for similar documents."""
         try:
             vector_store = self.get_vector_store(collection_name)

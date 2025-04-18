@@ -57,7 +57,7 @@ def update_document_by_custom_id(custom_id: str, answer_en: str, answer_ms: str,
             },
         )
 
-        store.add(documents=[new_document])
+        chatbot.brain.add(documents=[new_document])
         return (f"ID '{custom_id}' updated ")
     except Exception as e:
         print(f"Error to update document: {str(e)}")
@@ -144,8 +144,8 @@ def insert_document(question_text, answer_en: str, answer_ms: str, answer_cn: st
             },
         )
 
-        store.add_documents(documents=[new_document])
-        store.persist()
+        chatbot.brain.add_documents(documents=[new_document])
+        chatbot.brain.persist()
         return (f"ID '{new_id}' updated ")
     
     except Exception as e:

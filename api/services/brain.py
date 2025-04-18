@@ -2,8 +2,9 @@ import os
 import logging
 import chromadb
 import json
-from typing import List
-
+from typing import List, Optional
+import re
+import tiktoken
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="langchain")
 
@@ -48,14 +49,7 @@ def load_and_process_json_file() -> List[dict]:
         "database_part_1.json",
         "database_part_2.json",
         "database_part_3.json",
-        "database_part_4.json",
-        "database_part_5.json",
-        "database_part_6.json",
-        "old_conv_04_08_25.json",
-        "old_conv_04_09_25.json",
-        "old_conv_04_10_25.json",
-        "old_conv_04_11_25.json",
-        "old_conv_04_12_25.json",
+       
     ]
 
     all_documents = []
@@ -127,6 +121,7 @@ def load_and_process_json_file() -> List[dict]:
     return all_documents
 
 
+
 class Brain:
     # store the singleton instance
     _instance = None
@@ -157,6 +152,62 @@ class Brain:
             self.get_vector_store()
 
 
+    def _load_and_chunk_rules(self, file_name="4DJokerRulesDocument.markdown", max_tokens=400) -> List[BrainDocument]:
+        base_dir = os.path.join(os.path.dirname(__file__), "../../data")
+        file_path = os.path.join(base_dir, file_name)
+
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                rules_content = f.read()
+
+            # Split by markdown H2 headers
+            sections = re.split(r'(## .+)', rules_content)
+            encoding = tiktoken.encoding_for_model("gpt-4")
+            chunks = []
+
+            current_chunk = ""
+            current_tokens = 0
+
+            for section in sections:
+                if not section.strip():
+                    continue
+                section_tokens = len(encoding.encode(section))
+                if current_tokens + section_tokens > max_tokens:
+                    if current_chunk:
+                        chunks.append(current_chunk.strip())
+                    current_chunk = section
+                    current_tokens = section_tokens
+                else:
+                    current_chunk += "\n" + section
+                    current_tokens += section_tokens
+
+            if current_chunk:
+                chunks.append(current_chunk.strip())
+
+            doc_chunks = [
+                BrainDocument(
+                    id=f"joker_rules_en_{i}",
+                    page_content=chunk,
+                    metadata={
+                        "id": f"joker_rules_en_{i}",
+                        "category": "static_rules",
+                        "language": "en",
+                        "type": "reference",
+                        "chunk": i,
+                        "source": file_name
+                    }
+                )
+                for i, chunk in enumerate(chunks)
+            ]
+
+            return doc_chunks
+
+        except FileNotFoundError:
+            logger.error(f"Rules file not found: {file_name}")
+        except Exception as e:
+            logger.error(f"Error loading and chunking rules file: {str(e)}")
+        return []
+
     def get_vector_store(self):
         """Retrieve the vector store for a given collection."""
         documents = load_and_process_json_file()
@@ -183,8 +234,12 @@ class Brain:
             for doc in documents
         ]
 
-        self.vector_store.add_documents(doc_objects)
+        rules_chunks = self._load_and_chunk_rules("4DJokerRulesDocument.markdown")
+        if rules_chunks:
+            doc_objects.extend(rules_chunks)
 
+        self.vector_store.add_documents(doc_objects)
+       
         all_docs = self.vector_store.get()
         print("All docs IDs:", all_docs["ids"]) 
 
@@ -194,8 +249,14 @@ class Brain:
         logger.info(f"{brain_count} documents loading to the brain")
         self._parse_conversations(processed_conversations, brain_count)
 
+        for idx, doc_id in enumerate(all_docs["ids"]):
+            if "joker_rules" in doc_id:
+                print(f"📘 Found Rules Doc: {doc_id}")
+                print("🔍 Preview:", all_docs["documents"][idx][:100], "...") 
+
         return self.vector_store
     
+
     def load_conversations_to_store(self):
         """
         Load the document store with a list of documents if the chroma store is empty
@@ -293,5 +354,5 @@ class Brain:
         collection = client.get_collection(name=self.collection_name)
         return collection.count()
 
-    def query(self, query:str, k:int=3):
+    def query(self, query:str, k:int=6):
         return self.vector_store.similarity_search(query, k=k)

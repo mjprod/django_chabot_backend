@@ -182,7 +182,6 @@ def format_docs(docs):
     return "\n".join(doc.page_content for doc in docs)
 
 def prompt_conversation_admin(
-    self,
     user_prompt,
     conversation_id,
     admin_id,
@@ -195,17 +194,14 @@ def prompt_conversation_admin(
     logger.info(
         f"Starting prompt_conversation_admin request - Language: {language_code}"
     )
-    db = None
 
     try:
-        # Database connection with timeout
-        # db = MongoDB.get_db()
+        
         db = MongoDB.get_db()
         logger.debug(
             f"MongoDB connection established in {time.time() - start_time:.2f}s"
         )
 
-        # Conversation retrieval
         existing_conversation = db.conversations.find_one(
             {"session_id": conversation_id},
             {"messages": 1, "_id": 0},
@@ -231,13 +227,11 @@ def prompt_conversation_admin(
         docs_retrieve = []
         try:
 
-            # Exception handling for user prompt
-            if user_prompt.lower().strip() in ["ok", "like", "boss", "yes", "no","tq","thanks"]:
-                 docs_retrieve = []
+            if user_prompt.lower().strip() in ["ok", "like", "boss", "yes", "no", "tq", "thanks"]:
+                docs_retrieve = []
             else:
                 docs_retrieve = chatbot.brain.query(user_prompt)
 
-            
             for i, doc in enumerate(docs_retrieve, start=1):
                 print(f"📌 Result {i}:")
                 print(f"Content: {doc.page_content}\n")
@@ -247,25 +241,48 @@ def prompt_conversation_admin(
             logger.debug(
                 f"Vector store retrieval completed in {time.time() - vector_start:.2f}s"
             )
+
         except Exception as ve:
             logger.error(f"Vector store error: {str(ve)}")
             docs_retrieve = []
-            print(docs_retrieve)
 
         # OpenAI response generation
         generation_start = time.time()
         try:
-            
             client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), timeout=OPENAI_TIMEOUT)
 
-            # the history of messages is the context
+            # Clone conversation history
             messages_history = messages.copy()
-            if docs_retrieve:
-                context_text = " ".join([doc.page_content for doc in docs_retrieve])
-                messages_history.append(
-                    {"role": "system", "content": f"Relevant context: {context_text}"}
+
+            # 🧠 Load static rules document (always include it)
+            static_chunks = chatbot.brain.vector_store.similarity_search(
+                query=user_prompt,
+                k=3,
+                filter={"category": "static_rules"}
+            )
+
+            # adiciona esses chunks ao docs_retrieve geral
+            docs_retrieve += static_chunks
+
+            # 🧠 Combine dynamic + static chunks em uma única lista
+            all_docs = docs_retrieve
+
+            # 🧠 Cria o contexto a ser injetado no prompt
+            combined_context = ""
+            if all_docs:
+                combined_context += (
+                    "Boss, here’s what we found in the official 4D Joker knowledge base that may help:\n\n"
+                    + "\n\n---\n\n".join([doc.page_content for doc in all_docs])
                 )
 
+            # Inject into system prompt
+            if combined_context:
+                messages_history.insert(0, {
+                    "role": "system",
+                    "content": combined_context
+                })
+
+            # 🔥 Make the OpenAI call
             response = client.chat.completions.create(
                 model=OPENAI_MODEL,
                 messages=messages_history,
@@ -338,7 +355,6 @@ def prompt_conversation_agent_ai(
    ):
 
     try:
-     
         # Vector store retrieval
         vector_start = time.time()
         docs_retrieve = []
@@ -350,7 +366,6 @@ def prompt_conversation_agent_ai(
             else:
                 docs_retrieve = chatbot.brain.query(user_prompt)
 
-            
             for i, doc in enumerate(docs_retrieve, start=1):
                 print(f"📌 Result {i}:")
                 print(f"Content: {doc.page_content}\n")
