@@ -13,13 +13,8 @@ logger = logging.getLogger("chatbot")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 if not OPENAI_API_KEY:
     raise ValueError("OPENAI_API_KEY environment variable not set.")
-def strip_markdown(text):
-        text = re.sub(r'\*\*(.*?)\*\*', r'\1', text)
-        text = re.sub(r'\*(.*?)\*', r'\1', text)
-        text = re.sub(r'_(.*?)_', r'\1', text)
-        text = re.sub(r'[`#>~-]', '', text)
-        return text.strip() 
-        
+
+       
 class ChatBot:
     _instance = None
 
@@ -48,6 +43,4 @@ class ChatBot:
 
     def generate_response(self, messages_history):
         response = self.llm.invoke(messages_history)
-        clean_response = strip_markdown(response.content)
-
-        return clean_response
+        return response.content
