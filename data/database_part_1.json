@@ -9577,197 +9577,88 @@
     "id": "0187",
     "question": {
       "text": "How can I contact live support if I have urgent issues?",
-      "variations": [],
       "intent": "general_inquiry",
       "languages": {
         "en": "How can I contact live support if I have urgent issues?",
-        "ms": "Bagaimana saya boleh menghubungi sokongan langsung jika saya mempunyai isu yang mendesak?",
-        "cn": "如果我有緊急問題，我如何聯繫實時客服團隊？"
+        "ms": "Bagaimana saya boleh menghubungi sokongan langsung jika saya mempunyai isu mendesak?",
+        "cn": "如果我有紧急问题，该如何联系实时客服？"
       }
     },
     "answer": {
       "detailed": {
-        "en": "For urgent issues, boss: Hit the online customer service icon at the bottom of the app—start a chat, and we’ll tackle it ASAP!",
-        "ms": "Kalau ada isu mendesak, boss: Tekan ikon sokongan pelanggan dalam talian kat bawah app—mulakan chat, kami selesaikan cepat!",
-        "cn": "若您有緊急問題，老板，可在應用下方點擊在線客服圖標，隨時開啟聊天，我們會盡快為您解答！"
-      },
-      "conditions": []
+        "en": "You're already chatting live with support, boss! Just share your urgent issue here, and I'll handle it immediately! 💬🔥",
+        "ms": "Boss sekarang dah berhubung terus dengan sokongan live! Ceritakan je isu mendesak boss kat sini, saya akan uruskan terus! 💬🔥",
+        "cn": "老板，您现在已经直接连接到实时客服啦！直接告诉我您的紧急问题，我立刻帮您处理！💬🔥"
+      }
     },
     "metadata": {
       "category": [
         "customer_support"
       ],
       "subCategory": "general_inquiry",
-      "difficulty": 2,
-      "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
-      "version": "1.0",
-      "source": "",
+      "difficulty": 1,
+      "confidence": 1.0,
+      "version": "1.1",
       "status": "active"
-    },
-    "context": {
-      "relatedTopics": [],
-      "prerequisites": [],
-      "followUpQuestions": {
-        "en": [],
-        "ms": [],
-        "cn": []
-      }
-    },
-    "usage": {
-      "searchFrequency": 0,
-      "successRate": 0,
-      "lastQueried": null
-    },
-    "review_status": []
+    }
   },
   {
     "id": "0188",
     "question": {
-      "text": "How can I contact live support if I have urgent issues?",
-      "variations": [],
+      "text": "How can I contact live support quickly?",
       "intent": "general_inquiry",
       "languages": {
-        "en": "How can I contact live support if I have urgent issues?",
-        "ms": "Bagaimana saya boleh menghubungi sokongan langsung jika saya mempunyai isu yang mendesak?",
-        "cn": "如果我有緊急問題，我如何聯繫實時支持？"
+        "en": "How can I contact live support quickly?",
+        "ms": "Bagaimana saya boleh cepat menghubungi sokongan langsung?",
+        "cn": "如何快速联系实时客服？"
       }
     },
     "answer": {
       "detailed": {
-        "en": "For urgent stuff, boss, hit the live support icon at the bottom of the app—our team’s there real-time to zap your issues fast!",
-        "ms": "Kalau ada benda urgent, boss, tekan ikon sokongan langsung kat bawah app—pasukan kami ada secara langsung untuk hapuskan isu boss cepat!",
-        "cn": "若您有緊急問題，老板，您可以通過應用程序下方的在線客服圖標聯繫我們。我們的客服團隊會實時為您提供幫助，確保您能迅速解決問題。"
-      },
-      "conditions": []
+        "en": "Good news, boss—you're already in live support! Let me know your issue, and I'll tackle it right away. 🚀💬",
+        "ms": "Berita baik, boss—sekarang boss dah dalam sokongan langsung! Ceritakan isu boss, saya terus bantu! 🚀💬",
+        "cn": "老板，好消息，您已经直接联系上实时客服了！告诉我您的问题，我会立即处理！🚀💬"
+      }
     },
     "metadata": {
       "category": [
         "customer_support"
       ],
       "subCategory": "general_inquiry",
-      "difficulty": 2,
-      "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
-      "version": "1.0",
-      "source": "",
+      "difficulty": 1,
+      "confidence": 1.0,
+      "version": "1.1",
       "status": "active"
-    },
-    "context": {
-      "relatedTopics": [],
-      "prerequisites": [],
-      "followUpQuestions": {
-        "en": [],
-        "ms": [],
-        "cn": []
-      }
-    },
-    "usage": {
-      "searchFrequency": 0,
-      "successRate": 0,
-      "lastQueried": null
-    },
-    "review_status": []
+    }
   },
   {
     "id": "0189",
     "question": {
-      "text": "How can I contact live support if I have urgent issues?",
-      "variations": [],
+      "text": "Is there a faster way to contact live support?",
       "intent": "general_inquiry",
       "languages": {
-        "en": "How can I contact live support if I have urgent issues?",
-        "ms": "Bagaimana saya boleh menghubungi sokongan langsung jika saya mempunyai isu yang mendesak?",
-        "cn": "如果我有緊急問題，我如何聯繫實時支持？"
+        "en": "Is there a faster way to contact live support?",
+        "ms": "Ada cara lebih pantas hubungi sokongan langsung?",
+        "cn": "有没有更快的方法联系实时客服？"
       }
     },
     "answer": {
       "detailed": {
-        "en": "For urgent stuff, boss, hit the online support icon at the bottom of the app—live help’s right there to tackle your issues on the spot!",
-        "ms": "Kalau ada benda urgent, boss, tekan ikon sokongan online kat bawah app—bantuan langsung ada kat situ untuk selesai isu boss masa tu jugak!",
-        "cn": "若您遇到緊急問題，老板，可以通過應用程序底部的在線客服圖標直接聯繫實時支持。我們會在第一時間為您解答疑問，確保問題得到及時處理。"
-      },
-      "conditions": []
+        "en": "Boss, you're already talking to the fastest support right here! Just let me know your urgent issue. ⚡️💬",
+        "ms": "Boss dah pun bercakap dengan sokongan terpantas sekarang! Terus bagitau isu mendesak boss kat sini. ⚡️💬",
+        "cn": "老板，您现在已经在和最快的实时客服聊天啦！告诉我您的紧急问题，我立刻处理！⚡️💬"
+      }
     },
     "metadata": {
       "category": [
         "customer_support"
       ],
       "subCategory": "general_inquiry",
-      "difficulty": 2,
-      "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
-      "version": "1.0",
-      "source": "",
+      "difficulty": 1,
+      "confidence": 1.0,
+      "version": "1.1",
       "status": "active"
-    },
-    "context": {
-      "relatedTopics": [],
-      "prerequisites": [],
-      "followUpQuestions": {
-        "en": [],
-        "ms": [],
-        "cn": []
-      }
-    },
-    "usage": {
-      "searchFrequency": 0,
-      "successRate": 0,
-      "lastQueried": null
-    },
-    "review_status": []
-  },
-  {
-    "id": "0190",
-    "question": {
-      "text": "How can I contact live support if I have urgent issues?",
-      "variations": [],
-      "intent": "general_inquiry",
-      "languages": {
-        "en": "How can I contact live support if I have urgent issues?",
-        "ms": "Bagaimana saya boleh menghubungi sokongan langsung jika saya mempunyai isu yang mendesak?",
-        "cn": "如果我有緊急問題，我如何聯繫實時支持？"
-      }
-    },
-    "answer": {
-      "detailed": {
-        "en": "Got an urgent snag, boss? Our live support crew’s got your back—just open the app, spot the online support icon at the bottom, tap it, and you’ll be chatting with our reps in no time!",
-        "ms": "Ada masalah urgent, boss? Pasukan sokongan langsung kami ada untuk boss—buka je app, cari ikon sokongan online kat bawah, tekan, dan boss boleh sembang dengan rep kami sekejap je!",
-        "cn": "若您有緊急問題，老板，我們的實時客服團隊隨時為您服務！您只需打開我們的應用程序，在下方找到在線客服的圖標，點擊它就可以立即與我們的客服代表聯繫。"
-      },
-      "conditions": []
-    },
-    "metadata": {
-      "category": [
-        "customer_support"
-      ],
-      "subCategory": "general_inquiry",
-      "difficulty": 2,
-      "confidence": 0.5,
-      "dateCreated": "2025-03-04T01:15:35Z",
-      "lastUpdated": "2025-03-04T01:15:35Z",
-      "version": "1.0",
-      "source": "",
-      "status": "active"
-    },
-    "context": {
-      "relatedTopics": [],
-      "prerequisites": [],
-      "followUpQuestions": {
-        "en": [],
-        "ms": [],
-        "cn": []
-      }
-    },
-    "usage": {
-      "searchFrequency": 0,
-      "successRate": 0,
-      "lastQueried": null
-    },
-    "review_status": []
+    }
   },
   {
     "id": "0191",
