@@ -44,13 +44,6 @@ class ChatBot:
         except Exception as e:
             logger.exception(f"Initialization failed: {e}")
             raise RuntimeError("ChatBot initialization failed.") from e
-        
-    def strip_markdown(text):
-        text = re.sub(r'\*\*(.*?)\*\*', r'\1', text)
-        text = re.sub(r'\*(.*?)\*', r'\1', text)
-        text = re.sub(r'_(.*?)_', r'\1', text)
-        text = re.sub(r'[`#>~-]', '', text)
-        return text.strip()
     
 
     def generate_response(self, messages_history):
