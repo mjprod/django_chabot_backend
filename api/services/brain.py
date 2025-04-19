@@ -126,7 +126,7 @@ class Brain:
         collection = client.get_or_create_collection(name=self.collection_name)
         return collection.count()
 
-    def query(self, query: str, k: int = 6):
+    def query(self, query: str, k: int = 4):
         return self.vector_store.similarity_search(query, k=k)
 
 

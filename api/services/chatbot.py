@@ -30,7 +30,7 @@ class ChatBot:
         try:
             self.brain = Brain()
             self.vector_store = self.brain.vector_store
-            self.llm = ChatOpenAI(model=CHAT_MODEL, api_key=OPENAI_API_KEY)
+            self.llm = ChatOpenAI(model=CHAT_MODEL, api_key=OPENAI_API_KEY, temperature=0.4)
             self.prompt = hub.pull("rlm/rag-prompt")
             self.initialized = True
             logger.info("ChatBot initialized successfully.")
