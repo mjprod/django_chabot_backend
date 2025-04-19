@@ -79,7 +79,7 @@ class Brain:
                 logger.error(f"Error loading {file_name}: {e}")
         return all_documents
 
-    def _load_and_chunk_rules(self, file_name="4DJokerRulesDocument.markdown", max_tokens=400):
+    def _load_and_chunk_rules(self, file_name="4DJokerRulesDocument.markdown", max_chars=1000):
         base_dir = os.path.join(os.path.dirname(__file__), "../../data")
         file_path = os.path.join(base_dir, file_name)
 
@@ -88,32 +88,32 @@ class Brain:
                 rules_content = f.read()
 
             sections = re.split(r'(## .+)', rules_content)
-            encoding = tiktoken.encoding_for_model("gpt-4")
-            chunks, current_chunk, current_tokens = [], "", 0
+            chunks, current_chunk, current_length = [], "", 0
 
             for section in sections:
                 if not section.strip():
                     continue
-                section_tokens = len(encoding.encode(section))
-                if current_tokens + section_tokens > max_tokens:
-                    chunks.append(current_chunk.strip())
-                    current_chunk, current_tokens = section, section_tokens
+                section_length = len(section)
+                if current_length + section_length > max_chars:
+                    if current_chunk:
+                        chunks.append(current_chunk.strip())
+                    current_chunk, current_length = section, section_length
                 else:
                     current_chunk += "\n" + section
-                    current_tokens += section_tokens
+                    current_length += section_length
 
             if current_chunk:
                 chunks.append(current_chunk.strip())
 
             return [{
-                "id": f"joker_rules_en_{i}",
+                "id": f"joker_rules_chunk_{i}",
                 "content": chunk,
                 "metadata": {"category": "static_rules"}
             } for i, chunk in enumerate(chunks)]
 
         except Exception as e:
             logger.error(f"Error chunking rules file: {e}")
-        return []
+            return []
 
     def prepare_brain_documents(self, raw_docs):
         return [

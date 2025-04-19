@@ -5,6 +5,7 @@ from langchain import hub
 from langchain_openai import ChatOpenAI
 from .brain import Brain
 from .config import CHAT_MODEL
+import re
 
 load_dotenv()
 logger = logging.getLogger("chatbot")
@@ -12,7 +13,13 @@ logger = logging.getLogger("chatbot")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 if not OPENAI_API_KEY:
     raise ValueError("OPENAI_API_KEY environment variable not set.")
-
+def strip_markdown(text):
+        text = re.sub(r'\*\*(.*?)\*\*', r'\1', text)
+        text = re.sub(r'\*(.*?)\*', r'\1', text)
+        text = re.sub(r'_(.*?)_', r'\1', text)
+        text = re.sub(r'[`#>~-]', '', text)
+        return text.strip() 
+        
 class ChatBot:
     _instance = None
 
@@ -37,7 +44,17 @@ class ChatBot:
         except Exception as e:
             logger.exception(f"Initialization failed: {e}")
             raise RuntimeError("ChatBot initialization failed.") from e
+        
+    def strip_markdown(text):
+        text = re.sub(r'\*\*(.*?)\*\*', r'\1', text)
+        text = re.sub(r'\*(.*?)\*', r'\1', text)
+        text = re.sub(r'_(.*?)_', r'\1', text)
+        text = re.sub(r'[`#>~-]', '', text)
+        return text.strip()
+    
 
     def generate_response(self, messages_history):
         response = self.llm.invoke(messages_history)
-        return response.content
+        clean_response = strip_markdown(response.content)
+
+        return clean_response
