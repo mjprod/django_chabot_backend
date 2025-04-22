@@ -14,6 +14,7 @@ from api.app.conversation import (
     prompt_conversation,
     prompt_conversation_admin,
     prompt_conversation_agent_ai,
+    prompt_conversation_grok_admin,
  )
 
 from ..serializers import (
@@ -50,7 +51,7 @@ class PromptConversationAdminView(APIView):
 
             validated_data = input_serializer.validated_data
 
-            response = prompt_conversation_admin(
+            response = prompt_conversation_grok_admin(
                 user_prompt=validated_data["prompt"],
                 conversation_id=validated_data["conversation_id"],
                 admin_id=validated_data.get("admin_id", ""),

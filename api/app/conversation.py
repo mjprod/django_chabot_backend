@@ -276,7 +276,7 @@ def prompt_conversation_admin(
                 "zh_TW" : "請只用中文回覆。",
             }
 
-            language_instruction = language_prompts.get(language_code, language_prompts["en"])  # fallback to English
+            language_instruction = language_prompts.get(language_code, language_prompts["ms_MY"])
 
             # Add language instruction before context
             messages_history.insert(0, {
@@ -383,6 +383,136 @@ def prompt_conversation_agent_ai(
             docs_retrieve = []
             print(docs_retrieve)
 
+    except Exception as e:
+        logger.error(f"Error in prompt_conversation_admin: {str(e)}", exc_info=True)
+        raise
+
+
+# Configurações
+GROK_API_KEY = os.getenv("GROK_API_KEY")
+GROK_MODEL = "grok-3-mini"  # ou "llama3-70b-8192"
+MAX_TEMPERATURE = 0.3
+MAX_TOKENS = 1024
+GROK_TIMEOUT = 60
+
+# Cliente Grok/x.ai
+client = OpenAI(
+    api_key=GROK_API_KEY,
+    base_url="https://api.x.ai/v1",
+    timeout=GROK_TIMEOUT
+)
+
+def prompt_conversation_grok_admin(
+    user_prompt,
+    conversation_id,
+    admin_id,
+    bot_id,
+    user_id,
+    language_code="en",
+):
+    start_time = time.time()
+    logger = logging.getLogger("conversation")
+
+    db = MongoDB.get_db()
+    logger.debug(f"MongoDB connection established in {time.time() - start_time:.2f}s")
+
+    existing_conversation = db.conversations.find_one(
+        {"session_id": conversation_id},
+        {"messages": 1, "_id": 0},
+    )
+
+    messages = existing_conversation.get("messages", []) if existing_conversation else [
+        {"role": "system", "content": FIRST_MESSAGE_PROMPT}
+    ]
+
+    # Add user message
+    messages.append({
+        "role": "user",
+        "content": user_prompt,
+        "timestamp": datetime.now().isoformat(),
+    })
+
+    # Vector store retrieval
+    docs_retrieve = []
+    if user_prompt.lower().strip() not in ["ok", "like", "boss", "yes", "no", "tq", "thanks"]:
+        try:
+            docs_retrieve = chatbot.brain.query(user_prompt)
+        except Exception as ve:
+            logger.error(f"Vector store error: {str(ve)}")
+
+    try:
+        static_chunks = chatbot.brain.vector_store.similarity_search(
+            query=user_prompt,
+            k=3,
+            filter={"category": "static_rules"}
+        )
+        docs_retrieve += static_chunks
+    except Exception as ve:
+        logger.error(f"Vector store static search error: {str(ve)}")
+
+    combined_context = ""
+    if docs_retrieve:
+        combined_context = (
+            "Boss, here’s what we found in the official 4D Joker knowledge base that may help:\n\n"
+            + "\n\n---\n\n".join([doc.page_content for doc in docs_retrieve])
+        )
+
+    language_prompts = {
+        "en": "Please respond only in English.",
+        "ms_MY": "Sila balas dalam Bahasa Melayu sahaja.",
+        "zh_CN": "请只用中文回复。",
+        "zh_TW": "請只用中文回覆。",
+    }
+
+    language_instruction = language_prompts.get(language_code, language_prompts["ms_MY"])
+
+    messages_history = [
+        {"role": "system", "content": language_instruction}
+    ]
+
+    if combined_context:
+        messages_history.insert(0, {"role": "system", "content": combined_context})
+
+    messages_history += [{"role": m["role"], "content": m["content"]} for m in messages]
+
+    try:
+        response = client.chat.completions.create(
+            model=GROK_MODEL,
+            messages=messages_history,
+            temperature=MAX_TEMPERATURE,
+            max_tokens=MAX_TOKENS,
+            timeout=GROK_TIMEOUT,
+        )
+
+        ai_response = response.choices[0].message.content
+
+        messages.append({
+            "role": "assistant",
+            "content": ai_response,
+            "timestamp": datetime.now().isoformat(),
+        })
+
+        conversation = {
+            "session_id": conversation_id,
+            "admin_id": admin_id,
+            "bot_id": bot_id,
+            "user_id": user_id,
+            "language": language_code,
+            "messages": messages,
+            "updated_at": datetime.now().isoformat(),
+        }
+
+        db.conversations.update_one(
+            {"session_id": conversation_id},
+            {"$set": conversation},
+            upsert=True
+        )
+
+        return {
+            "generation": ai_response,
+            "conversation_id": conversation_id,
+            "language": language_code,
+        }
     except Exception as e:
         logger.error(f"Error in prompt_conversation_admin: {str(e)}", exc_info=True)
         raise
