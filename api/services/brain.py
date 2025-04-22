@@ -56,7 +56,7 @@ class Brain:
 
     def load_and_process_json_file(self) -> List[dict]:
         base_dir = os.path.join(os.path.dirname(__file__), "../../data")
-        database_files = ["database_part_1.json", "database_part_2.json", "database_part_3.json"]
+        database_files = ["database_part_1.json", "database_part_2.json", "database_part_3.json", "database_part_4.json"]
         all_documents = []
 
         for file_name in database_files:

@@ -269,6 +269,21 @@ def prompt_conversation_admin(
                     + "\n\n---\n\n".join([doc.page_content for doc in all_docs])
                 )
 
+            language_prompts = {
+                "en": "Please respond only in English.",
+                "ms_MY": "Sila balas dalam Bahasa Melayu sahaja.",
+                "zh_CN": "请只用中文回复。",
+                "zh_TW" : "請只用中文回覆。",
+            }
+
+            language_instruction = language_prompts.get(language_code, language_prompts["en"])  # fallback to English
+
+            # Add language instruction before context
+            messages_history.insert(0, {
+                "role": "system",
+                "content": language_instruction
+            })
+
             # Inject into system prompt
             if combined_context:
                 messages_history.insert(0, {
