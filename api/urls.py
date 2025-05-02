@@ -7,6 +7,7 @@ from .views.conversation_view import (
     AllConversationsIdsView,
     PromptConversationAdminView,
     PromptConversationAgentAIView,
+    PromptImageView,
 )
 
 from .views.brain_view import (
@@ -19,6 +20,7 @@ urlpatterns = [
     # Prompt Conversation
     path("prompt_conversation/",PromptConversationView.as_view(),name="prompt_conversation"),
     path("prompt_conversation_admin/",PromptConversationAdminView.as_view(),name="prompt_conversation_admin",),
+    path("prompt_conversation_image/",PromptImageView.as_view(),name="prompt_conversation_image",),
     path("prompt_conversation_agent_ai/",PromptConversationAgentAIView.as_view(),name="prompt_conversation_agent_ai",),
     path("conversation/<conversation_id>/",ConversationDetailView.as_view(), name="conversation"),
     path("all_conversations_ids/",AllConversationsIdsView.as_view(), name="all_conversations_ids",),

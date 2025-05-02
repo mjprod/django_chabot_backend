@@ -4,7 +4,8 @@ from rest_framework import status
 
 import logging
 import time
-
+import base64
+import requests
 
 from api.chatbot import (
     chatbot,    
@@ -15,7 +16,9 @@ from api.app.conversation import (
     prompt_conversation_admin,
     prompt_conversation_agent_ai,
     prompt_conversation_grok_admin,
+    prompt_conversation_image
  )
+
 
 from ..serializers import (
     PromptConversationSerializer,
@@ -33,10 +36,8 @@ logger = logging.getLogger(__name__)
 
 
 class PromptConversationAdminView(APIView):
-
     def post(self, request):
         logger.info("Starting prompt_conversation_admin request")
-
         try:
             language_code = request.GET.get("language", LANGUAGE_DEFAULT)
             logger.info(f"Processing request for language: {language_code}")
@@ -317,4 +318,46 @@ class AllConversationsIdsView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
         
-    
+class PromptImageView(APIView):
+    def post(self, request):
+        try:
+            conversation_id = request.data.get("conversation_id")
+            image_base64 = request.data.get("image_base64")
+            image_url = request.data.get("image_url")
+
+            if not conversation_id:
+                return Response(
+                    {"error": "Missing conversation_id in request."},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            if not image_base64 and not image_url:
+                return Response(
+                    {"error": "Provide either image_base64 or image_url."},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            if image_url:
+                try:
+                    img_response = requests.get(image_url)
+                    if img_response.status_code != 200:
+                        raise Exception(f"Failed to download image. Status {img_response.status_code}")
+                    image_base64 = base64.b64encode(img_response.content).decode('utf-8')
+                except Exception as download_error:
+                    return Response(
+                        {"error": f"Error downloading image: {str(download_error)}"},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            response = prompt_conversation_image(
+                conversation_id=conversation_id,
+                image_base64=image_base64
+            )
+
+            return Response(response, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response(
+                {"error": f"Error processing prompt_conversation_image: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )

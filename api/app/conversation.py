@@ -351,6 +351,24 @@ def prompt_conversation_admin(
         logger.error(f"Error in prompt_conversation_admin: {str(e)}", exc_info=True)
         raise
 
+def prompt_conversation_image(
+    conversation_id,
+    image_base64,
+):
+    try:
+        try:
+            ai_response = chatbot.read_image_response(image_base64)
+        except Exception as oe:
+            logger.error(f"OpenAI error: {str(oe)}")
+            raise
+        return {
+            "generation": ai_response,
+            "conversation_id": conversation_id,
+        }
+    except Exception as e:
+        logger.error(f"Error in prompt_conversation_admin: {str(e)}", exc_info=True)
+        raise
+
 def prompt_conversation_agent_ai(
     user_prompt,
    ):
