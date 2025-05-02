@@ -14,7 +14,7 @@ from api.ai_services import BrainDocument
 
 warnings.filterwarnings("ignore", category=UserWarning, module="langchain")
 
-from .config import EMBEDDING_MODEL, COLLECTION_NAME, CHROMA_DIR
+from .config import COLLECTION_NAME, CHROMA_DIR
 from ai_config.ai_constants import COHERE_MODEL
 
 logger = logging.getLogger(__name__)
@@ -56,7 +56,7 @@ class Brain:
 
     def load_and_process_json_file(self) -> List[dict]:
         base_dir = os.path.join(os.path.dirname(__file__), "../../data")
-        database_files = ["database_part_1.json", "database_part_2.json", "database_part_3.json"]
+        database_files = ["database_part_1.json", "database_part_2.json", "database_part_3.json", "database_part_4.json"]
         all_documents = []
 
         for file_name in database_files:

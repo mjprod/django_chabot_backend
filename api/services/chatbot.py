@@ -3,9 +3,10 @@ import logging
 from dotenv import load_dotenv
 from langchain import hub
 from langchain_openai import ChatOpenAI
+from langchain.schema import HumanMessage
 from .brain import Brain
 from .config import CHAT_MODEL
-import re
+
 
 load_dotenv()
 logger = logging.getLogger("chatbot")
@@ -32,7 +33,7 @@ class ChatBot:
         try:
             self.brain = Brain()
             self.vector_store = self.brain.vector_store
-            self.llm = ChatOpenAI(model=CHAT_MODEL, api_key=OPENAI_API_KEY, temperature=0.2)
+            self.llm = ChatOpenAI(model=CHAT_MODEL, api_key=OPENAI_API_KEY, temperature=0.3)
             self.prompt = hub.pull("rlm/rag-prompt")
             self.initialized = True
             logger.info("ChatBot initialized successfully.")
@@ -44,3 +45,19 @@ class ChatBot:
     def generate_response(self, messages_history):
         response = self.llm.invoke(messages_history)
         return response.content
+    
+    def read_image_response(self, image_base64: str) -> str:
+        """
+        Process an image encoded in base64 and return the extracted text
+        or a description of the image.
+        """
+        logger.info("Processing image for text extraction or description.")
+        msg = HumanMessage(
+            content=[
+                {"type": "text", "text": "Extract and return all text in this image if it's a receipt. "
+                                         "If it's not a receipt, explain what the image is doing."},
+                {"type": "image_url", "image_url": {"url": "data:image/jpeg;base64," + image_base64}},
+            ]
+        )
+        response = self.llm.invoke([msg])
+        return response.content.strip()

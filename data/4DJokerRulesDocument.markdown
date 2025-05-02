@@ -43,8 +43,8 @@ The following outlines the operational rules of 4D Joker, encompassing account m
   - E-wallets: 5-30 minutes
 - **Procedure**:
   1. Before transferring, confirm the current bank account is correct, as the platform may periodically change accounts.
-  2. Upload the receipt to the wallet’s top-up page in the app (not via live chat), including the player ID (JOKER ID) in the “Bank Reference” field, ensuring it is an official receipt uploaded within 24 hours.
-  3. If funds are not credited after 10 minutes, submit the receipt to live chat for verification.
+  2. Upload the receipt to the wallet’s top-up page in the app (not through live chat), including the player ID (JOKER ID) in the “Bank Reference” field, ensuring it is an official receipt uploaded within 24 hours.
+  3. If funds are not credited after 10 minutes, inform us directly here for immediate assistance.
 - **Notes**:
   - Only instant transfers (INSTANT TRANSFER) are accepted; Interbank Giro (IBG) transfers, requiring 1-3 working days, are not permitted.
   - Avoid duplicate uploads of the same receipt, as this may delay processing (1-10 minutes). If the wrong bank is selected, wait for system rejection before re-uploading.
@@ -60,7 +60,7 @@ The following outlines the operational rules of 4D Joker, encompassing account m
 - **Processing Time**: The entire withdrawal process, from application to funds reaching the user’s bank account, does not exceed 1 hour. Delays due to bank maintenance may require using an alternate bank or retrying later.
 - **Procedure**:
   1. Submit a withdrawal request through the app.
-  2. If funds are not received after 30 minutes, verify the transaction status in the app. If still pending, contact customer support via live chat.
+  2. If funds are not received after 30 minutes, verify the transaction status in the app. If still pending, notify us directly here for quick resolution.
 - **Policy**: Withdrawals are restricted to bank accounts registered in the user’s name; transfers to third-party accounts are prohibited.
 - **Security**: Each withdrawal undergoes a review to ensure fund security.
 
@@ -114,7 +114,7 @@ The following outlines the operational rules of 4D Joker, encompassing account m
 
 ### 2.5 Customer Support
 
-- **Immediate Assistance**: Users can contact customer support via in-app live chat for prompt responses.
+- **Immediate Assistance**: You’re already connected with our customer support right here—just share the details of your issue, and we’ll help you promptly.
 - **Urgent Issues**: Detailed issue descriptions enable swift resolution by the support team.
 - **Gaming Issues**: In case of disconnection, reconnect to the network and log in to restore progress. Persistent issues should be reported to support.
 - **Additional Support**:
@@ -143,7 +143,7 @@ The following details common issues users may encounter during top-ups, withdraw
   - **Resolution**: Ensure the receipt includes the JOKER ID and provide a screenshot of the bank transfer record to customer support for verification.
 - **Issue**: Top-up processing exceeds specified times (FPX: 1-3 minutes; ATM/manual: 3-10 minutes; e-wallets: 5-30 minutes).
   - **Cause**: Receipt errors, incorrect top-up method, or network delays.
-  - **Resolution**: After 30 minutes, if funds are not credited, submit the receipt via live chat for review.
+  - **Resolution**: After 30 minutes, if funds are not credited, inform us directly here and provide your receipt details for quick verification.
 - **Issue**: Duplicate receipt uploads cause delays.
   - **Cause**: Multiple uploads of the same receipt disrupt system processing.
   - **Resolution**: Upload the receipt once and wait for processing (1-10 minutes). If rejected, re-upload a correct receipt.
@@ -152,7 +152,7 @@ The following details common issues users may encounter during top-ups, withdraw
 
 - **Issue**: Withdrawal approval exceeds 30 minutes.
   - **Cause**: Bank processing delays, non-compliance with conditions (e.g., insufficient winnings), or maintenance issues.
-  - **Resolution**: Check transaction status in the app. If still pending, provide details to customer support via live chat.
+  - **Resolution**: Check transaction status in the app. If still pending, share the details with us directly here for quick assistance.
 - **Issue**: Inability to access banking section.
   - **Cause**: Account restrictions due to potential rule violations.
   - **Resolution**: Submit evidence to customer support for review; erroneous restrictions will be lifted.
@@ -208,7 +208,7 @@ The following case studies illustrate the application of operational rules and i
   1. The user completes a RM50 top-up via Fast Payment (FPX, using Maybank), uploading an official receipt to the app’s wallet top-up page within 1-3 minutes, including the JOKER ID.
   2. Funds are credited within 2 minutes, with the wallet reflecting RM50.
   3. The user places a GD Lotto bet at 6:30 PM, before the 6:59 PM deadline, with the receipt showing no SO or CR marks, confirming a successful bet.
-- **Issue Resolution**: If funds are not credited, the user confirms the correct bank account, verifies transaction records, and submits a correct receipt via live chat, avoiding duplicate uploads.
+- **Issue Resolution**: If funds are not credited, please confirm you’ve transferred to the correct bank account and verify the transaction records. Since you’re already in live chat, just provide your receipt details here, and we’ll check it immediately. Avoid sending duplicate uploads to prevent delays.
 - **Applicable Rules**: Fast transfer minimum RM50, processed in 1-3 minutes; bets must be placed before the operator’s deadline; receipts require player ID.
 
 ### Case Study 2: Withdrawal Processing Delay
@@ -217,7 +217,7 @@ The following case studies illustrate the application of operational rules and i
 
 - **Process**:
   1. The user checks the app’s transaction records, which indicate “Processing.”
-  2. The user contacts customer support via live chat, providing request details.
+  2. The user provides the request details directly here in the live chat for quick assistance.
   3. Support identifies a bank maintenance delay and facilitates the transfer, with funds received within 1 hour.
 - **Issue Resolution**: If approval exceeds 30 minutes, the user submits evidence to customer support for expedited review, ensuring the account is in their name.
 - **Applicable Rules**: Withdrawal processing does not exceed 1 hour; delays warrant contact with customer support; restricted to user-named accounts.
@@ -239,7 +239,7 @@ The following case studies illustrate the application of operational rules and i
 
 - **Process**:
   1. The user clears the browser cache and tries a different device, but the issue persists.
-  2. The user contacts customer support via live chat, providing account details and issue description.
+  2. The user provides account details and describes the issue here directly in the live chat for immediate assistance.
   3. Support identifies an expired link, provides an updated link (m.cfbz888.com), and restores game progress.
 - **Issue Resolution**: If disconnection persists, the user submits device and account information for expedited resolution.
 - **Applicable Rules**: Disconnections require reconnection and login; app issues can be resolved by contacting support for updated links.
@@ -268,7 +268,7 @@ The following case studies illustrate the application of operational rules and i
 
 ## 5. Conclusion
 
-4D Joker is dedicated to providing a secure and rewarding online lottery and gaming experience. The platform’s rules ensure account security, transaction transparency, and fair betting practices. With a diverse range of 4D operators, exclusive Magic Box functionality offering additional rewards for corresponding wins, live casino, football betting, and a robust referral reward system, users have ample opportunities for winnings and entertainment. For issues related to top-ups, withdrawals, winnings, gaming, or other operations, customer support is available via in-app live chat for swift resolution. Users are encouraged to contact support promptly to address inquiries or concerns. 😊
+4D Joker is dedicated to providing a secure and rewarding online lottery and gaming experience. The platform’s rules ensure account security, transaction transparency, and fair betting practices. With a diverse range of 4D operators, exclusive Magic Box functionality offering additional rewards for corresponding wins, live casino, football betting, and a robust referral reward system, users have ample opportunities for winnings and entertainment. Since you’re already connected with our live chat, feel free to share any issues related to top-ups, withdrawals, winnings, gaming, or other operations here. We’re ready to help resolve your inquiries promptly. 😊
 
 # Dokumen Perniagaan dan Peraturan Komprehensif 4D Joker
 
@@ -386,7 +386,7 @@ Berikut ialah peraturan operasi 4D Joker, merangkumi pengurusan akaun, transaksi
 
 ### 2.5 Sokongan Pelanggan
 
-- **Bantuan Segera**: Pengguna boleh menghubungi sokongan pelanggan melalui sembang langsung dalam aplikasi untuk respons segera.
+- **Bantuan Segera**: Boss dah pun berhubung terus dengan sokongan pelanggan kami kat sini—hanya perlu maklumkan isu boss, kami akan bantu secepat mungkin.
 - **Isu Kecemasan**: Penerangan isu yang terperinci membolehkan penyelesaian cepat oleh pasukan sokongan.
 - **Masalah Permainan**: Sekiranya terputus sambungan, sambung semula rangkaian dan log masuk untuk memulihkan kemajuan. Isu yang berterusan perlu dilaporkan kepada sokongan.
 - **Sokongan Tambahan**:
@@ -480,5 +480,5 @@ Kajian kes berikut menggambarkan penggunaan peraturan operasi dan penyelesaian i
   1. Pengguna melengkapkan top-up RM50 melalui Pembayaran Pantas (FPX, menggunakan Maybank), memuat naik resit rasmi ke laman top-up dompet aplikasi dalam masa 1-3 minit, termasuk JOKER ID.
   2. Dana dikreditkan dalam masa 2 minit, dengan dompet memaparkan RM50.
   3. Pengguna meletakkan pertaruhan GD Lotto pada 6:30 PM, sebelum tarikh akhir 6:59 PM, dengan resit tidak menunjukkan tanda SO atau CR, mengesahkan pertaruhan berjaya.
-- **Penyelesaian Isu**: Jika dana tidak dikreditkan, pengguna mengesahkan akaun bank yang betul, menyemak rekod transaksi, dan menyerahkan resit yang betul melalui sembang langsung, mengelakkan muat naik berganda.
+- **Penyelesaian Isu**: Kalau dana belum masuk, boss boleh sahkan dulu nombor akaun bank betul dan semak rekod transaksi. Boss dah pun dalam live chat sekarang, cuma perlu bagi detail resit kat sini, kami akan terus semak. Jangan hantar resit berulang kali untuk elak proses tertunda.
 - **Peraturan yang Digunakan**: Top-up minimum RM50 untuk pemindahan pantas, diproses dalam 1-3 minit; pertaruhan mesti dibuat sebelum tarikh akhir pengendali; resit memerlukan ID pemain.
